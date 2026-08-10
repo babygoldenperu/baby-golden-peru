@@ -8,7 +8,7 @@
 
   <style>
 
-    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
     * {
       box-sizing: border-box;
@@ -21,13 +21,9 @@
     body {
       margin: 0;
       background: #f8f3ea;
-      color: #2d2924;
+      color: #302a23;
       font-family: 'Montserrat', sans-serif;
     }
-
-    /* =========================
-       HEADER
-    ========================= */
 
     header {
       position: sticky;
@@ -56,19 +52,14 @@
     .menu {
       display: flex;
       align-items: center;
-      gap: 34px;
+      gap: 28px;
     }
 
     .menu a {
       color: #302b25;
       text-decoration: none;
-      font-size: 13px;
+      font-size: 12px;
       font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .menu a:hover {
-      color: #b47c24;
     }
 
     .header-button {
@@ -76,41 +67,25 @@
       color: white !important;
       padding: 13px 20px;
       border-radius: 30px;
-      box-shadow: 0 7px 20px rgba(180,124,36,0.22);
     }
 
     .heart {
       color: #b47c24;
       font-size: 25px;
-      margin-left: 4px;
     }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero {
       max-width: 1250px;
       margin: auto;
       min-height: 650px;
       padding: 60px 30px 70px;
-
       display: grid;
       grid-template-columns: 45% 55%;
       align-items: center;
-
-      background:
-        radial-gradient(
-          circle at 75% 40%,
-          rgba(213,171,91,0.20),
-          transparent 38%
-        );
     }
 
     .hero-content {
       padding-right: 30px;
-      position: relative;
-      z-index: 3;
     }
 
     .eyebrow {
@@ -118,18 +93,7 @@
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 2px;
-      text-transform: uppercase;
       margin-bottom: 20px;
-    }
-
-    .eyebrow::after {
-      content: "";
-      display: inline-block;
-      width: 65px;
-      height: 1px;
-      background: #b98531;
-      margin-left: 15px;
-      vertical-align: middle;
     }
 
     h1 {
@@ -148,8 +112,6 @@
     .heart-title {
       color: #b47c24;
       font-size: 32px;
-      vertical-align: top;
-      margin-left: 3px;
     }
 
     .line-heart {
@@ -167,7 +129,6 @@
 
     .line-heart strong {
       color: #b47c24;
-      font-size: 17px;
     }
 
     .hero-description {
@@ -193,7 +154,6 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: 0.3s;
     }
 
     .primary {
@@ -202,19 +162,11 @@
       box-shadow: 0 10px 25px rgba(180,124,36,0.22);
     }
 
-    .primary:hover {
-      transform: translateY(-2px);
-    }
-
     .secondary {
       color: #312b25;
       background: white;
       border: 1px solid #d8c8ad;
     }
-
-    /* =========================
-       HERO GOLDEN
-    ========================= */
 
     .hero-visual {
       position: relative;
@@ -229,14 +181,8 @@
       width: 540px;
       height: 540px;
       border-radius: 50%;
-      background:
-        radial-gradient(
-          circle,
-          #e7c27a,
-          #c28b34 70%,
-          transparent 71%
-        );
-      opacity: 0.25;
+      background: #d9ad61;
+      opacity: 0.22;
     }
 
     .golden {
@@ -244,58 +190,30 @@
       z-index: 2;
       width: 430px;
       height: 520px;
-
+      border-radius: 220px 220px 30px 30px;
+      background: linear-gradient(145deg,#e8c37b,#bd8430);
+      overflow: hidden;
+      box-shadow: 0 35px 70px rgba(70,45,17,0.20);
       display: flex;
       align-items: center;
       justify-content: center;
-
-      border-radius: 220px 220px 30px 30px;
-
-      background:
-        linear-gradient(
-          145deg,
-          #e8c37b,
-          #bd8430
-        );
-
-      overflow: hidden;
-      box-shadow: 0 35px 70px rgba(70,45,17,0.20);
-    }
-
-    .golden::before {
-      content: "Golden Retriever";
-      position: absolute;
-      bottom: 28px;
-      color: rgba(255,255,255,0.7);
-      font-size: 11px;
-      letter-spacing: 3px;
-      text-transform: uppercase;
     }
 
     .golden-face {
       font-size: 170px;
-      filter: drop-shadow(0 15px 15px rgba(50,30,10,0.15));
     }
-
-    /* =========================
-       ID CARD
-    ========================= */
 
     .id-card {
       position: absolute;
       right: -10px;
       bottom: 10px;
       z-index: 5;
-
       width: 340px;
       min-height: 220px;
-
       background: rgba(255,250,241,0.97);
       border: 1px solid rgba(185,139,59,0.35);
       border-radius: 22px;
-
       padding: 25px;
-
       box-shadow: 0 25px 55px rgba(50,35,20,0.20);
     }
 
@@ -303,16 +221,13 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-
       color: #a56f20;
       font-size: 11px;
       font-weight: 700;
-      letter-spacing: 1px;
     }
 
     .id-card-logo {
       width: 95px;
-      height: auto;
     }
 
     .id-card-name {
@@ -349,10 +264,6 @@
       font-weight: 700;
     }
 
-    /* =========================
-       HOW IT WORKS
-    ========================= */
-
     .section {
       padding: 100px 25px;
       max-width: 1200px;
@@ -370,7 +281,6 @@
       font-size: 12px;
       font-weight: 700;
       letter-spacing: 2px;
-      text-transform: uppercase;
     }
 
     .section-heading h2 {
@@ -400,15 +310,12 @@
       width: 70px;
       height: 70px;
       margin: auto;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       border-radius: 50%;
       background: #f1e5d1;
       border: 1px solid #d5b77c;
-
       color: #ad7822;
       font-family: 'Cormorant Garamond', serif;
       font-size: 27px;
@@ -426,18 +333,12 @@
       line-height: 1.6;
     }
 
-    /* =========================
-       BENEFITS
-    ========================= */
-
     .benefits {
       max-width: 1250px;
       margin: auto;
       padding: 90px 35px;
-
       background: #29251f;
       border-radius: 30px;
-
       color: white;
     }
 
@@ -475,14 +376,13 @@
 
     .benefit-symbol {
       color: #d6a445;
-      font-size: 38px;
+      font-size: 30px;
       margin-bottom: 20px;
     }
 
     .benefit h3 {
       color: #e1b458;
       font-size: 14px;
-      letter-spacing: 1px;
     }
 
     .benefit p {
@@ -491,22 +391,11 @@
       line-height: 1.6;
     }
 
-    /* =========================
-       CTA
-    ========================= */
-
     .cta {
       max-width: 1100px;
       margin: 80px auto;
       padding: 70px 25px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #f2e4cb,
-          #fffaf1
-        );
-
+      background: linear-gradient(135deg,#f2e4cb,#fffaf1);
       border-radius: 28px;
       text-align: center;
       border: 1px solid #e6d8c1;
@@ -530,10 +419,6 @@
       margin: 18px auto 28px;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
-
     footer {
       background: #29251f;
       color: white;
@@ -544,7 +429,6 @@
     footer img {
       width: 150px;
       filter: brightness(0) invert(1);
-      margin-bottom: 15px;
     }
 
     footer p {
@@ -552,14 +436,6 @@
       font-size: 12px;
       line-height: 1.7;
     }
-
-    .footer-heart {
-      color: #d5a448;
-    }
-
-    /* =========================
-       MOBILE
-    ========================= */
 
     @media (max-width: 900px) {
 
@@ -577,14 +453,6 @@
         text-align: center;
       }
 
-      .eyebrow::after {
-        display: none;
-      }
-
-      .line-heart {
-        justify-content: center;
-      }
-
       .hero-description {
         margin: auto;
       }
@@ -597,16 +465,8 @@
         margin-top: 30px;
       }
 
-      .id-card {
-        right: 0;
-      }
-
       .benefit-grid {
         grid-template-columns: 1fr 1fr;
-      }
-
-      .benefit {
-        border-bottom: 1px solid rgba(212,165,76,0.25);
       }
 
     }
@@ -698,9 +558,6 @@
 
 <body>
 
-<!-- =========================
-     HEADER
-========================= -->
 
 <header>
 
@@ -729,7 +586,7 @@
       </a>
 
       <a
-        href="#registro"
+        href="registro.html"
         class="header-button"
       >
         REGISTRAR MI PERRITO
@@ -743,10 +600,6 @@
 
 </header>
 
-
-<!-- =========================
-     HERO
-========================= -->
 
 <section class="hero" id="inicio">
 
@@ -778,9 +631,7 @@
     <div class="line-heart">
 
       <span></span>
-
       <strong>♥</strong>
-
       <span></span>
 
     </div>
@@ -798,7 +649,7 @@
     <div class="buttons">
 
       <a
-        href="#registro"
+        href="registro.html"
         class="button primary"
       >
         REGISTRAR MI PERRITO
@@ -806,18 +657,16 @@
 
 
       <a
-        href="#consultar"
+        href="#beneficios"
         class="button secondary"
       >
-        CONSULTAR UN ID
+        CONOCE EL BABY GOLDEN ID
       </a>
 
     </div>
 
   </div>
 
-
-  <!-- VISUAL -->
 
   <div class="hero-visual">
 
@@ -832,8 +681,6 @@
 
     </div>
 
-
-    <!-- DIGITAL ID -->
 
     <div class="id-card">
 
@@ -886,10 +733,6 @@
 </section>
 
 
-<!-- =========================
-     COMO FUNCIONA
-========================= -->
-
 <section
   class="section"
   id="como-funciona"
@@ -928,7 +771,7 @@
 
       <p>
         Completa los datos de tu perrito
-        y de su familia.
+        y de sus tutores.
       </p>
 
     </div>
@@ -973,10 +816,6 @@
 
 </section>
 
-
-<!-- =========================
-     BENEFICIOS
-========================= -->
 
 <section
   class="benefits"
@@ -1074,10 +913,6 @@
 </section>
 
 
-<!-- =========================
-     CTA
-========================= -->
-
 <section
   class="cta"
   id="registro"
@@ -1096,7 +931,7 @@
   </p>
 
   <a
-    href="#"
+    href="registro.html"
     class="button primary"
   >
     QUIERO MI BABY GOLDEN ID
@@ -1104,10 +939,6 @@
 
 </section>
 
-
-<!-- =========================
-     FOOTER
-========================= -->
 
 <footer id="contacto">
 
@@ -1118,7 +949,7 @@
 
   <p>
 
-    <span class="footer-heart">
+    <span class="heart">
       ♥
     </span>
 
@@ -1129,9 +960,7 @@
   </p>
 
   <p>
-    NFC &nbsp; | &nbsp;
-    QR &nbsp; | &nbsp;
-    ID DIGITAL
+    BABY GOLDEN ID · NFC · QR
   </p>
 
 </footer>
