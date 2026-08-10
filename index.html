@@ -4,184 +4,1138 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Baby Golden Perú | ID Digital</title>
+  <title>Baby Golden Perú | Baby Golden ID</title>
 
   <style>
+
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
     * {
       box-sizing: border-box;
     }
 
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fffaf0;
-      color: #4a3218;
+    html {
+      scroll-behavior: smooth;
     }
 
-    .hero {
-      background: linear-gradient(180deg, #f6c65b, #e9a72f);
-      padding: 45px 20px 55px;
-      text-align: center;
-      border-radius: 0 0 35px 35px;
+    body {
+      margin: 0;
+      background: #f8f3ea;
+      color: #2d2924;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(248,243,234,0.96);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(173,126,48,0.15);
+    }
+
+    .nav {
+      max-width: 1250px;
+      margin: auto;
+      padding: 14px 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .logo {
-      font-size: 65px;
-      margin-bottom: 10px;
+      width: 185px;
+      height: auto;
+      display: block;
     }
 
-    .marca {
-      font-size: 15px;
-      font-weight: bold;
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+    }
+
+    .menu a {
+      color: #302b25;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      transition: 0.3s;
+    }
+
+    .menu a:hover {
+      color: #b47c24;
+    }
+
+    .header-button {
+      background: #b47c24;
+      color: white !important;
+      padding: 13px 20px;
+      border-radius: 30px;
+      box-shadow: 0 7px 20px rgba(180,124,36,0.22);
+    }
+
+    .heart {
+      color: #b47c24;
+      font-size: 25px;
+      margin-left: 4px;
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+      max-width: 1250px;
+      margin: auto;
+      min-height: 650px;
+      padding: 60px 30px 70px;
+
+      display: grid;
+      grid-template-columns: 45% 55%;
+      align-items: center;
+
+      background:
+        radial-gradient(
+          circle at 75% 40%,
+          rgba(213,171,91,0.20),
+          transparent 38%
+        );
+    }
+
+    .hero-content {
+      padding-right: 30px;
+      position: relative;
+      z-index: 3;
+    }
+
+    .eyebrow {
+      color: #a97020;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::after {
+      content: "";
+      display: inline-block;
+      width: 65px;
+      height: 1px;
+      background: #b98531;
+      margin-left: 15px;
+      vertical-align: middle;
+    }
+
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(65px, 7vw, 105px);
+      line-height: 0.82;
+      font-weight: 500;
+      letter-spacing: -4px;
+      margin: 0;
+    }
+
+    h1 .gold {
+      color: #b47c24;
+    }
+
+    .heart-title {
+      color: #b47c24;
+      font-size: 32px;
+      vertical-align: top;
+      margin-left: 3px;
+    }
+
+    .line-heart {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin: 28px 0;
+    }
+
+    .line-heart span {
+      width: 75px;
+      height: 1px;
+      background: #bd8b3b;
+    }
+
+    .line-heart strong {
+      color: #b47c24;
+      font-size: 17px;
+    }
+
+    .hero-description {
+      max-width: 490px;
+      color: #625b52;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      text-decoration: none;
+      padding: 17px 25px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
+    }
+
+    .primary {
+      background: #b47c24;
+      color: white;
+      box-shadow: 0 10px 25px rgba(180,124,36,0.22);
+    }
+
+    .primary:hover {
+      transform: translateY(-2px);
+    }
+
+    .secondary {
+      color: #312b25;
+      background: white;
+      border: 1px solid #d8c8ad;
+    }
+
+    /* =========================
+       HERO GOLDEN
+    ========================= */
+
+    .hero-visual {
+      position: relative;
+      min-height: 600px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .golden-background {
+      position: absolute;
+      width: 540px;
+      height: 540px;
+      border-radius: 50%;
+      background:
+        radial-gradient(
+          circle,
+          #e7c27a,
+          #c28b34 70%,
+          transparent 71%
+        );
+      opacity: 0.25;
+    }
+
+    .golden {
+      position: relative;
+      z-index: 2;
+      width: 430px;
+      height: 520px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 220px 220px 30px 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #e8c37b,
+          #bd8430
+        );
+
+      overflow: hidden;
+      box-shadow: 0 35px 70px rgba(70,45,17,0.20);
+    }
+
+    .golden::before {
+      content: "Golden Retriever";
+      position: absolute;
+      bottom: 28px;
+      color: rgba(255,255,255,0.7);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .golden-face {
+      font-size: 170px;
+      filter: drop-shadow(0 15px 15px rgba(50,30,10,0.15));
+    }
+
+    /* =========================
+       ID CARD
+    ========================= */
+
+    .id-card {
+      position: absolute;
+      right: -10px;
+      bottom: 10px;
+      z-index: 5;
+
+      width: 340px;
+      min-height: 220px;
+
+      background: rgba(255,250,241,0.97);
+      border: 1px solid rgba(185,139,59,0.35);
+      border-radius: 22px;
+
+      padding: 25px;
+
+      box-shadow: 0 25px 55px rgba(50,35,20,0.20);
+    }
+
+    .id-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      color: #a56f20;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
+    .id-card-logo {
+      width: 95px;
+      height: auto;
+    }
+
+    .id-card-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 38px;
+      margin-top: 28px;
+    }
+
+    .id-card-breed {
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #746b60;
+    }
+
+    .id-number {
+      display: inline-block;
+      margin-top: 17px;
+      padding: 8px 13px;
+      border-radius: 30px;
+      background: #bd8730;
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .id-technologies {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      border-top: 1px solid #e5dac7;
+      padding-top: 14px;
+      color: #93651e;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       HOW IT WORKS
+    ========================= */
+
+    .section {
+      padding: 100px 25px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-heading {
+      text-align: center;
+      max-width: 700px;
+      margin: auto auto 60px;
+    }
+
+    .section-heading small {
+      color: #aa741e;
+      font-size: 12px;
+      font-weight: 700;
       letter-spacing: 2px;
       text-transform: uppercase;
     }
 
-    h1 {
-      font-size: 36px;
-      margin: 8px 0;
-      color: white;
+    .section-heading h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 500;
+      margin: 12px 0;
     }
 
-    .subtitulo {
-      font-size: 17px;
-      color: white;
-      margin: 0 auto;
-      max-width: 350px;
-      line-height: 1.5;
+    .section-heading p {
+      color: #756d63;
+      line-height: 1.7;
     }
 
-    .contenedor {
-      max-width: 500px;
-      margin: -25px auto 0;
-      padding: 0 20px 40px;
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
     }
 
-    .tarjeta {
-      background: white;
-      border-radius: 22px;
-      padding: 25px;
-      margin-bottom: 18px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-    }
-
-    .tarjeta h2 {
-      margin-top: 0;
-      font-size: 22px;
-    }
-
-    .boton {
-      display: block;
-      width: 100%;
-      padding: 17px;
-      margin-top: 15px;
-      border-radius: 14px;
-      text-decoration: none;
+    .step {
       text-align: center;
-      font-weight: bold;
-      font-size: 16px;
-      background: #d99124;
-      color: white;
+      padding: 35px 25px;
     }
 
-    .boton.secundario {
-      background: #fff1d2;
-      color: #8a5b18;
+    .step-number {
+      width: 70px;
+      height: 70px;
+      margin: auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 50%;
+      background: #f1e5d1;
+      border: 1px solid #d5b77c;
+
+      color: #ad7822;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px;
     }
 
-    .info {
-      text-align: center;
+    .step h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 27px;
+      margin: 20px 0 8px;
+    }
+
+    .step p {
+      color: #746d64;
       font-size: 14px;
       line-height: 1.6;
     }
 
-    footer {
+    /* =========================
+       BENEFITS
+    ========================= */
+
+    .benefits {
+      max-width: 1250px;
+      margin: auto;
+      padding: 90px 35px;
+
+      background: #29251f;
+      border-radius: 30px;
+
+      color: white;
+    }
+
+    .benefits-heading {
       text-align: center;
+    }
+
+    .benefits-heading small {
+      color: #d4a54c;
+      letter-spacing: 2px;
+      font-size: 12px;
+    }
+
+    .benefits-heading h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px;
+      font-weight: 500;
+      margin: 12px 0 60px;
+    }
+
+    .benefit-grid {
+      display: grid;
+      grid-template-columns: repeat(4,1fr);
+    }
+
+    .benefit {
       padding: 25px;
+      text-align: center;
+      border-right: 1px solid rgba(212,165,76,0.35);
+    }
+
+    .benefit:last-child {
+      border-right: none;
+    }
+
+    .benefit-symbol {
+      color: #d6a445;
+      font-size: 38px;
+      margin-bottom: 20px;
+    }
+
+    .benefit h3 {
+      color: #e1b458;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+
+    .benefit p {
+      color: #c9c1b7;
       font-size: 13px;
-      color: #8a765d;
+      line-height: 1.6;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+      max-width: 1100px;
+      margin: 80px auto;
+      padding: 70px 25px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f2e4cb,
+          #fffaf1
+        );
+
+      border-radius: 28px;
+      text-align: center;
+      border: 1px solid #e6d8c1;
+    }
+
+    .cta-heart {
+      color: #b47c24;
+      font-size: 45px;
+      margin-bottom: 15px;
+    }
+
+    .cta h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 50px;
+      font-weight: 500;
+      margin: 0;
+    }
+
+    .cta p {
+      color: #70675d;
+      margin: 18px auto 28px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      background: #29251f;
+      color: white;
+      padding: 45px 25px;
+      text-align: center;
+    }
+
+    footer img {
+      width: 150px;
+      filter: brightness(0) invert(1);
+      margin-bottom: 15px;
+    }
+
+    footer p {
+      color: #aaa197;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .footer-heart {
+      color: #d5a448;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 900px) {
+
+      .menu {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding-top: 45px;
+      }
+
+      .hero-content {
+        padding-right: 0;
+        text-align: center;
+      }
+
+      .eyebrow::after {
+        display: none;
+      }
+
+      .line-heart {
+        justify-content: center;
+      }
+
+      .hero-description {
+        margin: auto;
+      }
+
+      .buttons {
+        justify-content: center;
+      }
+
+      .hero-visual {
+        margin-top: 30px;
+      }
+
+      .id-card {
+        right: 0;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .benefit {
+        border-bottom: 1px solid rgba(212,165,76,0.25);
+      }
+
+    }
+
+    @media (max-width: 600px) {
+
+      .nav {
+        padding: 12px 18px;
+      }
+
+      .logo {
+        width: 145px;
+      }
+
+      .header-button {
+        padding: 10px 13px;
+        font-size: 11px;
+      }
+
+      .hero {
+        padding: 45px 18px;
+      }
+
+      h1 {
+        font-size: 65px;
+      }
+
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .golden {
+        width: 310px;
+        height: 390px;
+      }
+
+      .golden-face {
+        font-size: 125px;
+      }
+
+      .golden-background {
+        width: 350px;
+        height: 350px;
+      }
+
+      .id-card {
+        width: 285px;
+        right: 50%;
+        transform: translateX(50%);
+        bottom: -30px;
+      }
+
+      .hero-visual {
+        min-height: 550px;
+      }
+
+      .steps {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .benefit {
+        border-right: none;
+      }
+
+      .section-heading h2,
+      .benefits-heading h2,
+      .cta h2 {
+        font-size: 40px;
+      }
+
+      .section {
+        padding: 70px 20px;
+      }
+
+      .benefits {
+        border-radius: 20px;
+        padding: 70px 20px;
+      }
+
     }
 
   </style>
 </head>
 
+
 <body>
 
-  <section class="hero">
+<!-- =========================
+     HEADER
+========================= -->
 
-    <div class="logo">🐶💛</div>
+<header>
 
-    <div class="marca">
-      Baby Golden Perú
-    </div>
+  <nav class="nav">
 
-    <h1>Baby Golden ID</h1>
+    <img
+      src="BABY%20GOLDEN.png"
+      alt="Baby Golden Perú"
+      class="logo"
+    >
 
-    <p class="subtitulo">
-      La identificación digital de nuestros perritos.
-    </p>
+    <div class="menu">
 
-  </section>
+      <a href="#inicio">INICIO</a>
 
+      <a href="#como-funciona">
+        SOBRE NOSOTROS
+      </a>
 
-  <main class="contenedor">
+      <a href="#beneficios">
+        BENEFICIOS
+      </a>
 
-    <div class="tarjeta">
+      <a href="#contacto">
+        CONTACTO
+      </a>
 
-      <h2>🪪 Identifica a tu mejor amigo</h2>
-
-      <p>
-        Registra a tu perrito y obtén su identificación
-        digital Baby Golden Perú.
-      </p>
-
-      <a href="#" class="boton">
+      <a
+        href="#registro"
+        class="header-button"
+      >
         REGISTRAR MI PERRITO
       </a>
 
+      <span class="heart">♡</span>
+
+    </div>
+
+  </nav>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="hero" id="inicio">
+
+  <div class="hero-content">
+
+    <div class="eyebrow">
+      IDENTIFICACIÓN DIGITAL
+    </div>
+
+    <h1>
+
+      BABY
+
+      <br>
+
+      <span class="gold">
+        GOLDEN
+      </span>
+
+      <span class="heart-title">
+        ♥
+      </span>
+
+      ID
+
+    </h1>
+
+
+    <div class="line-heart">
+
+      <span></span>
+
+      <strong>♥</strong>
+
+      <span></span>
+
     </div>
 
 
-    <div class="tarjeta">
+    <p class="hero-description">
 
-      <h2>🔎 Consultar un ID</h2>
+      La identificación digital que conecta
+      a tu Golden Retriever con su familia
+      y su comunidad.
 
-      <p>
-        ¿Encontraste un perrito con un Baby Golden ID?
-        Próximamente podrás consultar su información.
-      </p>
+    </p>
 
-      <a href="#" class="boton secundario">
-        CONSULTAR ID
+
+    <div class="buttons">
+
+      <a
+        href="#registro"
+        class="button primary"
+      >
+        REGISTRAR MI PERRITO
+      </a>
+
+
+      <a
+        href="#consultar"
+        class="button secondary"
+      >
+        CONSULTAR UN ID
       </a>
 
     </div>
 
+  </div>
 
-    <div class="tarjeta info">
 
-      <strong>🐾 Una pata a la vez</strong>
+  <!-- VISUAL -->
+
+  <div class="hero-visual">
+
+    <div class="golden-background"></div>
+
+
+    <div class="golden">
+
+      <div class="golden-face">
+        🐕
+      </div>
+
+    </div>
+
+
+    <!-- DIGITAL ID -->
+
+    <div class="id-card">
+
+      <div class="id-card-top">
+
+        <img
+          src="BABY%20GOLDEN.png"
+          class="id-card-logo"
+          alt="Baby Golden Perú"
+        >
+
+        <span>
+          ID DIGITAL
+        </span>
+
+      </div>
+
+
+      <div class="id-card-name">
+        KALMA
+      </div>
+
+
+      <div class="id-card-breed">
+        GOLDEN RETRIEVER
+      </div>
+
+
+      <div class="id-number">
+        BGP-00001
+      </div>
+
+
+      <div class="id-technologies">
+
+        <span>
+          NFC
+        </span>
+
+        <span>
+          QR CODE
+        </span>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     COMO FUNCIONA
+========================= -->
+
+<section
+  class="section"
+  id="como-funciona"
+>
+
+  <div class="section-heading">
+
+    <small>
+      ¿CÓMO FUNCIONA?
+    </small>
+
+    <h2>
+      Simple, rápido y seguro
+    </h2>
+
+    <p>
+      Tu perrito tendrá una identificación
+      digital única que podrá abrirse mediante
+      NFC o código QR.
+    </p>
+
+  </div>
+
+
+  <div class="steps">
+
+    <div class="step">
+
+      <div class="step-number">
+        01
+      </div>
+
+      <h3>
+        REGISTRA
+      </h3>
 
       <p>
-        Construimos una comunidad más responsable,
-        unida por el amor a nuestros Golden Retriever.
+        Completa los datos de tu perrito
+        y de su familia.
       </p>
 
     </div>
 
-  </main>
+
+    <div class="step">
+
+      <div class="step-number">
+        02
+      </div>
+
+      <h3>
+        OBTÉN SU ID
+      </h3>
+
+      <p>
+        Cada perrito recibirá un número
+        de identificación único.
+      </p>
+
+    </div>
 
 
-  <footer>
+    <div class="step">
 
-    ❤️ Baby Golden Perú
+      <div class="step-number">
+        03
+      </div>
 
-    <br><br>
+      <h3>
+        CONECTA
+      </h3>
 
-    ID Digital • NFC • QR
+      <p>
+        Acerca un celular al NFC o escanea
+        el QR para acceder a su información.
+      </p>
 
-  </footer>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     BENEFICIOS
+========================= -->
+
+<section
+  class="benefits"
+  id="beneficios"
+>
+
+  <div class="benefits-heading">
+
+    <small>
+      BENEFICIOS
+    </small>
+
+    <h2>
+      Más que un ID, una conexión
+    </h2>
+
+  </div>
+
+
+  <div class="benefit-grid">
+
+    <div class="benefit">
+
+      <div class="benefit-symbol">
+        ♡
+      </div>
+
+      <h3>
+        IDENTIFICACIÓN DIGITAL
+      </h3>
+
+      <p>
+        Información importante de tu
+        perrito siempre disponible.
+      </p>
+
+    </div>
+
+
+    <div class="benefit">
+
+      <div class="benefit-symbol">
+        ♡
+      </div>
+
+      <h3>
+        CONTACTO RÁPIDO
+      </h3>
+
+      <p>
+        Facilita el contacto con su
+        familia si tu perrito se extravía.
+      </p>
+
+    </div>
+
+
+    <div class="benefit">
+
+      <div class="benefit-symbol">
+        NFC
+      </div>
+
+      <h3>
+        NFC + QR
+      </h3>
+
+      <p>
+        Dos formas inteligentes de
+        acceder a su perfil.
+      </p>
+
+    </div>
+
+
+    <div class="benefit">
+
+      <div class="benefit-symbol">
+        ♡
+      </div>
+
+      <h3>
+        COMUNIDAD GOLDEN
+      </h3>
+
+      <p>
+        Forma parte de Baby Golden Perú
+        y accede a beneficios exclusivos.
+      </p>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     CTA
+========================= -->
+
+<section
+  class="cta"
+  id="registro"
+>
+
+  <div class="cta-heart">
+    ♡
+  </div>
+
+  <h2>
+    TU MEJOR AMIGO MERECE LO MEJOR
+  </h2>
+
+  <p>
+    Regístralo y dale su propia identidad digital.
+  </p>
+
+  <a
+    href="#"
+    class="button primary"
+  >
+    QUIERO MI BABY GOLDEN ID
+  </a>
+
+</section>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer id="contacto">
+
+  <img
+    src="BABY%20GOLDEN.png"
+    alt="Baby Golden Perú"
+  >
+
+  <p>
+
+    <span class="footer-heart">
+      ♥
+    </span>
+
+    Una pata a la vez,
+    construimos una comunidad
+    más responsable.
+
+  </p>
+
+  <p>
+    NFC &nbsp; | &nbsp;
+    QR &nbsp; | &nbsp;
+    ID DIGITAL
+  </p>
+
+</footer>
+
 
 </body>
 </html>
