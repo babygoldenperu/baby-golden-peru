@@ -1,14 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>Registro | Baby Golden ID</title>
 
@@ -23,843 +17,1077 @@
     body {
       margin: 0;
       background: #f8f3ea;
-      color: #302b25;
+      color: #302a23;
       font-family: 'Montserrat', sans-serif;
     }
 
-    .top {
+    .header {
       background: #29251f;
-      padding: 18px;
+      padding: 20px;
       text-align: center;
     }
 
-    .top img {
-      width: 155px;
-      filter: brightness(0) invert(1);
+    .header img {
+      width: 175px;
+      max-width: 70%;
     }
 
-    .contenedor {
-      max-width: 760px;
+    .container {
+      max-width: 850px;
       margin: auto;
       padding: 45px 20px 70px;
     }
 
-    .titulo {
+    .intro {
       text-align: center;
-      margin-bottom: 35px;
+      margin-bottom: 40px;
     }
 
-    .titulo small {
-      color: #ad7620;
-      font-size: 12px;
+    .intro small {
+      color: #ae7721;
       font-weight: 700;
       letter-spacing: 2px;
     }
 
-    .titulo h1 {
+    .intro h1 {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 54px;
+      font-size: 55px;
       font-weight: 500;
       margin: 10px 0;
     }
 
-    .titulo p {
-      color: #756d64;
+    .intro p {
+      color: #746b60;
       line-height: 1.7;
-      font-size: 14px;
+      max-width: 600px;
+      margin: auto;
     }
 
-    .formulario {
+    .section {
       background: white;
-      border-radius: 25px;
-      padding: 35px;
-      box-shadow: 0 15px 45px rgba(60,45,25,0.08);
-      border: 1px solid #eadfce;
+      border: 1px solid #e7ddcd;
+      border-radius: 24px;
+      padding: 30px;
+      margin-bottom: 22px;
+      box-shadow: 0 8px 25px rgba(70,50,25,0.05);
     }
 
-    .seccion {
-      margin-bottom: 38px;
-    }
-
-    .seccion-titulo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 25px;
-    }
-
-    .numero {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: #f1e4cc;
-      color: #a86f1d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+    .section-title {
       font-family: 'Cormorant Garamond', serif;
-      font-size: 20px;
+      font-size: 30px;
+      margin: 0 0 22px;
+      color: #8f611f;
+    }
+
+    .section-number {
+      color: #b47c24;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 11px;
+      letter-spacing: 2px;
       font-weight: 700;
-    }
-
-    .seccion h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      margin: 0;
-      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
     }
 
     label {
       display: block;
-      margin-bottom: 8px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 700;
-      color: #4b443d;
-    }
-
-    .campo {
-      margin-bottom: 20px;
+      margin: 20px 0 8px;
     }
 
     input,
     select,
     textarea {
       width: 100%;
+      padding: 14px 15px;
       border: 1px solid #ded3c2;
-      background: #fffdf9;
       border-radius: 11px;
-      padding: 14px;
+      background: #fffdf9;
       font-family: 'Montserrat', sans-serif;
       font-size: 14px;
-      color: #302b25;
+      color: #302a23;
       outline: none;
-      transition: 0.2s;
     }
 
     input:focus,
     select:focus,
     textarea:focus {
       border-color: #b47c24;
-      box-shadow: 0 0 0 3px rgba(180,124,36,0.10);
+      box-shadow: 0 0 0 3px rgba(180,124,36,0.08);
     }
 
     textarea {
-      min-height: 100px;
+      min-height: 110px;
       resize: vertical;
     }
 
-    .fila {
+    .required {
+      color: #b47c24;
+    }
+
+    .optional {
+      color: #8d8479;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    /* ID OPTIONS */
+
+    .id-options {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 15px;
     }
 
-    .radio-group {
-      display: flex;
-      gap: 10px;
+    .id-option {
+      position: relative;
     }
 
-    .radio {
-      flex: 1;
+    .id-option input {
+      position: absolute;
+      opacity: 0;
     }
 
-    .radio input {
-      display: none;
-    }
-
-    .radio label {
+    .id-card-option {
       display: block;
-      text-align: center;
-      padding: 14px;
-      border: 1px solid #ded3c2;
-      border-radius: 11px;
-      cursor: pointer;
-      font-weight: 600;
-      color: #665d53;
-    }
-
-    .radio input:checked + label {
-      background: #f1e4cc;
-      border-color: #b47c24;
-      color: #8d5f1d;
-    }
-
-    .foto-box {
-      border: 2px dashed #d9c7a8;
-      border-radius: 16px;
       padding: 25px;
-      text-align: center;
-      background: #fffaf2;
+      border-radius: 18px;
+      border: 1px solid #ddd2c0;
+      cursor: pointer;
+      transition: .25s;
     }
 
-    .foto-box strong {
+    .id-card-option:hover {
+      border-color: #b47c24;
+    }
+
+    .id-option input:checked + .id-card-option {
+      border: 2px solid #b47c24;
+      background: #fff8eb;
+    }
+
+    .id-card-option strong {
       display: block;
-      margin-bottom: 6px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 28px;
+      margin-bottom: 8px;
     }
 
-    .foto-box p {
+    .id-card-option span {
       font-size: 12px;
-      color: #84796c;
+      color: #766d62;
+      line-height: 1.5;
+    }
+
+    .premium {
+      color: #a87522;
+    }
+
+    .black {
+      color: #29251f;
+    }
+
+    /* PHOTO */
+
+    .photo-guide {
+      background: #faf5eb;
+      border: 1px solid #e7dac5;
+      border-radius: 18px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+
+    .photo-example {
+      height: 190px;
+      border-radius: 14px;
+      background: white;
+      border: 1px dashed #c9b99e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      color: #8a7c6b;
       margin-bottom: 15px;
     }
 
-    .foto-box input {
-      border: none;
-      background: transparent;
-      padding: 0;
+    .photo-example .dog {
+      font-size: 80px;
     }
 
-    .nota {
-      background: #f7f0e3;
-      border-radius: 13px;
-      padding: 15px;
-      color: #70675c;
+    .photo-guide ul {
+      margin: 10px 0 0;
+      padding-left: 20px;
+      color: #70675d;
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    /* CHECKBOXES */
+
+    .check {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 20px 0;
       font-size: 12px;
       line-height: 1.6;
-      margin-bottom: 25px;
-    }
-
-    .autorizacion {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      margin: 20px 0;
-    }
-
-    .autorizacion input {
-      width: auto;
-      margin-top: 3px;
-    }
-
-    .autorizacion label {
-      font-size: 11px;
-      line-height: 1.6;
       font-weight: 400;
-      margin: 0;
     }
 
-    .boton {
+    .check input {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+      flex-shrink: 0;
+    }
+
+    /* BUTTON */
+
+    .submit {
       width: 100%;
       border: none;
-      border-radius: 13px;
-      padding: 17px;
+      padding: 18px;
+      border-radius: 14px;
       background: #b47c24;
       color: white;
       font-family: 'Montserrat', sans-serif;
-      font-size: 14px;
       font-weight: 700;
+      font-size: 14px;
       cursor: pointer;
-      box-shadow: 0 10px 25px rgba(180,124,36,0.20);
+      box-shadow: 0 12px 25px rgba(180,124,36,0.20);
     }
 
-    .boton:hover {
-      background: #986719;
+    .submit:hover {
+      background: #98681f;
     }
 
-    .volver {
-      display: block;
+    .notice {
       text-align: center;
-      margin-top: 25px;
-      color: #8e672d;
-      text-decoration: none;
-      font-size: 13px;
-    }
-
-    .pie {
-      text-align: center;
-      color: #81786d;
+      color: #8a8176;
       font-size: 11px;
-      margin-top: 30px;
+      line-height: 1.6;
+      margin-top: 18px;
+    }
+
+    footer {
+      background: #29251f;
+      color: white;
+      text-align: center;
+      padding: 35px 20px;
+    }
+
+    footer img {
+      width: 145px;
+      filter: brightness(0) invert(1);
+    }
+
+    footer p {
+      color: #aaa198;
+      font-size: 11px;
+    }
+
+    .heart {
+      color: #d3a044;
     }
 
     @media (max-width: 600px) {
 
-      .contenedor {
+      .container {
         padding: 30px 15px 50px;
       }
 
-      .formulario {
-        padding: 25px 18px;
-        border-radius: 20px;
+      .section {
+        padding: 22px;
       }
 
-      .titulo h1 {
-        font-size: 45px;
+      .intro h1 {
+        font-size: 44px;
       }
 
-      .fila {
+      .id-options {
         grid-template-columns: 1fr;
-        gap: 0;
-      }
-
-      .seccion h2 {
-        font-size: 25px;
       }
 
     }
 
   </style>
-
 </head>
 
 
 <body>
 
 
-  <div class="top">
+<!-- HEADER -->
 
-    <img
-      src="BABY%20GOLDEN.png"
-      alt="Baby Golden Perú"
-    >
+<header class="header">
+
+  <img
+    src="BABY%20GOLDEN.png"
+    alt="Baby Golden Perú"
+  >
+
+</header>
+
+
+<main class="container">
+
+
+  <!-- INTRO -->
+
+  <div class="intro">
+
+    <small>
+      BABY GOLDEN ID
+    </small>
+
+    <h1>
+      Crea la identidad de tu mejor amigo
+    </h1>
+
+    <p>
+      Completa los datos de tu perrito y de sus tutores
+      para solicitar su identificación digital Baby Golden Perú.
+    </p>
 
   </div>
 
 
-  <main class="contenedor">
+  <form>
 
 
-    <div class="titulo">
+    <!-- ID -->
 
-      <small>
-        BABY GOLDEN ID
-      </small>
+    <section class="section">
 
-      <h1>
-        Registra a tu mejor amigo
-      </h1>
+      <span class="section-number">
+        PASO 01
+      </span>
 
-      <p>
-        Completa los datos para crear su
-        identificación digital Baby Golden Perú.
-      </p>
-
-    </div>
+      <h2 class="section-title">
+        Elige tu ID
+      </h2>
 
 
-    <form
-      class="formulario"
-      id="registroForm"
-    >
+      <div class="id-options">
 
 
-      <!-- TUTOR -->
-
-      <section class="seccion">
-
-        <div class="seccion-titulo">
-
-          <div class="numero">
-            01
-          </div>
-
-          <h2>
-            Datos del tutor
-          </h2>
-
-        </div>
-
-
-        <div class="campo">
-
-          <label>
-            Nombres y apellidos *
-          </label>
+        <div class="id-option">
 
           <input
-            type="text"
-            name="nombreTutor"
-            placeholder="Ej. Sandra Dávila"
+            type="radio"
+            id="premium"
+            name="tipo_id"
+            value="Premium ID"
             required
           >
 
-        </div>
-
-
-        <div class="fila">
-
-          <div class="campo">
-
-            <label>
-              DNI *
-            </label>
-
-            <input
-              type="text"
-              name="dni"
-              placeholder="8 dígitos"
-              maxlength="8"
-              required
-            >
-
-          </div>
-
-
-          <div class="campo">
-
-            <label>
-              Celular / WhatsApp *
-            </label>
-
-            <input
-              type="tel"
-              name="celular"
-              placeholder="999 999 999"
-              required
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="campo">
-
-          <label>
-            Correo electrónico *
-          </label>
-
-          <input
-            type="email"
-            name="correo"
-            placeholder="correo@ejemplo.com"
-            required
+          <label
+            for="premium"
+            class="id-card-option"
           >
 
-        </div>
-
-
-        <div class="campo">
-
-          <label>
-            Distrito *
-          </label>
-
-          <input
-            type="text"
-            name="distrito"
-            placeholder="Ej. Jesús María"
-            required
-          >
-
-        </div>
-
-      </section>
-
-
-      <!-- PERRITO -->
-
-      <section class="seccion">
-
-        <div class="seccion-titulo">
-
-          <div class="numero">
-            02
-          </div>
-
-          <h2>
-            Datos de tu perrito
-          </h2>
-
-        </div>
-
-
-        <div class="campo">
-
-          <label>
-            Nombre del perrito *
-          </label>
-
-          <input
-            type="text"
-            name="nombrePerrito"
-            placeholder="Ej. Kalma"
-            required
-          >
-
-        </div>
-
-
-        <div class="campo">
-
-          <label>
-            Foto actual del perrito *
-          </label>
-
-          <div class="foto-box">
-
-            <strong>
-              Sube una foto de tu Golden
+            <strong class="premium">
+              Premium ID
             </strong>
 
-            <p>
-              Preferiblemente una foto clara y reciente.
-            </p>
+            <span>
+              Una identificación elegante
+              para tu Golden.
+            </span>
 
-            <input
-              type="file"
-              name="foto"
-              accept="image/*"
-              required
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="fila">
-
-          <div class="campo">
-
-            <label>
-              Raza *
-            </label>
-
-            <input
-              type="text"
-              name="raza"
-              value="Golden Retriever"
-              required
-            >
-
-          </div>
-
-
-          <div class="campo">
-
-            <label>
-              Fecha de nacimiento
-            </label>
-
-            <input
-              type="date"
-              name="fechaNacimiento"
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="campo">
-
-          <label>
-            Sexo *
           </label>
 
-          <div class="radio-group">
+        </div>
 
-            <div class="radio">
 
-              <input
-                type="radio"
-                id="macho"
-                name="sexo"
-                value="Macho"
-                required
-              >
+        <div class="id-option">
 
-              <label for="macho">
-                Macho
-              </label>
+          <input
+            type="radio"
+            id="black"
+            name="tipo_id"
+            value="Black ID"
+          >
 
+          <label
+            for="black"
+            class="id-card-option"
+          >
+
+            <strong class="black">
+              Black ID
+            </strong>
+
+            <span>
+              La versión exclusiva
+              de Baby Golden ID.
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PET -->
+
+    <section class="section">
+
+      <span class="section-number">
+        PASO 02
+      </span>
+
+      <h2 class="section-title">
+        Datos del perrito
+      </h2>
+
+
+      <label>
+        Nombre y apellido del perrito
+        <span class="required">*</span>
+      </label>
+
+      <input
+        type="text"
+        name="nombre_perrito"
+        placeholder="Ejemplo: Kalma Dávila"
+        required
+      >
+
+
+      <label>
+        Fecha de nacimiento
+        <span class="required">*</span>
+      </label>
+
+      <input
+        type="date"
+        name="fecha_nacimiento"
+        required
+      >
+
+
+      <label>
+        Sexo
+        <span class="required">*</span>
+      </label>
+
+      <select
+        name="sexo"
+        required
+      >
+
+        <option value="">
+          Selecciona
+        </option>
+
+        <option value="Macho">
+          Macho
+        </option>
+
+        <option value="Hembra">
+          Hembra
+        </option>
+
+      </select>
+
+
+      <label>
+        Raza
+        <span class="required">*</span>
+      </label>
+
+      <input
+        type="text"
+        name="raza"
+        placeholder="Ejemplo: Golden Retriever"
+        required
+      >
+
+
+      <label>
+        Color / características particulares
+        <span class="optional">
+          Opcional
+        </span>
+      </label>
+
+      <textarea
+        name="caracteristicas"
+        placeholder="Ejemplo: Golden dorado claro, mancha particular, etc."
+      ></textarea>
+
+
+      <label>
+        ¿Tiene microchip?
+        <span class="required">*</span>
+      </label>
+
+      <select
+        name="microchip"
+        required
+      >
+
+        <option value="">
+          Selecciona
+        </option>
+
+        <option value="Sí">
+          Sí
+        </option>
+
+        <option value="No">
+          No
+        </option>
+
+      </select>
+
+
+      <label>
+        Número de microchip
+        <span class="optional">
+          Si tiene
+        </span>
+      </label>
+
+      <input
+        type="text"
+        name="numero_microchip"
+        placeholder="Número de microchip"
+      >
+
+    </section>
+
+
+    <!-- PHOTO -->
+
+    <section class="section">
+
+      <span class="section-number">
+        PASO 03
+      </span>
+
+      <h2 class="section-title">
+        Fotografía del perrito
+      </h2>
+
+
+      <div class="photo-guide">
+
+        <div class="photo-example">
+
+          <div>
+
+            <div class="dog">
+              🐕
             </div>
 
+            <strong>
+              Ejemplo de fotografía
+            </strong>
 
-            <div class="radio">
+            <br>
 
-              <input
-                type="radio"
-                id="hembra"
-                name="sexo"
-                value="Hembra"
-              >
-
-              <label for="hembra">
-                Hembra
-              </label>
-
-            </div>
+            <small>
+              Golden Retriever sobre fondo blanco
+            </small>
 
           </div>
 
         </div>
 
 
-        <div class="fila">
+        <strong>
+          Requisitos de la fotografía
+        </strong>
 
-          <div class="campo">
+        <ul>
 
-            <label>
-              ¿Tiene microchip?
-            </label>
+          <li>
+            Fondo blanco.
+          </li>
 
-            <select name="tieneMicrochip">
+          <li>
+            Alta calidad.
+          </li>
 
-              <option value="">
-                Seleccionar
-              </option>
+          <li>
+            Únicamente debe aparecer tu mascota.
+          </li>
 
-              <option value="Si">
-                Sí
-              </option>
+          <li>
+            Solo 1 mascota en la fotografía.
+          </li>
 
-              <option value="No">
-                No
-              </option>
+          <li>
+            No fotografías con personas.
+          </li>
 
-            </select>
+          <li>
+            No fotografías con otros animales.
+          </li>
 
-          </div>
+        </ul>
 
+      </div>
 
-          <div class="campo">
 
-            <label>
-              Número de microchip
-            </label>
+      <label>
+        Fotografía de tu mascota
+        <span class="required">*</span>
+      </label>
 
-            <input
-              type="text"
-              name="microchip"
-              placeholder="Si tiene"
-            >
+      <input
+        type="file"
+        name="foto_perrito"
+        accept="image/jpeg,image/png,image/webp"
+        required
+      >
 
-          </div>
+    </section>
 
-        </div>
 
+    <!-- SOCIAL -->
 
-        <div class="campo">
+    <section class="section">
 
-          <label>
-            Color / característica especial
-          </label>
+      <span class="section-number">
+        PASO 04
+      </span>
 
-          <input
-            type="text"
-            name="caracteristica"
-            placeholder="Ej. Mancha blanca en el pecho"
-          >
+      <h2 class="section-title">
+        Red social
+      </h2>
 
-        </div>
 
-      </section>
+      <label>
+        Link de red social
+        <span class="required">*</span>
+      </label>
 
+      <input
+        type="url"
+        name="red_social"
+        placeholder="https://instagram.com/..."
+        required
+      >
 
-      <!-- CONTACTO -->
+      <p class="notice">
+        Coloca únicamente el link de una red social.
+        Solo se permite 1 link.
+      </p>
 
-      <section class="seccion">
+    </section>
 
-        <div class="seccion-titulo">
 
-          <div class="numero">
-            03
-          </div>
+    <!-- TUTOR -->
 
-          <h2>
-            Contacto de emergencia
-          </h2>
+    <section class="section">
 
-        </div>
+      <span class="section-number">
+        PASO 05
+      </span>
 
+      <h2 class="section-title">
+        Datos del tutor
+      </h2>
 
-        <div class="nota">
 
-          Esta información será utilizada únicamente
-          para facilitar el contacto en caso de una
-          situación relacionada con el perrito.
+      <label>
+        Nombres y apellidos del tutor 1
+        <span class="required">*</span>
+      </label>
 
-        </div>
+      <input
+        type="text"
+        name="tutor_1"
+        required
+      >
 
 
-        <div class="campo">
+      <label>
+        DNI del tutor 1
+        <span class="required">*</span>
+      </label>
 
-          <label>
-            Nombre del contacto
-          </label>
+      <input
+        type="text"
+        name="dni_1"
+        inputmode="numeric"
+        maxlength="8"
+        placeholder="8 dígitos"
+        required
+      >
+
 
-          <input
-            type="text"
-            name="contactoEmergencia"
-            placeholder="Nombre completo"
-          >
+      <label>
+        Nombres y apellidos del tutor 2
+        <span class="optional">
+          Opcional
+        </span>
+      </label>
+
+      <input
+        type="text"
+        name="tutor_2"
+      >
 
-        </div>
 
+      <label>
+        DNI del tutor 2
+        <span class="optional">
+          Opcional
+        </span>
+      </label>
 
-        <div class="campo">
+      <input
+        type="text"
+        name="dni_2"
+        inputmode="numeric"
+        maxlength="8"
+        placeholder="8 dígitos"
+      >
 
-          <label>
-            Celular del contacto
-          </label>
 
-          <input
-            type="tel"
-            name="telefonoEmergencia"
-            placeholder="999 999 999"
-          >
+      <label>
+        Número de celular
+        <span class="required">*</span>
+      </label>
 
-        </div>
+      <input
+        type="tel"
+        name="celular"
+        required
+      >
 
-      </section>
 
+      <label>
+        Correo electrónico
+        <span class="required">*</span>
+      </label>
 
-      <!-- INFORMACIÓN -->
+      <input
+        type="email"
+        name="correo"
+        placeholder="correo@ejemplo.com"
+        required
+      >
 
-      <section class="seccion">
 
-        <div class="seccion-titulo">
+      <label>
+        Distrito
+        <span class="required">*</span>
+      </label>
 
-          <div class="numero">
-            04
-          </div>
+      <input
+        type="text"
+        name="distrito"
+        placeholder="Ejemplo: Jesús María"
+        required
+      >
 
-          <h2>
-            Información importante
-          </h2>
+    </section>
 
-        </div>
 
+    <!-- EMERGENCY -->
 
-        <div class="campo">
+    <section class="section">
 
-          <label>
-            Alergias
-          </label>
+      <span class="section-number">
+        PASO 06
+      </span>
 
-          <textarea
-            name="alergias"
-            placeholder="Indica si tiene alguna alergia conocida."
-          ></textarea>
+      <h2 class="section-title">
+        Contacto de emergencia
+      </h2>
 
-        </div>
 
+      <label>
+        Nombre y apellido
+        <span class="required">*</span>
+      </label>
 
-        <div class="campo">
+      <input
+        type="text"
+        name="emergencia_nombre"
+        required
+      >
 
-          <label>
-            Información médica relevante
-          </label>
 
-          <textarea
-            name="informacionMedica"
-            placeholder="Información que consideres importante."
-          ></textarea>
+      <label>
+        Celular
+        <span class="required">*</span>
+      </label>
 
-        </div>
+      <input
+        type="tel"
+        name="emergencia_celular"
+        required
+      >
 
+    </section>
 
-        <div class="campo">
 
-          <label>
-            Vacunas / información adicional
-          </label>
+    <!-- HEALTH -->
 
-          <textarea
-            name="vacunas"
-            placeholder="Puedes agregar información adicional."
-          ></textarea>
+    <section class="section">
 
-        </div>
+      <span class="section-number">
+        PASO 07
+      </span>
 
-      </section>
+      <h2 class="section-title">
+        Información importante
+      </h2>
 
 
-      <!-- AUTORIZACIÓN -->
+      <label>
+        ¿Tiene alguna alergia?
+      </label>
 
-      <section class="seccion">
+      <select name="alergias">
 
-        <div class="nota">
+        <option value="No">
+          No
+        </option>
 
-          <strong>
-            Protección de información
-          </strong>
+        <option value="Sí">
+          Sí
+        </option>
 
-          <br><br>
+      </select>
 
-          Los datos proporcionados serán utilizados
-          para la creación y gestión del Baby Golden ID.
-          La información pública del perfil será limitada
-          a los datos que el tutor autorice.
 
-        </div>
+      <label>
+        Si tiene alergias, indica cuáles
+      </label>
 
+      <textarea
+        name="detalle_alergias"
+        placeholder="Escribe aquí..."
+      ></textarea>
 
-        <div class="autorizacion">
 
-          <input
-            type="checkbox"
-            id="autorizacion"
-            required
-          >
+      <label>
+        ¿Tiene alguna condición médica o información importante?
+      </label>
 
-          <label for="autorizacion">
+      <select name="condicion">
 
-            Autorizo el uso de la información proporcionada
-            para la creación y gestión del Baby Golden ID
-            y confirmo que los datos registrados son correctos.
+        <option value="No">
+          No
+        </option>
 
-          </label>
+        <option value="Sí">
+          Sí
+        </option>
 
-        </div>
+      </select>
 
 
-        <button
-          type="submit"
-          class="boton"
+      <label>
+        Detalle de la información médica
+      </label>
+
+      <textarea
+        name="detalle_condicion"
+        placeholder="Escribe aquí..."
+      ></textarea>
+
+
+      <label>
+        ¿Toma algún medicamento actualmente?
+      </label>
+
+      <select name="medicamento">
+
+        <option value="No">
+          No
+        </option>
+
+        <option value="Sí">
+          Sí
+        </option>
+
+      </select>
+
+
+      <label>
+        ¿Cuál?
+      </label>
+
+      <input
+        type="text"
+        name="detalle_medicamento"
+      >
+
+
+      <label>
+        ¿Tiene sus vacunas al día?
+      </label>
+
+      <select name="vacunas">
+
+        <option value="">
+          Selecciona
+        </option>
+
+        <option value="Sí">
+          Sí
+        </option>
+
+        <option value="No">
+          No
+        </option>
+
+        <option value="No sabe">
+          No sabe / pendiente de actualizar
+        </option>
+
+      </select>
+
+    </section>
+
+
+    <!-- PUBLIC INFORMATION -->
+
+    <section class="section">
+
+      <span class="section-number">
+        PASO 08
+      </span>
+
+      <h2 class="section-title">
+        Información del ID
+      </h2>
+
+
+      <label>
+        ¿Deseas que el celular del tutor pueda ser contactado desde el ID?
+      </label>
+
+      <select name="mostrar_celular">
+
+        <option value="Sí">
+          Sí
+        </option>
+
+        <option value="No">
+          No
+        </option>
+
+      </select>
+
+
+      <label>
+        ¿Deseas habilitar un botón de WhatsApp en el ID?
+      </label>
+
+      <select name="whatsapp">
+
+        <option value="Sí">
+          Sí
+        </option>
+
+        <option value="No">
+          No
+        </option>
+
+      </select>
+
+    </section>
+
+
+    <!-- AUTHORIZATION -->
+
+    <section class="section">
+
+      <span class="section-number">
+        PASO 09
+      </span>
+
+      <h2 class="section-title">
+        Autorizaciones
+      </h2>
+
+
+      <label class="check">
+
+        <input
+          type="checkbox"
+          name="autorizacion_datos"
+          required
         >
 
-          CREAR BABY GOLDEN ID
+        <span>
+          Autorizo a Baby Golden Perú a utilizar los datos
+          proporcionados exclusivamente para la creación,
+          identificación y funcionamiento de mi ID Baby Golden Perú.
+        </span>
 
-        </button>
-
-      </section>
-
-
-    </form>
-
-
-    <a
-      href="index.html"
-      class="volver"
-    >
-      ← Volver a Baby Golden Perú
-    </a>
+      </label>
 
 
-    <div class="pie">
+      <label class="check">
 
-      Baby Golden Perú ♥
-      <br>
-      Identificación Digital • NFC • QR
+        <input
+          type="checkbox"
+          name="confirmacion_datos"
+          required
+        >
 
-    </div>
+        <span>
+          Confirmo que los datos proporcionados son correctos.
+        </span>
+
+      </label>
 
 
-  </main>
+      <button
+        type="submit"
+        class="submit"
+      >
+        SOLICITAR MI BABY GOLDEN ID
+      </button>
 
 
-  <script>
+      <p class="notice">
+        Al enviar este formulario se solicitará la creación
+        de tu Baby Golden ID. En esta primera versión,
+        el formulario es visual; posteriormente conectaremos
+        el sistema a una base de datos segura.
+      </p>
 
-    document
-      .getElementById("registroForm")
-      .addEventListener("submit", function(event) {
+    </section>
 
-        event.preventDefault();
 
-        alert(
-          "¡Perfecto! Tu formulario está listo. " +
-          "En el siguiente paso conectaremos el registro " +
-          "con nuestra base de datos."
-        );
+  </form>
 
-      });
+</main>
 
-  </script>
+
+<footer>
+
+  <img
+    src="BABY%20GOLDEN.png"
+    alt="Baby Golden Perú"
+  >
+
+  <p>
+    <span class="heart">♥</span>
+    Una pata a la vez, construimos una comunidad más responsable.
+  </p>
+
+  <p>
+    BABY GOLDEN ID · NFC · QR
+  </p>
+
+</footer>
 
 
 </body>
-
 </html>
