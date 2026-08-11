@@ -1056,133 +1056,209 @@ async function cargarPerfil() {
 
   `;
 
+/* ======================================
+   INFORMACIÓN MÉDICA
+====================================== */
 
-  /* ======================================
-     INFORMACIÓN MÉDICA
-  ====================================== */
+let informacionMedica = "";
 
-  let informacionMedica = "";
+const tieneAlergias =
+  String(data.alergias || "").trim().toLowerCase() === "sí";
 
+const tieneCondicion =
+  String(data.condicion_medica || "").trim().toLowerCase() === "sí";
 
-  if (
+const tomaMedicamento =
+  String(data.medicamento || "").trim().toLowerCase() === "sí";
 
-    data.alergias ||
-
-    data.condicion_medica ||
-
-    data.medicamento ||
-
-    data.vacunas_al_dia
-
-  ) {
-
-    informacionMedica = `
-
-      <div class="section">
-
-        <h2 class="section-title">
-
-          Información importante
-
-        </h2>
+const vacunas =
+  String(data.vacunas_al_dia || "").trim();
 
 
-        <div class="info">
+if (
+  data.alergias ||
+  data.condicion_medica ||
+  data.medicamento ||
+  data.vacunas_al_dia
+) {
+
+  informacionMedica = `
+
+    <div class="section">
+
+      <h2 class="section-title">
+        Información importante
+      </h2>
 
 
-          ${
-            data.alergias
-
-            ? `
-
-              <strong>
-                Alergias:
-              </strong>
-
-              ${escaparHTML(
-                data.detalle_alergias ||
-                data.alergias
-              )}
-
-              <br>
-
-            `
-
-            : ""
-          }
+      <div class="info">
 
 
-          ${
-            data.condicion_medica
+        <!-- ALERGIAS -->
 
-            ? `
+        ${
+          data.alergias
 
-              <strong>
-                Condición médica:
-              </strong>
+          ? `
 
-              ${escaparHTML(
-                data.detalle_condicion ||
-                data.condicion_medica
-              )}
+            <strong>
+              Alergias:
+            </strong>
 
-              <br>
+            ${escaparHTML(
+              tieneAlergias
+                ? "Sí"
+                : "No"
+            )}
 
-            `
+            ${
+              tieneAlergias &&
+              data.detalle_alergias
 
-            : ""
-          }
+              ? `
 
+                <br>
 
-          ${
-            data.medicamento
+                <strong>
+                  Detalle:
+                </strong>
 
-            ? `
+                ${escaparHTML(
+                  data.detalle_alergias
+                )}
 
-              <strong>
-                Medicamento:
-              </strong>
+              `
 
-              ${escaparHTML(
-                data.detalle_medicamento ||
-                data.medicamento
-              )}
+              : ""
+            }
 
-              <br>
+            <br>
 
-            `
+          `
 
-            : ""
-          }
-
-
-          ${
-            data.vacunas_al_dia
-
-            ? `
-
-              <strong>
-                Vacunas:
-              </strong>
-
-              ${escaparHTML(
-                data.vacunas_al_dia
-              )}
-
-            `
-
-            : ""
-          }
+          : ""
+        }
 
 
-        </div>
+        <!-- CONDICIÓN MÉDICA -->
+
+        ${
+          data.condicion_medica
+
+          ? `
+
+            <strong>
+              Condición médica:
+            </strong>
+
+            ${escaparHTML(
+              tieneCondicion
+                ? "Sí"
+                : "No"
+            )}
+
+            ${
+              tieneCondicion &&
+              data.detalle_condicion
+
+              ? `
+
+                <br>
+
+                <strong>
+                  Detalle:
+                </strong>
+
+                ${escaparHTML(
+                  data.detalle_condicion
+                )}
+
+              `
+
+              : ""
+            }
+
+            <br>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- MEDICAMENTO -->
+
+        ${
+          data.medicamento
+
+          ? `
+
+            <strong>
+              Medicamento:
+            </strong>
+
+            ${escaparHTML(
+              tomaMedicamento
+                ? "Sí"
+                : "No"
+            )}
+
+            ${
+              tomaMedicamento &&
+              data.detalle_medicamento
+
+              ? `
+
+                <br>
+
+                <strong>
+                  Detalle:
+                </strong>
+
+                ${escaparHTML(
+                  data.detalle_medicamento
+                )}
+
+              `
+
+              : ""
+            }
+
+            <br>
+
+          `
+
+          : ""
+        }
+
+
+        <!-- VACUNAS -->
+
+        ${
+          data.vacunas_al_dia
+
+          ? `
+
+            <strong>
+              Vacunas:
+            </strong>
+
+            ${escaparHTML(
+              vacunas
+            )}
+
+          `
+
+          : ""
+        }
+
 
       </div>
 
-    `;
+    </div>
 
-  }
-
+  `;
+}
 
   /* ======================================
      BENEFICIOS BLACK
