@@ -552,24 +552,33 @@
 
           <div class="actions">
 
-            <a
-              id="abrirPerfil"
-              href="#"
-              target="_blank"
-            >
-              ABRIR PERFIL
-            </a>
+  <a
+    id="abrirPerfil"
+    href="#"
+    target="_blank"
+  >
+    ABRIR PERFIL
+  </a>
 
 
-            <button
-              id="copiarUrl"
-              type="button"
-              class="secondary"
-            >
-              COPIAR URL
-            </button>
+  <button
+    id="copiarUrl"
+    type="button"
+    class="secondary"
+  >
+    COPIAR URL
+  </button>
 
-          </div>
+
+  <button
+    id="editarPerrito"
+    type="button"
+    class="secondary"
+  >
+    EDITAR
+  </button>
+
+</div>
 
 
           <div
@@ -578,7 +587,101 @@
           >
             URL copiada correctamente.
           </div>
+<div
+  id="editor"
+  class="hidden"
+  style="margin-top:25px;"
+>
 
+  <h2>
+    Editar Baby Golden ID
+  </h2>
+
+
+  <label>
+    Nombre del perrito
+  </label>
+
+  <input
+    type="text"
+    id="editNombre"
+  >
+
+
+  <label>
+    Fecha de nacimiento
+  </label>
+
+  <input
+    type="date"
+    id="editFecha"
+  >
+
+
+  <label>
+    Sexo
+  </label>
+
+  <input
+    type="text"
+    id="editSexo"
+  >
+
+
+  <label>
+    Raza
+  </label>
+
+  <input
+    type="text"
+    id="editRaza"
+  >
+
+
+  <label>
+    Características
+  </label>
+
+  <input
+    type="text"
+    id="editCaracteristicas"
+  >
+
+
+  <label>
+    Número de microchip
+  </label>
+
+  <input
+    type="text"
+    id="editMicrochip"
+  >
+
+
+  <label>
+    Red social
+  </label>
+
+  <input
+    type="url"
+    id="editRedSocial"
+  >
+
+
+  <button
+    id="guardarCambios"
+    type="button"
+  >
+    GUARDAR CAMBIOS
+  </button>
+
+
+  <div
+    id="editMessage"
+    class="message"
+  ></div>
+
+</div>
 
         </div>
 
