@@ -477,6 +477,73 @@ Una comunidad unida por el amor a nuestros perritos.
 
 </footer>
 
+<script>
 
+const searchInput = document.querySelector('.search-box input');
+const categories = document.querySelectorAll('.category');
+const brandCards = document.querySelectorAll('.brand-card');
+
+function filterBrands() {
+
+    const search = searchInput.value.toLowerCase();
+
+    const activeCategory =
+        document.querySelector('.category.active');
+
+    const category =
+        activeCategory ?
+        activeCategory.textContent.toLowerCase() :
+        'todos';
+
+    brandCards.forEach(card => {
+
+        const text =
+            card.textContent.toLowerCase();
+
+        const matchesSearch =
+            text.includes(search);
+
+        const matchesCategory =
+            category === 'todos' ||
+            text.includes(category);
+
+        if (matchesSearch && matchesCategory) {
+
+            card.style.display = '';
+
+        } else {
+
+            card.style.display = 'none';
+
+        }
+
+    });
+
+}
+
+categories.forEach(button => {
+
+    button.addEventListener('click', function() {
+
+        categories.forEach(btn => {
+            btn.classList.remove('active');
+        });
+
+        this.classList.add('active');
+
+        filterBrands();
+
+    });
+
+});
+
+searchInput.addEventListener(
+    'input',
+    filterBrands
+);
+
+categories[0].classList.add('active');
+
+</script>
 </body>
 </html>
