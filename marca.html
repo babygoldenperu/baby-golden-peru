@@ -5,9 +5,14 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<title>YUM | Beneficio Baby Golden Perú</title>
+<title>Beneficio | Baby Golden Perú</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
@@ -48,6 +53,7 @@ header {
 }
 
 .header-container {
+
     max-width: 1100px;
 
     margin: auto;
@@ -62,6 +68,7 @@ header {
 }
 
 .logo {
+
     font-size: 18px;
 
     font-weight: bold;
@@ -74,6 +81,7 @@ header {
 }
 
 .back {
+
     text-decoration: none;
 
     color: #555;
@@ -192,13 +200,32 @@ header {
 
     justify-content: center;
 
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.06);
+
+    overflow: hidden;
+}
+
+.brand-logo img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    padding: 12px;
+}
+
+.brand-logo-text {
+
     font-family: Georgia, serif;
 
-    font-size: 45px;
+    font-size: 40px;
 
     font-weight: bold;
 
-    letter-spacing: 5px;
+    letter-spacing: 4px;
 }
 
 .brand-header small {
@@ -236,7 +263,7 @@ header {
 }
 
 
-/* BENEFICIO PRINCIPAL */
+/* BENEFICIO */
 
 .discount-box {
 
@@ -495,6 +522,35 @@ header {
 }
 
 
+/* ESTADOS */
+
+.loading {
+
+    text-align: center;
+
+    padding: 80px 20px;
+
+    color: #777;
+}
+
+.error {
+
+    background: #fff0f0;
+
+    color: #9b3333;
+
+    border: 1px solid #f0cccc;
+
+    padding: 25px;
+
+    border-radius: 15px;
+
+    text-align: center;
+
+    display: none;
+}
+
+
 /* FOOTER */
 
 footer {
@@ -559,7 +615,6 @@ footer p {
 
 <div class="header-container">
 
-
 <div class="logo">
 
 BABY <span>GOLDEN</span> PERÚ
@@ -575,7 +630,6 @@ class="back">
 
 </a>
 
-
 </div>
 
 </header>
@@ -590,9 +644,9 @@ GOLDEN BENEFITS CLUB
 </div>
 
 
-<h1>
+<h1 id="heroBrand">
 
-YUM
+Cargando...
 
 </h1>
 
@@ -609,15 +663,37 @@ Beneficio exclusivo para miembros Baby Golden Perú
 <main class="container">
 
 
-<div class="benefit-card">
+<div
+id="loading"
+class="loading">
+
+Cargando beneficio...
+
+</div>
+
+
+<div
+id="errorBox"
+class="error">
+
+No pudimos encontrar este beneficio.
+
+</div>
+
+
+<div
+id="benefitCard"
+class="benefit-card"
+style="display:none;"
+>
 
 
 <section class="brand-header">
 
 
-<div class="brand-logo">
-
-YUM
+<div
+id="brandLogo"
+class="brand-logo">
 
 </div>
 
@@ -629,11 +705,10 @@ MARCA AFILIADA
 </small>
 
 
-<h2>
-
-Comida cocida para perros y gatos
+<h2 id="brandName">
 
 </h2>
+
 
 </section>
 
@@ -643,7 +718,6 @@ Comida cocida para perros y gatos
 
 <div class="discount-box">
 
-
 <small>
 
 BENEFICIO GOLDEN
@@ -651,17 +725,12 @@ BENEFICIO GOLDEN
 </small>
 
 
-<h3>
-
-10% OFF
+<h3 id="discount">
 
 </h3>
 
 
-<p>
-
-Descuento exclusivo para miembros
-con ID Baby Golden.
+<p id="discountDescription">
 
 </p>
 
@@ -670,9 +739,7 @@ con ID Baby Golden.
 
 <div class="membership">
 
-<span>
-
-BLACK ID + PREMIUM
+<span id="membership">
 
 </span>
 
@@ -681,7 +748,6 @@ BLACK ID + PREMIUM
 
 <div class="section">
 
-
 <h3>
 
 Tu beneficio
@@ -689,19 +755,18 @@ Tu beneficio
 </h3>
 
 
-<p>
-
-Obtén <strong>10% de descuento</strong>
-en YUM utilizando el código exclusivo
-de Baby Golden Perú.
+<p id="benefitDescription">
 
 </p>
 
 </div>
 
 
-<div class="code-box">
-
+<div
+id="codeContainer"
+class="code-box"
+style="display:none;"
+>
 
 <small>
 
@@ -710,50 +775,16 @@ CÓDIGO DE DESCUENTO
 </small>
 
 
-<div class="code">
-
-babygolden10
-
-</div>
+<div
+id="code"
+class="code">
 
 </div>
-
-
-<div class="section">
-
-
-<h3>
-
-Cómo utilizarlo
-
-</h3>
-
-
-<p>
-
-1. Realiza tu pedido con YUM.
-
-<br><br>
-
-2. Presenta tu ID Baby Golden
-o indica que eres miembro.
-
-<br><br>
-
-3. Utiliza el código
-<strong>babygolden10</strong>.
-
-<br><br>
-
-4. Disfruta tu descuento.
-
-</p>
 
 </div>
 
 
 <div class="section">
-
 
 <h3>
 
@@ -764,23 +795,7 @@ Condiciones
 
 <div class="conditions">
 
-
-<p>
-
-• No incluye delivery.
-
-<br>
-
-• Sujeto a stock.
-
-<br>
-
-• No aplica con otras promociones.
-
-<br>
-
-• Beneficio exclusivo para miembros
-con ID Baby Golden Black o Premium.
+<p id="conditions">
 
 </p>
 
@@ -789,17 +804,9 @@ con ID Baby Golden Black o Premium.
 </div>
 
 
-<div class="validity">
-
-VÁLIDO HASTA:
-
-<br>
-
-<strong>
-
-1 DE DICIEMBRE DE 2026
-
-</strong>
+<div
+id="validity"
+class="validity">
 
 </div>
 
@@ -808,21 +815,38 @@ VÁLIDO HASTA:
 
 
 <a
-href="https://wa.me/51929883880"
+id="whatsappButton"
+href="#"
 class="button primary"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer">
 
-CONTACTAR YUM
+CONTACTAR MARCA
 
 </a>
 
 
 <a
-href="https://www.instagram.com/yum_peru/"
+id="instagramButton"
+href="#"
 class="button secondary"
-target="_blank">
+target="_blank"
+rel="noopener noreferrer">
 
 VER INSTAGRAM
+
+</a>
+
+
+<a
+id="webButton"
+href="#"
+class="button secondary"
+target="_blank"
+rel="noopener noreferrer"
+style="display:none;">
+
+VISITAR WEB
 
 </a>
 
@@ -854,6 +878,603 @@ para nuestra comunidad.
 </p>
 
 </footer>
+
+
+<script>
+
+/* =========================================
+   SUPABASE
+========================================= */
+
+const SUPABASE_URL =
+"https://cxgcmrpqqaachnfavplh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+const supabaseClient =
+window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+/* =========================================
+   ELEMENTOS
+========================================= */
+
+const loading =
+document.getElementById(
+    "loading"
+);
+
+const errorBox =
+document.getElementById(
+    "errorBox"
+);
+
+const benefitCard =
+document.getElementById(
+    "benefitCard"
+);
+
+const heroBrand =
+document.getElementById(
+    "heroBrand"
+);
+
+const brandLogo =
+document.getElementById(
+    "brandLogo"
+);
+
+const brandName =
+document.getElementById(
+    "brandName"
+);
+
+const discount =
+document.getElementById(
+    "discount"
+);
+
+const discountDescription =
+document.getElementById(
+    "discountDescription"
+);
+
+const membership =
+document.getElementById(
+    "membership"
+);
+
+const benefitDescription =
+document.getElementById(
+    "benefitDescription"
+);
+
+const codeContainer =
+document.getElementById(
+    "codeContainer"
+);
+
+const code =
+document.getElementById(
+    "code"
+);
+
+const conditions =
+document.getElementById(
+    "conditions"
+);
+
+const validity =
+document.getElementById(
+    "validity"
+);
+
+const whatsappButton =
+document.getElementById(
+    "whatsappButton"
+);
+
+const instagramButton =
+document.getElementById(
+    "instagramButton"
+);
+
+const webButton =
+document.getElementById(
+    "webButton"
+);
+
+
+/* =========================================
+   OBTENER SLUG
+========================================= */
+
+const parametros =
+new URLSearchParams(
+    window.location.search
+);
+
+const slug =
+parametros.get("id");
+
+
+/* =========================================
+   CARGAR BENEFICIO
+========================================= */
+
+async function cargarBeneficio() {
+
+    if (!slug) {
+
+        mostrarError();
+
+        return;
+
+    }
+
+
+    try {
+
+        const resultadoMarca =
+        await supabaseClient
+            .from("marcas_afiliadas")
+            .select("*")
+            .eq("slug", slug)
+            .eq("estado", true)
+            .maybeSingle();
+
+
+        if (resultadoMarca.error) {
+
+            throw resultadoMarca.error;
+
+        }
+
+
+        const marca =
+        resultadoMarca.data;
+
+
+        if (!marca) {
+
+            mostrarError();
+
+            return;
+
+        }
+
+
+        const resultadoBeneficio =
+        await supabaseClient
+            .from("beneficios_golden")
+            .select("*")
+            .eq("marca_id", marca.id)
+            .eq("estado", true)
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            )
+            .limit(1)
+            .maybeSingle();
+
+
+        if (resultadoBeneficio.error) {
+
+            throw resultadoBeneficio.error;
+
+        }
+
+
+        const beneficio =
+        resultadoBeneficio.data;
+
+
+        if (!beneficio) {
+
+            mostrarError();
+
+            return;
+
+        }
+
+
+        mostrarBeneficio(
+            marca,
+            beneficio
+        );
+
+
+    } catch (error) {
+
+        console.error(
+            "ERROR:",
+            error
+        );
+
+        mostrarError(
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================================
+   MOSTRAR BENEFICIO
+========================================= */
+
+function mostrarBeneficio(
+    marca,
+    beneficio
+) {
+
+    heroBrand.textContent =
+    marca.nombre;
+
+
+    brandName.textContent =
+    marca.nombre;
+
+
+    if (marca.logo_url) {
+
+        brandLogo.innerHTML = `
+
+            <img
+                src="${escaparHTML(
+                    marca.logo_url
+                )}"
+                alt="Logo ${escaparHTML(
+                    marca.nombre
+                )}"
+            >
+
+        `;
+
+    } else {
+
+        brandLogo.innerHTML = `
+
+            <div class="brand-logo-text">
+
+                ${escaparHTML(
+                    marca.nombre
+                )}
+
+            </div>
+
+        `;
+
+    }
+
+
+    discount.textContent =
+    beneficio.descuento ||
+    "BENEFICIO";
+
+
+    discountDescription.textContent =
+    beneficio.titulo ||
+    "Beneficio exclusivo Baby Golden";
+
+
+    membership.textContent =
+    obtenerMembresia(
+        beneficio
+    );
+
+
+    benefitDescription.textContent =
+    beneficio.descripcion ||
+    "Beneficio exclusivo para la comunidad Baby Golden Perú.";
+
+
+    if (beneficio.codigo) {
+
+        code.textContent =
+        beneficio.codigo;
+
+        codeContainer.style.display =
+        "block";
+
+    } else {
+
+        codeContainer.style.display =
+        "none";
+
+    }
+
+
+    conditions.textContent =
+    beneficio.condiciones ||
+    "Consulta las condiciones directamente con la marca.";
+
+
+    if (beneficio.fecha_fin) {
+
+        validity.innerHTML = `
+
+            VÁLIDO HASTA:
+
+            <br>
+
+            <strong>
+
+                ${formatearFecha(
+                    beneficio.fecha_fin
+                )}
+
+            </strong>
+
+        `;
+
+    } else {
+
+        validity.innerHTML = `
+
+            BENEFICIO ACTIVO
+
+            <br>
+
+            <strong>
+
+                Sujeto a las condiciones de la marca
+
+            </strong>
+
+        `;
+
+    }
+
+
+    /* WHATSAPP */
+
+    if (marca.whatsapp) {
+
+        const numero =
+        marca.whatsapp
+            .replace(
+                /\D/g,
+                ""
+            );
+
+
+        whatsappButton.href =
+        "https://wa.me/51" +
+        numero;
+
+        whatsappButton.style.display =
+        "block";
+
+    } else {
+
+        whatsappButton.style.display =
+        "none";
+
+    }
+
+
+    /* INSTAGRAM */
+
+    if (marca.instagram) {
+
+        instagramButton.href =
+        marca.instagram;
+
+        instagramButton.style.display =
+        "block";
+
+    } else {
+
+        instagramButton.style.display =
+        "none";
+
+    }
+
+
+    /* WEB */
+
+    if (marca.web) {
+
+        webButton.href =
+        marca.web;
+
+        webButton.style.display =
+        "block";
+
+    } else {
+
+        webButton.style.display =
+        "none";
+
+    }
+
+
+    loading.style.display =
+    "none";
+
+
+    benefitCard.style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   MEMBRESIA
+========================================= */
+
+function obtenerMembresia(
+    beneficio
+) {
+
+    if (
+        beneficio.acceso_black &&
+        beneficio.acceso_premium
+    ) {
+
+        return "BLACK ID + PREMIUM";
+
+    }
+
+
+    if (
+        beneficio.acceso_premium
+    ) {
+
+        return "PREMIUM";
+
+    }
+
+
+    if (
+        beneficio.acceso_black
+    ) {
+
+        return "BLACK ID";
+
+    }
+
+
+    if (
+        beneficio.acceso_id
+    ) {
+
+        return "ID BABY GOLDEN";
+
+    }
+
+
+    return "BENEFICIO GOLDEN";
+
+}
+
+
+/* =========================================
+   FECHA
+========================================= */
+
+function formatearFecha(
+    fecha
+) {
+
+    if (!fecha) {
+
+        return "";
+
+    }
+
+
+    const partes =
+    fecha.split("-");
+
+
+    if (
+        partes.length !== 3
+    ) {
+
+        return fecha;
+
+    }
+
+
+    return (
+        partes[2] +
+        "/" +
+        partes[1] +
+        "/" +
+        partes[0]
+    );
+
+}
+
+
+/* =========================================
+   ERROR
+========================================= */
+
+function mostrarError(
+    mensaje
+) {
+
+    loading.style.display =
+    "none";
+
+    benefitCard.style.display =
+    "none";
+
+    errorBox.textContent =
+    mensaje ||
+    "No pudimos encontrar este beneficio.";
+
+    errorBox.style.display =
+    "block";
+
+}
+
+
+/* =========================================
+   SEGURIDAD
+========================================= */
+
+function escaparHTML(
+    valor
+) {
+
+    if (
+        valor === null ||
+        valor === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(valor)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
+
+cargarBeneficio();
+
+</script>
 
 
 </body>
