@@ -5,10 +5,9 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Beneficio | Baby Golden Perú</title>
+<title>YUM | Beneficio Baby Golden Perú</title>
 
 <style>
 
@@ -18,50 +17,136 @@ content="width=device-width, initial-scale=1.0">
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f8f7f3;
-    color: #222;
+:root {
+    --gold: #c7a15a;
+    --gold-light: #ead9ad;
+    --black: #111111;
+    --cream: #f7f4ed;
+    --gray: #707070;
+    --white: #ffffff;
 }
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--black);
+}
+
 
 /* HEADER */
 
 header {
-    background: white;
-    padding: 18px 25px;
-    border-bottom: 1px solid #e5e5e5;
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid #e5e0d6;
+
+    position: sticky;
+    top: 0;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(10px);
 }
 
 .header-container {
     max-width: 1100px;
+
     margin: auto;
 
+    padding: 18px 25px;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 }
 
 .logo {
+    font-size: 18px;
+
     font-weight: bold;
-    font-size: 20px;
+
+    letter-spacing: 1px;
 }
 
 .logo span {
-    color: #c79b3b;
+    color: var(--gold);
 }
 
 .back {
     text-decoration: none;
+
     color: #555;
+
+    font-size: 13px;
 }
+
+
+/* HERO */
+
+.hero {
+
+    background:
+    linear-gradient(
+        rgba(0,0,0,.72),
+        rgba(0,0,0,.72)
+    ),
+    url("BABY GOLDEN.png");
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+
+    text-align: center;
+
+    padding: 70px 20px;
+}
+
+.eyebrow {
+
+    color: var(--gold-light);
+
+    font-size: 10px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 15px;
+
+    font-weight: bold;
+}
+
+.hero h1 {
+
+    font-family: Georgia, serif;
+
+    font-size: 54px;
+
+    font-weight: normal;
+
+    margin-bottom: 12px;
+}
+
+.hero p {
+
+    color: #ddd;
+
+    font-size: 15px;
+}
+
 
 /* CONTENEDOR */
 
 .container {
-    max-width: 1000px;
+
+    max-width: 950px;
+
     margin: auto;
-    padding: 50px 20px;
+
+    padding: 45px 20px;
 }
+
 
 /* TARJETA */
 
@@ -69,58 +154,79 @@ header {
 
     background: white;
 
-    border-radius: 22px;
+    border-radius: 20px;
 
     overflow: hidden;
 
     box-shadow:
-    0 10px 35px rgba(0,0,0,.08);
+    0 15px 45px rgba(0,0,0,.08);
 }
 
-/* CABECERA */
+
+/* MARCA */
 
 .brand-header {
 
-    background: #111;
-
-    color: white;
+    text-align: center;
 
     padding: 45px 25px;
 
-    text-align: center;
+    border-bottom: 1px solid #eee;
 }
 
 .brand-logo {
 
-    width: 120px;
-    height: 120px;
+    width: 150px;
 
-    margin: 0 auto 20px;
+    height: 110px;
+
+    margin: auto;
+
+    background: #f5f3ee;
 
     border-radius: 20px;
 
-    background: white;
-
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    font-size: 55px;
+    font-family: Georgia, serif;
+
+    font-size: 45px;
+
+    font-weight: bold;
+
+    letter-spacing: 5px;
 }
 
 .brand-header small {
 
-    color: #bbb;
+    display: block;
 
-    letter-spacing: 1px;
+    margin-top: 20px;
+
+    color: var(--gold);
+
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    font-weight: bold;
 }
 
-.brand-header h1 {
+.brand-header h2 {
 
-    margin-top: 10px;
+    font-family: Georgia, serif;
 
-    font-size: 34px;
+    font-size: 32px;
+
+    font-weight: normal;
+
+    margin-top: 8px;
 }
+
 
 /* CONTENIDO */
 
@@ -129,69 +235,133 @@ header {
     padding: 35px;
 }
 
-/* DESCUENTO */
+
+/* BENEFICIO PRINCIPAL */
 
 .discount-box {
 
-    text-align: center;
+    background: #faf7ef;
 
-    background: #f8f3e8;
+    border: 1px solid #eadfca;
 
-    border-radius: 15px;
+    border-radius: 16px;
 
     padding: 30px;
+
+    text-align: center;
 
     margin-bottom: 30px;
 }
 
-.discount-box h2 {
+.discount-box small {
 
-    color: #c79b3b;
+    color: #777;
 
-    font-size: 38px;
+    font-size: 10px;
 
-    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.discount-box h3 {
+
+    color: var(--gold);
+
+    font-family: Georgia, serif;
+
+    font-size: 50px;
+
+    font-weight: normal;
+
+    margin: 8px 0;
 }
 
 .discount-box p {
 
-    color: #555;
+    color: #666;
+
+    font-size: 13px;
 }
+
+
+/* MEMBRESIA */
+
+.membership {
+
+    text-align: center;
+
+    margin-bottom: 35px;
+}
+
+.membership span {
+
+    display: inline-block;
+
+    background: var(--black);
+
+    color: white;
+
+    padding: 9px 16px;
+
+    border-radius: 30px;
+
+    font-size: 10px;
+
+    letter-spacing: 1px;
+
+    font-weight: bold;
+}
+
 
 /* SECCIONES */
 
 .section {
 
-    margin-bottom: 30px;
+    padding: 25px 0;
+
+    border-bottom: 1px solid #eee;
+}
+
+.section:last-child {
+
+    border-bottom: none;
 }
 
 .section h3 {
 
-    margin-bottom: 12px;
+    font-family: Georgia, serif;
 
-    font-size: 20px;
+    font-size: 23px;
+
+    font-weight: normal;
+
+    margin-bottom: 12px;
 }
 
 .section p {
 
-    color: #666;
+    color: var(--gray);
 
-    line-height: 1.6;
+    font-size: 14px;
+
+    line-height: 1.7;
 }
+
 
 /* CODIGO */
 
 .code-box {
 
-    border: 2px dashed #c79b3b;
+    margin: 25px 0;
 
-    border-radius: 12px;
+    padding: 25px;
 
-    padding: 20px;
+    border: 2px dashed var(--gold);
+
+    border-radius: 15px;
 
     text-align: center;
 
-    margin: 25px 0;
+    background: #fffdf8;
 }
 
 .code-box small {
@@ -200,27 +370,79 @@ header {
 
     color: #888;
 
-    margin-bottom: 8px;
+    font-size: 10px;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 10px;
 }
 
 .code {
+
+    font-family: monospace;
 
     font-size: 25px;
 
     font-weight: bold;
 
     letter-spacing: 2px;
-
-    color: #111;
 }
+
+
+/* CONDICIONES */
+
+.conditions {
+
+    background: #f8f7f3;
+
+    padding: 20px;
+
+    border-radius: 12px;
+
+    margin-top: 15px;
+}
+
+.conditions p {
+
+    font-size: 13px;
+
+    line-height: 1.8;
+
+    color: #666;
+}
+
+
+/* VIGENCIA */
+
+.validity {
+
+    text-align: center;
+
+    background: #111;
+
+    color: white;
+
+    padding: 18px;
+
+    border-radius: 10px;
+
+    margin-top: 25px;
+}
+
+.validity strong {
+
+    color: var(--gold-light);
+}
+
 
 /* BOTONES */
 
 .buttons {
 
-    display: flex;
+    display: grid;
 
-    flex-wrap: wrap;
+    grid-template-columns:
+    repeat(2, 1fr);
 
     gap: 12px;
 
@@ -229,71 +451,98 @@ header {
 
 .button {
 
-    flex: 1;
-
-    min-width: 180px;
-
-    padding: 15px;
-
-    border-radius: 10px;
+    display: block;
 
     text-align: center;
 
     text-decoration: none;
 
+    padding: 15px;
+
+    border-radius: 9px;
+
+    font-size: 11px;
+
     font-weight: bold;
+
+    letter-spacing: .8px;
+
+    transition: .2s;
 }
 
 .primary {
 
-    background: #111;
+    background: var(--black);
 
     color: white;
 }
 
+.primary:hover {
+
+    background: var(--gold);
+}
+
 .secondary {
 
-    background: #f0f0f0;
+    background: #f0eee9;
 
     color: #222;
 }
 
-.primary:hover {
+.secondary:hover {
 
-    background: #c79b3b;
+    background: #e4dfd3;
 }
+
 
 /* FOOTER */
 
 footer {
 
+    background: #0c0c0c;
+
+    color: white;
+
     text-align: center;
 
-    padding: 35px;
+    padding: 40px 20px;
+
+    margin-top: 60px;
+}
+
+footer strong {
+
+    color: var(--gold-light);
+}
+
+footer p {
 
     color: #888;
 
-    font-size: 13px;
+    font-size: 12px;
+
+    margin-top: 8px;
 }
+
 
 /* MOBILE */
 
 @media(max-width:600px) {
 
-    .container {
-        padding: 25px 15px;
+    .hero h1 {
+        font-size: 42px;
     }
 
     .content {
         padding: 25px 20px;
     }
 
-    .brand-header h1 {
-        font-size: 27px;
+    .discount-box h3 {
+        font-size: 42px;
     }
 
-    .discount-box h2 {
-        font-size: 30px;
+    .buttons {
+        grid-template-columns: 1fr;
     }
 
 }
@@ -302,6 +551,7 @@ footer {
 
 </head>
 
+
 <body>
 
 
@@ -309,23 +559,51 @@ footer {
 
 <div class="header-container">
 
+
 <div class="logo">
 
 BABY <span>GOLDEN</span> PERÚ
 
 </div>
 
+
 <a
 href="beneficios.html"
 class="back">
 
-← Beneficios
+← BENEFICIOS
 
 </a>
+
 
 </div>
 
 </header>
+
+
+<section class="hero">
+
+<div class="eyebrow">
+
+GOLDEN BENEFITS CLUB
+
+</div>
+
+
+<h1>
+
+YUM
+
+</h1>
+
+
+<p>
+
+Beneficio exclusivo para miembros Baby Golden Perú
+
+</p>
+
+</section>
 
 
 <main class="container">
@@ -339,7 +617,7 @@ class="back">
 
 <div class="brand-logo">
 
-🐶
+YUM
 
 </div>
 
@@ -351,12 +629,11 @@ MARCA AFILIADA
 </small>
 
 
-<h1>
+<h2>
 
-Nombre de la marca
+Comida cocida para perros y gatos
 
-</h1>
-
+</h2>
 
 </section>
 
@@ -366,38 +643,57 @@ Nombre de la marca
 
 <div class="discount-box">
 
-<h2>
 
-15% OFF
+<small>
 
-</h2>
+BENEFICIO GOLDEN
+
+</small>
+
+
+<h3>
+
+10% OFF
+
+</h3>
+
 
 <p>
 
-Beneficio exclusivo para
-la comunidad Baby Golden Perú
+Descuento exclusivo para miembros
+con ID Baby Golden.
 
 </p>
 
 </div>
 
 
+<div class="membership">
+
+<span>
+
+BLACK ID + PREMIUM
+
+</span>
+
+</div>
+
+
 <div class="section">
+
 
 <h3>
 
-🎁 Tu beneficio
+Tu beneficio
 
 </h3>
 
+
 <p>
 
-Disfruta de un descuento exclusivo
-por ser parte de Baby Golden Perú.
-
-Presenta tu ID Baby Golden al momento
-de realizar tu compra o utiliza el código
-de descuento indicado.
+Obtén <strong>10% de descuento</strong>
+en YUM utilizando el código exclusivo
+de Baby Golden Perú.
 
 </p>
 
@@ -406,15 +702,17 @@ de descuento indicado.
 
 <div class="code-box">
 
+
 <small>
 
 CÓDIGO DE DESCUENTO
 
 </small>
 
+
 <div class="code">
 
-GOLDEN15
+babygolden10
 
 </div>
 
@@ -423,72 +721,111 @@ GOLDEN15
 
 <div class="section">
 
+
 <h3>
 
-📋 Condiciones
+Cómo utilizarlo
 
 </h3>
 
+
 <p>
+
+1. Realiza tu pedido con YUM.
+
+<br><br>
+
+2. Presenta tu ID Baby Golden
+o indica que eres miembro.
+
+<br><br>
+
+3. Utiliza el código
+<strong>babygolden10</strong>.
+
+<br><br>
+
+4. Disfruta tu descuento.
+
+</p>
+
+</div>
+
+
+<div class="section">
+
+
+<h3>
+
+Condiciones
+
+</h3>
+
+
+<div class="conditions">
+
+
+<p>
+
+• No incluye delivery.
+
+<br>
+
+• Sujeto a stock.
+
+<br>
+
+• No aplica con otras promociones.
+
+<br>
 
 • Beneficio exclusivo para miembros
-Baby Golden Perú.
-
-<br><br>
-
-• No acumulable con otras promociones.
-
-<br><br>
-
-• Válido según las condiciones
-establecidas por la marca.
-
-<br><br>
-
-• Baby Golden Perú no comercializa
-los productos de las marcas afiliadas.
+con ID Baby Golden Black o Premium.
 
 </p>
 
 </div>
 
+</div>
 
-<div class="section">
 
-<h3>
+<div class="validity">
 
-📅 Vigencia
+VÁLIDO HASTA:
 
-</h3>
+<br>
 
-<p>
+<strong>
 
-Beneficio sujeto a disponibilidad
-y vigencia indicada por la marca.
+1 DE DICIEMBRE DE 2026
 
-</p>
+</strong>
 
 </div>
 
 
 <div class="buttons">
 
-<a
-href="#"
-class="button primary">
 
-OBTENER BENEFICIO
+<a
+href="https://wa.me/51929883880"
+class="button primary"
+target="_blank">
+
+CONTACTAR YUM
 
 </a>
 
 
 <a
-href="#"
-class="button secondary">
+href="https://www.instagram.com/yum_peru/"
+class="button secondary"
+target="_blank">
 
-VISITAR MARCA
+VER INSTAGRAM
 
 </a>
+
 
 </div>
 
@@ -502,11 +839,19 @@ VISITAR MARCA
 
 <footer>
 
-© Baby Golden Perú
+<strong>
 
-<br><br>
+BABY GOLDEN PERÚ
 
-Beneficios exclusivos para nuestra comunidad.
+</strong>
+
+
+<p>
+
+Golden Benefits Club · Beneficios exclusivos
+para nuestra comunidad.
+
+</p>
 
 </footer>
 
