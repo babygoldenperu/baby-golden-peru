@@ -779,7 +779,177 @@
   type="tel"
   id="editEmergenciaCelular"
 >
+<hr style="margin:25px 0; border:0; border-top:1px solid #eee;">
 
+<h2>
+  Información médica
+</h2>
+
+
+<label>
+  ¿Tiene alergias?
+</label>
+
+<select
+  id="editAlergias"
+  style="width:100%;padding:13px 14px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px;font-size:14px;"
+>
+
+  <option value="">
+    Seleccionar
+  </option>
+
+  <option value="Sí">
+    Sí
+  </option>
+
+  <option value="No">
+    No
+  </option>
+
+</select>
+
+
+<label>
+  Detalle de alergias
+</label>
+
+<input
+  type="text"
+  id="editDetalleAlergias"
+>
+
+
+<label>
+  ¿Tiene condición médica?
+</label>
+
+<select
+  id="editCondicion"
+  style="width:100%;padding:13px 14px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px;font-size:14px;"
+>
+
+  <option value="">
+    Seleccionar
+  </option>
+
+  <option value="Sí">
+    Sí
+  </option>
+
+  <option value="No">
+    No
+  </option>
+
+</select>
+
+
+<label>
+  Detalle de condición médica
+</label>
+
+<input
+  type="text"
+  id="editDetalleCondicion"
+>
+
+
+<label>
+  ¿Toma medicamentos?
+</label>
+
+<select
+  id="editMedicamento"
+  style="width:100%;padding:13px 14px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px;font-size:14px;"
+>
+
+  <option value="">
+    Seleccionar
+  </option>
+
+  <option value="Sí">
+    Sí
+  </option>
+
+  <option value="No">
+    No
+  </option>
+
+</select>
+
+
+<label>
+  Detalle de medicamento
+</label>
+
+<input
+  type="text"
+  id="editDetalleMedicamento"
+>
+
+
+<label>
+  Vacunas al día
+</label>
+
+<select
+  id="editVacunas"
+  style="width:100%;padding:13px 14px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px;font-size:14px;"
+>
+
+  <option value="">
+    Seleccionar
+  </option>
+
+  <option value="Sí">
+    Sí
+  </option>
+
+  <option value="No">
+    No
+  </option>
+
+</select>
+
+
+<label>
+  ¿Mostrar celular públicamente?
+</label>
+
+<select
+  id="editMostrarCelular"
+  style="width:100%;padding:13px 14px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px;font-size:14px;"
+>
+
+  <option value="false">
+    No
+  </option>
+
+  <option value="true">
+    Sí
+  </option>
+
+</select>
+
+
+<label>
+  ¿Habilitar WhatsApp?
+</label>
+
+<select
+  id="editWhatsapp"
+  style="width:100%;padding:13px 14px;margin-bottom:15px;border:1px solid #ddd;border-radius:12px;font-size:14px;"
+>
+
+  <option value="false">
+    No
+  </option>
+
+  <option value="true">
+    Sí
+  </option>
+
+</select>
   <button
     id="guardarCambios"
     type="button"
@@ -1512,7 +1682,99 @@ document
         );
 
       }
+/* ==============================
+   OBTENER INFORMACIÓN MÉDICA
+============================== */
 
+try {
+
+  const {
+    data: informacion,
+    error
+  } =
+    await supabaseClient.rpc(
+      "admin_obtener_informacion",
+      {
+        p_id_baby:
+          perritoActual.baby_golden_id
+      }
+    );
+
+
+  if (error) {
+    throw error;
+  }
+
+
+  if (informacion) {
+
+    document
+      .getElementById("editAlergias")
+      .value =
+        informacion.alergias || "";
+
+
+    document
+      .getElementById("editDetalleAlergias")
+      .value =
+        informacion.detalle_alergias || "";
+
+
+    document
+      .getElementById("editCondicion")
+      .value =
+        informacion.condicion_medica || "";
+
+
+    document
+      .getElementById("editDetalleCondicion")
+      .value =
+        informacion.detalle_condicion || "";
+
+
+    document
+      .getElementById("editMedicamento")
+      .value =
+        informacion.medicamento || "";
+
+
+    document
+      .getElementById("editDetalleMedicamento")
+      .value =
+        informacion.detalle_medicamento || "";
+
+
+    document
+      .getElementById("editVacunas")
+      .value =
+        informacion.vacunas_al_dia || "";
+
+
+    document
+      .getElementById("editMostrarCelular")
+      .value =
+        String(
+          informacion.mostrar_celular
+        );
+
+
+    document
+      .getElementById("editWhatsapp")
+      .value =
+        String(
+          informacion.habilitar_whatsapp
+        );
+
+  }
+
+} catch (error) {
+
+  console.error(
+    "ERROR OBTENIENDO INFORMACIÓN MÉDICA:",
+    error
+  );
+
+}
     }
   );
 
