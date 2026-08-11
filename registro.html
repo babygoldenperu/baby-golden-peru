@@ -1106,120 +1106,192 @@
 <script>
   const formulario = document.querySelector("form");
 
-  formulario.addEventListener("submit", async function(event) {
+ formulario.addEventListener("submit", async function(event) {
 
-    event.preventDefault();
+  event.preventDefault();
 
-    const boton = formulario.querySelector(".submit");
+  const boton = formulario.querySelector(".submit");
 
-    boton.disabled = true;
-    boton.textContent = "ENVIANDO...";
+  boton.disabled = true;
+  boton.textContent = "ENVIANDO...";
 
-    try {
+  try {
 
-      const datos = new FormData(formulario);
+    const datos = new FormData(formulario);
 
-      const { data, error } = await supabaseClient.rpc(
-        "crear_baby_golden_id",
+    /* 1. CREAR EL REGISTRO DEL PERRITO */
+
+    const { data, error } = await supabaseClient.rpc(
+      "crear_baby_golden_id",
+      {
+        p_tipo_id: datos.get("tipo_id"),
+        p_nombre_perrito: datos.get("nombre_perrito"),
+        p_fecha_nacimiento: datos.get("fecha_nacimiento") || null,
+        p_sexo: datos.get("sexo"),
+        p_raza: datos.get("raza"),
+        p_caracteristicas: datos.get("caracteristicas") || null,
+
+        p_tiene_microchip:
+          datos.get("microchip") === "Sí",
+
+        p_numero_microchip:
+          datos.get("numero_microchip") || null,
+
+        p_red_social:
+          datos.get("red_social"),
+
+        p_nombre_tutor_1:
+          datos.get("tutor_1"),
+
+        p_dni_tutor_1:
+          datos.get("dni_1"),
+
+        p_nombre_tutor_2:
+          datos.get("tutor_2") || null,
+
+        p_dni_tutor_2:
+          datos.get("dni_2") || null,
+
+        p_celular:
+          datos.get("celular"),
+
+        p_correo:
+          datos.get("correo"),
+
+        p_distrito:
+          datos.get("distrito"),
+
+        p_emergencia_nombre:
+          datos.get("emergencia_nombre"),
+
+        p_emergencia_celular:
+          datos.get("emergencia_celular"),
+
+        p_alergias:
+          datos.get("alergias"),
+
+        p_detalle_alergias:
+          datos.get("detalle_alergias") || null,
+
+        p_condicion_medica:
+          datos.get("condicion"),
+
+        p_detalle_condicion:
+          datos.get("detalle_condicion") || null,
+
+        p_medicamento:
+          datos.get("medicamento"),
+
+        p_detalle_medicamento:
+          datos.get("detalle_medicamento") || null,
+
+        p_vacunas_al_dia:
+          datos.get("vacunas") || null,
+
+        p_mostrar_celular:
+          datos.get("mostrar_celular") === "Sí",
+
+        p_habilitar_whatsapp:
+          datos.get("whatsapp") === "Sí"
+      }
+    );
+
+    if (error) {
+      throw error;
+    }
+
+    const perritoId = data;
+
+
+    /* 2. TOMAR LA FOTOGRAFÍA */
+
+    const archivoFoto = datos.get("foto_perrito");
+
+    if (!archivoFoto || archivoFoto.size === 0) {
+      throw new Error("No se encontró la fotografía del perrito.");
+    }
+
+
+    /* 3. CREAR UN NOMBRE ÚNICO PARA LA FOTO */
+
+    const extension =
+      archivoFoto.name.split(".").pop().toLowerCase();
+
+    const nombreArchivo =
+      "perritos/" +
+      perritoId +
+      "-" +
+      Date.now() +
+      "." +
+      extension;
+
+
+    /* 4. SUBIR LA FOTO A SUPABASE STORAGE */
+
+    const { error: errorFoto } =
+      await supabaseClient.storage
+        .from("fotos-perritos")
+        .upload(nombreArchivo, archivoFoto, {
+          cacheControl: "3600",
+          upsert: false,
+          contentType: archivoFoto.type
+        });
+
+    if (errorFoto) {
+      throw errorFoto;
+    }
+
+
+    /* 5. GUARDAR LA RUTA DE LA FOTO EN EL PERRITO */
+
+    const { error: errorGuardarFoto } =
+      await supabaseClient.rpc(
+        "guardar_foto_baby_golden",
         {
-          p_tipo_id: datos.get("tipo_id"),
-          p_nombre_perrito: datos.get("nombre_perrito"),
-          p_fecha_nacimiento: datos.get("fecha_nacimiento") || null,
-          p_sexo: datos.get("sexo"),
-          p_raza: datos.get("raza"),
-          p_caracteristicas: datos.get("caracteristicas") || null,
-
-          p_tiene_microchip:
-            datos.get("microchip") === "Sí",
-
-          p_numero_microchip:
-            datos.get("numero_microchip") || null,
-
-          p_red_social:
-            datos.get("red_social"),
-
-          p_nombre_tutor_1:
-            datos.get("tutor_1"),
-
-          p_dni_tutor_1:
-            datos.get("dni_1"),
-
-          p_nombre_tutor_2:
-            datos.get("tutor_2") || null,
-
-          p_dni_tutor_2:
-            datos.get("dni_2") || null,
-
-          p_celular:
-            datos.get("celular"),
-
-          p_correo:
-            datos.get("correo"),
-
-          p_distrito:
-            datos.get("distrito"),
-
-          p_emergencia_nombre:
-            datos.get("emergencia_nombre"),
-
-          p_emergencia_celular:
-            datos.get("emergencia_celular"),
-
-          p_alergias:
-            datos.get("alergias"),
-
-          p_detalle_alergias:
-            datos.get("detalle_alergias") || null,
-
-          p_condicion_medica:
-            datos.get("condicion"),
-
-          p_detalle_condicion:
-            datos.get("detalle_condicion") || null,
-
-          p_medicamento:
-            datos.get("medicamento"),
-
-          p_detalle_medicamento:
-            datos.get("detalle_medicamento") || null,
-
-          p_vacunas_al_dia:
-            datos.get("vacunas") || null,
-
-          p_mostrar_celular:
-            datos.get("mostrar_celular") === "Sí",
-
-          p_habilitar_whatsapp:
-            datos.get("whatsapp") === "Sí"
+          p_perrito_id: perritoId,
+          p_foto_url: nombreArchivo
         }
       );
 
-      if (error) {
-        throw error;
-      }
+    if (errorGuardarFoto) {
+      throw errorGuardarFoto;
+    }
 
-      alert(
-        "¡Registro recibido correctamente!\\n\\n" +
-        "Número interno del registro: BGP-" +
-        String(data).padStart(5, "0") +
-        "\\n\\n" +
-        "Pronto podremos convertirlo en tu Baby Golden ID."
-      );
 
-      formulario.reset();
+    /* 6. MOSTRAR CONFIRMACIÓN */
 
-} catch (error) {
+    alert(
+      "¡Registro recibido correctamente!\n\n" +
+      "Número interno del registro: BGP-" +
+      String(perritoId).padStart(5, "0") +
+      "\n\n" +
+      "La fotografía también fue guardada correctamente.\n\n" +
+      "Pronto podremos convertirlo en tu Baby Golden ID."
+    );
 
-  console.error("ERROR SUPABASE:", error);
 
-  alert(
-    "ERROR REAL DE SUPABASE:\n\n" +
-    (error.message || JSON.stringify(error))
-  );
+    /* 7. LIMPIAR FORMULARIO */
 
-}
+    formulario.reset();
 
-  });
+
+  } catch (error) {
+
+    console.error("ERROR SUPABASE:", error);
+
+    alert(
+      "ERROR REAL DE SUPABASE:\n\n" +
+      (error.message || JSON.stringify(error))
+    );
+
+  } finally {
+
+    boton.disabled = false;
+    boton.textContent = "SOLICITAR MI BABY GOLDEN ID";
+
+  }
+
+});
 </script>
   
 </body>
