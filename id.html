@@ -17,6 +17,17 @@
 
   <style>
 
+.medical-detail {
+  margin-left: 16px;
+  margin-top: 3px;
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  opacity: 0.85;
+}
+
+.medical-detail strong {
+  font-weight: 600;
+}
     * {
       box-sizing: border-box;
     }
@@ -1119,14 +1130,12 @@ if (
 
                 <br>
 
-                <strong>
-                  Detalle:
-                </strong>
-
-                ${escaparHTML(
-                  data.detalle_alergias
-                )}
-
+                <div class="medical-detail">
+  └ <strong>Detalle:</strong>
+  ${escaparHTML(
+    data.detalle_alergias
+  )}
+</div>
               `
 
               : ""
@@ -1165,13 +1174,12 @@ if (
 
                 <br>
 
-                <strong>
-                  Detalle:
-                </strong>
-
-                ${escaparHTML(
-                  data.detalle_condicion
-                )}
+                <div class="medical-detail">
+  └ <strong>Detalle:</strong>
+  ${escaparHTML(
+    data.detalle_condicion
+  )}
+</div>
 
               `
 
@@ -1211,13 +1219,12 @@ if (
 
                 <br>
 
-                <strong>
-                  Detalle:
-                </strong>
-
-                ${escaparHTML(
-                  data.detalle_medicamento
-                )}
+                <div class="medical-detail">
+  └ <strong>Detalle:</strong>
+  ${escaparHTML(
+    data.detalle_medicamento
+  )}
+</div>
 
               `
 
