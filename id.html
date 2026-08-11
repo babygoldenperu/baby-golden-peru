@@ -314,10 +314,22 @@
     }
 
 
-    const fotoUrl =
-      data.foto_url
-        ? `${SUPABASE_URL}/storage/v1/object/public/fotos-perritos/${data.foto_url}`
-        : "";
+ let fotoUrl = "";
+
+if (data.foto_url) {
+
+  const { data: fotoFirmada, error: errorFoto } =
+    await supabaseClient.storage
+      .from("fotos-perritos")
+      .createSignedUrl(data.foto_url, 3600);
+
+  if (errorFoto) {
+    console.error("ERROR FOTO:", errorFoto);
+  } else {
+    fotoUrl = fotoFirmada.signedUrl;
+  }
+
+}
 
 
     document.title =
