@@ -31,7 +31,14 @@
       justify-content: center;
       align-items: flex-start;
     }
-
+.verified {
+  margin: 10px 0 22px;
+  font-family: Arial, sans-serif;
+  font-size: 10px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: #8a6b43;
+}
     .card {
       width: 100%;
       max-width: 480px;
@@ -89,12 +96,32 @@
       margin-bottom: 12px;
     }
 
+    .id-type {
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-top: -5px;
+  margin-bottom: 14px;
+  color: #888;
+}
+
+.id-badge.premium-id {
+  background: #f0e7d8;
+  color: #76552e;
+}
+
+.id-badge.black-id {
+  background: #222;
+  color: #fff;
+}
     .name {
-      margin: 0;
-      font-size: 34px;
-      line-height: 1.1;
-      font-weight: normal;
-    }
+  margin: 4px 0 8px;
+  font-size: 38px;
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
 
     .breed {
       margin: 9px 0 24px;
@@ -370,17 +397,25 @@ if (data.foto_url) {
 
       <div class="content">
 
-        <div class="id-badge">
-          ${escaparHTML(data.baby_golden_id)}
-        </div>
+        <div class="id-badge ${data.tipo_id === 'Black ID' ? 'black-id' : 'premium-id'}">
+  ${escaparHTML(data.baby_golden_id)}
+</div>
+
+<div class="id-type">
+  ${escaparHTML(data.tipo_id)}
+</div>
 
         <h1 class="name">
           ${escaparHTML(data.nombre_perrito)}
         </h1>
 
-        <div class="breed">
-          ${escaparHTML(data.raza)}
-        </div>
+       <div class="breed">
+  ${escaparHTML(data.raza)}
+</div>
+
+<div class="verified">
+  ✓ PERFIL REGISTRADO EN BABY GOLDEN PERÚ
+</div>
 
 
         <div class="data-grid">
