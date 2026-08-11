@@ -679,7 +679,106 @@
     type="url"
     id="editRedSocial"
   >
+<hr style="margin:25px 0; border:0; border-top:1px solid #eee;">
 
+<h2>
+  Datos de tutores
+</h2>
+
+
+<label>
+  Nombre del tutor 1
+</label>
+
+<input
+  type="text"
+  id="editTutor1"
+>
+
+
+<label>
+  DNI del tutor 1
+</label>
+
+<input
+  type="text"
+  id="editDni1"
+>
+
+
+<label>
+  Nombre del tutor 2
+</label>
+
+<input
+  type="text"
+  id="editTutor2"
+>
+
+
+<label>
+  DNI del tutor 2
+</label>
+
+<input
+  type="text"
+  id="editDni2"
+>
+
+
+<label>
+  Celular
+</label>
+
+<input
+  type="tel"
+  id="editCelular"
+>
+
+
+<label>
+  Correo
+</label>
+
+<input
+  type="email"
+  id="editCorreo"
+>
+
+
+<label>
+  Distrito
+</label>
+
+<input
+  type="text"
+  id="editDistrito"
+>
+
+
+<h2 style="margin-top:25px;">
+  Contacto de emergencia
+</h2>
+
+
+<label>
+  Nombre de emergencia
+</label>
+
+<input
+  type="text"
+  id="editEmergenciaNombre"
+>
+
+
+<label>
+  Celular de emergencia
+</label>
+
+<input
+  type="tel"
+  id="editEmergenciaCelular"
+>
 
   <button
     id="guardarCambios"
@@ -1217,7 +1316,7 @@ document
   .getElementById("editarPerrito")
   .addEventListener(
     "click",
-    function() {
+    async function() {
 
       if (!perritoActual) {
         return;
@@ -1227,6 +1326,10 @@ document
         .getElementById("editor")
         .classList.remove("hidden");
 
+
+      /* ==============================
+         DATOS DEL PERRITO
+      ============================== */
 
       document
         .getElementById("editNombre")
@@ -1269,9 +1372,149 @@ document
         .value =
           perritoActual.red_social || "";
 
+
+      /* ==============================
+         OBTENER TUTORES
+      ============================== */
+
+      try {
+
+        const {
+          data: tutor,
+          error
+        } =
+          await supabaseClient.rpc(
+            "admin_obtener_tutores",
+            {
+              p_id_baby:
+                perritoActual.baby_golden_id
+            }
+          );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        /* ============================
+           CARGAR TUTOR
+        ============================ */
+
+        if (tutor) {
+
+          document
+            .getElementById("editTutor1")
+            .value =
+              tutor.nombre_tutor_1 || "";
+
+
+          document
+            .getElementById("editDni1")
+            .value =
+              tutor.dni_tutor_1 || "";
+
+
+          document
+            .getElementById("editTutor2")
+            .value =
+              tutor.nombre_tutor_2 || "";
+
+
+          document
+            .getElementById("editDni2")
+            .value =
+              tutor.dni_tutor_2 || "";
+
+
+          document
+            .getElementById("editCelular")
+            .value =
+              tutor.celular || "";
+
+
+          document
+            .getElementById("editCorreo")
+            .value =
+              tutor.correo || "";
+
+
+          document
+            .getElementById("editDistrito")
+            .value =
+              tutor.distrito || "";
+
+
+          document
+            .getElementById("editEmergenciaNombre")
+            .value =
+              tutor.emergencia_nombre || "";
+
+
+          document
+            .getElementById("editEmergenciaCelular")
+            .value =
+              tutor.emergencia_celular || "";
+
+        } else {
+
+          /* No existe información de tutor */
+
+          document
+            .getElementById("editTutor1")
+            .value = "";
+
+          document
+            .getElementById("editDni1")
+            .value = "";
+
+          document
+            .getElementById("editTutor2")
+            .value = "";
+
+          document
+            .getElementById("editDni2")
+            .value = "";
+
+          document
+            .getElementById("editCelular")
+            .value = "";
+
+          document
+            .getElementById("editCorreo")
+            .value = "";
+
+          document
+            .getElementById("editDistrito")
+            .value = "";
+
+          document
+            .getElementById("editEmergenciaNombre")
+            .value = "";
+
+          document
+            .getElementById("editEmergenciaCelular")
+            .value = "";
+
+        }
+
+
+      } catch (error) {
+
+        console.error(
+          "ERROR OBTENIENDO TUTORES:",
+          error
+        );
+
+        alert(
+          "No se pudieron cargar los datos de los tutores:\n\n" +
+          (error.message || error)
+        );
+
+      }
+
     }
   );
-
 
 /* ========================================
    GUARDAR CAMBIOS
@@ -1493,9 +1736,86 @@ if (archivoFoto) {
           "block";
 
 
-        /* Volver a buscar el perfil */
+        /* ======================================
+   GUARDAR DATOS DE TUTORES
+====================================== */
 
-        await buscarPerrito();
+const {
+  data: tutorActualizado,
+  error: errorTutor
+} =
+  await supabaseClient.rpc(
+    "admin_actualizar_tutores",
+    {
+      p_baby_golden_id:
+        perritoActual.baby_golden_id,
+
+      p_nombre_tutor_1:
+        document
+          .getElementById("editTutor1")
+          .value
+          .trim(),
+
+      p_dni_tutor_1:
+        document
+          .getElementById("editDni1")
+          .value
+          .trim(),
+
+      p_nombre_tutor_2:
+        document
+          .getElementById("editTutor2")
+          .value
+          .trim() || null,
+
+      p_dni_tutor_2:
+        document
+          .getElementById("editDni2")
+          .value
+          .trim() || null,
+
+      p_celular:
+        document
+          .getElementById("editCelular")
+          .value
+          .trim(),
+
+      p_correo:
+        document
+          .getElementById("editCorreo")
+          .value
+          .trim(),
+
+      p_distrito:
+        document
+          .getElementById("editDistrito")
+          .value
+          .trim(),
+
+      p_emergencia_nombre:
+        document
+          .getElementById("editEmergenciaNombre")
+          .value
+          .trim(),
+
+      p_emergencia_celular:
+        document
+          .getElementById("editEmergenciaCelular")
+          .value
+          .trim()
+    }
+  );
+
+
+if (errorTutor) {
+  throw errorTutor;
+}
+
+
+/* Volver a buscar el perfil */
+
+await buscarPerrito();
+        
 document.getElementById(
   "editFoto"
 ).value = "";
