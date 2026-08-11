@@ -646,7 +646,20 @@
     type="text"
     id="editCaracteristicas"
   >
+<label>
+  Nueva fotografía
+</label>
 
+<input
+  type="file"
+  id="editFoto"
+  accept="image/jpeg,image/png,image/webp"
+>
+
+<div
+  id="fotoMessage"
+  class="message"
+></div>
 
   <label>
     Número de microchip
@@ -1297,7 +1310,91 @@ document
 
 
       try {
+/* ======================================
+   SUBIR NUEVA FOTO SI EXISTE
+====================================== */
 
+const archivoFoto =
+  document.getElementById(
+    "editFoto"
+  ).files[0];
+
+let nuevaFotoUrl =
+  perritoActual.foto_url || null;
+
+
+if (archivoFoto) {
+
+  const extension =
+    archivoFoto.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+
+  const nombreArchivo =
+    "perritos/" +
+    Date.now() +
+    "-" +
+    Math.random()
+      .toString(36)
+      .substring(2) +
+    "." +
+    extension;
+
+
+  const {
+    error: errorSubida
+  } =
+    await supabaseClient
+      .storage
+      .from("fotos-perritos")
+      .upload(
+        nombreArchivo,
+        archivoFoto,
+        {
+          cacheControl: "3600",
+          upsert: false,
+          contentType:
+            archivoFoto.type
+        }
+      );
+
+
+  if (errorSubida) {
+    throw errorSubida;
+  }
+
+
+  nuevaFotoUrl =
+    nombreArchivo;
+
+
+  /* Actualizar foto_url */
+
+  const {
+    error: errorFoto
+  } =
+    await supabaseClient.rpc(
+
+      "admin_actualizar_foto",
+
+      {
+        p_baby_golden_id:
+          perritoActual.baby_golden_id,
+
+        p_foto_url:
+          nuevaFotoUrl
+      }
+
+    );
+
+
+  if (errorFoto) {
+    throw errorFoto;
+  }
+
+}
         const {
           data,
           error
@@ -1399,7 +1496,9 @@ document
         /* Volver a buscar el perfil */
 
         await buscarPerrito();
-
+document.getElementById(
+  "editFoto"
+).value = "";
 
       } catch (error) {
 
