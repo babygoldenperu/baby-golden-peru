@@ -2078,6 +2078,75 @@ if (errorTutor) {
    GUARDAR INFORMACIÓN MÉDICA
 ====================================== */
 
+const alergiasValor =
+  document
+    .getElementById("editAlergias")
+    .value
+    .trim();
+
+const detalleAlergiasValor =
+  document
+    .getElementById("editDetalleAlergias")
+    .value
+    .trim() || null;
+
+const condicionValor =
+  document
+    .getElementById("editCondicion")
+    .value
+    .trim();
+
+const detalleCondicionValor =
+  document
+    .getElementById("editDetalleCondicion")
+    .value
+    .trim() || null;
+
+const medicamentoValor =
+  document
+    .getElementById("editMedicamento")
+    .value
+    .trim();
+
+const detalleMedicamentoValor =
+  document
+    .getElementById("editDetalleMedicamento")
+    .value
+    .trim() || null;
+
+const vacunasValor =
+  document
+    .getElementById("editVacunas")
+    .value
+    .trim();
+
+const mostrarCelularValor =
+  document
+    .getElementById("editMostrarCelular")
+    .value === "true";
+
+const whatsappValor =
+  document
+    .getElementById("editWhatsapp")
+    .value === "true";
+
+
+console.log(
+  "DATOS MÉDICOS A GUARDAR:",
+  {
+    alergiasValor,
+    detalleAlergiasValor,
+    condicionValor,
+    detalleCondicionValor,
+    medicamentoValor,
+    detalleMedicamentoValor,
+    vacunasValor,
+    mostrarCelularValor,
+    whatsappValor
+  }
+);
+
+
 const {
   data: informacionActualizada,
   error: errorInformacion
@@ -2085,62 +2154,35 @@ const {
   await supabaseClient.rpc(
     "admin_actualizar_informacion",
     {
-
       p_baby_golden_id:
         perritoActual.baby_golden_id,
 
       p_alergias:
-        document
-          .getElementById("editAlergias")
-          .value
-          .trim(),
+        alergiasValor,
 
       p_detalle_alergias:
-        document
-          .getElementById("editDetalleAlergias")
-          .value
-          .trim() || null,
+        detalleAlergiasValor,
 
       p_condicion_medica:
-        document
-          .getElementById("editCondicion")
-          .value
-          .trim(),
+        condicionValor,
 
       p_detalle_condicion:
-        document
-          .getElementById("editDetalleCondicion")
-          .value
-          .trim() || null,
+        detalleCondicionValor,
 
       p_medicamento:
-        document
-          .getElementById("editMedicamento")
-          .value
-          .trim(),
+        medicamentoValor,
 
       p_detalle_medicamento:
-        document
-          .getElementById("editDetalleMedicamento")
-          .value
-          .trim() || null,
+        detalleMedicamentoValor,
 
       p_vacunas_al_dia:
-        document
-          .getElementById("editVacunas")
-          .value
-          .trim(),
+        vacunasValor,
 
       p_mostrar_celular:
-        document
-          .getElementById("editMostrarCelular")
-          .value === "true",
+        mostrarCelularValor,
 
       p_habilitar_whatsapp:
-        document
-          .getElementById("editWhatsapp")
-          .value === "true"
-
+        whatsappValor
     }
   );
 
@@ -2148,7 +2190,6 @@ const {
 if (errorInformacion) {
   throw errorInformacion;
 }
-
 
 /* Volver a buscar el perfil */
 
