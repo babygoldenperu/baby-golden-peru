@@ -2074,6 +2074,82 @@ if (errorTutor) {
 }
 
 
+/* ======================================
+   GUARDAR INFORMACIÓN MÉDICA
+====================================== */
+
+const {
+  data: informacionActualizada,
+  error: errorInformacion
+} =
+  await supabaseClient.rpc(
+    "admin_actualizar_informacion",
+    {
+
+      p_baby_golden_id:
+        perritoActual.baby_golden_id,
+
+      p_alergias:
+        document
+          .getElementById("editAlergias")
+          .value
+          .trim(),
+
+      p_detalle_alergias:
+        document
+          .getElementById("editDetalleAlergias")
+          .value
+          .trim() || null,
+
+      p_condicion_medica:
+        document
+          .getElementById("editCondicion")
+          .value
+          .trim(),
+
+      p_detalle_condicion:
+        document
+          .getElementById("editDetalleCondicion")
+          .value
+          .trim() || null,
+
+      p_medicamento:
+        document
+          .getElementById("editMedicamento")
+          .value
+          .trim(),
+
+      p_detalle_medicamento:
+        document
+          .getElementById("editDetalleMedicamento")
+          .value
+          .trim() || null,
+
+      p_vacunas_al_dia:
+        document
+          .getElementById("editVacunas")
+          .value
+          .trim(),
+
+      p_mostrar_celular:
+        document
+          .getElementById("editMostrarCelular")
+          .value === "true",
+
+      p_habilitar_whatsapp:
+        document
+          .getElementById("editWhatsapp")
+          .value === "true"
+
+    }
+  );
+
+
+if (errorInformacion) {
+  throw errorInformacion;
+}
+
+
 /* Volver a buscar el perfil */
 
 await buscarPerrito();
