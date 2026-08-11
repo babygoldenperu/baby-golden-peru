@@ -441,49 +441,97 @@
     }
 
 
-    /* ========================================
-       CONTACTO
-    ======================================== */
+  /* ======================================
+   CONTACTO
+====================================== */
 
-    .buttons {
-      display: flex;
+let botonesContacto = "";
 
-      gap: 10px;
+const tieneRedSocial =
+  data.red_social &&
+  String(data.red_social).trim() !== "";
 
-      margin-top: 18px;
-    }
+const tieneCelular =
+  data.celular &&
+  String(data.celular).trim() !== "";
 
-
-    .button {
-      flex: 1;
-
-      padding: 14px 10px;
-
-      border-radius: 14px;
-
-      text-decoration: none;
-
-      text-align: center;
-
-      font-family: Arial, sans-serif;
-
-      font-size: 12px;
-
-      font-weight: bold;
-    }
+const tieneWhatsApp =
+  data.whatsapp &&
+  String(data.whatsapp).trim() !== "";
 
 
-    .premium .button {
-      background: #2d2925;
-      color: #ffffff;
-    }
+if (
+  tieneRedSocial ||
+  (data.mostrar_celular && tieneCelular) ||
+  (data.habilitar_whatsapp && tieneWhatsApp)
+) {
+
+  botonesContacto = `
+
+    <div class="buttons">
+
+      ${
+        tieneRedSocial
+        ? `
+
+          <a
+            class="button"
+            href="${escaparHTML(
+              data.red_social
+            )}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Red social
+          </a>
+
+        `
+        : ""
+      }
 
 
-    .black .button {
-      background: #d3ad61;
-      color: #111111;
-    }
+      ${
+        data.mostrar_celular && tieneCelular
+        ? `
 
+          <a
+            class="button"
+            href="tel:${escaparHTML(
+              data.celular
+            )}"
+          >
+            Llamar
+          </a>
+
+        `
+        : ""
+      }
+
+
+      ${
+        data.habilitar_whatsapp && tieneWhatsApp
+        ? `
+
+          <a
+            class="button"
+            href="https://wa.me/${String(
+              data.whatsapp
+            ).replace(/\D/g, "")}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+
+        `
+        : ""
+      }
+
+
+    </div>
+
+  `;
+}
 
     /* ========================================
        MICROCHIP
