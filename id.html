@@ -1010,63 +1010,71 @@ async function cargarPerfil() {
       : "";
 
 
-  /* ======================================
-     CONTACTO
-  ====================================== */
+ /* ======================================
+   CONTACTO
+====================================== */
 
-  const botonesContacto = `
+const botonesContacto = `
 
-    <div class="buttons">
+  <div class="buttons">
 
+    ${
+      data.red_social
+      ? `
 
-      ${
-        data.red_social
+        <a
+          class="button"
+          href="${escaparHTML(data.red_social)}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Red social
+        </a>
 
-        ? `
-
-          <a
-            class="button"
-            href="${escaparHTML(data.red_social)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-
-            Red social
-
-          </a>
-
-        `
-
-        : ""
-      }
+      `
+      : ""
+    }
 
 
-      ${
-        data.whatsapp
+    ${
+      data.mostrar_celular && data.celular
+      ? `
 
-        ? `
+        <a
+          class="button"
+          href="tel:${escaparHTML(data.celular)}"
+        >
+          Llamar
+        </a>
 
-          <a
-            class="button"
-            href="https://wa.me/${escaparHTML(data.whatsapp)}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-
-            WhatsApp
-
-          </a>
-
-        `
-
-        : ""
-      }
+      `
+      : ""
+    }
 
 
-    </div>
+    ${
+      data.habilitar_whatsapp && data.celular
+      ? `
 
-  `;
+        <a
+          class="button"
+          href="https://wa.me/${escaparHTML(
+            String(data.celular).replace(/\D/g, "")
+          )}"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp
+        </a>
 
+      `
+      : ""
+    }
+
+
+  </div>
+
+`;
 /* ======================================
    INFORMACIÓN MÉDICA
 ====================================== */
