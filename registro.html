@@ -1100,5 +1100,129 @@
 </footer>
 
 
+<script>
+  const formulario = document.querySelector("form");
+
+  formulario.addEventListener("submit", async function(event) {
+
+    event.preventDefault();
+
+    const boton = formulario.querySelector(".submit");
+
+    boton.disabled = true;
+    boton.textContent = "ENVIANDO...";
+
+    try {
+
+      const datos = new FormData(formulario);
+
+      const { data, error } = await supabaseClient.rpc(
+        "crear_baby_golden_id",
+        {
+          p_tipo_id: datos.get("tipo_id"),
+          p_nombre_perrito: datos.get("nombre_perrito"),
+          p_fecha_nacimiento: datos.get("fecha_nacimiento") || null,
+          p_sexo: datos.get("sexo"),
+          p_raza: datos.get("raza"),
+          p_caracteristicas: datos.get("caracteristicas") || null,
+
+          p_tiene_microchip:
+            datos.get("microchip") === "Sí",
+
+          p_numero_microchip:
+            datos.get("numero_microchip") || null,
+
+          p_red_social:
+            datos.get("red_social"),
+
+          p_nombre_tutor_1:
+            datos.get("tutor_1"),
+
+          p_dni_tutor_1:
+            datos.get("dni_1"),
+
+          p_nombre_tutor_2:
+            datos.get("tutor_2") || null,
+
+          p_dni_tutor_2:
+            datos.get("dni_2") || null,
+
+          p_celular:
+            datos.get("celular"),
+
+          p_correo:
+            datos.get("correo"),
+
+          p_distrito:
+            datos.get("distrito"),
+
+          p_emergencia_nombre:
+            datos.get("emergencia_nombre"),
+
+          p_emergencia_celular:
+            datos.get("emergencia_celular"),
+
+          p_alergias:
+            datos.get("alergias"),
+
+          p_detalle_alergias:
+            datos.get("detalle_alergias") || null,
+
+          p_condicion_medica:
+            datos.get("condicion"),
+
+          p_detalle_condicion:
+            datos.get("detalle_condicion") || null,
+
+          p_medicamento:
+            datos.get("medicamento"),
+
+          p_detalle_medicamento:
+            datos.get("detalle_medicamento") || null,
+
+          p_vacunas_al_dia:
+            datos.get("vacunas") || null,
+
+          p_mostrar_celular:
+            datos.get("mostrar_celular") === "Sí",
+
+          p_habilitar_whatsapp:
+            datos.get("whatsapp") === "Sí"
+        }
+      );
+
+      if (error) {
+        throw error;
+      }
+
+      alert(
+        "¡Registro recibido correctamente!\\n\\n" +
+        "Número interno del registro: BGP-" +
+        String(data).padStart(5, "0") +
+        "\\n\\n" +
+        "Pronto podremos convertirlo en tu Baby Golden ID."
+      );
+
+      formulario.reset();
+
+    } catch (error) {
+
+      console.error(error);
+
+      alert(
+        "No pudimos enviar el registro.\\n\\n" +
+        "Revisa tu conexión e inténtalo nuevamente."
+      );
+
+    } finally {
+
+      boton.disabled = false;
+      boton.textContent = "SOLICITAR MI BABY GOLDEN ID";
+
+    }
+
+  });
+</script>
+  
 </body>
 </html>
