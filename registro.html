@@ -1205,21 +1205,16 @@
 
       formulario.reset();
 
-    } catch (error) {
+} catch (error) {
 
-      console.error(error);
+  console.error("ERROR SUPABASE:", error);
 
-      alert(
-        "No pudimos enviar el registro.\\n\\n" +
-        "Revisa tu conexión e inténtalo nuevamente."
-      );
+  alert(
+    "ERROR REAL DE SUPABASE:\n\n" +
+    (error.message || JSON.stringify(error))
+  );
 
-    } finally {
-
-      boton.disabled = false;
-      boton.textContent = "SOLICITAR MI BABY GOLDEN ID";
-
-    }
+}
 
   });
 </script>
