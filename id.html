@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -13,226 +15,651 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     * {
       box-sizing: border-box;
     }
 
     body {
       margin: 0;
+      min-height: 100vh;
       font-family: Georgia, "Times New Roman", serif;
-      background: #f7f4ef;
-      color: #2d2925;
+      background: #f4f1ec;
+      color: #292521;
     }
+
+
+    /* ========================================
+       CONTENEDOR
+    ======================================== */
 
     .page {
       min-height: 100vh;
-      padding: 30px 16px;
+      padding: 24px 14px 40px;
+
       display: flex;
       justify-content: center;
       align-items: flex-start;
     }
-.verified {
-  margin: 10px 0 22px;
-  font-family: Arial, sans-serif;
-  font-size: 10px;
-  letter-spacing: 1.2px;
-  text-transform: uppercase;
-  color: #8a6b43;
-}
+
+
     .card {
       width: 100%;
-      max-width: 480px;
-      background: #ffffff;
-      border-radius: 28px;
+      max-width: 500px;
+
       overflow: hidden;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.10);
+
+      border-radius: 28px;
+
+      background: #ffffff;
+
+      box-shadow:
+        0 18px 60px rgba(0, 0, 0, 0.14);
+
+      transition: all 0.3s ease;
     }
 
+
+    /* ========================================
+       PREMIUM
+    ======================================== */
+
+    .card.premium {
+      background: #ffffff;
+      color: #292521;
+    }
+
+
+    /* ========================================
+       BLACK ID
+    ======================================== */
+
+    .card.black {
+      background:
+        linear-gradient(
+          145deg,
+          #111111,
+          #1b1b1b 55%,
+          #0b0b0b
+        );
+
+      color: #ffffff;
+
+      box-shadow:
+        0 20px 70px rgba(0, 0, 0, 0.45);
+    }
+
+
+    /* ========================================
+       HEADER
+    ======================================== */
+
     .header {
-      padding: 28px 24px 18px;
+      padding: 28px 22px 20px;
+
       text-align: center;
     }
 
+
     .brand {
       font-size: 13px;
-      letter-spacing: 3px;
+
+      letter-spacing: 4px;
+
       text-transform: uppercase;
-      color: #8a6b43;
+
       font-weight: bold;
+
+      color: #87673d;
     }
 
-    .heart {
-      font-size: 28px;
-      margin: 8px 0;
+
+    .black .brand {
+      color: #d6b26a;
     }
+
+
+    .symbol {
+      margin-top: 10px;
+
+      font-size: 27px;
+
+      color: #17130f;
+    }
+
+
+    .black .symbol {
+      color: #d6b26a;
+    }
+
+
+    /* ========================================
+       FOTO
+    ======================================== */
 
     .photo-container {
       padding: 0 20px;
     }
 
+
     .photo {
       width: 100%;
+
       aspect-ratio: 1 / 1;
+
       object-fit: cover;
-      border-radius: 22px;
-      background: #eee;
+
       display: block;
+
+      border-radius: 22px;
+
+      background: #e9e7e4;
     }
 
+
+    .black .photo {
+      border: 1px solid #6e562e;
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,0.45);
+    }
+
+
+    /* ========================================
+       CONTENIDO
+    ======================================== */
+
     .content {
-      padding: 24px;
+      padding: 25px;
       text-align: center;
     }
+
+
+    /* ========================================
+       ID BADGE
+    ======================================== */
 
     .id-badge {
       display: inline-block;
-      padding: 7px 16px;
-      border-radius: 30px;
-      background: #f0e7d8;
-      color: #76552e;
+
+      padding: 8px 18px;
+
+      border-radius: 40px;
+
+      font-family: Arial, sans-serif;
+
       font-size: 12px;
-      letter-spacing: 1.5px;
+
       font-weight: bold;
-      margin-bottom: 12px;
+
+      letter-spacing: 2px;
     }
+
+
+    .premium .id-badge {
+      background: #efe5d4;
+      color: #76552e;
+    }
+
+
+    .black .id-badge {
+      background: #d3ad61;
+      color: #111111;
+    }
+
 
     .id-type {
-  font-family: Arial, sans-serif;
-  font-size: 11px;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-top: -5px;
-  margin-bottom: 14px;
-  color: #888;
-}
+      margin-top: 9px;
 
-.id-badge.premium-id {
-  background: #f0e7d8;
-  color: #76552e;
-}
+      margin-bottom: 14px;
 
-.id-badge.black-id {
-  background: #222;
-  color: #fff;
-}
+      font-family: Arial, sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 3px;
+
+      text-transform: uppercase;
+    }
+
+
+    .premium .id-type {
+      color: #8d8d8d;
+    }
+
+
+    .black .id-type {
+      color: #d6b26a;
+    }
+
+
+    /* ========================================
+       NOMBRE
+    ======================================== */
+
     .name {
-  margin: 4px 0 8px;
-  font-size: 38px;
-  line-height: 1.05;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
+      margin: 5px 0 7px;
+
+      font-size: 39px;
+
+      line-height: 1.05;
+
+      font-weight: 700;
+
+      letter-spacing: -0.5px;
+    }
+
 
     .breed {
-      margin: 9px 0 24px;
-      color: #777;
+      margin: 0 0 18px;
+
       font-family: Arial, sans-serif;
+
       font-size: 14px;
+
+      text-transform: capitalize;
     }
+
+
+    .premium .breed {
+      color: #777;
+    }
+
+
+    .black .breed {
+      color: #c9c9c9;
+    }
+
+
+    /* ========================================
+       VERIFICADO
+    ======================================== */
+
+    .verified {
+      margin: 12px 0 24px;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 9px;
+
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
+    }
+
+
+    .premium .verified {
+      color: #8a6b43;
+    }
+
+
+    .black .verified {
+      color: #d6b26a;
+    }
+
+
+    /* ========================================
+       GRID
+    ======================================== */
 
     .data-grid {
       display: grid;
+
       grid-template-columns: 1fr 1fr;
+
       gap: 10px;
+
       text-align: left;
     }
 
+
     .data {
-      padding: 14px;
-      background: #faf8f5;
-      border-radius: 15px;
+      padding: 15px;
+
+      border-radius: 16px;
     }
+
+
+    .premium .data {
+      background: #faf8f5;
+    }
+
+
+    .black .data {
+      background: #202020;
+
+      border: 1px solid #333;
+    }
+
 
     .label {
       display: block;
+
+      margin-bottom: 6px;
+
       font-family: Arial, sans-serif;
-      font-size: 10px;
+
+      font-size: 9px;
+
+      letter-spacing: 1.3px;
+
       text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #999;
-      margin-bottom: 5px;
     }
+
+
+    .premium .label {
+      color: #999;
+    }
+
+
+    .black .label {
+      color: #a99573;
+    }
+
 
     .value {
       font-family: Arial, sans-serif;
+
       font-size: 14px;
-      font-weight: 600;
+
+      font-weight: 700;
     }
+
+
+    .black .value {
+      color: #ffffff;
+    }
+
+
+    /* ========================================
+       SECCIONES
+    ======================================== */
 
     .section {
-      margin-top: 22px;
-      padding-top: 22px;
-      border-top: 1px solid #eee;
-      text-align: left;
+      margin-top: 25px;
+
+      padding-top: 23px;
+
+      border-top: 1px solid;
     }
+
+
+    .premium .section {
+      border-color: #eeeeee;
+    }
+
+
+    .black .section {
+      border-color: #383838;
+    }
+
 
     .section-title {
-      font-size: 18px;
-      margin: 0 0 12px;
+      margin: 0 0 13px;
+
+      text-align: left;
+
+      font-size: 20px;
     }
 
+
+    .black .section-title {
+      color: #d6b26a;
+    }
+
+
     .info {
+      text-align: left;
+
       font-family: Arial, sans-serif;
+
       font-size: 14px;
-      line-height: 1.6;
+
+      line-height: 1.65;
+    }
+
+
+    .premium .info {
       color: #555;
     }
 
+
+    .black .info {
+      color: #d0d0d0;
+    }
+
+
+    /* ========================================
+       CONTACTO
+    ======================================== */
+
     .buttons {
       display: flex;
+
       gap: 10px;
+
       margin-top: 18px;
     }
 
+
     .button {
       flex: 1;
-      padding: 13px;
+
+      padding: 14px 10px;
+
       border-radius: 14px;
-      text-align: center;
+
       text-decoration: none;
+
+      text-align: center;
+
       font-family: Arial, sans-serif;
-      font-size: 13px;
+
+      font-size: 12px;
+
       font-weight: bold;
-      background: #2d2925;
-      color: white;
     }
 
-    .footer {
-      padding: 20px;
-      text-align: center;
+
+    .premium .button {
+      background: #2d2925;
+      color: #ffffff;
+    }
+
+
+    .black .button {
+      background: #d3ad61;
+      color: #111111;
+    }
+
+
+    /* ========================================
+       MICROCHIP
+    ======================================== */
+
+    .microchip {
+      margin-top: 20px;
+
+      padding: 16px;
+
+      border-radius: 16px;
+
+      text-align: left;
+
       font-family: Arial, sans-serif;
-      font-size: 11px;
+
+      font-size: 13px;
+    }
+
+
+    .premium .microchip {
+      background: #faf8f5;
+    }
+
+
+    .black .microchip {
+      background: #202020;
+
+      border: 1px solid #333;
+    }
+
+
+    .microchip-title {
+      margin-bottom: 5px;
+
+      font-size: 10px;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1.5px;
+    }
+
+
+    .premium .microchip-title {
       color: #999;
     }
 
+
+    .black .microchip-title {
+      color: #a99573;
+    }
+
+
+    /* ========================================
+       BENEFICIOS BLACK
+    ======================================== */
+
+    .black-benefits {
+      margin-top: 25px;
+
+      padding: 20px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #191919,
+          #252525
+        );
+
+      border: 1px solid #6c532c;
+
+      text-align: left;
+    }
+
+
+    .black-benefits-title {
+      margin-bottom: 14px;
+
+      color: #d6b26a;
+
+      font-size: 18px;
+    }
+
+
+    .benefit {
+      padding: 8px 0;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 13px;
+
+      color: #eeeeee;
+    }
+
+
+    .benefit span {
+      color: #d6b26a;
+
+      margin-right: 7px;
+    }
+
+
+    /* ========================================
+       FOOTER
+    ======================================== */
+
+    .footer {
+      padding: 24px 20px;
+
+      text-align: center;
+
+      font-family: Arial, sans-serif;
+
+      font-size: 10px;
+
+      letter-spacing: 1px;
+    }
+
+
+    .premium .footer {
+      color: #999;
+    }
+
+
+    .black .footer {
+      color: #777;
+    }
+
+
+    /* ========================================
+       CARGANDO / ERROR
+    ======================================== */
+
     .loading,
     .error {
+      padding: 70px 25px;
+
       text-align: center;
-      padding: 60px 20px;
+
       font-family: Arial, sans-serif;
     }
 
+
     .error {
-      color: #9b3d3d;
+      color: #a33;
     }
 
-    @media (max-width: 400px) {
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
+
+    @media (max-width: 420px) {
+
+      .page {
+        padding: 10px;
+      }
+
+      .card {
+        border-radius: 22px;
+      }
+
       .name {
-        font-size: 29px;
+        font-size: 34px;
       }
 
       .data-grid {
         grid-template-columns: 1fr;
       }
+
     }
+
   </style>
+
 </head>
+
 
 <body>
 
+
 <div class="page">
 
-  <div class="card" id="app">
+  <div
+    class="card premium"
+    id="app"
+  >
 
     <div class="loading">
       Cargando Baby Golden ID...
@@ -242,361 +669,458 @@
 
 </div>
 
+
 <script>
 
-  const SUPABASE_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
-  const SUPABASE_KEY = "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
-  const supabaseClient = window.supabase.createClient(
+/* ========================================
+   CONFIGURACIÓN SUPABASE
+======================================== */
+
+const SUPABASE_URL =
+  "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+
+const supabaseClient =
+  window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
   );
 
 
-  function escaparHTML(texto) {
+/* ========================================
+   SEGURIDAD HTML
+======================================== */
 
-    if (texto === null || texto === undefined) {
-      return "";
-    }
+function escaparHTML(texto) {
 
-    return String(texto)
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
+  if (
+    texto === null ||
+    texto === undefined
+  ) {
+    return "";
   }
 
+  return String(texto)
 
-  function formatearFecha(fecha) {
+    .replace(/&/g, "&amp;")
 
-    if (!fecha) return "";
+    .replace(/</g, "&lt;")
 
-    const partes = fecha.split("-");
+    .replace(/>/g, "&gt;")
 
-    if (partes.length !== 3) {
-      return fecha;
-    }
+    .replace(/"/g, "&quot;")
 
-    return `${partes[2]}/${partes[1]}/${partes[0]}`;
-
-  }
-
-
-  async function cargarPerfil() {
-
-    const parametros = new URLSearchParams(
-      window.location.search
-    );
-
-    const babyGoldenId =
-      parametros.get("id");
-
-
-    if (!babyGoldenId) {
-
-      document.getElementById("app").innerHTML = `
-        <div class="error">
-          No se indicó un Baby Golden ID.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    const { data, error } =
-      await supabaseClient.rpc(
-        "obtener_baby_golden_publico",
-        {
-          p_baby_golden_id: babyGoldenId
-        }
-      );
-
-
-    if (error) {
-
-      console.error(error);
-
-      document.getElementById("app").innerHTML = `
-        <div class="error">
-          No pudimos cargar este Baby Golden ID.
-        </div>
-      `;
-
-      return;
-    }
-
-
-    if (!data) {
-
-      document.getElementById("app").innerHTML = `
-        <div class="error">
-          Este Baby Golden ID no existe.
-        </div>
-      `;
-
-      return;
-    }
-
-
- let fotoUrl = "";
-
-if (data.foto_url) {
-
-  const { data: fotoFirmada, error: errorFoto } =
-    await supabaseClient.storage
-      .from("fotos-perritos")
-      .createSignedUrl(data.foto_url, 3600);
-
-  if (errorFoto) {
-    console.error("ERROR FOTO:", errorFoto);
-  } else {
-    fotoUrl = fotoFirmada.signedUrl;
-  }
-
+    .replace(/'/g, "&#039;");
 }
 
 
-    document.title =
-      `${data.nombre_perrito} | ${data.baby_golden_id}`;
+/* ========================================
+   FECHA
+======================================== */
+
+function formatearFecha(fecha) {
+
+  if (!fecha) {
+    return "No registrada";
+  }
+
+  const partes =
+    fecha.split("-");
+
+  if (
+    partes.length !== 3
+  ) {
+    return fecha;
+  }
+
+  return (
+    partes[2] +
+    "/" +
+    partes[1] +
+    "/" +
+    partes[0]
+  );
+}
 
 
-    document.getElementById("app").innerHTML = `
+/* ========================================
+   CARGAR PERFIL
+======================================== */
 
-      <div class="header">
-
-        <div class="brand">
-          Baby Golden Perú
-        </div>
-
-        <div class="heart">
-          ♥
-        </div>
-
-      </div>
+async function cargarPerfil() {
 
 
-      <div class="photo-container">
-
-        ${
-          fotoUrl
-          ? `
-            <img
-              class="photo"
-              src="${escaparHTML(fotoUrl)}"
-              alt="Fotografía de ${escaparHTML(data.nombre_perrito)}"
-            >
-          `
-          : ""
-        }
-
-      </div>
+  const parametros =
+    new URLSearchParams(
+      window.location.search
+    );
 
 
-      <div class="content">
-
-        <div class="id-badge ${data.tipo_id === 'Black ID' ? 'black-id' : 'premium-id'}">
-  ${escaparHTML(data.baby_golden_id)}
-</div>
-
-<div class="id-type">
-  ${escaparHTML(data.tipo_id)}
-</div>
-
-        <h1 class="name">
-          ${escaparHTML(data.nombre_perrito)}
-        </h1>
-
-       <div class="breed">
-  ${escaparHTML(data.raza)}
-</div>
-
-<div class="verified">
-  ✓ PERFIL REGISTRADO EN BABY GOLDEN PERÚ
-</div>
+  const babyGoldenId =
+    parametros.get("id");
 
 
-        <div class="data-grid">
+  if (!babyGoldenId) {
 
-          <div class="data">
-            <span class="label">
-              Fecha de nacimiento
-            </span>
+    document.getElementById(
+      "app"
+    ).innerHTML = `
 
-            <span class="value">
-              ${formatearFecha(data.fecha_nacimiento)}
-            </span>
-          </div>
+      <div class="error">
 
-
-          <div class="data">
-            <span class="label">
-              Sexo
-            </span>
-
-            <span class="value">
-              ${escaparHTML(data.sexo)}
-            </span>
-          </div>
-
-
-          <div class="data">
-            <span class="label">
-              Tipo de ID
-            </span>
-
-            <span class="value">
-              ${escaparHTML(data.tipo_id)}
-            </span>
-          </div>
-
-
-          <div class="data">
-            <span class="label">
-              Microchip
-            </span>
-
-            <span class="value">
-              ${
-                data.tiene_microchip
-                ? "Registrado"
-                : "No registrado"
-              }
-            </span>
-          </div>
-
-        </div>
-
-
-        ${
-          data.caracteristicas
-          ? `
-            <div class="section">
-
-              <h2 class="section-title">
-                Sobre ${escaparHTML(data.nombre_perrito)}
-              </h2>
-
-              <div class="info">
-                ${escaparHTML(data.caracteristicas)}
-              </div>
-
-            </div>
-          `
-          : ""
-        }
-
-
-        <div class="section">
-
-          <h2 class="section-title">
-            Familia
-          </h2>
-
-          <div class="info">
-
-            ${escaparHTML(data.tutor_1)}
-
-            ${
-              data.tutor_2
-              ? `<br>${escaparHTML(data.tutor_2)}`
-              : ""
-            }
-
-          </div>
-
-
-          <div class="buttons">
-
-            ${
-              data.red_social
-              ? `
-                <a
-                  class="button"
-                  href="${escaparHTML(data.red_social)}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  Red social
-                </a>
-              `
-              : ""
-            }
-
-
-            ${
-              data.whatsapp
-              ? `
-                <a
-                  class="button"
-                  href="https://wa.me/${escaparHTML(data.whatsapp)}"
-                  target="_blank"
-                  rel="noopener"
-                >
-                  WhatsApp
-                </a>
-              `
-              : ""
-            }
-
-          </div>
-
-        </div>
-
-
-        ${
-          data.alergias ||
-          data.condicion_medica ||
-          data.medicamento ||
-          data.vacunas_al_dia
-          ? `
-            <div class="section">
-
-              <h2 class="section-title">
-                Información importante
-              </h2>
-
-              <div class="info">
-
-                ${
-                  data.alergias
-                  ? `<strong>Alergias:</strong> ${escaparHTML(data.detalle_alergias || data.alergias)}<br>`
-                  : ""
-                }
-
-                ${
-                  data.condicion_medica
-                  ? `<strong>Condición médica:</strong> ${escaparHTML(data.detalle_condicion || data.condicion_medica)}<br>`
-                  : ""
-                }
-
-                ${
-                  data.medicamento
-                  ? `<strong>Medicamento:</strong> ${escaparHTML(data.detalle_medicamento || data.medicamento)}<br>`
-                  : ""
-                }
-
-                ${
-                  data.vacunas_al_dia
-                  ? `<strong>Vacunas:</strong> ${escaparHTML(data.vacunas_al_dia)}`
-                  : ""
-                }
-
-              </div>
-
-            </div>
-          `
-          : ""
-        }
+        No se indicó un
+        Baby Golden ID.
 
       </div>
 
+    `;
 
-      <div class="footer">
+    return;
+  }
 
-        Baby Golden Perú · Una pata a la vez
+
+  /* ======================================
+     CONSULTAR SUPABASE
+  ====================================== */
+
+  const {
+    data,
+    error
+  } = await supabaseClient.rpc(
+
+    "obtener_baby_golden_publico",
+
+    {
+      p_baby_golden_id:
+        babyGoldenId
+    }
+
+  );
+
+
+  if (error) {
+
+    console.error(
+      "ERROR PERFIL:",
+      error
+    );
+
+
+    document.getElementById(
+      "app"
+    ).innerHTML = `
+
+      <div class="error">
+
+        No pudimos cargar
+        este Baby Golden ID.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  if (!data) {
+
+    document.getElementById(
+      "app"
+    ).innerHTML = `
+
+      <div class="error">
+
+        Este Baby Golden ID
+        no existe.
+
+      </div>
+
+    `;
+
+    return;
+  }
+
+
+  /* ======================================
+     DETECTAR TIPO DE ID
+  ====================================== */
+
+  const esBlack =
+    data.tipo_id === "Black ID";
+
+
+  const claseTarjeta =
+    esBlack
+      ? "black"
+      : "premium";
+
+
+  const app =
+    document.getElementById(
+      "app"
+    );
+
+
+  app.className =
+    "card " +
+    claseTarjeta;
+
+
+  /* ======================================
+     FOTO PRIVADA
+  ====================================== */
+
+  let fotoUrl = "";
+
+
+  if (data.foto_url) {
+
+    const {
+      data: fotoFirmada,
+      error: errorFoto
+    } =
+      await supabaseClient
+        .storage
+        .from("fotos-perritos")
+        .createSignedUrl(
+          data.foto_url,
+          3600
+        );
+
+
+    if (errorFoto) {
+
+      console.error(
+        "ERROR FOTO:",
+        errorFoto
+      );
+
+    } else {
+
+      fotoUrl =
+        fotoFirmada.signedUrl;
+
+    }
+
+  }
+
+
+  /* ======================================
+     TÍTULO
+  ====================================== */
+
+  document.title =
+    data.nombre_perrito +
+    " | " +
+    data.baby_golden_id;
+
+
+  /* ======================================
+     FOTO HTML
+  ====================================== */
+
+  const fotoHTML =
+    fotoUrl
+
+      ? `
+
+        <div class="photo-container">
+
+          <img
+            class="photo"
+            src="${escaparHTML(fotoUrl)}"
+            alt="Fotografía de ${escaparHTML(data.nombre_perrito)}"
+          >
+
+        </div>
+
+      `
+
+      : "";
+
+
+  /* ======================================
+     CONTACTO
+  ====================================== */
+
+  const botonesContacto = `
+
+    <div class="buttons">
+
+
+      ${
+        data.red_social
+
+        ? `
+
+          <a
+            class="button"
+            href="${escaparHTML(data.red_social)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            Red social
+
+          </a>
+
+        `
+
+        : ""
+      }
+
+
+      ${
+        data.whatsapp
+
+        ? `
+
+          <a
+            class="button"
+            href="https://wa.me/${escaparHTML(data.whatsapp)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+
+            WhatsApp
+
+          </a>
+
+        `
+
+        : ""
+      }
+
+
+    </div>
+
+  `;
+
+
+  /* ======================================
+     INFORMACIÓN MÉDICA
+  ====================================== */
+
+  let informacionMedica = "";
+
+
+  if (
+
+    data.alergias ||
+
+    data.condicion_medica ||
+
+    data.medicamento ||
+
+    data.vacunas_al_dia
+
+  ) {
+
+    informacionMedica = `
+
+      <div class="section">
+
+        <h2 class="section-title">
+
+          Información importante
+
+        </h2>
+
+
+        <div class="info">
+
+
+          ${
+            data.alergias
+
+            ? `
+
+              <strong>
+                Alergias:
+              </strong>
+
+              ${escaparHTML(
+                data.detalle_alergias ||
+                data.alergias
+              )}
+
+              <br>
+
+            `
+
+            : ""
+          }
+
+
+          ${
+            data.condicion_medica
+
+            ? `
+
+              <strong>
+                Condición médica:
+              </strong>
+
+              ${escaparHTML(
+                data.detalle_condicion ||
+                data.condicion_medica
+              )}
+
+              <br>
+
+            `
+
+            : ""
+          }
+
+
+          ${
+            data.medicamento
+
+            ? `
+
+              <strong>
+                Medicamento:
+              </strong>
+
+              ${escaparHTML(
+                data.detalle_medicamento ||
+                data.medicamento
+              )}
+
+              <br>
+
+            `
+
+            : ""
+          }
+
+
+          ${
+            data.vacunas_al_dia
+
+            ? `
+
+              <strong>
+                Vacunas:
+              </strong>
+
+              ${escaparHTML(
+                data.vacunas_al_dia
+              )}
+
+            `
+
+            : ""
+          }
+
+
+        </div>
 
       </div>
 
@@ -605,9 +1129,375 @@ if (data.foto_url) {
   }
 
 
-  cargarPerfil();
+  /* ======================================
+     BENEFICIOS BLACK
+  ====================================== */
+
+  const beneficiosBlack =
+
+    esBlack
+
+      ? `
+
+        <div class="black-benefits">
+
+          <div class="black-benefits-title">
+
+            Beneficios Black ID
+
+          </div>
+
+
+          <div class="benefit">
+
+            <span>◆</span>
+
+            Identificación digital exclusiva
+
+          </div>
+
+
+          <div class="benefit">
+
+            <span>◆</span>
+
+            Tecnología QR + NFC
+
+          </div>
+
+
+          <div class="benefit">
+
+            <span>◆</span>
+
+            Perfil digital personalizado
+
+          </div>
+
+
+          <div class="benefit">
+
+            <span>◆</span>
+
+            Beneficios exclusivos de
+            Baby Golden Perú
+
+          </div>
+
+
+        </div>
+
+      `
+
+      : "";
+
+
+  /* ======================================
+     MICROCHIP
+  ====================================== */
+
+  const microchipHTML = `
+
+    <div class="microchip">
+
+      <div class="microchip-title">
+
+        Microchip
+
+      </div>
+
+
+      <strong>
+
+        ${
+          data.tiene_microchip
+            ? "Registrado"
+            : "No registrado"
+        }
+
+      </strong>
+
+    </div>
+
+  `;
+
+
+  /* ======================================
+     CONSTRUIR TARJETA
+  ====================================== */
+
+  app.innerHTML = `
+
+
+    <div class="header">
+
+      <div class="brand">
+
+        Baby Golden Perú
+
+      </div>
+
+
+      <div class="symbol">
+
+        ♥️
+
+      </div>
+
+    </div>
+
+
+    ${fotoHTML}
+
+
+    <div class="content">
+
+
+      <div class="id-badge">
+
+        ${escaparHTML(
+          data.baby_golden_id
+        )}
+
+      </div>
+
+
+      <div class="id-type">
+
+        ${escaparHTML(
+          data.tipo_id
+        )}
+
+      </div>
+
+
+      <h1 class="name">
+
+        ${escaparHTML(
+          data.nombre_perrito
+        )}
+
+      </h1>
+
+
+      <div class="breed">
+
+        ${escaparHTML(
+          data.raza
+        )}
+
+      </div>
+
+
+      <div class="verified">
+
+        ✓ Perfil registrado
+        en Baby Golden Perú
+
+      </div>
+
+
+      <div class="data-grid">
+
+
+        <div class="data">
+
+          <span class="label">
+
+            Fecha de nacimiento
+
+          </span>
+
+
+          <span class="value">
+
+            ${formatearFecha(
+              data.fecha_nacimiento
+            )}
+
+          </span>
+
+        </div>
+
+
+        <div class="data">
+
+          <span class="label">
+
+            Sexo
+
+          </span>
+
+
+          <span class="value">
+
+            ${escaparHTML(
+              data.sexo
+            )}
+
+          </span>
+
+        </div>
+
+
+        <div class="data">
+
+          <span class="label">
+
+            Tipo de ID
+
+          </span>
+
+
+          <span class="value">
+
+            ${escaparHTML(
+              data.tipo_id
+            )}
+
+          </span>
+
+        </div>
+
+
+        <div class="data">
+
+          <span class="label">
+
+            Identificación
+
+          </span>
+
+
+          <span class="value">
+
+            ${escaparHTML(
+              data.baby_golden_id
+            )}
+
+          </span>
+
+        </div>
+
+
+      </div>
+
+
+      ${
+        data.caracteristicas
+
+        ? `
+
+          <div class="section">
+
+            <h2 class="section-title">
+
+              Sobre
+              ${escaparHTML(
+                data.nombre_perrito
+              )}
+
+            </h2>
+
+
+            <div class="info">
+
+              ${escaparHTML(
+                data.caracteristicas
+              )}
+
+            </div>
+
+          </div>
+
+        `
+
+        : ""
+      }
+
+
+      ${
+        data.tutor_1
+
+        ? `
+
+          <div class="section">
+
+            <h2 class="section-title">
+
+              Familia
+
+            </h2>
+
+
+            <div class="info">
+
+              ${escaparHTML(
+                data.tutor_1
+              )}
+
+
+              ${
+                data.tutor_2
+
+                ? `
+
+                  <br>
+
+                  ${escaparHTML(
+                    data.tutor_2
+                  )}
+
+                `
+
+                : ""
+              }
+
+            </div>
+
+
+            ${botonesContacto}
+
+          </div>
+
+        `
+
+        : ""
+      }
+
+
+      ${microchipHTML}
+
+
+      ${informacionMedica}
+
+
+      ${beneficiosBlack}
+
+
+    </div>
+
+
+    <div class="footer">
+
+      Baby Golden Perú
+
+      <br><br>
+
+      Una pata a la vez
+
+    </div>
+
+
+  `;
+
+}
+
+
+cargarPerfil();
 
 </script>
 
 </body>
+
 </html>
