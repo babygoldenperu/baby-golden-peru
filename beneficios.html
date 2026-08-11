@@ -7,7 +7,7 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Beneficios Golden | Baby Golden Perú</title>
+<title>Golden Benefits Club | Baby Golden Perú</title>
 
 <style>
 
@@ -17,185 +17,328 @@
     padding: 0;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: #f8f7f3;
-    color: #222;
+:root {
+    --gold: #c7a15a;
+    --gold-light: #e8d4a5;
+    --black: #111111;
+    --cream: #f7f4ed;
+    --white: #ffffff;
+    --gray: #777777;
 }
 
-/* HEADER */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: var(--cream);
+    color: var(--black);
+}
+
+
+/* =========================
+   HEADER
+========================= */
 
 header {
-    background: #ffffff;
-    padding: 18px 25px;
-    border-bottom: 1px solid #e5e5e5;
+    background: rgba(255,255,255,.97);
+    border-bottom: 1px solid #e8e4da;
+
     position: sticky;
     top: 0;
-    z-index: 100;
+
+    z-index: 1000;
+
+    backdrop-filter: blur(10px);
 }
 
 .header-container {
+
     max-width: 1200px;
+
     margin: auto;
 
+    padding: 18px 25px;
+
     display: flex;
+
     justify-content: space-between;
+
     align-items: center;
 }
 
 .logo {
-    font-weight: bold;
-    font-size: 20px;
-    color: #111;
+
+    font-size: 18px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
 }
 
 .logo span {
-    color: #c79b3b;
+    color: var(--gold);
 }
 
 .back {
-    text-decoration: none;
+
     color: #555;
-    font-size: 14px;
+
+    text-decoration: none;
+
+    font-size: 13px;
+
+    letter-spacing: .5px;
 }
 
-/* HERO */
+
+/* =========================
+   HERO
+========================= */
 
 .hero {
 
+    min-height: 430px;
+
     background:
     linear-gradient(
-        rgba(0,0,0,.45),
-        rgba(0,0,0,.45)
+        rgba(0,0,0,.68),
+        rgba(0,0,0,.68)
     ),
     url("BABY GOLDEN.png");
 
     background-size: cover;
+
     background-position: center;
 
-    min-height: 300px;
-
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
     text-align: center;
 
     color: white;
 
-    padding: 40px 20px;
+    padding: 60px 20px;
 }
 
 .hero-content {
-    max-width: 700px;
+
+    max-width: 760px;
+}
+
+.eyebrow {
+
+    color: var(--gold-light);
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+
+    margin-bottom: 18px;
+
+    font-weight: bold;
 }
 
 .hero h1 {
-    font-size: 42px;
-    margin-bottom: 15px;
+
+    font-family: Georgia, serif;
+
+    font-size: 56px;
+
+    font-weight: normal;
+
+    margin-bottom: 20px;
+}
+
+.hero h1 span {
+
+    color: var(--gold-light);
 }
 
 .hero p {
-    font-size: 18px;
+
+    max-width: 620px;
+
+    margin: auto;
+
+    color: #e7e7e7;
+
+    font-size: 17px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   CONTENEDOR
+========================= */
+
+.container {
+
+    max-width: 1200px;
+
+    margin: auto;
+
+    padding: 55px 20px;
+}
+
+
+/* =========================
+   INTRO
+========================= */
+
+.intro {
+
+    text-align: center;
+
+    max-width: 700px;
+
+    margin: 0 auto 40px;
+}
+
+.intro h2 {
+
+    font-family: Georgia, serif;
+
+    font-size: 32px;
+
+    font-weight: normal;
+
+    margin-bottom: 10px;
+}
+
+.intro p {
+
+    color: var(--gray);
+
     line-height: 1.6;
 }
 
-/* CONTENEDOR */
 
-.container {
-    max-width: 1200px;
-    margin: auto;
-    padding: 45px 20px;
+/* =========================
+   BUSCADOR
+========================= */
+
+.search {
+
+    max-width: 650px;
+
+    margin: 0 auto 30px;
+
+    position: relative;
 }
 
-/* BUSCADOR */
-
-.search-box {
-
-    display: flex;
-    justify-content: center;
-
-    margin-bottom: 30px;
-}
-
-.search-box input {
+.search input {
 
     width: 100%;
-    max-width: 600px;
 
-    padding: 15px 20px;
+    padding: 17px 22px;
 
-    border-radius: 30px;
+    border-radius: 50px;
 
-    border: 1px solid #ddd;
+    border: 1px solid #ddd6c8;
 
-    font-size: 15px;
+    background: white;
+
+    font-size: 14px;
 
     outline: none;
+
+    box-shadow: 0 5px 20px rgba(0,0,0,.04);
 }
 
-/* CATEGORIAS */
+.search input:focus {
+
+    border-color: var(--gold);
+}
+
+
+/* =========================
+   CATEGORIAS
+========================= */
 
 .categories {
 
     display: flex;
 
-    flex-wrap: wrap;
-
     justify-content: center;
 
-    gap: 10px;
+    flex-wrap: wrap;
 
-    margin-bottom: 40px;
+    gap: 9px;
+
+    margin-bottom: 50px;
 }
 
 .category {
 
-    border: 1px solid #ddd;
-
     background: white;
 
-    padding: 10px 18px;
+    border: 1px solid #ddd6c8;
 
-    border-radius: 25px;
+    padding: 10px 17px;
+
+    border-radius: 50px;
 
     cursor: pointer;
 
-    font-size: 14px;
+    color: #555;
+
+    font-size: 12px;
+
+    transition: .2s;
 }
 
 .category:hover,
 .category.active {
 
-    background: #c79b3b;
+    background: var(--black);
 
     color: white;
 
-    border-color: #c79b3b;
+    border-color: var(--black);
 }
 
-/* TITULO */
 
-.section-title {
+/* =========================
+   SECCION
+========================= */
 
-    text-align: center;
+.section-heading {
 
-    margin-bottom: 30px;
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: end;
+
+    margin-bottom: 25px;
+
+    border-bottom: 1px solid #ddd6c8;
+
+    padding-bottom: 15px;
 }
 
-.section-title h2 {
+.section-heading h3 {
 
-    font-size: 28px;
+    font-family: Georgia, serif;
 
-    margin-bottom: 8px;
+    font-size: 27px;
+
+    font-weight: normal;
 }
 
-.section-title p {
+.section-heading span {
 
-    color: #777;
+    font-size: 12px;
+
+    color: var(--gray);
 }
 
-/* GRID */
+
+/* =========================
+   GRID
+========================= */
 
 .brands {
 
@@ -204,40 +347,48 @@ header {
     grid-template-columns:
     repeat(
         auto-fit,
-        minmax(260px, 1fr)
+        minmax(280px, 1fr)
     );
 
     gap: 25px;
 }
 
-/* CARD */
+
+/* =========================
+   CARD
+========================= */
 
 .brand-card {
 
     background: white;
 
-    border-radius: 18px;
+    border: 1px solid #e7e1d5;
+
+    border-radius: 16px;
 
     overflow: hidden;
 
-    border: 1px solid #eee;
+    transition: .25s;
 
-    transition: .2s;
+    position: relative;
 }
 
 .brand-card:hover {
 
-    transform: translateY(-4px);
+    transform: translateY(-5px);
 
     box-shadow:
-    0 10px 25px rgba(0,0,0,.08);
+    0 18px 40px rgba(0,0,0,.09);
 }
+
+
+/* IMAGEN */
 
 .brand-image {
 
-    height: 170px;
+    height: 190px;
 
-    background: #f1f1f1;
+    background: #f1eee7;
 
     display: flex;
 
@@ -245,101 +396,265 @@ header {
 
     justify-content: center;
 
-    font-size: 50px;
+    position: relative;
 }
+
+.brand-logo {
+
+    width: 100px;
+
+    height: 100px;
+
+    background: white;
+
+    border-radius: 18px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 45px;
+
+    box-shadow:
+    0 8px 25px rgba(0,0,0,.08);
+}
+
+
+/* ETIQUETA */
+
+.badge {
+
+    position: absolute;
+
+    top: 15px;
+
+    left: 15px;
+
+    background: var(--black);
+
+    color: white;
+
+    padding: 7px 11px;
+
+    border-radius: 30px;
+
+    font-size: 9px;
+
+    letter-spacing: 1px;
+
+    font-weight: bold;
+}
+
+
+/* CONTENIDO */
 
 .brand-content {
 
-    padding: 22px;
-}
-
-.brand-content h3 {
-
-    margin-bottom: 8px;
+    padding: 24px;
 }
 
 .category-label {
 
-    font-size: 12px;
+    font-size: 10px;
 
-    color: #999;
+    color: var(--gold);
+
+    font-weight: bold;
+
+    letter-spacing: 1.5px;
+
+    margin-bottom: 9px;
+}
+
+.brand-content h4 {
+
+    font-family: Georgia, serif;
+
+    font-size: 25px;
+
+    font-weight: normal;
 
     margin-bottom: 12px;
 }
 
-.discount {
-
-    font-size: 24px;
-
-    font-weight: bold;
-
-    color: #c79b3b;
-
-    margin: 15px 0;
-}
-
 .description {
 
-    color: #666;
+    color: var(--gray);
 
-    font-size: 14px;
+    font-size: 13px;
 
-    line-height: 1.5;
+    line-height: 1.6;
+
+    min-height: 42px;
+}
+
+.discount {
+
+    margin: 20px 0;
+
+    padding: 15px;
+
+    background: #faf7ef;
+
+    border: 1px solid #eee3ca;
+
+    border-radius: 10px;
+
+    text-align: center;
+}
+
+.discount strong {
+
+    display: block;
+
+    font-family: Georgia, serif;
+
+    font-size: 27px;
+
+    color: var(--gold);
+}
+
+.discount span {
+
+    font-size: 10px;
+
+    color: #777;
+
+    letter-spacing: 1px;
 }
 
 .button {
 
     display: block;
 
-    margin-top: 20px;
-
-    padding: 12px;
-
-    background: #111;
-
-    color: white;
-
     text-align: center;
 
     text-decoration: none;
 
+    background: var(--black);
+
+    color: white;
+
+    padding: 13px;
+
     border-radius: 8px;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: .8px;
+
+    transition: .2s;
 }
 
 .button:hover {
 
-    background: #c79b3b;
+    background: var(--gold);
 }
 
-/* FOOTER */
+
+/* =========================
+   CLUB
+========================= */
+
+.club {
+
+    margin-top: 75px;
+
+    background: var(--black);
+
+    color: white;
+
+    border-radius: 20px;
+
+    padding: 50px 30px;
+
+    text-align: center;
+}
+
+.club small {
+
+    color: var(--gold-light);
+
+    letter-spacing: 3px;
+
+    font-size: 10px;
+}
+
+.club h2 {
+
+    font-family: Georgia, serif;
+
+    font-size: 35px;
+
+    font-weight: normal;
+
+    margin: 15px 0;
+}
+
+.club p {
+
+    max-width: 650px;
+
+    margin: auto;
+
+    color: #bbb;
+
+    line-height: 1.7;
+
+    font-size: 14px;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
 
 footer {
 
-    background: #111;
+    background: #0c0c0c;
 
     color: white;
 
     text-align: center;
 
-    padding: 35px 20px;
+    padding: 40px 20px;
 
-    margin-top: 50px;
+    margin-top: 70px;
+}
+
+footer strong {
+
+    color: var(--gold-light);
 }
 
 footer p {
 
-    color: #aaa;
+    color: #888;
 
-    font-size: 13px;
+    font-size: 12px;
+
+    margin-top: 10px;
 }
 
-/* MOBILE */
 
-@media (max-width: 600px) {
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:600px) {
+
+    .hero {
+
+        min-height: 380px;
+    }
 
     .hero h1 {
 
-        font-size: 30px;
+        font-size: 40px;
     }
 
     .hero p {
@@ -349,7 +664,16 @@ footer p {
 
     .container {
 
-        padding: 30px 15px;
+        padding: 40px 15px;
+    }
+
+    .section-heading {
+
+        align-items: start;
+
+        flex-direction: column;
+
+        gap: 6px;
     }
 
 }
@@ -377,7 +701,7 @@ BABY <span>GOLDEN</span> PERÚ
 href="index.html"
 class="back">
 
-← Volver
+← VOLVER
 
 </a>
 
@@ -390,17 +714,25 @@ class="back">
 
 <div class="hero-content">
 
+<div class="eyebrow">
+
+BABY GOLDEN PERÚ
+
+</div>
+
+
 <h1>
 
-Beneficios Golden
+Golden <span>Benefits</span> Club
 
 </h1>
 
 
 <p>
 
-Descuentos y beneficios exclusivos
-para nuestra comunidad Baby Golden Perú.
+Un espacio exclusivo donde nuestra comunidad
+encuentra beneficios, experiencias y descuentos
+especiales de nuestras marcas afiliadas.
 
 </p>
 
@@ -412,18 +744,39 @@ para nuestra comunidad Baby Golden Perú.
 <main class="container">
 
 
-<div class="search-box">
+<div class="intro">
+
+<h2>
+
+Beneficios exclusivos
+
+</h2>
+
+
+<p>
+
+Descubre marcas que comparten nuestro amor
+por los perritos y disfruta de condiciones
+especiales por ser parte de Baby Golden Perú.
+
+</p>
+
+</div>
+
+
+<div class="search">
 
 <input
 type="text"
 id="searchInput"
-placeholder="Buscar una marca o beneficio..."
+placeholder="Buscar marca, producto o beneficio..."
 >
 
 </div>
 
 
 <div class="categories">
+
 
 <button
 class="category active"
@@ -499,21 +852,20 @@ Pet Friendly
 </div>
 
 
-<div class="section-title">
+<div class="section-heading">
 
-<h2>
+<h3>
 
 Marcas afiliadas
 
-</h2>
+</h3>
 
 
-<p>
+<span>
 
-Descubre los beneficios disponibles
-para los Baby Golden.
+BENEFICIOS GOLDEN
 
-</p>
+</span>
 
 </div>
 
@@ -529,14 +881,28 @@ id="brandsContainer">
 class="brand-card"
 data-category="alimentacion">
 
+
 <div class="brand-image">
+
+
+<div class="badge">
+
+EXCLUSIVO
+
+</div>
+
+
+<div class="brand-logo">
 
 🐶
 
 </div>
 
+</div>
+
 
 <div class="brand-content">
+
 
 <div class="category-label">
 
@@ -545,26 +911,36 @@ ALIMENTACIÓN
 </div>
 
 
-<h3>
+<h4>
 
 Próxima marca
 
-</h3>
-
-
-<div class="discount">
-
-DESCUENTO ESPECIAL
-
-</div>
+</h4>
 
 
 <p class="description">
 
-Pronto podrás disfrutar de beneficios
-exclusivos de nuestras marcas afiliadas.
+Muy pronto encontrarás beneficios
+especiales de una de nuestras marcas afiliadas.
 
 </p>
+
+
+<div class="discount">
+
+<strong>
+
+15% OFF
+
+</strong>
+
+<span>
+
+BENEFICIO GOLDEN
+
+</span>
+
+</div>
 
 
 <a
@@ -586,14 +962,28 @@ VER BENEFICIO
 class="brand-card"
 data-category="accesorios">
 
+
 <div class="brand-image">
+
+
+<div class="badge">
+
+BLACK ID
+
+</div>
+
+
+<div class="brand-logo">
 
 🦴
 
 </div>
 
+</div>
+
 
 <div class="brand-content">
+
 
 <div class="category-label">
 
@@ -602,26 +992,36 @@ ACCESORIOS
 </div>
 
 
-<h3>
+<h4>
 
 Próxima marca
 
-</h3>
-
-
-<div class="discount">
-
-BENEFICIO GOLDEN
-
-</div>
+</h4>
 
 
 <p class="description">
 
-Descuentos especiales para miembros
-de la comunidad Baby Golden Perú.
+Beneficios especiales para nuestra
+comunidad Baby Golden Perú.
 
 </p>
+
+
+<div class="discount">
+
+<strong>
+
+20% OFF
+
+</strong>
+
+<span>
+
+BENEFICIO BLACK ID
+
+</span>
+
+</div>
 
 
 <a
@@ -643,14 +1043,28 @@ VER BENEFICIO
 class="brand-card"
 data-category="servicios">
 
+
 <div class="brand-image">
 
-❤️
+
+<div class="badge">
+
+PREMIUM
+
+</div>
+
+
+<div class="brand-logo">
+
+✦
+
+</div>
 
 </div>
 
 
 <div class="brand-content">
+
 
 <div class="category-label">
 
@@ -659,26 +1073,36 @@ SERVICIOS
 </div>
 
 
-<h3>
+<h4>
 
 Próxima marca
 
-</h3>
-
-
-<div class="discount">
-
-BENEFICIO EXCLUSIVO
-
-</div>
+</h4>
 
 
 <p class="description">
 
-Muy pronto encontrarás aquí nuevas
-marcas afiliadas.
+Experiencias y promociones exclusivas
+para nuestros miembros.
 
 </p>
+
+
+<div class="discount">
+
+<strong>
+
+BENEFICIO
+
+</strong>
+
+<span>
+
+GOLDEN PREMIUM
+
+</span>
+
+</div>
 
 
 <a
@@ -696,22 +1120,55 @@ VER BENEFICIO
 
 </div>
 
+
+<section class="club">
+
+
+<small>
+
+BABY GOLDEN PERÚ
+
+</small>
+
+
+<h2>
+
+Más que descuentos.
+
+Una comunidad.
+
+</h2>
+
+
+<p>
+
+Ser parte de Baby Golden Perú significa
+compartir experiencias, descubrir nuevas
+marcas y disfrutar beneficios pensados
+para quienes consideran a sus perritos
+parte de la familia.
+
+</p>
+
+</section>
+
+
 </main>
 
 
 <footer>
 
+<strong>
+
+BABY GOLDEN PERÚ
+
+</strong>
+
+
 <p>
 
-© Baby Golden Perú — Beneficios Golden
-
-</p>
-
-
-<p>
-
-Una comunidad unida por el amor
-a nuestros perritos.
+Golden Benefits Club · Beneficios exclusivos
+para nuestra comunidad.
 
 </p>
 
@@ -733,10 +1190,16 @@ document.querySelectorAll(".brand-card");
 function filterBrands() {
 
     const search =
-    searchInput.value.toLowerCase().trim();
+    searchInput.value
+    .toLowerCase()
+    .trim();
+
 
     const activeButton =
-    document.querySelector(".category.active");
+    document.querySelector(
+        ".category.active"
+    );
+
 
     const selectedCategory =
     activeButton.dataset.category;
@@ -745,7 +1208,9 @@ function filterBrands() {
     brandCards.forEach(card => {
 
         const text =
-        card.textContent.toLowerCase();
+        card.textContent
+        .toLowerCase();
+
 
         const cardCategory =
         card.dataset.category;
