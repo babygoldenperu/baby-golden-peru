@@ -13,6 +13,7 @@
   <title>Baby Golden ID</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js"></script>
 
   <style>
 
@@ -575,7 +576,61 @@
       margin-right: 7px;
     }
 
+/* ========================================
+   QR
+======================================== */
 
+.qr-section {
+  text-align: center;
+}
+
+.qr-box {
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.premium .qr-box {
+  background: #faf8f5;
+}
+
+.black .qr-box {
+  background: #181818;
+  border: 1px solid #5d4726;
+}
+
+#qr-code {
+  width: 180px;
+  height: 180px;
+  padding: 10px;
+  background: #ffffff;
+  border-radius: 12px;
+}
+
+#qr-code img,
+#qr-code canvas {
+  display: block;
+  width: 160px !important;
+  height: 160px !important;
+}
+
+.qr-text {
+  margin-top: 13px;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+
+.premium .qr-text {
+  color: #76552e;
+}
+
+.black .qr-text {
+  color: #d6b26a;
+}
     /* ========================================
        FOOTER
     ======================================== */
@@ -1468,10 +1523,25 @@ async function cargarPerfil() {
 
       ${microchipHTML}
 
-
       ${informacionMedica}
 
+<div class="section qr-section">
 
+  <h2 class="section-title">
+    Identificación digital
+  </h2>
+
+  <div class="qr-box">
+
+    <div id="qr-code"></div>
+
+    <div class="qr-text">
+      Escanea para conocerme
+    </div>
+
+  </div>
+
+</div>
       ${beneficiosBlack}
 
 
@@ -1490,7 +1560,23 @@ async function cargarPerfil() {
 
 
   `;
+const urlPerfil =
+  window.location.origin +
+  window.location.pathname +
+  "?id=" +
+  encodeURIComponent(data.baby_golden_id);
 
+new QRCode(
+  document.getElementById("qr-code"),
+  {
+    text: urlPerfil,
+    width: 160,
+    height: 160,
+    colorDark: "#111111",
+    colorLight: "#ffffff",
+    correctLevel: QRCode.CorrectLevel.H
+  }
+);
 }
 
 
