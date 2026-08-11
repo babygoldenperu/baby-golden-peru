@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Baby Golden Perú | Administración</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Arial, sans-serif;
+      background: #f5f2ed;
+      color: #292521;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1000px;
+      margin: auto;
+      padding: 25px 16px 50px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .brand {
+      color: #8a6b43;
+      font-size: 12px;
+      font-weight: bold;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 10px 0 5px;
+      font-family: Georgia, serif;
+      font-size: 32px;
+    }
+
+    .subtitle {
+      color: #777;
+      font-size: 14px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 22px;
+      padding: 25px;
+      box-shadow: 0 10px 35px rgba(0,0,0,.08);
+      margin-bottom: 20px;
+    }
+
+    .login-card {
+      max-width: 430px;
+      margin: 50px auto;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px 14px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 12px;
+      font-size: 14px;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      border: 0;
+      border-radius: 12px;
+      background: #2d2925;
+      color: #fff;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: .9;
+    }
+
+    .logout {
+      width: auto;
+      padding: 10px 16px;
+      background: #eee;
+      color: #333;
+    }
+
+    .search {
+      display: flex;
+      gap: 10px;
+    }
+
+    .search input {
+      margin: 0;
+      flex: 1;
+    }
+
+    .search button {
+      width: auto;
+      min-width: 130px;
+    }
+
+    .profile {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 25px;
+    }
+
+    .profile img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border-radius: 18px;
+      background: #eee;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 7px 13px;
+      border-radius: 30px;
+      background: #eee5d7;
+      color: #76552e;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
+    .badge.black {
+      background: #222;
+      color: #d6b26a;
+    }
+
+    .profile h2 {
+      margin: 12px 0 5px;
+      font-family: Georgia, serif;
+      font-size: 30px;
+    }
+
+    .breed {
+      color: #777;
+      margin-bottom: 20px;
+    }
+
+    .data {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .data-box {
+      padding: 13px;
+      background: #faf8f5;
+      border-radius: 12px;
+    }
+
+    .data-label {
+      display: block;
+      color: #999;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+
+    .data-value {
+      font-size: 13px;
+      font-weight: bold;
+      word-break: break-word;
+    }
+
+    .actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .actions a,
+    .actions button {
+      flex: 1;
+      text-align: center;
+      text-decoration: none;
+      padding: 13px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .actions a {
+      background: #2d2925;
+      color: white;
+    }
+
+    .secondary {
+      background: #eee !important;
+      color: #333 !important;
+    }
+
+    .message {
+      padding: 14px;
+      margin-top: 15px;
+      border-radius: 12px;
+      font-size: 13px;
+      display: none;
+    }
+
+    .error {
+      background: #fbeaea;
+      color: #9b3333;
+    }
+
+    .success {
+      background: #eaf7ed;
+      color: #276b39;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @media (max-width: 700px) {
+
+      .profile {
+        grid-template-columns: 1fr;
+      }
+
+      .profile img {
+        max-width: 280px;
+      }
+
+      .search {
+        flex-direction: column;
+      }
+
+      .search button {
+        width: 100%;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- LOGIN -->
+
+  <div id="loginView">
+
+    <div class="card login-card">
+
+      <div class="header">
+
+        <div class="brand">
+          Baby Golden Perú
+        </div>
+
+        <h1>
+          Administración
+        </h1>
+
+        <div class="subtitle">
+          Baby Golden ID
+        </div>
+
+      </div>
+
+
+      <form id="loginForm">
+
+        <label>
+          Correo electrónico
+        </label>
+
+        <input
+          type="email"
+          id="email"
+          required
+          autocomplete="email"
+        >
+
+
+        <label>
+          Contraseña
+        </label>
+
+        <input
+          type="password"
+          id="password"
+          required
+          autocomplete="current-password"
+        >
+
+
+        <button type="submit">
+
+          INGRESAR
+
+        </button>
+
+      </form>
+
+
+      <div
+        id="loginMessage"
+        class="message error"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- PANEL -->
+
+  <div
+    id="panelView"
+    class="hidden"
+  >
+
+
+    <div class="header">
+
+      <div class="brand">
+        Baby Golden Perú
+      </div>
+
+      <h1>
+        Panel Baby Golden ID
+      </h1>
+
+      <div class="subtitle">
+        Administración de registros
+      </div>
+
+      <br>
+
+      <button
+        id="logoutButton"
+        class="logout"
+      >
+        CERRAR SESIÓN
+      </button>
+
+    </div>
+
+
+    <!-- BUSCADOR -->
+
+    <div class="card">
+
+      <label>
+        Buscar Baby Golden ID
+      </label>
+
+
+      <div class="search">
+
+        <input
+          type="text"
+          id="buscarId"
+          placeholder="Ejemplo: BGP-00005"
+        >
+
+        <button
+          id="buscarButton"
+          type="button"
+        >
+          BUSCAR
+        </button>
+
+      </div>
+
+
+      <div
+        id="searchMessage"
+        class="message error"
+      ></div>
+
+    </div>
+
+
+
+    <!-- RESULTADO -->
+
+    <div
+      id="resultado"
+      class="card hidden"
+    >
+
+      <div class="profile">
+
+
+        <div>
+
+          <img
+            id="foto"
+            src=""
+            alt="Foto del perrito"
+          >
+
+        </div>
+
+
+        <div>
+
+          <span
+            id="badge"
+            class="badge"
+          >
+          </span>
+
+
+          <h2 id="nombre">
+          </h2>
+
+
+          <div
+            id="raza"
+            class="breed"
+          >
+          </div>
+
+
+          <div class="data">
+
+
+            <div class="data-box">
+
+              <span class="data-label">
+                Baby Golden ID
+              </span>
+
+              <span
+                id="babyGoldenId"
+                class="data-value"
+              >
+              </span>
+
+            </div>
+
+
+            <div class="data-box">
+
+              <span class="data-label">
+                Sexo
+              </span>
+
+              <span
+                id="sexo"
+                class="data-value"
+              >
+              </span>
+
+            </div>
+
+
+            <div class="data-box">
+
+              <span class="data-label">
+                Fecha nacimiento
+              </span>
+
+              <span
+                id="fecha"
+                class="data-value"
+              >
+              </span>
+
+            </div>
+
+
+            <div class="data-box">
+
+              <span class="data-label">
+                Microchip
+              </span>
+
+              <span
+                id="microchip"
+                class="data-value"
+              >
+              </span>
+
+            </div>
+
+
+            <div class="data-box">
+
+              <span class="data-label">
+                Tutor
+              </span>
+
+              <span
+                id="tutor"
+                class="data-value"
+              >
+              </span>
+
+            </div>
+
+
+            <div class="data-box">
+
+              <span class="data-label">
+                Celular
+              </span>
+
+              <span
+                id="celular"
+                class="data-value"
+              >
+              </span>
+
+            </div>
+
+
+          </div>
+
+
+          <div class="actions">
+
+            <a
+              id="abrirPerfil"
+              href="#"
+              target="_blank"
+            >
+              ABRIR PERFIL
+            </a>
+
+
+            <button
+              id="copiarUrl"
+              type="button"
+              class="secondary"
+            >
+              COPIAR URL
+            </button>
+
+          </div>
+
+
+          <div
+            id="copyMessage"
+            class="message success"
+          >
+            URL copiada correctamente.
+          </div>
+
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ========================================
+   SUPABASE
+======================================== */
+
+const SUPABASE_URL =
+  "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+/* ========================================
+   ELEMENTOS
+======================================== */
+
+const loginView =
+  document.getElementById(
+    "loginView"
+  );
+
+const panelView =
+  document.getElementById(
+    "panelView"
+  );
+
+const loginForm =
+  document.getElementById(
+    "loginForm"
+  );
+
+const loginMessage =
+  document.getElementById(
+    "loginMessage"
+  );
+
+const searchMessage =
+  document.getElementById(
+    "searchMessage"
+  );
+
+const resultado =
+  document.getElementById(
+    "resultado"
+  );
+
+
+/* ========================================
+   LOGIN
+======================================== */
+
+loginForm.addEventListener(
+  "submit",
+  async function(event) {
+
+    event.preventDefault();
+
+
+    loginMessage.style.display =
+      "none";
+
+
+    const email =
+      document.getElementById(
+        "email"
+      ).value.trim();
+
+
+    const password =
+      document.getElementById(
+        "password"
+      ).value;
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
+
+          email,
+          password
+
+        });
+
+
+    if (error) {
+
+      loginMessage.textContent =
+        error.message;
+
+      loginMessage.style.display =
+        "block";
+
+      return;
+    }
+
+
+    await comprobarAdministrador();
+
+  }
+);
+
+
+/* ========================================
+   COMPROBAR ADMIN
+======================================== */
+
+async function comprobarAdministrador() {
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.rpc(
+      "es_administrador"
+    );
+
+
+  if (error) {
+
+    await supabaseClient.auth
+      .signOut();
+
+
+    loginMessage.textContent =
+      error.message;
+
+    loginMessage.style.display =
+      "block";
+
+    return;
+  }
+
+
+  if (!data) {
+
+    await supabaseClient.auth
+      .signOut();
+
+
+    loginMessage.textContent =
+      "Esta cuenta no tiene permisos de administrador.";
+
+    loginMessage.style.display =
+      "block";
+
+    return;
+  }
+
+
+  loginView.classList.add(
+    "hidden"
+  );
+
+  panelView.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/* ========================================
+   CERRAR SESIÓN
+======================================== */
+
+document
+  .getElementById(
+    "logoutButton"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      await supabaseClient.auth
+        .signOut();
+
+      location.reload();
+
+    }
+  );
+
+
+/* ========================================
+   BUSCAR
+======================================== */
+
+document
+  .getElementById(
+    "buscarButton"
+  )
+  .addEventListener(
+    "click",
+    buscarPerrito
+  );
+
+
+document
+  .getElementById(
+    "buscarId"
+  )
+  .addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Enter"
+      ) {
+
+        event.preventDefault();
+
+        buscarPerrito();
+
+      }
+
+    }
+  );
+
+
+async function buscarPerrito() {
+
+
+  searchMessage.style.display =
+    "none";
+
+  resultado.classList.add(
+    "hidden"
+  );
+
+
+  let id =
+    document
+      .getElementById(
+        "buscarId"
+      )
+      .value
+      .trim()
+      .toUpperCase();
+
+
+  if (!id) {
+
+    mostrarErrorBusqueda(
+      "Escribe un Baby Golden ID."
+    );
+
+    return;
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.rpc(
+
+      "obtener_baby_golden_publico",
+
+      {
+        p_baby_golden_id: id
+      }
+
+    );
+
+
+  if (error) {
+
+    console.error(error);
+
+    mostrarErrorBusqueda(
+      error.message
+    );
+
+    return;
+  }
+
+
+  if (!data) {
+
+    mostrarErrorBusqueda(
+      "No encontramos ese Baby Golden ID."
+    );
+
+    return;
+  }
+
+
+  mostrarPerrito(
+    data
+  );
+
+}
+
+
+/* ========================================
+   MOSTRAR PERRITO
+======================================== */
+
+async function mostrarPerrito(
+  data
+) {
+
+
+  document.getElementById(
+    "nombre"
+  ).textContent =
+    data.nombre_perrito || "";
+
+
+  document.getElementById(
+    "raza"
+  ).textContent =
+    data.raza || "";
+
+
+  document.getElementById(
+    "babyGoldenId"
+  ).textContent =
+    data.baby_golden_id || "";
+
+
+  document.getElementById(
+    "sexo"
+  ).textContent =
+    data.sexo || "";
+
+
+  document.getElementById(
+    "fecha"
+  ).textContent =
+    formatearFecha(
+      data.fecha_nacimiento
+    );
+
+
+  document.getElementById(
+    "microchip"
+  ).textContent =
+    data.tiene_microchip
+      ? "Registrado"
+      : "No registrado";
+
+
+  document.getElementById(
+    "tutor"
+  ).textContent =
+    data.tutor_1 || "";
+
+
+  document.getElementById(
+    "celular"
+  ).textContent =
+    data.celular || "No autorizado";
+
+
+  const badge =
+    document.getElementById(
+      "badge"
+    );
+
+
+  badge.textContent =
+    data.tipo_id || "";
+
+
+  badge.className =
+    "badge" +
+    (
+      data.tipo_id === "Black ID"
+        ? " black"
+        : ""
+    );
+
+
+  /* ======================================
+     FOTO
+  ====================================== */
+
+  const foto =
+    document.getElementById(
+      "foto"
+    );
+
+
+  if (data.foto_url) {
+
+    const {
+      data: fotoFirmada,
+      error: errorFoto
+    } =
+      await supabaseClient.storage
+        .from("fotos-perritos")
+        .createSignedUrl(
+          data.foto_url,
+          3600
+        );
+
+
+    if (!errorFoto) {
+
+      foto.src =
+        fotoFirmada.signedUrl;
+
+    }
+
+  } else {
+
+    foto.removeAttribute(
+      "src"
+    );
+
+  }
+
+
+  /* ======================================
+     URL PERFIL
+  ====================================== */
+
+  const urlPerfil =
+    window.location.origin +
+    window.location.pathname
+      .replace(
+        "admin.html",
+        "id.html"
+      ) +
+    "?id=" +
+    encodeURIComponent(
+      data.baby_golden_id
+    );
+
+
+  document.getElementById(
+    "abrirPerfil"
+  ).href =
+    urlPerfil;
+
+
+  document.getElementById(
+    "copiarUrl"
+  ).onclick =
+    async function() {
+
+      try {
+
+        await navigator.clipboard
+          .writeText(
+            urlPerfil
+          );
+
+        const message =
+          document.getElementById(
+            "copyMessage"
+          );
+
+        message.style.display =
+          "block";
+
+        setTimeout(
+          function() {
+
+            message.style.display =
+              "none";
+
+          },
+          2500
+        );
+
+      } catch (error) {
+
+        alert(
+          "No se pudo copiar la URL."
+        );
+
+      }
+
+    };
+
+
+  resultado.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+/* ========================================
+   FECHA
+======================================== */
+
+function formatearFecha(
+  fecha
+) {
+
+  if (!fecha) {
+    return "No registrada";
+  }
+
+
+  const partes =
+    fecha.split("-");
+
+
+  if (
+    partes.length !== 3
+  ) {
+    return fecha;
+  }
+
+
+  return (
+    partes[2] +
+    "/" +
+    partes[1] +
+    "/" +
+    partes[0]
+  );
+
+}
+
+
+/* ========================================
+   ERROR
+======================================== */
+
+function mostrarErrorBusqueda(
+  mensaje
+) {
+
+  searchMessage.textContent =
+    mensaje;
+
+  searchMessage.style.display =
+    "block";
+
+}
+
+
+/* ========================================
+   SESIÓN EXISTENTE
+======================================== */
+
+async function revisarSesion() {
+
+
+  const {
+    data
+  } =
+    await supabaseClient.auth
+      .getSession();
+
+
+  if (
+    data &&
+    data.session
+  ) {
+
+    await comprobarAdministrador();
+
+  }
+
+}
+
+
+revisarSesion();
+
+</script>
+
+
+</body>
+
+</html>
