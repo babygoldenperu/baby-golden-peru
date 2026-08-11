@@ -1010,6 +1010,7 @@ async function mostrarPerrito(
   data
 ) {
 
+   perritoActual = data;
 
   document.getElementById(
     "nombre"
@@ -1192,7 +1193,244 @@ async function mostrarPerrito(
 
 }
 
+/* ========================================
+   EDITAR PERRITO
+======================================== */
 
+let perritoActual = null;
+
+
+document
+  .getElementById("editarPerrito")
+  .addEventListener(
+    "click",
+    function() {
+
+      if (!perritoActual) {
+        return;
+      }
+
+      document
+        .getElementById("editor")
+        .classList.remove("hidden");
+
+
+      document
+        .getElementById("editNombre")
+        .value =
+          perritoActual.nombre_perrito || "";
+
+
+      document
+        .getElementById("editFecha")
+        .value =
+          perritoActual.fecha_nacimiento || "";
+
+
+      document
+        .getElementById("editSexo")
+        .value =
+          perritoActual.sexo || "";
+
+
+      document
+        .getElementById("editRaza")
+        .value =
+          perritoActual.raza || "";
+
+
+      document
+        .getElementById("editCaracteristicas")
+        .value =
+          perritoActual.caracteristicas || "";
+
+
+      document
+        .getElementById("editMicrochip")
+        .value =
+          perritoActual.numero_microchip || "";
+
+
+      document
+        .getElementById("editRedSocial")
+        .value =
+          perritoActual.red_social || "";
+
+    }
+  );
+
+
+/* ========================================
+   GUARDAR CAMBIOS
+======================================== */
+
+document
+  .getElementById("guardarCambios")
+  .addEventListener(
+    "click",
+    async function() {
+
+      if (!perritoActual) {
+        return;
+      }
+
+
+      const boton =
+        document.getElementById(
+          "guardarCambios"
+        );
+
+
+      const mensaje =
+        document.getElementById(
+          "editMessage"
+        );
+
+
+      boton.disabled = true;
+
+      boton.textContent =
+        "GUARDANDO...";
+
+      mensaje.style.display =
+        "none";
+
+
+      try {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.rpc(
+
+            "admin_actualizar_perrito",
+
+            {
+
+              p_baby_golden_id:
+                perritoActual.baby_golden_id,
+
+              p_nombre_perrito:
+                document
+                  .getElementById(
+                    "editNombre"
+                  )
+                  .value
+                  .trim(),
+
+              p_fecha_nacimiento:
+                document
+                  .getElementById(
+                    "editFecha"
+                  )
+                  .value || null,
+
+              p_sexo:
+                document
+                  .getElementById(
+                    "editSexo"
+                  )
+                  .value
+                  .trim(),
+
+              p_raza:
+                document
+                  .getElementById(
+                    "editRaza"
+                  )
+                  .value
+                  .trim(),
+
+              p_caracteristicas:
+                document
+                  .getElementById(
+                    "editCaracteristicas"
+                  )
+                  .value
+                  .trim() || null,
+
+              p_tiene_microchip:
+                Boolean(
+                  document
+                    .getElementById(
+                      "editMicrochip"
+                    )
+                    .value
+                    .trim()
+                ),
+
+              p_numero_microchip:
+                document
+                  .getElementById(
+                    "editMicrochip"
+                  )
+                  .value
+                  .trim() || null,
+
+              p_red_social:
+                document
+                  .getElementById(
+                    "editRedSocial"
+                  )
+                  .value
+                  .trim() || null
+
+            }
+
+          );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        mensaje.className =
+          "message success";
+
+        mensaje.textContent =
+          "Cambios guardados correctamente.";
+
+        mensaje.style.display =
+          "block";
+
+
+        /* Volver a buscar el perfil */
+
+        await buscarPerrito();
+
+
+      } catch (error) {
+
+        console.error(
+          "ERROR ACTUALIZANDO:",
+          error
+        );
+
+
+        mensaje.className =
+          "message error";
+
+        mensaje.textContent =
+          error.message ||
+          "No se pudieron guardar los cambios.";
+
+        mensaje.style.display =
+          "block";
+
+
+      } finally {
+
+        boton.disabled = false;
+
+        boton.textContent =
+          "GUARDAR CAMBIOS";
+
+      }
+
+    }
+  );
 /* ========================================
    FECHA
 ======================================== */
