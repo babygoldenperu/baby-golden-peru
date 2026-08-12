@@ -6613,6 +6613,766 @@ revisarSesion();
 })();
 
 </script>
+  <script>
+(function repararGoldenBenefits() {
+
+  const SB_URL =
+    "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+  const SB_KEY =
+    "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+  const sb =
+    window.supabase.createClient(
+      SB_URL,
+      SB_KEY
+    );
+
+
+  async function reparar() {
+
+    const lista =
+      document.getElementById("gbLista");
+
+    if (!lista) return;
+
+
+    const tarjetas =
+      lista.querySelectorAll(".gb-card");
+
+
+    for (const card of tarjetas) {
+
+      if (
+        card.querySelector(
+          ".gb-reparacion-acciones"
+        )
+      ) {
+        continue;
+      }
+
+
+      const nombre =
+        card.querySelector(
+          ".gb-brand-name"
+        )?.textContent.trim();
+
+
+      if (!nombre) continue;
+
+
+      const resultado =
+        await sb
+          .from("marcas_afiliadas")
+          .select("*")
+          .eq("nombre", nombre)
+          .maybeSingle();
+
+
+      if (
+        resultado.error ||
+        !resultado.data
+      ) {
+        continue;
+      }
+
+
+      const marca =
+        resultado.data;
+
+
+      const beneficioResultado =
+        await sb
+          .from("beneficios_golden")
+          .select("*")
+          .eq(
+            "marca_id",
+            marca.id
+          )
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          )
+          .limit(1)
+          .maybeSingle();
+
+
+      const beneficio =
+        beneficioResultado.data;
+
+
+      const acciones =
+        document.createElement("div");
+
+
+      acciones.className =
+        "gb-actions gb-reparacion-acciones";
+
+
+      acciones.innerHTML = `
+
+        <button
+          type="button"
+          class="edit"
+          data-gb-edit
+        >
+          ✏️ EDITAR
+        </button>
+
+        <button
+          type="button"
+          data-gb-toggle
+        >
+          ${
+            marca.estado
+              ? "🔴 DESACTIVAR"
+              : "🟢 ACTIVAR"
+          }
+        </button>
+
+        <button
+          type="button"
+          class="delete"
+          data-gb-delete
+        >
+          🗑️ ELIMINAR
+        </button>
+
+      `;
+
+
+      card.appendChild(
+        acciones
+      );
+
+
+      const editor =
+        document.createElement(
+          "div"
+        );
+
+
+      editor.className =
+        "gb-edit";
+
+
+      editor.innerHTML = `
+
+        <h3
+          style="
+            font-family:Georgia,serif;
+          "
+        >
+          Editar ${escaparGB(
+            marca.nombre
+          )}
+        </h3>
+
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          data-e="nombre"
+          value="${escaparGB(
+            marca.nombre
+          )}"
+        >
+
+
+        <label>
+          Categoría
+        </label>
+
+        <input
+          data-e="categoria"
+          value="${escaparGB(
+            marca.categoria
+          )}"
+        >
+
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          data-e="descripcion"
+        >${escaparGB(
+          marca.descripcion || ""
+        )}</textarea>
+
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          data-e="whatsapp"
+          value="${escaparGB(
+            marca.whatsapp || ""
+          )}"
+        >
+
+
+        <label>
+          Instagram
+        </label>
+
+        <input
+          data-e="instagram"
+          value="${escaparGB(
+            marca.instagram || ""
+          )}"
+        >
+
+
+        <label>
+          Página web
+        </label>
+
+        <input
+          data-e="web"
+          value="${escaparGB(
+            marca.web || ""
+          )}"
+        >
+
+
+        ${
+          beneficio
+            ? `
+
+              <hr>
+
+              <h3
+                style="
+                  font-family:Georgia,serif;
+                "
+              >
+                Beneficio
+              </h3>
+
+
+              <label>
+                Título
+              </label>
+
+              <input
+                data-b="titulo"
+                value="${escaparGB(
+                  beneficio.titulo || ""
+                )}"
+              >
+
+
+              <label>
+                Descuento
+              </label>
+
+              <input
+                data-b="descuento"
+                value="${escaparGB(
+                  beneficio.descuento || ""
+                )}"
+              >
+
+
+              <label>
+                Código
+              </label>
+
+              <input
+                data-b="codigo"
+                value="${escaparGB(
+                  beneficio.codigo || ""
+                )}"
+              >
+
+
+              <label>
+                ¿Quién puede utilizarlo?
+              </label>
+
+
+              <div class="gb-access">
+
+                <label>
+
+                  <input
+                    type="radio"
+                    name="gbfix-${beneficio.id}"
+                    value="general"
+                    ${
+                      beneficio.acceso_id
+                        ? "checked"
+                        : ""
+                    }
+                  >
+
+                  TODOS LOS ID BABY GOLDEN
+
+                </label>
+
+
+                <label>
+
+                  <input
+                    type="radio"
+                    name="gbfix-${beneficio.id}"
+                    value="black"
+                    ${
+                      !beneficio.acceso_id &&
+                      beneficio.acceso_black &&
+                      !beneficio.acceso_premium
+                        ? "checked"
+                        : ""
+                    }
+                  >
+
+                  SOLO BLACK ID
+
+                </label>
+
+
+                <label>
+
+                  <input
+                    type="radio"
+                    name="gbfix-${beneficio.id}"
+                    value="premium"
+                    ${
+                      !beneficio.acceso_id &&
+                      !beneficio.acceso_black &&
+                      beneficio.acceso_premium
+                        ? "checked"
+                        : ""
+                    }
+                  >
+
+                  SOLO PREMIUM ID
+
+                </label>
+
+              </div>
+
+            `
+            : ""
+        }
+
+
+        <div class="gb-actions">
+
+          <button
+            type="button"
+            class="edit"
+            data-gb-save
+          >
+            GUARDAR CAMBIOS
+          </button>
+
+        </div>
+
+      `;
+
+
+      card.appendChild(
+        editor
+      );
+
+
+      /* EDITAR */
+
+      acciones
+        .querySelector(
+          "[data-gb-edit]"
+        )
+        .onclick =
+        function() {
+
+          editor.classList.toggle(
+            "open"
+          );
+
+        };
+
+
+      /* ACTIVAR / DESACTIVAR */
+
+      acciones
+        .querySelector(
+          "[data-gb-toggle]"
+        )
+        .onclick =
+        async function() {
+
+          const nuevoEstado =
+            !marca.estado;
+
+
+          const r =
+            await sb
+              .from(
+                "marcas_afiliadas"
+              )
+              .update({
+                estado:
+                  nuevoEstado
+              })
+              .eq(
+                "id",
+                marca.id
+              );
+
+
+          if (r.error) {
+
+            alert(
+              r.error.message
+            );
+
+            return;
+
+          }
+
+
+          location.reload();
+
+        };
+
+
+      /* ELIMINAR */
+
+      acciones
+        .querySelector(
+          "[data-gb-delete]"
+        )
+        .onclick =
+        async function() {
+
+          if (
+            !confirm(
+              "¿Eliminar esta marca y su beneficio?"
+            )
+          ) {
+            return;
+          }
+
+
+          if (
+            beneficio
+          ) {
+
+            const rb =
+              await sb
+                .from(
+                  "beneficios_golden"
+                )
+                .delete()
+                .eq(
+                  "id",
+                  beneficio.id
+                );
+
+
+            if (rb.error) {
+
+              alert(
+                rb.error.message
+              );
+
+              return;
+
+            }
+
+          }
+
+
+          const rm =
+            await sb
+              .from(
+                "marcas_afiliadas"
+              )
+              .delete()
+              .eq(
+                "id",
+                marca.id
+              );
+
+
+          if (rm.error) {
+
+            alert(
+              rm.error.message
+            );
+
+            return;
+
+          }
+
+
+          location.reload();
+
+        };
+
+
+      /* GUARDAR */
+
+      editor
+        .querySelector(
+          "[data-gb-save]"
+        )
+        .onclick =
+        async function() {
+
+          const get =
+            selector =>
+              editor
+                .querySelector(
+                  selector
+                )
+                ?.value
+                .trim() || "";
+
+
+          const nombre =
+            get(
+              '[data-e="nombre"]'
+            );
+
+
+          const categoria =
+            get(
+              '[data-e="categoria"]'
+            );
+
+
+          const marcaUpdate =
+            await sb
+              .from(
+                "marcas_afiliadas"
+              )
+              .update({
+
+                nombre,
+
+                categoria,
+
+                descripcion:
+                  get(
+                    '[data-e="descripcion"]'
+                  ) || null,
+
+                whatsapp:
+                  get(
+                    '[data-e="whatsapp"]'
+                  ) || null,
+
+                instagram:
+                  get(
+                    '[data-e="instagram"]'
+                  ) || null,
+
+                web:
+                  get(
+                    '[data-e="web"]'
+                  ) || null
+
+              })
+              .eq(
+                "id",
+                marca.id
+              );
+
+
+          if (
+            marcaUpdate.error
+          ) {
+
+            alert(
+              marcaUpdate.error.message
+            );
+
+            return;
+
+          }
+
+
+          if (
+            beneficio
+          ) {
+
+            const tipo =
+              editor
+                .querySelector(
+                  `input[name="gbfix-${beneficio.id}"]:checked`
+                )
+                ?.value;
+
+
+            if (!tipo) {
+
+              alert(
+                "Selecciona el tipo de acceso."
+              );
+
+              return;
+
+            }
+
+
+            const beneficioUpdate =
+              await sb
+                .from(
+                  "beneficios_golden"
+                )
+                .update({
+
+                  titulo:
+                    get(
+                      '[data-b="titulo"]'
+                    ),
+
+                  descuento:
+                    get(
+                      '[data-b="descuento"]'
+                    ) || null,
+
+                  codigo:
+                    get(
+                      '[data-b="codigo"]'
+                    ) || null,
+
+                  acceso_id:
+                    tipo ===
+                    "general",
+
+                  acceso_black:
+                    tipo === "general" ||
+                    tipo === "black",
+
+                  acceso_premium:
+                    tipo === "general" ||
+                    tipo === "premium"
+
+                })
+                .eq(
+                  "id",
+                  beneficio.id
+                );
+
+
+            if (
+              beneficioUpdate.error
+            ) {
+
+              alert(
+                beneficioUpdate
+                  .error
+                  .message
+              );
+
+              return;
+
+            }
+
+          }
+
+
+          alert(
+            "Cambios guardados correctamente."
+          );
+
+
+          location.reload();
+
+        };
+
+    }
+
+  }
+
+
+  function escaparGB(
+    valor
+  ) {
+
+    return String(
+      valor ?? ""
+    )
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /*
+     Esperamos a que Golden Benefits
+     termine de cargar.
+  */
+
+  const observador =
+    new MutationObserver(
+      function() {
+
+        reparar();
+
+      }
+    );
+
+
+  const lista =
+    document.getElementById(
+      "gbLista"
+    );
+
+
+  if (lista) {
+
+    observador.observe(
+      lista,
+      {
+        childList: true
+      }
+    );
+
+  }
+
+
+  setTimeout(
+    reparar,
+    1500
+  );
+
+
+})();
+</script>
 </body>
 
 </html>
