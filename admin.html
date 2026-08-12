@@ -2750,17 +2750,53 @@ revisarSesion();
       </div>
 
 
-      <div>
+     <div>
 
-        <label>
-          Logo URL
-        </label>
+  <label>
+    Logo de la marca
+  </label>
 
-        <input
-          id="gbLogo"
-        >
+  <input
+    id="gbLogoFile"
+    type="file"
+    accept="image/png,image/jpeg,image/webp"
+  >
 
-      </div>
+  <small style="
+    display:block;
+    margin-top:6px;
+    color:#888;
+    font-size:11px;
+  ">
+    PNG, JPG o WEBP
+  </small>
+
+  <div
+    id="gbLogoPreview"
+    style="
+      display:none;
+      margin-top:12px;
+    "
+  >
+
+    <img
+      id="gbLogoPreviewImg"
+      src=""
+      alt="Vista previa"
+      style="
+        width:80px;
+        height:80px;
+        object-fit:contain;
+        border-radius:14px;
+        background:#f7f4ee;
+        padding:8px;
+        border:1px solid #e8e3db;
+      "
+    >
+
+  </div>
+
+</div>
 
 
       <div class="gb-full">
@@ -3785,10 +3821,12 @@ revisarSesion();
       );
 
 
-    const logo =
-      valorGB(
-        "gbLogo"
-      );
+   let logo = null;
+
+const logoFile =
+  document.getElementById(
+    "gbLogoFile"
+  ).files[0];
 
 
     const titulo =
@@ -3923,7 +3961,61 @@ revisarSesion();
       return;
 
     }
+// =====================================================
+// SUBIR LOGO DE LA MARCA
+// =====================================================
 
+if (logoFile) {
+
+  const extension =
+    logoFile.name
+      .split(".")
+      .pop()
+      .toLowerCase();
+
+  const nombreArchivo =
+    `${slug}-${Date.now()}.${extension}`;
+
+  const {
+    error: uploadError
+  } = await gb.storage
+    .from("logos-marcas")
+    .upload(
+      nombreArchivo,
+      logoFile,
+      {
+        cacheControl: "3600",
+        upsert: true,
+        contentType: logoFile.type
+      }
+    );
+
+
+  if (uploadError) {
+
+    alert(
+      "No se pudo subir el logo: " +
+      uploadError.message
+    );
+
+    return;
+
+  }
+
+
+  const {
+    data: publicUrl
+  } = gb.storage
+    .from("logos-marcas")
+    .getPublicUrl(
+      nombreArchivo
+    );
+
+
+  logo =
+    publicUrl.publicUrl;
+
+}
 
     const {
       data: marca,
@@ -4492,6 +4584,82 @@ revisarSesion();
     );
 
   }
+if (
+  goldenBenefits &&
+  panel
+) {
+
+  panel.appendChild(
+    goldenBenefits
+  );
+
+}
+
+
+/* VISTA PREVIA DEL LOGO */
+
+const logoFileInput =
+  document.getElementById(
+    "gbLogoFile"
+  );
+
+const logoPreview =
+  document.getElementById(
+    "gbLogoPreview"
+  );
+
+const logoPreviewImg =
+  document.getElementById(
+    "gbLogoPreviewImg"
+  );
+
+
+if (
+  logoFileInput &&
+  logoPreview &&
+  logoPreviewImg
+) {
+
+  logoFileInput.addEventListener(
+    "change",
+    function () {
+
+      const file =
+        this.files[0];
+
+      if (!file) {
+
+        logoPreview.style.display =
+          "none";
+
+        logoPreviewImg.src = "";
+
+        return;
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        function (event) {
+
+          logoPreviewImg.src =
+            event.target.result;
+
+          logoPreview.style.display =
+            "block";
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
+
+}
 
 })();
 
