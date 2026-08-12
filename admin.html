@@ -2147,28 +2147,32 @@ async function cargarSolicitudes() {
 
   contenido.innerHTML = `
 
-    ${
-      solicitud.foto_url
-        ? `
-          <div style="margin-bottom:20px;">
+${
+  solicitud.foto_url
+    ? `
+      <div style="margin-bottom:20px;">
 
-            <img
-              src="${escaparHTML(
+        <img
+          src="${
+            supabaseClient.storage
+              .from("fotos-perritos")
+              .getPublicUrl(
                 solicitud.foto_url
-              )}"
-              alt="Foto del perrito"
-              style="
-                width:180px;
-                height:180px;
-                object-fit:cover;
-                border-radius:14px;
-              "
-            >
+              ).data.publicUrl
+          }"
+          alt="Foto del perrito"
+          style="
+            width:180px;
+            height:180px;
+            object-fit:cover;
+            border-radius:14px;
+          "
+        >
 
-          </div>
-        `
-        : ""
-    }
+      </div>
+    `
+    : ""
+}
 
 
     <h3>
