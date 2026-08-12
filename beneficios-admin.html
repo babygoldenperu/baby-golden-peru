@@ -21,507 +21,464 @@
 }
 
 body {
-
   margin: 0;
-
   min-height: 100vh;
-
   font-family: Arial, sans-serif;
-
   background: #f5f2ed;
-
   color: #292521;
 }
 
 .container {
-
   width: 100%;
-
   max-width: 1100px;
-
   margin: auto;
-
   padding: 25px 16px 60px;
 }
 
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .header {
-
   text-align: center;
-
   margin-bottom: 30px;
 }
 
 .brand {
-
   color: #b18a4a;
-
   font-size: 11px;
-
   font-weight: bold;
-
   letter-spacing: 3px;
-
   text-transform: uppercase;
 }
 
 h1 {
-
   margin: 10px 0 5px;
-
   font-family: Georgia, serif;
-
   font-size: 36px;
-
   font-weight: normal;
 }
 
 .subtitle {
-
   color: #777;
-
   font-size: 14px;
 }
 
 
-/* CARD */
+/* =========================
+   CARD
+========================= */
 
 .card {
-
   background: #fff;
-
   border-radius: 20px;
-
   padding: 25px;
-
-  box-shadow:
-    0 10px 35px rgba(0,0,0,.08);
-
+  box-shadow: 0 10px 35px rgba(0,0,0,.08);
   margin-bottom: 20px;
 }
 
 
-/* LOGIN */
+/* =========================
+   LOGIN
+========================= */
 
 .login-card {
-
   max-width: 430px;
-
   margin: 70px auto;
 }
 
 label {
-
   display: block;
-
   margin-bottom: 7px;
-
   font-size: 12px;
-
   font-weight: bold;
 }
 
 input,
-textarea,
-select {
-
+textarea {
   width: 100%;
-
   padding: 13px 14px;
-
   margin-bottom: 15px;
-
   border: 1px solid #ddd;
-
   border-radius: 12px;
-
   font-size: 14px;
-
   font-family: Arial, sans-serif;
 }
 
 textarea {
-
   min-height: 100px;
-
   resize: vertical;
 }
 
 button {
-
   width: 100%;
-
   padding: 14px;
-
   border: 0;
-
   border-radius: 12px;
-
   background: #2d2925;
-
   color: white;
-
   font-size: 12px;
-
   font-weight: bold;
-
   cursor: pointer;
 }
 
 button:hover {
-
   opacity: .9;
 }
 
 button.gold {
-
   background: #b18a4a;
 }
 
 button.danger {
-
   background: #a83b3b;
 }
 
 button.secondary {
-
   background: #eee;
-
   color: #333;
 }
 
 
-/* LOGIN */
+/* =========================
+   VISTAS
+========================= */
 
 #loginView {
-
   display: block;
 }
 
 #panelView {
-
   display: none;
 }
 
 
-/* TOP ACTIONS */
+/* =========================
+   ACCIONES
+========================= */
 
 .top-actions {
-
   display: flex;
-
   justify-content: space-between;
-
   align-items: center;
-
   gap: 15px;
-
   margin-bottom: 25px;
 }
 
 .top-actions button {
-
   width: auto;
 }
 
 .logout {
-
   background: #eee;
-
   color: #333;
-
   padding: 10px 16px;
 }
 
 
-/* FORM */
+/* =========================
+   FORMULARIO
+========================= */
 
 .form {
-
   display: none;
-
   border-top: 1px solid #eee;
-
   margin-top: 25px;
-
   padding-top: 25px;
 }
 
 .form-grid {
-
   display: grid;
-
   grid-template-columns: 1fr 1fr;
-
   gap: 15px;
 }
 
 .full {
-
   grid-column: 1 / -1;
 }
 
 
-/* CHECKBOXES */
+/* =========================
+   LOGO
+========================= */
+
+.logo-upload-box {
+  background: #faf8f5;
+  border: 1px dashed #d8c9ad;
+  border-radius: 15px;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.logo-preview {
+  width: 150px;
+  height: 110px;
+  background: white;
+  border-radius: 15px;
+  margin: 0 auto 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  box-shadow: 0 5px 18px rgba(0,0,0,.06);
+}
+
+.logo-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 10px;
+}
+
+.logo-placeholder {
+  color: #aaa;
+  font-family: Georgia, serif;
+  font-size: 30px;
+}
+
+.file-input {
+  width: 100%;
+  padding: 10px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.upload-status {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #777;
+}
+
+
+/* =========================
+   CHECKBOXES
+========================= */
 
 .checks {
-
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 10px;
-
   margin-bottom: 20px;
 }
 
 .check {
-
   background: #f7f4ed;
-
   border-radius: 20px;
-
   padding: 10px 14px;
-
   font-size: 12px;
-
   cursor: pointer;
 }
 
 .check input {
-
   width: auto;
-
   margin: 0 6px 0 0;
 }
 
 
-/* MENSAJES */
+/* =========================
+   MENSAJES
+========================= */
 
 .message {
-
   display: none;
-
   padding: 14px;
-
   margin-top: 15px;
-
   border-radius: 12px;
-
   font-size: 13px;
 }
 
 .error {
-
   background: #fbeaea;
-
   color: #9b3333;
 }
 
 .success {
-
   background: #eaf7ed;
-
   color: #276b39;
 }
 
 
-/* MARCAS */
+/* =========================
+   MARCAS
+========================= */
 
 .brand-item {
-
   border: 1px solid #eee;
-
   border-radius: 16px;
-
   padding: 20px;
-
   margin-top: 15px;
-
   background: #fff;
 }
 
 .brand-header {
-
   display: flex;
-
   justify-content: space-between;
-
   align-items: flex-start;
-
   gap: 15px;
 }
 
-.brand-name {
+.brand-main {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
 
+.brand-mini-logo {
+  width: 65px;
+  height: 65px;
+  border-radius: 14px;
+  background: #f5f2ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.brand-mini-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 7px;
+}
+
+.brand-mini-text {
   font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: bold;
+}
 
+.brand-name {
+  font-family: Georgia, serif;
   font-size: 25px;
 }
 
 .brand-category {
-
   color: #999;
-
   font-size: 11px;
-
   margin-top: 5px;
 }
 
 .status {
-
   padding: 7px 11px;
-
   border-radius: 20px;
-
   font-size: 9px;
-
   font-weight: bold;
-
   letter-spacing: 1px;
 }
 
 .status.active {
-
   background: #eaf7ed;
-
   color: #276b39;
 }
 
 .status.inactive {
-
   background: #fbeaea;
-
   color: #9b3333;
 }
 
 .benefit {
-
   margin-top: 18px;
-
   background: #faf8f5;
-
   border-radius: 13px;
-
   padding: 17px;
 }
 
 .discount {
-
   color: #b18a4a;
-
   font-family: Georgia, serif;
-
   font-size: 28px;
-
   font-weight: bold;
 }
 
 .benefit-title {
-
   margin-top: 5px;
-
   font-size: 13px;
 }
 
 .code {
-
   margin-top: 8px;
-
   color: #777;
-
   font-size: 12px;
 }
 
 .access {
-
   margin-top: 10px;
-
   color: #666;
-
   font-size: 11px;
 }
 
 .actions {
-
   display: flex;
-
   flex-wrap: wrap;
-
   gap: 8px;
-
   margin-top: 15px;
 }
 
 .actions button {
-
   width: auto;
-
   padding: 10px 14px;
 }
 
 
-/* EDITOR */
+/* =========================
+   EDITOR
+========================= */
 
 .edit-box {
-
   display: none;
-
   margin-top: 20px;
-
   border-top: 1px solid #ddd;
-
   padding-top: 20px;
 }
 
 
-/* LOADING */
+/* =========================
+   LOADING
+========================= */
 
 .loading {
-
   text-align: center;
-
   padding: 40px;
-
   color: #777;
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media(max-width:700px) {
 
   .form-grid {
-
     grid-template-columns: 1fr;
   }
 
   .full {
-
     grid-column: auto;
   }
 
   .top-actions {
-
     flex-direction: column;
-
     align-items: stretch;
   }
 
   .top-actions button {
-
     width: 100%;
   }
 
   .brand-header {
-
     flex-direction: column;
   }
 
-  .actions button {
+  .brand-main {
+    align-items: flex-start;
+  }
 
+  .actions button {
     width: 100%;
   }
 
@@ -544,9 +501,7 @@ button.secondary {
 
 <div id="loginView">
 
-
   <div class="card login-card">
-
 
     <div class="header">
 
@@ -566,7 +521,6 @@ button.secondary {
 
 
     <form id="loginForm">
-
 
       <label>
         Correo electrónico
@@ -594,7 +548,6 @@ button.secondary {
         INGRESAR
       </button>
 
-
     </form>
 
 
@@ -603,9 +556,7 @@ button.secondary {
       class="message error"
     ></div>
 
-
   </div>
-
 
 </div>
 
@@ -616,7 +567,6 @@ button.secondary {
 ================================================= -->
 
 <div id="panelView">
-
 
   <div class="header">
 
@@ -759,16 +709,51 @@ button.secondary {
       </div>
 
 
-      <div>
+      <!-- =============================
+           LOGO
+      ============================== -->
+
+      <div class="full">
 
         <label>
-          Logo URL
+          Logo de la marca
         </label>
 
-        <input
-          id="brandLogo"
-          type="url"
-        >
+
+        <div class="logo-upload-box">
+
+
+          <div
+            id="newLogoPreview"
+            class="logo-preview"
+          >
+
+            <div class="logo-placeholder">
+              LOGO
+            </div>
+
+          </div>
+
+
+          <input
+            id="newLogoFile"
+            class="file-input"
+            type="file"
+            accept="image/png,image/jpeg,image/webp"
+          >
+
+
+          <div
+            id="newLogoStatus"
+            class="upload-status"
+          >
+
+            Selecciona una imagen
+            PNG, JPG o WEBP.
+
+          </div>
+
+        </div>
 
       </div>
 
@@ -940,7 +925,6 @@ button.secondary {
         CANCELAR
       </button>
 
-
     </div>
 
 
@@ -965,9 +949,7 @@ button.secondary {
     </h2>
 
 
-    <div
-      id="brandList"
-    >
+    <div id="brandList">
 
       <div class="loading">
         Cargando marcas...
@@ -1038,6 +1020,9 @@ const brandList =
     "brandList"
   );
 
+let nuevoLogoUrl = null;
+
+let nuevoLogoPath = null;
 
 
 /* =================================================
@@ -1049,7 +1034,6 @@ loginForm.addEventListener(
   async function(event) {
 
     event.preventDefault();
-
 
     loginMessage.style.display =
       "none";
@@ -1139,7 +1123,6 @@ loginForm.addEventListener(
 );
 
 
-
 /* =================================================
    SESIÓN EXISTENTE
 ================================================= */
@@ -1186,9 +1169,8 @@ async function revisarSesion() {
 revisarSesion();
 
 
-
 /* =================================================
-   CERRAR SESIÓN
+   LOGOUT
 ================================================= */
 
 document
@@ -1206,7 +1188,6 @@ document
 
     }
   );
-
 
 
 /* =================================================
@@ -1244,7 +1225,6 @@ document
   );
 
 
-
 /* =================================================
    CANCELAR
 ================================================= */
@@ -1266,6 +1246,104 @@ document
   );
 
 
+/* =================================================
+   VISTA PREVIA LOGO NUEVO
+================================================= */
+
+document
+  .getElementById(
+    "newLogoFile"
+  )
+  .addEventListener(
+    "change",
+    function() {
+
+      const archivo =
+        this.files[0];
+
+
+      if (!archivo) {
+        return;
+      }
+
+
+      if (
+        ![
+          "image/png",
+          "image/jpeg",
+          "image/webp"
+        ].includes(
+          archivo.type
+        )
+      ) {
+
+        mostrarMensaje(
+          "El logo debe ser PNG, JPG o WEBP.",
+          true
+        );
+
+        this.value = "";
+
+        return;
+
+      }
+
+
+      if (
+        archivo.size >
+        5 * 1024 * 1024
+      ) {
+
+        mostrarMensaje(
+          "El logo no puede superar 5 MB.",
+          true
+        );
+
+        this.value = "";
+
+        return;
+
+      }
+
+
+      const lector =
+        new FileReader();
+
+
+      lector.onload =
+        function(event) {
+
+          document
+            .getElementById(
+              "newLogoPreview"
+            )
+            .innerHTML = `
+
+              <img
+                src="${event.target.result}"
+                alt="Vista previa"
+              >
+
+            `;
+
+        };
+
+
+      lector.readAsDataURL(
+        archivo
+      );
+
+
+      document
+        .getElementById(
+          "newLogoStatus"
+        )
+        .textContent =
+          archivo.name;
+
+    }
+  );
+
 
 /* =================================================
    GUARDAR MARCA
@@ -1283,121 +1361,83 @@ document
 
 async function guardarMarca() {
 
+  const boton =
+    document.getElementById(
+      "saveButton"
+    );
+
+
   const nombre =
-    document
-      .getElementById(
-        "brandName"
-      )
-      .value
-      .trim();
+    valor(
+      "brandName"
+    );
 
 
   const categoria =
-    document
-      .getElementById(
-        "brandCategory"
-      )
-      .value
-      .trim();
+    valor(
+      "brandCategory"
+    );
 
 
   const descripcion =
-    document
-      .getElementById(
-        "brandDescription"
-      )
-      .value
-      .trim();
+    valor(
+      "brandDescription"
+    );
 
 
   const whatsapp =
-    document
-      .getElementById(
-        "brandWhatsapp"
-      )
-      .value
-      .trim();
+    valor(
+      "brandWhatsapp"
+    );
 
 
   const instagram =
-    document
-      .getElementById(
-        "brandInstagram"
-      )
-      .value
-      .trim();
+    valor(
+      "brandInstagram"
+    );
 
 
   const web =
-    document
-      .getElementById(
-        "brandWeb"
-      )
-      .value
-      .trim();
-
-
-  const logo =
-    document
-      .getElementById(
-        "brandLogo"
-      )
-      .value
-      .trim();
+    valor(
+      "brandWeb"
+    );
 
 
   const titulo =
-    document
-      .getElementById(
-        "benefitTitle"
-      )
-      .value
-      .trim();
+    valor(
+      "benefitTitle"
+    );
 
 
   const descuento =
-    document
-      .getElementById(
-        "benefitDiscount"
-      )
-      .value
-      .trim();
+    valor(
+      "benefitDiscount"
+    );
 
 
   const codigo =
-    document
-      .getElementById(
-        "benefitCode"
-      )
-      .value
-      .trim();
+    valor(
+      "benefitCode"
+    );
 
 
   const fecha =
-    document
-      .getElementById(
-        "benefitDate"
-      )
-      .value ||
-      null;
+    valor(
+      "benefitDate"
+    ) ||
+    null;
 
 
   const descripcionBeneficio =
-    document
-      .getElementById(
-        "benefitDescription"
-      )
-      .value
-      .trim();
+    valor(
+      "benefitDescription"
+    );
 
 
   const condiciones =
-    document
-      .getElementById(
-        "benefitConditions"
-      )
-      .value
-      .trim();
+    valor(
+      "benefitConditions"
+    );
 
 
   const accesoId =
@@ -1476,12 +1516,6 @@ async function guardarMarca() {
   }
 
 
-  const boton =
-    document.getElementById(
-      "saveButton"
-    );
-
-
   boton.disabled =
     true;
 
@@ -1511,6 +1545,15 @@ async function guardarMarca() {
 
 
     if (
+      existente.error
+    ) {
+
+      throw existente.error;
+
+    }
+
+
+    if (
       existente.data
     ) {
 
@@ -1520,6 +1563,92 @@ async function guardarMarca() {
 
     }
 
+
+    /* SUBIR LOGO */
+
+    let logoUrl = null;
+
+
+    const archivo =
+      document
+        .getElementById(
+          "newLogoFile"
+        )
+        .files[0];
+
+
+    if (archivo) {
+
+      const extension =
+        obtenerExtension(
+          archivo.name
+        );
+
+
+      const nombreArchivo =
+        slug +
+        "-" +
+        Date.now() +
+        "." +
+        extension;
+
+
+      const resultadoUpload =
+        await supabaseClient
+          .storage
+          .from(
+            "logos-marcas"
+          )
+          .upload(
+            nombreArchivo,
+            archivo,
+            {
+              cacheControl:
+                "3600",
+
+              upsert:
+                false,
+
+              contentType:
+                archivo.type
+
+            }
+          );
+
+
+      if (
+        resultadoUpload.error
+      ) {
+
+        throw resultadoUpload.error;
+
+      }
+
+
+      nuevoLogoPath =
+        nombreArchivo;
+
+
+      const resultadoUrl =
+        supabaseClient
+          .storage
+          .from(
+            "logos-marcas"
+          )
+          .getPublicUrl(
+            nombreArchivo
+          );
+
+
+      logoUrl =
+        resultadoUrl
+          .data
+          .publicUrl;
+
+    }
+
+
+    /* CREAR MARCA */
 
     const resultadoMarca =
       await supabaseClient
@@ -1533,21 +1662,25 @@ async function guardarMarca() {
           slug,
 
           logo_url:
-            logo || null,
+            logoUrl,
 
           descripcion:
-            descripcion || null,
+            descripcion ||
+            null,
 
           categoria,
 
           whatsapp:
-            whatsapp || null,
+            whatsapp ||
+            null,
 
           instagram:
-            instagram || null,
+            instagram ||
+            null,
 
           web:
-            web || null,
+            web ||
+            null,
 
           estado:
             true
@@ -1561,6 +1694,17 @@ async function guardarMarca() {
       resultadoMarca.error
     ) {
 
+      if (
+        nuevoLogoPath
+      ) {
+
+        await eliminarLogo(
+          nuevoLogoPath
+        );
+
+      }
+
+
       throw resultadoMarca.error;
 
     }
@@ -1569,6 +1713,8 @@ async function guardarMarca() {
     const marca =
       resultadoMarca.data;
 
+
+    /* CREAR BENEFICIO */
 
     const resultadoBeneficio =
       await supabaseClient
@@ -1586,10 +1732,12 @@ async function guardarMarca() {
             "Descuento",
 
           descuento:
-            descuento || null,
+            descuento ||
+            null,
 
           codigo:
-            codigo || null,
+            codigo ||
+            null,
 
           descripcion:
             descripcionBeneficio ||
@@ -1600,9 +1748,7 @@ async function guardarMarca() {
             null,
 
           fecha_inicio:
-            new Date()
-              .toISOString()
-              .split("T")[0],
+            fecha,
 
           fecha_fin:
             fecha,
@@ -1636,6 +1782,18 @@ async function guardarMarca() {
           marca.id
         );
 
+
+      if (
+        nuevoLogoPath
+      ) {
+
+        await eliminarLogo(
+          nuevoLogoPath
+        );
+
+      }
+
+
       throw resultadoBeneficio.error;
 
     }
@@ -1648,6 +1806,7 @@ async function guardarMarca() {
 
 
     limpiarFormulario();
+
 
     brandForm.style.display =
       "none";
@@ -1683,7 +1842,6 @@ async function guardarMarca() {
 }
 
 
-
 /* =================================================
    CARGAR MARCAS
 ================================================= */
@@ -1691,18 +1849,17 @@ async function guardarMarca() {
 async function cargarMarcas() {
 
   brandList.innerHTML = `
+
     <div class="loading">
       Cargando marcas...
     </div>
+
   `;
 
 
   try {
 
-    const {
-      data: marcas,
-      error
-    } =
+    const resultado =
       await supabaseClient
         .from(
           "marcas_afiliadas"
@@ -1713,20 +1870,32 @@ async function cargarMarcas() {
         );
 
 
-    if (error) {
-      throw error;
+    if (
+      resultado.error
+    ) {
+
+      throw resultado.error;
+
     }
 
 
+    const marcas =
+      resultado.data ||
+      [];
+
+
     if (
-      !marcas ||
       marcas.length === 0
     ) {
 
       brandList.innerHTML = `
+
         <div class="loading">
+
           No hay marcas afiliadas.
+
         </div>
+
       `;
 
       return;
@@ -1743,7 +1912,7 @@ async function cargarMarcas() {
       of marcas
     ) {
 
-      await crearElementoMarca(
+      await crearMarca(
         marca
       );
 
@@ -1754,8 +1923,10 @@ async function cargarMarcas() {
 
     brandList.innerHTML = `
 
-      <div class="message error"
-           style="display:block;">
+      <div
+        class="message error"
+        style="display:block;"
+      >
 
         ${escapar(
           error.message
@@ -1770,12 +1941,11 @@ async function cargarMarcas() {
 }
 
 
-
 /* =================================================
-   CREAR MARCA
+   CREAR ELEMENTO MARCA
 ================================================= */
 
-async function crearElementoMarca(
+async function crearMarca(
   marca
 ) {
 
@@ -1814,27 +1984,83 @@ async function crearElementoMarca(
     "brand-item";
 
 
+  let logoHTML;
+
+
+  if (
+    marca.logo_url
+  ) {
+
+    logoHTML = `
+
+      <img
+        src="${escapar(
+          marca.logo_url
+        )}"
+        alt="Logo ${escapar(
+          marca.nombre
+        )}"
+      >
+
+    `;
+
+  } else {
+
+    logoHTML = `
+
+      <div class="brand-mini-text">
+
+        ${escapar(
+          marca.nombre
+            .substring(
+              0,
+              1
+            )
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+
   elemento.innerHTML = `
 
     <div class="brand-header">
 
-      <div>
 
-        <div class="brand-name">
+      <div class="brand-main">
 
-          ${escapar(
-            marca.nombre
-          )}
+
+        <div class="brand-mini-logo">
+
+          ${logoHTML}
+
+        </div>
+
+
+        <div>
+
+          <div class="brand-name">
+
+            ${escapar(
+              marca.nombre
+            )}
+
+          </div>
+
+
+          <div class="brand-category">
+
+            ${escapar(
+              marca.categoria
+            )}
+
+          </div>
 
         </div>
 
-        <div class="brand-category">
-
-          ${escapar(
-            marca.categoria
-          )}
-
-        </div>
 
       </div>
 
@@ -1857,6 +2083,7 @@ async function crearElementoMarca(
         }
 
       </span>
+
 
     </div>
 
@@ -1920,16 +2147,7 @@ async function crearElementoMarca(
           </div>
 
         `
-        : `
-
-          <div class="benefit">
-
-            Esta marca no tiene
-            un beneficio activo.
-
-          </div>
-
-        `
+        : ""
     }
 
 
@@ -1976,6 +2194,7 @@ async function crearElementoMarca(
       class="edit-box"
       data-edit-box
     >
+
 
       <h3>
         Editar ${escapar(
@@ -2060,16 +2279,64 @@ async function crearElementoMarca(
 
 
       <label>
-        Logo URL
+        Logo de la marca
       </label>
 
-      <input
-        data-field="logo_url"
-        value="${escapar(
-          marca.logo_url ||
-          ""
-        )}"
-      >
+
+      <div class="logo-upload-box">
+
+
+        <div
+          class="logo-preview"
+          data-edit-logo-preview
+        >
+
+          ${
+            marca.logo_url
+              ? `
+
+                <img
+                  src="${escapar(
+                    marca.logo_url
+                  )}"
+                  alt="Logo"
+                >
+
+              `
+              : `
+
+                <div class="logo-placeholder">
+                  LOGO
+                </div>
+
+              `
+          }
+
+        </div>
+
+
+        <input
+          class="file-input"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          data-logo-file
+        >
+
+
+        <div
+          class="upload-status"
+          data-logo-status
+        >
+
+          ${
+            marca.logo_url
+              ? "Logo actual. Selecciona otra imagen para reemplazarlo."
+              : "Esta marca todavía no tiene logo."
+          }
+
+        </div>
+
+      </div>
 
 
       ${
@@ -2161,7 +2428,7 @@ async function crearElementoMarca(
 
 
             <label>
-              Quién puede utilizarlo
+              ¿Quién puede utilizarlo?
             </label>
 
 
@@ -2235,6 +2502,7 @@ async function crearElementoMarca(
           : ""
       }
 
+
     </div>
 
   `;
@@ -2245,7 +2513,9 @@ async function crearElementoMarca(
   );
 
 
-  /* EDITAR */
+  /* =========================
+     EDITAR
+  ========================= */
 
   elemento
     .querySelector(
@@ -2271,7 +2541,114 @@ async function crearElementoMarca(
     );
 
 
-  /* ACTIVAR / DESACTIVAR */
+  /* =========================
+     NUEVO LOGO
+  ========================= */
+
+  const archivoLogo =
+    elemento.querySelector(
+      "[data-logo-file]"
+    );
+
+
+  if (
+    archivoLogo
+  ) {
+
+    archivoLogo.addEventListener(
+      "change",
+      function() {
+
+        const archivo =
+          this.files[0];
+
+
+        if (!archivo) {
+          return;
+        }
+
+
+        if (
+          ![
+            "image/png",
+            "image/jpeg",
+            "image/webp"
+          ].includes(
+            archivo.type
+          )
+        ) {
+
+          alert(
+            "El logo debe ser PNG, JPG o WEBP."
+          );
+
+          this.value = "";
+
+          return;
+
+        }
+
+
+        if (
+          archivo.size >
+          5 * 1024 * 1024
+        ) {
+
+          alert(
+            "El logo no puede superar 5 MB."
+          );
+
+          this.value = "";
+
+          return;
+
+        }
+
+
+        const lector =
+          new FileReader();
+
+
+        lector.onload =
+          function(event) {
+
+            elemento
+              .querySelector(
+                "[data-edit-logo-preview]"
+              )
+              .innerHTML = `
+
+                <img
+                  src="${event.target.result}"
+                  alt="Vista previa"
+                >
+
+              `;
+
+          };
+
+
+        lector.readAsDataURL(
+          archivo
+        );
+
+
+        elemento
+          .querySelector(
+            "[data-logo-status]"
+          )
+          .textContent =
+            archivo.name;
+
+      }
+    );
+
+  }
+
+
+  /* =========================
+     ACTIVAR / DESACTIVAR
+  ========================= */
 
   elemento
     .querySelector(
@@ -2298,9 +2675,7 @@ async function crearElementoMarca(
         }
 
 
-        const {
-          error
-        } =
+        const resultado =
           await supabaseClient
             .from(
               "marcas_afiliadas"
@@ -2315,10 +2690,12 @@ async function crearElementoMarca(
             );
 
 
-        if (error) {
+        if (
+          resultado.error
+        ) {
 
           alert(
-            error.message
+            resultado.error.message
           );
 
           return;
@@ -2332,7 +2709,9 @@ async function crearElementoMarca(
     );
 
 
-  /* ELIMINAR */
+  /* =========================
+     ELIMINAR
+  ========================= */
 
   elemento
     .querySelector(
@@ -2353,9 +2732,7 @@ async function crearElementoMarca(
         }
 
 
-        const {
-          error
-        } =
+        const resultado =
           await supabaseClient
             .from(
               "marcas_afiliadas"
@@ -2367,10 +2744,12 @@ async function crearElementoMarca(
             );
 
 
-        if (error) {
+        if (
+          resultado.error
+        ) {
 
           alert(
-            error.message
+            resultado.error.message
           );
 
           return;
@@ -2384,7 +2763,9 @@ async function crearElementoMarca(
     );
 
 
-  /* GUARDAR CAMBIOS */
+  /* =========================
+     GUARDAR CAMBIOS
+  ========================= */
 
   const guardar =
     elemento.querySelector(
@@ -2392,7 +2773,9 @@ async function crearElementoMarca(
     );
 
 
-  if (guardar) {
+  if (
+    guardar
+  ) {
 
     guardar.addEventListener(
       "click",
@@ -2412,7 +2795,6 @@ async function crearElementoMarca(
 }
 
 
-
 /* =================================================
    GUARDAR CAMBIOS
 ================================================= */
@@ -2423,9 +2805,22 @@ async function guardarCambios(
   beneficio
 ) {
 
+  const boton =
+    elemento.querySelector(
+      '[data-action="save"]'
+    );
+
+
   try {
 
-    const valor =
+    boton.disabled =
+      true;
+
+    boton.textContent =
+      "GUARDANDO...";
+
+
+    const nombre =
       campo(
         elemento,
         "nombre"
@@ -2467,74 +2862,236 @@ async function guardarCambios(
       );
 
 
-    const logo =
-      campo(
-        elemento,
-        "logo_url"
-      );
+    if (!nombre) {
 
-
-    if (!valor) {
-
-      alert(
+      throw new Error(
         "El nombre no puede estar vacío."
       );
 
-      return;
-
     }
 
 
-    const {
-      error: errorMarca
-    } =
-      await supabaseClient
-        .from(
-          "marcas_afiliadas"
+    let logoUrl =
+      marca.logo_url ||
+      null;
+
+
+    /* =========================
+       REEMPLAZAR LOGO
+    ========================= */
+
+    const archivo =
+      elemento
+        .querySelector(
+          "[data-logo-file]"
         )
-        .update({
+        .files[0];
 
-          nombre:
-            valor,
 
-          categoria:
-            categoria,
+    if (
+      archivo
+    ) {
 
-          descripcion:
-            descripcion ||
-            null,
-
-          whatsapp:
-            whatsapp ||
-            null,
-
-          instagram:
-            instagram ||
-            null,
-
-          web:
-            web ||
-            null,
-
-          logo_url:
-            logo ||
-            null
-
-        })
-        .eq(
-          "id",
-          marca.id
+      const extension =
+        obtenerExtension(
+          archivo.name
         );
 
 
-    if (errorMarca) {
+      const slug =
+        crearSlug(
+          nombre
+        );
 
-      throw errorMarca;
+
+      const nuevoPath =
+        slug +
+        "-" +
+        Date.now() +
+        "." +
+        extension;
+
+
+      const upload =
+        await supabaseClient
+          .storage
+          .from(
+            "logos-marcas"
+          )
+          .upload(
+            nuevoPath,
+            archivo,
+            {
+              cacheControl:
+                "3600",
+
+              upsert:
+                false,
+
+              contentType:
+                archivo.type
+
+            }
+          );
+
+
+      if (
+        upload.error
+      ) {
+
+        throw upload.error;
+
+      }
+
+
+      logoUrl =
+        supabaseClient
+          .storage
+          .from(
+            "logos-marcas"
+          )
+          .getPublicUrl(
+            nuevoPath
+          )
+          .data
+          .publicUrl;
+
+
+      /* Guardamos primero
+         la nueva URL */
+
+
+      const actualizarLogo =
+        await supabaseClient
+          .from(
+            "marcas_afiliadas"
+          )
+          .update({
+
+            nombre,
+
+            categoria,
+
+            descripcion:
+              descripcion ||
+              null,
+
+            whatsapp:
+              whatsapp ||
+              null,
+
+            instagram:
+              instagram ||
+              null,
+
+            web:
+              web ||
+              null,
+
+            logo_url:
+              logoUrl
+
+          })
+          .eq(
+            "id",
+            marca.id
+          );
+
+
+      if (
+        actualizarLogo.error
+      ) {
+
+        await eliminarLogo(
+          nuevoPath
+        );
+
+        throw actualizarLogo.error;
+
+      }
+
+
+      /* Eliminamos el logo anterior
+         solamente después de guardar
+         correctamente el nuevo */
+
+      if (
+        marca.logo_url
+      ) {
+
+        const viejoPath =
+          obtenerPathLogo(
+            marca.logo_url
+          );
+
+
+        if (
+          viejoPath
+        ) {
+
+          await eliminarLogo(
+            viejoPath
+          );
+
+        }
+
+      }
+
+
+    } else {
+
+      const actualizarMarca =
+        await supabaseClient
+          .from(
+            "marcas_afiliadas"
+          )
+          .update({
+
+            nombre,
+
+            categoria,
+
+            descripcion:
+              descripcion ||
+              null,
+
+            whatsapp:
+              whatsapp ||
+              null,
+
+            instagram:
+              instagram ||
+              null,
+
+            web:
+              web ||
+              null
+
+          })
+          .eq(
+            "id",
+            marca.id
+          );
+
+
+      if (
+        actualizarMarca.error
+      ) {
+
+        throw actualizarMarca.error;
+
+      }
 
     }
 
 
-    if (beneficio) {
+    /* =========================
+       ACTUALIZAR BENEFICIO
+    ========================= */
+
+    if (
+      beneficio
+    ) {
 
       const titulo =
         campoBeneficio(
@@ -2579,21 +3136,27 @@ async function guardarCambios(
 
 
       const accesoId =
-        elemento.querySelector(
-          '[data-benefit-access="id"]'
-        ).checked;
+        elemento
+          .querySelector(
+            '[data-benefit-access="id"]'
+          )
+          .checked;
 
 
       const accesoBlack =
-        elemento.querySelector(
-          '[data-benefit-access="black"]'
-        ).checked;
+        elemento
+          .querySelector(
+            '[data-benefit-access="black"]'
+          )
+          .checked;
 
 
       const accesoPremium =
-        elemento.querySelector(
-          '[data-benefit-access="premium"]'
-        ).checked;
+        elemento
+          .querySelector(
+            '[data-benefit-access="premium"]'
+          )
+          .checked;
 
 
       if (
@@ -2602,18 +3165,14 @@ async function guardarCambios(
         !accesoPremium
       ) {
 
-        alert(
+        throw new Error(
           "Selecciona al menos un tipo de acceso."
         );
-
-        return;
 
       }
 
 
-      const {
-        error: errorBeneficio
-      } =
+      const actualizarBeneficio =
         await supabaseClient
           .from(
             "beneficios_golden"
@@ -2658,9 +3217,11 @@ async function guardarCambios(
           );
 
 
-      if (errorBeneficio) {
+      if (
+        actualizarBeneficio.error
+      ) {
 
-        throw errorBeneficio;
+        throw actualizarBeneficio.error;
 
       }
 
@@ -2677,20 +3238,50 @@ async function guardarCambios(
 
   } catch (error) {
 
+    console.error(
+      error
+    );
+
+
     alert(
       error.message ||
       "No se pudieron guardar los cambios."
     );
+
+
+  } finally {
+
+    boton.disabled =
+      false;
+
+    boton.textContent =
+      "GUARDAR CAMBIOS";
 
   }
 
 }
 
 
-
 /* =================================================
    UTILIDADES
 ================================================= */
+
+function valor(
+  id
+) {
+
+  const elemento =
+    document.getElementById(
+      id
+    );
+
+
+  return elemento
+    ? elemento.value.trim()
+    : "";
+
+}
+
 
 function campo(
   elemento,
@@ -2799,6 +3390,83 @@ function crearSlug(
 }
 
 
+function obtenerExtension(
+  nombre
+) {
+
+  const partes =
+    nombre.split(".");
+
+
+  return (
+    partes[
+      partes.length - 1
+    ] ||
+    "png"
+  ).toLowerCase();
+
+}
+
+
+function obtenerPathLogo(
+  url
+) {
+
+  if (!url) {
+    return null;
+  }
+
+
+  const marcador =
+    "/logos-marcas/";
+
+
+  const posicion =
+    url.indexOf(
+      marcador
+    );
+
+
+  if (
+    posicion === -1
+  ) {
+
+    return null;
+
+  }
+
+
+  return decodeURIComponent(
+    url.substring(
+      posicion +
+      marcador.length
+    )
+  );
+
+}
+
+
+async function eliminarLogo(
+  path
+) {
+
+  if (!path) {
+    return;
+  }
+
+
+  await supabaseClient
+    .storage
+    .from(
+      "logos-marcas"
+    )
+    .remove([
+      path
+    ]);
+
+}
+
+
 function escapar(
   valor
 ) {
@@ -2845,6 +3513,36 @@ function escapar(
 }
 
 
+function mostrarMensaje(
+  texto,
+  error
+) {
+
+  const elemento =
+    document.getElementById(
+      "formMessage"
+    );
+
+
+  elemento.textContent =
+    texto;
+
+
+  elemento.className =
+    "message " +
+    (
+      error
+        ? "error"
+        : "success"
+    );
+
+
+  elemento.style.display =
+    "block";
+
+}
+
+
 function limpiarFormulario() {
 
   const ids = [
@@ -2855,7 +3553,6 @@ function limpiarFormulario() {
     "brandWhatsapp",
     "brandInstagram",
     "brandWeb",
-    "brandLogo",
     "benefitTitle",
     "benefitDiscount",
     "benefitCode",
@@ -2894,45 +3591,75 @@ function limpiarFormulario() {
   .forEach(
     id => {
 
-      document
-        .getElementById(
+      const elemento =
+        document.getElementById(
           id
-        )
-        .checked =
+        );
+
+
+      if (elemento) {
+
+        elemento.checked =
           false;
+
+      }
 
     }
   );
 
-}
 
-
-function mostrarMensaje(
-  texto,
-  error
-) {
-
-  const elemento =
+  const archivo =
     document.getElementById(
-      "formMessage"
+      "newLogoFile"
     );
 
 
-  elemento.textContent =
-    texto;
+  if (archivo) {
+
+    archivo.value =
+      "";
+
+  }
 
 
-  elemento.className =
-    "message " +
-    (
-      error
-        ? "error"
-        : "success"
+  const preview =
+    document.getElementById(
+      "newLogoPreview"
     );
 
 
-  elemento.style.display =
-    "block";
+  if (preview) {
+
+    preview.innerHTML = `
+
+      <div class="logo-placeholder">
+        LOGO
+      </div>
+
+    `;
+
+  }
+
+
+  const status =
+    document.getElementById(
+      "newLogoStatus"
+    );
+
+
+  if (status) {
+
+    status.textContent =
+      "Selecciona una imagen PNG, JPG o WEBP.";
+
+  }
+
+
+  nuevoLogoUrl =
+    null;
+
+  nuevoLogoPath =
+    null;
 
 }
 
