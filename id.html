@@ -439,98 +439,44 @@
     .black .info {
       color: #d0d0d0;
     }
-
-
-  /* ======================================
-   CONTACTO
+/* ======================================
+   BOTONES DE CONTACTO
 ====================================== */
 
-let botonesContacto = "";
+.contact-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid rgba(120, 90, 50, 0.15);
+  flex-wrap: wrap;
+}
 
-const tieneRedSocial =
-  data.red_social &&
-  String(data.red_social).trim() !== "";
+.contact-button {
+  flex: 1;
+  min-width: 110px;
 
-const tieneCelular =
-  data.celular &&
-  String(data.celular).trim() !== "";
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-const tieneWhatsApp =
-  data.whatsapp &&
-  String(data.whatsapp).trim() !== "";
+  padding: 11px 12px;
 
+  border-radius: 10px;
 
-if (
-  tieneRedSocial ||
-  (data.mostrar_celular && tieneCelular) ||
-  (data.habilitar_whatsapp && tieneWhatsApp)
-) {
+  background: #2d2926;
+  color: #ffffff !important;
 
-  botonesContacto = `
+  text-decoration: none !important;
 
-    <div class="buttons">
+  font-size: 13px;
+  font-weight: 600;
 
-      ${
-        tieneRedSocial
-        ? `
+  box-sizing: border-box;
+}
 
-          <a
-            class="button"
-            href="${escaparHTML(
-              data.red_social
-            )}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Red social
-          </a>
-
-        `
-        : ""
-      }
-
-
-      ${
-        data.mostrar_celular && tieneCelular
-        ? `
-
-          <a
-            class="button"
-            href="tel:${escaparHTML(
-              data.celular
-            )}"
-          >
-            Llamar
-          </a>
-
-        `
-        : ""
-      }
-
-
-      ${
-        data.habilitar_whatsapp && tieneWhatsApp
-        ? `
-
-          <a
-            class="button"
-            href="https://wa.me/${String(
-              data.whatsapp
-            ).replace(/\D/g, "")}"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            WhatsApp
-          </a>
-
-        `
-        : ""
-      }
-
-
-    </div>
-
-  `;
+.contact-button:hover {
+  opacity: 0.88;
 }
 
     /* ========================================
@@ -1057,72 +1003,86 @@ async function cargarPerfil() {
 
       : "";
 
-
- /* ======================================
+/* ======================================
    CONTACTO
 ====================================== */
 
-const botonesContacto = `
+let botonesContacto = "";
 
-  <div class="buttons">
+const tieneRedSocial =
+  data.red_social &&
+  String(data.red_social).trim() !== "";
 
-    ${
-      data.red_social
-      ? `
+const tieneCelular =
+  data.celular &&
+  String(data.celular).trim() !== "";
 
-        <a
-          class="button"
-          href="${escaparHTML(data.red_social)}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Red social
-        </a>
-
-      `
-      : ""
-    }
+const tieneWhatsApp =
+  data.whatsapp &&
+  String(data.whatsapp).trim() !== "";
 
 
-    ${
-      data.mostrar_celular && data.celular
-      ? `
+if (
+  tieneRedSocial ||
+  tieneCelular ||
+  tieneWhatsApp
+) {
 
-        <a
-          class="button"
-          href="tel:${escaparHTML(data.celular)}"
-        >
-          Llamar
-        </a>
+  botonesContacto = `
 
-      `
-      : ""
-    }
+    <div class="contact-buttons">
 
-
-    ${
-      data.habilitar_whatsapp && data.celular
-      ? `
-
-        <a
-          class="button"
-          href="https://wa.me/${escaparHTML(
-            String(data.celular).replace(/\D/g, "")
-          )}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          WhatsApp
-        </a>
-
-      `
-      : ""
-    }
+      ${
+        tieneRedSocial
+        ? `
+          <a
+            class="contact-button"
+            href="${escaparHTML(data.red_social)}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Red social
+          </a>
+        `
+        : ""
+      }
 
 
-  </div>
+      ${
+        tieneCelular
+        ? `
+          <a
+            class="contact-button"
+            href="tel:${escaparHTML(data.celular)}"
+          >
+            Llamar
+          </a>
+        `
+        : ""
+      }
 
-`;
+
+      ${
+        tieneWhatsApp
+        ? `
+          <a
+            class="contact-button"
+            href="https://wa.me/${String(
+  data.whatsapp
+).replace(/\D/g, "")}"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            WhatsApp
+          </a>
+        `
+        : ""
+      }
+
+    </div>
+
+  `;
+}
 /* ======================================
    INFORMACIÓN MÉDICA
 ====================================== */
