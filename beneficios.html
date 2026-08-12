@@ -429,38 +429,224 @@ details[open] summary:after{
 
 @media(max-width:480px){
 
+  .site-nav{
+    padding:10px 10px 12px;
+    gap:8px;
+  }
+
+  .site-logo img{
+    width:145px;
+  }
+
+  .site-links{
+    width:100%;
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:8px 12px;
+  }
+
+  .site-links a{
+    font-size:9px;
+    letter-spacing:.1px;
+  }
+
+  .register-button{
+    padding:9px 12px;
+    border-radius:22px;
+    font-size:9px !important;
+  }
+
+  .heart-button{
+    font-size:21px !important;
+  }
+
   .container{
-    padding:18px 12px 50px;
+    padding:24px 12px 55px;
+  }
+
+  .hero{
+    padding:22px 8px 25px;
+  }
+
+  .brand-kicker{
+    font-size:9px;
+    letter-spacing:3px;
+  }
+
+  h1{
+    font-size:38px;
+  }
+
+  .hero p{
+    font-size:13px;
+  }
+
+  .toolbar{
+    margin-bottom:20px;
+  }
+
+  .search input{
+    padding:13px 14px;
+    font-size:13px;
+  }
+
+  .filters{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:7px;
+  }
+
+  .filter{
+    width:100%;
+    padding:10px 6px;
+    font-size:9px;
+  }
+
+  .brand-card{
+    border-radius:20px;
   }
 
   .brand-top{
-    padding:18px 17px 15px;
+    padding:18px 16px 15px;
+    gap:13px;
   }
 
   .logo-wrap{
-    width:68px;
-    height:68px;
-    flex-basis:68px;
+    width:70px;
+    height:70px;
+    flex:0 0 70px;
+    border-radius:16px;
+  }
+
+  .logo-wrap img{
+    padding:8px;
   }
 
   .brand-name{
-    font-size:24px;
+    font-size:25px;
+  }
+
+  .brand-category{
+    font-size:9px;
+  }
+
+  .brand-description{
+    font-size:12px;
   }
 
   .benefit-box{
-    margin:0 12px 12px;
-    padding:17px;
+    margin:0 12px 13px;
+    padding:18px 16px;
+    border-radius:17px;
+  }
+
+  .discount{
+    font-size:31px;
+  }
+
+  .benefit-title{
+    font-size:13px;
+    line-height:1.4;
+  }
+
+  .benefit-description{
+    font-size:12px;
+  }
+
+  .meta{
+    gap:6px;
+  }
+
+  .pill{
+    font-size:9px;
+    padding:6px 8px;
   }
 
   .details{
-    padding:0 17px 18px;
+    padding:0 16px 18px;
   }
-}
 
+  summary{
+    font-size:10px;
+    padding:3px 0;
+  }
+
+  .detail-content{
+    font-size:12px;
+  }
+
+  .contacts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .contact{
+    text-align:center;
+    padding:10px 7px;
+    font-size:10px;
+  }
+
+}
 </style>
 </head>
 
 <body>
+
+<header class="site-header">
+
+  <div class="site-nav">
+
+    <a href="index.html" class="site-logo">
+      <img
+        src="BABY%20GOLDEN.png"
+        alt="Baby Golden Perú"
+      >
+    </a>
+
+    <nav class="site-links">
+
+      <a href="index.html">
+        INICIO
+      </a>
+
+      <a href="index.html#como-funciona">
+        SOBRE NOSOTROS
+      </a>
+
+      <a
+        href="beneficios.html"
+        class="active"
+      >
+        BENEFICIOS
+      </a>
+
+      <a href="index.html#contacto">
+        CONTACTO
+      </a>
+
+      <a
+        href="registro.html"
+        class="register-button"
+      >
+        REGISTRAR MI PERRITO
+      </a>
+
+      <a
+        href="index.html"
+        class="heart-button"
+        aria-label="Inicio"
+      >
+        ♡
+      </a>
+
+    </nav>
+
+  </div>
+
+</header>
+
 
 <div class="container">
 
