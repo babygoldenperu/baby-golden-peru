@@ -4472,7 +4472,30 @@ revisarSesion();
 })();
 
 </script>
-  
+  <script>
+
+(function () {
+
+  const goldenBenefits =
+    document.getElementById("goldenBenefitsAdmin");
+
+  const panel =
+    document.getElementById("panelView");
+
+  if (
+    goldenBenefits &&
+    panel
+  ) {
+
+    panel.appendChild(
+      goldenBenefits
+    );
+
+  }
+
+})();
+
+</script>
 </body>
 
 </html>
