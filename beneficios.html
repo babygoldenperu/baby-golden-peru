@@ -1384,7 +1384,7 @@ function crearTarjetaMarca(
     );
 
 
- let acceso = "";
+let acceso = "";
 
 if (
     beneficio &&
@@ -1393,6 +1393,15 @@ if (
 
     acceso =
         "TODOS LOS ID BABY GOLDEN";
+
+} else if (
+    beneficio &&
+    beneficio.acceso_black &&
+    beneficio.acceso_premium
+) {
+
+    acceso =
+        "BLACK ID + PREMIUM ID";
 
 } else if (
     beneficio &&
