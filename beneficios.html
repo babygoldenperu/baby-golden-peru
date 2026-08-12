@@ -1384,7 +1384,7 @@ function crearTarjetaMarca(
     );
 
 
-   let acceso = "";
+ let acceso = "";
 
 if (
     beneficio &&
@@ -1392,24 +1392,7 @@ if (
 ) {
 
     acceso =
-    "TODOS LOS ID BABY GOLDEN";
-
-} else if (
-    beneficio &&
-    beneficio.acceso_black &&
-    beneficio.acceso_premium
-) {
-
-    acceso =
-    "BLACK ID + PREMIUM ID";
-
-} else if (
-    beneficio &&
-    beneficio.acceso_premium
-) {
-
-    acceso =
-    "PREMIUM ID";
+        "TODOS LOS ID BABY GOLDEN";
 
 } else if (
     beneficio &&
@@ -1417,17 +1400,22 @@ if (
 ) {
 
     acceso =
-    "BLACK ID";
+        "SOLO BLACK ID";
+
+} else if (
+    beneficio &&
+    beneficio.acceso_premium
+) {
+
+    acceso =
+        "SOLO PREMIUM ID";
 
 } else {
 
     acceso =
-    "BENEFICIO GOLDEN";
+        "SIN ACCESO";
 
 }
-
-
-    let logoHTML;
 
 
     if (marca.logo_url) {
