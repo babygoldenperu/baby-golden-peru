@@ -5,731 +5,525 @@
 
 <meta charset="UTF-8">
 
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
 
-<title>Golden Benefits Club | Baby Golden Perú</title>
+<title>Golden Benefits | Administración</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
 
 * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-}
-
-:root {
-    --gold: #c7a15a;
-    --gold-light: #ead9ad;
-    --black: #111111;
-    --cream: #f7f4ed;
-    --white: #ffffff;
-    --gray: #707070;
+  box-sizing: border-box;
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background: var(--cream);
-    color: var(--black);
+
+  margin: 0;
+
+  min-height: 100vh;
+
+  font-family: Arial, sans-serif;
+
+  background: #f5f2ed;
+
+  color: #292521;
 }
-
-
-/* =========================
-   HEADER
-========================= */
-
-header {
-    background: rgba(255,255,255,.97);
-    border-bottom: 1px solid #e5e0d6;
-
-    position: sticky;
-    top: 0;
-
-    z-index: 1000;
-
-    backdrop-filter: blur(10px);
-}
-
-.header-container {
-    max-width: 1200px;
-    margin: auto;
-
-    padding: 18px 25px;
-
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo {
-    font-size: 18px;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-.logo span {
-    color: var(--gold);
-}
-
-.back {
-    color: #555;
-    text-decoration: none;
-    font-size: 13px;
-}
-
-
-/* =========================
-   HERO
-========================= */
-
-.hero {
-    min-height: 430px;
-
-    background:
-    linear-gradient(
-        rgba(0,0,0,.68),
-        rgba(0,0,0,.68)
-    ),
-    url("BABY GOLDEN.png");
-
-    background-size: cover;
-    background-position: center;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    color: white;
-
-    padding: 60px 20px;
-}
-
-.hero-content {
-    max-width: 760px;
-}
-
-.eyebrow {
-    color: var(--gold-light);
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-
-    margin-bottom: 18px;
-
-    font-weight: bold;
-}
-
-.hero h1 {
-    font-family: Georgia, serif;
-
-    font-size: 56px;
-
-    font-weight: normal;
-
-    margin-bottom: 20px;
-}
-
-.hero h1 span {
-    color: var(--gold-light);
-}
-
-.hero p {
-    max-width: 620px;
-
-    margin: auto;
-
-    color: #e7e7e7;
-
-    font-size: 17px;
-
-    line-height: 1.7;
-}
-
-
-/* =========================
-   CONTENEDOR
-========================= */
 
 .container {
-    max-width: 1200px;
 
-    margin: auto;
+  width: 100%;
 
-    padding: 55px 20px;
+  max-width: 1100px;
+
+  margin: auto;
+
+  padding: 25px 16px 60px;
 }
 
 
-/* =========================
-   INTRO
-========================= */
+/* HEADER */
 
-.intro {
-    text-align: center;
+.header {
 
-    max-width: 700px;
+  text-align: center;
 
-    margin: 0 auto 40px;
+  margin-bottom: 30px;
 }
 
-.intro h2 {
-    font-family: Georgia, serif;
+.brand {
 
-    font-size: 32px;
+  color: #b18a4a;
 
-    font-weight: normal;
+  font-size: 11px;
 
-    margin-bottom: 10px;
+  font-weight: bold;
+
+  letter-spacing: 3px;
+
+  text-transform: uppercase;
 }
 
-.intro p {
-    color: var(--gray);
+h1 {
 
-    line-height: 1.6;
+  margin: 10px 0 5px;
+
+  font-family: Georgia, serif;
+
+  font-size: 36px;
+
+  font-weight: normal;
 }
 
+.subtitle {
 
-/* =========================
-   BUSCADOR
-========================= */
+  color: #777;
 
-.search {
-    max-width: 650px;
-
-    margin: 0 auto 30px;
-}
-
-.search input {
-    width: 100%;
-
-    padding: 17px 22px;
-
-    border-radius: 50px;
-
-    border: 1px solid #ddd6c8;
-
-    background: white;
-
-    font-size: 14px;
-
-    outline: none;
-
-    box-shadow: 0 5px 20px rgba(0,0,0,.04);
-}
-
-.search input:focus {
-    border-color: var(--gold);
+  font-size: 14px;
 }
 
 
-/* =========================
-   CATEGORIAS
-========================= */
+/* CARD */
 
-.categories {
-    display: flex;
+.card {
 
-    justify-content: center;
+  background: #fff;
 
-    flex-wrap: wrap;
+  border-radius: 20px;
 
-    gap: 9px;
+  padding: 25px;
 
-    margin-bottom: 50px;
-}
+  box-shadow:
+    0 10px 35px rgba(0,0,0,.08);
 
-.category {
-    background: white;
-
-    border: 1px solid #ddd6c8;
-
-    padding: 10px 17px;
-
-    border-radius: 50px;
-
-    cursor: pointer;
-
-    color: #555;
-
-    font-size: 12px;
-
-    transition: .2s;
-}
-
-.category:hover,
-.category.active {
-    background: var(--black);
-
-    color: white;
-
-    border-color: var(--black);
+  margin-bottom: 20px;
 }
 
 
-/* =========================
-   SECCION
-========================= */
+/* LOGIN */
 
-.section-heading {
-    display: flex;
+.login-card {
 
-    justify-content: space-between;
+  max-width: 430px;
 
-    align-items: end;
-
-    margin-bottom: 25px;
-
-    border-bottom: 1px solid #ddd6c8;
-
-    padding-bottom: 15px;
+  margin: 70px auto;
 }
 
-.section-heading h3 {
-    font-family: Georgia, serif;
+label {
 
-    font-size: 27px;
+  display: block;
 
-    font-weight: normal;
+  margin-bottom: 7px;
+
+  font-size: 12px;
+
+  font-weight: bold;
 }
 
-.section-heading span {
-    font-size: 12px;
+input,
+textarea,
+select {
 
-    color: var(--gray);
+  width: 100%;
+
+  padding: 13px 14px;
+
+  margin-bottom: 15px;
+
+  border: 1px solid #ddd;
+
+  border-radius: 12px;
+
+  font-size: 14px;
+
+  font-family: Arial, sans-serif;
 }
 
+textarea {
 
-/* =========================
-   GRID
-========================= */
+  min-height: 100px;
 
-.brands {
-    display: grid;
-
-    grid-template-columns:
-    repeat(
-        auto-fit,
-        minmax(280px, 1fr)
-    );
-
-    gap: 25px;
+  resize: vertical;
 }
 
+button {
 
-/* =========================
-   CARD
-========================= */
+  width: 100%;
 
-.brand-card {
-    background: white;
+  padding: 14px;
 
-    border: 1px solid #e7e1d5;
+  border: 0;
 
-    border-radius: 16px;
+  border-radius: 12px;
 
-    overflow: hidden;
+  background: #2d2925;
 
-    transition: .25s;
+  color: white;
 
-    position: relative;
+  font-size: 12px;
+
+  font-weight: bold;
+
+  cursor: pointer;
 }
 
-.brand-card:hover {
-    transform: translateY(-5px);
+button:hover {
 
-    box-shadow:
-    0 18px 40px rgba(0,0,0,.09);
+  opacity: .9;
 }
 
+button.gold {
 
-/* =========================
-   IMAGEN / LOGO
-========================= */
-
-.brand-image {
-    height: 190px;
-
-    background: #f1eee7;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    position: relative;
+  background: #b18a4a;
 }
 
-.brand-logo {
-    width: 150px;
+button.danger {
 
-    height: 110px;
-
-    background: white;
-
-    border-radius: 18px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    box-shadow:
-    0 8px 25px rgba(0,0,0,.08);
-
-    overflow: hidden;
+  background: #a83b3b;
 }
 
-.brand-logo img {
-    width: 100%;
+button.secondary {
 
-    height: 100%;
+  background: #eee;
 
-    object-fit: contain;
-
-    padding: 12px;
-}
-
-.brand-logo-text {
-    font-family: Georgia, serif;
-
-    font-size: 38px;
-
-    font-weight: bold;
-
-    letter-spacing: 4px;
+  color: #333;
 }
 
 
-/* =========================
-   BADGE
-========================= */
+/* LOGIN */
 
-.badge {
-    position: absolute;
+#loginView {
 
-    top: 15px;
-    left: 15px;
+  display: block;
+}
 
-    background: var(--black);
+#panelView {
 
-    color: white;
-
-    padding: 7px 11px;
-
-    border-radius: 30px;
-
-    font-size: 9px;
-
-    letter-spacing: 1px;
-
-    font-weight: bold;
+  display: none;
 }
 
 
-/* =========================
-   CONTENIDO
-========================= */
+/* TOP ACTIONS */
 
-.brand-content {
-    padding: 24px;
+.top-actions {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  gap: 15px;
+
+  margin-bottom: 25px;
 }
 
-.category-label {
-    font-size: 10px;
+.top-actions button {
 
-    color: var(--gold);
-
-    font-weight: bold;
-
-    letter-spacing: 1.5px;
-
-    margin-bottom: 9px;
+  width: auto;
 }
 
-.brand-content h4 {
-    font-family: Georgia, serif;
+.logout {
 
-    font-size: 27px;
+  background: #eee;
 
-    font-weight: normal;
+  color: #333;
 
-    margin-bottom: 10px;
-}
-
-.description {
-    color: var(--gray);
-
-    font-size: 13px;
-
-    line-height: 1.6;
-
-    min-height: 42px;
+  padding: 10px 16px;
 }
 
 
-/* =========================
-   MEMBRESIA
-========================= */
+/* FORM */
 
-.membership {
-    display: inline-block;
+.form {
 
-    margin-top: 15px;
+  display: none;
 
-    padding: 7px 10px;
+  border-top: 1px solid #eee;
 
-    border-radius: 30px;
+  margin-top: 25px;
 
-    background: #f1eee7;
+  padding-top: 25px;
+}
 
-    color: #555;
+.form-grid {
 
-    font-size: 9px;
+  display: grid;
 
-    font-weight: bold;
+  grid-template-columns: 1fr 1fr;
 
-    letter-spacing: 1px;
+  gap: 15px;
+}
+
+.full {
+
+  grid-column: 1 / -1;
 }
 
 
-/* =========================
-   DESCUENTO
-========================= */
+/* CHECKBOXES */
+
+.checks {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  margin-bottom: 20px;
+}
+
+.check {
+
+  background: #f7f4ed;
+
+  border-radius: 20px;
+
+  padding: 10px 14px;
+
+  font-size: 12px;
+
+  cursor: pointer;
+}
+
+.check input {
+
+  width: auto;
+
+  margin: 0 6px 0 0;
+}
+
+
+/* MENSAJES */
+
+.message {
+
+  display: none;
+
+  padding: 14px;
+
+  margin-top: 15px;
+
+  border-radius: 12px;
+
+  font-size: 13px;
+}
+
+.error {
+
+  background: #fbeaea;
+
+  color: #9b3333;
+}
+
+.success {
+
+  background: #eaf7ed;
+
+  color: #276b39;
+}
+
+
+/* MARCAS */
+
+.brand-item {
+
+  border: 1px solid #eee;
+
+  border-radius: 16px;
+
+  padding: 20px;
+
+  margin-top: 15px;
+
+  background: #fff;
+}
+
+.brand-header {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: flex-start;
+
+  gap: 15px;
+}
+
+.brand-name {
+
+  font-family: Georgia, serif;
+
+  font-size: 25px;
+}
+
+.brand-category {
+
+  color: #999;
+
+  font-size: 11px;
+
+  margin-top: 5px;
+}
+
+.status {
+
+  padding: 7px 11px;
+
+  border-radius: 20px;
+
+  font-size: 9px;
+
+  font-weight: bold;
+
+  letter-spacing: 1px;
+}
+
+.status.active {
+
+  background: #eaf7ed;
+
+  color: #276b39;
+}
+
+.status.inactive {
+
+  background: #fbeaea;
+
+  color: #9b3333;
+}
+
+.benefit {
+
+  margin-top: 18px;
+
+  background: #faf8f5;
+
+  border-radius: 13px;
+
+  padding: 17px;
+}
 
 .discount {
-    margin: 20px 0;
 
-    padding: 18px;
+  color: #b18a4a;
 
-    background: #faf7ef;
+  font-family: Georgia, serif;
 
-    border: 1px solid #eee3ca;
+  font-size: 28px;
 
-    border-radius: 10px;
-
-    text-align: center;
+  font-weight: bold;
 }
 
-.discount strong {
-    display: block;
+.benefit-title {
 
-    font-family: Georgia, serif;
+  margin-top: 5px;
 
-    font-size: 32px;
-
-    color: var(--gold);
+  font-size: 13px;
 }
 
-.discount span {
-    font-size: 10px;
+.code {
 
-    color: #777;
+  margin-top: 8px;
 
-    letter-spacing: 1px;
+  color: #777;
+
+  font-size: 12px;
 }
 
+.access {
 
-/* =========================
-   BOTON
-========================= */
+  margin-top: 10px;
 
-.button {
-    display: block;
+  color: #666;
 
-    text-align: center;
-
-    text-decoration: none;
-
-    background: var(--black);
-
-    color: white;
-
-    padding: 13px;
-
-    border-radius: 8px;
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: .8px;
-
-    transition: .2s;
+  font-size: 11px;
 }
 
-.button:hover {
-    background: var(--gold);
+.actions {
+
+  display: flex;
+
+  flex-wrap: wrap;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+.actions button {
+
+  width: auto;
+
+  padding: 10px 14px;
 }
 
 
-/* =========================
-   VIGENCIA
-========================= */
+/* EDITOR */
 
-.expiration {
-    margin-top: 15px;
+.edit-box {
 
-    text-align: center;
+  display: none;
 
-    font-size: 11px;
+  margin-top: 20px;
 
-    color: #888;
+  border-top: 1px solid #ddd;
+
+  padding-top: 20px;
 }
 
 
-/* =========================
-   ESTADOS
-========================= */
+/* LOADING */
 
 .loading {
-    text-align: center;
 
-    padding: 60px 20px;
+  text-align: center;
 
-    color: #777;
-}
+  padding: 40px;
 
-.error-box {
-    background: #fff0f0;
-
-    border: 1px solid #f0cccc;
-
-    color: #9b3333;
-
-    padding: 20px;
-
-    border-radius: 12px;
-
-    text-align: center;
-
-    margin-bottom: 30px;
-
-    display: none;
-}
-
-.empty {
-    text-align: center;
-
-    padding: 60px 20px;
-
-    color: #777;
-
-    display: none;
+  color: #777;
 }
 
 
-/* =========================
-   CLUB
-========================= */
+/* MOBILE */
 
-.club {
-    margin-top: 75px;
+@media(max-width:700px) {
 
-    background: var(--black);
+  .form-grid {
 
-    color: white;
+    grid-template-columns: 1fr;
+  }
 
-    border-radius: 20px;
+  .full {
 
-    padding: 50px 30px;
+    grid-column: auto;
+  }
 
-    text-align: center;
-}
+  .top-actions {
 
-.club small {
-    color: var(--gold-light);
+    flex-direction: column;
 
-    letter-spacing: 3px;
+    align-items: stretch;
+  }
 
-    font-size: 10px;
-}
+  .top-actions button {
 
-.club h2 {
-    font-family: Georgia, serif;
+    width: 100%;
+  }
 
-    font-size: 35px;
+  .brand-header {
 
-    font-weight: normal;
+    flex-direction: column;
+  }
 
-    margin: 15px 0;
-}
+  .actions button {
 
-.club p {
-    max-width: 650px;
-
-    margin: auto;
-
-    color: #bbb;
-
-    line-height: 1.7;
-
-    font-size: 14px;
-}
-
-
-/* =========================
-   FOOTER
-========================= */
-
-footer {
-    background: #0c0c0c;
-
-    color: white;
-
-    text-align: center;
-
-    padding: 40px 20px;
-
-    margin-top: 70px;
-}
-
-footer strong {
-    color: var(--gold-light);
-}
-
-footer p {
-    color: #888;
-
-    font-size: 12px;
-
-    margin-top: 10px;
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media(max-width:600px) {
-
-    .hero {
-        min-height: 380px;
-    }
-
-    .hero h1 {
-        font-size: 40px;
-    }
-
-    .hero p {
-        font-size: 15px;
-    }
-
-    .container {
-        padding: 40px 15px;
-    }
-
-    .section-heading {
-        align-items: start;
-
-        flex-direction: column;
-
-        gap: 6px;
-    }
+    width: 100%;
+  }
 
 }
 
@@ -741,927 +535,2406 @@ footer p {
 <body>
 
 
-<header>
+<div class="container">
 
-<div class="header-container">
 
-<div class="logo">
+<!-- =================================================
+     LOGIN
+================================================= -->
 
-BABY <span>GOLDEN</span> PERÚ
+<div id="loginView">
+
+
+  <div class="card login-card">
+
+
+    <div class="header">
+
+      <div class="brand">
+        BABY GOLDEN PERÚ
+      </div>
+
+      <h1>
+        Golden Benefits
+      </h1>
+
+      <div class="subtitle">
+        Administración de marcas afiliadas
+      </div>
+
+    </div>
+
+
+    <form id="loginForm">
+
+
+      <label>
+        Correo electrónico
+      </label>
+
+      <input
+        type="email"
+        id="email"
+        required
+      >
+
+
+      <label>
+        Contraseña
+      </label>
+
+      <input
+        type="password"
+        id="password"
+        required
+      >
+
+
+      <button type="submit">
+        INGRESAR
+      </button>
+
+
+    </form>
+
+
+    <div
+      id="loginMessage"
+      class="message error"
+    ></div>
+
+
+  </div>
+
 
 </div>
 
 
-<a
-href="index.html"
-class="back">
 
-← VOLVER
+<!-- =================================================
+     PANEL
+================================================= -->
 
-</a>
+<div id="panelView">
+
+
+  <div class="header">
+
+    <div class="brand">
+      BABY GOLDEN PERÚ
+    </div>
+
+    <h1>
+      Golden Benefits Club
+    </h1>
+
+    <div class="subtitle">
+      Administración de marcas afiliadas
+    </div>
+
+  </div>
+
+
+  <div class="top-actions">
+
+    <button
+      id="newBrandButton"
+      class="gold"
+    >
+      + AGREGAR MARCA
+    </button>
+
+
+    <button
+      id="logoutButton"
+      class="logout"
+    >
+      CERRAR SESIÓN
+    </button>
+
+  </div>
+
+
+
+  <!-- =================================================
+       FORMULARIO
+  ================================================= -->
+
+  <div
+    id="brandForm"
+    class="card form"
+  >
+
+    <h2>
+      Nueva marca
+    </h2>
+
+
+    <div class="form-grid">
+
+
+      <div>
+
+        <label>
+          Nombre de la marca
+        </label>
+
+        <input
+          id="brandName"
+          type="text"
+          placeholder="Ejemplo: YUM"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Categoría
+        </label>
+
+        <input
+          id="brandCategory"
+          type="text"
+          placeholder="Ejemplo: Alimentación"
+        >
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="brandDescription"
+          placeholder="Descripción de la marca"
+        ></textarea>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          id="brandWhatsapp"
+          type="text"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Instagram
+        </label>
+
+        <input
+          id="brandInstagram"
+          type="url"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Página web
+        </label>
+
+        <input
+          id="brandWeb"
+          type="url"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Logo URL
+        </label>
+
+        <input
+          id="brandLogo"
+          type="url"
+        >
+
+      </div>
+
+
+      <div class="full">
+
+        <hr>
+
+        <h2>
+          Beneficio
+        </h2>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="benefitTitle"
+          type="text"
+          placeholder="Ejemplo: 10% de descuento"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Descuento
+        </label>
+
+        <input
+          id="benefitDiscount"
+          type="text"
+          placeholder="Ejemplo: 10% OFF"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Código
+        </label>
+
+        <input
+          id="benefitCode"
+          type="text"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Válido hasta
+        </label>
+
+        <input
+          id="benefitDate"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Descripción del beneficio
+        </label>
+
+        <textarea
+          id="benefitDescription"
+        ></textarea>
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          Condiciones
+        </label>
+
+        <textarea
+          id="benefitConditions"
+        ></textarea>
+
+      </div>
+
+
+      <div class="full">
+
+        <label>
+          ¿Quién puede utilizarlo?
+        </label>
+
+
+        <div class="checks">
+
+
+          <label class="check">
+
+            <input
+              id="accessId"
+              type="checkbox"
+            >
+
+            ID Baby Golden
+
+          </label>
+
+
+          <label class="check">
+
+            <input
+              id="accessBlack"
+              type="checkbox"
+            >
+
+            BLACK ID
+
+          </label>
+
+
+          <label class="check">
+
+            <input
+              id="accessPremium"
+              type="checkbox"
+            >
+
+            PREMIUM
+
+          </label>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="actions">
+
+
+      <button
+        id="saveButton"
+        class="gold"
+      >
+        PUBLICAR
+      </button>
+
+
+      <button
+        id="cancelButton"
+        class="secondary"
+      >
+        CANCELAR
+      </button>
+
+
+    </div>
+
+
+    <div
+      id="formMessage"
+      class="message"
+    ></div>
+
+
+  </div>
+
+
+
+  <!-- =================================================
+       LISTA
+  ================================================= -->
+
+  <div class="card">
+
+    <h2>
+      Marcas afiliadas
+    </h2>
+
+
+    <div
+      id="brandList"
+    >
+
+      <div class="loading">
+        Cargando marcas...
+      </div>
+
+    </div>
+
+  </div>
+
 
 </div>
 
-</header>
-
-
-<section class="hero">
-
-<div class="hero-content">
-
-<div class="eyebrow">
-
-BABY GOLDEN PERÚ
 
 </div>
 
-
-<h1>
-
-Golden <span>Benefits</span> Club
-
-</h1>
-
-
-<p>
-
-Un espacio exclusivo donde nuestra comunidad
-encuentra beneficios, experiencias y descuentos
-especiales de nuestras marcas afiliadas.
-
-</p>
-
-</div>
-
-</section>
-
-
-<main class="container">
-
-
-<div class="intro">
-
-<h2>
-
-Beneficios exclusivos
-
-</h2>
-
-
-<p>
-
-Descubre marcas que comparten nuestro amor
-por los perritos y disfruta de condiciones
-especiales por ser parte de Baby Golden Perú.
-
-</p>
-
-</div>
-
-
-<div class="search">
-
-<input
-type="text"
-id="searchInput"
-placeholder="Buscar marca, producto o beneficio..."
->
-
-</div>
-
-
-<div
-class="categories"
-id="categoriesContainer">
-
-</div>
-
-
-<div class="section-heading">
-
-<h3>
-
-Marcas afiliadas
-
-</h3>
-
-
-<span id="brandCount">
-
-CARGANDO...
-
-</span>
-
-</div>
-
-
-<div
-id="errorBox"
-class="error-box">
-
-No pudimos cargar los beneficios.
-Intenta nuevamente más tarde.
-
-</div>
-
-
-<div
-id="loading"
-class="loading">
-
-Cargando beneficios Golden...
-
-</div>
-
-
-<div
-class="brands"
-id="brandsContainer">
-
-</div>
-
-
-<div
-id="empty"
-class="empty">
-
-No encontramos beneficios con esa búsqueda.
-
-</div>
-
-
-<section class="club">
-
-
-<small>
-
-BABY GOLDEN PERÚ
-
-</small>
-
-
-<h2>
-
-Más que descuentos.
-Una comunidad.
-
-</h2>
-
-
-<p>
-
-Ser parte de Baby Golden Perú significa
-compartir experiencias, descubrir nuevas
-marcas y disfrutar beneficios pensados
-para quienes consideran a sus perritos
-parte de la familia.
-
-</p>
-
-</section>
-
-
-</main>
-
-
-<footer>
-
-<strong>
-
-BABY GOLDEN PERÚ
-
-</strong>
-
-
-<p>
-
-Golden Benefits Club · Beneficios exclusivos
-para nuestra comunidad.
-
-</p>
-
-</footer>
 
 
 <script>
 
-/* =========================================
+/* =================================================
    SUPABASE
-========================================= */
+================================================= */
 
 const SUPABASE_URL =
-"https://cxgcmrpqqaachnfavplh.supabase.co";
+  "https://cxgcmrpqqaachnfavplh.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+  "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
 const supabaseClient =
-window.supabase.createClient(
+  window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
-);
+  );
 
 
-/* =========================================
+/* =================================================
    ELEMENTOS
-========================================= */
+================================================= */
 
-const brandsContainer =
-document.getElementById(
-    "brandsContainer"
-);
+const loginView =
+  document.getElementById(
+    "loginView"
+  );
 
-const categoriesContainer =
-document.getElementById(
-    "categoriesContainer"
-);
+const panelView =
+  document.getElementById(
+    "panelView"
+  );
 
-const searchInput =
-document.getElementById(
-    "searchInput"
-);
+const loginForm =
+  document.getElementById(
+    "loginForm"
+  );
 
-const loading =
-document.getElementById(
-    "loading"
-);
+const loginMessage =
+  document.getElementById(
+    "loginMessage"
+  );
 
-const errorBox =
-document.getElementById(
-    "errorBox"
-);
+const brandForm =
+  document.getElementById(
+    "brandForm"
+  );
 
-const empty =
-document.getElementById(
-    "empty"
-);
-
-const brandCount =
-document.getElementById(
-    "brandCount"
-);
+const brandList =
+  document.getElementById(
+    "brandList"
+  );
 
 
-/* =========================================
-   DATOS
-========================================= */
 
-let marcas = [];
+/* =================================================
+   LOGIN
+================================================= */
 
-let beneficios = [];
+loginForm.addEventListener(
+  "submit",
+  async function(event) {
 
-let categoriaSeleccionada = "todos";
-
-
-/* =========================================
-   CARGAR DATOS
-========================================= */
-
-async function cargarBeneficios() {
-
-    loading.style.display = "block";
-
-    errorBox.style.display = "none";
-
-    empty.style.display = "none";
+    event.preventDefault();
 
 
-    try {
-
-        const resultadoMarcas =
-        await supabaseClient
-            .from("marcas_afiliadas")
-            .select("*")
-            .eq("estado", true)
-            .order("nombre");
+    loginMessage.style.display =
+      "none";
 
 
-        if (resultadoMarcas.error) {
-            throw resultadoMarcas.error;
-        }
-
-
-        marcas =
-        resultadoMarcas.data || [];
-
-
-        const resultadoBeneficios =
-        await supabaseClient
-            .from("beneficios_golden")
-            .select("*")
-            .eq("estado", true)
-            .order("created_at", {
-                ascending: false
-            });
-
-
-        if (resultadoBeneficios.error) {
-            throw resultadoBeneficios.error;
-        }
-
-
-        beneficios =
-        resultadoBeneficios.data || [];
-
-
-        crearCategorias();
-
-        mostrarMarcas();
-
-
-    } catch (error) {
-
-        console.error(
-            "ERROR CARGANDO BENEFICIOS:",
-            error
-        );
-
-        errorBox.textContent =
-        "No pudimos cargar los beneficios. " +
-        (error.message || "");
-
-        errorBox.style.display =
-        "block";
-
-
-    } finally {
-
-        loading.style.display =
-        "none";
-
-    }
-
-}
-
-
-/* =========================================
-   CREAR CATEGORIAS
-========================================= */
-
-function crearCategorias() {
-
-    categoriesContainer.innerHTML = "";
-
-
-    const botonTodos =
-    document.createElement("button");
-
-    botonTodos.className =
-    "category active";
-
-    botonTodos.dataset.category =
-    "todos";
-
-    botonTodos.textContent =
-    "Todos";
-
-
-    botonTodos.addEventListener(
-        "click",
-        function() {
-
-            seleccionarCategoria(
-                "todos",
-                this
-            );
-
-        }
-    );
-
-
-    categoriesContainer.appendChild(
-        botonTodos
-    );
-
-
-    const categorias =
-    [...new Set(
-        marcas
-        .map(
-            marca => marca.categoria
+    const email =
+      document
+        .getElementById(
+          "email"
         )
-        .filter(Boolean)
-    )];
-
-
-    categorias.forEach(
-        categoria => {
-
-            const boton =
-            document.createElement(
-                "button"
-            );
-
-            boton.className =
-            "category";
-
-            boton.dataset.category =
-            categoria;
-
-            boton.textContent =
-            categoria;
-
-
-            boton.addEventListener(
-                "click",
-                function() {
-
-                    seleccionarCategoria(
-                        categoria,
-                        this
-                    );
-
-                }
-            );
-
-
-            categoriesContainer.appendChild(
-                boton
-            );
-
-        }
-    );
-
-}
-
-
-/* =========================================
-   SELECCIONAR CATEGORIA
-========================================= */
-
-function seleccionarCategoria(
-    categoria,
-    boton
-) {
-
-    categoriaSeleccionada =
-    categoria;
-
-
-    document
-        .querySelectorAll(
-            ".category"
-        )
-        .forEach(
-            elemento => {
-
-                elemento.classList.remove(
-                    "active"
-                );
-
-            }
-        );
-
-
-    boton.classList.add(
-        "active"
-    );
-
-
-    mostrarMarcas();
-
-}
-
-
-/* =========================================
-   MOSTRAR MARCAS
-========================================= */
-
-function mostrarMarcas() {
-
-    brandsContainer.innerHTML = "";
-
-
-    const busqueda =
-    searchInput.value
-        .toLowerCase()
+        .value
         .trim();
 
 
-    const marcasFiltradas =
-    marcas.filter(
-        marca => {
-
-            const beneficiosMarca =
-            beneficios.filter(
-                beneficio =>
-                beneficio.marca_id === marca.id
-            );
+    const password =
+      document
+        .getElementById(
+          "password"
+        )
+        .value;
 
 
-            const texto =
-            (
-                marca.nombre +
-                " " +
-                marca.descripcion +
-                " " +
-                marca.categoria +
-                " " +
-                beneficiosMarca
-                    .map(
-                        beneficio =>
-                        (
-                            beneficio.titulo +
-                            " " +
-                            beneficio.descripcion +
-                            " " +
-                            beneficio.descuento
-                        )
-                    )
-                    .join(" ")
-            )
-            .toLowerCase();
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .signInWithPassword({
+
+          email,
+          password
+
+        });
 
 
-            const coincideBusqueda =
-            texto.includes(
-                busqueda
-            );
+    if (error) {
+
+      loginMessage.textContent =
+        error.message;
+
+      loginMessage.style.display =
+        "block";
+
+      return;
+
+    }
 
 
-            const coincideCategoria =
-            categoriaSeleccionada ===
-            "todos" ||
-
-            marca.categoria ===
-            categoriaSeleccionada;
-
-
-            return (
-                coincideBusqueda &&
-                coincideCategoria
-            );
-
-        }
-    );
-
-
-    brandCount.textContent =
-    marcasFiltradas.length +
-    (
-        marcasFiltradas.length === 1
-        ? " MARCA"
-        : " MARCAS"
-    );
+    const {
+      data: admin,
+      error: adminError
+    } =
+      await supabaseClient.rpc(
+        "es_administrador"
+      );
 
 
     if (
-        marcasFiltradas.length === 0
+      adminError ||
+      !admin
     ) {
 
-        empty.style.display =
+      await supabaseClient.auth
+        .signOut();
+
+
+      loginMessage.textContent =
+        "Esta cuenta no tiene permisos de administrador.";
+
+      loginMessage.style.display =
         "block";
 
-        return;
+      return;
 
     }
 
 
-    empty.style.display =
-    "none";
+    loginView.style.display =
+      "none";
+
+    panelView.style.display =
+      "block";
 
 
-    marcasFiltradas.forEach(
-        marca => {
+    cargarMarcas();
 
-            const card =
-            crearTarjetaMarca(
-                marca
-            );
+  }
+);
 
-            brandsContainer.appendChild(
-                card
-            );
 
+
+/* =================================================
+   SESIÓN EXISTENTE
+================================================= */
+
+async function revisarSesion() {
+
+  const {
+    data
+  } =
+    await supabaseClient.auth
+      .getSession();
+
+
+  if (
+    data &&
+    data.session
+  ) {
+
+    const {
+      data: admin
+    } =
+      await supabaseClient.rpc(
+        "es_administrador"
+      );
+
+
+    if (admin) {
+
+      loginView.style.display =
+        "none";
+
+      panelView.style.display =
+        "block";
+
+      cargarMarcas();
+
+    }
+
+  }
+
+}
+
+
+revisarSesion();
+
+
+
+/* =================================================
+   CERRAR SESIÓN
+================================================= */
+
+document
+  .getElementById(
+    "logoutButton"
+  )
+  .addEventListener(
+    "click",
+    async function() {
+
+      await supabaseClient.auth
+        .signOut();
+
+      location.reload();
+
+    }
+  );
+
+
+
+/* =================================================
+   NUEVA MARCA
+================================================= */
+
+document
+  .getElementById(
+    "newBrandButton"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      limpiarFormulario();
+
+      brandForm.style.display =
+        "block";
+
+      window.scrollTo({
+
+        top:
+          brandForm
+            .getBoundingClientRect()
+            .top +
+          window.scrollY -
+          20,
+
+        behavior:
+          "smooth"
+
+      });
+
+    }
+  );
+
+
+
+/* =================================================
+   CANCELAR
+================================================= */
+
+document
+  .getElementById(
+    "cancelButton"
+  )
+  .addEventListener(
+    "click",
+    function() {
+
+      brandForm.style.display =
+        "none";
+
+      limpiarFormulario();
+
+    }
+  );
+
+
+
+/* =================================================
+   GUARDAR MARCA
+================================================= */
+
+document
+  .getElementById(
+    "saveButton"
+  )
+  .addEventListener(
+    "click",
+    guardarMarca
+  );
+
+
+async function guardarMarca() {
+
+  const nombre =
+    document
+      .getElementById(
+        "brandName"
+      )
+      .value
+      .trim();
+
+
+  const categoria =
+    document
+      .getElementById(
+        "brandCategory"
+      )
+      .value
+      .trim();
+
+
+  const descripcion =
+    document
+      .getElementById(
+        "brandDescription"
+      )
+      .value
+      .trim();
+
+
+  const whatsapp =
+    document
+      .getElementById(
+        "brandWhatsapp"
+      )
+      .value
+      .trim();
+
+
+  const instagram =
+    document
+      .getElementById(
+        "brandInstagram"
+      )
+      .value
+      .trim();
+
+
+  const web =
+    document
+      .getElementById(
+        "brandWeb"
+      )
+      .value
+      .trim();
+
+
+  const logo =
+    document
+      .getElementById(
+        "brandLogo"
+      )
+      .value
+      .trim();
+
+
+  const titulo =
+    document
+      .getElementById(
+        "benefitTitle"
+      )
+      .value
+      .trim();
+
+
+  const descuento =
+    document
+      .getElementById(
+        "benefitDiscount"
+      )
+      .value
+      .trim();
+
+
+  const codigo =
+    document
+      .getElementById(
+        "benefitCode"
+      )
+      .value
+      .trim();
+
+
+  const fecha =
+    document
+      .getElementById(
+        "benefitDate"
+      )
+      .value ||
+      null;
+
+
+  const descripcionBeneficio =
+    document
+      .getElementById(
+        "benefitDescription"
+      )
+      .value
+      .trim();
+
+
+  const condiciones =
+    document
+      .getElementById(
+        "benefitConditions"
+      )
+      .value
+      .trim();
+
+
+  const accesoId =
+    document
+      .getElementById(
+        "accessId"
+      )
+      .checked;
+
+
+  const accesoBlack =
+    document
+      .getElementById(
+        "accessBlack"
+      )
+      .checked;
+
+
+  const accesoPremium =
+    document
+      .getElementById(
+        "accessPremium"
+      )
+      .checked;
+
+
+  if (!nombre) {
+
+    mostrarMensaje(
+      "Escribe el nombre de la marca.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (!categoria) {
+
+    mostrarMensaje(
+      "Escribe la categoría.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (!titulo) {
+
+    mostrarMensaje(
+      "Escribe el título del beneficio.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  if (
+    !accesoId &&
+    !accesoBlack &&
+    !accesoPremium
+  ) {
+
+    mostrarMensaje(
+      "Selecciona quién puede utilizar el beneficio.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const boton =
+    document.getElementById(
+      "saveButton"
+    );
+
+
+  boton.disabled =
+    true;
+
+  boton.textContent =
+    "PUBLICANDO...";
+
+
+  try {
+
+    const slug =
+      crearSlug(
+        nombre
+      );
+
+
+    const existente =
+      await supabaseClient
+        .from(
+          "marcas_afiliadas"
+        )
+        .select("id")
+        .eq(
+          "slug",
+          slug
+        )
+        .maybeSingle();
+
+
+    if (
+      existente.data
+    ) {
+
+      throw new Error(
+        "Esta marca ya existe."
+      );
+
+    }
+
+
+    const resultadoMarca =
+      await supabaseClient
+        .from(
+          "marcas_afiliadas"
+        )
+        .insert({
+
+          nombre,
+
+          slug,
+
+          logo_url:
+            logo || null,
+
+          descripcion:
+            descripcion || null,
+
+          categoria,
+
+          whatsapp:
+            whatsapp || null,
+
+          instagram:
+            instagram || null,
+
+          web:
+            web || null,
+
+          estado:
+            true
+
+        })
+        .select()
+        .single();
+
+
+    if (
+      resultadoMarca.error
+    ) {
+
+      throw resultadoMarca.error;
+
+    }
+
+
+    const marca =
+      resultadoMarca.data;
+
+
+    const resultadoBeneficio =
+      await supabaseClient
+        .from(
+          "beneficios_golden"
+        )
+        .insert({
+
+          marca_id:
+            marca.id,
+
+          titulo,
+
+          tipo_beneficio:
+            "Descuento",
+
+          descuento:
+            descuento || null,
+
+          codigo:
+            codigo || null,
+
+          descripcion:
+            descripcionBeneficio ||
+            null,
+
+          condiciones:
+            condiciones ||
+            null,
+
+          fecha_inicio:
+            new Date()
+              .toISOString()
+              .split("T")[0],
+
+          fecha_fin:
+            fecha,
+
+          acceso_id:
+            accesoId,
+
+          acceso_black:
+            accesoBlack,
+
+          acceso_premium:
+            accesoPremium,
+
+          estado:
+            true
+
+        });
+
+
+    if (
+      resultadoBeneficio.error
+    ) {
+
+      await supabaseClient
+        .from(
+          "marcas_afiliadas"
+        )
+        .delete()
+        .eq(
+          "id",
+          marca.id
+        );
+
+      throw resultadoBeneficio.error;
+
+    }
+
+
+    mostrarMensaje(
+      "Marca y beneficio publicados correctamente.",
+      false
+    );
+
+
+    limpiarFormulario();
+
+    brandForm.style.display =
+      "none";
+
+
+    cargarMarcas();
+
+
+  } catch (error) {
+
+    console.error(
+      error
+    );
+
+
+    mostrarMensaje(
+      error.message ||
+      "No se pudo guardar.",
+      true
+    );
+
+
+  } finally {
+
+    boton.disabled =
+      false;
+
+    boton.textContent =
+      "PUBLICAR";
+
+  }
+
+}
+
+
+
+/* =================================================
+   CARGAR MARCAS
+================================================= */
+
+async function cargarMarcas() {
+
+  brandList.innerHTML = `
+    <div class="loading">
+      Cargando marcas...
+    </div>
+  `;
+
+
+  try {
+
+    const {
+      data: marcas,
+      error
+    } =
+      await supabaseClient
+        .from(
+          "marcas_afiliadas"
+        )
+        .select("*")
+        .order(
+          "nombre"
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    if (
+      !marcas ||
+      marcas.length === 0
+    ) {
+
+      brandList.innerHTML = `
+        <div class="loading">
+          No hay marcas afiliadas.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    brandList.innerHTML =
+      "";
+
+
+    for (
+      const marca
+      of marcas
+    ) {
+
+      await crearElementoMarca(
+        marca
+      );
+
+    }
+
+
+  } catch (error) {
+
+    brandList.innerHTML = `
+
+      <div class="message error"
+           style="display:block;">
+
+        ${escapar(
+          error.message
+        )}
+
+      </div>
+
+    `;
+
+  }
+
+}
+
+
+
+/* =================================================
+   CREAR MARCA
+================================================= */
+
+async function crearElementoMarca(
+  marca
+) {
+
+  const resultado =
+    await supabaseClient
+      .from(
+        "beneficios_golden"
+      )
+      .select("*")
+      .eq(
+        "marca_id",
+        marca.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:
+            false
         }
-    );
+      )
+      .limit(1)
+      .maybeSingle();
 
-}
+
+  const beneficio =
+    resultado.data;
 
 
-/* =========================================
-   CREAR TARJETA
-========================================= */
-
-function crearTarjetaMarca(
-    marca
-) {
-
-    const card =
+  const elemento =
     document.createElement(
-        "div"
-    );
-
-    card.className =
-    "brand-card";
-
-
-    const beneficiosMarca =
-    beneficios.filter(
-        beneficio =>
-        beneficio.marca_id === marca.id
+      "div"
     );
 
 
-    const beneficio =
-    beneficiosMarca[0];
+  elemento.className =
+    "brand-item";
 
 
-    let descuento =
-    beneficio &&
-    beneficio.descuento
-    ? beneficio.descuento
-    : "BENEFICIO";
+  elemento.innerHTML = `
 
+    <div class="brand-header">
 
-    let descripcion =
-    beneficio &&
-    beneficio.descripcion
-    ? beneficio.descripcion
-    : (
-        marca.descripcion ||
-        "Beneficio exclusivo para la comunidad Baby Golden Perú."
-    );
+      <div>
 
+        <div class="brand-name">
 
-let acceso = "";
-
-if (
-    beneficio &&
-    beneficio.acceso_id
-) {
-
-    acceso =
-        "TODOS LOS ID BABY GOLDEN";
-
-} else if (
-    beneficio &&
-    beneficio.acceso_black &&
-    beneficio.acceso_premium
-) {
-
-    acceso =
-        "BLACK ID + PREMIUM ID";
-
-} else if (
-    beneficio &&
-    beneficio.acceso_black
-) {
-
-    acceso =
-        "SOLO BLACK ID";
-
-} else if (
-    beneficio &&
-    beneficio.acceso_premium
-) {
-
-    acceso =
-        "SOLO PREMIUM ID";
-
-} else {
-
-    acceso =
-        "SIN ACCESO";
-
-}
-
-
-    if (marca.logo_url) {
-
-        logoHTML = `
-            <img
-                src="${escaparHTML(
-                    marca.logo_url
-                )}"
-                alt="Logo ${escaparHTML(
-                    marca.nombre
-                )}"
-            >
-        `;
-
-    } else {
-
-        logoHTML = `
-            <div class="brand-logo-text">
-                ${escaparHTML(
-                    marca.nombre
-                )}
-            </div>
-        `;
-
-    }
-
-
-    card.innerHTML = `
-
-        <div class="brand-image">
-
-            <div class="badge">
-                EXCLUSIVO
-            </div>
-
-            <div class="brand-logo">
-
-                ${logoHTML}
-
-            </div>
+          ${escapar(
+            marca.nombre
+          )}
 
         </div>
 
+        <div class="brand-category">
 
-        <div class="brand-content">
+          ${escapar(
+            marca.categoria
+          )}
 
-            <div class="category-label">
+        </div>
 
-                ${escaparHTML(
-                    marca.categoria
-                )}
-
-            </div>
-
-
-            <h4>
-
-                ${escaparHTML(
-                    marca.nombre
-                )}
-
-            </h4>
+      </div>
 
 
-            <p class="description">
+      <span
+        class="
+          status
+          ${
+            marca.estado
+              ? "active"
+              : "inactive"
+          }
+        "
+      >
 
-                ${escaparHTML(
-                    descripcion
-                )}
+        ${
+          marca.estado
+            ? "ACTIVA"
+            : "INACTIVA"
+        }
 
-            </p>
+      </span>
+
+    </div>
 
 
-            <div class="membership">
+    ${
+      beneficio
+        ? `
 
-                ${escaparHTML(
-                    acceso
-                )}
-
-            </div>
-
+          <div class="benefit">
 
             <div class="discount">
 
-                <strong>
-
-                    ${escaparHTML(
-                        descuento
-                    )}
-
-                </strong>
-
-                <span>
-
-                    BENEFICIO GOLDEN
-
-                </span>
+              ${escapar(
+                beneficio.descuento ||
+                "BENEFICIO"
+              )}
 
             </div>
 
 
-            <a
-                href="marca.html?id=${encodeURIComponent(
-                    marca.slug
-                )}"
-                class="button">
+            <div class="benefit-title">
 
-                VER BENEFICIO
+              ${escapar(
+                beneficio.titulo
+              )}
 
-            </a>
+            </div>
+
 
             ${
-                beneficio &&
-                beneficio.fecha_fin
+              beneficio.codigo
                 ? `
-                    <div class="expiration">
 
-                        Válido hasta el
-                        ${formatearFecha(
-                            beneficio.fecha_fin
-                        )}
+                  <div class="code">
 
-                    </div>
+                    Código:
+                    <strong>
+
+                      ${escapar(
+                        beneficio.codigo
+                      )}
+
+                    </strong>
+
+                  </div>
+
                 `
                 : ""
             }
 
-        </div>
 
-    `;
+            <div class="access">
 
+              Acceso:
+              ${obtenerAcceso(
+                beneficio
+              )}
 
-    return card;
+            </div>
 
-}
+          </div>
 
+        `
+        : `
 
-/* =========================================
-   ESCAPAR HTML
-========================================= */
+          <div class="benefit">
 
-function escaparHTML(
-    valor
-) {
+            Esta marca no tiene
+            un beneficio activo.
 
-    if (
-        valor === null ||
-        valor === undefined
-    ) {
+          </div>
 
-        return "";
-
+        `
     }
 
 
-    return String(valor)
-        .replace(
-            /&/g,
-            "&amp;"
-        )
-        .replace(
-            /</g,
-            "&lt;"
-        )
-        .replace(
-            />/g,
-            "&gt;"
-        )
-        .replace(
-            /"/g,
-            "&quot;"
-        )
-        .replace(
-            /'/g,
-            "&#039;"
+    <div class="actions">
+
+
+      <button
+        class="gold"
+        data-action="edit"
+      >
+
+        ✏️ EDITAR
+
+      </button>
+
+
+      <button
+        data-action="toggle"
+      >
+
+        ${
+          marca.estado
+            ? "🔴 DESACTIVAR"
+            : "🟢 ACTIVAR"
+        }
+
+      </button>
+
+
+      <button
+        class="danger"
+        data-action="delete"
+      >
+
+        🗑️ ELIMINAR
+
+      </button>
+
+
+    </div>
+
+
+    <div
+      class="edit-box"
+      data-edit-box
+    >
+
+      <h3>
+        Editar ${escapar(
+          marca.nombre
+        )}
+      </h3>
+
+
+      <label>
+        Nombre
+      </label>
+
+      <input
+        data-field="nombre"
+        value="${escapar(
+          marca.nombre
+        )}"
+      >
+
+
+      <label>
+        Categoría
+      </label>
+
+      <input
+        data-field="categoria"
+        value="${escapar(
+          marca.categoria
+        )}"
+      >
+
+
+      <label>
+        Descripción
+      </label>
+
+      <textarea
+        data-field="descripcion"
+      >${escapar(
+        marca.descripcion ||
+        ""
+      )}</textarea>
+
+
+      <label>
+        WhatsApp
+      </label>
+
+      <input
+        data-field="whatsapp"
+        value="${escapar(
+          marca.whatsapp ||
+          ""
+        )}"
+      >
+
+
+      <label>
+        Instagram
+      </label>
+
+      <input
+        data-field="instagram"
+        value="${escapar(
+          marca.instagram ||
+          ""
+        )}"
+      >
+
+
+      <label>
+        Página web
+      </label>
+
+      <input
+        data-field="web"
+        value="${escapar(
+          marca.web ||
+          ""
+        )}"
+      >
+
+
+      <label>
+        Logo URL
+      </label>
+
+      <input
+        data-field="logo_url"
+        value="${escapar(
+          marca.logo_url ||
+          ""
+        )}"
+      >
+
+
+      ${
+        beneficio
+          ? `
+
+            <hr>
+
+            <h3>
+              Beneficio
+            </h3>
+
+
+            <label>
+              Título
+            </label>
+
+            <input
+              data-benefit="titulo"
+              value="${escapar(
+                beneficio.titulo ||
+                ""
+              )}"
+            >
+
+
+            <label>
+              Descuento
+            </label>
+
+            <input
+              data-benefit="descuento"
+              value="${escapar(
+                beneficio.descuento ||
+                ""
+              )}"
+            >
+
+
+            <label>
+              Código
+            </label>
+
+            <input
+              data-benefit="codigo"
+              value="${escapar(
+                beneficio.codigo ||
+                ""
+              )}"
+            >
+
+
+            <label>
+              Válido hasta
+            </label>
+
+            <input
+              type="date"
+              data-benefit="fecha_fin"
+              value="${escapar(
+                beneficio.fecha_fin ||
+                ""
+              )}"
+            >
+
+
+            <label>
+              Descripción
+            </label>
+
+            <textarea
+              data-benefit="descripcion"
+            >${escapar(
+              beneficio.descripcion ||
+              ""
+            )}</textarea>
+
+
+            <label>
+              Condiciones
+            </label>
+
+            <textarea
+              data-benefit="condiciones"
+            >${escapar(
+              beneficio.condiciones ||
+              ""
+            )}</textarea>
+
+
+            <label>
+              Quién puede utilizarlo
+            </label>
+
+
+            <div class="checks">
+
+
+              <label class="check">
+
+                <input
+                  type="checkbox"
+                  data-benefit-access="id"
+                  ${
+                    beneficio.acceso_id
+                      ? "checked"
+                      : ""
+                  }
+                >
+
+                ID
+
+              </label>
+
+
+              <label class="check">
+
+                <input
+                  type="checkbox"
+                  data-benefit-access="black"
+                  ${
+                    beneficio.acceso_black
+                      ? "checked"
+                      : ""
+                  }
+                >
+
+                BLACK
+
+              </label>
+
+
+              <label class="check">
+
+                <input
+                  type="checkbox"
+                  data-benefit-access="premium"
+                  ${
+                    beneficio.acceso_premium
+                      ? "checked"
+                      : ""
+                  }
+                >
+
+                PREMIUM
+
+              </label>
+
+
+            </div>
+
+
+            <button
+              data-action="save"
+              class="gold"
+            >
+
+              GUARDAR CAMBIOS
+
+            </button>
+
+          `
+          : ""
+      }
+
+    </div>
+
+  `;
+
+
+  brandList.appendChild(
+    elemento
+  );
+
+
+  /* EDITAR */
+
+  elemento
+    .querySelector(
+      '[data-action="edit"]'
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        const caja =
+          elemento.querySelector(
+            "[data-edit-box]"
+          );
+
+
+        caja.style.display =
+          caja.style.display ===
+          "block"
+            ? "none"
+            : "block";
+
+      }
+    );
+
+
+  /* ACTIVAR / DESACTIVAR */
+
+  elemento
+    .querySelector(
+      '[data-action="toggle"]'
+    )
+    .addEventListener(
+      "click",
+      async function() {
+
+        const nuevoEstado =
+          !marca.estado;
+
+
+        const confirmar =
+          confirm(
+            nuevoEstado
+              ? "¿Activar esta marca?"
+              : "¿Desactivar esta marca?"
+          );
+
+
+        if (!confirmar) {
+          return;
+        }
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(
+              "marcas_afiliadas"
+            )
+            .update({
+              estado:
+                nuevoEstado
+            })
+            .eq(
+              "id",
+              marca.id
+            );
+
+
+        if (error) {
+
+          alert(
+            error.message
+          );
+
+          return;
+
+        }
+
+
+        cargarMarcas();
+
+      }
+    );
+
+
+  /* ELIMINAR */
+
+  elemento
+    .querySelector(
+      '[data-action="delete"]'
+    )
+    .addEventListener(
+      "click",
+      async function() {
+
+        const confirmar =
+          confirm(
+            "¿Seguro que quieres eliminar esta marca? También se eliminarán sus beneficios."
+          );
+
+
+        if (!confirmar) {
+          return;
+        }
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(
+              "marcas_afiliadas"
+            )
+            .delete()
+            .eq(
+              "id",
+              marca.id
+            );
+
+
+        if (error) {
+
+          alert(
+            error.message
+          );
+
+          return;
+
+        }
+
+
+        cargarMarcas();
+
+      }
+    );
+
+
+  /* GUARDAR CAMBIOS */
+
+  const guardar =
+    elemento.querySelector(
+      '[data-action="save"]'
+    );
+
+
+  if (guardar) {
+
+    guardar.addEventListener(
+      "click",
+      async function() {
+
+        await guardarCambios(
+          elemento,
+          marca,
+          beneficio
         );
 
+      }
+    );
+
+  }
+
 }
 
 
-/* =========================================
-   FECHA
-========================================= */
 
-function formatearFecha(
-    fecha
+/* =================================================
+   GUARDAR CAMBIOS
+================================================= */
+
+async function guardarCambios(
+  elemento,
+  marca,
+  beneficio
 ) {
 
-    if (!fecha) {
-        return "";
+  try {
+
+    const valor =
+      campo(
+        elemento,
+        "nombre"
+      );
+
+
+    const categoria =
+      campo(
+        elemento,
+        "categoria"
+      );
+
+
+    const descripcion =
+      campo(
+        elemento,
+        "descripcion"
+      );
+
+
+    const whatsapp =
+      campo(
+        elemento,
+        "whatsapp"
+      );
+
+
+    const instagram =
+      campo(
+        elemento,
+        "instagram"
+      );
+
+
+    const web =
+      campo(
+        elemento,
+        "web"
+      );
+
+
+    const logo =
+      campo(
+        elemento,
+        "logo_url"
+      );
+
+
+    if (!valor) {
+
+      alert(
+        "El nombre no puede estar vacío."
+      );
+
+      return;
+
     }
 
 
-    const partes =
-    fecha.split("-");
+    const {
+      error: errorMarca
+    } =
+      await supabaseClient
+        .from(
+          "marcas_afiliadas"
+        )
+        .update({
+
+          nombre:
+            valor,
+
+          categoria:
+            categoria,
+
+          descripcion:
+            descripcion ||
+            null,
+
+          whatsapp:
+            whatsapp ||
+            null,
+
+          instagram:
+            instagram ||
+            null,
+
+          web:
+            web ||
+            null,
+
+          logo_url:
+            logo ||
+            null
+
+        })
+        .eq(
+          "id",
+          marca.id
+        );
 
 
-    if (
-        partes.length !== 3
-    ) {
+    if (errorMarca) {
 
-        return fecha;
+      throw errorMarca;
 
     }
 
 
-    return (
-        partes[2] +
-        "/" +
-        partes[1] +
-        "/" +
-        partes[0]
+    if (beneficio) {
+
+      const titulo =
+        campoBeneficio(
+          elemento,
+          "titulo"
+        );
+
+
+      const descuento =
+        campoBeneficio(
+          elemento,
+          "descuento"
+        );
+
+
+      const codigo =
+        campoBeneficio(
+          elemento,
+          "codigo"
+        );
+
+
+      const fechaFin =
+        campoBeneficio(
+          elemento,
+          "fecha_fin"
+        );
+
+
+      const descripcionBeneficio =
+        campoBeneficio(
+          elemento,
+          "descripcion"
+        );
+
+
+      const condiciones =
+        campoBeneficio(
+          elemento,
+          "condiciones"
+        );
+
+
+      const accesoId =
+        elemento.querySelector(
+          '[data-benefit-access="id"]'
+        ).checked;
+
+
+      const accesoBlack =
+        elemento.querySelector(
+          '[data-benefit-access="black"]'
+        ).checked;
+
+
+      const accesoPremium =
+        elemento.querySelector(
+          '[data-benefit-access="premium"]'
+        ).checked;
+
+
+      if (
+        !accesoId &&
+        !accesoBlack &&
+        !accesoPremium
+      ) {
+
+        alert(
+          "Selecciona al menos un tipo de acceso."
+        );
+
+        return;
+
+      }
+
+
+      const {
+        error: errorBeneficio
+      } =
+        await supabaseClient
+          .from(
+            "beneficios_golden"
+          )
+          .update({
+
+            titulo,
+
+            descuento:
+              descuento ||
+              null,
+
+            codigo:
+              codigo ||
+              null,
+
+            fecha_fin:
+              fechaFin ||
+              null,
+
+            descripcion:
+              descripcionBeneficio ||
+              null,
+
+            condiciones:
+              condiciones ||
+              null,
+
+            acceso_id:
+              accesoId,
+
+            acceso_black:
+              accesoBlack,
+
+            acceso_premium:
+              accesoPremium
+
+          })
+          .eq(
+            "id",
+            beneficio.id
+          );
+
+
+      if (errorBeneficio) {
+
+        throw errorBeneficio;
+
+      }
+
+    }
+
+
+    alert(
+      "Cambios guardados correctamente."
+    );
+
+
+    cargarMarcas();
+
+
+  } catch (error) {
+
+    alert(
+      error.message ||
+      "No se pudieron guardar los cambios."
+    );
+
+  }
+
+}
+
+
+
+/* =================================================
+   UTILIDADES
+================================================= */
+
+function campo(
+  elemento,
+  nombre
+) {
+
+  const input =
+    elemento.querySelector(
+      `[data-field="${nombre}"]`
+    );
+
+
+  return input
+    ? input.value.trim()
+    : "";
+
+}
+
+
+function campoBeneficio(
+  elemento,
+  nombre
+) {
+
+  const input =
+    elemento.querySelector(
+      `[data-benefit="${nombre}"]`
+    );
+
+
+  return input
+    ? input.value.trim()
+    : "";
+
+}
+
+
+function obtenerAcceso(
+  beneficio
+) {
+
+  const accesos = [];
+
+
+  if (
+    beneficio.acceso_id
+  ) {
+
+    accesos.push(
+      "ID"
+    );
+
+  }
+
+
+  if (
+    beneficio.acceso_black
+  ) {
+
+    accesos.push(
+      "BLACK"
+    );
+
+  }
+
+
+  if (
+    beneficio.acceso_premium
+  ) {
+
+    accesos.push(
+      "PREMIUM"
+    );
+
+  }
+
+
+  return accesos.length
+    ? accesos.join(
+        " + "
+      )
+    : "SIN ACCESO";
+
+}
+
+
+function crearSlug(
+  texto
+) {
+
+  return texto
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(
+      /[\u0300-\u036f]/g,
+      ""
+    )
+    .replace(
+      /[^a-z0-9]+/g,
+      "-"
+    )
+    .replace(
+      /^-+|-+$/g,
+      "");
+
+}
+
+
+function escapar(
+  valor
+) {
+
+  if (
+    valor === null ||
+    valor === undefined
+  ) {
+
+    return "";
+
+  }
+
+
+  return String(
+    valor
+  )
+
+    .replace(
+      /&/g,
+      "&amp;"
+    )
+
+    .replace(
+      /</g,
+      "&lt;"
+    )
+
+    .replace(
+      />/g,
+      "&gt;"
+    )
+
+    .replace(
+      /"/g,
+      "&quot;"
+    )
+
+    .replace(
+      /'/g,
+      "&#039;"
     );
 
 }
 
 
-/* =========================================
-   BUSCADOR
-========================================= */
+function limpiarFormulario() {
 
-searchInput.addEventListener(
-    "input",
-    function() {
+  const ids = [
 
-        mostrarMarcas();
+    "brandName",
+    "brandCategory",
+    "brandDescription",
+    "brandWhatsapp",
+    "brandInstagram",
+    "brandWeb",
+    "brandLogo",
+    "benefitTitle",
+    "benefitDiscount",
+    "benefitCode",
+    "benefitDate",
+    "benefitDescription",
+    "benefitConditions"
+
+  ];
+
+
+  ids.forEach(
+    id => {
+
+      const elemento =
+        document.getElementById(
+          id
+        );
+
+
+      if (elemento) {
+
+        elemento.value =
+          "";
+
+      }
 
     }
-);
+  );
 
 
-/* =========================================
-   INICIAR
-========================================= */
+  [
+    "accessId",
+    "accessBlack",
+    "accessPremium"
+  ]
+  .forEach(
+    id => {
 
-cargarBeneficios();
+      document
+        .getElementById(
+          id
+        )
+        .checked =
+          false;
+
+    }
+  );
+
+}
+
+
+function mostrarMensaje(
+  texto,
+  error
+) {
+
+  const elemento =
+    document.getElementById(
+      "formMessage"
+    );
+
+
+  elemento.textContent =
+    texto;
+
+
+  elemento.className =
+    "message " +
+    (
+      error
+        ? "error"
+        : "success"
+    );
+
+
+  elemento.style.display =
+    "block";
+
+}
 
 </script>
 
