@@ -492,17 +492,78 @@ s<!DOCTYPE html>
 
   </div>
 
+<div id="listaSolicitudes">
 
-  <div id="listaSolicitudes">
+  <p>
+    Cargando solicitudes...
+  </p>
 
-    <p>
-      Cargando solicitudes...
-    </p>
+</div>
+
+
+<!-- DETALLE DE SOLICITUD -->
+
+<div
+  id="detalleSolicitud"
+  class="hidden"
+  style="
+    margin-top:20px;
+    padding:20px;
+    border:1px solid #e5e5e5;
+    border-radius:14px;
+  "
+>
+
+  <h2>
+    Detalle de la solicitud
+  </h2>
+
+
+  <div id="contenidoDetalle">
+
+  </div>
+
+
+  <div
+    style="
+      display:flex;
+      gap:10px;
+      margin-top:20px;
+    "
+  >
+
+    <button
+      id="aprobarDetalle"
+      type="button"
+    >
+      APROBAR
+    </button>
+
+
+    <button
+      id="rechazarDetalle"
+      type="button"
+      class="secondary"
+    >
+      RECHAZAR
+    </button>
+
+
+    <button
+      id="cerrarDetalle"
+      type="button"
+      class="secondary"
+    >
+      CERRAR
+    </button>
 
   </div>
 
 </div>
 
+
+</div>
+    
     <!-- RESULTADO -->
 
     <div
@@ -1892,37 +1953,45 @@ async function cargarSolicitudes() {
         let acciones = "";
 
 
-        if (
-          estado === "PENDIENTE"
-        ) {
+       if (estado === "PENDIENTE") {
 
-          acciones = `
+  acciones = `
 
-            <button
-              type="button"
-              onclick="actualizarEstadoSolicitud(
-                '${solicitud.baby_golden_id}',
-                'ACTIVO'
-              )"
-            >
-              APROBAR
-            </button>
+    <button
+      type="button"
+      onclick="verDetalleSolicitud(
+        '${solicitud.baby_golden_id}'
+      )"
+    >
+      VER DETALLE
+    </button>
 
 
-            <button
-              type="button"
-              class="secondary"
-              onclick="actualizarEstadoSolicitud(
-                '${solicitud.baby_golden_id}',
-                'RECHAZADO'
-              )"
-            >
-              RECHAZAR
-            </button>
+    <button
+      type="button"
+      onclick="actualizarEstadoSolicitud(
+        '${solicitud.baby_golden_id}',
+        'ACTIVO'
+      )"
+    >
+      APROBAR
+    </button>
 
-          `;
 
-        }
+    <button
+      type="button"
+      class="secondary"
+      onclick="actualizarEstadoSolicitud(
+        '${solicitud.baby_golden_id}',
+        'RECHAZADO'
+      )"
+    >
+      RECHAZAR
+    </button>
+
+  `;
+
+}
 
 
         return `
@@ -2006,6 +2075,459 @@ async function cargarSolicitudes() {
     .join("");
 
 }
+
+  async function verDetalleSolicitud(
+  babyGoldenId
+) {
+
+  const detalle =
+    document.getElementById(
+      "detalleSolicitud"
+    );
+
+  const contenido =
+    document.getElementById(
+      "contenidoDetalle"
+    );
+
+
+  detalle.classList.remove(
+    "hidden"
+  );
+
+
+  contenido.innerHTML =
+    "<p>Cargando información...</p>";
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient.rpc(
+    "admin_obtener_detalle_solicitud",
+    {
+      p_baby_golden_id:
+        babyGoldenId
+    }
+  );
+
+
+  if (error) {
+
+    console.error(
+      "ERROR DETALLE:",
+      error
+    );
+
+    contenido.innerHTML = `
+      <p style="color:#b00020;">
+        No se pudo cargar el detalle.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
+    contenido.innerHTML = `
+      <p>
+        No se encontró la solicitud.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  const solicitud =
+    data[0];
+
+
+  contenido.innerHTML = `
+
+    ${
+      solicitud.foto_url
+        ? `
+          <div style="margin-bottom:20px;">
+
+            <img
+              src="${escaparHTML(
+                solicitud.foto_url
+              )}"
+              alt="Foto del perrito"
+              style="
+                width:180px;
+                height:180px;
+                object-fit:cover;
+                border-radius:14px;
+              "
+            >
+
+          </div>
+        `
+        : ""
+    }
+
+
+    <h3>
+      ${escaparHTML(
+        solicitud.nombre_perrito || ""
+      )}
+    </h3>
+
+
+    <p>
+      <strong>Baby Golden ID:</strong>
+      ${escaparHTML(
+        solicitud.baby_golden_id || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Tipo de ID:</strong>
+      ${escaparHTML(
+        solicitud.tipo_id || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Fecha de nacimiento:</strong>
+      ${escaparHTML(
+        solicitud.fecha_nacimiento || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Sexo:</strong>
+      ${escaparHTML(
+        solicitud.sexo || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Raza:</strong>
+      ${escaparHTML(
+        solicitud.raza || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Características:</strong>
+      ${escaparHTML(
+        solicitud.caracteristicas || ""
+      )}
+    </p>
+
+
+    <hr>
+
+
+    <h3>
+      Identificación
+    </h3>
+
+
+    <p>
+      <strong>Tiene microchip:</strong>
+      ${
+        solicitud.tiene_microchip
+          ? "Sí"
+          : "No"
+      }
+    </p>
+
+
+    ${
+      solicitud.numero_microchip
+        ? `
+          <p>
+            <strong>Número de microchip:</strong>
+            ${escaparHTML(
+              solicitud.numero_microchip
+            )}
+          </p>
+        `
+        : ""
+    }
+
+
+    ${
+      solicitud.red_social
+        ? `
+          <p>
+            <strong>Red social:</strong>
+            ${escaparHTML(
+              solicitud.red_social
+            )}
+          </p>
+        `
+        : ""
+    }
+
+
+    <hr>
+
+
+    <h3>
+      Tutores
+    </h3>
+
+
+    <p>
+      <strong>Tutor 1:</strong>
+      ${escaparHTML(
+        solicitud.nombre_tutor_1 || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>DNI tutor 1:</strong>
+      ${escaparHTML(
+        solicitud.dni_tutor_1 || ""
+      )}
+    </p>
+
+
+    ${
+      solicitud.nombre_tutor_2
+        ? `
+          <p>
+            <strong>Tutor 2:</strong>
+            ${escaparHTML(
+              solicitud.nombre_tutor_2
+            )}
+          </p>
+
+          <p>
+            <strong>DNI tutor 2:</strong>
+            ${escaparHTML(
+              solicitud.dni_tutor_2 || ""
+            )}
+          </p>
+        `
+        : ""
+    }
+
+
+    <p>
+      <strong>Celular:</strong>
+      ${escaparHTML(
+        solicitud.celular || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Correo:</strong>
+      ${escaparHTML(
+        solicitud.correo || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Distrito:</strong>
+      ${escaparHTML(
+        solicitud.distrito || ""
+      )}
+    </p>
+
+
+    <hr>
+
+
+    <h3>
+      Contacto de emergencia
+    </h3>
+
+
+    <p>
+      <strong>Nombre:</strong>
+      ${escaparHTML(
+        solicitud.emergencia_nombre || ""
+      )}
+    </p>
+
+
+    <p>
+      <strong>Celular:</strong>
+      ${escaparHTML(
+        solicitud.emergencia_celular || ""
+      )}
+    </p>
+
+
+    <hr>
+
+
+    <h3>
+      Información médica
+    </h3>
+
+
+    <p>
+      <strong>Alergias:</strong>
+      ${escaparHTML(
+        solicitud.alergias || ""
+      )}
+    </p>
+
+
+    ${
+      solicitud.detalle_alergias
+        ? `
+          <p>
+            <strong>Detalle de alergias:</strong>
+            ${escaparHTML(
+              solicitud.detalle_alergias
+            )}
+          </p>
+        `
+        : ""
+    }
+
+
+    <p>
+      <strong>Condición médica:</strong>
+      ${escaparHTML(
+        solicitud.condicion_medica || ""
+      )}
+    </p>
+
+
+    ${
+      solicitud.detalle_condicion
+        ? `
+          <p>
+            <strong>Detalle de condición:</strong>
+            ${escaparHTML(
+              solicitud.detalle_condicion
+            )}
+          </p>
+        `
+        : ""
+    }
+
+
+    <p>
+      <strong>Medicamento:</strong>
+      ${escaparHTML(
+        solicitud.medicamento || ""
+      )}
+    </p>
+
+
+    ${
+      solicitud.detalle_medicamento
+        ? `
+          <p>
+            <strong>Detalle de medicamento:</strong>
+            ${escaparHTML(
+              solicitud.detalle_medicamento
+            )}
+          </p>
+        `
+        : ""
+    }
+
+
+    <p>
+      <strong>Vacunas al día:</strong>
+      ${escaparHTML(
+        solicitud.vacunas_al_dia || ""
+      )}
+    </p>
+
+
+    <hr>
+
+
+    <h3>
+      Configuración
+    </h3>
+
+
+    <p>
+      <strong>Mostrar celular:</strong>
+      ${
+        solicitud.mostrar_celular
+          ? "Sí"
+          : "No"
+      }
+    </p>
+
+
+    <p>
+      <strong>WhatsApp:</strong>
+      ${
+        solicitud.habilitar_whatsapp
+          ? "Sí"
+          : "No"
+      }
+    </p>
+
+
+    <hr>
+
+
+    <p>
+      <strong>Estado:</strong>
+      ${escaparHTML(
+        solicitud.estado_solicitud || ""
+      )}
+    </p>
+
+  `;
+
+
+  document.getElementById(
+    "aprobarDetalle"
+  ).onclick = function() {
+
+    actualizarEstadoSolicitud(
+      babyGoldenId,
+      "ACTIVO"
+    );
+
+  };
+
+
+  document.getElementById(
+    "rechazarDetalle"
+  ).onclick = function() {
+
+    actualizarEstadoSolicitud(
+      babyGoldenId,
+      "RECHAZADO"
+    );
+
+  };
+
+}
+
+  document.getElementById(
+  "cerrarDetalle"
+).addEventListener(
+  "click",
+  function() {
+
+    document.getElementById(
+      "detalleSolicitud"
+    ).classList.add(
+      "hidden"
+    );
+
+  }
+);
+  
 async function actualizarEstadoSolicitud(
   babyGoldenId,
   nuevoEstado
