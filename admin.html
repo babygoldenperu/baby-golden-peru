@@ -3924,7 +3924,2695 @@ revisarSesion();
 })();
 </script>
 
+<!-- =========================================================
+     GOLDEN BENEFITS — MÓDULO INDEPENDIENTE
+     NO MODIFICA BABY GOLDEN ID
+========================================================= -->
 
+<style>
+
+#goldenBenefitsModule {
+  margin-top: 30px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 28px;
+  box-shadow: 0 10px 35px rgba(0,0,0,.08);
+}
+
+#goldenBenefitsModule .gb-title {
+  font-family: Georgia, serif;
+  font-size: 30px;
+  margin: 5px 0;
+}
+
+#goldenBenefitsModule .gb-subtitle {
+  color: #777;
+  font-size: 13px;
+}
+
+.gb-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 22px;
+}
+
+.gb-button {
+  border: 0;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font-weight: bold;
+  cursor: pointer;
+  background: #2d2925;
+  color: white;
+}
+
+.gb-button.gold {
+  background: #b18a4a;
+}
+
+.gb-button.red {
+  background: #a83b3b;
+}
+
+.gb-button.gray {
+  background: #eee;
+  color: #333;
+}
+
+.gb-form {
+  display: none;
+  background: #faf8f5;
+  border-radius: 16px;
+  padding: 22px;
+  margin-bottom: 25px;
+}
+
+.gb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+.gb-full {
+  grid-column: 1 / -1;
+}
+
+#goldenBenefitsModule label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+#goldenBenefitsModule input,
+#goldenBenefitsModule textarea {
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 12px;
+  margin-bottom: 14px;
+  font-family: Arial, sans-serif;
+}
+
+#goldenBenefitsModule textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.gb-access {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.gb-access label {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 10px 13px;
+  cursor: pointer;
+  margin: 0 !important;
+}
+
+.gb-access input {
+  width: auto !important;
+  margin: 0 5px 0 0 !important;
+}
+
+.gb-list {
+  display: grid;
+  gap: 15px;
+}
+
+.gb-card {
+  border: 1px solid #e8e8e8;
+  border-radius: 16px;
+  padding: 18px;
+}
+
+.gb-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.gb-brand-info {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.gb-logo {
+  width: 65px;
+  height: 65px;
+  border-radius: 14px;
+  background: #f5f2ed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.gb-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  padding: 7px;
+}
+
+.gb-logo-text {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: bold;
+}
+
+.gb-brand-name {
+  font-family: Georgia, serif;
+  font-size: 24px;
+}
+
+.gb-category {
+  color: #999;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.gb-status {
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.gb-active {
+  background: #eaf7ed;
+  color: #276b39;
+}
+
+.gb-inactive {
+  background: #fbeaea;
+  color: #9b3333;
+}
+
+.gb-benefit {
+  background: #faf8f5;
+  border-radius: 13px;
+  padding: 16px;
+  margin-top: 15px;
+}
+
+.gb-discount {
+  color: #b18a4a;
+  font-family: Georgia, serif;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.gb-code {
+  color: #777;
+  font-size: 12px;
+  margin-top: 7px;
+}
+
+.gb-access-text {
+  color: #666;
+  font-size: 11px;
+  margin-top: 8px;
+}
+
+.gb-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 15px;
+}
+
+.gb-actions button {
+  border: 0;
+  border-radius: 9px;
+  padding: 10px 13px;
+  cursor: pointer;
+  font-size: 11px;
+  font-weight: bold;
+  background: #2d2925;
+  color: #fff;
+}
+
+.gb-actions .edit {
+  background: #b18a4a;
+}
+
+.gb-actions .delete {
+  background: #a83b3b;
+}
+
+.gb-edit {
+  display: none;
+  border-top: 1px solid #eee;
+  margin-top: 18px;
+  padding-top: 18px;
+}
+
+.gb-edit.open {
+  display: block;
+}
+
+.gb-message {
+  display: none;
+  padding: 12px;
+  border-radius: 10px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.gb-success {
+  display: block;
+  background: #eaf7ed;
+  color: #276b39;
+}
+
+.gb-error {
+  display: block;
+  background: #fbeaea;
+  color: #9b3333;
+}
+
+@media(max-width:700px) {
+
+  .gb-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gb-full {
+    grid-column: auto;
+  }
+
+  .gb-top {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .gb-top button {
+    width: 100%;
+  }
+
+  .gb-card-head {
+    flex-direction: column;
+  }
+
+  .gb-actions button {
+    width: 100%;
+  }
+
+}
+
+</style>
+
+
+<section id="goldenBenefitsModule">
+
+  <div class="gb-top">
+
+    <div>
+
+      <div
+        style="
+          color:#b18a4a;
+          font-size:10px;
+          font-weight:bold;
+          letter-spacing:3px;
+        "
+      >
+        GOLDEN BENEFITS CLUB
+      </div>
+
+      <div class="gb-title">
+        Marcas afiliadas
+      </div>
+
+      <div class="gb-subtitle">
+        Administra los beneficios exclusivos de Baby Golden Perú.
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="gb-button gold"
+      id="gbNewButton"
+    >
+      + AGREGAR MARCA
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       FORMULARIO
+  ====================================================== -->
+
+  <div
+    id="gbForm"
+    class="gb-form"
+  >
+
+    <h2
+      id="gbFormTitle"
+      style="font-family:Georgia,serif;"
+    >
+      Nueva marca
+    </h2>
+
+
+    <div class="gb-grid">
+
+
+      <div>
+
+        <label>
+          Nombre de la marca
+        </label>
+
+        <input
+          id="gbNombre"
+          type="text"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Categoría
+        </label>
+
+        <input
+          id="gbCategoria"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="gbDescripcion"
+        ></textarea>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          id="gbWhatsapp"
+          type="text"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Instagram
+        </label>
+
+        <input
+          id="gbInstagram"
+          type="text"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Página web
+        </label>
+
+        <input
+          id="gbWeb"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Logo
+        </label>
+
+        <input
+          id="gbLogo"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+        >
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <hr>
+
+        <h3
+          style="
+            font-family:Georgia,serif;
+          "
+        >
+          Beneficio
+        </h3>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Título del beneficio
+        </label>
+
+        <input
+          id="gbTitulo"
+          type="text"
+          placeholder="10% de descuento"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Descuento
+        </label>
+
+        <input
+          id="gbDescuento"
+          type="text"
+          placeholder="10% OFF"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Código
+        </label>
+
+        <input
+          id="gbCodigo"
+          type="text"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Válido hasta
+        </label>
+
+        <input
+          id="gbFecha"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Descripción del beneficio
+        </label>
+
+        <textarea
+          id="gbBeneficioDescripcion"
+        ></textarea>
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Condiciones
+        </label>
+
+        <textarea
+          id="gbCondiciones"
+        ></textarea>
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          ¿Quién puede utilizarlo?
+        </label>
+
+
+        <div class="gb-access">
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="gbTipoAcceso"
+              value="general"
+            >
+
+            TODOS LOS ID BABY GOLDEN
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="gbTipoAcceso"
+              value="black"
+            >
+
+            SOLO BLACK ID
+
+          </label>
+
+
+          <label>
+
+            <input
+              type="radio"
+              name="gbTipoAcceso"
+              value="premium"
+            >
+
+            SOLO PREMIUM ID
+
+          </label>
+
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <div class="gb-actions">
+
+      <button
+        id="gbGuardar"
+        type="button"
+        style="background:#b18a4a;"
+      >
+        PUBLICAR
+      </button>
+
+
+      <button
+        id="gbCancelar"
+        type="button"
+      >
+        CANCELAR
+      </button>
+
+    </div>
+
+
+    <div
+      id="gbMensaje"
+      class="gb-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       LISTA
+  ====================================================== -->
+
+  <div
+    id="gbLista"
+    class="gb-list"
+  >
+
+    <div
+      style="
+        text-align:center;
+        padding:30px;
+        color:#777;
+      "
+    >
+      Cargando marcas afiliadas...
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+(function() {
+
+  /* =====================================================
+     CONEXIÓN INDEPENDIENTE
+     NO TOCA EL SUPABASE DEL BABY GOLDEN ID
+  ====================================================== */
+
+  const GB_URL =
+    "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+  const GB_KEY =
+    "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+
+  const gbSupabase =
+    window.supabase.createClient(
+      GB_URL,
+      GB_KEY
+    );
+
+
+  /* =====================================================
+     ELEMENTOS
+  ====================================================== */
+
+  const module =
+    document.getElementById(
+      "goldenBenefitsModule"
+    );
+
+  const lista =
+    document.getElementById(
+      "gbLista"
+    );
+
+  const formulario =
+    document.getElementById(
+      "gbForm"
+    );
+
+
+  /* =====================================================
+     MOSTRAR MENSAJE
+  ====================================================== */
+
+  function mensaje(
+    texto,
+    error
+  ) {
+
+    const elemento =
+      document.getElementById(
+        "gbMensaje"
+      );
+
+
+    elemento.textContent =
+      texto;
+
+
+    elemento.className =
+      "gb-message " +
+      (
+        error
+          ? "gb-error"
+          : "gb-success"
+      );
+
+
+    elemento.style.display =
+      "block";
+
+  }
+
+
+  /* =====================================================
+     ESCAPAR HTML
+  ====================================================== */
+
+  function escapar(
+    valor
+  ) {
+
+    if (
+      valor === null ||
+      valor === undefined
+    ) {
+
+      return "";
+
+    }
+
+
+    return String(
+      valor
+    )
+
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+
+      .replace(
+        /</g,
+        "&lt;"
+      )
+
+      .replace(
+        />/g,
+        "&gt;"
+      )
+
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /* =====================================================
+     SLUG
+  ====================================================== */
+
+  function slug(
+    texto
+  ) {
+
+    return texto
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+      .replace(
+        /[^a-z0-9]+/g,
+        "-"
+      )
+      .replace(
+        /^-+|-+$/g,
+        "");
+
+  }
+
+
+  /* =====================================================
+     ACCESO
+  ====================================================== */
+
+  function textoAcceso(
+    beneficio
+  ) {
+
+    if (
+      beneficio.acceso_id
+    ) {
+
+      return "TODOS LOS ID BABY GOLDEN";
+
+    }
+
+
+    if (
+      beneficio.acceso_black &&
+      beneficio.acceso_premium
+    ) {
+
+      return "BLACK ID + PREMIUM ID";
+
+    }
+
+
+    if (
+      beneficio.acceso_black
+    ) {
+
+      return "SOLO BLACK ID";
+
+    }
+
+
+    if (
+      beneficio.acceso_premium
+    ) {
+
+      return "SOLO PREMIUM ID";
+
+    }
+
+
+    return "SIN ACCESO";
+
+  }
+
+
+  /* =====================================================
+     LIMPIAR FORMULARIO
+  ====================================================== */
+
+  function limpiar() {
+
+    [
+      "gbNombre",
+      "gbCategoria",
+      "gbDescripcion",
+      "gbWhatsapp",
+      "gbInstagram",
+      "gbWeb",
+      "gbTitulo",
+      "gbDescuento",
+      "gbCodigo",
+      "gbFecha",
+      "gbBeneficioDescripcion",
+      "gbCondiciones"
+    ]
+    .forEach(
+      function(id) {
+
+        const elemento =
+          document.getElementById(
+            id
+          );
+
+
+        if (elemento) {
+
+          elemento.value =
+            "";
+
+        }
+
+      }
+    );
+
+
+    const logo =
+      document.getElementById(
+        "gbLogo"
+      );
+
+
+    if (logo) {
+
+      logo.value =
+        "";
+
+    }
+
+
+    document
+      .querySelectorAll(
+        'input[name="gbTipoAcceso"]'
+      )
+      .forEach(
+        function(input) {
+
+          input.checked =
+            false;
+
+        }
+      );
+
+
+    document
+      .getElementById(
+        "gbMensaje"
+      )
+      .style.display =
+        "none";
+
+  }
+
+
+  /* =====================================================
+     NUEVA MARCA
+  ====================================================== */
+
+  document
+    .getElementById(
+      "gbNewButton"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        limpiar();
+
+        document
+          .getElementById(
+            "gbFormTitle"
+          )
+          .textContent =
+            "Nueva marca";
+
+
+        formulario.style.display =
+          "block";
+
+
+        formulario.scrollIntoView({
+          behavior:
+            "smooth"
+        });
+
+      }
+    );
+
+
+  /* =====================================================
+     CANCELAR
+  ====================================================== */
+
+  document
+    .getElementById(
+      "gbCancelar"
+    )
+    .addEventListener(
+      "click",
+      function() {
+
+        formulario.style.display =
+          "none";
+
+        limpiar();
+
+      }
+    );
+
+
+  /* =====================================================
+     CARGAR MARCAS
+  ====================================================== */
+
+  async function cargarMarcas() {
+
+    lista.innerHTML = `
+
+      <div
+        style="
+          text-align:center;
+          padding:30px;
+          color:#777;
+        "
+      >
+        Cargando marcas afiliadas...
+      </div>
+
+    `;
+
+
+    const resultado =
+      await gbSupabase
+        .from(
+          "marcas_afiliadas"
+        )
+        .select("*")
+        .order(
+          "nombre"
+        );
+
+
+    if (
+      resultado.error
+    ) {
+
+      lista.innerHTML = `
+
+        <div class="gb-message gb-error">
+          ${escapar(
+            resultado.error.message
+          )}
+        </div>
+
+      `;
+
+      lista
+        .firstElementChild
+        .style.display =
+          "block";
+
+      return;
+
+    }
+
+
+    const marcas =
+      resultado.data ||
+      [];
+
+
+    if (
+      !marcas.length
+    ) {
+
+      lista.innerHTML = `
+
+        <div
+          style="
+            text-align:center;
+            padding:30px;
+            color:#777;
+          "
+        >
+          No hay marcas afiliadas todavía.
+        </div>
+
+      `;
+
+      return;
+
+    }
+
+
+    lista.innerHTML =
+      "";
+
+
+    for (
+      const marca of marcas
+    ) {
+
+      await dibujarMarca(
+        marca
+      );
+
+    }
+
+  }
+
+
+  /* =====================================================
+     DIBUJAR MARCA
+  ====================================================== */
+
+  async function dibujarMarca(
+    marca
+  ) {
+
+    const resultado =
+      await gbSupabase
+        .from(
+          "beneficios_golden"
+        )
+        .select("*")
+        .eq(
+          "marca_id",
+          marca.id
+        )
+        .order(
+          "created_at",
+          {
+            ascending:
+              false
+          }
+        )
+        .limit(1)
+        .maybeSingle();
+
+
+    const beneficio =
+      resultado.data;
+
+
+    const card =
+      document.createElement(
+        "div"
+      );
+
+
+    card.className =
+      "gb-card";
+
+
+    let logoHTML;
+
+
+    if (
+      marca.logo_url
+    ) {
+
+      logoHTML = `
+
+        <img
+          src="${escapar(
+            marca.logo_url
+          )}"
+          alt="Logo"
+        >
+
+      `;
+
+    } else {
+
+      logoHTML = `
+
+        <div class="gb-logo-text">
+
+          ${escapar(
+            (marca.nombre || "M")
+              .substring(
+                0,
+                1
+              )
+          )}
+
+        </div>
+
+      `;
+
+    }
+
+
+    card.innerHTML = `
+
+      <div class="gb-card-head">
+
+
+        <div class="gb-brand-info">
+
+
+          <div class="gb-logo">
+
+            ${logoHTML}
+
+          </div>
+
+
+          <div>
+
+            <div class="gb-brand-name">
+
+              ${escapar(
+                marca.nombre
+              )}
+
+            </div>
+
+
+            <div class="gb-category">
+
+              ${escapar(
+                marca.categoria
+              )}
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+
+        <span class="
+          gb-status
+          ${
+            marca.estado
+              ? "gb-active"
+              : "gb-inactive"
+          }
+        ">
+
+          ${
+            marca.estado
+              ? "ACTIVA"
+              : "INACTIVA"
+          }
+
+        </span>
+
+
+      </div>
+
+
+      ${
+        beneficio
+
+          ? `
+
+            <div class="gb-benefit">
+
+              <div class="gb-discount">
+
+                ${escapar(
+                  beneficio.descuento ||
+                  "BENEFICIO"
+                )}
+
+              </div>
+
+
+              <div>
+
+                ${escapar(
+                  beneficio.titulo ||
+                  ""
+                )}
+
+              </div>
+
+
+              ${
+                beneficio.codigo
+
+                  ? `
+
+                    <div class="gb-code">
+
+                      Código:
+                      <strong>
+
+                        ${escapar(
+                          beneficio.codigo
+                        )}
+
+                      </strong>
+
+                    </div>
+
+                  `
+
+                  : ""
+
+              }
+
+
+              <div class="gb-access-text">
+
+                Acceso:
+                ${textoAcceso(
+                  beneficio
+                )}
+
+              </div>
+
+            </div>
+
+          `
+
+          : ""
+
+      }
+
+
+      <div class="gb-actions">
+
+        <button
+          class="edit"
+          data-edit
+        >
+          ✏️ EDITAR
+        </button>
+
+
+        <button
+          data-toggle
+        >
+
+          ${
+            marca.estado
+              ? "🔴 DESACTIVAR"
+              : "🟢 ACTIVAR"
+          }
+
+        </button>
+
+
+        <button
+          class="delete"
+          data-delete
+        >
+          🗑️ ELIMINAR
+        </button>
+
+      </div>
+
+
+      <div
+        class="gb-edit"
+        data-edit-box
+      >
+
+        <h3
+          style="
+            font-family:Georgia,serif;
+          "
+        >
+          Editar marca
+        </h3>
+
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          data-field="nombre"
+          value="${escapar(
+            marca.nombre
+          )}"
+        >
+
+
+        <label>
+          Categoría
+        </label>
+
+        <input
+          data-field="categoria"
+          value="${escapar(
+            marca.categoria
+          )}"
+        >
+
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          data-field="descripcion"
+        >${escapar(
+          marca.descripcion ||
+          ""
+        )}</textarea>
+
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          data-field="whatsapp"
+          value="${escapar(
+            marca.whatsapp ||
+            ""
+          )}"
+        >
+
+
+        <label>
+          Instagram
+        </label>
+
+        <input
+          data-field="instagram"
+          value="${escapar(
+            marca.instagram ||
+            ""
+          )}"
+        >
+
+
+        <label>
+          Página web
+        </label>
+
+        <input
+          data-field="web"
+          value="${escapar(
+            marca.web ||
+            ""
+          )}"
+        >
+
+
+        <label>
+          Reemplazar logo
+        </label>
+
+        <input
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+          data-logo
+        >
+
+
+        ${
+          beneficio
+
+            ? `
+
+              <hr>
+
+
+              <h3
+                style="
+                  font-family:Georgia,serif;
+                "
+              >
+                Editar beneficio
+              </h3>
+
+
+              <label>
+                Título
+              </label>
+
+              <input
+                data-benefit="titulo"
+                value="${escapar(
+                  beneficio.titulo ||
+                  ""
+                )}"
+              >
+
+
+              <label>
+                Descuento
+              </label>
+
+              <input
+                data-benefit="descuento"
+                value="${escapar(
+                  beneficio.descuento ||
+                  ""
+                )}"
+              >
+
+
+              <label>
+                Código
+              </label>
+
+              <input
+                data-benefit="codigo"
+                value="${escapar(
+                  beneficio.codigo ||
+                  ""
+                )}"
+              >
+
+
+              <label>
+                Válido hasta
+              </label>
+
+              <input
+                type="date"
+                data-benefit="fecha"
+                value="${escapar(
+                  beneficio.fecha_fin ||
+                  ""
+                )}"
+              >
+
+
+              <label>
+                Descripción
+              </label>
+
+              <textarea
+                data-benefit="descripcion"
+              >${escapar(
+                beneficio.descripcion ||
+                ""
+              )}</textarea>
+
+
+              <label>
+                Condiciones
+              </label>
+
+              <textarea
+                data-benefit="condiciones"
+              >${escapar(
+                beneficio.condiciones ||
+                ""
+              )}</textarea>
+
+
+              <label>
+                ¿Quién puede utilizarlo?
+              </label>
+
+
+              <div class="gb-access">
+
+
+                <label>
+
+                  <input
+                    type="radio"
+                    name="gb-edit-${marca.id}"
+                    data-access="general"
+                    ${
+                      beneficio.acceso_id
+                        ? "checked"
+                        : ""
+                    }
+                  >
+
+                  TODOS LOS ID BABY GOLDEN
+
+                </label>
+
+
+                <label>
+
+                  <input
+                    type="radio"
+                    name="gb-edit-${marca.id}"
+                    data-access="black"
+                    ${
+                      !beneficio.acceso_id &&
+                      beneficio.acceso_black &&
+                      !beneficio.acceso_premium
+                        ? "checked"
+                        : ""
+                    }
+                  >
+
+                  SOLO BLACK ID
+
+                </label>
+
+
+                <label>
+
+                  <input
+                    type="radio"
+                    name="gb-edit-${marca.id}"
+                    data-access="premium"
+                    ${
+                      !beneficio.acceso_id &&
+                      !beneficio.acceso_black &&
+                      beneficio.acceso_premium
+                        ? "checked"
+                        : ""
+                    }
+                  >
+
+                  SOLO PREMIUM ID
+
+                </label>
+
+
+              </div>
+
+            `
+
+            : ""
+
+        }
+
+
+        <div class="gb-actions">
+
+          <button
+            data-save
+            style="background:#b18a4a;"
+          >
+            GUARDAR CAMBIOS
+          </button>
+
+        </div>
+
+
+      </div>
+
+    `;
+
+
+    lista.appendChild(
+      card
+    );
+
+
+    /* =================================================
+       EDITAR
+    ================================================== */
+
+    card
+      .querySelector(
+        "[data-edit]"
+      )
+      .addEventListener(
+        "click",
+        function() {
+
+          const caja =
+            card.querySelector(
+              "[data-edit-box]"
+            );
+
+
+          caja.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+
+    /* =================================================
+       ACTIVAR / DESACTIVAR
+    ================================================== */
+
+    card
+      .querySelector(
+        "[data-toggle]"
+      )
+      .addEventListener(
+        "click",
+        async function() {
+
+          const resultado =
+            await gbSupabase
+              .from(
+                "marcas_afiliadas"
+              )
+              .update({
+
+                estado:
+                  !marca.estado
+
+              })
+              .eq(
+                "id",
+                marca.id
+              );
+
+
+          if (
+            resultado.error
+          ) {
+
+            alert(
+              resultado.error.message
+            );
+
+            return;
+
+          }
+
+
+          cargarMarcas();
+
+        }
+      );
+
+
+    /* =================================================
+       ELIMINAR
+    ================================================== */
+
+    card
+      .querySelector(
+        "[data-delete]"
+      )
+      .addEventListener(
+        "click",
+        async function() {
+
+          if (
+            !confirm(
+              "¿Seguro que deseas eliminar esta marca y su beneficio?"
+            )
+          ) {
+
+            return;
+
+          }
+
+
+          if (
+            beneficio
+          ) {
+
+            const eliminarBeneficio =
+              await gbSupabase
+                .from(
+                  "beneficios_golden"
+                )
+                .delete()
+                .eq(
+                  "id",
+                  beneficio.id
+                );
+
+
+            if (
+              eliminarBeneficio.error
+            ) {
+
+              alert(
+                eliminarBeneficio
+                  .error
+                  .message
+              );
+
+              return;
+
+            }
+
+          }
+
+
+          const eliminarMarca =
+            await gbSupabase
+              .from(
+                "marcas_afiliadas"
+              )
+              .delete()
+              .eq(
+                "id",
+                marca.id
+              );
+
+
+          if (
+            eliminarMarca.error
+          ) {
+
+            alert(
+              eliminarMarca
+                .error
+                .message
+            );
+
+            return;
+
+          }
+
+
+          cargarMarcas();
+
+        }
+      );
+
+
+    /* =================================================
+       GUARDAR EDICIÓN
+    ================================================== */
+
+    card
+      .querySelector(
+        "[data-save]"
+      )
+      .addEventListener(
+        "click",
+        async function() {
+
+          await guardarEdicion(
+            card,
+            marca,
+            beneficio
+          );
+
+        }
+      );
+
+  }
+
+
+  /* =====================================================
+     GUARDAR EDICIÓN
+  ====================================================== */
+
+  async function guardarEdicion(
+    card,
+    marca,
+    beneficio
+  ) {
+
+    const boton =
+      card.querySelector(
+        "[data-save]"
+      );
+
+
+    boton.disabled =
+      true;
+
+    boton.textContent =
+      "GUARDANDO...";
+
+
+    try {
+
+      function campo(
+        nombre
+      ) {
+
+        return card
+          .querySelector(
+            `[data-field="${nombre}"]`
+          )
+          .value
+          .trim();
+
+      }
+
+
+      const nombre =
+        campo(
+          "nombre"
+        );
+
+
+      const categoria =
+        campo(
+          "categoria"
+        );
+
+
+      if (!nombre) {
+
+        throw new Error(
+          "El nombre de la marca es obligatorio."
+        );
+
+      }
+
+
+      /* =================================================
+         MARCA
+      ================================================== */
+
+      const actualizarMarca =
+        await gbSupabase
+          .from(
+            "marcas_afiliadas"
+          )
+          .update({
+
+            nombre,
+
+            categoria,
+
+            descripcion:
+              campo(
+                "descripcion"
+              ) ||
+              null,
+
+            whatsapp:
+              campo(
+                "whatsapp"
+              ) ||
+              null,
+
+            instagram:
+              campo(
+                "instagram"
+              ) ||
+              null,
+
+            web:
+              campo(
+                "web"
+              ) ||
+              null
+
+          })
+          .eq(
+            "id",
+            marca.id
+          );
+
+
+      if (
+        actualizarMarca.error
+      ) {
+
+        throw actualizarMarca.error;
+
+      }
+
+
+      /* =================================================
+         LOGO NUEVO
+      ================================================== */
+
+      const archivo =
+        card
+          .querySelector(
+            "[data-logo]"
+          )
+          ?.files[0];
+
+
+      if (
+        archivo
+      ) {
+
+        const extension =
+          (
+            archivo.name
+              .split(".")
+              .pop() ||
+            "png"
+          )
+          .toLowerCase();
+
+
+        const ruta =
+          slug(
+            nombre
+          ) +
+          "-" +
+          Date.now() +
+          "." +
+          extension;
+
+
+        const subida =
+          await gbSupabase
+            .storage
+            .from(
+              "logos-marcas"
+            )
+            .upload(
+              ruta,
+              archivo,
+              {
+
+                cacheControl:
+                  "3600",
+
+                upsert:
+                  false,
+
+                contentType:
+                  archivo.type
+
+              }
+            );
+
+
+        if (
+          subida.error
+        ) {
+
+          throw subida.error;
+
+        }
+
+
+        const nuevaUrl =
+          gbSupabase
+            .storage
+            .from(
+              "logos-marcas"
+            )
+            .getPublicUrl(
+              ruta
+            )
+            .data
+            .publicUrl;
+
+
+        const actualizarLogo =
+          await gbSupabase
+            .from(
+              "marcas_afiliadas"
+            )
+            .update({
+
+              logo_url:
+                nuevaUrl
+
+            })
+            .eq(
+              "id",
+              marca.id
+            );
+
+
+        if (
+          actualizarLogo.error
+        ) {
+
+          throw actualizarLogo.error;
+
+        }
+
+      }
+
+
+      /* =================================================
+         BENEFICIO
+      ================================================== */
+
+      if (
+        beneficio
+      ) {
+
+        function beneficioCampo(
+          nombre
+        ) {
+
+          return card
+            .querySelector(
+              `[data-benefit="${nombre}"]`
+            )
+            ?.value
+            .trim() ||
+            "";
+
+        }
+
+
+        const tipo =
+          card
+            .querySelector(
+              "[data-access]:checked"
+            )
+            ?.dataset
+            .access;
+
+
+        if (!tipo) {
+
+          throw new Error(
+            "Selecciona quién puede utilizar el beneficio."
+          );
+
+        }
+
+
+        const actualizarBeneficio =
+          await gbSupabase
+            .from(
+              "beneficios_golden"
+            )
+            .update({
+
+              titulo:
+                beneficioCampo(
+                  "titulo"
+                ),
+
+              descuento:
+                beneficioCampo(
+                  "descuento"
+                ) ||
+                null,
+
+              codigo:
+                beneficioCampo(
+                  "codigo"
+                ) ||
+                null,
+
+              fecha_fin:
+                beneficioCampo(
+                  "fecha"
+                ) ||
+                null,
+
+              descripcion:
+                beneficioCampo(
+                  "descripcion"
+                ) ||
+                null,
+
+              condiciones:
+                beneficioCampo(
+                  "condiciones"
+                ) ||
+                null,
+
+              acceso_id:
+                tipo ===
+                "general",
+
+              acceso_black:
+                tipo ===
+                  "general" ||
+                tipo ===
+                  "black",
+
+              acceso_premium:
+                tipo ===
+                  "general" ||
+                tipo ===
+                  "premium"
+
+            })
+            .eq(
+              "id",
+              beneficio.id
+            );
+
+
+        if (
+          actualizarBeneficio.error
+        ) {
+
+          throw actualizarBeneficio.error;
+
+        }
+
+      }
+
+
+      alert(
+        "Cambios guardados correctamente."
+      );
+
+
+      cargarMarcas();
+
+
+    } catch (
+      error
+    ) {
+
+      console.error(
+        error
+      );
+
+
+      alert(
+        error.message ||
+        "No se pudieron guardar los cambios."
+      );
+
+
+    } finally {
+
+      boton.disabled =
+        false;
+
+      boton.textContent =
+        "GUARDAR CAMBIOS";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     PUBLICAR NUEVA MARCA
+  ====================================================== */
+
+  document
+    .getElementById(
+      "gbGuardar"
+    )
+    .addEventListener(
+      "click",
+      async function() {
+
+        const boton =
+          this;
+
+
+        const nombre =
+          document
+            .getElementById(
+              "gbNombre"
+            )
+            .value
+            .trim();
+
+
+        const categoria =
+          document
+            .getElementById(
+              "gbCategoria"
+            )
+            .value
+            .trim();
+
+
+        const titulo =
+          document
+            .getElementById(
+              "gbTitulo"
+            )
+            .value
+            .trim();
+
+
+        const tipo =
+          document
+            .querySelector(
+              'input[name="gbTipoAcceso"]:checked'
+            )
+            ?.value;
+
+
+        if (
+          !nombre ||
+          !categoria ||
+          !titulo ||
+          !tipo
+        ) {
+
+          mensaje(
+            "Completa nombre, categoría, título y acceso.",
+            true
+          );
+
+          return;
+
+        }
+
+
+        boton.disabled =
+          true;
+
+        boton.textContent =
+          "PUBLICANDO...";
+
+
+        try {
+
+          const slugMarca =
+            slug(
+              nombre
+            );
+
+
+          /* =================================================
+             COMPROBAR DUPLICADO
+          ================================================== */
+
+          const existente =
+            await gbSupabase
+              .from(
+                "marcas_afiliadas"
+              )
+              .select(
+                "id"
+              )
+              .eq(
+                "slug",
+                slugMarca
+              )
+              .maybeSingle();
+
+
+          if (
+            existente.error
+          ) {
+
+            throw existente.error;
+
+          }
+
+
+          if (
+            existente.data
+          ) {
+
+            throw new Error(
+              "Esta marca ya existe."
+            );
+
+          }
+
+
+          /* =================================================
+             LOGO
+          ================================================== */
+
+          let logoUrl =
+            null;
+
+
+          const archivo =
+            document
+              .getElementById(
+                "gbLogo"
+              )
+              .files[0];
+
+
+          if (
+            archivo
+          ) {
+
+            if (
+              archivo.size >
+              5 * 1024 * 1024
+            ) {
+
+              throw new Error(
+                "El logo no puede superar 5 MB."
+              );
+
+            }
+
+
+            const extension =
+              (
+                archivo.name
+                  .split(".")
+                  .pop() ||
+                "png"
+              )
+              .toLowerCase();
+
+
+            const ruta =
+              slugMarca +
+              "-" +
+              Date.now() +
+              "." +
+              extension;
+
+
+            const subida =
+              await gbSupabase
+                .storage
+                .from(
+                  "logos-marcas"
+                )
+                .upload(
+                  ruta,
+                  archivo,
+                  {
+
+                    cacheControl:
+                      "3600",
+
+                    upsert:
+                      false,
+
+                    contentType:
+                      archivo.type
+
+                  }
+                );
+
+
+            if (
+              subida.error
+            ) {
+
+              throw subida.error;
+
+            }
+
+
+            logoUrl =
+              gbSupabase
+                .storage
+                .from(
+                  "logos-marcas"
+                )
+                .getPublicUrl(
+                  ruta
+                )
+                .data
+                .publicUrl;
+
+          }
+
+
+          /* =================================================
+             CREAR MARCA
+          ================================================== */
+
+          const marca =
+            await gbSupabase
+              .from(
+                "marcas_afiliadas"
+              )
+              .insert({
+
+                nombre,
+
+                slug:
+                  slugMarca,
+
+                logo_url:
+                  logoUrl,
+
+                categoria,
+
+                descripcion:
+                  document
+                    .getElementById(
+                      "gbDescripcion"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                whatsapp:
+                  document
+                    .getElementById(
+                      "gbWhatsapp"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                instagram:
+                  document
+                    .getElementById(
+                      "gbInstagram"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                web:
+                  document
+                    .getElementById(
+                      "gbWeb"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                estado:
+                  true
+
+              })
+              .select()
+              .single();
+
+
+          if (
+            marca.error
+          ) {
+
+            throw marca.error;
+
+          }
+
+
+          /* =================================================
+             CREAR BENEFICIO
+          ================================================== */
+
+          const beneficio =
+            await gbSupabase
+              .from(
+                "beneficios_golden"
+              )
+              .insert({
+
+                marca_id:
+                  marca.data.id,
+
+                titulo,
+
+                tipo_beneficio:
+                  "Descuento",
+
+                descuento:
+                  document
+                    .getElementById(
+                      "gbDescuento"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                codigo:
+                  document
+                    .getElementById(
+                      "gbCodigo"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                fecha_inicio:
+                  document
+                    .getElementById(
+                      "gbFecha"
+                    )
+                    .value ||
+                  null,
+
+                fecha_fin:
+                  document
+                    .getElementById(
+                      "gbFecha"
+                    )
+                    .value ||
+                  null,
+
+                descripcion:
+                  document
+                    .getElementById(
+                      "gbBeneficioDescripcion"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                condiciones:
+                  document
+                    .getElementById(
+                      "gbCondiciones"
+                    )
+                    .value
+                    .trim() ||
+                  null,
+
+                acceso_id:
+                  tipo ===
+                  "general",
+
+                acceso_black:
+                  tipo ===
+                    "general" ||
+                  tipo ===
+                    "black",
+
+                acceso_premium:
+                  tipo ===
+                    "general" ||
+                  tipo ===
+                    "premium",
+
+                estado:
+                  true
+
+              });
+
+
+          if (
+            beneficio.error
+          ) {
+
+            throw beneficio.error;
+
+          }
+
+
+          alert(
+            "Marca y beneficio publicados correctamente."
+          );
+
+
+          limpiar();
+
+
+          formulario.style.display =
+            "none";
+
+
+          cargarMarcas();
+
+
+        } catch (
+          error
+        ) {
+
+          console.error(
+            error
+          );
+
+
+          mensaje(
+            error.message ||
+            "No se pudo publicar.",
+            true
+          );
+
+
+        } finally {
+
+          boton.disabled =
+            false;
+
+          boton.textContent =
+            "PUBLICAR";
+
+        }
+
+      }
+    );
+
+
+  /* =====================================================
+     INICIAR
+  ====================================================== */
+
+  async function iniciar() {
+
+    const sesion =
+      await gbSupabase
+        .auth
+        .getSession();
+
+
+    if (
+      sesion.data &&
+      sesion.data.session
+    ) {
+
+      module.style.display =
+        "block";
+
+      cargarMarcas();
+
+    }
+
+  }
+
+
+  iniciar();
+
+})();
+
+</script>
 </body>
 
 </html>
