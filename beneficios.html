@@ -1384,48 +1384,47 @@ function crearTarjetaMarca(
     );
 
 
-    let acceso = "";
+   let acceso = "";
 
+if (
+    beneficio &&
+    beneficio.acceso_id
+) {
 
-    if (
-        beneficio &&
-        beneficio.acceso_black &&
-        beneficio.acceso_premium
-    ) {
+    acceso =
+    "TODOS LOS ID BABY GOLDEN";
 
-        acceso =
-        "BLACK ID + PREMIUM";
+} else if (
+    beneficio &&
+    beneficio.acceso_black &&
+    beneficio.acceso_premium
+) {
 
-    } else if (
-        beneficio &&
-        beneficio.acceso_premium
-    ) {
+    acceso =
+    "BLACK ID + PREMIUM ID";
 
-        acceso =
-        "PREMIUM";
+} else if (
+    beneficio &&
+    beneficio.acceso_premium
+) {
 
-    } else if (
-        beneficio &&
-        beneficio.acceso_black
-    ) {
+    acceso =
+    "PREMIUM ID";
 
-        acceso =
-        "BLACK ID";
+} else if (
+    beneficio &&
+    beneficio.acceso_black
+) {
 
-    } else if (
-        beneficio &&
-        beneficio.acceso_id
-    ) {
+    acceso =
+    "BLACK ID";
 
-        acceso =
-        "ID BABY GOLDEN";
+} else {
 
-    } else {
+    acceso =
+    "BENEFICIO GOLDEN";
 
-        acceso =
-        "BENEFICIO GOLDEN";
-
-    }
+}
 
 
     let logoHTML;
