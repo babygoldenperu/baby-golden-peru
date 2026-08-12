@@ -437,11 +437,32 @@
       line-height: 1.7;
     }
 
-    @media (max-width: 900px) {
+   @media (max-width: 900px) {
 
-      .menu {
-        display: none;
-      }
+  .nav {
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    padding: 12px 18px;
+  }
+
+  .menu {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px 16px;
+  }
+
+  .menu a {
+    font-size: 10px;
+  }
+
+  .header-button {
+    padding: 10px 14px;
+    font-size: 10px !important;
+  }
 
       .hero {
         grid-template-columns: 1fr;
@@ -473,9 +494,31 @@
 
     @media (max-width: 600px) {
 
-      .nav {
-        padding: 12px 18px;
-      }
+     .nav {
+  padding: 9px 10px 11px;
+  gap: 8px;
+}
+
+.menu {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px 11px;
+}
+
+.menu a {
+  font-size: 9px;
+  line-height: 1.2;
+}
+
+.header-button {
+  padding: 9px 12px;
+  font-size: 9px !important;
+}
+
+.heart {
+  font-size: 20px;
+}
 
       .logo {
         width: 145px;
