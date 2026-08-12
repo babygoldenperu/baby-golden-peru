@@ -1293,64 +1293,66 @@ if (
      BENEFICIOS BLACK
   ====================================== */
 
-  const beneficiosBlack =
+  const beneficiosID = `
 
-    esBlack
+  <div class="id-benefits">
 
+    <div class="id-benefits-title">
+
+      Beneficios Baby Golden ID
+
+    </div>
+
+
+    <div class="benefit">
+
+      <span>◆</span>
+
+      Identificación digital exclusiva
+
+    </div>
+
+
+    <div class="benefit">
+
+      <span>◆</span>
+
+      Perfil digital personalizado
+
+    </div>
+
+
+    <div class="benefit">
+
+      <span>◆</span>
+
+      Beneficios exclusivos de
+      Baby Golden Perú
+
+    </div>
+
+
+    ${
+      esBlack
       ? `
 
-        <div class="black-benefits">
+        <div class="benefit">
 
-          <div class="black-benefits-title">
+          <span>◆</span>
 
-            Beneficios Black ID
-
-          </div>
-
-
-          <div class="benefit">
-
-            <span>◆</span>
-
-            Identificación digital exclusiva
-
-          </div>
-
-
-          <div class="benefit">
-
-            <span>◆</span>
-
-            Tecnología QR + NFC
-
-          </div>
-
-
-          <div class="benefit">
-
-            <span>◆</span>
-
-            Perfil digital personalizado
-
-          </div>
-
-
-          <div class="benefit">
-
-            <span>◆</span>
-
-            Beneficios exclusivos de
-            Baby Golden Perú
-
-          </div>
-
+          Beneficios especiales en
+          merchandising de Baby Golden Perú
 
         </div>
 
       `
+      : ""
+    }
 
-      : "";
 
+  </div>
+
+`;
 
   /* ======================================
      MICROCHIP
@@ -1647,7 +1649,7 @@ if (
   </div>
 
 </div>
-      ${beneficiosBlack}
+     ${beneficiosID}
 
 
     </div>
