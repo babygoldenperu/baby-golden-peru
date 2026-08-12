@@ -412,21 +412,93 @@ s<!DOCTYPE html>
     </div>
 
 <div
-  id="solicitudesPendientes"
+  id="gestionSolicitudes"
   class="card"
   style="margin-top:25px;"
 >
 
   <h2>
-    Solicitudes pendientes
+    Gestión Baby Golden ID
   </h2>
 
+
   <div
-    id="listaSolicitudes"
+    style="
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:12px;
+      margin:20px 0;
+    "
   >
+
+    <div
+      style="
+        padding:15px;
+        border-radius:12px;
+        background:#fff8e1;
+        text-align:center;
+      "
+    >
+
+      <strong id="contadorPendientes">
+        0
+      </strong>
+
+      <div>
+        Pendientes
+      </div>
+
+    </div>
+
+
+    <div
+      style="
+        padding:15px;
+        border-radius:12px;
+        background:#e8f5e9;
+        text-align:center;
+      "
+    >
+
+      <strong id="contadorActivos">
+        0
+      </strong>
+
+      <div>
+        Activos
+      </div>
+
+    </div>
+
+
+    <div
+      style="
+        padding:15px;
+        border-radius:12px;
+        background:#ffebee;
+        text-align:center;
+      "
+    >
+
+      <strong id="contadorRechazados">
+        0
+      </strong>
+
+      <div>
+        Rechazados
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <div id="listaSolicitudes">
+
     <p>
       Cargando solicitudes...
     </p>
+
   </div>
 
 </div>
@@ -1707,13 +1779,28 @@ function escaparHTML(valor) {
     .replace(/'/g, "&#039;");
 
 }
-  
-async function cargarSolicitudesPendientes() {
+async function cargarSolicitudes() {
 
   const lista =
     document.getElementById(
       "listaSolicitudes"
     );
+
+  const contadorPendientes =
+    document.getElementById(
+      "contadorPendientes"
+    );
+
+  const contadorActivos =
+    document.getElementById(
+      "contadorActivos"
+    );
+
+  const contadorRechazados =
+    document.getElementById(
+      "contadorRechazados"
+    );
+
 
   lista.innerHTML =
     "<p>Cargando solicitudes...</p>";
@@ -1723,7 +1810,7 @@ async function cargarSolicitudesPendientes() {
     data,
     error
   } = await supabaseClient.rpc(
-    "admin_obtener_solicitudes_pendientes"
+    "admin_obtener_solicitudes"
   );
 
 
@@ -1744,11 +1831,49 @@ async function cargarSolicitudesPendientes() {
   }
 
 
-  if (!data || data.length === 0) {
+  const solicitudes =
+    data || [];
+
+
+  const pendientes =
+    solicitudes.filter(
+      solicitud =>
+        solicitud.estado_solicitud ===
+        "PENDIENTE"
+    );
+
+
+  const activos =
+    solicitudes.filter(
+      solicitud =>
+        solicitud.estado_solicitud ===
+        "ACTIVO"
+    );
+
+
+  const rechazados =
+    solicitudes.filter(
+      solicitud =>
+        solicitud.estado_solicitud ===
+        "RECHAZADO"
+    );
+
+
+  contadorPendientes.textContent =
+    pendientes.length;
+
+  contadorActivos.textContent =
+    activos.length;
+
+  contadorRechazados.textContent =
+    rechazados.length;
+
+
+  if (solicitudes.length === 0) {
 
     lista.innerHTML = `
       <p>
-        No hay solicitudes pendientes.
+        No hay registros.
       </p>
     `;
 
@@ -1757,52 +1882,21 @@ async function cargarSolicitudesPendientes() {
 
 
   lista.innerHTML =
-    data.map(
-      solicitud => `
+    solicitudes.map(
+      solicitud => {
 
-        <div
-          class="solicitud-item"
-          data-id="${solicitud.baby_golden_id}"
-          style="
-            padding:18px;
-            margin-bottom:15px;
-            border:1px solid #e5e5e5;
-            border-radius:14px;
-          "
-        >
+        const estado =
+          solicitud.estado_solicitud;
 
-          <div>
-            <strong>
-              ${escaparHTML(
-                solicitud.baby_golden_id
-              )}
-            </strong>
-          </div>
 
-          <div style="margin-top:6px;">
-            ${escaparHTML(
-              solicitud.nombre_perrito || ""
-            )}
-          </div>
+        let acciones = "";
 
-          <div style="margin-top:6px;">
-            ${escaparHTML(
-              solicitud.tipo_id || ""
-            )}
-          </div>
 
-          <div style="margin-top:6px;">
-            Estado:
-            <strong>PENDIENTE</strong>
-          </div>
+        if (
+          estado === "PENDIENTE"
+        ) {
 
-          <div
-            style="
-              display:flex;
-              gap:10px;
-              margin-top:15px;
-            "
-          >
+          acciones = `
 
             <button
               type="button"
@@ -1814,22 +1908,100 @@ async function cargarSolicitudesPendientes() {
               APROBAR
             </button>
 
+
             <button
               type="button"
+              class="secondary"
               onclick="actualizarEstadoSolicitud(
                 '${solicitud.baby_golden_id}',
                 'RECHAZADO'
               )"
-              class="secondary"
             >
               RECHAZAR
             </button>
 
+          `;
+
+        }
+
+
+        return `
+
+          <div
+            class="solicitud-item"
+            style="
+              padding:18px;
+              margin-bottom:15px;
+              border:1px solid #e5e5e5;
+              border-radius:14px;
+            "
+          >
+
+            <div>
+
+              <strong>
+                ${escaparHTML(
+                  solicitud.baby_golden_id
+                )}
+              </strong>
+
+            </div>
+
+
+            <div style="margin-top:6px;">
+
+              ${escaparHTML(
+                solicitud.nombre_perrito || ""
+              )}
+
+            </div>
+
+
+            <div style="margin-top:6px;">
+
+              ${escaparHTML(
+                solicitud.tipo_id || ""
+              )}
+
+            </div>
+
+
+            <div style="margin-top:6px;">
+
+              Estado:
+
+              <strong>
+                ${escaparHTML(
+                  estado
+                )}
+              </strong>
+
+            </div>
+
+
+            ${
+              acciones
+                ? `
+                  <div
+                    style="
+                      display:flex;
+                      gap:10px;
+                      margin-top:15px;
+                    "
+                  >
+
+                    ${acciones}
+
+                  </div>
+                `
+                : ""
+            }
+
           </div>
 
-        </div>
+        `;
 
-      `
+      }
     )
     .join("");
 
@@ -1893,11 +2065,11 @@ async function actualizarEstadoSolicitud(
       : "Solicitud rechazada correctamente."
   );
 
-  await cargarSolicitudesPendientes();
+  await cargarSolicitudes();
 
 }
 
-  cargarSolicitudesPendientes();
+  cargarSolicitudes();
   
 /* ========================================
    ELEMENTOS
