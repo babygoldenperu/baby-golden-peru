@@ -972,6 +972,682 @@ s<!DOCTYPE html>
     </div>
 
 
+<!-- GOLDEN BENEFITS CLUB — PANEL ÚNICO -->
+
+<style>
+
+#goldenBenefitsAdmin {
+  margin-top: 35px;
+}
+
+.gb-head {
+  background: #fff;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.07);
+}
+
+.gb-kicker {
+  color: #b18a4a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.gb-title {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.gb-subtitle {
+  margin: 7px 0 22px;
+  color: #777;
+  font-size: 13px;
+}
+
+.gb-add {
+  width: auto !important;
+  min-width: 145px;
+  padding: 11px 18px !important;
+  background: #b18a4a !important;
+  border-radius: 12px !important;
+}
+
+.gb-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 14px;
+}
+
+.gb-card {
+  background: #fff;
+  border: 1px solid #e9e5df;
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.gb-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.gb-brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.gb-logo {
+  width: 54px;
+  height: 54px;
+  border-radius: 13px;
+  object-fit: contain;
+  background: #f7f4ee;
+  padding: 7px;
+}
+
+.gb-logo-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #b18a4a;
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+.gb-name {
+  font-family: Georgia, serif;
+  font-size: 23px;
+}
+
+.gb-category {
+  margin-top: 3px;
+  color: #999;
+  font-size: 11px;
+}
+
+.gb-status {
+  padding: 7px 10px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.gb-active {
+  background: #edf7ef;
+  color: #27703c;
+}
+
+.gb-inactive {
+  background: #faeaea;
+  color: #a33b3b;
+}
+
+.gb-benefit {
+  margin-top: 15px;
+  background: #faf8f5;
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.gb-discount {
+  color: #b18a4a;
+  font-family: Georgia, serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.gb-benefit-title {
+  margin-top: 4px;
+  font-size: 13px;
+}
+
+.gb-code {
+  margin-top: 7px;
+  color: #777;
+  font-size: 11px;
+}
+
+.gb-access {
+  margin-top: 7px;
+  color: #555;
+  font-size: 11px;
+}
+
+.gb-actions {
+  margin-top: 13px;
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.gb-actions button {
+  width: auto !important;
+  padding: 9px 13px !important;
+  border-radius: 10px !important;
+  font-size: 10px !important;
+}
+
+.gb-edit {
+  display: none;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #eee;
+}
+
+.gb-edit.open {
+  display: block;
+}
+
+.gb-edit h3 {
+  margin: 0 0 16px;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+
+.gb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.gb-full {
+  grid-column: 1 / -1;
+}
+
+.gb-edit label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.gb-edit input,
+.gb-edit textarea,
+.gb-edit select {
+  width: 100%;
+  padding: 11px 12px;
+  margin-bottom: 13px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.gb-edit textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.gb-access-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.gb-access-option {
+  position: relative;
+}
+
+.gb-access-option input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.gb-access-option span {
+  display: block;
+  padding: 9px 13px;
+  border-radius: 20px;
+  background: #f5f2ed;
+  color: #555;
+  cursor: pointer;
+  font-size: 11px;
+}
+
+.gb-access-option input:checked + span {
+  background: #b18a4a;
+  color: #fff;
+}
+
+.gb-save {
+  background: #b18a4a !important;
+}
+
+.gb-delete {
+  background: #a83b3b !important;
+}
+
+.gb-loading,
+.gb-empty {
+  padding: 35px;
+  text-align: center;
+  color: #888;
+  background: #fff;
+  border-radius: 18px;
+}
+
+.gb-modal {
+  display: none;
+  margin-top: 18px;
+  background: #fff;
+  border-radius: 18px;
+  padding: 22px;
+  border: 1px solid #e9e5df;
+}
+
+.gb-modal.open {
+  display: block;
+}
+
+.gb-modal h3 {
+  margin-top: 0;
+  font-family: Georgia, serif;
+  font-weight: 400;
+}
+
+.gb-modal-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.gb-modal-actions button {
+  width: auto !important;
+}
+
+@media(max-width:700px) {
+
+  .gb-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .gb-full {
+    grid-column: auto;
+  }
+
+  .gb-card-top {
+    flex-direction: column;
+  }
+
+  .gb-actions {
+    justify-content: stretch;
+  }
+
+  .gb-actions button {
+    flex: 1;
+  }
+
+}
+
+</style>
+
+<div id="goldenBenefitsAdmin">
+
+
+  <div class="gb-head">
+
+    <div class="gb-kicker">
+      GOLDEN BENEFITS CLUB
+    </div>
+
+    <h2 class="gb-title">
+      Marcas afiliadas
+    </h2>
+
+    <p class="gb-subtitle">
+      Administra las marcas y beneficios exclusivos de Baby Golden Perú.
+    </p>
+
+    <button
+      id="gbAddButton"
+      class="gb-add"
+      type="button"
+    >
+      + AGREGAR MARCA
+    </button>
+
+  </div>
+
+
+  <div
+    id="gbForm"
+    class="gb-modal"
+  >
+
+    <h3 id="gbFormTitle">
+      Nueva marca
+    </h3>
+
+
+    <div class="gb-grid">
+
+      <div>
+
+        <label>
+          Nombre de la marca
+        </label>
+
+        <input
+          id="gbNombre"
+          type="text"
+          placeholder="Ejemplo: YUM"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Categoría
+        </label>
+
+        <input
+          id="gbCategoria"
+          type="text"
+          placeholder="Ejemplo: Alimentación"
+        >
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="gbDescripcion"
+        ></textarea>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          WhatsApp
+        </label>
+
+        <input
+          id="gbWhatsapp"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Instagram
+        </label>
+
+        <input
+          id="gbInstagram"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Página web
+        </label>
+
+        <input
+          id="gbWeb"
+        >
+
+      </div>
+
+
+     <div>
+
+  <label>
+    Logo de la marca
+  </label>
+
+  <input
+    id="gbLogoFile"
+    type="file"
+    accept="image/png,image/jpeg,image/webp"
+  >
+
+  <small style="
+    display:block;
+    margin-top:6px;
+    color:#888;
+    font-size:11px;
+  ">
+    PNG, JPG o WEBP
+  </small>
+
+  <div
+    id="gbLogoPreview"
+    style="
+      display:none;
+      margin-top:12px;
+    "
+  >
+
+    <img
+      id="gbLogoPreviewImg"
+      src=""
+      alt="Vista previa"
+      style="
+        width:80px;
+        height:80px;
+        object-fit:contain;
+        border-radius:14px;
+        background:#f7f4ee;
+        padding:8px;
+        border:1px solid #e8e3db;
+      "
+    >
+
+  </div>
+
+</div>
+
+
+      <div class="gb-full">
+
+        <hr>
+
+        <h3>
+          Beneficio
+        </h3>
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="gbTitulo"
+          placeholder="10% de descuento Baby Golden"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Descuento
+        </label>
+
+        <input
+          id="gbDescuento"
+          placeholder="10% OFF"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Código
+        </label>
+
+        <input
+          id="gbCodigo"
+        >
+
+      </div>
+
+
+      <div>
+
+        <label>
+          Válido hasta
+        </label>
+
+        <input
+          id="gbFecha"
+          type="date"
+        >
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Descripción del beneficio
+        </label>
+
+        <textarea
+          id="gbBeneficioDescripcion"
+        ></textarea>
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          Condiciones
+        </label>
+
+        <textarea
+          id="gbCondiciones"
+        ></textarea>
+
+      </div>
+
+
+      <div class="gb-full">
+
+        <label>
+          ¿Quién puede utilizarlo?</label>
+
+        <div class="gb-access-options">
+
+          <label class="gb-access-option">
+
+            <input
+              id="gbAccessId"
+              type="checkbox"
+            >
+
+            <span>
+              ID BABY GOLDEN
+            </span>
+
+          </label>
+
+
+          <label class="gb-access-option">
+
+            <input
+              id="gbAccessBlack"
+              type="checkbox"
+            >
+
+            <span>
+              BLACK ID
+            </span>
+
+          </label>
+
+
+          <label class="gb-access-option">
+
+            <input
+              id="gbAccessPremium"
+              type="checkbox"
+            >
+
+            <span>
+              PREMIUM ID
+            </span>
+
+          </label>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="gb-modal-actions">
+
+      <button
+        id="gbSaveButton"
+        class="gb-save"
+        type="button"
+      >
+        GUARDAR
+      </button>
+
+      <button
+        id="gbCancelButton"
+        class="secondary"
+        type="button"
+      >
+        CANCELAR
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <div
+    id="gbList"
+    class="gb-list"
+  >
+
+    <div class="gb-loading">
+      Cargando marcas...
+    </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+
   </div>
 
 
@@ -1148,6 +1824,12 @@ async function comprobarAdministrador() {
   panelView.classList.remove(
     "hidden"
   );
+
+  if (
+    typeof window.cargarGoldenBenefits === "function"
+  ) {
+    window.cargarGoldenBenefits();
+  }
 
 }
 
@@ -2309,678 +2991,6 @@ async function revisarSesion() {
 
 revisarSesion();
   </script>
-/*<!-- =====================================================
-     GOLDEN BENEFITS CLUB — PANEL ÚNICO
-     ===================================================== -->
-
-<style>
-
-#goldenBenefitsAdmin {
-  margin-top: 35px;
-}
-
-.gb-head {
-  background: #fff;
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.07);
-}
-
-.gb-kicker {
-  color: #b18a4a;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-
-.gb-title {
-  margin: 0;
-  font-family: Georgia, serif;
-  font-size: 32px;
-  font-weight: 400;
-}
-
-.gb-subtitle {
-  margin: 7px 0 22px;
-  color: #777;
-  font-size: 13px;
-}
-
-.gb-add {
-  width: auto !important;
-  min-width: 145px;
-  padding: 11px 18px !important;
-  background: #b18a4a !important;
-  border-radius: 12px !important;
-}
-
-.gb-list {
-  margin-top: 18px;
-  display: grid;
-  gap: 14px;
-}
-
-.gb-card {
-  background: #fff;
-  border: 1px solid #e9e5df;
-  border-radius: 18px;
-  padding: 18px;
-}
-
-.gb-card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 15px;
-}
-
-.gb-brand {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-}
-
-.gb-logo {
-  width: 54px;
-  height: 54px;
-  border-radius: 13px;
-  object-fit: contain;
-  background: #f7f4ee;
-  padding: 7px;
-}
-
-.gb-logo-empty {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #b18a4a;
-  font-family: Georgia, serif;
-  font-size: 22px;
-}
-
-.gb-name {
-  font-family: Georgia, serif;
-  font-size: 23px;
-}
-
-.gb-category {
-  margin-top: 3px;
-  color: #999;
-  font-size: 11px;
-}
-
-.gb-status {
-  padding: 7px 10px;
-  border-radius: 20px;
-  font-size: 9px;
-  font-weight: 700;
-  letter-spacing: 1px;
-}
-
-.gb-active {
-  background: #edf7ef;
-  color: #27703c;
-}
-
-.gb-inactive {
-  background: #faeaea;
-  color: #a33b3b;
-}
-
-.gb-benefit {
-  margin-top: 15px;
-  background: #faf8f5;
-  border-radius: 14px;
-  padding: 16px;
-}
-
-.gb-discount {
-  color: #b18a4a;
-  font-family: Georgia, serif;
-  font-size: 25px;
-  font-weight: 700;
-}
-
-.gb-benefit-title {
-  margin-top: 4px;
-  font-size: 13px;
-}
-
-.gb-code {
-  margin-top: 7px;
-  color: #777;
-  font-size: 11px;
-}
-
-.gb-access {
-  margin-top: 7px;
-  color: #555;
-  font-size: 11px;
-}
-
-.gb-actions {
-  margin-top: 13px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
-}
-
-.gb-actions button {
-  width: auto !important;
-  padding: 9px 13px !important;
-  border-radius: 10px !important;
-  font-size: 10px !important;
-}
-
-.gb-edit {
-  display: none;
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid #eee;
-}
-
-.gb-edit.open {
-  display: block;
-}
-
-.gb-edit h3 {
-  margin: 0 0 16px;
-  font-family: Georgia, serif;
-  font-weight: 400;
-}
-
-.gb-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 12px;
-}
-
-.gb-full {
-  grid-column: 1 / -1;
-}
-
-.gb-edit label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.gb-edit input,
-.gb-edit textarea,
-.gb-edit select {
-  width: 100%;
-  padding: 11px 12px;
-  margin-bottom: 13px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-}
-
-.gb-edit textarea {
-  min-height: 80px;
-  resize: vertical;
-}
-
-.gb-access-options {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-bottom: 15px;
-}
-
-.gb-access-option {
-  position: relative;
-}
-
-.gb-access-option input {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-}
-
-.gb-access-option span {
-  display: block;
-  padding: 9px 13px;
-  border-radius: 20px;
-  background: #f5f2ed;
-  color: #555;
-  cursor: pointer;
-  font-size: 11px;
-}
-
-.gb-access-option input:checked + span {
-  background: #b18a4a;
-  color: #fff;
-}
-
-.gb-save {
-  background: #b18a4a !important;
-}
-
-.gb-delete {
-  background: #a83b3b !important;
-}
-
-.gb-loading,
-.gb-empty {
-  padding: 35px;
-  text-align: center;
-  color: #888;
-  background: #fff;
-  border-radius: 18px;
-}
-
-.gb-modal {
-  display: none;
-  margin-top: 18px;
-  background: #fff;
-  border-radius: 18px;
-  padding: 22px;
-  border: 1px solid #e9e5df;
-}
-
-.gb-modal.open {
-  display: block;
-}
-
-.gb-modal h3 {
-  margin-top: 0;
-  font-family: Georgia, serif;
-  font-weight: 400;
-}
-
-.gb-modal-actions {
-  display: flex;
-  gap: 8px;
-}
-
-.gb-modal-actions button {
-  width: auto !important;
-}
-
-@media(max-width:700px) {
-
-  .gb-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .gb-full {
-    grid-column: auto;
-  }
-
-  .gb-card-top {
-    flex-direction: column;
-  }
-
-  .gb-actions {
-    justify-content: stretch;
-  }
-
-  .gb-actions button {
-    flex: 1;
-  }
-
-}
-
-</style>
-
-
-<div id="goldenBenefitsAdmin">
-
-  <div class="gb-head">
-
-    <div class="gb-kicker">
-      GOLDEN BENEFITS CLUB
-    </div>
-
-    <h2 class="gb-title">
-      Marcas afiliadas
-    </h2>
-
-    <p class="gb-subtitle">
-      Administra las marcas y beneficios exclusivos de Baby Golden Perú.
-    </p>
-
-    <button
-      id="gbAddButton"
-      class="gb-add"
-      type="button"
-    >
-      + AGREGAR MARCA
-    </button>
-
-  </div>
-
-
-  <div
-    id="gbForm"
-    class="gb-modal"
-  >
-
-    <h3 id="gbFormTitle">
-      Nueva marca
-    </h3>
-
-
-    <div class="gb-grid">
-
-      <div>
-
-        <label>
-          Nombre de la marca
-        </label>
-
-        <input
-          id="gbNombre"
-          type="text"
-          placeholder="Ejemplo: YUM"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Categoría
-        </label>
-
-        <input
-          id="gbCategoria"
-          type="text"
-          placeholder="Ejemplo: Alimentación"
-        >
-
-      </div>
-
-
-      <div class="gb-full">
-
-        <label>
-          Descripción
-        </label>
-
-        <textarea
-          id="gbDescripcion"
-        ></textarea>
-
-      </div>
-
-
-      <div>
-
-        <label>
-          WhatsApp
-        </label>
-
-        <input
-          id="gbWhatsapp"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Instagram
-        </label>
-
-        <input
-          id="gbInstagram"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Página web
-        </label>
-
-        <input
-          id="gbWeb"
-        >
-
-      </div>
-
-
-     <div>
-
-  <label>
-    Logo de la marca
-  </label>
-
-  <input
-    id="gbLogoFile"
-    type="file"
-    accept="image/png,image/jpeg,image/webp"
-  >
-
-  <small style="
-    display:block;
-    margin-top:6px;
-    color:#888;
-    font-size:11px;
-  ">
-    PNG, JPG o WEBP
-  </small>
-
-  <div
-    id="gbLogoPreview"
-    style="
-      display:none;
-      margin-top:12px;
-    "
-  >
-
-    <img
-      id="gbLogoPreviewImg"
-      src=""
-      alt="Vista previa"
-      style="
-        width:80px;
-        height:80px;
-        object-fit:contain;
-        border-radius:14px;
-        background:#f7f4ee;
-        padding:8px;
-        border:1px solid #e8e3db;
-      "
-    >
-
-  </div>
-
-</div>
-
-
-      <div class="gb-full">
-
-        <hr>
-
-        <h3>
-          Beneficio
-        </h3>
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Título
-        </label>
-
-        <input
-          id="gbTitulo"
-          placeholder="10% de descuento Baby Golden"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Descuento
-        </label>
-
-        <input
-          id="gbDescuento"
-          placeholder="10% OFF"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Código
-        </label>
-
-        <input
-          id="gbCodigo"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Válido hasta
-        </label>
-
-        <input
-          id="gbFecha"
-          type="date"
-        >
-
-      </div>
-
-
-      <div class="gb-full">
-
-        <label>
-          Descripción del beneficio
-        </label>
-
-        <textarea
-          id="gbBeneficioDescripcion"
-        ></textarea>
-
-      </div>
-
-
-      <div class="gb-full">
-
-        <label>
-          Condiciones
-        </label>
-
-        <textarea
-          id="gbCondiciones"
-        ></textarea>
-
-      </div>
-
-
-      <div class="gb-full">
-
-        <label>
-          ¿Quién puede utilizarlo?</label>
-
-        <div class="gb-access-options">
-
-          <label class="gb-access-option">
-
-            <input
-              id="gbAccessId"
-              type="checkbox"
-            >
-
-            <span>
-              ID BABY GOLDEN
-            </span>
-
-          </label>
-
-
-          <label class="gb-access-option">
-
-            <input
-              id="gbAccessBlack"
-              type="checkbox"
-            >
-
-            <span>
-              BLACK ID
-            </span>
-
-          </label>
-
-
-          <label class="gb-access-option">
-
-            <input
-              id="gbAccessPremium"
-              type="checkbox"
-            >
-
-            <span>
-              PREMIUM ID
-            </span>
-
-          </label>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="gb-modal-actions">
-
-      <button
-        id="gbSaveButton"
-        class="gb-save"
-        type="button"
-      >
-        GUARDAR
-      </button>
-
-      <button
-        id="gbCancelButton"
-        class="secondary"
-        type="button"
-      >
-        CANCELAR
-      </button>
-
-    </div>
-
-  </div>
-
-
-  <div
-    id="gbList"
-    class="gb-list"
-  >
-
-    <div class="gb-loading">
-      Cargando marcas...
-    </div>
-
-  </div>
-
-</div>
 
 
 <script>
@@ -3013,12 +3023,6 @@ revisarSesion();
     );
 
 
-  let editMarcaId =
-    null;
-
-  let editBeneficioId =
-    null;
-
 
   document
     .getElementById(
@@ -3027,9 +3031,6 @@ revisarSesion();
     .addEventListener(
       "click",
       function () {
-
-        editMarcaId = null;
-        editBeneficioId = null;
 
         limpiarGB();
 
@@ -3373,6 +3374,15 @@ revisarSesion();
             "edit-logo",
             marca.logo_url
           )}
+
+          <div>
+            <label>Nuevo logo (opcional)</label>
+            <input
+              type="file"
+              data-edit="logo-file"
+              accept="image/png,image/jpeg,image/webp"
+            >
+          </div>
 
           ${campoGB(
             "WhatsApp",
@@ -3780,6 +3790,15 @@ revisarSesion();
 
   async function guardarGB() {
 
+    const {
+      data: sessionData
+    } = await gb.auth.getSession();
+
+    if (!sessionData || !sessionData.session) {
+      alert("Tu sesión de administrador no está activa. Vuelve a iniciar sesión.");
+      return;
+    }
+
     const nombre =
       valorGB(
         "gbNombre"
@@ -4176,6 +4195,62 @@ if (logoFile) {
     }
 
 
+    let logoUrlActualizada =
+      card.querySelector(
+        '[data-edit="edit-logo"]'
+      ).value.trim() || null;
+
+    const nuevoLogo =
+      card.querySelector(
+        '[data-edit="logo-file"]'
+      ).files[0];
+
+    if (nuevoLogo) {
+
+      const extension =
+        nuevoLogo.name
+          .split(".")
+          .pop()
+          .toLowerCase();
+
+      const slugLogo =
+        crearSlugGB(nombre);
+
+      const nombreArchivo =
+        `marcas/${slugLogo}-${Date.now()}.${extension}`;
+
+      const {
+        error: uploadError
+      } = await gb.storage
+        .from("logos-marcas")
+        .upload(
+          nombreArchivo,
+          nuevoLogo,
+          {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: nuevoLogo.type
+          }
+        );
+
+      if (uploadError) {
+        alert(
+          "No se pudo subir el nuevo logo: " +
+          uploadError.message
+        );
+        return;
+      }
+
+      const {
+        data: publicUrlData
+      } = gb.storage
+        .from("logos-marcas")
+        .getPublicUrl(nombreArchivo);
+
+      logoUrlActualizada =
+        publicUrlData.publicUrl;
+    }
+
     const {
       error: marcaError
     } = await gb
@@ -4189,10 +4264,7 @@ if (logoFile) {
         categoria,
 
         logo_url:
-          card.querySelector(
-            '[data-edit="edit-logo"]'
-          ).value.trim() ||
-          null,
+          logoUrlActualizada,
 
         whatsapp:
           card.querySelector(
@@ -4554,107 +4626,74 @@ if (logoFile) {
   }
 
 
-  cargarGB();
+  window.cargarGoldenBenefits = cargarGB;
 
 })();
 
 </script>
-  <script>
+
+<script>
 
 (function () {
 
-  const goldenBenefits =
-    document.getElementById("goldenBenefitsAdmin");
+  const logoFileInput =
+    document.getElementById(
+      "gbLogoFile"
+    );
 
-  const panel =
-    document.getElementById("panelView");
+  const logoPreview =
+    document.getElementById(
+      "gbLogoPreview"
+    );
+
+  const logoPreviewImg =
+    document.getElementById(
+      "gbLogoPreviewImg"
+    );
 
   if (
-    goldenBenefits &&
-    panel
+    logoFileInput &&
+    logoPreview &&
+    logoPreviewImg
   ) {
 
-    panel.appendChild(
-      goldenBenefits
+    logoFileInput.addEventListener(
+      "change",
+      function () {
+
+        const file =
+          this.files[0];
+
+        if (!file) {
+
+          logoPreview.style.display =
+            "none";
+
+          logoPreviewImg.src = "";
+
+          return;
+        }
+
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          function (event) {
+
+            logoPreviewImg.src =
+              event.target.result;
+
+            logoPreview.style.display =
+              "block";
+
+          };
+
+        reader.readAsDataURL(file);
+
+      }
     );
 
   }
-if (
-  goldenBenefits &&
-  panel
-) {
-
-  panel.appendChild(
-    goldenBenefits
-  );
-
-}
-
-
-/* VISTA PREVIA DEL LOGO */
-
-const logoFileInput =
-  document.getElementById(
-    "gbLogoFile"
-  );
-
-const logoPreview =
-  document.getElementById(
-    "gbLogoPreview"
-  );
-
-const logoPreviewImg =
-  document.getElementById(
-    "gbLogoPreviewImg"
-  );
-
-
-if (
-  logoFileInput &&
-  logoPreview &&
-  logoPreviewImg
-) {
-
-  logoFileInput.addEventListener(
-    "change",
-    function () {
-
-      const file =
-        this.files[0];
-
-      if (!file) {
-
-        logoPreview.style.display =
-          "none";
-
-        logoPreviewImg.src = "";
-
-        return;
-      }
-
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        function (event) {
-
-          logoPreviewImg.src =
-            event.target.result;
-
-          logoPreview.style.display =
-            "block";
-
-        };
-
-
-      reader.readAsDataURL(file);
-
-    }
-  );
-
-}
 
 })();
 
