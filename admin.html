@@ -411,7 +411,25 @@ s<!DOCTYPE html>
 
     </div>
 
+<div
+  id="solicitudesPendientes"
+  class="card"
+  style="margin-top:25px;"
+>
 
+  <h2>
+    Solicitudes pendientes
+  </h2>
+
+  <div
+    id="listaSolicitudes"
+  >
+    <p>
+      Cargando solicitudes...
+    </p>
+  </div>
+
+</div>
 
     <!-- RESULTADO -->
 
@@ -1675,7 +1693,197 @@ const supabaseClient =
     SUPABASE_KEY
   );
 
+async function cargarSolicitudesPendientes() {
 
+  const lista =
+    document.getElementById(
+      "listaSolicitudes"
+    );
+
+  lista.innerHTML =
+    "<p>Cargando solicitudes...</p>";
+
+
+  const {
+    data,
+    error
+  } = await supabaseClient.rpc(
+    "admin_obtener_solicitudes_pendientes"
+  );
+
+
+  if (error) {
+
+    console.error(
+      "ERROR SOLICITUDES:",
+      error
+    );
+
+    lista.innerHTML = `
+      <p style="color:#b00020;">
+        No se pudieron cargar las solicitudes.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  if (!data || data.length === 0) {
+
+    lista.innerHTML = `
+      <p>
+        No hay solicitudes pendientes.
+      </p>
+    `;
+
+    return;
+  }
+
+
+  lista.innerHTML =
+    data.map(
+      solicitud => `
+
+        <div
+          class="solicitud-item"
+          data-id="${solicitud.baby_golden_id}"
+          style="
+            padding:18px;
+            margin-bottom:15px;
+            border:1px solid #e5e5e5;
+            border-radius:14px;
+          "
+        >
+
+          <div>
+            <strong>
+              ${escaparHTML(
+                solicitud.baby_golden_id
+              )}
+            </strong>
+          </div>
+
+          <div style="margin-top:6px;">
+            ${escaparHTML(
+              solicitud.nombre_perrito || ""
+            )}
+          </div>
+
+          <div style="margin-top:6px;">
+            ${escaparHTML(
+              solicitud.tipo_id || ""
+            )}
+          </div>
+
+          <div style="margin-top:6px;">
+            Estado:
+            <strong>PENDIENTE</strong>
+          </div>
+
+          <div
+            style="
+              display:flex;
+              gap:10px;
+              margin-top:15px;
+            "
+          >
+
+            <button
+              type="button"
+              onclick="actualizarEstadoSolicitud(
+                '${solicitud.baby_golden_id}',
+                'ACTIVO'
+              )"
+            >
+              APROBAR
+            </button>
+
+            <button
+              type="button"
+              onclick="actualizarEstadoSolicitud(
+                '${solicitud.baby_golden_id}',
+                'RECHAZADO'
+              )"
+              class="secondary"
+            >
+              RECHAZAR
+            </button>
+
+          </div>
+
+        </div>
+
+      `
+    )
+    .join("");
+
+}
+async function actualizarEstadoSolicitud(
+  babyGoldenId,
+  nuevoEstado
+) {
+
+  const confirmar =
+    confirm(
+      nuevoEstado === "ACTIVO"
+        ? "¿Aprobar este Baby Golden ID?"
+        : "¿Rechazar esta solicitud?"
+    );
+
+  if (!confirmar) {
+    return;
+  }
+
+  const {
+    data,
+    error
+  } = await supabaseClient.rpc(
+    "admin_actualizar_estado_solicitud",
+    {
+      p_baby_golden_id:
+        babyGoldenId,
+
+      p_estado:
+        nuevoEstado
+    }
+  );
+
+  if (error) {
+
+    console.error(
+      "ERROR ACTUALIZANDO ESTADO:",
+      error
+    );
+
+    alert(
+      "No se pudo actualizar la solicitud."
+    );
+
+    return;
+  }
+
+  if (data !== true) {
+
+    alert(
+      "No se pudo confirmar la actualización."
+    );
+
+    return;
+  }
+
+  alert(
+    nuevoEstado === "ACTIVO"
+      ? "Baby Golden ID aprobado correctamente."
+      : "Solicitud rechazada correctamente."
+  );
+
+  await cargarSolicitudesPendientes();
+
+}
+
+  cargarSolicitudesPendientes();
+  
 /* ========================================
    ELEMENTOS
 ======================================== */
