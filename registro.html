@@ -366,8 +366,35 @@
 
   </div>
 
+<div id="accesoRegistro">
 
-  <form>
+  <h2>Acceso Baby Golden ID</h2>
+
+  <p>
+    Ingresa el correo electrónico con el que adquiriste tu Baby Golden ID.
+  </p>
+
+  <input
+    type="email"
+    id="correoAcceso"
+    placeholder="Correo electrónico"
+    required
+  >
+
+  <button
+    type="button"
+    id="enviarAcceso"
+  >
+    ENVIAR ACCESO
+  </button>
+
+  <div id="mensajeAcceso"></div>
+
+</div>
+
+<div id="contenidoRegistro" style="display:none;">
+  
+ <form id="registroForm">
 
 
     <!-- ID -->
@@ -1081,6 +1108,8 @@
 
   </form>
 
+</div>
+  
 </main>
 
 
@@ -1104,6 +1133,181 @@
 
 
 <script>
+  const accesoRegistro =
+  document.getElementById("accesoRegistro");
+
+const contenidoRegistro =
+  document.getElementById("contenidoRegistro");
+
+const correoAcceso =
+  document.getElementById("correoAcceso");
+
+const enviarAcceso =
+  document.getElementById("enviarAcceso");
+
+const mensajeAcceso =
+  document.getElementById("mensajeAcceso");
+
+
+async function comprobarAccesoRegistro() {
+
+  const {
+    data: {
+      session
+    }
+  } = await supabaseClient.auth.getSession();
+
+
+  if (!session) {
+
+    accesoRegistro.style.display = "block";
+    contenidoRegistro.style.display = "none";
+
+    return;
+  }
+
+
+  const {
+    data: accesos,
+    error
+  } = await supabaseClient
+    .from("accesos_registro")
+    .select(
+      "id, producto, utilizado, baby_golden_id"
+    )
+    .eq(
+      "user_id",
+      session.user.id
+    )
+    .eq(
+      "activo",
+      true
+    )
+    .eq(
+      "utilizado",
+      false
+    );
+
+
+  if (error) {
+
+    console.error(
+      "ERROR ACCESO:",
+      error
+    );
+
+    accesoRegistro.style.display = "block";
+    contenidoRegistro.style.display = "none";
+
+    mensajeAcceso.textContent =
+      "No pudimos verificar tu autorización.";
+
+    return;
+  }
+
+
+  if (!accesos || accesos.length === 0) {
+
+    accesoRegistro.style.display = "block";
+    contenidoRegistro.style.display = "none";
+
+    mensajeAcceso.textContent =
+      "Este correo no tiene un Baby Golden ID disponible para registrar.";
+
+    return;
+  }
+
+
+  accesoRegistro.style.display = "none";
+  contenidoRegistro.style.display = "block";
+}
+
+
+enviarAcceso.addEventListener(
+  "click",
+  async function() {
+
+    const email =
+      correoAcceso.value.trim();
+
+
+    if (!email) {
+
+      mensajeAcceso.textContent =
+        "Ingresa tu correo electrónico.";
+
+      return;
+    }
+
+
+    enviarAcceso.disabled = true;
+
+    enviarAcceso.textContent =
+      "ENVIANDO...";
+
+
+    try {
+
+      const {
+        error
+      } =
+      await supabaseClient.auth.signInWithOtp({
+
+        email: email,
+
+        options: {
+
+          emailRedirectTo:
+            window.location.origin +
+            window.location.pathname
+
+        }
+
+      });
+
+
+      if (error) {
+
+        console.error(
+          "ERROR LOGIN:",
+          error
+        );
+
+        mensajeAcceso.textContent =
+          "No pudimos enviar el acceso.";
+
+        return;
+      }
+
+
+      mensajeAcceso.textContent =
+        "Te enviamos un enlace a tu correo. Revisa tu bandeja de entrada.";
+
+    }
+
+    catch (error) {
+
+      console.error(error);
+
+      mensajeAcceso.textContent =
+        "Ocurrió un error. Inténtalo nuevamente.";
+
+    }
+
+    finally {
+
+      enviarAcceso.disabled = false;
+
+      enviarAcceso.textContent =
+        "ENVIAR ACCESO";
+
+    }
+
+  }
+);
+
+
+comprobarAccesoRegistro();
   const formulario = document.querySelector("form");
 
  formulario.addEventListener("submit", async function(event) {
