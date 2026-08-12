@@ -1000,36 +1000,23 @@ const supabaseClient =
 ================================================= */
 
 const loginView =
-  document.getElementById(
-    "loginView"
-  );
+  document.getElementById("loginView");
 
 const panelView =
-  document.getElementById(
-    "panelView"
-  );
+  document.getElementById("panelView");
 
 const loginForm =
-  document.getElementById(
-    "loginForm"
-  );
+  document.getElementById("loginForm");
 
 const loginMessage =
-  document.getElementById(
-    "loginMessage"
-  );
+  document.getElementById("loginMessage");
 
 const brandForm =
-  document.getElementById(
-    "brandForm"
-  );
+  document.getElementById("brandForm");
 
 const brandList =
-  document.getElementById(
-    "brandList"
-  );
+  document.getElementById("brandList");
 
-let nuevoLogoUrl = null;
 
 let nuevoLogoPath = null;
 
@@ -1044,36 +1031,27 @@ loginForm.addEventListener(
 
     event.preventDefault();
 
-    loginMessage.style.display =
-      "none";
+    loginMessage.style.display = "none";
 
 
     const email =
       document
-        .getElementById(
-          "email"
-        )
+        .getElementById("email")
         .value
         .trim();
 
 
     const password =
       document
-        .getElementById(
-          "password"
-        )
+        .getElementById("password")
         .value;
 
 
-    const {
-      error
-    } =
+    const { error } =
       await supabaseClient.auth
         .signInWithPassword({
-
           email,
           password
-
         });
 
 
@@ -1104,9 +1082,7 @@ loginForm.addEventListener(
       !admin
     ) {
 
-      await supabaseClient.auth
-        .signOut();
-
+      await supabaseClient.auth.signOut();
 
       loginMessage.textContent =
         "Esta cuenta no tiene permisos de administrador.";
@@ -1119,14 +1095,7 @@ loginForm.addEventListener(
     }
 
 
-    loginView.style.display =
-      "none";
-
-    panelView.style.display =
-      "block";
-
-
-    cargarMarcas();
+    mostrarPanel();
 
   }
 );
@@ -1138,9 +1107,7 @@ loginForm.addEventListener(
 
 async function revisarSesion() {
 
-  const {
-    data
-  } =
+  const { data } =
     await supabaseClient.auth
       .getSession();
 
@@ -1150,9 +1117,7 @@ async function revisarSesion() {
     data.session
   ) {
 
-    const {
-      data: admin
-    } =
+    const { data: admin } =
       await supabaseClient.rpc(
         "es_administrador"
       );
@@ -1160,17 +1125,24 @@ async function revisarSesion() {
 
     if (admin) {
 
-      loginView.style.display =
-        "none";
-
-      panelView.style.display =
-        "block";
-
-      cargarMarcas();
+      mostrarPanel();
 
     }
 
   }
+
+}
+
+
+function mostrarPanel() {
+
+  loginView.style.display =
+    "none";
+
+  panelView.style.display =
+    "block";
+
+  cargarMarcas();
 
 }
 
@@ -1183,9 +1155,7 @@ revisarSesion();
 ================================================= */
 
 document
-  .getElementById(
-    "logoutButton"
-  )
+  .getElementById("logoutButton")
   .addEventListener(
     "click",
     async function() {
@@ -1204,9 +1174,7 @@ document
 ================================================= */
 
 document
-  .getElementById(
-    "newBrandButton"
-  )
+  .getElementById("newBrandButton")
   .addEventListener(
     "click",
     function() {
@@ -1239,9 +1207,7 @@ document
 ================================================= */
 
 document
-  .getElementById(
-    "cancelButton"
-  )
+  .getElementById("cancelButton")
   .addEventListener(
     "click",
     function() {
@@ -1256,13 +1222,11 @@ document
 
 
 /* =================================================
-   VISTA PREVIA LOGO NUEVO
+   VISTA PREVIA LOGO
 ================================================= */
 
 document
-  .getElementById(
-    "newLogoFile"
-  )
+  .getElementById("newLogoFile")
   .addEventListener(
     "change",
     function() {
@@ -1323,9 +1287,7 @@ document
         function(event) {
 
           document
-            .getElementById(
-              "newLogoPreview"
-            )
+            .getElementById("newLogoPreview")
             .innerHTML = `
 
               <img
@@ -1344,9 +1306,7 @@ document
 
 
       document
-        .getElementById(
-          "newLogoStatus"
-        )
+        .getElementById("newLogoStatus")
         .textContent =
           archivo.name;
 
@@ -1359,9 +1319,7 @@ document
 ================================================= */
 
 document
-  .getElementById(
-    "saveButton"
-  )
+  .getElementById("saveButton")
   .addEventListener(
     "click",
     guardarMarca
@@ -1377,101 +1335,77 @@ async function guardarMarca() {
 
 
   const nombre =
-    valor(
-      "brandName"
-    );
-
+    valor("brandName");
 
   const categoria =
-    valor(
-      "brandCategory"
-    );
-
+    valor("brandCategory");
 
   const descripcion =
-    valor(
-      "brandDescription"
-    );
-
+    valor("brandDescription");
 
   const whatsapp =
-    valor(
-      "brandWhatsapp"
-    );
-
+    valor("brandWhatsapp");
 
   const instagram =
-    valor(
-      "brandInstagram"
-    );
-
+    valor("brandInstagram");
 
   const web =
-    valor(
-      "brandWeb"
-    );
-
+    valor("brandWeb");
 
   const titulo =
-    valor(
-      "benefitTitle"
-    );
-
+    valor("benefitTitle");
 
   const descuento =
-    valor(
-      "benefitDiscount"
-    );
-
+    valor("benefitDiscount");
 
   const codigo =
-    valor(
-      "benefitCode"
-    );
-
+    valor("benefitCode");
 
   const fecha =
-    valor(
-      "benefitDate"
-    ) ||
+    valor("benefitDate") ||
     null;
 
-
   const descripcionBeneficio =
-    valor(
-      "benefitDescription"
-    );
-
+    valor("benefitDescription");
 
   const condiciones =
-    valor(
-      "benefitConditions"
-    );
+    valor("benefitConditions");
 
 
-const tipoAcceso =
+  /* =================================================
+     ACCESO — SOLO 3 OPCIONES
+  ================================================= */
+
+  const tipoAcceso =
     document.querySelector(
-        'input[name="tipoAcceso"]:checked'
+      'input[name="tipoAcceso"]:checked'
     )?.value || "";
 
-const accesoId =
+
+  if (!tipoAcceso) {
+
+    mostrarMensaje(
+      "Selecciona quién puede utilizar el beneficio.",
+      true
+    );
+
+    return;
+
+  }
+
+
+  const accesoId =
     tipoAcceso === "general";
 
-const accesoBlack =
-    tipoAcceso === "black" ||
-    tipoAcceso === "black-premium";
 
-const accesoPremium =
-    tipoAcceso === "premium" ||
-    tipoAcceso === "black-premium";
+  const accesoBlack =
+    tipoAcceso === "general" ||
+    tipoAcceso === "black";
 
 
   const accesoPremium =
-    document
-      .getElementById(
-        "accessPremium"
-      )
-      .checked;
+    tipoAcceso === "general" ||
+    tipoAcceso === "premium";
 
 
   if (!nombre) {
@@ -1510,62 +1444,35 @@ const accesoPremium =
   }
 
 
-  if (
-    !accesoId &&
-    !accesoBlack &&
-    !accesoPremium
-  ) {
-
-    mostrarMensaje(
-      "Selecciona quién puede utilizar el beneficio.",
-      true
-    );
-
-    return;
-
-  }
-
-
-  boton.disabled =
-    true;
+  boton.disabled = true;
 
   boton.textContent =
     "PUBLICANDO...";
 
 
+  let logoPath = null;
+
+
   try {
 
     const slug =
-      crearSlug(
-        nombre
-      );
+      crearSlug(nombre);
 
 
     const existente =
       await supabaseClient
-        .from(
-          "marcas_afiliadas"
-        )
+        .from("marcas_afiliadas")
         .select("id")
-        .eq(
-          "slug",
-          slug
-        )
+        .eq("slug", slug)
         .maybeSingle();
 
 
-    if (
-      existente.error
-    ) {
-
+    if (existente.error) {
       throw existente.error;
-
     }
 
 
-    if (
-      existente.data
-    ) {
+    if (existente.data) {
 
       throw new Error(
         "Esta marca ya existe."
@@ -1574,16 +1481,16 @@ const accesoPremium =
     }
 
 
-    /* SUBIR LOGO */
+    /* =================================================
+       LOGO
+    ================================================= */
 
     let logoUrl = null;
 
 
     const archivo =
       document
-        .getElementById(
-          "newLogoFile"
-        )
+        .getElementById("newLogoFile")
         .files[0];
 
 
@@ -1603,68 +1510,51 @@ const accesoPremium =
         extension;
 
 
-      const resultadoUpload =
+      const upload =
         await supabaseClient
           .storage
-          .from(
-            "logos-marcas"
-          )
+          .from("logos-marcas")
           .upload(
             nombreArchivo,
             archivo,
             {
-              cacheControl:
-                "3600",
-
-              upsert:
-                false,
-
+              cacheControl: "3600",
+              upsert: false,
               contentType:
                 archivo.type
-
             }
           );
 
 
-      if (
-        resultadoUpload.error
-      ) {
-
-        throw resultadoUpload.error;
-
+      if (upload.error) {
+        throw upload.error;
       }
 
 
-      nuevoLogoPath =
+      logoPath =
         nombreArchivo;
 
 
-      const resultadoUrl =
+      logoUrl =
         supabaseClient
           .storage
-          .from(
-            "logos-marcas"
-          )
+          .from("logos-marcas")
           .getPublicUrl(
             nombreArchivo
-          );
-
-
-      logoUrl =
-        resultadoUrl
+          )
           .data
           .publicUrl;
 
     }
 
 
-    /* CREAR MARCA */
+    /* =================================================
+       CREAR MARCA
+    ================================================= */
 
     const resultadoMarca =
       await supabaseClient
-        .from(
-          "marcas_afiliadas"
-        )
+        .from("marcas_afiliadas")
         .insert({
 
           nombre,
@@ -1700,20 +1590,13 @@ const accesoPremium =
         .single();
 
 
-    if (
-      resultadoMarca.error
-    ) {
+    if (resultadoMarca.error) {
 
-      if (
-        nuevoLogoPath
-      ) {
-
+      if (logoPath) {
         await eliminarLogo(
-          nuevoLogoPath
+          logoPath
         );
-
       }
-
 
       throw resultadoMarca.error;
 
@@ -1724,13 +1607,13 @@ const accesoPremium =
       resultadoMarca.data;
 
 
-    /* CREAR BENEFICIO */
+    /* =================================================
+       CREAR BENEFICIO
+    ================================================= */
 
     const resultadoBeneficio =
       await supabaseClient
-        .from(
-          "beneficios_golden"
-        )
+        .from("beneficios_golden")
         .insert({
 
           marca_id:
@@ -1778,14 +1661,10 @@ const accesoPremium =
         });
 
 
-    if (
-      resultadoBeneficio.error
-    ) {
+    if (resultadoBeneficio.error) {
 
       await supabaseClient
-        .from(
-          "marcas_afiliadas"
-        )
+        .from("marcas_afiliadas")
         .delete()
         .eq(
           "id",
@@ -1793,14 +1672,10 @@ const accesoPremium =
         );
 
 
-      if (
-        nuevoLogoPath
-      ) {
-
+      if (logoPath) {
         await eliminarLogo(
-          nuevoLogoPath
+          logoPath
         );
-
       }
 
 
@@ -1827,9 +1702,7 @@ const accesoPremium =
 
   } catch (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     mostrarMensaje(
@@ -1871,39 +1744,26 @@ async function cargarMarcas() {
 
     const resultado =
       await supabaseClient
-        .from(
-          "marcas_afiliadas"
-        )
+        .from("marcas_afiliadas")
         .select("*")
-        .order(
-          "nombre"
-        );
+        .order("nombre");
 
 
-    if (
-      resultado.error
-    ) {
-
+    if (resultado.error) {
       throw resultado.error;
-
     }
 
 
     const marcas =
-      resultado.data ||
-      [];
+      resultado.data || [];
 
 
-    if (
-      marcas.length === 0
-    ) {
+    if (!marcas.length) {
 
       brandList.innerHTML = `
 
         <div class="loading">
-
           No hay marcas afiliadas.
-
         </div>
 
       `;
@@ -1913,13 +1773,11 @@ async function cargarMarcas() {
     }
 
 
-    brandList.innerHTML =
-      "";
+    brandList.innerHTML = "";
 
 
     for (
-      const marca
-      of marcas
+      const marca of marcas
     ) {
 
       await crearMarca(
@@ -1952,7 +1810,7 @@ async function cargarMarcas() {
 
 
 /* =================================================
-   CREAR ELEMENTO MARCA
+   CREAR TARJETA DE MARCA
 ================================================= */
 
 async function crearMarca(
@@ -1961,9 +1819,7 @@ async function crearMarca(
 
   const resultado =
     await supabaseClient
-      .from(
-        "beneficios_golden"
-      )
+      .from("beneficios_golden")
       .select("*")
       .eq(
         "marca_id",
@@ -1972,8 +1828,7 @@ async function crearMarca(
       .order(
         "created_at",
         {
-          ascending:
-            false
+          ascending: false
         }
       )
       .limit(1)
@@ -1997,9 +1852,7 @@ async function crearMarca(
   let logoHTML;
 
 
-  if (
-    marca.logo_url
-  ) {
+  if (marca.logo_url) {
 
     logoHTML = `
 
@@ -2022,10 +1875,7 @@ async function crearMarca(
 
         ${escapar(
           marca.nombre
-            .substring(
-              0,
-              1
-            )
+            .substring(0, 1)
         )}
 
       </div>
@@ -2039,9 +1889,7 @@ async function crearMarca(
 
     <div class="brand-header">
 
-
       <div class="brand-main">
-
 
         <div class="brand-mini-logo">
 
@@ -2071,7 +1919,6 @@ async function crearMarca(
 
         </div>
 
-
       </div>
 
 
@@ -2093,7 +1940,6 @@ async function crearMarca(
         }
 
       </span>
-
 
     </div>
 
@@ -2163,14 +2009,11 @@ async function crearMarca(
 
     <div class="actions">
 
-
       <button
         class="gold"
         data-action="edit"
       >
-
         ✏️ EDITAR
-
       </button>
 
 
@@ -2191,11 +2034,8 @@ async function crearMarca(
         class="danger"
         data-action="delete"
       >
-
         🗑️ ELIMINAR
-
       </button>
-
 
     </div>
 
@@ -2204,7 +2044,6 @@ async function crearMarca(
       class="edit-box"
       data-edit-box
     >
-
 
       <h3>
         Editar ${escapar(
@@ -2244,8 +2083,7 @@ async function crearMarca(
       <textarea
         data-field="descripcion"
       >${escapar(
-        marca.descripcion ||
-        ""
+        marca.descripcion || ""
       )}</textarea>
 
 
@@ -2256,8 +2094,7 @@ async function crearMarca(
       <input
         data-field="whatsapp"
         value="${escapar(
-          marca.whatsapp ||
-          ""
+          marca.whatsapp || ""
         )}"
       >
 
@@ -2269,8 +2106,7 @@ async function crearMarca(
       <input
         data-field="instagram"
         value="${escapar(
-          marca.instagram ||
-          ""
+          marca.instagram || ""
         )}"
       >
 
@@ -2282,8 +2118,7 @@ async function crearMarca(
       <input
         data-field="web"
         value="${escapar(
-          marca.web ||
-          ""
+          marca.web || ""
         )}"
       >
 
@@ -2294,7 +2129,6 @@ async function crearMarca(
 
 
       <div class="logo-upload-box">
-
 
         <div
           class="logo-preview"
@@ -2367,8 +2201,7 @@ async function crearMarca(
             <input
               data-benefit="titulo"
               value="${escapar(
-                beneficio.titulo ||
-                ""
+                beneficio.titulo || ""
               )}"
             >
 
@@ -2380,8 +2213,7 @@ async function crearMarca(
             <input
               data-benefit="descuento"
               value="${escapar(
-                beneficio.descuento ||
-                ""
+                beneficio.descuento || ""
               )}"
             >
 
@@ -2393,8 +2225,7 @@ async function crearMarca(
             <input
               data-benefit="codigo"
               value="${escapar(
-                beneficio.codigo ||
-                ""
+                beneficio.codigo || ""
               )}"
             >
 
@@ -2407,8 +2238,7 @@ async function crearMarca(
               type="date"
               data-benefit="fecha_fin"
               value="${escapar(
-                beneficio.fecha_fin ||
-                ""
+                beneficio.fecha_fin || ""
               )}"
             >
 
@@ -2420,8 +2250,7 @@ async function crearMarca(
             <textarea
               data-benefit="descripcion"
             >${escapar(
-              beneficio.descripcion ||
-              ""
+              beneficio.descripcion || ""
             )}</textarea>
 
 
@@ -2432,8 +2261,7 @@ async function crearMarca(
             <textarea
               data-benefit="condiciones"
             >${escapar(
-              beneficio.condiciones ||
-              ""
+              beneficio.condiciones || ""
             )}</textarea>
 
 
@@ -2448,8 +2276,9 @@ async function crearMarca(
               <label class="check">
 
                 <input
-                  type="checkbox"
-                  data-benefit-access="id"
+                  type="radio"
+                  name="edit-access-${marca.id}"
+                  data-benefit-access="general"
                   ${
                     beneficio.acceso_id
                       ? "checked"
@@ -2457,7 +2286,7 @@ async function crearMarca(
                   }
                 >
 
-                ID
+                TODOS LOS ID BABY GOLDEN
 
               </label>
 
@@ -2465,16 +2294,18 @@ async function crearMarca(
               <label class="check">
 
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="edit-access-${marca.id}"
                   data-benefit-access="black"
                   ${
-                    beneficio.acceso_black
+                    beneficio.acceso_black &&
+                    !beneficio.acceso_id
                       ? "checked"
                       : ""
                   }
                 >
 
-                BLACK
+                SOLO BLACK ID
 
               </label>
 
@@ -2482,16 +2313,18 @@ async function crearMarca(
               <label class="check">
 
                 <input
-                  type="checkbox"
+                  type="radio"
+                  name="edit-access-${marca.id}"
                   data-benefit-access="premium"
                   ${
-                    beneficio.acceso_premium
+                    beneficio.acceso_premium &&
+                    !beneficio.acceso_id
                       ? "checked"
                       : ""
                   }
                 >
 
-                PREMIUM
+                SOLO PREMIUM ID
 
               </label>
 
@@ -2512,7 +2345,6 @@ async function crearMarca(
           : ""
       }
 
-
     </div>
 
   `;
@@ -2523,9 +2355,9 @@ async function crearMarca(
   );
 
 
-  /* =========================
+  /* =================================================
      EDITAR
-  ========================= */
+  ================================================= */
 
   elemento
     .querySelector(
@@ -2542,8 +2374,7 @@ async function crearMarca(
 
 
         caja.style.display =
-          caja.style.display ===
-          "block"
+          caja.style.display === "block"
             ? "none"
             : "block";
 
@@ -2551,9 +2382,9 @@ async function crearMarca(
     );
 
 
-  /* =========================
-     NUEVO LOGO
-  ========================= */
+  /* =================================================
+     LOGO DE EDICIÓN
+  ================================================= */
 
   const archivoLogo =
     elemento.querySelector(
@@ -2561,9 +2392,7 @@ async function crearMarca(
     );
 
 
-  if (
-    archivoLogo
-  ) {
+  if (archivoLogo) {
 
     archivoLogo.addEventListener(
       "change",
@@ -2656,9 +2485,9 @@ async function crearMarca(
   }
 
 
-  /* =========================
+  /* =================================================
      ACTIVAR / DESACTIVAR
-  ========================= */
+  ================================================= */
 
   elemento
     .querySelector(
@@ -2672,24 +2501,22 @@ async function crearMarca(
           !marca.estado;
 
 
-        const confirmar =
-          confirm(
+        if (
+          !confirm(
             nuevoEstado
               ? "¿Activar esta marca?"
               : "¿Desactivar esta marca?"
-          );
+          )
+        ) {
 
-
-        if (!confirmar) {
           return;
+
         }
 
 
         const resultado =
           await supabaseClient
-            .from(
-              "marcas_afiliadas"
-            )
+            .from("marcas_afiliadas")
             .update({
               estado:
                 nuevoEstado
@@ -2700,9 +2527,7 @@ async function crearMarca(
             );
 
 
-        if (
-          resultado.error
-        ) {
+        if (resultado.error) {
 
           alert(
             resultado.error.message
@@ -2719,9 +2544,9 @@ async function crearMarca(
     );
 
 
-  /* =========================
+  /* =================================================
      ELIMINAR
-  ========================= */
+  ================================================= */
 
   elemento
     .querySelector(
@@ -2731,22 +2556,20 @@ async function crearMarca(
       "click",
       async function() {
 
-        const confirmar =
-          confirm(
+        if (
+          !confirm(
             "¿Seguro que quieres eliminar esta marca? También se eliminarán sus beneficios."
-          );
+          )
+        ) {
 
-
-        if (!confirmar) {
           return;
+
         }
 
 
         const resultado =
           await supabaseClient
-            .from(
-              "marcas_afiliadas"
-            )
+            .from("marcas_afiliadas")
             .delete()
             .eq(
               "id",
@@ -2754,9 +2577,7 @@ async function crearMarca(
             );
 
 
-        if (
-          resultado.error
-        ) {
+        if (resultado.error) {
 
           alert(
             resultado.error.message
@@ -2773,9 +2594,9 @@ async function crearMarca(
     );
 
 
-  /* =========================
-     GUARDAR CAMBIOS
-  ========================= */
+  /* =================================================
+     GUARDAR EDICIÓN
+  ================================================= */
 
   const guardar =
     elemento.querySelector(
@@ -2783,9 +2604,7 @@ async function crearMarca(
     );
 
 
-  if (
-    guardar
-  ) {
+  if (guardar) {
 
     guardar.addEventListener(
       "click",
@@ -2886,21 +2705,19 @@ async function guardarCambios(
       null;
 
 
-    /* =========================
-       REEMPLAZAR LOGO
-    ========================= */
+    /* =================================================
+       NUEVO LOGO
+    ================================================= */
 
     const archivo =
       elemento
         .querySelector(
           "[data-logo-file]"
         )
-        .files[0];
+        ?.files[0];
 
 
-    if (
-      archivo
-    ) {
+    if (archivo) {
 
       const extension =
         obtenerExtension(
@@ -2925,9 +2742,7 @@ async function guardarCambios(
       const upload =
         await supabaseClient
           .storage
-          .from(
-            "logos-marcas"
-          )
+          .from("logos-marcas")
           .upload(
             nuevoPath,
             archivo,
@@ -2945,21 +2760,15 @@ async function guardarCambios(
           );
 
 
-      if (
-        upload.error
-      ) {
-
+      if (upload.error) {
         throw upload.error;
-
       }
 
 
       logoUrl =
         supabaseClient
           .storage
-          .from(
-            "logos-marcas"
-          )
+          .from("logos-marcas")
           .getPublicUrl(
             nuevoPath
           )
@@ -2967,15 +2776,9 @@ async function guardarCambios(
           .publicUrl;
 
 
-      /* Guardamos primero
-         la nueva URL */
-
-
       const actualizarLogo =
         await supabaseClient
-          .from(
-            "marcas_afiliadas"
-          )
+          .from("marcas_afiliadas")
           .update({
 
             nombre,
@@ -3008,9 +2811,7 @@ async function guardarCambios(
           );
 
 
-      if (
-        actualizarLogo.error
-      ) {
+      if (actualizarLogo.error) {
 
         await eliminarLogo(
           nuevoPath
@@ -3021,13 +2822,7 @@ async function guardarCambios(
       }
 
 
-      /* Eliminamos el logo anterior
-         solamente después de guardar
-         correctamente el nuevo */
-
-      if (
-        marca.logo_url
-      ) {
+      if (marca.logo_url) {
 
         const viejoPath =
           obtenerPathLogo(
@@ -3035,9 +2830,7 @@ async function guardarCambios(
           );
 
 
-        if (
-          viejoPath
-        ) {
+        if (viejoPath) {
 
           await eliminarLogo(
             viejoPath
@@ -3052,9 +2845,7 @@ async function guardarCambios(
 
       const actualizarMarca =
         await supabaseClient
-          .from(
-            "marcas_afiliadas"
-          )
+          .from("marcas_afiliadas")
           .update({
 
             nombre,
@@ -3084,24 +2875,18 @@ async function guardarCambios(
           );
 
 
-      if (
-        actualizarMarca.error
-      ) {
-
+      if (actualizarMarca.error) {
         throw actualizarMarca.error;
-
       }
 
     }
 
 
-    /* =========================
+    /* =================================================
        ACTUALIZAR BENEFICIO
-    ========================= */
+    ================================================= */
 
-    if (
-      beneficio
-    ) {
+    if (beneficio) {
 
       const titulo =
         campoBeneficio(
@@ -3145,15 +2930,15 @@ async function guardarCambios(
         );
 
 
-      const accesoId =
+      const accesoGeneral =
         elemento
           .querySelector(
-            '[data-benefit-access="id"]'
+            '[data-benefit-access="general"]'
           )
           .checked;
 
 
-      const accesoBlack =
+      const accesoBlackSeleccionado =
         elemento
           .querySelector(
             '[data-benefit-access="black"]'
@@ -3161,7 +2946,7 @@ async function guardarCambios(
           .checked;
 
 
-      const accesoPremium =
+      const accesoPremiumSeleccionado =
         elemento
           .querySelector(
             '[data-benefit-access="premium"]'
@@ -3170,13 +2955,13 @@ async function guardarCambios(
 
 
       if (
-        !accesoId &&
-        !accesoBlack &&
-        !accesoPremium
+        !accesoGeneral &&
+        !accesoBlackSeleccionado &&
+        !accesoPremiumSeleccionado
       ) {
 
         throw new Error(
-          "Selecciona al menos un tipo de acceso."
+          "Selecciona quién puede utilizar el beneficio."
         );
 
       }
@@ -3184,9 +2969,7 @@ async function guardarCambios(
 
       const actualizarBeneficio =
         await supabaseClient
-          .from(
-            "beneficios_golden"
-          )
+          .from("beneficios_golden")
           .update({
 
             titulo,
@@ -3212,13 +2995,15 @@ async function guardarCambios(
               null,
 
             acceso_id:
-              accesoId,
+              accesoGeneral,
 
             acceso_black:
-              accesoBlack,
+              accesoGeneral ||
+              accesoBlackSeleccionado,
 
             acceso_premium:
-              accesoPremium
+              accesoGeneral ||
+              accesoPremiumSeleccionado
 
           })
           .eq(
@@ -3248,9 +3033,7 @@ async function guardarCambios(
 
   } catch (error) {
 
-    console.error(
-      error
-    );
+    console.error(error);
 
 
     alert(
@@ -3276,14 +3059,10 @@ async function guardarCambios(
    UTILIDADES
 ================================================= */
 
-function valor(
-  id
-) {
+function valor(id) {
 
   const elemento =
-    document.getElementById(
-      id
-    );
+    document.getElementById(id);
 
 
   return elemento
@@ -3329,58 +3108,55 @@ function campoBeneficio(
 }
 
 
+/* =================================================
+   MOSTRAR ACCESO
+================================================= */
+
 function obtenerAcceso(
   beneficio
 ) {
 
-  const accesos = [];
-
-
   if (
-    beneficio.acceso_id
-  ) {
-
-    accesos.push(
-      "ID"
-    );
-
-  }
-
-
-  if (
-    beneficio.acceso_black
-  ) {
-
-    accesos.push(
-      "BLACK"
-    );
-
-  }
-
-
-  if (
+    beneficio.acceso_id &&
+    beneficio.acceso_black &&
     beneficio.acceso_premium
   ) {
 
-    accesos.push(
-      "PREMIUM"
-    );
+    return "TODOS LOS ID BABY GOLDEN";
 
   }
 
 
-  return accesos.length
-    ? accesos.join(
-        " + "
-      )
-    : "SIN ACCESO";
+  if (
+    beneficio.acceso_black &&
+    !beneficio.acceso_premium
+  ) {
+
+    return "SOLO BLACK ID";
+
+  }
+
+
+  if (
+    beneficio.acceso_premium &&
+    !beneficio.acceso_black
+  ) {
+
+    return "SOLO PREMIUM ID";
+
+  }
+
+
+  return "SIN ACCESO";
 
 }
 
 
-function crearSlug(
-  texto
-) {
+/* =================================================
+   SLUG
+================================================= */
+
+function crearSlug(texto) {
 
   return texto
     .toLowerCase()
@@ -3400,6 +3176,10 @@ function crearSlug(
 }
 
 
+/* =================================================
+   EXTENSIÓN
+================================================= */
+
 function obtenerExtension(
   nombre
 ) {
@@ -3417,6 +3197,10 @@ function obtenerExtension(
 
 }
 
+
+/* =================================================
+   PATH LOGO
+================================================= */
 
 function obtenerPathLogo(
   url
@@ -3437,12 +3221,8 @@ function obtenerPathLogo(
     );
 
 
-  if (
-    posicion === -1
-  ) {
-
+  if (posicion === -1) {
     return null;
-
   }
 
 
@@ -3456,6 +3236,10 @@ function obtenerPathLogo(
 }
 
 
+/* =================================================
+   ELIMINAR LOGO
+================================================= */
+
 async function eliminarLogo(
   path
 ) {
@@ -3467,15 +3251,17 @@ async function eliminarLogo(
 
   await supabaseClient
     .storage
-    .from(
-      "logos-marcas"
-    )
+    .from("logos-marcas")
     .remove([
       path
     ]);
 
 }
 
+
+/* =================================================
+   ESCAPAR HTML
+================================================= */
 
 function escapar(
   valor
@@ -3491,9 +3277,7 @@ function escapar(
   }
 
 
-  return String(
-    valor
-  )
+  return String(valor)
 
     .replace(
       /&/g,
@@ -3522,6 +3306,10 @@ function escapar(
 
 }
 
+
+/* =================================================
+   MENSAJE
+================================================= */
 
 function mostrarMensaje(
   texto,
@@ -3553,21 +3341,36 @@ function mostrarMensaje(
 }
 
 
+/* =================================================
+   LIMPIAR FORMULARIO
+================================================= */
+
 function limpiarFormulario() {
 
   const ids = [
 
     "brandName",
+
     "brandCategory",
+
     "brandDescription",
+
     "brandWhatsapp",
+
     "brandInstagram",
+
     "brandWeb",
+
     "benefitTitle",
+
     "benefitDiscount",
+
     "benefitCode",
+
     "benefitDate",
+
     "benefitDescription",
+
     "benefitConditions"
 
   ];
@@ -3593,29 +3396,11 @@ function limpiarFormulario() {
   );
 
 
- [
+  [
     "accessId",
     "accessBlack",
-    "accessPremium",
-    "accessBlackPremium"
-]
-.forEach(
-    id => {
-
-        const elemento =
-            document.getElementById(
-                id
-            );
-
-        if (elemento) {
-
-            elemento.checked =
-                false;
-
-        }
-
-    }
-);
+    "accessPremium"
+  ]
   .forEach(
     id => {
 
@@ -3683,11 +3468,22 @@ function limpiarFormulario() {
   }
 
 
-  nuevoLogoUrl =
-    null;
-
   nuevoLogoPath =
     null;
+
+
+  const mensaje =
+    document.getElementById(
+      "formMessage"
+    );
+
+
+  if (mensaje) {
+
+    mensaje.style.display =
+      "none";
+
+  }
 
 }
 
