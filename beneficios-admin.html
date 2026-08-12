@@ -1460,12 +1460,21 @@ async function guardarMarca() {
     );
 
 
-  const accesoId =
-    document
-      .getElementById(
-        "accessId"
-      )
-      .checked;
+ const tipoAcceso =
+    document.querySelector(
+        'input[name="tipoAcceso"]:checked'
+    )?.value || "";
+
+const accesoId =
+    tipoAcceso === "general";
+
+const accesoBlack =
+    tipoAcceso === "black" ||
+    tipoAcceso === "black-premium";
+
+const accesoPremium =
+    tipoAcceso === "premium" ||
+    tipoAcceso === "black-premium";
 
 
   const accesoBlack =
