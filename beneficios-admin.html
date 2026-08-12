@@ -1460,7 +1460,7 @@ async function guardarMarca() {
     );
 
 
- const tipoAcceso =
+const tipoAcceso =
     document.querySelector(
         'input[name="tipoAcceso"]:checked'
     )?.value || "";
@@ -1475,14 +1475,6 @@ const accesoBlack =
 const accesoPremium =
     tipoAcceso === "premium" ||
     tipoAcceso === "black-premium";
-
-
-  const accesoBlack =
-    document
-      .getElementById(
-        "accessBlack"
-      )
-      .checked;
 
 
   const accesoPremium =
@@ -3612,11 +3604,29 @@ function limpiarFormulario() {
   );
 
 
-  [
+ [
     "accessId",
     "accessBlack",
-    "accessPremium"
-  ]
+    "accessPremium",
+    "accessBlackPremium"
+]
+.forEach(
+    id => {
+
+        const elemento =
+            document.getElementById(
+                id
+            );
+
+        if (elemento) {
+
+            elemento.checked =
+                false;
+
+        }
+
+    }
+);
   .forEach(
     id => {
 
