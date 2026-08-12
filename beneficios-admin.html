@@ -35,11 +35,6 @@ body {
   padding: 25px 16px 60px;
 }
 
-
-/* =========================
-   HEADER
-========================= */
-
 .header {
   text-align: center;
   margin-bottom: 30px;
@@ -60,15 +55,14 @@ h1 {
   font-weight: normal;
 }
 
+h2 {
+  font-family: Georgia, serif;
+}
+
 .subtitle {
   color: #777;
   font-size: 14px;
 }
-
-
-/* =========================
-   CARD
-========================= */
 
 .card {
   background: #fff;
@@ -77,11 +71,6 @@ h1 {
   box-shadow: 0 10px 35px rgba(0,0,0,.08);
   margin-bottom: 20px;
 }
-
-
-/* =========================
-   LOGIN
-========================= */
 
 .login-card {
   max-width: 430px;
@@ -117,7 +106,7 @@ button {
   border: 0;
   border-radius: 12px;
   background: #2d2925;
-  color: white;
+  color: #fff;
   font-size: 12px;
   font-weight: bold;
   cursor: pointer;
@@ -140,10 +129,12 @@ button.secondary {
   color: #333;
 }
 
-
-/* =========================
-   VISTAS
-========================= */
+.logout {
+  background: #eee;
+  color: #333;
+  width: auto;
+  padding: 10px 16px;
+}
 
 #loginView {
   display: block;
@@ -152,11 +143,6 @@ button.secondary {
 #panelView {
   display: none;
 }
-
-
-/* =========================
-   ACCIONES
-========================= */
 
 .top-actions {
   display: flex;
@@ -170,22 +156,9 @@ button.secondary {
   width: auto;
 }
 
-.logout {
-  background: #eee;
-  color: #333;
-  padding: 10px 16px;
-}
-
-
-/* =========================
-   FORMULARIO
-========================= */
-
 .form {
   display: none;
-  border-top: 1px solid #eee;
   margin-top: 25px;
-  padding-top: 25px;
 }
 
 .form-grid {
@@ -197,11 +170,6 @@ button.secondary {
 .full {
   grid-column: 1 / -1;
 }
-
-
-/* =========================
-   LOGO
-========================= */
 
 .logo-upload-box {
   background: #faf8f5;
@@ -215,7 +183,7 @@ button.secondary {
 .logo-preview {
   width: 150px;
   height: 110px;
-  background: white;
+  background: #fff;
   border-radius: 15px;
   margin: 0 auto 15px;
   display: flex;
@@ -238,24 +206,11 @@ button.secondary {
   font-size: 30px;
 }
 
-.file-input {
-  width: 100%;
-  padding: 10px;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-}
-
 .upload-status {
   margin-top: 10px;
   font-size: 12px;
   color: #777;
 }
-
-
-/* =========================
-   CHECKBOXES
-========================= */
 
 .checks {
   display: flex;
@@ -267,20 +222,16 @@ button.secondary {
 .check {
   background: #f7f4ed;
   border-radius: 20px;
-  padding: 10px 14px;
+  padding: 11px 15px;
   font-size: 12px;
   cursor: pointer;
+  margin: 0;
 }
 
 .check input {
   width: auto;
   margin: 0 6px 0 0;
 }
-
-
-/* =========================
-   MENSAJES
-========================= */
 
 .message {
   display: none;
@@ -299,11 +250,6 @@ button.secondary {
   background: #eaf7ed;
   color: #276b39;
 }
-
-
-/* =========================
-   MARCAS
-========================= */
 
 .brand-item {
   border: 1px solid #eee;
@@ -423,11 +369,6 @@ button.secondary {
   padding: 10px 14px;
 }
 
-
-/* =========================
-   EDITOR
-========================= */
-
 .edit-box {
   display: none;
   margin-top: 20px;
@@ -435,21 +376,17 @@ button.secondary {
   padding-top: 20px;
 }
 
-
-/* =========================
-   LOADING
-========================= */
-
 .loading {
   text-align: center;
   padding: 40px;
   color: #777;
 }
 
-
-/* =========================
-   MOBILE
-========================= */
+hr {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 25px 0;
+}
 
 @media(max-width:700px) {
 
@@ -472,10 +409,6 @@ button.secondary {
 
   .brand-header {
     flex-direction: column;
-  }
-
-  .brand-main {
-    align-items: flex-start;
   }
 
   .actions button {
@@ -561,7 +494,6 @@ button.secondary {
 </div>
 
 
-
 <!-- =================================================
      PANEL
 ================================================= -->
@@ -605,375 +537,357 @@ button.secondary {
   </div>
 
 
+<!-- =================================================
+     NUEVA MARCA
+================================================= -->
 
-  <!-- =================================================
-       FORMULARIO
-  ================================================= -->
+<div
+  id="brandForm"
+  class="card form"
+>
 
-  <div
-    id="brandForm"
-    class="card form"
-  >
-
-    <h2>
-      Nueva marca
-    </h2>
-
-
-    <div class="form-grid">
+  <h2>
+    Nueva marca
+  </h2>
 
 
-      <div>
+  <div class="form-grid">
 
-        <label>
-          Nombre de la marca
-        </label>
 
-        <input
-          id="brandName"
-          type="text"
-          placeholder="Ejemplo: YUM"
+    <div>
+
+      <label>
+        Nombre de la marca
+      </label>
+
+      <input
+        id="brandName"
+        type="text"
+        placeholder="Ejemplo: YUM"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Categoría
+      </label>
+
+      <input
+        id="brandCategory"
+        type="text"
+        placeholder="Ejemplo: Alimentación"
+      >
+
+    </div>
+
+
+    <div class="full">
+
+      <label>
+        Descripción
+      </label>
+
+      <textarea
+        id="brandDescription"
+      ></textarea>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        WhatsApp
+      </label>
+
+      <input
+        id="brandWhatsapp"
+        type="text"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Instagram
+      </label>
+
+      <input
+        id="brandInstagram"
+        type="url"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Página web
+      </label>
+
+      <input
+        id="brandWeb"
+        type="url"
+      >
+
+    </div>
+
+
+    <div class="full">
+
+      <label>
+        Logo de la marca
+      </label>
+
+
+      <div class="logo-upload-box">
+
+        <div
+          id="newLogoPreview"
+          class="logo-preview"
         >
 
-      </div>
-
-
-      <div>
-
-        <label>
-          Categoría
-        </label>
-
-        <input
-          id="brandCategory"
-          type="text"
-          placeholder="Ejemplo: Alimentación"
-        >
-
-      </div>
-
-
-      <div class="full">
-
-        <label>
-          Descripción
-        </label>
-
-        <textarea
-          id="brandDescription"
-          placeholder="Descripción de la marca"
-        ></textarea>
-
-      </div>
-
-
-      <div>
-
-        <label>
-          WhatsApp
-        </label>
-
-        <input
-          id="brandWhatsapp"
-          type="text"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Instagram
-        </label>
-
-        <input
-          id="brandInstagram"
-          type="url"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Página web
-        </label>
-
-        <input
-          id="brandWeb"
-          type="url"
-        >
-
-      </div>
-
-
-      <!-- =============================
-           LOGO
-      ============================== -->
-
-      <div class="full">
-
-        <label>
-          Logo de la marca
-        </label>
-
-
-        <div class="logo-upload-box">
-
-
-          <div
-            id="newLogoPreview"
-            class="logo-preview"
-          >
-
-            <div class="logo-placeholder">
-              LOGO
-            </div>
-
+          <div class="logo-placeholder">
+            LOGO
           </div>
 
+        </div>
+
+
+        <input
+          id="newLogoFile"
+          type="file"
+          accept="image/png,image/jpeg,image/webp"
+        >
+
+
+        <div
+          id="newLogoStatus"
+          class="upload-status"
+        >
+          Selecciona PNG, JPG o WEBP.
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <div class="full">
+
+      <hr>
+
+      <h2>
+        Beneficio
+      </h2>
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Título
+      </label>
+
+      <input
+        id="benefitTitle"
+        type="text"
+        placeholder="Ejemplo: 10% de descuento"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Descuento
+      </label>
+
+      <input
+        id="benefitDiscount"
+        type="text"
+        placeholder="Ejemplo: 10% OFF"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Código
+      </label>
+
+      <input
+        id="benefitCode"
+        type="text"
+      >
+
+    </div>
+
+
+    <div>
+
+      <label>
+        Válido hasta
+      </label>
+
+      <input
+        id="benefitDate"
+        type="date"
+      >
+
+    </div>
+
+
+    <div class="full">
+
+      <label>
+        Descripción del beneficio
+      </label>
+
+      <textarea
+        id="benefitDescription"
+      ></textarea>
+
+    </div>
+
+
+    <div class="full">
+
+      <label>
+        Condiciones
+      </label>
+
+      <textarea
+        id="benefitConditions"
+      ></textarea>
+
+    </div>
+
+
+    <div class="full">
+
+      <label>
+        ¿Quién puede utilizarlo?
+      </label>
+
+
+      <div class="checks">
+
+
+        <label class="check">
 
           <input
-            id="newLogoFile"
-            class="file-input"
-            type="file"
-            accept="image/png,image/jpeg,image/webp"
+            id="accessId"
+            name="tipoAcceso"
+            type="radio"
+            value="general"
           >
 
+          TODOS LOS ID BABY GOLDEN
 
-          <div
-            id="newLogoStatus"
-            class="upload-status"
+        </label>
+
+
+        <label class="check">
+
+          <input
+            id="accessBlack"
+            name="tipoAcceso"
+            type="radio"
+            value="black"
           >
 
-            Selecciona una imagen
-            PNG, JPG o WEBP.
+          SOLO BLACK ID
 
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="full">
-
-        <hr>
-
-        <h2>
-          Beneficio
-        </h2>
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Título
-        </label>
-
-        <input
-          id="benefitTitle"
-          type="text"
-          placeholder="Ejemplo: 10% de descuento"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Descuento
-        </label>
-
-        <input
-          id="benefitDiscount"
-          type="text"
-          placeholder="Ejemplo: 10% OFF"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Código
-        </label>
-
-        <input
-          id="benefitCode"
-          type="text"
-        >
-
-      </div>
-
-
-      <div>
-
-        <label>
-          Válido hasta
-        </label>
-
-        <input
-          id="benefitDate"
-          type="date"
-        >
-
-      </div>
-
-
-      <div class="full">
-
-        <label>
-          Descripción del beneficio
-        </label>
-
-        <textarea
-          id="benefitDescription"
-        ></textarea>
-
-      </div>
-
-
-      <div class="full">
-
-        <label>
-          Condiciones
-        </label>
-
-        <textarea
-          id="benefitConditions"
-        ></textarea>
-
-      </div>
-
-
-      <div class="full">
-
-        <label>
-          ¿Quién puede utilizarlo?
         </label>
 
 
-        <div class="checks">
+        <label class="check">
 
+          <input
+            id="accessPremium"
+            name="tipoAcceso"
+            type="radio"
+            value="premium"
+          >
 
-         <label class="check">
+          SOLO PREMIUM ID
 
-    <input
-        id="accessId"
-        name="tipoAcceso"
-        type="radio"
-        value="general"
-    >
+        </label>
 
-    TODOS LOS ID BABY GOLDEN
-
-</label>
-
-
-<label class="check">
-
-    <input
-        id="accessBlack"
-        name="tipoAcceso"
-        type="radio"
-        value="black"
-    >
-
-    SOLO BLACK ID
-
-</label>
-
-
-<label class="check">
-
-    <input
-        id="accessPremium"
-        name="tipoAcceso"
-        type="radio"
-        value="premium"
-    >
-
-    SOLO PREMIUM ID
-
-</label>
-
-
-
-
-
-        </div>
 
       </div>
-
 
     </div>
-
-
-    <div class="actions">
-
-
-      <button
-        id="saveButton"
-        class="gold"
-      >
-        PUBLICAR
-      </button>
-
-
-      <button
-        id="cancelButton"
-        class="secondary"
-      >
-        CANCELAR
-      </button>
-
-    </div>
-
-
-    <div
-      id="formMessage"
-      class="message"
-    ></div>
 
 
   </div>
 
 
+  <div class="actions">
 
-  <!-- =================================================
-       LISTA
-  ================================================= -->
-
-  <div class="card">
-
-    <h2>
-      Marcas afiliadas
-    </h2>
+    <button
+      id="saveButton"
+      class="gold"
+    >
+      PUBLICAR
+    </button>
 
 
-    <div id="brandList">
-
-      <div class="loading">
-        Cargando marcas...
-      </div>
-
-    </div>
+    <button
+      id="cancelButton"
+      class="secondary"
+    >
+      CANCELAR
+    </button>
 
   </div>
 
+
+  <div
+    id="formMessage"
+    class="message"
+  ></div>
+
+
+</div>
+
+
+<!-- =================================================
+     LISTA
+================================================= -->
+
+<div class="card">
+
+  <h2>
+    Marcas afiliadas
+  </h2>
+
+
+  <div id="brandList">
+
+    <div class="loading">
+      Cargando marcas...
+    </div>
+
+  </div>
 
 </div>
 
 
 </div>
 
+</div>
 
 
 <script>
@@ -988,6 +902,7 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
   "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
+
 const supabaseClient =
   window.supabase.createClient(
     SUPABASE_URL,
@@ -1000,25 +915,34 @@ const supabaseClient =
 ================================================= */
 
 const loginView =
-  document.getElementById("loginView");
+  document.getElementById(
+    "loginView"
+  );
 
 const panelView =
-  document.getElementById("panelView");
+  document.getElementById(
+    "panelView"
+  );
 
 const loginForm =
-  document.getElementById("loginForm");
+  document.getElementById(
+    "loginForm"
+  );
 
 const loginMessage =
-  document.getElementById("loginMessage");
+  document.getElementById(
+    "loginMessage"
+  );
 
 const brandForm =
-  document.getElementById("brandForm");
+  document.getElementById(
+    "brandForm"
+  );
 
 const brandList =
-  document.getElementById("brandList");
-
-
-let nuevoLogoPath = null;
+  document.getElementById(
+    "brandList"
+  );
 
 
 /* =================================================
@@ -1031,7 +955,9 @@ loginForm.addEventListener(
 
     event.preventDefault();
 
-    loginMessage.style.display = "none";
+
+    loginMessage.style.display =
+      "none";
 
 
     const email =
@@ -1047,11 +973,16 @@ loginForm.addEventListener(
         .value;
 
 
-    const { error } =
+    const {
+      error
+    } =
       await supabaseClient.auth
         .signInWithPassword({
+
           email,
+
           password
+
         });
 
 
@@ -1069,8 +1000,8 @@ loginForm.addEventListener(
 
 
     const {
-      data: admin,
-      error: adminError
+      data: administrador,
+      error: errorAdmin
     } =
       await supabaseClient.rpc(
         "es_administrador"
@@ -1078,11 +1009,13 @@ loginForm.addEventListener(
 
 
     if (
-      adminError ||
-      !admin
+      errorAdmin ||
+      !administrador
     ) {
 
-      await supabaseClient.auth.signOut();
+      await supabaseClient.auth
+        .signOut();
+
 
       loginMessage.textContent =
         "Esta cuenta no tiene permisos de administrador.";
@@ -1107,7 +1040,9 @@ loginForm.addEventListener(
 
 async function revisarSesion() {
 
-  const { data } =
+  const {
+    data
+  } =
     await supabaseClient.auth
       .getSession();
 
@@ -1117,13 +1052,15 @@ async function revisarSesion() {
     data.session
   ) {
 
-    const { data: admin } =
+    const {
+      data: administrador
+    } =
       await supabaseClient.rpc(
         "es_administrador"
       );
 
 
-    if (admin) {
+    if (administrador) {
 
       mostrarPanel();
 
@@ -1151,11 +1088,13 @@ revisarSesion();
 
 
 /* =================================================
-   LOGOUT
+   CERRAR SESIÓN
 ================================================= */
 
 document
-  .getElementById("logoutButton")
+  .getElementById(
+    "logoutButton"
+  )
   .addEventListener(
     "click",
     async function() {
@@ -1170,11 +1109,13 @@ document
 
 
 /* =================================================
-   NUEVA MARCA
+   AGREGAR MARCA
 ================================================= */
 
 document
-  .getElementById("newBrandButton")
+  .getElementById(
+    "newBrandButton"
+  )
   .addEventListener(
     "click",
     function() {
@@ -1184,18 +1125,8 @@ document
       brandForm.style.display =
         "block";
 
-      window.scrollTo({
-
-        top:
-          brandForm
-            .getBoundingClientRect()
-            .top +
-          window.scrollY -
-          20,
-
-        behavior:
-          "smooth"
-
+      brandForm.scrollIntoView({
+        behavior: "smooth"
       });
 
     }
@@ -1207,7 +1138,9 @@ document
 ================================================= */
 
 document
-  .getElementById("cancelButton")
+  .getElementById(
+    "cancelButton"
+  )
   .addEventListener(
     "click",
     function() {
@@ -1226,7 +1159,9 @@ document
 ================================================= */
 
 document
-  .getElementById("newLogoFile")
+  .getElementById(
+    "newLogoFile"
+  )
   .addEventListener(
     "change",
     function() {
@@ -1287,7 +1222,9 @@ document
         function(event) {
 
           document
-            .getElementById("newLogoPreview")
+            .getElementById(
+              "newLogoPreview"
+            )
             .innerHTML = `
 
               <img
@@ -1295,7 +1232,7 @@ document
                 alt="Vista previa"
               >
 
-            `;
+          `;
 
         };
 
@@ -1306,7 +1243,9 @@ document
 
 
       document
-        .getElementById("newLogoStatus")
+        .getElementById(
+          "newLogoStatus"
+        )
         .textContent =
           archivo.name;
 
@@ -1315,11 +1254,13 @@ document
 
 
 /* =================================================
-   GUARDAR MARCA
+   GUARDAR NUEVA MARCA
 ================================================= */
 
 document
-  .getElementById("saveButton")
+  .getElementById(
+    "saveButton"
+  )
   .addEventListener(
     "click",
     guardarMarca
@@ -1373,7 +1314,7 @@ async function guardarMarca() {
 
 
   /* =================================================
-     ACCESO — SOLO 3 OPCIONES
+     ACCESO — 3 OPCIONES
   ================================================= */
 
   const tipoAcceso =
@@ -1444,35 +1385,46 @@ async function guardarMarca() {
   }
 
 
-  boton.disabled = true;
+  boton.disabled =
+    true;
 
   boton.textContent =
     "PUBLICANDO...";
 
 
-  let logoPath = null;
-
-
   try {
 
     const slug =
-      crearSlug(nombre);
+      crearSlug(
+        nombre
+      );
 
 
     const existente =
       await supabaseClient
-        .from("marcas_afiliadas")
+        .from(
+          "marcas_afiliadas"
+        )
         .select("id")
-        .eq("slug", slug)
+        .eq(
+          "slug",
+          slug
+        )
         .maybeSingle();
 
 
-    if (existente.error) {
+    if (
+      existente.error
+    ) {
+
       throw existente.error;
+
     }
 
 
-    if (existente.data) {
+    if (
+      existente.data
+    ) {
 
       throw new Error(
         "Esta marca ya existe."
@@ -1481,18 +1433,24 @@ async function guardarMarca() {
     }
 
 
-    /* =================================================
-       LOGO
-    ================================================= */
+    let logoUrl =
+      null;
 
-    let logoUrl = null;
+    let logoPath =
+      null;
 
 
     const archivo =
       document
-        .getElementById("newLogoFile")
+        .getElementById(
+          "newLogoFile"
+        )
         .files[0];
 
+
+    /* =================================================
+       SUBIR LOGO
+    ================================================= */
 
     if (archivo) {
 
@@ -1510,24 +1468,31 @@ async function guardarMarca() {
         extension;
 
 
-      const upload =
+      const subida =
         await supabaseClient
           .storage
-          .from("logos-marcas")
+          .from(
+            "logos-marcas"
+          )
           .upload(
             nombreArchivo,
             archivo,
             {
-              cacheControl: "3600",
-              upsert: false,
+              cacheControl:
+                "3600",
+
+              upsert:
+                false,
+
               contentType:
                 archivo.type
+
             }
           );
 
 
-      if (upload.error) {
-        throw upload.error;
+      if (subida.error) {
+        throw subida.error;
       }
 
 
@@ -1538,7 +1503,9 @@ async function guardarMarca() {
       logoUrl =
         supabaseClient
           .storage
-          .from("logos-marcas")
+          .from(
+            "logos-marcas"
+          )
           .getPublicUrl(
             nombreArchivo
           )
@@ -1554,7 +1521,9 @@ async function guardarMarca() {
 
     const resultadoMarca =
       await supabaseClient
-        .from("marcas_afiliadas")
+        .from(
+          "marcas_afiliadas"
+        )
         .insert({
 
           nombre,
@@ -1590,7 +1559,9 @@ async function guardarMarca() {
         .single();
 
 
-    if (resultadoMarca.error) {
+    if (
+      resultadoMarca.error
+    ) {
 
       if (logoPath) {
         await eliminarLogo(
@@ -1613,7 +1584,9 @@ async function guardarMarca() {
 
     const resultadoBeneficio =
       await supabaseClient
-        .from("beneficios_golden")
+        .from(
+          "beneficios_golden"
+        )
         .insert({
 
           marca_id:
@@ -1661,10 +1634,14 @@ async function guardarMarca() {
         });
 
 
-    if (resultadoBeneficio.error) {
+    if (
+      resultadoBeneficio.error
+    ) {
 
       await supabaseClient
-        .from("marcas_afiliadas")
+        .from(
+          "marcas_afiliadas"
+        )
         .delete()
         .eq(
           "id",
@@ -1692,17 +1669,18 @@ async function guardarMarca() {
 
     limpiarFormulario();
 
-
     brandForm.style.display =
       "none";
 
 
-    cargarMarcas();
+    await cargarMarcas();
 
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     mostrarMensaje(
@@ -1744,13 +1722,21 @@ async function cargarMarcas() {
 
     const resultado =
       await supabaseClient
-        .from("marcas_afiliadas")
+        .from(
+          "marcas_afiliadas"
+        )
         .select("*")
-        .order("nombre");
+        .order(
+          "nombre"
+        );
 
 
-    if (resultado.error) {
+    if (
+      resultado.error
+    ) {
+
       throw resultado.error;
+
     }
 
 
@@ -1773,7 +1759,8 @@ async function cargarMarcas() {
     }
 
 
-    brandList.innerHTML = "";
+    brandList.innerHTML =
+      "";
 
 
     for (
@@ -1793,7 +1780,7 @@ async function cargarMarcas() {
 
       <div
         class="message error"
-        style="display:block;"
+        style="display:block"
       >
 
         ${escapar(
@@ -1819,12 +1806,21 @@ async function crearMarca(
 
   const resultado =
     await supabaseClient
-      .from("beneficios_golden")
+      .from(
+        "beneficios_golden"
+      )
       .select("*")
-      .eq("marca_id", marca.id)
-      .order("created_at", {
-        ascending: false
-      })
+      .eq(
+        "marca_id",
+        marca.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending:
+            false
+        }
+      )
       .limit(1)
       .maybeSingle();
 
@@ -1834,36 +1830,44 @@ async function crearMarca(
 
 
   const elemento =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
 
   elemento.className =
     "brand-item";
 
 
-  let logoHTML;
+  const logoHTML =
+    marca.logo_url
 
+      ? `
 
-  if (marca.logo_url) {
+        <img
+          src="${escapar(
+            marca.logo_url
+          )}"
+          alt="Logo"
+        >
 
-    logoHTML = `
-      <img
-        src="${escapar(marca.logo_url)}"
-        alt="Logo ${escapar(marca.nombre)}"
-      >
-    `;
+      `
 
-  } else {
+      : `
 
-    logoHTML = `
-      <div class="brand-mini-text">
-        ${escapar(
-          marca.nombre.substring(0, 1)
-        )}
-      </div>
-    `;
+        <div class="brand-mini-text">
 
-  }
+          ${escapar(
+            marca.nombre
+              .substring(
+                0,
+                1
+              )
+          )}
+
+        </div>
+
+      `;
 
 
   elemento.innerHTML = `
@@ -1873,17 +1877,29 @@ async function crearMarca(
       <div class="brand-main">
 
         <div class="brand-mini-logo">
+
           ${logoHTML}
+
         </div>
+
 
         <div>
 
           <div class="brand-name">
-            ${escapar(marca.nombre)}
+
+            ${escapar(
+              marca.nombre
+            )}
+
           </div>
 
+
           <div class="brand-category">
-            ${escapar(marca.categoria)}
+
+            ${escapar(
+              marca.categoria
+            )}
+
           </div>
 
         </div>
@@ -1893,10 +1909,18 @@ async function crearMarca(
 
       <span class="
         status
-        ${marca.estado ? "active" : "inactive"}
+        ${
+          marca.estado
+            ? "active"
+            : "inactive"
+        }
       ">
 
-        ${marca.estado ? "ACTIVA" : "INACTIVA"}
+        ${
+          marca.estado
+            ? "ACTIVA"
+            : "INACTIVA"
+        }
 
       </span>
 
@@ -1905,47 +1929,67 @@ async function crearMarca(
 
     ${
       beneficio
+
         ? `
 
           <div class="benefit">
 
             <div class="discount">
+
               ${escapar(
-                beneficio.descuento || "BENEFICIO"
+                beneficio.descuento ||
+                "BENEFICIO"
               )}
+
             </div>
 
+
             <div class="benefit-title">
+
               ${escapar(
-                beneficio.titulo || ""
+                beneficio.titulo
               )}
+
             </div>
+
 
             ${
               beneficio.codigo
+
                 ? `
+
                   <div class="code">
+
                     Código:
                     <strong>
+
                       ${escapar(
                         beneficio.codigo
                       )}
+
                     </strong>
+
                   </div>
+
                 `
+
                 : ""
             }
+
 
             <div class="access">
 
               Acceso:
-              ${obtenerAcceso(beneficio)}
+              ${obtenerAcceso(
+                beneficio
+              )}
 
             </div>
 
           </div>
 
         `
+
         : ""
     }
 
@@ -1989,7 +2033,9 @@ async function crearMarca(
     >
 
       <h3>
-        Editar ${escapar(marca.nombre)}
+        Editar ${escapar(
+          marca.nombre
+        )}
       </h3>
 
 
@@ -1999,7 +2045,9 @@ async function crearMarca(
 
       <input
         data-field="nombre"
-        value="${escapar(marca.nombre)}"
+        value="${escapar(
+          marca.nombre
+        )}"
       >
 
 
@@ -2009,7 +2057,9 @@ async function crearMarca(
 
       <input
         data-field="categoria"
-        value="${escapar(marca.categoria)}"
+        value="${escapar(
+          marca.categoria
+        )}"
       >
 
 
@@ -2020,7 +2070,8 @@ async function crearMarca(
       <textarea
         data-field="descripcion"
       >${escapar(
-        marca.descripcion || ""
+        marca.descripcion ||
+        ""
       )}</textarea>
 
 
@@ -2031,7 +2082,8 @@ async function crearMarca(
       <input
         data-field="whatsapp"
         value="${escapar(
-          marca.whatsapp || ""
+          marca.whatsapp ||
+          ""
         )}"
       >
 
@@ -2043,7 +2095,8 @@ async function crearMarca(
       <input
         data-field="instagram"
         value="${escapar(
-          marca.instagram || ""
+          marca.instagram ||
+          ""
         )}"
       >
 
@@ -2055,7 +2108,8 @@ async function crearMarca(
       <input
         data-field="web"
         value="${escapar(
-          marca.web || ""
+          marca.web ||
+          ""
         )}"
       >
 
@@ -2074,18 +2128,24 @@ async function crearMarca(
 
           ${
             marca.logo_url
+
               ? `
+
                 <img
                   src="${escapar(
                     marca.logo_url
                   )}"
                   alt="Logo"
                 >
+
               `
+
               : `
+
                 <div class="logo-placeholder">
                   LOGO
                 </div>
+
               `
           }
 
@@ -2093,7 +2153,6 @@ async function crearMarca(
 
 
         <input
-          class="file-input"
           type="file"
           accept="image/png,image/jpeg,image/webp"
           data-logo-file
@@ -2118,9 +2177,11 @@ async function crearMarca(
 
       ${
         beneficio
+
           ? `
 
             <hr>
+
 
             <h3>
               Beneficio
@@ -2134,7 +2195,8 @@ async function crearMarca(
             <input
               data-benefit="titulo"
               value="${escapar(
-                beneficio.titulo || ""
+                beneficio.titulo ||
+                ""
               )}"
             >
 
@@ -2146,7 +2208,8 @@ async function crearMarca(
             <input
               data-benefit="descuento"
               value="${escapar(
-                beneficio.descuento || ""
+                beneficio.descuento ||
+                ""
               )}"
             >
 
@@ -2158,7 +2221,8 @@ async function crearMarca(
             <input
               data-benefit="codigo"
               value="${escapar(
-                beneficio.codigo || ""
+                beneficio.codigo ||
+                ""
               )}"
             >
 
@@ -2171,7 +2235,8 @@ async function crearMarca(
               type="date"
               data-benefit="fecha_fin"
               value="${escapar(
-                beneficio.fecha_fin || ""
+                beneficio.fecha_fin ||
+                ""
               )}"
             >
 
@@ -2183,7 +2248,8 @@ async function crearMarca(
             <textarea
               data-benefit="descripcion"
             >${escapar(
-              beneficio.descripcion || ""
+              beneficio.descripcion ||
+              ""
             )}</textarea>
 
 
@@ -2194,7 +2260,8 @@ async function crearMarca(
             <textarea
               data-benefit="condiciones"
             >${escapar(
-              beneficio.condiciones || ""
+              beneficio.condiciones ||
+              ""
             )}</textarea>
 
 
@@ -2210,7 +2277,7 @@ async function crearMarca(
 
                 <input
                   type="radio"
-                  name="edit-access-${marca.id}"
+                  name="access-${marca.id}"
                   data-benefit-access="general"
                   ${
                     beneficio.acceso_id
@@ -2228,11 +2295,11 @@ async function crearMarca(
 
                 <input
                   type="radio"
-                  name="edit-access-${marca.id}"
+                  name="access-${marca.id}"
                   data-benefit-access="black"
                   ${
-                    beneficio.acceso_black &&
                     !beneficio.acceso_id &&
+                    beneficio.acceso_black &&
                     !beneficio.acceso_premium
                       ? "checked"
                       : ""
@@ -2248,12 +2315,12 @@ async function crearMarca(
 
                 <input
                   type="radio"
-                  name="edit-access-${marca.id}"
+                  name="access-${marca.id}"
                   data-benefit-access="premium"
                   ${
-                    beneficio.acceso_premium &&
                     !beneficio.acceso_id &&
-                    !beneficio.acceso_black
+                    !beneficio.acceso_black &&
+                    beneficio.acceso_premium
                       ? "checked"
                       : ""
                   }
@@ -2268,13 +2335,16 @@ async function crearMarca(
 
 
             <button
-              data-action="save"
               class="gold"
+              data-action="save"
             >
+
               GUARDAR CAMBIOS
+
             </button>
 
           `
+
           : ""
       }
 
@@ -2289,9 +2359,9 @@ async function crearMarca(
   );
 
 
-  /* =========================
+  /* =================================================
      EDITAR
-  ========================= */
+  ================================================= */
 
   elemento
     .querySelector(
@@ -2316,19 +2386,19 @@ async function crearMarca(
     );
 
 
-  /* =========================
-     LOGO
-  ========================= */
+  /* =================================================
+     LOGO DE EDICIÓN
+  ================================================= */
 
-  const archivoLogo =
+  const logoInput =
     elemento.querySelector(
       "[data-logo-file]"
     );
 
 
-  if (archivoLogo) {
+  if (logoInput) {
 
-    archivoLogo.addEventListener(
+    logoInput.addEventListener(
       "change",
       function() {
 
@@ -2396,7 +2466,7 @@ async function crearMarca(
                   alt="Vista previa"
                 >
 
-            `;
+              `;
 
           };
 
@@ -2419,9 +2489,9 @@ async function crearMarca(
   }
 
 
-  /* =========================
+  /* =================================================
      ACTIVAR / DESACTIVAR
-  ========================= */
+  ================================================= */
 
   elemento
     .querySelector(
@@ -2450,7 +2520,9 @@ async function crearMarca(
 
         const resultado =
           await supabaseClient
-            .from("marcas_afiliadas")
+            .from(
+              "marcas_afiliadas"
+            )
             .update({
               estado:
                 nuevoEstado
@@ -2461,7 +2533,9 @@ async function crearMarca(
             );
 
 
-        if (resultado.error) {
+        if (
+          resultado.error
+        ) {
 
           alert(
             resultado.error.message
@@ -2478,9 +2552,9 @@ async function crearMarca(
     );
 
 
-  /* =========================
+  /* =================================================
      ELIMINAR
-  ========================= */
+  ================================================= */
 
   elemento
     .querySelector(
@@ -2503,7 +2577,9 @@ async function crearMarca(
 
         const resultado =
           await supabaseClient
-            .from("marcas_afiliadas")
+            .from(
+              "marcas_afiliadas"
+            )
             .delete()
             .eq(
               "id",
@@ -2511,7 +2587,9 @@ async function crearMarca(
             );
 
 
-        if (resultado.error) {
+        if (
+          resultado.error
+        ) {
 
           alert(
             resultado.error.message
@@ -2528,19 +2606,19 @@ async function crearMarca(
     );
 
 
-  /* =========================
+  /* =================================================
      GUARDAR EDICIÓN
-  ========================= */
+  ================================================= */
 
-  const guardar =
+  const botonGuardar =
     elemento.querySelector(
       '[data-action="save"]'
     );
 
 
-  if (guardar) {
+  if (botonGuardar) {
 
-    guardar.addEventListener(
+    botonGuardar.addEventListener(
       "click",
       async function() {
 
@@ -2576,7 +2654,8 @@ async function guardarCambios(
 
   try {
 
-    boton.disabled = true;
+    boton.disabled =
+      true;
 
     boton.textContent =
       "GUARDANDO...";
@@ -2633,13 +2712,15 @@ async function guardarCambios(
     }
 
 
-    /* =========================
+    /* =================================================
        ACTUALIZAR MARCA
-    ========================= */
+    ================================================= */
 
     const actualizarMarca =
       await supabaseClient
-        .from("marcas_afiliadas")
+        .from(
+          "marcas_afiliadas"
+        )
         .update({
 
           nombre,
@@ -2647,16 +2728,20 @@ async function guardarCambios(
           categoria,
 
           descripcion:
-            descripcion || null,
+            descripcion ||
+            null,
 
           whatsapp:
-            whatsapp || null,
+            whatsapp ||
+            null,
 
           instagram:
-            instagram || null,
+            instagram ||
+            null,
 
           web:
-            web || null
+            web ||
+            null
 
         })
         .eq(
@@ -2665,16 +2750,142 @@ async function guardarCambios(
         );
 
 
-    if (actualizarMarca.error) {
+    if (
+      actualizarMarca.error
+    ) {
 
       throw actualizarMarca.error;
 
     }
 
 
-    /* =========================
+    /* =================================================
+       CAMBIAR LOGO
+    ================================================= */
+
+    const archivo =
+      elemento
+        .querySelector(
+          "[data-logo-file]"
+        )
+        ?.files[0];
+
+
+    if (archivo) {
+
+      const extension =
+        obtenerExtension(
+          archivo.name
+        );
+
+
+      const nuevoPath =
+        crearSlug(
+          nombre
+        ) +
+        "-" +
+        Date.now() +
+        "." +
+        extension;
+
+
+      const subida =
+        await supabaseClient
+          .storage
+          .from(
+            "logos-marcas"
+          )
+          .upload(
+            nuevoPath,
+            archivo,
+            {
+              cacheControl:
+                "3600",
+
+              upsert:
+                false,
+
+              contentType:
+                archivo.type
+
+            }
+          );
+
+
+      if (
+        subida.error
+      ) {
+
+        throw subida.error;
+
+      }
+
+
+      const nuevaUrl =
+        supabaseClient
+          .storage
+          .from(
+            "logos-marcas"
+          )
+          .getPublicUrl(
+            nuevoPath
+          )
+          .data
+          .publicUrl;
+
+
+      const actualizarLogo =
+        await supabaseClient
+          .from(
+            "marcas_afiliadas"
+          )
+          .update({
+            logo_url:
+              nuevaUrl
+          })
+          .eq(
+            "id",
+            marca.id
+          );
+
+
+      if (
+        actualizarLogo.error
+      ) {
+
+        await eliminarLogo(
+          nuevoPath
+        );
+
+        throw actualizarLogo.error;
+
+      }
+
+
+      if (marca.logo_url) {
+
+        const viejoPath =
+          obtenerPathLogo(
+            marca.logo_url
+          );
+
+
+        if (viejoPath) {
+
+          await eliminarLogo(
+            viejoPath
+          );
+
+        }
+
+      }
+
+    }
+
+
+    /* =================================================
        ACTUALIZAR BENEFICIO
-    ========================= */
+    ================================================= */
 
     if (beneficio) {
 
@@ -2720,35 +2931,17 @@ async function guardarCambios(
         );
 
 
-      const accesoGeneral =
+      const tipoAcceso =
         elemento
           .querySelector(
-            '[data-benefit-access="general"]'
+            '[data-benefit-access]:checked'
           )
-          .checked;
+          ?.dataset
+          .benefitAccess ||
+        "";
 
 
-      const accesoBlack =
-        elemento
-          .querySelector(
-            '[data-benefit-access="black"]'
-          )
-          .checked;
-
-
-      const accesoPremium =
-        elemento
-          .querySelector(
-            '[data-benefit-access="premium"]'
-          )
-          .checked;
-
-
-      if (
-        !accesoGeneral &&
-        !accesoBlack &&
-        !accesoPremium
-      ) {
+      if (!tipoAcceso) {
 
         throw new Error(
           "Selecciona quién puede utilizar el beneficio."
@@ -2757,37 +2950,56 @@ async function guardarCambios(
       }
 
 
+      const accesoId =
+        tipoAcceso === "general";
+
+
+      const accesoBlack =
+        tipoAcceso === "general" ||
+        tipoAcceso === "black";
+
+
+      const accesoPremium =
+        tipoAcceso === "general" ||
+        tipoAcceso === "premium";
+
+
       const actualizarBeneficio =
         await supabaseClient
-          .from("beneficios_golden")
+          .from(
+            "beneficios_golden"
+          )
           .update({
 
             titulo,
 
             descuento:
-              descuento || null,
+              descuento ||
+              null,
 
             codigo:
-              codigo || null,
+              codigo ||
+              null,
 
             fecha_fin:
-              fechaFin || null,
+              fechaFin ||
+              null,
 
             descripcion:
-              descripcionBeneficio || null,
+              descripcionBeneficio ||
+              null,
 
             condiciones:
-              condiciones || null,
+              condiciones ||
+              null,
 
             acceso_id:
-              accesoGeneral,
+              accesoId,
 
             acceso_black:
-              accesoGeneral ||
               accesoBlack,
 
             acceso_premium:
-              accesoGeneral ||
               accesoPremium
 
           })
@@ -2818,7 +3030,9 @@ async function guardarCambios(
 
   } catch (error) {
 
-    console.error(error);
+    console.error(
+      error
+    );
 
 
     alert(
@@ -2829,7 +3043,8 @@ async function guardarCambios(
 
   } finally {
 
-    boton.disabled = false;
+    boton.disabled =
+      false;
 
     boton.textContent =
       "GUARDAR CAMBIOS";
@@ -2838,10 +3053,17 @@ async function guardarCambios(
 
 }
 
+
+/* =================================================
+   UTILIDADES
+================================================= */
+
 function valor(id) {
 
   const elemento =
-    document.getElementById(id);
+    document.getElementById(
+      id
+    );
 
 
   return elemento
@@ -2887,18 +3109,12 @@ function campoBeneficio(
 }
 
 
-/* =================================================
-   MOSTRAR ACCESO
-================================================= */
-
 function obtenerAcceso(
   beneficio
 ) {
 
   if (
-    beneficio.acceso_id &&
-    beneficio.acceso_black &&
-    beneficio.acceso_premium
+    beneficio.acceso_id
   ) {
 
     return "TODOS LOS ID BABY GOLDEN";
@@ -2908,7 +3124,16 @@ function obtenerAcceso(
 
   if (
     beneficio.acceso_black &&
-    !beneficio.acceso_premium
+    beneficio.acceso_premium
+  ) {
+
+    return "BLACK ID + PREMIUM ID";
+
+  }
+
+
+  if (
+    beneficio.acceso_black
   ) {
 
     return "SOLO BLACK ID";
@@ -2917,8 +3142,7 @@ function obtenerAcceso(
 
 
   if (
-    beneficio.acceso_premium &&
-    !beneficio.acceso_black
+    beneficio.acceso_premium
   ) {
 
     return "SOLO PREMIUM ID";
@@ -2931,11 +3155,9 @@ function obtenerAcceso(
 }
 
 
-/* =================================================
-   SLUG
-================================================= */
-
-function crearSlug(texto) {
+function crearSlug(
+  texto
+) {
 
   return texto
     .toLowerCase()
@@ -2955,10 +3177,6 @@ function crearSlug(texto) {
 }
 
 
-/* =================================================
-   EXTENSIÓN
-================================================= */
-
 function obtenerExtension(
   nombre
 ) {
@@ -2976,10 +3194,6 @@ function obtenerExtension(
 
 }
 
-
-/* =================================================
-   PATH LOGO
-================================================= */
 
 function obtenerPathLogo(
   url
@@ -3000,8 +3214,12 @@ function obtenerPathLogo(
     );
 
 
-  if (posicion === -1) {
+  if (
+    posicion === -1
+  ) {
+
     return null;
+
   }
 
 
@@ -3015,10 +3233,6 @@ function obtenerPathLogo(
 }
 
 
-/* =================================================
-   ELIMINAR LOGO
-================================================= */
-
 async function eliminarLogo(
   path
 ) {
@@ -3030,17 +3244,15 @@ async function eliminarLogo(
 
   await supabaseClient
     .storage
-    .from("logos-marcas")
+    .from(
+      "logos-marcas"
+    )
     .remove([
       path
     ]);
 
 }
 
-
-/* =================================================
-   ESCAPAR HTML
-================================================= */
 
 function escapar(
   valor
@@ -3056,7 +3268,9 @@ function escapar(
   }
 
 
-  return String(valor)
+  return String(
+    valor
+  )
 
     .replace(
       /&/g,
@@ -3085,10 +3299,6 @@ function escapar(
 
 }
 
-
-/* =================================================
-   MENSAJE
-================================================= */
 
 function mostrarMensaje(
   texto,
@@ -3120,36 +3330,21 @@ function mostrarMensaje(
 }
 
 
-/* =================================================
-   LIMPIAR FORMULARIO
-================================================= */
-
 function limpiarFormulario() {
 
   const ids = [
 
     "brandName",
-
     "brandCategory",
-
     "brandDescription",
-
     "brandWhatsapp",
-
     "brandInstagram",
-
     "brandWeb",
-
     "benefitTitle",
-
     "benefitDiscount",
-
     "benefitCode",
-
     "benefitDate",
-
     "benefitDescription",
-
     "benefitConditions"
 
   ];
@@ -3242,13 +3437,9 @@ function limpiarFormulario() {
   if (status) {
 
     status.textContent =
-      "Selecciona una imagen PNG, JPG o WEBP.";
+      "Selecciona PNG, JPG o WEBP.";
 
   }
-
-
-  nuevoLogoPath =
-    null;
 
 
   const mensaje =
@@ -3267,7 +3458,6 @@ function limpiarFormulario() {
 }
 
 </script>
-
 
 </body>
 
