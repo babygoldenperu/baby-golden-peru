@@ -2143,7 +2143,36 @@ async function cargarSolicitudes() {
 
   const solicitud =
     data[0];
+let fotoUrl = "";
 
+if (solicitud.foto_url) {
+
+  const {
+    data: fotoFirmada,
+    error: errorFoto
+  } = await supabaseClient.storage
+    .from("fotos-perritos")
+    .createSignedUrl(
+      solicitud.foto_url,
+      300
+    );
+
+
+  if (errorFoto) {
+
+    console.error(
+      "ERROR FOTO:",
+      errorFoto
+    );
+
+  } else {
+
+    fotoUrl =
+      fotoFirmada?.signedUrl || "";
+
+  }
+
+}
 
   contenido.innerHTML = `
 
@@ -2153,13 +2182,9 @@ ${
       <div style="margin-bottom:20px;">
 
         <img
-          src="${
-            supabaseClient.storage
-              .from("fotos-perritos")
-              .getPublicUrl(
-                solicitud.foto_url
-              ).data.publicUrl
-          }"
+          src="${escaparHTML(
+  fotoUrl
+)}"
           alt="Foto del perrito"
           style="
             width:180px;
