@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Tienda | Baby Golden Perú
+  </title>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #fafafa;
+      color: #222;
+    }
+
+
+    /* =========================================
+       ENCABEZADO
+       ========================================= */
+
+    header {
+      padding: 20px;
+      background: #ffffff;
+      border-bottom: 1px solid #eeeeee;
+      text-align: center;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+
+    /* =========================================
+       CONTENIDO
+       ========================================= */
+
+    main {
+      max-width: 1100px;
+      margin: auto;
+      padding: 30px 20px;
+    }
+
+    .intro {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .intro h2 {
+      margin-bottom: 10px;
+    }
+
+
+    /* =========================================
+       PRODUCTOS
+       ========================================= */
+
+    .productos {
+      display: grid;
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            220px,
+            1fr
+          )
+        );
+
+      gap: 20px;
+    }
+
+
+    .producto {
+      background: #ffffff;
+      border: 1px solid #eeeeee;
+      border-radius: 14px;
+      padding: 15px;
+      text-align: center;
+    }
+
+
+    .producto img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+
+    .producto h3 {
+      margin: 15px 0 8px;
+    }
+
+
+    .producto p {
+      margin: 8px 0;
+      line-height: 1.5;
+    }
+
+
+    .precio {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 12px 0;
+    }
+
+
+    .boton {
+      display: inline-block;
+      padding: 11px 18px;
+      border: none;
+      border-radius: 8px;
+      background: #222;
+      color: #ffffff;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+
+    /* =========================================
+       PIE DE PÁGINA
+       ========================================= */
+
+    footer {
+      margin-top: 50px;
+      padding: 25px 20px;
+      text-align: center;
+      background: #ffffff;
+      border-top: 1px solid #eeeeee;
+    }
+
+
+    /* =========================================
+       MÓVIL
+       ========================================= */
+
+    @media (
+      max-width: 600px
+    ) {
+
+      .producto img {
+        height: 200px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       ENCABEZADO
+       ========================================= -->
+
+  <header>
+
+    <h1>
+      Baby Golden Perú
+    </h1>
+
+  </header>
+
+
+  <!-- =========================================
+       CONTENIDO
+       ========================================= -->
+
+  <main>
+
+    <section class="intro">
+
+      <h2>
+        Tienda Baby Golden Perú
+      </h2>
+
+      <p>
+        Productos pensados para consentir,
+        identificar y acompañar a nuestros
+        perritos.
+      </p>
+
+    </section>
+
+
+    <!-- =========================================
+         PRODUCTOS
+         ========================================= -->
+
+    <section
+      class="productos"
+      id="productos"
+    >
+
+      <!-- PRODUCTO 1 -->
+
+      <article class="producto">
+
+        <img
+          src=""
+          alt="Baby Golden ID Premium"
+        >
+
+        <h3>
+          Baby Golden ID Premium
+        </h3>
+
+        <p>
+          Tarjeta de identificación
+          para tu perrito.
+        </p>
+
+        <div class="precio">
+          S/30.00
+        </div>
+
+        <button
+          class="boton"
+          type="button"
+        >
+          COMPRAR
+        </button>
+
+      </article>
+
+
+      <!-- PRODUCTO 2 -->
+
+      <article class="producto">
+
+        <img
+          src=""
+          alt="Baby Golden ID Black"
+        >
+
+        <h3>
+          Baby Golden ID Black
+        </h3>
+
+        <p>
+          Identificación exclusiva
+          para tu perrito.
+        </p>
+
+        <div class="precio">
+          S/36.90
+        </div>
+
+        <button
+          class="boton"
+          type="button"
+        >
+          COMPRAR
+        </button>
+
+      </article>
+
+
+      <!-- PRODUCTO 3 -->
+
+      <article class="producto">
+
+        <img
+          src=""
+          alt="Producto Baby Golden Perú"
+        >
+
+        <h3>
+          Producto 3
+        </h3>
+
+        <p>
+          Descripción del producto.
+        </p>
+
+        <div class="precio">
+          S/00.00
+        </div>
+
+        <button
+          class="boton"
+          type="button"
+        >
+          COMPRAR
+        </button>
+
+      </article>
+
+
+      <!-- PRODUCTO 4 -->
+
+      <article class="producto">
+
+        <img
+          src=""
+          alt="Producto Baby Golden Perú"
+        >
+
+        <h3>
+          Producto 4
+        </h3>
+
+        <p>
+          Descripción del producto.
+        </p>
+
+        <div class="precio">
+          S/00.00
+        </div>
+
+        <button
+          class="boton"
+          type="button"
+        >
+          COMPRAR
+        </button>
+
+      </article>
+
+
+      <!-- PRODUCTO 5 -->
+
+      <article class="producto">
+
+        <img
+          src=""
+          alt="Producto Baby Golden Perú"
+        >
+
+        <h3>
+          Producto 5
+        </h3>
+
+        <p>
+          Descripción del producto.
+        </p>
+
+        <div class="precio">
+          S/00.00
+        </div>
+
+        <button
+          class="boton"
+          type="button"
+        >
+          COMPRAR
+        </button>
+
+      </article>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       PIE DE PÁGINA
+       ========================================= -->
+
+  <footer>
+
+    Baby Golden Perú
+
+  </footer>
+
+
+</body>
+
+</html>
