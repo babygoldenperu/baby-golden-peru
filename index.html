@@ -116,20 +116,32 @@
 .menu a:hover::after {
   width: 100%;
 }
+.header-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 13px 22px;
+  background: var(--gold);
+  color: #fff !important;
+  border: 1px solid rgba(180, 124, 36, 0.35);
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(180, 124, 36, 0.18);
+  letter-spacing: .4px;
+  transition:
+    transform .3s ease,
+    box-shadow .3s ease,
+    background .3s ease;
+}
 
-    .header-button {
-      background: var(--gold);
-      color: white !important;
-      padding: 13px 20px;
-      border-radius: 999px;
-      box-shadow: 0 8px 25px rgba(180,124,36,.18);
-    }
+.header-button:hover {
+  background: var(--brown);
+  color: #fff !important;
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(45, 35, 25, 0.18);
+}
 
-    .header-button:hover {
-      color: white !important;
-      transform: translateY(-2px);
-    }
-
+  
     .heart {
       color: var(--gold);
       font-size: 25px;
