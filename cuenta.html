@@ -648,34 +648,107 @@ document
 
       if (error) {
 
-        console.error(
-          "ERROR REGISTRO:",
-          error
+  console.error(
+    "ERROR REGISTRO:",
+    error
+  );
+
+  message.className =
+    "message error";
+
+  message.textContent =
+    error.message;
+
+  message.style.display =
+    "block";
+
+  return;
+}
+
+
+message.className =
+  "message success";
+
+message.innerHTML = `
+  <strong>¡Cuenta creada!</strong>
+  <br><br>
+  Hemos enviado un correo de confirmación a:
+  <br>
+  <strong>${email}</strong>
+  <br><br>
+  Confirma tu correo para activar tu cuenta.
+  <br><br>
+
+  <button
+    type="button"
+    id="reenviarConfirmacion"
+    class="secondary"
+  >
+    REENVIAR CORREO
+  </button>
+`;
+
+message.style.display =
+  "block";
+
+      const reenviar =
+  document.getElementById(
+    "reenviarConfirmacion"
+  );
+
+if (reenviar) {
+
+  reenviar.addEventListener(
+    "click",
+    async function() {
+
+      reenviar.disabled = true;
+
+      reenviar.textContent =
+        "ENVIANDO...";
+
+      const {
+        error
+      } =
+        await supabaseClient.auth.resend({
+          type: "signup",
+
+          email: email,
+
+          options: {
+            emailRedirectTo:
+              window.location.origin +
+              "/cuenta.html"
+          }
+
+        });
+
+      if (error) {
+
+        reenviar.disabled = false;
+
+        reenviar.textContent =
+          "REENVIAR CORREO";
+
+        alert(
+          "No se pudo reenviar el correo: " +
+          error.message
         );
 
-
-        message.className =
-          "message error";
-
-        message.textContent =
-          error.message;
-
-        message.style.display =
-          "block";
-
         return;
-
       }
 
+      reenviar.textContent =
+        "CORREO ENVIADO";
 
-      message.className =
-        "message success";
+    }
+  );
 
-      message.textContent =
-        "Cuenta creada. Revisa tu correo electrónico para confirmar tu cuenta.";
+}
 
-      message.style.display =
-        "block";
+document
+  .getElementById("registroForm")
+  .reset();
 
     }
   );
