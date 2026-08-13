@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Mi cuenta | Baby Golden Perú
+  </title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      color: #222;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 480px;
+      margin: 50px auto;
+      padding: 20px;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 18px;
+      padding: 30px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 13px;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      font-size: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 13px;
+      margin-top: 18px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .primary {
+      background: #222;
+      color: #fff;
+    }
+
+    .secondary {
+      background: #eee;
+      color: #222;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 18px;
+      cursor: pointer;
+      color: #555;
+      font-size: 14px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      margin-top: 15px;
+      padding: 12px;
+      border-radius: 10px;
+      display: none;
+      font-size: 14px;
+    }
+
+    .success {
+      background: #e8f5e9;
+      color: #256029;
+    }
+
+    .error {
+      background: #ffebee;
+      color: #b00020;
+    }
+
+    .account-email {
+      text-align: center;
+      padding: 15px;
+      background: #f7f7f7;
+      border-radius: 12px;
+      margin: 20px 0;
+      word-break: break-word;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+  <!-- LOGIN -->
+
+  <div
+    id="loginPanel"
+    class="card"
+  >
+
+    <h1>
+      Mi cuenta
+    </h1>
+
+    <div class="subtitle">
+      Baby Golden Perú
+    </div>
+
+
+    <form id="loginForm">
+
+      <label>
+        Correo electrónico
+      </label>
+
+      <input
+        type="email"
+        id="loginEmail"
+        required
+      >
+
+
+      <label>
+        Contraseña
+      </label>
+
+      <input
+        type="password"
+        id="loginPassword"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="primary"
+      >
+        INICIAR SESIÓN
+      </button>
+
+    </form>
+
+
+    <div
+      id="loginMessage"
+      class="message"
+    ></div>
+
+
+    <div
+      id="mostrarRegistro"
+      class="link"
+    >
+      ¿No tienes cuenta? Crear cuenta
+    </div>
+
+
+    <div
+      id="mostrarRecuperar"
+      class="link"
+    >
+      ¿Olvidaste tu contraseña?
+    </div>
+
+  </div>
+
+
+
+  <!-- REGISTRO -->
+
+  <div
+    id="registroPanel"
+    class="card hidden"
+  >
+
+    <h1>
+      Crear cuenta
+    </h1>
+
+    <div class="subtitle">
+      Baby Golden Perú
+    </div>
+
+
+    <form id="registroForm">
+
+      <label>
+        Correo electrónico
+      </label>
+
+      <input
+        type="email"
+        id="registroEmail"
+        required
+      >
+
+
+      <label>
+        Contraseña
+      </label>
+
+      <input
+        type="password"
+        id="registroPassword"
+        minlength="6"
+        required
+      >
+
+
+      <label>
+        Confirmar contraseña
+      </label>
+
+      <input
+        type="password"
+        id="registroPassword2"
+        minlength="6"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="primary"
+      >
+        CREAR CUENTA
+      </button>
+
+    </form>
+
+
+    <div
+      id="registroMessage"
+      class="message"
+    ></div>
+
+
+    <div
+      id="volverLogin"
+      class="link"
+    >
+      Ya tengo una cuenta
+    </div>
+
+  </div>
+
+
+
+  <!-- RECUPERAR CONTRASEÑA -->
+
+  <div
+    id="recuperarPanel"
+    class="card hidden"
+  >
+
+    <h1>
+      Recuperar contraseña
+    </h1>
+
+    <div class="subtitle">
+      Te enviaremos un enlace a tu correo
+    </div>
+
+
+    <form id="recuperarForm">
+
+      <label>
+        Correo electrónico
+      </label>
+
+      <input
+        type="email"
+        id="recuperarEmail"
+        required
+      >
+
+
+      <button
+        type="submit"
+        class="primary"
+      >
+        ENVIAR ENLACE
+      </button>
+
+    </form>
+
+
+    <div
+      id="recuperarMessage"
+      class="message"
+    ></div>
+
+
+    <div
+      id="volverLogin2"
+      class="link"
+    >
+      Volver a iniciar sesión
+    </div>
+
+  </div>
+
+
+
+  <!-- CUENTA -->
+
+  <div
+    id="cuentaPanel"
+    class="card hidden"
+  >
+
+    <h1>
+      Mi cuenta
+    </h1>
+
+    <div class="subtitle">
+      Bienvenido a Baby Golden Perú
+    </div>
+
+
+    <div class="account-email">
+
+      <strong>
+        Cuenta:
+      </strong>
+
+      <br>
+
+      <span id="cuentaEmail">
+      </span>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="primary"
+      id="comprarPremium"
+    >
+      PREMIUM — S/30.00
+    </button>
+
+
+    <button
+      type="button"
+      class="primary"
+      id="comprarBlack"
+    >
+      BLACK — S/36.90
+    </button>
+
+
+    <button
+      type="button"
+      class="secondary"
+      id="cerrarSesion"
+    >
+      CERRAR SESIÓN
+    </button>
+
+  </div>
+
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+  "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+const SUPABASE_KEY =
+  "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+
+const supabaseClient =
+  window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
+
+
+
+/* =========================================
+   ELEMENTOS
+   ========================================= */
+
+const loginPanel =
+  document.getElementById(
+    "loginPanel"
+  );
+
+const registroPanel =
+  document.getElementById(
+    "registroPanel"
+  );
+
+const recuperarPanel =
+  document.getElementById(
+    "recuperarPanel"
+  );
+
+const cuentaPanel =
+  document.getElementById(
+    "cuentaPanel"
+  );
+
+
+
+/* =========================================
+   MOSTRAR PANEL
+   ========================================= */
+
+function mostrarPanel(panel) {
+
+  loginPanel.classList.add(
+    "hidden"
+  );
+
+  registroPanel.classList.add(
+    "hidden"
+  );
+
+  recuperarPanel.classList.add(
+    "hidden"
+  );
+
+  cuentaPanel.classList.add(
+    "hidden"
+  );
+
+
+  panel.classList.remove(
+    "hidden"
+  );
+
+}
+
+
+
+/* =========================================
+   CAMBIAR A REGISTRO
+   ========================================= */
+
+document
+  .getElementById("mostrarRegistro")
+  .addEventListener(
+    "click",
+    function() {
+
+      mostrarPanel(
+        registroPanel
+      );
+
+    }
+  );
+
+
+
+/* =========================================
+   VOLVER LOGIN
+   ========================================= */
+
+document
+  .getElementById("volverLogin")
+  .addEventListener(
+    "click",
+    function() {
+
+      mostrarPanel(
+        loginPanel
+      );
+
+    }
+  );
+
+
+
+document
+  .getElementById("volverLogin2")
+  .addEventListener(
+    "click",
+    function() {
+
+      mostrarPanel(
+        loginPanel
+      );
+
+    }
+  );
+
+
+
+/* =========================================
+   RECUPERAR
+   ========================================= */
+
+document
+  .getElementById("mostrarRecuperar")
+  .addEventListener(
+    "click",
+    function() {
+
+      mostrarPanel(
+        recuperarPanel
+      );
+
+    }
+  );
+
+
+
+/* =========================================
+   CREAR CUENTA
+   ========================================= */
+
+document
+  .getElementById("registroForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      const email =
+        document
+          .getElementById(
+            "registroEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const password =
+        document
+          .getElementById(
+            "registroPassword"
+          )
+          .value;
+
+
+      const password2 =
+        document
+          .getElementById(
+            "registroPassword2"
+          )
+          .value;
+
+
+      const message =
+        document.getElementById(
+          "registroMessage"
+        );
+
+
+      message.style.display =
+        "none";
+
+
+      if (
+        password !== password2
+      ) {
+
+        message.className =
+          "message error";
+
+        message.textContent =
+          "Las contraseñas no coinciden.";
+
+        message.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient.auth.signUp({
+
+        email: email,
+
+        password: password,
+
+        options: {
+
+          emailRedirectTo:
+            window.location.origin +
+            "/cuenta.html"
+
+        }
+
+      });
+
+
+      if (error) {
+
+        console.error(
+          "ERROR REGISTRO:",
+          error
+        );
+
+
+        message.className =
+          "message error";
+
+        message.textContent =
+          error.message;
+
+        message.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      message.className =
+        "message success";
+
+      message.textContent =
+        "Cuenta creada. Revisa tu correo electrónico para confirmar tu cuenta.";
+
+      message.style.display =
+        "block";
+
+    }
+  );
+
+
+
+/* =========================================
+   LOGIN
+   ========================================= */
+
+document
+  .getElementById("loginForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      const email =
+        document
+          .getElementById(
+            "loginEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const password =
+        document
+          .getElementById(
+            "loginPassword"
+          )
+          .value;
+
+
+      const message =
+        document.getElementById(
+          "loginMessage"
+        );
+
+
+      message.style.display =
+        "none";
+
+
+      const {
+        data,
+        error
+      } = await supabaseClient.auth
+        .signInWithPassword({
+
+          email: email,
+
+          password: password
+
+        });
+
+
+      if (error) {
+
+        console.error(
+          "ERROR LOGIN:",
+          error
+        );
+
+
+        message.className =
+          "message error";
+
+        message.textContent =
+          error.message;
+
+        message.style.display =
+          "block";
+
+        return;
+
+      }
+
+
+      mostrarCuenta(
+        data.user
+      );
+
+    }
+  );
+
+
+
+/* =========================================
+   MOSTRAR CUENTA
+   ========================================= */
+
+function mostrarCuenta(
+  user
+) {
+
+  document.getElementById(
+    "cuentaEmail"
+  ).textContent =
+    user.email || "";
+
+
+  mostrarPanel(
+    cuentaPanel
+  );
+
+}
+
+
+
+/* =========================================
+   RECUPERAR CONTRASEÑA
+   ========================================= */
+
+document
+  .getElementById("recuperarForm")
+  .addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+
+      const email =
+        document
+          .getElementById(
+            "recuperarEmail"
+          )
+          .value
+          .trim()
+          .toLowerCase();
+
+
+      const message =
+        document.getElementById(
+          "recuperarMessage"
+        );
+
+
+      const {
+        error
+      } = await supabaseClient.auth
+        .resetPasswordForEmail(
+          email,
+          {
+            redirectTo:
+              window.location.origin +
+              "/cuenta.html"
+          }
+        );
+
+
+      if (error) {
+
+        message.className =
+          "message error";
+
+        message.textContent =
+          error.message;
+
+      } else {
+
+        message.className =
+          "message success";
+
+        message.textContent =
+          "Te enviamos un enlace para recuperar tu contraseña.";
+
+      }
+
+
+      message.style.display =
+        "block";
+
+    }
+  );
+
+
+
+/* =========================================
+   CERRAR SESIÓN
+   ========================================= */
+
+document
+  .getElementById("cerrarSesion")
+  .addEventListener(
+    "click",
+    async function() {
+
+      await supabaseClient.auth
+        .signOut();
+
+      mostrarPanel(
+        loginPanel
+      );
+
+    }
+  );
+
+
+
+/* =========================================
+   COMPROBAR SESIÓN EXISTENTE
+   ========================================= */
+
+async function comprobarSesion() {
+
+  const {
+    data,
+    error
+  } = await supabaseClient.auth
+    .getSession();
+
+
+  if (
+    error
+    ||
+    !data.session
+  ) {
+
+    mostrarPanel(
+      loginPanel
+    );
+
+    return;
+
+  }
+
+
+  mostrarCuenta(
+    data.session.user
+  );
+
+}
+
+
+comprobarSesion();
+
+</script>
+
+
+</body>
+
+</html>
