@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Contacto | Baby Golden Perú
+  </title>
+
+
+  <!-- =========================================
+       TIPOGRAFÍAS
+       ========================================= -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
+  <style>
+
+    /* =========================================
+       BASE
+       ========================================= */
+
+    * {
+      box-sizing: border-box;
+    }
+
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+
+    body {
+      margin: 0;
+
+      background: #f6f0e6;
+      color: #3b2b20;
+
+      font-family: "Montserrat", sans-serif;
+    }
+
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+
+    /* =========================================
+       HEADER
+       ========================================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(
+        246,
+        240,
+        230,
+        .96
+      );
+
+      border-bottom: 1px solid #ded1bf;
+
+      backdrop-filter: blur(10px);
+    }
+
+
+    .nav {
+      max-width: 1280px;
+      margin: auto;
+
+      min-height: 76px;
+      padding: 0 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 25px;
+    }
+
+
+    .logo {
+      width: 155px;
+      height: auto;
+      display: block;
+    }
+
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .7px;
+    }
+
+
+    .menu a:hover {
+      color: #a76f20;
+    }
+
+
+    .header-button {
+      padding: 12px 18px;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+      color: #ffffff;
+    }
+
+
+    .header-button:hover {
+      background: #684936;
+      color: #ffffff !important;
+    }
+
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+
+    .icon-button {
+      width: 40px;
+      height: 40px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #d9c9b6;
+      border-radius: 50%;
+
+      background: transparent;
+      color: #4a3324;
+    }
+
+
+    .icon-button svg {
+      width: 19px;
+      height: 19px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+    }
+
+
+    /* =========================================
+       PRESENTACIÓN
+       ========================================= */
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+
+      padding: 80px 25px 50px;
+
+      text-align: center;
+    }
+
+
+    .hero-label {
+      margin-bottom: 15px;
+
+      color: #a76f20;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
+    }
+
+
+    .hero h1 {
+      margin: 0;
+
+      font-size: clamp(
+        55px,
+        7vw,
+        85px
+      );
+
+      line-height: .9;
+      font-weight: 600;
+    }
+
+
+    .hero h1 span {
+      color: #b77b20;
+    }
+
+
+    .hero p {
+      max-width: 650px;
+      margin: 25px auto 0;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.8;
+    }
+
+
+    /* =========================================
+       CONTACTO
+       ========================================= */
+
+    .contacto {
+      max-width: 1150px;
+      margin: auto;
+
+      padding: 20px 25px 90px;
+    }
+
+
+    .contact-grid {
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap: 25px;
+    }
+
+
+    .card {
+      padding: 30px;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+      border-radius: 22px;
+
+      box-shadow:
+        0 16px 40px
+        rgba(
+          57,
+          42,
+          28,
+          .07
+        );
+    }
+
+
+    .card-label {
+      margin-bottom: 8px;
+
+      color: #a76f20;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+
+    .card h2 {
+      margin: 0 0 20px;
+
+      font-size: 38px;
+      line-height: 1;
+    }
+
+
+    .contact-item {
+      padding: 17px 0;
+
+      border-bottom: 1px solid #e5d9cb;
+    }
+
+
+    .contact-item:last-child {
+      border-bottom: none;
+    }
+
+
+    .contact-item strong {
+      display: block;
+
+      margin-bottom: 5px;
+
+      font-size: 10px;
+      letter-spacing: .7px;
+    }
+
+
+    .contact-item a,
+    .contact-item span {
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+
+    .contact-item a:hover {
+      color: #a76f20;
+    }
+
+
+    /* =========================================
+       REDES SOCIALES
+       ========================================= */
+
+    .socials {
+      display: grid;
+      gap: 10px;
+    }
+
+
+    .social {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 14px 16px;
+
+      border: 1px solid #decdb8;
+      border-radius: 12px;
+
+      background: #f7efe4;
+
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+
+    .social:hover {
+      background: #eee2d2;
+    }
+
+
+    /* =========================================
+       BOTÓN WHATSAPP
+       ========================================= */
+
+    .whatsapp {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 100%;
+
+      margin-top: 20px;
+
+      padding: 14px 20px;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+      color: #ffffff;
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .8px;
+    }
+
+
+    .whatsapp:hover {
+      background: #684936;
+    }
+
+
+    /* =========================================
+       MAPA
+       ========================================= */
+
+    .map-card {
+      margin-top: 25px;
+
+      overflow: hidden;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+      border-radius: 22px;
+
+      box-shadow:
+        0 16px 40px
+        rgba(
+          57,
+          42,
+          28,
+          .07
+        );
+    }
+
+
+    .map-header {
+      padding: 28px;
+    }
+
+
+    .map-header h2 {
+      margin: 0 0 8px;
+
+      font-size: 38px;
+    }
+
+
+    .map-header p {
+      margin: 0;
+
+      color: #765f4c;
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+
+    .map {
+      width: 100%;
+      height: 420px;
+
+      display: block;
+
+      border: 0;
+    }
+
+
+    .map-button {
+      display: inline-flex;
+
+      margin-top: 18px;
+
+      padding: 11px 18px;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+      color: #ffffff;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+    }
+
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+
+    footer {
+      padding: 45px 25px;
+
+      border-top: 1px solid #ded1bf;
+
+      background: #eee3d3;
+
+      text-align: center;
+    }
+
+
+    footer img {
+      width: 120px;
+      margin-bottom: 15px;
+    }
+
+
+    .footer-brand {
+      font-family: "Cormorant Garamond", serif;
+
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+
+    footer p {
+      margin: 8px 0;
+
+      color: #765f4c;
+
+      font-size: 11px;
+    }
+
+
+    /* =========================================
+       MÓVIL
+       ========================================= */
+
+    @media (
+      max-width: 900px
+    ) {
+
+      .nav {
+        flex-wrap: wrap;
+        padding: 14px 18px;
+      }
+
+
+      .menu {
+        width: 100%;
+
+        justify-content: center;
+
+        gap: 12px;
+      }
+
+
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+
+    @media (
+      max-width: 620px
+    ) {
+
+      .logo {
+        width: 135px;
+      }
+
+
+      .menu > a:not(.header-button) {
+        display: none;
+      }
+
+
+      .menu {
+        width: auto;
+        margin-left: auto;
+      }
+
+
+      .header-button {
+        display: none;
+      }
+
+
+      .hero {
+        padding: 60px 20px 40px;
+      }
+
+
+      .hero h1 {
+        font-size: 58px;
+      }
+
+
+      .contacto {
+        padding: 15px 18px 60px;
+      }
+
+
+      .card {
+        padding: 24px;
+      }
+
+
+      .map {
+        height: 350px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- =========================================
+       HEADER
+       ========================================= -->
+
+  <header>
+
+    <nav class="nav">
+
+
+      <a
+        href="index.html"
+        aria-label="Baby Golden Perú"
+      >
+
+        <img
+          src="BABY%20GOLDEN.png"
+          alt="Baby Golden Perú"
+          class="logo"
+        >
+
+      </a>
+
+
+      <div class="menu">
+
+
+        <a href="index.html">
+          INICIO
+        </a>
+
+
+        <a href="tienda.html">
+          TIENDA
+        </a>
+
+
+        <a href="index.html#baby-golden-id">
+          BABY GOLDEN ID
+        </a>
+
+
+        <a href="contacto.html">
+          CONTACTO
+        </a>
+
+
+        <a
+          href="registro.html"
+          class="header-button"
+        >
+          REGISTRAR MI PERRITO
+        </a>
+
+
+        <div class="nav-actions">
+
+
+          <a
+            class="icon-button"
+            href="micuenta.html"
+            aria-label="Ir a Mi cuenta"
+          >
+
+            <svg viewBox="0 0 24 24">
+
+              <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+              ></circle>
+
+              <path
+                d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"
+              ></path>
+
+            </svg>
+
+          </a>
+
+
+        </div>
+
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+
+  <!-- =========================================
+       PRESENTACIÓN
+       ========================================= -->
+
+  <section class="hero">
+
+
+    <div class="hero-label">
+      BABY GOLDEN PERÚ
+    </div>
+
+
+    <h1>
+
+      Estamos para
+      <span>ayudarte.</span>
+
+    </h1>
+
+
+    <p>
+
+      ¿Tienes alguna consulta sobre nuestros
+      productos, Baby Golden ID o quieres
+      comunicarte con nosotros?
+      Escríbenos. Estaremos encantados
+      de atenderte.
+
+    </p>
+
+
+  </section>
+
+
+
+  <!-- =========================================
+       INFORMACIÓN DE CONTACTO
+       ========================================= -->
+
+  <main class="contacto">
+
+
+    <section class="contact-grid">
+
+
+      <!-- =====================================
+           DATOS DE CONTACTO
+           ===================================== -->
+
+      <div class="card">
+
+
+        <div class="card-label">
+          INFORMACIÓN
+        </div>
+
+
+        <h2>
+          Contáctanos
+        </h2>
+
+
+        <div class="contact-item">
+
+
+          <strong>
+            CORREO
+          </strong>
+
+
+          <a
+            href="mailto:babygoldeperu@gmail.com"
+          >
+            babygoldeperu@gmail.com
+          </a>
+
+
+        </div>
+
+
+        <div class="contact-item">
+
+
+          <strong>
+            TELÉFONO / WHATSAPP
+          </strong>
+
+
+          <a
+            href="tel:+51936078406"
+          >
+            +51 936 078 406
+          </a>
+
+
+        </div>
+
+
+        <div class="contact-item">
+
+
+          <strong>
+            DIRECCIÓN
+          </strong>
+
+
+          <span>
+            Calle Putumayo N° 176
+            <br>
+            San Miguel, Lima, Perú
+          </span>
+
+
+        </div>
+
+
+        <a
+          class="whatsapp"
+          href="https://wa.me/51936078406"
+          target="_blank"
+          rel="noopener"
+        >
+          ESCRIBIR POR WHATSAPP
+        </a>
+
+
+      </div>
+
+
+
+      <!-- =====================================
+           REDES SOCIALES
+           ===================================== -->
+
+      <div class="card">
+
+
+        <div class="card-label">
+          COMUNIDAD
+        </div>
+
+
+        <h2>
+          Síguenos
+        </h2>
+
+
+        <div class="socials">
+
+
+          <a
+            class="social"
+            href="https://www.instagram.com/babygoldenperu/"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <span>
+              Instagram
+            </span>
+
+            <span>
+              @babygoldenperu
+            </span>
+
+          </a>
+
+
+          <a
+            class="social"
+            href="https://www.tiktok.com/@baby.golden.per"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <span>
+              TikTok
+            </span>
+
+            <span>
+              @baby.golden.per
+            </span>
+
+          </a>
+
+
+          <a
+            class="social"
+            href="https://www.facebook.com/babygoldenperu"
+            target="_blank"
+            rel="noopener"
+          >
+
+            <span>
+              Facebook
+            </span>
+
+            <span>
+              @babygoldenperu
+            </span>
+
+          </a>
+
+
+        </div>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- =========================================
+         MAPA
+         ========================================= -->
+
+    <section class="map-card">
+
+
+      <div class="map-header">
+
+
+        <div class="card-label">
+          ENCUÉNTRANOS
+        </div>
+
+
+        <h2>
+          Nuestra ubicación
+        </h2>
+
+
+        <p>
+
+          Calle Putumayo N° 176,
+          San Miguel, Lima, Perú.
+
+        </p>
+
+
+        <a
+          class="map-button"
+          href="https://www.google.com/maps/search/?api=1&query=Calle+Putumayo+176,+San+Miguel,+Lima,+Peru"
+          target="_blank"
+          rel="noopener"
+        >
+          ABRIR EN GOOGLE MAPS
+        </a>
+
+
+      </div>
+
+
+      <iframe
+        class="map"
+        src="https://www.google.com/maps?q=Calle%20Putumayo%20176%2C%20San%20Miguel%2C%20Lima%2C%20Peru&output=embed"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        title="Ubicación de Baby Golden Perú"
+      ></iframe>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =========================================
+       FOOTER
+       ========================================= -->
+
+  <footer>
+
+
+    <img
+      src="BABY%20GOLDEN.png"
+      alt="Baby Golden Perú"
+    >
+
+
+    <div class="footer-brand">
+      BABY GOLDEN PERÚ
+    </div>
+
+
+    <p>
+      Comunidad · Tenencia responsable · Baby Golden ID
+    </p>
+
+
+    <p>
+      ♥ Una pata a la vez, construimos una comunidad mejor.
+    </p>
+
+
+  </footer>
+
+
+</body>
+
+</html>
