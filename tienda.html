@@ -43,8 +43,10 @@
 
     body {
       margin: 0;
+
       background: #f6f0e6;
       color: #3b2b20;
+
       font-family: "Montserrat", sans-serif;
     }
 
@@ -74,9 +76,15 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
 
-      background: rgba(246,240,230,.96);
+      background: rgba(
+        246,
+        240,
+        230,
+        .96
+      );
+
       border-bottom: 1px solid #ded1bf;
 
       backdrop-filter: blur(10px);
@@ -85,9 +93,9 @@
 
     .nav {
       max-width: 1280px;
-      margin: auto;
-
       min-height: 76px;
+
+      margin: auto;
       padding: 0 28px;
 
       display: flex;
@@ -105,6 +113,10 @@
     }
 
 
+    /* =========================================
+       MENÚ
+       ========================================= */
+
     .menu {
       display: flex;
       align-items: center;
@@ -116,10 +128,49 @@
     }
 
 
-    .menu > a:hover {
-      color: #a76f20;
+    .menu > a {
+      position: relative;
+
+      transition:
+        color .25s ease,
+        transform .25s ease;
     }
 
+
+    .menu > a:hover {
+      color: #b77b20;
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    .menu > a:not(.header-button)::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: #b77b20;
+
+      transition:
+        width .25s ease;
+    }
+
+
+    .menu > a:not(.header-button):hover::after {
+      width: 100%;
+    }
+
+
+    /* =========================================
+       BOTÓN REGISTRAR
+       ========================================= */
 
     .header-button {
       padding: 12px 18px;
@@ -127,17 +178,31 @@
       border-radius: 999px;
 
       background: #4a3324;
-      color: #fff;
+      color: #ffffff;
 
-      transition: .2s ease;
+      transition:
+        background .25s ease,
+        transform .25s ease;
     }
 
 
     .header-button:hover {
       background: #684936;
-      color: #fff !important;
+      color: #ffffff !important;
+
+      transform:
+        translateY(-2px);
     }
 
+
+    .header-button::after {
+      display: none !important;
+    }
+
+
+    /* =========================================
+       ACCIONES
+       ========================================= */
 
     .nav-actions {
       display: flex;
@@ -165,6 +230,26 @@
       color: #4a3324;
 
       cursor: pointer;
+
+      transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+    }
+
+
+    .icon-button:hover {
+      background: rgba(
+        183,
+        123,
+        32,
+        .12
+      );
+
+      color: #b77b20;
+
+      transform:
+        translateY(-2px);
     }
 
 
@@ -175,13 +260,14 @@
       fill: none;
       stroke: currentColor;
       stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
 
-    .icon-button:hover {
-      background: #eee4d6;
-    }
-
+    /* =========================================
+       CONTADOR CARRITO
+       ========================================= */
 
     .cart-count {
       position: absolute;
@@ -189,31 +275,306 @@
       top: -4px;
       right: -4px;
 
-      min-width: 18px;
-      height: 18px;
+      min-width: 17px;
+      height: 17px;
+
+      padding: 1px 4px;
+
+      border-radius: 999px;
+
+      background: #b77b20;
+      color: #ffffff;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    /* =========================================
+       CARRITO
+       ========================================= */
+
+    .cart-drawer {
+      position: fixed;
+
+      z-index: 1300;
+
+      top: 0;
+      right: 0;
+
+      width: min(
+        430px,
+        100%
+      );
+
+      height: 100dvh;
+
+      padding: 28px;
+
+      display: flex;
+      flex-direction: column;
+
+      background: #fffaf4;
+
+      box-shadow:
+        -18px 0 60px
+        rgba(
+          0,
+          0,
+          0,
+          .22
+        );
+
+      transform:
+        translateX(105%);
+
+      transition:
+        transform .28s ease;
+    }
+
+
+    .cart-drawer.is-open {
+      transform:
+        translateX(0);
+    }
+
+
+    .cart-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 20px;
+
+      padding-bottom: 20px;
+
+      border-bottom: 1px solid #e4d7c5;
+    }
+
+
+    .cart-drawer-header h2 {
+      margin: 7px 0 0;
+
+      font-size: 34px;
+      line-height: .95;
+    }
+
+
+    .panel-kicker {
+      margin: 0;
+
+      color: #b77b20;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+    }
+
+
+    .panel-close {
+      width: 34px;
+      height: 34px;
+
+      border: 1px solid #dfd1bd;
+      border-radius: 50%;
+
+      background: transparent;
+      color: #4a3324;
+
+      font-size: 26px;
+      line-height: 1;
+
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+    }
+
+
+    .panel-close:hover {
+      background: #eee2d2;
+      color: #b77b20;
+
+      transform:
+        rotate(90deg);
+    }
+
+
+    .cart-items {
+      flex: 1;
+
+      overflow: auto;
+
+      padding: 20px 0;
+    }
+
+
+    .cart-empty {
+      margin: 20px 0;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    .cart-item {
+      display: grid;
+
+      grid-template-columns:
+        1fr auto;
+
+      gap: 12px;
+
+      padding: 15px 0;
+
+      border-bottom: 1px solid #eadfce;
+    }
+
+
+    .cart-item h3 {
+      margin: 0 0 5px;
+
+      font-size: 24px;
+      line-height: .9;
+    }
+
+
+    .cart-item p {
+      margin: 0;
+
+      color: #765f4c;
+
+      font-size: 11px;
+    }
+
+
+    .remove-item {
+      align-self: start;
+
+      border: 0;
+
+      background: transparent;
+      color: #9f3d2c;
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+
+      cursor: pointer;
+    }
+
+
+    .cart-summary {
+      padding-top: 20px;
+
+      border-top: 1px solid #e4d7c5;
+    }
+
+
+    .cart-summary > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 13px;
+    }
+
+
+    .cart-summary strong {
+      color: #b77b20;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 29px;
+    }
+
+
+    .cart-checkout {
+      width: 100%;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      padding: 0 4px;
+      margin-top: 18px;
+      padding: 15px;
 
       border-radius: 999px;
 
-      background: #b77b20;
-      color: #fff;
+      background: #4a3324;
+      color: #ffffff;
 
       font-size: 9px;
       font-weight: 700;
+      letter-spacing: .8px;
+
+      transition:
+        background .25s ease,
+        transform .25s ease;
+    }
+
+
+    .cart-checkout:hover {
+      background: #684936;
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    .cart-checkout.is-disabled {
+      pointer-events: none;
+
+      opacity: .52;
+    }
+
+
+    .cart-summary p {
+      margin: 14px 0 0;
+
+      color: #765f4c;
+
+      font-size: 10px;
+      line-height: 1.6;
+
+      text-align: center;
+    }
+
+
+    .cart-backdrop {
+      position: fixed;
+
+      z-index: 1250;
+
+      inset: 0;
+
+      background:
+        rgba(
+          24,
+          22,
+          19,
+          .42
+        );
     }
 
 
     /* =========================================
-       HERO TIENDA
+       HERO
        ========================================= */
 
     .shop-hero {
       max-width: 1200px;
+
       margin: auto;
 
       padding: 85px 28px 55px;
@@ -254,6 +615,7 @@
 
     .shop-hero p {
       max-width: 650px;
+
       margin: 25px auto 0;
 
       color: #765f4c;
@@ -269,6 +631,7 @@
 
     .shop {
       max-width: 1200px;
+
       margin: auto;
 
       padding: 20px 28px 90px;
@@ -324,7 +687,31 @@
 
       box-shadow:
         0 16px 40px
-        rgba(57,42,28,.07);
+        rgba(
+          57,
+          42,
+          28,
+          .07
+        );
+
+      transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+    }
+
+
+    .product:hover {
+      transform:
+        translateY(-6px);
+
+      box-shadow:
+        0 22px 50px
+        rgba(
+          57,
+          42,
+          28,
+          .13
+        );
     }
 
 
@@ -337,6 +724,16 @@
       object-fit: cover;
 
       background: #e9dfd1;
+
+      transition:
+        transform .5s ease;
+    }
+
+
+    .product:hover
+    .product-image {
+      transform:
+        scale(1.025);
     }
 
 
@@ -390,6 +787,7 @@
 
     .product-actions {
       display: flex;
+
       gap: 10px;
     }
 
@@ -417,12 +815,23 @@
 
       cursor: pointer;
 
-      transition: .2s ease;
+      transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
     }
 
 
     .product-link:hover {
       background: #eee2d2;
+
+      border-color: #b77b20;
+
+      color: #a76f20;
+
+      transform:
+        translateY(-2px);
     }
 
 
@@ -430,12 +839,16 @@
       border-color: #4a3324;
 
       background: #4a3324;
-      color: #fff;
+      color: #ffffff;
     }
 
 
     .product-buy:hover {
       background: #684936;
+
+      border-color: #684936;
+
+      color: #ffffff;
     }
 
 
@@ -454,6 +867,25 @@
       background: #efe5d7;
 
       text-align: center;
+
+      transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+    }
+
+
+    .coming-soon:hover {
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 16px 35px
+        rgba(
+          57,
+          42,
+          28,
+          .08
+        );
     }
 
 
@@ -475,234 +907,13 @@
 
     .coming-soon p {
       max-width: 600px;
+
       margin: auto;
 
       color: #765f4c;
 
       font-size: 13px;
       line-height: 1.7;
-    }
-
-
-    /* =========================================
-       CARRITO
-       ========================================= */
-
-    .cart-drawer {
-      position: fixed;
-
-      top: 0;
-      right: 0;
-
-      width: min(
-        430px,
-        100vw
-      );
-
-      height: 100vh;
-
-      z-index: 300;
-
-      padding: 28px;
-
-      display: flex;
-      flex-direction: column;
-
-      background: #fffaf4;
-
-      box-shadow:
-        -20px 0 50px
-        rgba(47,35,24,.18);
-
-      transform: translateX(100%);
-
-      transition:
-        transform .3s ease;
-    }
-
-
-    .cart-drawer.is-open {
-      transform: translateX(0);
-    }
-
-
-    .cart-drawer-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      padding-bottom: 20px;
-
-      border-bottom: 1px solid #e1d4c4;
-    }
-
-
-    .cart-drawer-header h2 {
-      margin: 4px 0 0;
-
-      font-size: 38px;
-    }
-
-
-    .panel-kicker {
-      margin: 0;
-
-      color: #a76f20;
-
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-
-
-    .panel-close {
-      width: 38px;
-      height: 38px;
-
-      border: 1px solid #d8c8b6;
-      border-radius: 50%;
-
-      background: transparent;
-
-      font-size: 23px;
-
-      cursor: pointer;
-    }
-
-
-    .cart-items {
-      flex: 1;
-
-      overflow-y: auto;
-
-      padding: 20px 0;
-    }
-
-
-    .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      padding: 16px 0;
-
-      border-bottom: 1px solid #e5d9cb;
-    }
-
-
-    .cart-item h3 {
-      margin: 0 0 5px;
-
-      font-size: 23px;
-    }
-
-
-    .cart-item p {
-      margin: 0;
-
-      color: #765f4c;
-
-      font-size: 11px;
-    }
-
-
-    .remove-item {
-      border: 0;
-      background: transparent;
-
-      color: #a33b32;
-
-      font-size: 8px;
-      font-weight: 800;
-      letter-spacing: 1px;
-
-      cursor: pointer;
-    }
-
-
-    .cart-empty {
-      color: #765f4c;
-
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-
-    .cart-summary {
-      padding-top: 20px;
-
-      border-top: 1px solid #e1d4c4;
-    }
-
-
-    .cart-summary > div {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      margin-bottom: 18px;
-    }
-
-
-    .cart-summary strong {
-      color: #a76f20;
-
-      font-size: 24px;
-    }
-
-
-    .cart-checkout {
-      width: 100%;
-      min-height: 48px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 999px;
-
-      background: #4a3324;
-      color: #fff;
-
-      font-size: 9px;
-      font-weight: 800;
-      letter-spacing: .8px;
-    }
-
-
-    .cart-checkout.is-disabled {
-      opacity: .45;
-      pointer-events: none;
-    }
-
-
-    .cart-summary p {
-      margin: 12px 0 0;
-
-      color: #765f4c;
-
-      font-size: 10px;
-      line-height: 1.6;
-
-      text-align: center;
-    }
-
-
-    .cart-backdrop {
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 250;
-
-      background: rgba(
-        35,
-        26,
-        19,
-        .42
-      );
     }
 
 
@@ -723,12 +934,15 @@
 
     footer img {
       width: 120px;
+
       margin-bottom: 15px;
     }
 
 
     .footer-brand {
-      font-family: "Cormorant Garamond", serif;
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
       font-size: 30px;
       font-weight: 600;
@@ -754,6 +968,7 @@
 
       .nav {
         flex-wrap: wrap;
+
         padding: 14px 18px;
       }
 
@@ -790,6 +1005,7 @@
 
       .menu {
         width: auto;
+
         margin-left: auto;
       }
 
@@ -800,7 +1016,8 @@
 
 
       .shop-hero {
-        padding: 60px 20px 35px;
+        padding:
+          60px 20px 35px;
       }
 
 
@@ -810,7 +1027,8 @@
 
 
       .shop {
-        padding: 15px 18px 60px;
+        padding:
+          15px 18px 60px;
       }
 
 
@@ -889,7 +1107,7 @@
         </a>
 
 
-        <a href="index.html#contacto">
+        <a href="contacto.html">
           CONTACTO
         </a>
 
@@ -1132,9 +1350,7 @@
     <section class="products">
 
 
-      <!-- =====================================
-           BLACK ID
-           ===================================== -->
+      <!-- BLACK ID -->
 
       <article class="product">
 
@@ -1203,9 +1419,7 @@
 
 
 
-      <!-- =====================================
-           PREMIUM ID
-           ===================================== -->
+      <!-- PREMIUM ID -->
 
       <article class="product">
 
@@ -1278,9 +1492,7 @@
 
 
 
-    <!-- =========================================
-         PRÓXIMAMENTE
-         ========================================= -->
+    <!-- PRÓXIMAMENTE -->
 
     <section class="coming-soon">
 
