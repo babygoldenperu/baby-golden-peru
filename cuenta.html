@@ -930,6 +930,101 @@ document
   );
 
 
+/* =========================================
+   CREAR ORDEN DE COMPRA
+   ========================================= */
+
+async function crearOrden(producto) {
+
+  const boton =
+    producto === "PREMIUM"
+      ? document.getElementById("comprarPremium")
+      : document.getElementById("comprarBlack");
+
+  boton.disabled = true;
+
+  boton.textContent =
+    "CREANDO ORDEN...";
+
+  const {
+    data,
+    error
+  } = await supabaseClient.rpc(
+    "crear_orden_baby_golden",
+    {
+      p_producto: producto
+    }
+  );
+
+  if (error) {
+
+    console.error(
+      "ERROR CREANDO ORDEN:",
+      error
+    );
+
+    alert(
+      "No se pudo crear la orden: " +
+      error.message
+    );
+
+    boton.disabled = false;
+
+    boton.textContent =
+      producto === "PREMIUM"
+        ? "PREMIUM — S/30.00"
+        : "BLACK — S/36.90";
+
+    return;
+  }
+
+  const ordenId = data;
+
+  alert(
+    "Orden creada correctamente.\n\n" +
+    "Número de orden: " +
+    ordenId +
+    "\n\n" +
+    "Producto: " +
+    producto
+  );
+
+  boton.disabled = false;
+
+  boton.textContent =
+    producto === "PREMIUM"
+      ? "PREMIUM — S/30.00"
+      : "BLACK — S/36.90";
+
+}
+
+
+/* =========================================
+   BOTONES DE COMPRA
+   ========================================= */
+
+document
+  .getElementById("comprarPremium")
+  .addEventListener(
+    "click",
+    function() {
+
+      crearOrden("PREMIUM");
+
+    }
+  );
+
+
+document
+  .getElementById("comprarBlack")
+  .addEventListener(
+    "click",
+    function() {
+
+      crearOrden("BLACK");
+
+    }
+  );
 
 /* =========================================
    CERRAR SESIÓN
