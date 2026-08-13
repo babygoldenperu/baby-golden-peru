@@ -422,145 +422,135 @@ s<!DOCTYPE html>
   </h2>
 
 
+  <!-- SOLICITUDES PENDIENTES -->
+
   <div
     style="
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:12px;
+      padding:15px;
+      border-radius:12px;
+      background:#fff8e1;
+      text-align:center;
       margin:20px 0;
     "
   >
 
-    <div
-      style="
-        padding:15px;
-        border-radius:12px;
-        background:#fff8e1;
-        text-align:center;
-      "
+    <strong
+      id="contadorPendientes"
+      style="font-size:24px;"
     >
+      0
+    </strong>
 
-      <strong id="contadorPendientes">
-        0
-      </strong>
-
-      <div>
-        Pendientes
-      </div>
-
-    </div>
-
-
-    <div
-      style="
-        padding:15px;
-        border-radius:12px;
-        background:#e8f5e9;
-        text-align:center;
-      "
-    >
-
-      <strong id="contadorActivos">
-        0
-      </strong>
-
-      <div>
-        Activos
-      </div>
-
-    </div>
-
-
-    <div
-      style="
-        padding:15px;
-        border-radius:12px;
-        background:#ffebee;
-        text-align:center;
-      "
-    >
-
-      <strong id="contadorRechazados">
-        0
-      </strong>
-
-      <div>
-        Rechazados
-      </div>
-
+    <div>
+      Solicitudes pendientes
     </div>
 
   </div>
 
-<div id="listaSolicitudes">
 
-  <p>
-    Cargando solicitudes...
-  </p>
+  <div id="listaSolicitudes">
 
-</div>
-
-
-<!-- DETALLE DE SOLICITUD -->
-
-<div
-  id="detalleSolicitud"
-  class="hidden"
-  style="
-    margin-top:20px;
-    padding:20px;
-    border:1px solid #e5e5e5;
-    border-radius:14px;
-  "
->
-
-  <h2>
-    Detalle de la solicitud
-  </h2>
-
-
-  <div id="contenidoDetalle">
+    <p>
+      Cargando solicitudes...
+    </p>
 
   </div>
 
 
-  <div
+  <!-- HISTORIAL DESPLEGABLE -->
+
+  <details
+    id="historialSolicitudes"
     style="
-      display:flex;
-      gap:10px;
-      margin-top:20px;
+      margin-top:25px;
+      border-top:1px solid #e5e5e5;
+      padding-top:15px;
     "
   >
 
-    <button
-      id="aprobarDetalle"
-      type="button"
+    <summary
+      style="
+        cursor:pointer;
+        font-weight:600;
+        padding:10px 0;
+      "
     >
-      APROBAR
-    </button>
+      Ver historial de Baby Golden ID
+    </summary>
 
 
-    <button
-      id="rechazarDetalle"
-      type="button"
-      class="secondary"
+    <div
+      id="contenidoHistorial"
+      style="margin-top:15px;"
     >
-      RECHAZAR
-    </button>
+
+      <p>
+        Cargando historial...
+      </p>
+
+    </div>
+
+  </details>
 
 
-    <button
-      id="cerrarDetalle"
-      type="button"
-      class="secondary"
+  <!-- DETALLE DE SOLICITUD -->
+
+  <div
+    id="detalleSolicitud"
+    class="hidden"
+    style="
+      margin-top:20px;
+      padding:20px;
+      border:1px solid #e5e5e5;
+      border-radius:14px;
+    "
+  >
+
+    <h2>
+      Detalle de la solicitud
+    </h2>
+
+
+    <div id="contenidoDetalle">
+    </div>
+
+
+    <div
+      style="
+        display:flex;
+        gap:10px;
+        margin-top:20px;
+      "
     >
-      CERRAR
-    </button>
+
+      <button
+        id="aprobarDetalle"
+        type="button"
+      >
+        APROBAR
+      </button>
+
+
+      <button
+        id="rechazarDetalle"
+        type="button"
+        class="secondary"
+      >
+        RECHAZAR
+      </button>
+
+
+      <button
+        id="cerrarDetalle"
+        type="button"
+        class="secondary"
+      >
+        CERRAR
+      </button>
+
+    </div>
 
   </div>
-
-</div>
-
 
 </div>
     
@@ -1852,19 +1842,18 @@ async function cargarSolicitudes() {
       "contadorPendientes"
     );
 
-  const contadorActivos =
+  const historial =
     document.getElementById(
-      "contadorActivos"
-    );
-
-  const contadorRechazados =
-    document.getElementById(
-      "contadorRechazados"
+      "contenidoHistorial"
     );
 
 
   lista.innerHTML =
     "<p>Cargando solicitudes...</p>";
+
+
+  historial.innerHTML =
+    "<p>Cargando historial...</p>";
 
 
   const {
@@ -1882,11 +1871,20 @@ async function cargarSolicitudes() {
       error
     );
 
+
     lista.innerHTML = `
       <p style="color:#b00020;">
         No se pudieron cargar las solicitudes.
       </p>
     `;
+
+
+    historial.innerHTML = `
+      <p style="color:#b00020;">
+        No se pudo cargar el historial.
+      </p>
+    `;
+
 
     return;
   }
@@ -1895,6 +1893,10 @@ async function cargarSolicitudes() {
   const solicitudes =
     data || [];
 
+
+  /* =========================================
+     SEPARAR ESTADOS
+     ========================================= */
 
   const pendientes =
     solicitudes.filter(
@@ -1920,81 +1922,37 @@ async function cargarSolicitudes() {
     );
 
 
+  /* =========================================
+     CONTADOR DE PENDIENTES
+     ========================================= */
+
   contadorPendientes.textContent =
     pendientes.length;
 
-  contadorActivos.textContent =
-    activos.length;
 
-  contadorRechazados.textContent =
-    rechazados.length;
+  /* =========================================
+     MOSTRAR PENDIENTES
+     ========================================= */
 
-
-  if (solicitudes.length === 0) {
+  if (pendientes.length === 0) {
 
     lista.innerHTML = `
-      <p>
-        No hay registros.
-      </p>
+      <div
+        style="
+          padding:20px;
+          text-align:center;
+          color:#666;
+        "
+      >
+        No hay solicitudes pendientes.
+      </div>
     `;
 
-    return;
-  }
+  } else {
 
-
-  lista.innerHTML =
-    solicitudes.map(
-      solicitud => {
-
-        const estado =
-          solicitud.estado_solicitud;
-
-
-        let acciones = "";
-
-
-       if (estado === "PENDIENTE") {
-
-  acciones = `
-
-    <button
-      type="button"
-      onclick="verDetalleSolicitud(
-        '${solicitud.baby_golden_id}'
-      )"
-    >
-      VER DETALLE
-    </button>
-
-
-    <button
-      type="button"
-      onclick="actualizarEstadoSolicitud(
-        '${solicitud.baby_golden_id}',
-        'ACTIVO'
-      )"
-    >
-      APROBAR
-    </button>
-
-
-    <button
-      type="button"
-      class="secondary"
-      onclick="actualizarEstadoSolicitud(
-        '${solicitud.baby_golden_id}',
-        'RECHAZADO'
-      )"
-    >
-      RECHAZAR
-    </button>
-
-  `;
-
-}
-
-
-        return `
+    lista.innerHTML =
+      pendientes.map(
+        solicitud => `
 
           <div
             class="solicitud-item"
@@ -2040,42 +1998,205 @@ async function cargarSolicitudes() {
               Estado:
 
               <strong>
-                ${escaparHTML(
-                  estado
-                )}
+                PENDIENTE
               </strong>
 
             </div>
 
 
-            ${
-              acciones
-                ? `
-                  <div
-                    style="
-                      display:flex;
-                      gap:10px;
-                      margin-top:15px;
-                    "
-                  >
+            <div
+              style="
+                display:flex;
+                gap:8px;
+                margin-top:15px;
+              "
+            >
 
-                    ${acciones}
+              <button
+                type="button"
+                onclick="verDetalleSolicitud(
+                  '${solicitud.baby_golden_id}'
+                )"
+              >
+                VER DETALLE
+              </button>
 
-                  </div>
-                `
-                : ""
-            }
+
+              <button
+                type="button"
+                onclick="actualizarEstadoSolicitud(
+                  '${solicitud.baby_golden_id}',
+                  'ACTIVO'
+                )"
+              >
+                APROBAR
+              </button>
+
+
+              <button
+                type="button"
+                class="secondary"
+                onclick="actualizarEstadoSolicitud(
+                  '${solicitud.baby_golden_id}',
+                  'RECHAZADO'
+                )"
+              >
+                RECHAZAR
+              </button>
+
+            </div>
 
           </div>
 
-        `;
+        `
+      )
+      .join("");
 
-      }
-    )
-    .join("");
+  }
+
+
+  /* =========================================
+     HISTORIAL
+     ========================================= */
+
+  let contenidoHistorial = "";
+
+
+  /* ACTIVOS */
+
+  contenidoHistorial += `
+
+    <h3
+      style="
+        margin-bottom:12px;
+      "
+    >
+      🟢 Activos (${activos.length})
+    </h3>
+
+  `;
+
+
+  if (activos.length === 0) {
+
+    contenidoHistorial += `
+      <p style="color:#777;">
+        No hay Baby Golden ID activos.
+      </p>
+    `;
+
+  } else {
+
+    contenidoHistorial +=
+      activos.map(
+        solicitud => `
+
+          <div
+            style="
+              padding:14px;
+              margin-bottom:10px;
+              border:1px solid #e5e5e5;
+              border-radius:12px;
+            "
+          >
+
+            <strong>
+              ${escaparHTML(
+                solicitud.baby_golden_id
+              )}
+            </strong>
+
+            <div>
+              ${escaparHTML(
+                solicitud.nombre_perrito || ""
+              )}
+            </div>
+
+            <div>
+              ${escaparHTML(
+                solicitud.tipo_id || ""
+              )}
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+  }
+
+
+  /* RECHAZADOS */
+
+  contenidoHistorial += `
+
+    <h3
+      style="
+        margin-top:25px;
+        margin-bottom:12px;
+      "
+    >
+      🔴 Rechazados (${rechazados.length})
+    </h3>
+
+  `;
+
+
+  if (rechazados.length === 0) {
+
+    contenidoHistorial += `
+      <p style="color:#777;">
+        No hay solicitudes rechazadas.
+      </p>
+    `;
+
+  } else {
+
+    contenidoHistorial +=
+      rechazados.map(
+        solicitud => `
+
+          <div
+            style="
+              padding:14px;
+              margin-bottom:10px;
+              border:1px solid #e5e5e5;
+              border-radius:12px;
+            "
+          >
+
+            <strong>
+              ${escaparHTML(
+                solicitud.baby_golden_id
+              )}
+            </strong>
+
+            <div>
+              ${escaparHTML(
+                solicitud.nombre_perrito || ""
+              )}
+            </div>
+
+            <div>
+              ${escaparHTML(
+                solicitud.tipo_id || ""
+              )}
+            </div>
+
+          </div>
+
+        `
+      )
+      .join("");
+
+  }
+
+
+  historial.innerHTML =
+    contenidoHistorial;
 
 }
-
   async function verDetalleSolicitud(
   babyGoldenId
 ) {
