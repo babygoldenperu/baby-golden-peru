@@ -1358,7 +1358,534 @@
         padding:55px 20px 35px;
       }
     }
-  </style>
+  
+    /* =========================================================
+       BABY GOLDEN PREMIUM REDESIGN
+       Hero: no text or ID card ever overlaps the dog.
+    ========================================================= */
+
+    .premium-hero{
+      position:relative;
+      max-width:1500px;
+      min-height:760px;
+      margin:0 auto;
+      padding:54px 52px 72px;
+      display:grid;
+      grid-template-columns:minmax(420px,.72fr) minmax(600px,1.28fr);
+      gap:42px;
+      align-items:center;
+      overflow:hidden;
+      background:var(--cream);
+    }
+
+    .premium-hero::before{
+      content:"";
+      position:absolute;
+      width:720px;
+      height:720px;
+      right:-260px;
+      top:-250px;
+      border-radius:50%;
+      background:rgba(215,173,99,.10);
+      pointer-events:none;
+    }
+
+    .premium-hero-panel{
+      position:relative;
+      z-index:4;
+      min-height:560px;
+      padding:54px 56px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+      background:#2b241c;
+      color:#fff;
+      border-radius:26px;
+      box-shadow:26px 30px 70px rgba(47,35,24,.15);
+      overflow:hidden;
+    }
+
+    .premium-hero-panel::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border:1px solid rgba(213,160,75,.28);
+      border-radius:18px;
+      pointer-events:none;
+    }
+
+    .premium-hero-brand img{
+      width:132px;
+      height:auto;
+      object-fit:contain;
+      margin-bottom:36px;
+      filter:brightness(0) invert(1);
+      opacity:.96;
+    }
+
+    .premium-eyebrow{
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:3px;
+      color:#d5a04b;
+      margin-bottom:18px;
+    }
+
+    .premium-hero-panel h1{
+      margin:0;
+      font-family:'Cormorant Garamond',Georgia,serif;
+      font-size:clamp(58px,5.5vw,88px);
+      line-height:.84;
+      font-weight:600;
+      letter-spacing:-2px;
+    }
+
+    .premium-hero-panel h1 span{color:#fff}
+    .premium-hero-panel h1 span:last-child{color:#d5a04b}
+
+    .premium-rule{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      margin:30px 0 23px;
+    }
+
+    .premium-rule span{
+      width:50px;
+      height:1px;
+      background:#d5a04b;
+      opacity:.7;
+    }
+
+    .premium-rule b{
+      color:#d5a04b;
+      font-size:11px;
+      font-weight:400;
+    }
+
+    .premium-hero-panel p{
+      margin:0;
+      max-width:500px;
+      color:#d8d0c6;
+      font-size:13px;
+      line-height:1.75;
+    }
+
+    .premium-actions{
+      display:flex;
+      gap:12px;
+      margin-top:30px;
+      flex-wrap:wrap;
+    }
+
+    .premium-btn{
+      display:inline-flex;
+      min-height:48px;
+      align-items:center;
+      justify-content:center;
+      padding:0 23px;
+      border-radius:999px;
+      text-decoration:none;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:1.1px;
+      transition:.25s ease;
+    }
+
+    .premium-btn.primary{
+      background:#c58a2c;
+      color:#fff;
+      box-shadow:0 14px 32px rgba(197,138,44,.20);
+    }
+
+    .premium-btn.ghost{
+      border:1px solid rgba(255,255,255,.35);
+      color:#fff;
+    }
+
+    .premium-hero-visual{
+      position:relative;
+      z-index:2;
+      min-width:0;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      min-height:650px;
+    }
+
+    .masked-golden{
+      position:relative;
+      width:100%;
+      min-height:570px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+    }
+
+    .masked-golden-word{
+      position:absolute;
+      inset:auto 0 0 0;
+      margin:auto;
+      font-family:'Montserrat',sans-serif;
+      font-size:clamp(160px,18vw,300px);
+      line-height:.72;
+      font-weight:800;
+      letter-spacing:-.075em;
+      text-align:center;
+      color:transparent;
+      background-image:url('IMG_3370.JPG');
+      background-size:cover;
+      background-position:center 38%;
+      -webkit-background-clip:text;
+      background-clip:text;
+      z-index:2;
+      user-select:none;
+      white-space:nowrap;
+    }
+
+    .masked-golden-photo{
+      position:absolute;
+      width:min(52%,500px);
+      height:560px;
+      right:13%;
+      top:8px;
+      object-fit:cover;
+      object-position:center 38%;
+      border-radius:180px 180px 34px 34px;
+      box-shadow:0 28px 70px rgba(48,35,22,.18);
+      z-index:1;
+      opacity:.94;
+      mix-blend-mode:multiply;
+    }
+
+    .masked-golden-frame{
+      position:absolute;
+      width:min(57%,545px);
+      height:590px;
+      right:10%;
+      top:-6px;
+      border:1px solid rgba(183,123,32,.34);
+      border-radius:210px 210px 40px 40px;
+      z-index:0;
+    }
+
+    .masked-golden-meta{
+      position:absolute;
+      left:4%;
+      bottom:5px;
+      z-index:5;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      color:#7a6a57;
+      font-size:8px;
+      font-weight:700;
+      letter-spacing:2.2px;
+    }
+
+    .masked-golden-meta span{
+      display:block;
+      width:55px;
+      height:1px;
+      background:#b77b20;
+    }
+
+    .stories-carousel{
+      max-width:1250px;
+      margin:32px auto 0;
+      position:relative;
+      overflow:hidden;
+      padding:0 42px 30px;
+    }
+
+    .stories-track{
+      display:flex;
+      gap:18px;
+      transition:transform .65s cubic-bezier(.22,.61,.36,1);
+      will-change:transform;
+    }
+
+    .story-slide{
+      flex:0 0 calc((100% - 36px)/3);
+      min-width:0;
+      position:relative;
+      overflow:hidden;
+      border-radius:24px;
+      background:#e4d4bf;
+      box-shadow:0 18px 45px rgba(48,35,22,.10);
+      aspect-ratio:1.08/1;
+    }
+
+    .story-slide img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:transform .7s ease;
+    }
+
+    .story-slide:hover img{transform:scale(1.04)}
+
+    .story-slide::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(28,22,16,.40),transparent 45%);
+      pointer-events:none;
+    }
+
+    .story-slide-label{
+      position:absolute;
+      left:20px;
+      bottom:18px;
+      z-index:2;
+      color:#fff;
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:1.8px;
+    }
+
+    .story-arrow{
+      position:absolute;
+      top:42%;
+      transform:translateY(-50%);
+      width:42px;
+      height:42px;
+      border-radius:50%;
+      border:1px solid rgba(183,123,32,.28);
+      background:rgba(246,240,230,.88);
+      color:#8b642d;
+      cursor:pointer;
+      z-index:4;
+      font-size:20px;
+    }
+
+    .story-arrow.prev{left:0}
+    .story-arrow.next{right:0}
+
+    .story-dots{
+      display:flex;
+      justify-content:center;
+      gap:8px;
+      margin-top:18px;
+    }
+
+    .story-dot{
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:#d8c7af;
+      border:0;
+      padding:0;
+      cursor:pointer;
+    }
+
+    .story-dot.active{background:#b77b20}
+
+    /* Make the community and ID areas feel more editorial. */
+    .community,
+    .goldens-section,
+    .section{
+      position:relative;
+    }
+
+    .section-heading h2{
+      max-width:850px;
+    }
+
+    @media(max-width:980px){
+      .premium-hero{
+        min-height:auto;
+        grid-template-columns:1fr;
+        gap:0;
+        padding:28px 18px 55px;
+      }
+
+      .premium-hero::before{display:none}
+
+      .premium-hero-panel{
+        min-height:0;
+        padding:40px 28px 42px;
+        border-radius:0 0 28px 28px;
+        box-shadow:0 20px 50px rgba(47,35,24,.12);
+      }
+
+      .premium-hero-panel::after{display:none}
+
+      .premium-hero-brand img{
+        width:145px;
+        margin-bottom:32px;
+      }
+
+      .premium-hero-panel h1{
+        font-size:clamp(50px,14vw,74px);
+        letter-spacing:-1.4px;
+      }
+
+      .premium-hero-panel p{
+        font-size:13px;
+      }
+
+      .premium-hero-photo{
+        padding-top:20px;
+      }
+
+      .photo-topline{
+        font-size:7px;
+        padding-bottom:9px;
+      }
+
+      .photo-window{
+        height:auto;
+        aspect-ratio:4/5;
+        border-radius:26px;
+      }
+
+      .photo-window::before{
+        inset:12px;
+        border-radius:18px;
+      }
+
+      .photo-window img{
+        object-fit:cover;
+        object-position:center 43%;
+      }
+
+      .photo-caption{
+        display:block;
+        padding-top:14px;
+      }
+
+      .photo-caption span,
+      .photo-caption strong{
+        display:block;
+      }
+
+      .photo-caption strong{
+        margin-top:5px;
+        font-size:20px;
+      }
+
+      .premium-actions{
+        margin-top:25px;
+      }
+
+      .premium-btn{
+        min-height:46px;
+        padding:0 18px;
+      }
+    }
+
+    @media(max-width:560px){
+      .premium-hero-panel{
+        padding:34px 22px 36px;
+      }
+
+      .premium-eyebrow{
+        font-size:8px;
+        letter-spacing:2.2px;
+      }
+
+      .premium-hero-panel h1{
+        font-size:50px;
+      }
+
+      .premium-actions{
+        flex-direction:column;
+      }
+
+      .premium-btn{
+        width:100%;
+      }
+    }
+
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+<style>
+@media(max-width:980px){
+  .premium-hero{
+    grid-template-columns:1fr;
+    padding:24px 18px 58px;
+    gap:8px;
+  }
+  .premium-hero-panel{
+    min-height:0;
+    padding:42px 30px 44px;
+    border-radius:24px;
+  }
+  .premium-hero-brand img{width:118px;margin-bottom:28px}
+  .premium-hero-panel h1{font-size:clamp(52px,12vw,76px)}
+  .premium-hero-visual{min-height:470px;margin-top:8px}
+  .masked-golden{min-height:470px}
+  .masked-golden-word{font-size:clamp(92px,22vw,190px);bottom:90px}
+  .masked-golden-photo{height:390px;width:54%;right:18%;top:22px}
+  .masked-golden-frame{height:420px;width:61%;right:14%;top:10px}
+  .masked-golden-meta{bottom:22px;left:50%;transform:translateX(-50%);white-space:nowrap}
+}
+
+@media(max-width:620px){
+  .premium-hero{padding:14px 12px 44px}
+  .premium-hero-panel{
+    padding:30px 22px 32px;
+    border-radius:20px;
+  }
+  .premium-hero-panel::before{inset:12px;border-radius:14px}
+  .premium-hero-brand img{width:105px;margin-bottom:25px}
+  .premium-eyebrow{font-size:7px;letter-spacing:2px}
+  .premium-hero-panel h1{
+    font-size:clamp(43px,13vw,61px);
+    letter-spacing:-1.2px;
+  }
+  .premium-hero-panel p{font-size:12px;line-height:1.65}
+  .premium-actions{flex-direction:column}
+  .premium-btn{width:100%}
+  .premium-hero-visual{min-height:370px}
+  .masked-golden{min-height:370px}
+  .masked-golden-word{
+    font-size:clamp(66px,20vw,100px);
+    bottom:72px;
+    letter-spacing:-.06em;
+  }
+  .masked-golden-photo{
+    width:64%;
+    height:300px;
+    right:18%;
+    top:18px;
+    border-radius:120px 120px 24px 24px;
+  }
+  .masked-golden-frame{
+    width:72%;
+    height:325px;
+    right:14%;
+    top:8px;
+    border-radius:140px 140px 28px 28px;
+  }
+  .masked-golden-meta{
+    bottom:14px;
+    font-size:6px;
+    letter-spacing:1.6px;
+  }
+
+  .stories-carousel{padding:0 30px 24px}
+  .stories-track{gap:12px}
+  .story-slide{flex:0 0 100%;aspect-ratio:1.05/1}
+  .story-arrow{width:34px;height:34px;font-size:17px}
+  .story-arrow.prev{left:0}
+  .story-arrow.next{right:0}
+}
+</style>
+
+<style>
+.identity-label-small{
+  font-size: 7px !important;
+  letter-spacing: 2px;
+  line-height: 1;
+  display: inline-block;
+  white-space: nowrap;
+}
+</style>
+
 </head>
 
 <body>
@@ -1398,100 +1925,50 @@
       </div>
     </nav>
   </header>
-
-
   <!-- HERO PRINCIPAL -->
-  <section class="hero" id="inicio">
-
-    <div class="hero-content">
-
-      <div class="eyebrow">BABY GOLDEN PERÚ · UNA FAMILIA DE ORO</div>
+  <section class="premium-hero premium-hero-brown" id="inicio">
+    <div class="premium-hero-panel">
+      <div class="premium-eyebrow" id="siteHeroKicker">
+        LA COMUNIDAD MÁS GRANDE DE GOLDEN RETRIEVER EN PERÚ
+      </div>
 
       <h1>
-        <span>UNA</span>
-        <span class="gold">COMUNIDAD</span>
-        <span>DE ORO</span>
+        <span id="siteHeroLine1">MÁS QUE UNA</span>
+        <span id="siteHeroLine2">COMUNIDAD,</span>
+        <span id="siteHeroLine3">UNA FAMILIA.</span>
       </h1>
 
-      <div class="line-heart">
-        <span></span>
-        <strong>♥</strong>
-        <span></span>
-      </div>
+      <div class="premium-rule"><span></span><b>♥</b><span></span></div>
 
-      <p class="hero-subtitle">
-        Una comunidad unida por el amor a nuestros Golden Retrievers,
-        la tenencia responsable y las experiencias que compartimos juntos.
+      <p>
+        <span id="siteHeroSubtitle">
+          Porque ellos no son solo mascotas, son familia.<br>
+          Compartimos momentos, historias y aventuras alrededor del amor por nuestros Golden Retriever.
+        </span>
       </p>
 
-      <div class="buttons">
-
-        <a
-          href="https://babygoldenperu.github.io/baby-golden-peru/registro.html"
-          class="button primary"
-        >
-          REGISTRAR MI PERRITO
+      <div class="premium-actions">
+        <a href="https://babygoldenperu.github.io/baby-golden-peru/registro.html" class="premium-btn primary">
+          ÚNETE A LA FAMILIA
         </a>
-
-        <a href="#baby-golden-id" class="button secondary">
-          CONOCE BABY GOLDEN ID
+        <a href="#historias" class="premium-btn ghost">
+          HISTORIAS DE ORO
         </a>
-
       </div>
-
     </div>
 
-
-    <div class="hero-visual">
-
-      <div class="hero-photo-frame">
-
-        <!-- FOTO PRINCIPAL: sube IMG_3370.JPG al repositorio -->
+    <div class="premium-hero-visual">
+      <div class="hero-golden-photo-wrap" aria-hidden="true">
         <img
-          src="IMG_3370.JPG"
-          alt="Golden Retriever Baby Golden Perú"
-          class="hero-photo"
+          class="hero-golden-photo"
+          id="siteHeroImage"
+          src="hero-golden.jpg"
+          alt="Golden Retriever de Baby Golden Perú"
         >
-
       </div>
-
-      <div class="floating-label">
-        UNA COMUNIDAD · UNA FAMILIA
-      </div>
-
-
-      <!-- TARJETA DE EJEMPLO -->
-      <div class="id-card">
-
-        <div class="id-card-top">
-
-          <img
-            src="BABY%20GOLDEN.png"
-            class="id-card-logo"
-            alt="Baby Golden Perú"
-          >
-
-          <span>IDENTIDAD DIGITAL</span>
-
-        </div>
-
-        <div class="id-card-name">KALMA</div>
-
-        <div class="id-card-breed">GOLDEN RETRIEVER</div>
-
-        <div class="id-number">BGP-00001</div>
-
-        <div class="id-technologies">
-          <span>NFC</span>
-          <span>QR CODE</span>
-        </div>
-
-      </div>
-
+      <div class="hero-golden-glow" aria-hidden="true"></div>
     </div>
-
   </section>
-
 
   <!-- SOBRE LA COMUNIDAD -->
   <section class="community" id="comunidad">
@@ -1554,47 +2031,37 @@
       </p>
     </div>
 
-    <div class="goldens-grid">
+    <div class="stories-carousel" aria-label="Historias de Oro">
+      <button class="story-arrow prev" type="button" aria-label="Historia anterior">‹</button>
 
-      <article class="golden-main">
-        <img src="IMG_3370.JPG" alt="Golden Retriever de Baby Golden Perú">
-        <div class="golden-caption">
-          <small>HISTORIAS DE NUESTRA COMUNIDAD</small>
-          <h3>Cada Golden tiene una historia.</h3>
-        </div>
-      </article>
-
-      <div class="golden-side">
-        <article class="golden-side-card">
-          <img src="_MG_3202%20copia.jpg.jpeg" alt="Golden Retriever Baby Golden Perú">
-          <div class="golden-caption">
-            <small>HISTORIAS DE ORO</small>
-            <h3>Amor de cuatro patas.</h3>
-          </div>
+      <div class="stories-track" id="storiesTrack">
+        <article class="story-slide">
+          <img id="storyPhoto1" src="IMG_3370.JPG" alt="Golden Retriever Baby Golden Perú">
+          <div class="story-slide-label">NUESTROS GOLDENS</div>
         </article>
 
-        <article class="golden-side-card">
-          <img src="bgp%20fondo%20amarillo.jpg.jpeg" alt="Foto grupal Baby Golden Perú">
-          <div class="golden-caption">
-            <small>FOTOS Y ENCUENTROS</small>
-            <h3>Juntos se ve mejor.</h3>
-          </div>
+        <article class="story-slide">
+          <img id="storyPhoto2" src="_MG_3202%20copia.jpg.jpeg" alt="Golden Retriever Baby Golden Perú">
+          <div class="story-slide-label">HISTORIAS DE ORO</div>
+        </article>
+
+        <article class="story-slide">
+          <img id="storyPhoto3" src="bgp%20fondo%20amarillo.jpg.jpeg" alt="Encuentro de Baby Golden Perú">
+          <div class="story-slide-label">FOTOS GRUPALES</div>
+        </article>
+
+        <article class="story-slide">
+          <img id="storyPhoto4" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+          <div class="story-slide-label">MOMENTOS DE ORO</div>
         </article>
       </div>
 
+      <button class="story-arrow next" type="button" aria-label="Siguiente historia">›</button>
+
+      <div class="story-dots" id="storyDots" aria-label="Seleccionar historia"></div>
     </div>
-<div class="group-gallery" style="max-width:1200px;margin:22px auto 0;grid-template-columns:1fr 1fr;">
-      <div class="group-gallery-item">
-        <img src="bgp%20fondo%20amarillo.jpg.jpeg" alt="Comunidad Baby Golden Perú">
-      </div>
-</div>
 
   </section>
-
-
-
-
-
 
 
   <section class="family-statement" aria-label="Nuestra familia">
@@ -1905,6 +2372,358 @@
     </p>
 
   </footer>
+
+
+<script>
+/* =========================================================
+   BABY GOLDEN — CONTENIDO EDITABLE DESDE UN SOLO PANEL
+   Fallback: la web conserva el contenido estático si Supabase
+   no está disponible o todavía no se ha creado la tabla.
+========================================================= */
+(function(){
+  const SB_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
+  const SB_KEY = "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+  const load = () => {
+    if (!window.supabase) return;
+    try{
+      const sb = window.supabase.createClient(SB_URL, SB_KEY);
+
+      sb.from("site_content")
+        .select("key,value")
+        .then(({data})=>{
+          if(!data) return;
+          const c = Object.fromEntries(data.map(x=>[x.key,x.value]));
+          const setText=(id,v)=>{const el=document.getElementById(id); if(el && v) el.textContent=v;};
+          setText("siteHeroKicker",c.hero_kicker);
+          setText("siteHeroLine1",c.hero_line1);
+          setText("siteHeroLine2",c.hero_line2);
+          setText("siteHeroLine3",c.hero_line3);
+          setText("siteHeroSubtitle",c.hero_subtitle);
+          if(c.hero_image){
+            const el=document.getElementById("siteHeroImage");
+            if(el) el.src=c.hero_image;
+          }
+          if(c.family_title){
+            const el=document.querySelector(".family-statement h2");
+            if(el) el.textContent=c.family_title;
+          }
+          if(c.family_text){
+            const el=document.querySelector(".family-statement p");
+            if(el) el.textContent=c.family_text;
+          }
+        });
+
+      sb.from("site_gallery")
+        .select("slot,image_url,title,caption,published")
+        .eq("published",true)
+        .order("slot")
+        .then(({data})=>{
+          if(!data) return;
+          data.forEach(item=>{
+            const img=document.getElementById(item.slot);
+            if(img && item.image_url){
+              img.src=item.image_url;
+              img.alt=item.title || "Baby Golden Perú";
+            }
+          });
+        });
+    }catch(e){ console.warn("Contenido editable no disponible:",e); }
+  };
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",load);
+  else load();
+})();
+</script>
+
+
+<script>
+(function(){
+  const track = document.getElementById('storiesTrack');
+  const dots = document.getElementById('storyDots');
+  if(!track || !dots) return;
+
+  const slides = Array.from(track.querySelectorAll('.story-slide'));
+  const prev = document.querySelector('.story-arrow.prev');
+  const next = document.querySelector('.story-arrow.next');
+  let index = 0;
+
+  function visibleCount(){
+    return window.innerWidth <= 620 ? 1 : 3;
+  }
+
+  function maxIndex(){
+    return Math.max(0, slides.length - visibleCount());
+  }
+
+  function renderDots(){
+    dots.innerHTML = '';
+    const count = maxIndex() + 1;
+    for(let i=0;i<count;i++){
+      const b=document.createElement('button');
+      b.className='story-dot' + (i===index?' active':'');
+      b.type='button';
+      b.setAttribute('aria-label','Mostrar historias '+(i+1));
+      b.addEventListener('click',()=>go(i));
+      dots.appendChild(b);
+    }
+  }
+
+  function go(i){
+    index = Math.max(0, Math.min(i, maxIndex()));
+    const first = slides[0];
+    const gap = parseFloat(getComputedStyle(track).gap) || 0;
+    const amount = first.getBoundingClientRect().width + gap;
+    track.style.transform = 'translateX(-' + (index * amount) + 'px)';
+    Array.from(dots.children).forEach((d,n)=>d.classList.toggle('active',n===index));
+  }
+
+  prev && prev.addEventListener('click',()=>go(index-1));
+  next && next.addEventListener('click',()=>go(index+1));
+
+  window.addEventListener('resize',()=>{ renderDots(); go(Math.min(index,maxIndex())); });
+  renderDots();
+
+  setInterval(()=>{
+    go(index >= maxIndex() ? 0 : index + 1);
+  }, 5000);
+})();
+</script>
+
+
+<style>
+/* =========================================================
+   HERO FINAL — FONDO MARRÓN + GOLDEN DIFUMINADO A LA DERECHA
+   Solo modifica la portada.
+========================================================= */
+.premium-hero-brown{
+  max-width:none;
+  width:100%;
+  min-height:720px;
+  margin:0;
+  padding:70px clamp(28px,6vw,110px) 78px;
+  grid-template-columns:minmax(420px, .92fr) minmax(520px, 1.08fr);
+  gap:20px;
+  background:
+    radial-gradient(circle at 74% 46%, rgba(194,143,65,.22), transparent 27%),
+    linear-gradient(90deg,#2a2119 0%,#34271c 47%,#46321f 100%);
+  color:#fff;
+}
+
+.premium-hero-brown::before{
+  width:900px;
+  height:900px;
+  right:-420px;
+  top:-330px;
+  background:rgba(216,170,91,.10);
+}
+
+.premium-hero-brown .premium-hero-panel{
+  min-height:570px;
+  padding:46px 0 48px 0;
+  background:transparent;
+  border-radius:0;
+  box-shadow:none;
+  overflow:visible;
+  justify-content:center;
+  max-width:680px;
+}
+
+.premium-hero-brown .premium-hero-panel::before{display:none}
+
+.premium-hero-brown .premium-eyebrow{
+  color:#d9ad62;
+  margin-bottom:20px;
+  font-size:10px;
+  letter-spacing:2.8px;
+}
+
+.premium-hero-brown .premium-hero-panel h1{
+  font-size:clamp(62px,6.4vw,102px);
+  line-height:.84;
+  letter-spacing:-2.8px;
+  text-wrap:balance;
+}
+
+.premium-hero-brown .premium-hero-panel h1 span:last-child{
+  color:#d6a04b;
+}
+
+.premium-hero-brown .premium-rule{
+  margin:28px 0 22px;
+}
+
+.premium-hero-brown .premium-rule span{background:#d6a04b}
+.premium-hero-brown .premium-rule b{color:#d6a04b}
+
+.premium-hero-brown .premium-hero-panel p{
+  max-width:610px;
+  color:#e2d7c9;
+  font-size:13px;
+  line-height:1.8;
+}
+
+.premium-hero-brown .premium-btn.primary{
+  background:#c58a2c;
+}
+
+.premium-hero-brown .premium-btn.ghost{
+  border-color:rgba(255,255,255,.38);
+  background:rgba(255,255,255,.025);
+}
+
+.premium-hero-brown .premium-hero-visual{
+  min-height:650px;
+  position:relative;
+  overflow:visible;
+  align-items:stretch;
+  justify-content:stretch;
+}
+
+.hero-golden-photo-wrap{
+  position:absolute;
+  inset:-30px -8vw -30px 0;
+  z-index:1;
+  overflow:hidden;
+  pointer-events:none;
+  -webkit-mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 8%,#000 30%,#000 100%);
+  mask-image:linear-gradient(90deg,transparent 0%,rgba(0,0,0,.18) 8%,#000 30%,#000 100%);
+}
+
+.hero-golden-photo{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 43%;
+  display:block;
+  opacity:.95;
+  mix-blend-mode:multiply;
+  filter:saturate(1.12) contrast(1.05) brightness(1.02);
+}
+
+.hero-golden-photo-wrap::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(90deg,#2a2119 0%,rgba(42,33,25,.88) 13%,rgba(42,33,25,.18) 39%,rgba(42,33,25,0) 68%),
+    linear-gradient(180deg,rgba(42,33,25,.08),rgba(42,33,25,.14));
+  pointer-events:none;
+}
+
+.hero-golden-glow{
+  position:absolute;
+  width:560px;
+  height:560px;
+  right:5%;
+  top:50%;
+  transform:translateY(-50%);
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(222,176,91,.20) 0%,rgba(222,176,91,.07) 34%,transparent 70%);
+  filter:blur(8px);
+  z-index:0;
+  pointer-events:none;
+}
+
+@media(max-width:980px){
+  .premium-hero-brown{
+    min-height:auto;
+    grid-template-columns:1fr;
+    gap:0;
+    padding:48px 24px 0;
+    background:
+      radial-gradient(circle at 80% 58%, rgba(194,143,65,.20), transparent 28%),
+      linear-gradient(180deg,#2a2119 0%,#34271c 100%);
+  }
+
+  .premium-hero-brown .premium-hero-panel{
+    min-height:0;
+    max-width:760px;
+    margin:0 auto;
+    padding:30px 4px 42px;
+    text-align:left;
+  }
+
+  .premium-hero-brown .premium-hero-panel h1{
+    font-size:clamp(54px,11vw,82px);
+  }
+
+  .premium-hero-brown .premium-hero-visual{
+    min-height:470px;
+    height:470px;
+    margin:0 -24px;
+  }
+
+  .hero-golden-photo-wrap{
+    inset:0 -5vw 0 0;
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.12) 0%,#000 22%,#000 100%);
+    mask-image:linear-gradient(180deg,rgba(0,0,0,.12) 0%,#000 22%,#000 100%);
+  }
+
+  .hero-golden-photo{
+    object-position:center 39%;
+  }
+
+  .hero-golden-photo-wrap::after{
+    background:linear-gradient(180deg,rgba(42,33,25,.12) 0%,rgba(42,33,25,0) 30%,rgba(42,33,25,.10) 100%);
+  }
+}
+
+@media(max-width:620px){
+  .premium-hero-brown{
+    padding:30px 20px 0;
+  }
+
+  .premium-hero-brown .premium-hero-panel{
+    padding:22px 0 32px;
+  }
+
+  .premium-hero-brown .premium-eyebrow{
+    font-size:7px;
+    letter-spacing:2px;
+    line-height:1.5;
+  }
+
+  .premium-hero-brown .premium-hero-panel h1{
+    font-size:clamp(45px,12.8vw,60px);
+    line-height:.86;
+    letter-spacing:-1.4px;
+  }
+
+  .premium-hero-brown .premium-hero-panel p{
+    font-size:11.5px;
+    line-height:1.7;
+    max-width:340px;
+  }
+
+  .premium-hero-brown .premium-actions{
+    flex-direction:column;
+    align-items:stretch;
+    max-width:310px;
+  }
+
+  .premium-hero-brown .premium-btn{width:100%}
+
+  .premium-hero-brown .premium-hero-visual{
+    min-height:390px;
+    height:390px;
+    margin:0 -20px;
+  }
+
+  .hero-golden-photo-wrap{
+    inset:0 -14vw 0 -8vw;
+  }
+
+  .hero-golden-photo{
+    object-position:58% 39%;
+  }
+
+  .hero-golden-glow{
+    width:360px;
+    height:360px;
+    right:-60px;
+    top:52%;
+  }
+}
+</style>
 
 </body>
 </html>
