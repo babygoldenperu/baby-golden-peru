@@ -3,1046 +3,1047 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f0e6">
 
   <title>Baby Golden Perú | Comunidad Golden</title>
 
   <style>
-
     @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
 
-    :root {
-      --cream: #f8f3ea;
-      --cream-light: #fffaf2;
-      --gold: #b47c24;
-      --gold-light: #d8b36a;
-      --gold-soft: #ead9b9;
-      --brown: #302a23;
-      --brown-light: #655c52;
-      --dark: #25211c;
-      --white: #ffffff;
-      --border: rgba(180,124,36,0.18);
-      --shadow: 0 25px 70px rgba(52,38,20,0.10);
+    :root{
+      --cream:#f6f0e6;
+      --cream-2:#fffaf3;
+      --gold:#b77b20;
+      --gold-2:#d7ad63;
+      --gold-3:#ead9b8;
+      --brown:#2d2822;
+      --brown-2:#625a50;
+      --dark:#181613;
+      --white:#fff;
+      --line:rgba(183,123,32,.18);
+      --shadow:0 30px 80px rgba(48,35,20,.12);
+      --max:1320px;
     }
 
-    * {
-      box-sizing: border-box;
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:var(--cream);
+      color:var(--brown);
+      font-family:'Montserrat',sans-serif;
+      overflow-x:hidden;
     }
 
-    html {
-      scroll-behavior: smooth;
+    img{max-width:100%;display:block}
+
+    a{color:inherit}
+
+    /* ================= HEADER ================= */
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      width:100%;
+      background:rgba(246,240,230,.90);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
     }
 
-    body {
-      margin: 0;
-      background: var(--cream);
-      color: var(--brown);
-      font-family: 'Montserrat', sans-serif;
-      overflow-x: hidden;
+    .nav{
+      width:min(var(--max),100%);
+      min-height:88px;
+      margin:auto;
+      padding:12px 34px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
     }
 
-    a {
-      color: inherit;
+    .logo{
+      width:165px;
+      height:auto;
+      flex:0 0 auto;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
-
-  header {
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  width: 100%;
-  background: rgba(248, 243, 234, 0.94);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border-bottom: 1px solid rgba(173, 126, 48, 0.14);
-  box-shadow: 0 4px 24px rgba(45, 35, 25, 0.04);
-  transition: all 0.3s ease;
-}
-
-    .nav {
-      max-width: 1320px;
-      min-height: 82px;
-      margin: auto;
-      padding: 12px 34px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
+    .menu{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:27px;
     }
 
-    .logo {
-      width: 175px;
-      height: auto;
-      display: block;
-      flex-shrink: 0;
+    .menu a{
+      position:relative;
+      text-decoration:none;
+      color:var(--brown);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      white-space:nowrap;
+      padding:12px 0;
+      transition:.25s ease;
     }
 
-    .menu {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 27px;
+    .menu a:not(.header-button)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:5px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:.25s ease;
     }
 
-   .menu a {
-  position: relative;
-  color: var(--brown);
-  text-decoration: none;
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 1px;
-  white-space: nowrap;
-  padding: 10px 0;
-  transition: color .3s ease;
-}
+    .menu a:hover{color:var(--gold)}
+    .menu a:hover::after{width:100%}
 
-.menu a::after {
-  content: "";
-  position: absolute;
-  left: 0;
-  bottom: 2px;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width .3s ease;
-}
-
-.menu a:hover {
-  color: var(--gold);
-}
-
-.menu a:hover::after {
-  width: 100%;
-}
-.header-button {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 44px;
-  padding: 13px 22px;
-  background: var(--gold);
-  color: #fff !important;
-  border: 1px solid rgba(180, 124, 36, 0.35);
-  border-radius: 999px;
-  box-shadow: 0 10px 28px rgba(180, 124, 36, 0.18);
-  letter-spacing: .4px;
-  transition:
-    transform .3s ease,
-    box-shadow .3s ease,
-    background .3s ease;
-}
-
-.header-button:hover {
-  background: var(--brown);
-  color: #fff !important;
-  transform: translateY(-2px);
-  box-shadow: 0 14px 32px rgba(45, 35, 25, 0.18);
-}
-
-  
-    .heart {
-      color: var(--gold);
-      font-size: 25px;
-      line-height: 1;
+    .header-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:45px;
+      padding:13px 21px!important;
+      border-radius:999px;
+      background:var(--gold);
+      color:#fff!important;
+      box-shadow:0 12px 28px rgba(183,123,32,.20);
+      transition:.25s ease;
     }
 
-    /* =========================
-       HERO COMUNIDAD
-    ========================= */
-
-    .hero {
-      position: relative;
-      min-height: 720px;
-      max-width: 1450px;
-      margin: auto;
-      padding: 70px 55px 90px;
-      display: grid;
-      grid-template-columns: 48% 52%;
-      align-items: center;
-      overflow: hidden;
+    .header-button:hover{
+      background:var(--brown);
+      transform:translateY(-2px);
+      box-shadow:0 15px 35px rgba(45,40,34,.18);
     }
 
-    .hero::before {
-      content: "";
-      position: absolute;
-      width: 700px;
-      height: 700px;
-      right: -250px;
-      top: -180px;
-      border-radius: 50%;
-      background: rgba(216,179,106,.12);
-      pointer-events: none;
+    .heart{
+      color:var(--gold);
+      font-size:24px;
+      line-height:1;
     }
 
-    .hero-content {
-      position: relative;
-      z-index: 2;
-      padding-right: 40px;
+    /* ================= HERO ================= */
+
+    .hero{
+      position:relative;
+      min-height:760px;
+      max-width:1500px;
+      margin:auto;
+      padding:78px 60px 105px;
+      display:grid;
+      grid-template-columns:46% 54%;
+      align-items:center;
+      overflow:hidden;
     }
 
-    .eyebrow {
-      color: var(--gold);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-      margin-bottom: 22px;
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:780px;
+      height:780px;
+      right:-290px;
+      top:-230px;
+      border-radius:50%;
+      background:rgba(215,173,99,.13);
     }
 
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(68px, 7.5vw, 112px);
-      line-height: .82;
-      font-weight: 500;
-      letter-spacing: -5px;
-      margin: 0;
+    .hero::after{
+      content:"";
+      position:absolute;
+      width:360px;
+      height:360px;
+      left:-230px;
+      bottom:-220px;
+      border-radius:50%;
+      background:rgba(215,173,99,.08);
     }
 
-    .hero h1 .gold {
-      color: var(--gold);
+    .hero-content{
+      position:relative;
+      z-index:3;
+      padding-left:25px;
+      padding-right:30px;
     }
 
-    .hero-title-community {
-      display: block;
+    .eyebrow{
+      color:var(--gold);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:4px;
+      margin-bottom:24px;
     }
 
-    .hero-title-community span {
-      display: block;
+    .hero h1{
+      margin:0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(72px,8vw,124px);
+      line-height:.78;
+      font-weight:500;
+      letter-spacing:-6px;
     }
 
-    .hero-subtitle {
-      max-width: 550px;
-      margin: 34px 0 0;
-      color: var(--brown-light);
-      font-size: 17px;
-      line-height: 1.85;
+    .hero h1 span{display:block}
+    .hero h1 .gold{color:var(--gold)}
+
+    .line-heart{
+      display:flex;
+      align-items:center;
+      gap:13px;
+      margin-top:32px;
     }
 
-    .line-heart {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      margin: 28px 0 0;
+    .line-heart span{
+      width:65px;
+      height:1px;
+      background:var(--gold-2);
     }
 
-    .line-heart span {
-      width: 65px;
-      height: 1px;
-      background: var(--gold-light);
+    .line-heart strong{
+      color:var(--gold);
+      font-size:12px;
     }
 
-    .line-heart strong {
-      color: var(--gold);
-      font-size: 13px;
+    .hero-subtitle{
+      max-width:575px;
+      margin:30px 0 0;
+      color:var(--brown-2);
+      font-size:16px;
+      line-height:1.9;
     }
 
-    .buttons {
-      display: flex;
-      gap: 12px;
-      margin-top: 34px;
-      flex-wrap: wrap;
+    .buttons{
+      display:flex;
+      gap:12px;
+      flex-wrap:wrap;
+      margin-top:34px;
     }
 
-    .button {
-      text-decoration: none;
-      padding: 16px 24px;
-      border-radius: 999px;
-      font-size: 11px;
-      letter-spacing: .5px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: .25s ease;
+    .button{
+      min-height:50px;
+      padding:16px 24px;
+      border-radius:999px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      text-decoration:none;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.6px;
+      transition:.25s ease;
     }
 
-    .button:hover {
-      transform: translateY(-3px);
+    .button:hover{transform:translateY(-3px)}
+
+    .primary{
+      background:var(--gold);
+      color:#fff;
+      box-shadow:0 15px 35px rgba(183,123,32,.22);
     }
 
-    .primary {
-      background: var(--gold);
-      color: white;
-      box-shadow: 0 12px 30px rgba(180,124,36,.22);
+    .primary:hover{background:var(--brown)}
+
+    .secondary{
+      background:rgba(255,255,255,.72);
+      color:var(--brown);
+      border:1px solid #d9c8ad;
     }
 
-    .secondary {
-      color: var(--brown);
-      background: rgba(255,255,255,.8);
-      border: 1px solid #dbcbb1;
+    .secondary:hover{
+      background:#fff;
+      border-color:var(--gold-2);
     }
 
-    /* =========================
-       HERO VISUAL
-    ========================= */
+    /* ================= HERO PHOTO ================= */
 
-    .hero-visual {
-      position: relative;
-      min-height: 610px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
+    .hero-visual{
+      position:relative;
+      min-height:650px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      z-index:2;
     }
 
-    .golden-background {
-      position: absolute;
-      width: 530px;
-      height: 530px;
-      border-radius: 50%;
-      background: linear-gradient(145deg,#e7c47f,#c8913e);
-      opacity: .22;
+    .hero-photo-frame{
+      position:relative;
+      width:min(510px,78%);
+      height:590px;
+      border-radius:260px 260px 34px 34px;
+      overflow:hidden;
+      background:#dfc28d;
+      box-shadow:0 45px 100px rgba(55,39,18,.20);
     }
 
-    .golden {
-      position: relative;
-      z-index: 2;
-      width: 400px;
-      height: 500px;
-      border-radius: 220px 220px 28px 28px;
+    .hero-photo-frame::before{
+      content:"";
+      position:absolute;
+      inset:18px;
+      border:1px solid rgba(255,255,255,.40);
+      border-radius:245px 245px 25px 25px;
+      z-index:2;
+      pointer-events:none;
+    }
+
+    .hero-photo{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:center 42%;
+    }
+
+    .hero-photo-frame::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(to top,rgba(35,25,14,.10),transparent 45%);
+      pointer-events:none;
+    }
+
+    .floating-label{
+      position:absolute;
+      left:7%;
+      bottom:12%;
+      z-index:5;
+      padding:12px 18px;
+      border:1px solid rgba(183,123,32,.28);
+      background:rgba(255,250,243,.93);
+      backdrop-filter:blur(10px);
+      border-radius:999px;
+      color:var(--gold);
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:2px;
+      box-shadow:0 18px 45px rgba(50,35,18,.14);
+    }
+
+    /* ================= ID CARD ================= */
+
+    .id-card{
+      position:absolute;
+      right:2%;
+      bottom:2%;
+      z-index:8;
+      width:345px;
+      min-height:235px;
+      padding:25px;
+      background:rgba(255,250,243,.96);
+      border:1px solid rgba(183,123,32,.28);
+      border-radius:25px;
+      box-shadow:0 30px 70px rgba(50,35,20,.20);
+      backdrop-filter:blur(12px);
+    }
+
+    .id-card-top{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+      color:var(--gold);
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:1.4px;
+    }
+
+    .id-card-logo{width:92px}
+
+    .id-card-name{
+      margin-top:27px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:43px;
+      line-height:1;
+    }
+
+    .id-card-breed{
+      margin-top:5px;
+      color:#786f64;
+      font-size:9px;
+      letter-spacing:1.7px;
+    }
+
+    .id-number{
+      display:inline-block;
+      margin-top:17px;
+      padding:8px 13px;
+      border-radius:999px;
+      background:var(--gold);
+      color:#fff;
+      font-size:9px;
+      font-weight:700;
+    }
+
+    .id-technologies{
+      display:flex;
+      justify-content:space-between;
+      margin-top:22px;
+      padding-top:14px;
+      border-top:1px solid #e4d7c4;
+      color:#93661f;
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:1px;
+    }
+
+    /* ================= COMMUNITY ================= */
+
+    .community{
+      background:var(--dark);
+      color:#fff;
+      padding:115px 30px;
+    }
+
+    .community-inner{
+      max-width:1180px;
+      margin:auto;
+      display:grid;
+      grid-template-columns:42% 58%;
+      gap:85px;
+      align-items:center;
+    }
+
+    .community-label{
+      color:#d7a951;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:4px;
+    }
+
+    .community h2{
+      margin:18px 0 0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(58px,6vw,82px);
+      line-height:.88;
+      font-weight:500;
+    }
+
+    .community h2 span{color:#d6a64f}
+
+    .community-copy{
+      color:#c7c0b7;
+      font-size:15px;
+      line-height:1.95;
+    }
+
+    .community-copy p{margin:0 0 22px}
+    .community-copy strong{color:#fff}
+
+    .community-photo{
+      margin-top:35px;
+      width:100%;
+      max-height:420px;
+      object-fit:cover;
+      object-position:center 38%;
+      border-radius:22px;
+      opacity:.92;
+    }
+
+    /* ================= GENERIC SECTION ================= */
+
+    .section{
+      max-width:1200px;
+      margin:auto;
+      padding:120px 30px;
+    }
+
+    .section-heading{
+      max-width:740px;
+      margin:0 auto 65px;
+      text-align:center;
+    }
+
+    .section-heading small{
+      color:#a9711c;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:4px;
+    }
+
+    .section-heading h2{
+      margin:14px 0 20px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(50px,5vw,72px);
+      line-height:.92;
+      font-weight:500;
+    }
+
+    .section-heading p{
+      margin:0;
+      color:#756d63;
+      font-size:15px;
+      line-height:1.85;
+    }
+
+    /* ================= ID HIGHLIGHT ================= */
+
+    .id-highlight{
+      background:var(--cream-2);
+      border:1px solid #e4d6c0;
+      border-radius:30px;
+      padding:58px;
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:55px;
+      align-items:center;
+      box-shadow:var(--shadow);
+    }
+
+    .id-highlight-label{
+      color:var(--gold);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    .id-highlight h3{
+      margin:15px 0 20px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:55px;
+      line-height:.92;
+      font-weight:500;
+    }
+
+    .id-highlight h3 span{color:var(--gold)}
+
+    .id-highlight p{
+      color:#6f675d;
+      font-size:14px;
+      line-height:1.85;
+    }
+
+    .id-features{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:12px;
+    }
+
+    .id-feature{
+      padding:25px;
+      background:#fff;
+      border:1px solid #e8ddcd;
+      border-radius:18px;
+      transition:.25s ease;
+    }
+
+    .id-feature:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 45px rgba(50,35,20,.07);
+    }
+
+    .id-feature-number{
+      color:var(--gold);
+      font-family:'Cormorant Garamond',serif;
+      font-size:28px;
+    }
+
+    .id-feature h4{
+      margin:8px 0;
+      font-size:11px;
+      letter-spacing:1px;
+    }
+
+    .id-feature p{
+      margin:0;
+      font-size:12px;
+      line-height:1.65;
+    }
+
+    /* ================= STEPS ================= */
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:20px;
+    }
+
+    .step{
+      padding:42px 28px;
+      text-align:center;
+      background:rgba(255,255,255,.55);
+      border:1px solid #e7dccb;
+      border-radius:22px;
+      transition:.25s ease;
+    }
+
+    .step:hover{
+      transform:translateY(-6px);
+      box-shadow:0 22px 50px rgba(65,45,20,.08);
+    }
+
+    .step-number{
+      width:68px;
+      height:68px;
+      margin:auto;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:50%;
+      background:#f1e4cf;
+      border:1px solid #d5b77c;
+      color:#ad7822;
+      font-family:'Cormorant Garamond',serif;
+      font-size:27px;
+    }
+
+    .step h3{
+      margin:20px 0 8px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:30px;
+      font-weight:600;
+    }
+
+    .step p{
+      margin:0;
+      color:#746d64;
+      font-size:13px;
+      line-height:1.75;
+    }
+
+    /* ================= VISUAL BANNER ================= */
+
+    .visual-banner{
+      max-width:1250px;
+      margin:20px auto 115px;
+      min-height:440px;
+      position:relative;
+      overflow:hidden;
+      border-radius:30px;
+      box-shadow:var(--shadow);
+    }
+
+    .visual-banner img{
+      width:100%;
+      height:440px;
+      object-fit:cover;
+      object-position:center 48%;
+    }
+
+    .visual-banner::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(90deg,rgba(20,16,12,.70),rgba(20,16,12,.05) 70%);
+    }
+
+    .visual-banner-content{
+      position:absolute;
+      left:60px;
+      top:50%;
+      transform:translateY(-50%);
+      z-index:2;
+      max-width:520px;
+      color:#fff;
+    }
+
+    .visual-banner-content small{
+      color:#e1b45b;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    .visual-banner-content h2{
+      margin:14px 0 12px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:58px;
+      line-height:.9;
+      font-weight:500;
+    }
+
+    .visual-banner-content p{
+      margin:0;
+      color:rgba(255,255,255,.88);
+      font-size:14px;
+      line-height:1.75;
+    }
+
+    /* ================= BENEFITS ================= */
+
+    .benefits{
+      max-width:1250px;
+      margin:30px auto 100px;
+      padding:92px 35px;
+      background:#29251f;
+      border-radius:32px;
+      color:#fff;
+    }
+
+    .benefits-heading{
+      max-width:700px;
+      margin:0 auto 60px;
+      text-align:center;
+    }
+
+    .benefits-heading small{
+      color:#d4a54c;
+      letter-spacing:3px;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    .benefits-heading h2{
+      margin:14px 0 18px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(50px,5vw,68px);
+      line-height:.92;
+      font-weight:500;
+    }
+
+    .benefits-heading p{
+      margin:0;
+      color:#c9c1b7;
+      line-height:1.75;
+      font-size:14px;
+    }
+
+    .benefit-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+    }
+
+    .benefit{
+      padding:25px;
+      text-align:center;
+      border-right:1px solid rgba(212,165,76,.35);
+    }
+
+    .benefit:last-child{border-right:none}
+
+    .benefit-symbol{
+      color:#d6a445;
+      font-size:27px;
+      margin-bottom:20px;
+    }
+
+    .benefit h3{
+      color:#e1b458;
+      font-size:11px;
+      letter-spacing:.8px;
+    }
+
+    .benefit p{
+      margin:0;
+      color:#c9c1b7;
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    .benefits-link{
+      text-align:center;
+      margin-top:45px;
+    }
+
+    /* ================= CTA ================= */
+
+    .cta{
+      max-width:1100px;
+      margin:80px auto 110px;
+      padding:85px 30px;
       background:
-        radial-gradient(circle at 50% 28%, rgba(255,255,255,.35), transparent 27%),
-        linear-gradient(145deg,#efd08d,#bb8231);
-      overflow: hidden;
-      box-shadow: 0 40px 90px rgba(70,45,17,.20);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .golden::before {
-      content: "";
-      position: absolute;
-      width: 270px;
-      height: 270px;
-      border-radius: 50%;
-      background: rgba(255,248,229,.18);
-      top: 80px;
-    }
-
-    .golden-face {
-      position: relative;
-      z-index: 2;
-      font-size: 145px;
-      filter: drop-shadow(0 18px 15px rgba(75,45,15,.16));
-    }
-
-    /* =========================
-       ID CARD
-    ========================= */
-
-    .id-card {
-      position: absolute;
-      right: 0;
-      bottom: 0;
-      z-index: 5;
-      width: 345px;
-      min-height: 235px;
-      background: rgba(255,250,241,.97);
-      border: 1px solid rgba(185,139,59,.32);
-      border-radius: 25px;
-      padding: 26px;
-      box-shadow: 0 30px 65px rgba(50,35,20,.20);
-      backdrop-filter: blur(10px);
-    }
-
-    .id-card-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      color: #a56f20;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    .id-card-logo {
-      width: 90px;
-      height: auto;
-    }
-
-    .id-card-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 42px;
-      line-height: 1;
-      margin-top: 28px;
-    }
-
-    .id-card-breed {
-      font-size: 10px;
-      letter-spacing: 1.7px;
-      color: #746b60;
-      margin-top: 4px;
-    }
-
-    .id-number {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 8px 13px;
-      border-radius: 30px;
-      background: #bd8730;
-      color: white;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .id-technologies {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 24px;
-      border-top: 1px solid #e5dac7;
-      padding-top: 14px;
-      color: #93651e;
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    /* =========================
-       COMMUNITY INTRO
-    ========================= */
-
-    .community {
-      background: var(--dark);
-      color: white;
-      padding: 110px 30px;
-    }
-
-    .community-inner {
-      max-width: 1180px;
-      margin: auto;
-      display: grid;
-      grid-template-columns: 40% 60%;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .community-label {
-      color: #d7a951;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-    }
-
-    .community h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(52px,6vw,78px);
-      font-weight: 500;
-      line-height: .9;
-      margin: 18px 0;
-    }
-
-    .community h2 span {
-      color: #d5a34c;
-    }
-
-    .community-copy {
-      color: #c7c0b7;
-      font-size: 15px;
-      line-height: 1.9;
-    }
-
-    .community-copy strong {
-      color: white;
-      font-weight: 600;
-    }
-
-    /* =========================
-       ID SECTION
-    ========================= */
-
-    .section {
-      padding: 115px 30px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    .section-heading {
-      text-align: center;
-      max-width: 720px;
-      margin: auto auto 65px;
-    }
-
-    .section-heading small {
-      color: #aa741e;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 3px;
-    }
-
-    .section-heading h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(48px,5vw,68px);
-      font-weight: 500;
-      line-height: .95;
-      margin: 14px 0 20px;
-    }
-
-    .section-heading p {
-      color: #756d63;
-      font-size: 15px;
-      line-height: 1.8;
-    }
-
-    .id-highlight {
-      background: #fffaf2;
-      border: 1px solid #e6d9c5;
-      border-radius: 30px;
-      padding: 55px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 55px;
-      align-items: center;
-      box-shadow: var(--shadow);
-    }
-
-    .id-highlight-label {
-      color: var(--gold);
-      font-size: 11px;
-      letter-spacing: 3px;
-      font-weight: 700;
-    }
-
-    .id-highlight h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 52px;
-      line-height: .95;
-      font-weight: 500;
-      margin: 15px 0 20px;
-    }
-
-    .id-highlight h3 span {
-      color: var(--gold);
-    }
-
-    .id-highlight p {
-      color: #6f675d;
-      line-height: 1.8;
-      font-size: 14px;
-    }
-
-    .id-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .id-feature {
-      padding: 24px;
-      background: white;
-      border: 1px solid #eadfce;
-      border-radius: 18px;
-    }
-
-    .id-feature-number {
-      color: var(--gold);
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-    }
-
-    .id-feature h4 {
-      margin: 8px 0;
-      font-size: 12px;
-      letter-spacing: .8px;
-    }
-
-    .id-feature p {
-      margin: 0;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    /* =========================
-       STEPS
-    ========================= */
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(3,1fr);
-      gap: 20px;
-    }
-
-    .step {
-      text-align: center;
-      padding: 38px 25px;
-      background: rgba(255,255,255,.55);
-      border: 1px solid #eadfce;
-      border-radius: 22px;
-      transition: .25s ease;
-    }
-
-    .step:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 20px 45px rgba(65,45,20,.08);
-    }
-
-    .step-number {
-      width: 68px;
-      height: 68px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 50%;
-      background: #f1e5d1;
-      border: 1px solid #d5b77c;
-      color: #ad7822;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px;
-    }
-
-    .step h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 28px;
-      margin: 20px 0 8px;
-    }
-
-    .step p {
-      color: #746d64;
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    /* =========================
-       BENEFITS
-    ========================= */
-
-    .benefits {
-      max-width: 1250px;
-      margin: 40px auto 100px;
-      padding: 90px 35px;
-      background: #29251f;
-      border-radius: 32px;
-      color: white;
-    }
-
-    .benefits-heading {
-      text-align: center;
-      max-width: 700px;
-      margin: auto auto 60px;
-    }
-
-    .benefits-heading small {
-      color: #d4a54c;
-      letter-spacing: 3px;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .benefits-heading h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(48px,5vw,66px);
-      line-height: .95;
-      font-weight: 500;
-      margin: 14px 0 18px;
-    }
-
-    .benefits-heading p {
-      color: #c9c1b7;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .benefit-grid {
-      display: grid;
-      grid-template-columns: repeat(4,1fr);
-    }
-
-    .benefit {
-      padding: 25px;
-      text-align: center;
-      border-right: 1px solid rgba(212,165,76,.35);
-    }
-
-    .benefit:last-child {
-      border-right: none;
-    }
-
-    .benefit-symbol {
-      color: #d6a445;
-      font-size: 28px;
-      margin-bottom: 20px;
-    }
-
-    .benefit h3 {
-      color: #e1b458;
-      font-size: 12px;
-      letter-spacing: .7px;
-    }
-
-    .benefit p {
-      color: #c9c1b7;
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .benefits-link {
-      text-align: center;
-      margin-top: 45px;
-    }
-
-    /* =========================
-       CTA
-    ========================= */
-
-    .cta {
-      max-width: 1100px;
-      margin: 80px auto 110px;
-      padding: 80px 30px;
-      background:
-        radial-gradient(circle at top right, rgba(214,169,79,.25), transparent 35%),
+        radial-gradient(circle at top right,rgba(214,169,79,.24),transparent 35%),
         linear-gradient(135deg,#f2e4cb,#fffaf1);
-      border-radius: 30px;
-      text-align: center;
-      border: 1px solid #e6d8c1;
+      border:1px solid #e6d8c1;
+      border-radius:30px;
+      text-align:center;
     }
 
-    .cta-heart {
-      color: var(--gold);
-      font-size: 42px;
-      margin-bottom: 15px;
+    .cta-heart{
+      color:var(--gold);
+      font-size:40px;
+      margin-bottom:15px;
     }
 
-    .cta h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(44px,5vw,62px);
-      line-height: .95;
-      font-weight: 500;
-      margin: 0 auto;
-      max-width: 800px;
+    .cta h2{
+      max-width:800px;
+      margin:0 auto;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(46px,5vw,65px);
+      line-height:.92;
+      font-weight:500;
     }
 
-    .cta p {
-      color: #70675d;
-      margin: 20px auto 30px;
-      font-size: 14px;
+    .cta p{
+      margin:20px auto 30px;
+      color:#70675d;
+      font-size:14px;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
+    /* ================= FOOTER ================= */
 
-    footer {
-      background: #29251f;
-      color: white;
-      padding: 65px 25px 40px;
-      text-align: center;
+    footer{
+      background:#29251f;
+      color:#fff;
+      padding:70px 25px 40px;
+      text-align:center;
     }
 
-    footer img {
-      width: 155px;
-      height: auto;
-      margin-bottom: 20px;
+    footer img{
+      width:155px;
+      margin:0 auto 20px;
     }
 
-    footer p {
-      color: #aaa197;
-      font-size: 11px;
-      line-height: 1.8;
-      margin: 8px 0;
+    .footer-brand{
+      color:#d5a34c;
+      letter-spacing:3px;
+      font-size:10px;
+      font-weight:700;
     }
 
-    .footer-brand {
-      color: #d5a34c;
-      letter-spacing: 3px;
-      font-size: 10px;
-      font-weight: 700;
+    footer p{
+      margin:8px 0;
+      color:#aaa197;
+      font-size:11px;
+      line-height:1.8;
     }
 
-    /* =========================
-       TABLET
-    ========================= */
+    /* ================= TABLET ================= */
 
-    @media (max-width: 1000px) {
+    @media(max-width:1000px){
+      .nav{padding:12px 22px}
+      .menu{gap:16px}
+      .menu a{font-size:9px}
 
-      .nav {
-        padding: 12px 22px;
+      .hero{
+        grid-template-columns:1fr;
+        padding:75px 30px 110px;
+        text-align:center;
       }
 
-      .menu {
-        gap: 16px;
+      .hero-content{
+        padding:0;
       }
 
-      .menu a {
-        font-size: 9px;
+      .hero-subtitle{
+        margin-left:auto;
+        margin-right:auto;
       }
 
-      .hero {
-        grid-template-columns: 1fr;
-        text-align: center;
-        padding: 70px 30px 100px;
+      .buttons,.line-heart{justify-content:center}
+
+      .hero-visual{margin-top:60px}
+
+      .community-inner{
+        grid-template-columns:1fr;
+        gap:45px;
+        text-align:center;
       }
 
-      .hero-content {
-        padding-right: 0;
+      .id-highlight{
+        grid-template-columns:1fr;
       }
 
-      .hero-subtitle {
-        margin-left: auto;
-        margin-right: auto;
+      .benefit-grid{
+        grid-template-columns:1fr 1fr;
       }
 
-      .buttons,
-      .line-heart {
-        justify-content: center;
+      .benefit:nth-child(2){border-right:none}
+      .benefit:nth-child(-n+2){
+        border-bottom:1px solid rgba(212,165,76,.35);
       }
 
-      .hero-visual {
-        margin-top: 60px;
-      }
-
-      .community-inner {
-        grid-template-columns: 1fr;
-        gap: 35px;
-        text-align: center;
-      }
-
-      .id-highlight {
-        grid-template-columns: 1fr;
-      }
-
-      .benefit-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .benefit:nth-child(2) {
-        border-right: none;
-      }
-
-      .benefit:nth-child(-n+2) {
-        border-bottom: 1px solid rgba(212,165,76,.35);
-      }
-
+      .visual-banner{margin-left:20px;margin-right:20px}
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /* ================= MOBILE ================= */
 
-    @media (max-width: 650px) {
+    @media(max-width:650px){
+      header{position:sticky}
 
-      header {
-        position: sticky;
+      .nav{
+        min-height:auto;
+        padding:10px 12px 12px;
+        flex-direction:column;
+        gap:8px;
       }
 
-      .nav {
-        min-height: auto;
-        padding: 10px 10px 12px;
-        flex-direction: column;
-        gap: 9px;
+      .logo{width:145px}
+
+      .menu{
+        width:100%;
+        justify-content:center;
+        gap:6px 11px;
+        flex-wrap:wrap;
       }
 
-      .logo {
-        width: 145px;
+      .menu a{
+        font-size:8px;
+        letter-spacing:.3px;
       }
 
-      .menu {
-        width: 100%;
-        justify-content: center;
-        gap: 7px 10px;
-        flex-wrap: wrap;
+      .header-button{
+        min-height:38px;
+        padding:9px 12px!important;
+        font-size:8px!important;
       }
 
-      .menu a {
-        font-size: 8px;
-        letter-spacing: .3px;
+      .heart{font-size:19px}
+
+      .hero{
+        min-height:auto;
+        padding:55px 18px 90px;
       }
 
-      .header-button {
-        padding: 9px 12px;
-        font-size: 8px !important;
+      .eyebrow{
+        font-size:9px;
+        letter-spacing:2.5px;
       }
 
-      .heart {
-        font-size: 19px;
+      .hero h1{
+        font-size:62px;
+        letter-spacing:-3px;
+        line-height:.82;
       }
 
-      .hero {
-        min-height: auto;
-        padding: 55px 18px 100px;
+      .hero-subtitle{
+        font-size:14px;
+        line-height:1.75;
       }
 
-      .eyebrow {
-        font-size: 9px;
-        letter-spacing: 2px;
+      .buttons{
+        flex-direction:column;
+        align-items:stretch;
       }
 
-      .hero h1 {
-        font-size: 64px;
-        letter-spacing: -3px;
+      .button{width:100%}
+
+      .hero-visual{
+        min-height:520px;
+        margin-top:30px;
       }
 
-      .hero-subtitle {
-        font-size: 14px;
-        line-height: 1.75;
+      .hero-photo-frame{
+        width:86%;
+        height:430px;
+        border-radius:210px 210px 25px 25px;
       }
 
-      .line-heart span {
-        width: 42px;
+      .id-card{
+        width:280px;
+        right:50%;
+        bottom:-5px;
+        transform:translateX(50%);
+        padding:21px;
       }
 
-      .buttons {
-        flex-direction: column;
-        align-items: stretch;
+      .id-card-name{font-size:36px}
+
+      .floating-label{
+        left:2%;
+        bottom:17%;
+        font-size:8px;
       }
 
-      .button {
-        width: 100%;
-        padding: 15px 18px;
+      .community{
+        padding:80px 22px;
       }
 
-      .hero-visual {
-        min-height: 480px;
-        margin-top: 35px;
+      .community h2{font-size:54px}
+      .community-copy{font-size:14px}
+
+      .section{padding:78px 18px}
+
+      .section-heading{
+        margin-bottom:45px;
       }
 
-      .golden-background {
-        width: 330px;
-        height: 330px;
+      .section-heading h2{font-size:45px}
+
+      .id-highlight{
+        padding:30px 22px;
+        gap:32px;
+        border-radius:22px;
       }
 
-      .golden {
-        width: 285px;
-        height: 370px;
+      .id-highlight h3{font-size:43px}
+
+      .id-features{grid-template-columns:1fr}
+
+      .steps{grid-template-columns:1fr}
+
+      .visual-banner{
+        min-height:500px;
+        margin:10px 14px 75px;
+        border-radius:23px;
       }
 
-      .golden-face {
-        font-size: 110px;
+      .visual-banner img{
+        height:500px;
       }
 
-      .id-card {
-        width: 275px;
-        right: 50%;
-        transform: translateX(50%);
-        bottom: -30px;
-        padding: 21px;
+      .visual-banner::after{
+        background:linear-gradient(180deg,rgba(20,16,12,.12),rgba(20,16,12,.82));
       }
 
-      .id-card-name {
-        font-size: 36px;
+      .visual-banner-content{
+        left:25px;
+        right:25px;
+        top:auto;
+        bottom:35px;
+        transform:none;
       }
 
-      .community {
-        padding: 80px 22px;
+      .visual-banner-content h2{font-size:45px}
+
+      .benefits{
+        margin:20px 12px 75px;
+        padding:65px 20px;
+        border-radius:24px;
       }
 
-      .community h2 {
-        font-size: 52px;
+      .benefits-heading h2{font-size:44px}
+
+      .benefit-grid{grid-template-columns:1fr}
+
+      .benefit{
+        border-right:none!important;
+        border-bottom:1px solid rgba(212,165,76,.35);
       }
 
-      .community-copy {
-        font-size: 14px;
+      .benefit:last-child{border-bottom:none}
+
+      .cta{
+        margin:55px 18px 75px;
+        padding:65px 22px;
+        border-radius:24px;
       }
 
-      .section {
-        padding: 75px 18px;
-      }
+      .cta h2{font-size:44px}
 
-      .section-heading {
-        margin-bottom: 45px;
+      footer{
+        padding:55px 20px 35px;
       }
-
-      .section-heading h2 {
-        font-size: 44px;
-      }
-
-      .id-highlight {
-        padding: 28px 22px;
-        gap: 30px;
-        border-radius: 22px;
-      }
-
-      .id-highlight h3 {
-        font-size: 42px;
-      }
-
-      .id-features {
-        grid-template-columns: 1fr;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      .benefits {
-        margin: 20px 12px 75px;
-        padding: 65px 20px;
-        border-radius: 24px;
-      }
-
-      .benefits-heading h2 {
-        font-size: 43px;
-      }
-
-      .benefit-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .benefit {
-        border-right: none !important;
-        border-bottom: 1px solid rgba(212,165,76,.35);
-      }
-
-      .benefit:last-child {
-        border-bottom: none;
-      }
-
-      .cta {
-        margin: 55px 18px 75px;
-        padding: 65px 22px;
-        border-radius: 24px;
-      }
-
-      .cta h2 {
-        font-size: 43px;
-      }
-
-      footer {
-        padding: 55px 20px 35px;
-      }
-
     }
-
   </style>
 </head>
 
 <body>
 
-  <!-- =========================
-       HEADER
-  ========================== -->
-
+  <!-- HEADER -->
   <header>
-
     <nav class="nav">
 
       <a href="#inicio" aria-label="Baby Golden Perú">
-
         <img
           src="BABY%20GOLDEN.png"
           alt="Baby Golden Perú"
           class="logo"
         >
-
       </a>
 
       <div class="menu">
 
-        <a href="#inicio">
-          INICIO
-        </a>
+        <a href="#inicio">INICIO</a>
 
-        <a href="#comunidad">
-          SOBRE NOSOTROS
-        </a>
+        <a href="#comunidad">SOBRE NOSOTROS</a>
 
-        <a href="beneficios.html">
-          BENEFICIOS
-        </a>
+        <a href="beneficios.html">BENEFICIOS</a>
 
-        <a href="#contacto">
-          CONTACTO
-        </a>
+        <a href="#contacto">CONTACTO</a>
 
         <a
           href="https://babygoldenperu.github.io/baby-golden-peru/registro.html"
@@ -1051,66 +1052,35 @@
           REGISTRAR MI PERRITO
         </a>
 
-        <span class="heart">
-          ♡
-        </span>
+        <span class="heart">♡</span>
 
       </div>
-
     </nav>
-
   </header>
 
 
-  <!-- =========================
-       HERO
-  ========================== -->
-
-  <section
-    class="hero"
-    id="inicio"
-  >
+  <!-- HERO PRINCIPAL -->
+  <section class="hero" id="inicio">
 
     <div class="hero-content">
 
-      <div class="eyebrow">
-        BABY GOLDEN PERÚ
-      </div>
+      <div class="eyebrow">BABY GOLDEN PERÚ</div>
 
-      <h1 class="hero-title-community">
-
-        <span>
-          UNA
-        </span>
-
-        <span class="gold">
-          COMUNIDAD
-        </span>
-
-        <span>
-          DE ORO
-        </span>
-
+      <h1>
+        <span>UNA</span>
+        <span class="gold">COMUNIDAD</span>
+        <span>DE ORO</span>
       </h1>
 
       <div class="line-heart">
-
         <span></span>
-
-        <strong>
-          ♥
-        </strong>
-
+        <strong>♥</strong>
         <span></span>
-
       </div>
 
       <p class="hero-subtitle">
-
-        Una comunidad unida por el amor a nuestros
-        Golden Retrievers, la tenencia responsable
-        y las experiencias que compartimos juntos.
-
+        Una comunidad unida por el amor a nuestros Golden Retrievers,
+        la tenencia responsable y las experiencias que compartimos juntos.
       </p>
 
       <div class="buttons">
@@ -1122,10 +1092,7 @@
           REGISTRAR MI PERRITO
         </a>
 
-        <a
-          href="#baby-golden-id"
-          class="button secondary"
-        >
+        <a href="#baby-golden-id" class="button secondary">
           CONOCE BABY GOLDEN ID
         </a>
 
@@ -1136,17 +1103,23 @@
 
     <div class="hero-visual">
 
-      <div class="golden-background"></div>
+      <div class="hero-photo-frame">
 
-      <div class="golden">
-
-        <div class="golden-face">
-          🐕
-        </div>
+        <!-- FOTO PRINCIPAL: sube IMG_3370.JPG al repositorio -->
+        <img
+          src="IMG_3370.JPG"
+          alt="Golden Retriever Baby Golden Perú"
+          class="hero-photo"
+        >
 
       </div>
 
+      <div class="floating-label">
+        UNA COMUNIDAD · UNA FAMILIA
+      </div>
 
+
+      <!-- TARJETA DE EJEMPLO -->
       <div class="id-card">
 
         <div class="id-card-top">
@@ -1157,34 +1130,19 @@
             alt="Baby Golden Perú"
           >
 
-          <span>
-            IDENTIDAD DIGITAL
-          </span>
+          <span>IDENTIDAD DIGITAL</span>
 
         </div>
 
-        <div class="id-card-name">
-          KALMA
-        </div>
+        <div class="id-card-name">KALMA</div>
 
-        <div class="id-card-breed">
-          GOLDEN RETRIEVER
-        </div>
+        <div class="id-card-breed">GOLDEN RETRIEVER</div>
 
-        <div class="id-number">
-          BGP-00001
-        </div>
+        <div class="id-number">BGP-00001</div>
 
         <div class="id-technologies">
-
-          <span>
-            NFC
-          </span>
-
-          <span>
-            QR CODE
-          </span>
-
+          <span>NFC</span>
+          <span>QR CODE</span>
         </div>
 
       </div>
@@ -1194,49 +1152,46 @@
   </section>
 
 
-  <!-- =========================
-       SOBRE BABY GOLDEN PERÚ
-  ========================== -->
-
-  <section
-    class="community"
-    id="comunidad"
-  >
+  <!-- SOBRE LA COMUNIDAD -->
+  <section class="community" id="comunidad">
 
     <div class="community-inner">
 
       <div>
 
-        <div class="community-label">
-          BABY GOLDEN PERÚ
-        </div>
+        <div class="community-label">BABY GOLDEN PERÚ</div>
 
         <h2>
           Más que una
           <span>comunidad.</span>
         </h2>
 
+        <img
+          src="_MG_3202%20copia.jpg.jpeg"
+          alt="Golden Retriever de Baby Golden Perú"
+          class="community-photo"
+        >
+
       </div>
 
       <div class="community-copy">
 
         <p>
-          Baby Golden Perú es una comunidad creada
-          para compartir el amor por nuestros Golden
-          Retrievers y construir experiencias que nos
-          unan como familia.
+          <strong>Baby Golden Perú</strong> es una comunidad creada
+          para compartir el amor por nuestros Golden Retrievers y
+          construir experiencias que nos unan como familia.
         </p>
 
         <p>
           Promovemos la <strong>tenencia responsable</strong>,
-          el bienestar animal, la convivencia y una
-          comunidad donde cada perrito y cada familia
-          tenga su propio lugar.
+          el bienestar animal, la convivencia y una comunidad
+          donde cada perrito y cada familia tenga su propio lugar.
         </p>
 
         <p>
-          Y ahora llevamos esa conexión al mundo digital
-          con <strong>Baby Golden ID</strong>.
+          Y ahora llevamos esa conexión al mundo digital con
+          <strong>Baby Golden ID</strong>, una identidad creada
+          especialmente para nuestros perritos.
         </p>
 
       </div>
@@ -1246,28 +1201,18 @@
   </section>
 
 
-  <!-- =========================
-       BABY GOLDEN ID
-  ========================== -->
-
-  <section
-    class="section"
-    id="baby-golden-id"
-  >
+  <!-- BABY GOLDEN ID -->
+  <section class="section" id="baby-golden-id">
 
     <div class="section-heading">
 
-      <small>
-        NUESTRO PROYECTO PRINCIPAL
-      </small>
+      <small>NUESTRO PROYECTO PRINCIPAL</small>
 
-      <h2>
-        BABY GOLDEN ID
-      </h2>
+      <h2>BABY GOLDEN ID</h2>
 
       <p>
-        La identidad digital que conecta a cada
-        Golden Retriever con su familia y su comunidad.
+        La identidad digital que conecta a cada Golden Retriever
+        con su familia y su comunidad.
       </p>
 
     </div>
@@ -1287,10 +1232,10 @@
         </h3>
 
         <p>
-          Cada perrito puede contar con una identidad
-          digital propia. Su perfil puede ser consultado
-          mediante tecnología NFC o código QR, facilitando
-          el acceso a su información y a los datos de contacto.
+          Cada perrito puede contar con una identidad digital propia.
+          Su perfil puede ser consultado mediante tecnología NFC o
+          código QR, facilitando el acceso a su información y a los
+          datos de contacto.
         </p>
 
         <div class="buttons">
@@ -1302,10 +1247,7 @@
             CREAR BABY GOLDEN ID
           </a>
 
-          <a
-            href="id.html"
-            class="button secondary"
-          >
+          <a href="id.html" class="button secondary">
             BUSCAR UN ID
           </a>
 
@@ -1317,74 +1259,27 @@
       <div class="id-features">
 
         <div class="id-feature">
-
-          <div class="id-feature-number">
-            01
-          </div>
-
-          <h4>
-            IDENTIDAD ÚNICA
-          </h4>
-
-          <p>
-            Cada perrito cuenta con un código
-            de identificación propio.
-          </p>
-
+          <div class="id-feature-number">01</div>
+          <h4>IDENTIDAD ÚNICA</h4>
+          <p>Cada perrito cuenta con un código de identificación propio.</p>
         </div>
 
-
         <div class="id-feature">
-
-          <div class="id-feature-number">
-            02
-          </div>
-
-          <h4>
-            NFC
-          </h4>
-
-          <p>
-            Acerca un celular compatible y
-            accede rápidamente al perfil.
-          </p>
-
+          <div class="id-feature-number">02</div>
+          <h4>NFC</h4>
+          <p>Acerca un celular compatible y accede rápidamente al perfil.</p>
         </div>
 
-
         <div class="id-feature">
-
-          <div class="id-feature-number">
-            03
-          </div>
-
-          <h4>
-            CÓDIGO QR
-          </h4>
-
-          <p>
-            Una segunda forma sencilla
-            de acceder a la información.
-          </p>
-
+          <div class="id-feature-number">03</div>
+          <h4>CÓDIGO QR</h4>
+          <p>Una segunda forma sencilla de acceder a la información.</p>
         </div>
 
-
         <div class="id-feature">
-
-          <div class="id-feature-number">
-            04
-          </div>
-
-          <h4>
-            COMUNIDAD
-          </h4>
-
-          <p>
-            Una identidad pensada para
-            nuestra comunidad Baby Golden.
-          </p>
-
+          <div class="id-feature-number">04</div>
+          <h4>COMUNIDAD</h4>
+          <p>Una identidad pensada para nuestra comunidad Baby Golden.</p>
         </div>
 
       </div>
@@ -1394,28 +1289,17 @@
   </section>
 
 
-  <!-- =========================
-       CÓMO FUNCIONA
-  ========================== -->
-
-  <section
-    class="section"
-    id="como-funciona"
-  >
+  <!-- COMO FUNCIONA -->
+  <section class="section" id="como-funciona">
 
     <div class="section-heading">
 
-      <small>
-        BABY GOLDEN ID
-      </small>
+      <small>BABY GOLDEN ID</small>
 
-      <h2>
-        Simple, elegante y digital
-      </h2>
+      <h2>Simple, elegante y digital</h2>
 
       <p>
-        Tener la identidad digital de tu perrito
-        es muy sencillo.
+        Tener la identidad digital de tu perrito es muy sencillo.
       </p>
 
     </div>
@@ -1424,56 +1308,26 @@
     <div class="steps">
 
       <div class="step">
-
-        <div class="step-number">
-          01
-        </div>
-
-        <h3>
-          REGISTRA
-        </h3>
-
-        <p>
-          Completa los datos de tu perrito
-          y de su familia.
-        </p>
-
+        <div class="step-number">01</div>
+        <h3>REGISTRA</h3>
+        <p>Completa los datos de tu perrito y de su familia.</p>
       </div>
 
-
       <div class="step">
-
-        <div class="step-number">
-          02
-        </div>
-
-        <h3>
-          OBTÉN SU ID
-        </h3>
-
+        <div class="step-number">02</div>
+        <h3>OBTÉN SU ID</h3>
         <p>
-          Cada perrito tendrá una identificación
-          digital única dentro de Baby Golden Perú.
+          Cada perrito tendrá una identificación digital única
+          dentro de Baby Golden Perú.
         </p>
-
       </div>
 
-
       <div class="step">
-
-        <div class="step-number">
-          03
-        </div>
-
-        <h3>
-          CONECTA
-        </h3>
-
+        <div class="step-number">03</div>
+        <h3>CONECTA</h3>
         <p>
-          Utiliza NFC o QR para acceder
-          rápidamente a su perfil.
+          Utiliza NFC o QR para acceder rápidamente a su perfil.
         </p>
-
       </div>
 
     </div>
@@ -1481,29 +1335,46 @@
   </section>
 
 
-  <!-- =========================
-       BENEFICIOS
-  ========================== -->
+  <!-- BANNER FOTOGRÁFICO -->
+  <section class="visual-banner">
 
-  <section
-    class="benefits"
-    id="beneficios"
-  >
+    <!-- FOTO: sube "bgp fondo amarillo.jpg.jpeg" al repositorio -->
+    <img
+      src="bgp%20fondo%20amarillo.jpg.jpeg"
+      alt="Baby Golden Perú"
+    >
 
-    <div class="benefits-heading">
+    <div class="visual-banner-content">
 
-      <small>
-        GOLDEN BENEFITS CLUB
-      </small>
+      <small>UNA PATA A LA VEZ</small>
 
       <h2>
-        Beneficios para nuestra comunidad
+        Porque ellos no son solo mascotas.
       </h2>
 
       <p>
-        Las marcas afiliadas de Baby Golden Perú
-        pueden ofrecer beneficios exclusivos
-        para nuestros miembros.
+        Son familia. Son parte de nuestras historias,
+        nuestras aventuras y de una comunidad que crece
+        alrededor del amor por los Golden Retrievers.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- BENEFICIOS -->
+  <section class="benefits" id="beneficios">
+
+    <div class="benefits-heading">
+
+      <small>GOLDEN BENEFITS CLUB</small>
+
+      <h2>Beneficios para nuestra comunidad</h2>
+
+      <p>
+        Las marcas afiliadas de Baby Golden Perú pueden ofrecer
+        beneficios exclusivos para nuestros miembros.
       </p>
 
     </div>
@@ -1512,74 +1383,27 @@
     <div class="benefit-grid">
 
       <div class="benefit">
-
-        <div class="benefit-symbol">
-          ♡
-        </div>
-
-        <h3>
-          BENEFICIOS EXCLUSIVOS
-        </h3>
-
-        <p>
-          Promociones y experiencias
-          pensadas para la comunidad.
-        </p>
-
+        <div class="benefit-symbol">♡</div>
+        <h3>BENEFICIOS EXCLUSIVOS</h3>
+        <p>Promociones y experiencias pensadas para la comunidad.</p>
       </div>
 
-
       <div class="benefit">
-
-        <div class="benefit-symbol">
-          %
-        </div>
-
-        <h3>
-          DESCUENTOS
-        </h3>
-
-        <p>
-          Accede a beneficios especiales
-          de nuestras marcas afiliadas.
-        </p>
-
+        <div class="benefit-symbol">%</div>
+        <h3>DESCUENTOS</h3>
+        <p>Accede a beneficios especiales de nuestras marcas afiliadas.</p>
       </div>
 
-
       <div class="benefit">
-
-        <div class="benefit-symbol">
-          NFC
-        </div>
-
-        <h3>
-          BABY GOLDEN ID
-        </h3>
-
-        <p>
-          Identificación que permite
-          acceder a determinados beneficios.
-        </p>
-
+        <div class="benefit-symbol">NFC</div>
+        <h3>BABY GOLDEN ID</h3>
+        <p>Identificación que permite acceder a determinados beneficios.</p>
       </div>
 
-
       <div class="benefit">
-
-        <div class="benefit-symbol">
-          ♥
-        </div>
-
-        <h3>
-          COMUNIDAD
-        </h3>
-
-        <p>
-          Una comunidad que crece
-          junto a nuestros perritos.
-        </p>
-
+        <div class="benefit-symbol">♥</div>
+        <h3>COMUNIDAD</h3>
+        <p>Una comunidad que crece junto a nuestros perritos.</p>
       </div>
 
     </div>
@@ -1587,10 +1411,7 @@
 
     <div class="benefits-link">
 
-      <a
-        href="beneficios.html"
-        class="button primary"
-      >
+      <a href="beneficios.html" class="button primary">
         VER TODOS LOS BENEFICIOS
       </a>
 
@@ -1599,18 +1420,10 @@
   </section>
 
 
-  <!-- =========================
-       CTA
-  ========================== -->
+  <!-- CTA -->
+  <section class="cta" id="registro">
 
-  <section
-    class="cta"
-    id="registro"
-  >
-
-    <div class="cta-heart">
-      ♡
-    </div>
+    <div class="cta-heart">♡</div>
 
     <h2>
       Tu mejor amigo merece tener su propia identidad.
@@ -1630,10 +1443,7 @@
   </section>
 
 
-  <!-- =========================
-       FOOTER
-  ========================== -->
-
+  <!-- FOOTER -->
   <footer id="contacto">
 
     <img
@@ -1641,9 +1451,7 @@
       alt="Baby Golden Perú"
     >
 
-    <div class="footer-brand">
-      BABY GOLDEN PERÚ
-    </div>
+    <div class="footer-brand">BABY GOLDEN PERÚ</div>
 
     <p>
       Comunidad · Tenencia responsable · Baby Golden ID
@@ -1654,7 +1462,6 @@
     </p>
 
   </footer>
-
 
 </body>
 </html>
