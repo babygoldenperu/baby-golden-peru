@@ -36,10 +36,15 @@
     }
 
 
+    html {
+      scroll-behavior: smooth;
+    }
+
+
     body {
       margin: 0;
-      background: #f7f1e8;
-      color: #4b3627;
+      background: #f6f0e6;
+      color: #3b2b20;
       font-family: "Montserrat", sans-serif;
     }
 
@@ -57,119 +62,204 @@
     }
 
 
-    /* =========================================
-       ENCABEZADO
-       ========================================= */
-
-    header {
-      background: #f7f1e8;
-      border-bottom: 1px solid #e5d7c5;
-      padding: 18px 30px;
-      position: sticky;
-      top: 0;
-      z-index: 100;
+    button {
+      font-family: inherit;
     }
 
 
-    .header-inner {
-      max-width: 1200px;
+    /* =========================================
+       HEADER
+       ========================================= */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+
+      background: rgba(246,240,230,.96);
+      border-bottom: 1px solid #ded1bf;
+
+      backdrop-filter: blur(10px);
+    }
+
+
+    .nav {
+      max-width: 1280px;
       margin: auto;
+
+      min-height: 76px;
+      padding: 0 28px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 20px;
+
+      gap: 25px;
     }
 
 
     .logo {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 30px;
-      font-weight: 700;
-      color: #4b3627;
+      width: 155px;
+      height: auto;
+      display: block;
     }
 
 
     .menu {
       display: flex;
       align-items: center;
-      gap: 20px;
-      font-size: 13px;
-      font-weight: 600;
+      gap: 22px;
+
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .7px;
     }
 
 
-    .menu a:hover {
-      color: #9a6a2f;
+    .menu > a:hover {
+      color: #a76f20;
     }
 
 
     .header-button {
-      padding: 10px 16px;
+      padding: 12px 18px;
+
       border-radius: 999px;
-      background: #4b3627;
-      color: #ffffff;
+
+      background: #4a3324;
+      color: #fff;
+
+      transition: .2s ease;
     }
 
 
-    .icon-button {
-      width: 42px;
-      height: 42px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border: 1px solid #d8c8b5;
-      border-radius: 50%;
-
-      background: transparent;
-      cursor: pointer;
-    }
-
-
-    .icon-button svg {
-      width: 20px;
-      height: 20px;
-
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.7;
+    .header-button:hover {
+      background: #684936;
+      color: #fff !important;
     }
 
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 7px;
+    }
+
+
+    .icon-button {
+      position: relative;
+
+      width: 40px;
+      height: 40px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0;
+
+      border: 1px solid #d9c9b6;
+      border-radius: 50%;
+
+      background: transparent;
+      color: #4a3324;
+
+      cursor: pointer;
+    }
+
+
+    .icon-button svg {
+      width: 19px;
+      height: 19px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.6;
+    }
+
+
+    .icon-button:hover {
+      background: #eee4d6;
+    }
+
+
+    .cart-count {
+      position: absolute;
+
+      top: -4px;
+      right: -4px;
+
+      min-width: 18px;
+      height: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 4px;
+
+      border-radius: 999px;
+
+      background: #b77b20;
+      color: #fff;
+
+      font-size: 9px;
+      font-weight: 700;
     }
 
 
     /* =========================================
-       PRESENTACIÓN
+       HERO TIENDA
        ========================================= */
 
-    .hero {
-      max-width: 1100px;
+    .shop-hero {
+      max-width: 1200px;
       margin: auto;
-      padding: 70px 25px 45px;
+
+      padding: 85px 28px 55px;
+
       text-align: center;
     }
 
 
-    .hero h1 {
-      margin: 0 0 12px;
-      font-size: clamp(42px, 6vw, 68px);
-      line-height: 1;
+    .shop-label {
+      margin-bottom: 15px;
+
+      color: #a76f20;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 3px;
     }
 
 
-    .hero p {
+    .shop-hero h1 {
+      margin: 0;
+
+      font-size: clamp(
+        55px,
+        7vw,
+        90px
+      );
+
+      line-height: .9;
+      font-weight: 600;
+    }
+
+
+    .shop-hero h1 span {
+      color: #b77b20;
+    }
+
+
+    .shop-hero p {
       max-width: 650px;
-      margin: auto;
-      line-height: 1.7;
-      font-size: 15px;
-      color: #765e4a;
+      margin: 25px auto 0;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.8;
     }
 
 
@@ -177,133 +267,480 @@
        TIENDA
        ========================================= */
 
-    .tienda {
+    .shop {
       max-width: 1200px;
       margin: auto;
-      padding: 20px 25px 70px;
+
+      padding: 20px 28px 90px;
     }
 
 
-    .productos {
-      display: grid;
+    .section-heading {
+      margin-bottom: 35px;
+    }
 
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(
-            240px,
-            1fr
-          )
-        );
 
-      gap: 24px;
+    .section-heading small {
+      color: #a76f20;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+    }
+
+
+    .section-heading h2 {
+      margin: 8px 0 0;
+
+      font-size: 42px;
+      line-height: 1;
     }
 
 
     /* =========================================
-       TARJETA PRODUCTO
+       PRODUCTOS
        ========================================= */
 
-    .producto {
-      background: #fffaf4;
-      border: 1px solid #e5d7c5;
-      border-radius: 20px;
+    .products {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          2,
+          minmax(0, 1fr)
+        );
+
+      gap: 28px;
+    }
+
+
+    .product {
       overflow: hidden;
 
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-    }
+      background: #fffaf4;
 
-
-    .producto:hover {
-      transform: translateY(-4px);
+      border: 1px solid #decdb8;
+      border-radius: 24px;
 
       box-shadow:
-        0 12px 30px
-        rgba(75, 54, 39, .10);
+        0 16px 40px
+        rgba(57,42,28,.07);
     }
 
 
-    .producto-imagen {
+    .product-image {
       width: 100%;
-      height: 300px;
-      object-fit: cover;
+      height: 430px;
+
       display: block;
-      background: #eee5da;
+
+      object-fit: cover;
+
+      background: #e9dfd1;
     }
 
 
-    .producto-contenido {
-      padding: 22px;
+    .product-body {
+      padding: 28px;
     }
 
 
-    .producto h2 {
-      margin: 0 0 8px;
-      font-size: 28px;
-    }
+    .product-category {
+      display: block;
 
+      margin-bottom: 8px;
 
-    .producto-descripcion {
-      min-height: 48px;
-      margin: 0 0 18px;
+      color: #a76f20;
 
-      color: #765e4a;
-      font-size: 14px;
-      line-height: 1.6;
-    }
-
-
-    .producto-precio {
-      margin-bottom: 18px;
-
-      font-size: 22px;
+      font-size: 8px;
       font-weight: 700;
-      color: #9a6a2f;
+      letter-spacing: 2px;
     }
 
 
-    .boton-comprar {
-      width: 100%;
-      padding: 13px 18px;
+    .product h2 {
+      margin: 0 0 12px;
 
-      border: none;
+      font-size: 38px;
+      line-height: .95;
+    }
+
+
+    .product-description {
+      min-height: 55px;
+
+      margin: 0 0 20px;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    .product-price {
+      margin-bottom: 20px;
+
+      color: #a76f20;
+
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+
+    .product-actions {
+      display: flex;
+      gap: 10px;
+    }
+
+
+    .product-link {
+      flex: 1;
+
+      min-height: 46px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 0 15px;
+
+      border: 1px solid #d7c5af;
       border-radius: 999px;
 
-      background: #4b3627;
-      color: #ffffff;
+      background: transparent;
+      color: #4a3324;
 
-      font-family: "Montserrat", sans-serif;
-      font-size: 13px;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .8px;
+
+      cursor: pointer;
+
+      transition: .2s ease;
+    }
+
+
+    .product-link:hover {
+      background: #eee2d2;
+    }
+
+
+    .product-buy {
+      border-color: #4a3324;
+
+      background: #4a3324;
+      color: #fff;
+    }
+
+
+    .product-buy:hover {
+      background: #684936;
+    }
+
+
+    /* =========================================
+       PRÓXIMAMENTE
+       ========================================= */
+
+    .coming-soon {
+      margin-top: 55px;
+
+      padding: 45px 30px;
+
+      border: 1px solid #decdb8;
+      border-radius: 24px;
+
+      background: #efe5d7;
+
+      text-align: center;
+    }
+
+
+    .coming-soon small {
+      color: #a76f20;
+
+      font-size: 9px;
       font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+
+    .coming-soon h2 {
+      margin: 10px 0;
+
+      font-size: 38px;
+    }
+
+
+    .coming-soon p {
+      max-width: 600px;
+      margin: auto;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       CARRITO
+       ========================================= */
+
+    .cart-drawer {
+      position: fixed;
+
+      top: 0;
+      right: 0;
+
+      width: min(
+        430px,
+        100vw
+      );
+
+      height: 100vh;
+
+      z-index: 300;
+
+      padding: 28px;
+
+      display: flex;
+      flex-direction: column;
+
+      background: #fffaf4;
+
+      box-shadow:
+        -20px 0 50px
+        rgba(47,35,24,.18);
+
+      transform: translateX(100%);
+
+      transition:
+        transform .3s ease;
+    }
+
+
+    .cart-drawer.is-open {
+      transform: translateX(0);
+    }
+
+
+    .cart-drawer-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+
+      padding-bottom: 20px;
+
+      border-bottom: 1px solid #e1d4c4;
+    }
+
+
+    .cart-drawer-header h2 {
+      margin: 4px 0 0;
+
+      font-size: 38px;
+    }
+
+
+    .panel-kicker {
+      margin: 0;
+
+      color: #a76f20;
+
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+
+
+    .panel-close {
+      width: 38px;
+      height: 38px;
+
+      border: 1px solid #d8c8b6;
+      border-radius: 50%;
+
+      background: transparent;
+
+      font-size: 23px;
 
       cursor: pointer;
     }
 
 
-    .boton-comprar:hover {
-      background: #654936;
+    .cart-items {
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 20px 0;
+    }
+
+
+    .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding: 16px 0;
+
+      border-bottom: 1px solid #e5d9cb;
+    }
+
+
+    .cart-item h3 {
+      margin: 0 0 5px;
+
+      font-size: 23px;
+    }
+
+
+    .cart-item p {
+      margin: 0;
+
+      color: #765f4c;
+
+      font-size: 11px;
+    }
+
+
+    .remove-item {
+      border: 0;
+      background: transparent;
+
+      color: #a33b32;
+
+      font-size: 8px;
+      font-weight: 800;
+      letter-spacing: 1px;
+
+      cursor: pointer;
+    }
+
+
+    .cart-empty {
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    .cart-summary {
+      padding-top: 20px;
+
+      border-top: 1px solid #e1d4c4;
+    }
+
+
+    .cart-summary > div {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      margin-bottom: 18px;
+    }
+
+
+    .cart-summary strong {
+      color: #a76f20;
+
+      font-size: 24px;
+    }
+
+
+    .cart-checkout {
+      width: 100%;
+      min-height: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+      color: #fff;
+
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .8px;
+    }
+
+
+    .cart-checkout.is-disabled {
+      opacity: .45;
+      pointer-events: none;
+    }
+
+
+    .cart-summary p {
+      margin: 12px 0 0;
+
+      color: #765f4c;
+
+      font-size: 10px;
+      line-height: 1.6;
+
+      text-align: center;
+    }
+
+
+    .cart-backdrop {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 250;
+
+      background: rgba(
+        35,
+        26,
+        19,
+        .42
+      );
     }
 
 
     /* =========================================
-       PIE DE PÁGINA
+       FOOTER
        ========================================= */
 
     footer {
-      padding: 35px 20px;
+      padding: 45px 25px;
 
-      border-top: 1px solid #e5d7c5;
+      border-top: 1px solid #ded1bf;
+
+      background: #eee3d3;
 
       text-align: center;
-      background: #efe4d5;
     }
 
 
-    footer strong {
+    footer img {
+      width: 120px;
+      margin-bottom: 15px;
+    }
+
+
+    .footer-brand {
       font-family: "Cormorant Garamond", serif;
-      font-size: 24px;
+
+      font-size: 30px;
+      font-weight: 600;
+    }
+
+
+    footer p {
+      margin: 8px 0;
+
+      color: #765f4c;
+
+      font-size: 11px;
     }
 
 
@@ -312,39 +749,93 @@
        ========================================= */
 
     @media (
-      max-width: 850px
+      max-width: 900px
     ) {
 
-      header {
-        padding: 15px 18px;
-      }
-
-
-      .header-inner {
+      .nav {
         flex-wrap: wrap;
+        padding: 14px 18px;
       }
 
 
       .menu {
         width: 100%;
+
         justify-content: center;
-        flex-wrap: wrap;
+
+        gap: 12px;
+      }
+
+
+      .products {
+        grid-template-columns: 1fr;
       }
 
     }
 
 
     @media (
-      max-width: 600px
+      max-width: 620px
     ) {
 
-      .hero {
-        padding-top: 45px;
+      .logo {
+        width: 135px;
       }
 
 
-      .producto-imagen {
-        height: 260px;
+      .menu > a:not(.header-button) {
+        display: none;
+      }
+
+
+      .menu {
+        width: auto;
+        margin-left: auto;
+      }
+
+
+      .header-button {
+        display: none;
+      }
+
+
+      .shop-hero {
+        padding: 60px 20px 35px;
+      }
+
+
+      .shop-hero h1 {
+        font-size: 58px;
+      }
+
+
+      .shop {
+        padding: 15px 18px 60px;
+      }
+
+
+      .product-image {
+        height: 330px;
+      }
+
+
+      .product-body {
+        padding: 22px;
+      }
+
+
+      .product h2 {
+        font-size: 34px;
+      }
+
+
+      .product-actions {
+        flex-direction: column;
+      }
+
+
+      .product-link {
+        width: 100%;
       }
 
     }
@@ -358,38 +849,50 @@
 
 
   <!-- =========================================
-       ENCABEZADO
+       HEADER
        ========================================= -->
 
   <header>
 
-    <div class="header-inner">
+    <nav class="nav">
+
 
       <a
         href="index.html"
-        class="logo"
+        aria-label="Baby Golden Perú"
       >
-        Baby Golden Perú
+
+        <img
+          src="BABY%20GOLDEN.png"
+          alt="Baby Golden Perú"
+          class="logo"
+        >
+
       </a>
 
 
-      <nav class="menu">
+      <div class="menu">
+
 
         <a href="index.html">
           INICIO
         </a>
 
+
         <a href="tienda.html">
           TIENDA
         </a>
+
 
         <a href="index.html#baby-golden-id">
           BABY GOLDEN ID
         </a>
 
+
         <a href="index.html#contacto">
           CONTACTO
         </a>
+
 
         <a
           href="registro.html"
@@ -399,12 +902,59 @@
         </a>
 
 
-        <div class="nav-actions">
+        <div
+          class="nav-actions"
+          aria-label="Accesos rápidos"
+        >
+
+
+          <!-- CARRITO -->
+
+          <button
+            class="icon-button"
+            id="openCart"
+            type="button"
+            aria-label="Abrir carrito"
+          >
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"
+              ></path>
+
+              <circle
+                cx="10"
+                cy="20"
+                r="1"
+              ></circle>
+
+              <circle
+                cx="17"
+                cy="20"
+                r="1"
+              ></circle>
+
+            </svg>
+
+
+            <span
+              class="cart-count"
+              id="cartCount"
+              hidden
+            >
+              0
+            </span>
+
+          </button>
+
+
+          <!-- MI CUENTA -->
 
           <a
-            href="cuenta.html"
             class="icon-button"
-            aria-label="Mi cuenta"
+            href="micuenta.html"
+            aria-label="Ir a Mi cuenta"
           >
 
             <svg viewBox="0 0 24 24">
@@ -423,184 +973,787 @@
 
           </a>
 
+
         </div>
 
-      </nav>
+      </div>
 
-    </div>
+    </nav>
 
   </header>
 
 
+
   <!-- =========================================
-       PRESENTACIÓN
+       CARRITO
        ========================================= -->
 
-  <section class="hero">
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+    aria-label="Carrito de compras"
+    aria-hidden="true"
+  >
+
+
+    <div class="cart-drawer-header">
+
+
+      <div>
+
+        <p class="panel-kicker">
+          TU SELECCIÓN
+        </p>
+
+        <h2>
+          Carrito
+        </h2>
+
+      </div>
+
+
+      <button
+        class="panel-close"
+        type="button"
+        id="closeCart"
+        aria-label="Cerrar carrito"
+      >
+        ×
+      </button>
+
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-summary">
+
+
+      <div>
+
+        <span>
+          Total
+        </span>
+
+        <strong id="cartTotal">
+          S/ 0.00
+        </strong>
+
+      </div>
+
+
+      <a
+        class="cart-checkout"
+        href="micuenta.html"
+        id="cartCheckout"
+      >
+        CONTINUAR A MI CUENTA
+      </a>
+
+
+      <p>
+        Desde Mi cuenta podrás crear tu orden
+        e iniciar el proceso de compra.
+      </p>
+
+
+    </div>
+
+
+  </aside>
+
+
+  <div
+    class="cart-backdrop"
+    id="cartBackdrop"
+    hidden
+  ></div>
+
+
+
+  <!-- =========================================
+       HERO
+       ========================================= -->
+
+  <section class="shop-hero">
+
+
+    <div class="shop-label">
+      BABY GOLDEN PERÚ · TIENDA OFICIAL
+    </div>
+
 
     <h1>
-      Tienda Baby Golden Perú
+
+      Productos
+      <span>de oro.</span>
+
     </h1>
 
+
     <p>
-      Productos pensados para identificar,
-      consentir y acompañar a nuestros
-      perritos en cada aventura.
+
+      Encuentra productos pensados para
+      identificar, consentir y acompañar
+      a nuestros perritos.
+
     </p>
+
 
   </section>
 
 
+
   <!-- =========================================
-       PRODUCTOS
+       TIENDA
        ========================================= -->
 
-  <main class="tienda">
+  <main class="shop">
 
-    <section class="productos">
+
+    <div class="section-heading">
+
+      <small>
+        BABY GOLDEN ID
+      </small>
+
+      <h2>
+        Nuestra colección
+      </h2>
+
+    </div>
+
+
+    <section class="products">
 
 
       <!-- =====================================
            BLACK ID
            ===================================== -->
 
-      <article class="producto">
+      <article class="product">
+
 
         <img
-          class="producto-imagen"
-          src=""
-          alt="Baby Golden ID Black"
+          class="product-image"
+          src="black.jpeg"
+          alt="Baby Golden Perú Black ID"
         >
 
-        <div class="producto-contenido">
+
+        <div class="product-body">
+
+
+          <span class="product-category">
+            EXCLUSIVA · ELEGANTE · ESENCIAL
+          </span>
+
 
           <h2>
             BLACK ID
           </h2>
 
-          <p class="producto-descripcion">
-            Tarjeta de identificación y
-            presentación para tu perrito,
-            con acceso a sus datos y
-            beneficios exclusivos.
+
+          <p class="product-description">
+
+            La identidad digital para los
+            Goldens que quieren llevar a
+            Baby Golden Perú con ellos.
+
           </p>
 
-          <div class="producto-precio">
-            S/36.90
+
+          <div class="product-price">
+            S/ 36.90
           </div>
 
-          <button
-            class="boton-comprar"
-            type="button"
-          >
-            COMPRAR
-          </button>
+
+          <div class="product-actions">
+
+
+            <a
+              href="id.html"
+              class="product-link"
+            >
+              CONOCER BLACK ID
+            </a>
+
+
+            <button
+              type="button"
+              class="product-link product-buy"
+              data-add-to-cart="BLACK"
+            >
+              AGREGAR AL CARRITO
+            </button>
+
+
+          </div>
+
 
         </div>
 
+
       </article>
+
 
 
       <!-- =====================================
            PREMIUM ID
            ===================================== -->
 
-      <article class="producto">
+      <article class="product">
+
 
         <img
-          class="producto-imagen"
-          src=""
-          alt="Baby Golden ID Premium"
+          class="product-image"
+          src="premium.jpeg"
+          alt="Baby Golden Perú Premium ID"
         >
 
-        <div class="producto-contenido">
+
+        <div class="product-body">
+
+
+          <span class="product-category">
+            ELEGANCIA · PROTECCIÓN · PREMIUM
+          </span>
+
 
           <h2>
             PREMIUM ID
           </h2>
 
-          <p class="producto-descripcion">
-            Identificación especial para
-            tu perrito y acceso a beneficios
-            de Baby Golden Perú.
+
+          <p class="product-description">
+
+            Una experiencia más completa
+            para tu compañero de vida,
+            con la identidad digital
+            Baby Golden.
+
           </p>
 
-          <div class="producto-precio">
-            S/30.00
+
+          <div class="product-price">
+            S/ 30.00
           </div>
 
-          <button
-            class="boton-comprar"
-            type="button"
-          >
-            COMPRAR
-          </button>
+
+          <div class="product-actions">
+
+
+            <a
+              href="id.html"
+              class="product-link"
+            >
+              CONOCER PREMIUM ID
+            </a>
+
+
+            <button
+              type="button"
+              class="product-link product-buy"
+              data-add-to-cart="PREMIUM"
+            >
+              AGREGAR AL CARRITO
+            </button>
+
+
+          </div>
+
 
         </div>
 
-      </article>
-
-
-      <!-- =====================================
-           PRODUCTO 3
-           ===================================== -->
-
-      <article class="producto">
-
-        <img
-          class="producto-imagen"
-          src=""
-          alt="Producto Baby Golden Perú"
-        >
-
-        <div class="producto-contenido">
-
-          <h2>
-            Próximamente
-          </h2>
-
-          <p class="producto-descripcion">
-            Producto Baby Golden Perú.
-          </p>
-
-          <div class="producto-precio">
-            S/00.00
-          </div>
-
-          <button
-            class="boton-comprar"
-            type="button"
-            disabled
-          >
-            PRÓXIMAMENTE
-          </button>
-
-        </div>
 
       </article>
 
 
     </section>
 
+
+
+    <!-- =========================================
+         PRÓXIMAMENTE
+         ========================================= -->
+
+    <section class="coming-soon">
+
+
+      <small>
+        BABY GOLDEN PERÚ
+      </small>
+
+
+      <h2>
+        Más productos muy pronto
+      </h2>
+
+
+      <p>
+
+        Estamos preparando nuevos productos
+        y experiencias para nuestra comunidad.
+        Muy pronto podrás encontrarlos aquí.
+
+      </p>
+
+
+    </section>
+
+
   </main>
 
 
+
   <!-- =========================================
-       PIE DE PÁGINA
+       FOOTER
        ========================================= -->
 
   <footer>
 
-    <strong>
-      Baby Golden Perú
-    </strong>
+
+    <img
+      src="BABY%20GOLDEN.png"
+      alt="Baby Golden Perú"
+    >
+
+
+    <div class="footer-brand">
+      BABY GOLDEN PERÚ
+    </div>
+
 
     <p>
-      Una comunidad de amor, identificación
-      y tenencia responsable.
+      Comunidad · Tenencia responsable · Baby Golden ID
     </p>
 
+
+    <p>
+      ♥ Una pata a la vez, construimos una comunidad mejor.
+    </p>
+
+
   </footer>
+
+
+
+  <!-- =========================================
+       CARRITO — JAVASCRIPT
+       ========================================= -->
+
+  <script>
+
+    /* =========================================
+       PRODUCTOS
+       ========================================= */
+
+    const products = {
+
+      BLACK: {
+        name: "Black ID",
+        price: 36.90
+      },
+
+      PREMIUM: {
+        name: "Premium ID",
+        price: 30.00
+      }
+
+    };
+
+
+    /* =========================================
+       CARRITO
+       ========================================= */
+
+    const cartKey =
+      "babyGoldenCart";
+
+
+    function getCart() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(
+            cartKey
+          )
+        ) || [];
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveCart(
+      cart
+    ) {
+
+      localStorage.setItem(
+        cartKey,
+        JSON.stringify(
+          cart
+        )
+      );
+
+    }
+
+
+    /* =========================================
+       ELEMENTOS
+       ========================================= */
+
+    const cartCount =
+      document.getElementById(
+        "cartCount"
+      );
+
+
+    const cartItems =
+      document.getElementById(
+        "cartItems"
+      );
+
+
+    const cartTotal =
+      document.getElementById(
+        "cartTotal"
+      );
+
+
+    const cartDrawer =
+      document.getElementById(
+        "cartDrawer"
+      );
+
+
+    const cartBackdrop =
+      document.getElementById(
+        "cartBackdrop"
+      );
+
+
+    /* =========================================
+       MOSTRAR CARRITO
+       ========================================= */
+
+    function renderCart() {
+
+      const cart =
+        getCart();
+
+
+      cartCount.hidden =
+        cart.length === 0;
+
+
+      cartCount.textContent =
+        cart.length;
+
+
+      const total =
+        cart.reduce(
+          (
+            sum,
+            id
+          ) => {
+
+            return sum +
+              (
+                products[id]?.price ||
+                0
+              );
+
+          },
+          0
+        );
+
+
+      cartTotal.textContent =
+        "S/ " +
+        total.toFixed(2);
+
+
+      if (
+        cart.length === 0
+      ) {
+
+        cartItems.innerHTML = `
+          <p class="cart-empty">
+            Tu carrito está vacío.
+            Agrega una Baby Golden ID
+            para continuar.
+          </p>
+        `;
+
+      } else {
+
+        cartItems.innerHTML =
+          cart
+            .map(
+              (
+                id,
+                index
+              ) => {
+
+                const product =
+                  products[id];
+
+
+                return `
+
+                  <div class="cart-item">
+
+                    <div>
+
+                      <h3>
+                        ${product.name}
+                      </h3>
+
+                      <p>
+                        Baby Golden Perú ·
+                        S/ ${product.price.toFixed(2)}
+                      </p>
+
+                    </div>
+
+                    <button
+                      class="remove-item"
+                      type="button"
+                      data-remove-item="${index}"
+                    >
+                      QUITAR
+                    </button>
+
+                  </div>
+
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+      document
+        .querySelectorAll(
+          "[data-remove-item]"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const cart =
+                  getCart();
+
+
+                cart.splice(
+                  Number(
+                    this.dataset.removeItem
+                  ),
+                  1
+                );
+
+
+                saveCart(
+                  cart
+                );
+
+
+                renderCart();
+
+              }
+            );
+
+          }
+        );
+
+
+      const checkout =
+        document.getElementById(
+          "cartCheckout"
+        );
+
+
+      checkout.classList.toggle(
+        "is-disabled",
+        cart.length === 0
+      );
+
+
+      checkout.href =
+        cart.length
+
+          ? "micuenta.html?carrito=" +
+            encodeURIComponent(
+              cart.join(",")
+            )
+
+          : "micuenta.html";
+
+    }
+
+
+    /* =========================================
+       ABRIR CARRITO
+       ========================================= */
+
+    function openCart() {
+
+      cartDrawer.classList.add(
+        "is-open"
+      );
+
+
+      cartDrawer.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      cartBackdrop.hidden =
+        false;
+
+
+      renderCart();
+
+    }
+
+
+    /* =========================================
+       CERRAR CARRITO
+       ========================================= */
+
+    function closeCart() {
+
+      cartDrawer.classList.remove(
+        "is-open"
+      );
+
+
+      cartDrawer.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      cartBackdrop.hidden =
+        true;
+
+    }
+
+
+    /* =========================================
+       BOTONES
+       ========================================= */
+
+    document
+      .getElementById(
+        "openCart"
+      )
+      .addEventListener(
+        "click",
+        openCart
+      );
+
+
+    document
+      .getElementById(
+        "closeCart"
+      )
+      .addEventListener(
+        "click",
+        closeCart
+      );
+
+
+    cartBackdrop.addEventListener(
+      "click",
+      closeCart
+    );
+
+
+    /* =========================================
+       AGREGAR PRODUCTOS
+       ========================================= */
+
+    document
+      .querySelectorAll(
+        "[data-add-to-cart]"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const cart =
+                getCart();
+
+
+              cart.push(
+                this.dataset.addToCart
+              );
+
+
+              saveCart(
+                cart
+              );
+
+
+              renderCart();
+
+              openCart();
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =========================================
+       ESC
+       ========================================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeCart();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       INICIAR
+       ========================================= */
+
+    renderCart();
+
+  </script>
 
 
 </body>
