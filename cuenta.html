@@ -404,6 +404,25 @@
       class="secondary"
       id="cerrarSesion"
     >
+      <hr
+  style="
+    margin:25px 0;
+    border:none;
+    border-top:1px solid #e5e5e5;
+  "
+>
+
+<h2>
+  Mis compras
+</h2>
+
+<div id="misOrdenes">
+
+  <p>
+    Cargando compras...
+  </p>
+
+</div>
       CERRAR SESIÓN
     </button>
 
@@ -858,6 +877,9 @@ function mostrarCuenta(
     cuentaPanel
   );
 
+
+  cargarMisOrdenes();
+
 }
 
 
@@ -929,6 +951,153 @@ document
     }
   );
 
+  /* =========================================
+   CARGAR MIS ÓRDENES
+   ========================================= */
+
+async function cargarMisOrdenes() {
+
+  const contenedor =
+    document.getElementById(
+      "misOrdenes"
+    );
+
+
+  contenedor.innerHTML =
+    "<p>Cargando compras...</p>";
+
+
+  const {
+    data: {
+      user
+    }
+  } =
+    await supabaseClient.auth
+      .getUser();
+
+
+  if (!user) {
+
+    contenedor.innerHTML =
+      "<p>Debes iniciar sesión.</p>";
+
+    return;
+
+  }
+
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("ordenes")
+      .select(`
+        id,
+        producto,
+        precio,
+        estado_pago,
+        estado_solicitud,
+        created_at
+      `)
+      .eq(
+        "user_id",
+        user.id
+      )
+      .order(
+        "created_at",
+        {
+          ascending: false
+        }
+      );
+
+
+  if (error) {
+
+    console.error(
+      "ERROR MIS ORDENES:",
+      error
+    );
+
+    contenedor.innerHTML =
+      `
+        <p style="color:#b00020;">
+          No se pudieron cargar tus compras.
+        </p>
+      `;
+
+    return;
+
+  }
+
+
+  if (
+    !data ||
+    data.length === 0
+  ) {
+
+    contenedor.innerHTML =
+      `
+        <p>
+          Todavía no tienes compras.
+        </p>
+      `;
+
+    return;
+
+  }
+
+
+  contenedor.innerHTML =
+    data.map(
+      orden => `
+
+        <div
+          style="
+            padding:15px;
+            margin-bottom:12px;
+            border:1px solid #e5e5e5;
+            border-radius:12px;
+          "
+        >
+
+          <strong>
+            Orden #${orden.id}
+          </strong>
+
+          <div style="margin-top:7px;">
+            Producto:
+            ${orden.producto}
+          </div>
+
+          <div style="margin-top:7px;">
+            Precio:
+            S/${Number(
+              orden.precio
+            ).toFixed(2)}
+          </div>
+
+          <div style="margin-top:7px;">
+            Pago:
+            <strong>
+              ${orden.estado_pago}
+            </strong>
+          </div>
+
+          <div style="margin-top:7px;">
+            Solicitud:
+            <strong>
+              ${orden.estado_solicitud}
+            </strong>
+          </div>
+
+        </div>
+
+      `
+    )
+    .join("");
+
+}
 
 /* =========================================
    CREAR ORDEN DE COMPRA
