@@ -64,6 +64,11 @@
     }
 
 
+    button {
+      font-family: inherit;
+    }
+
+
     /* =========================================
        HEADER
        ========================================= */
@@ -71,7 +76,7 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
+      z-index: 1000;
 
       background: rgba(
         246,
@@ -88,9 +93,9 @@
 
     .nav {
       max-width: 1280px;
-      margin: auto;
-
       min-height: 76px;
+
+      margin: auto;
       padding: 0 28px;
 
       display: flex;
@@ -108,6 +113,10 @@
     }
 
 
+    /* =========================================
+       MENÚ
+       ========================================= */
+
     .menu {
       display: flex;
       align-items: center;
@@ -119,10 +128,49 @@
     }
 
 
-    .menu a:hover {
-      color: #a76f20;
+    .menu > a {
+      position: relative;
+
+      transition:
+        color .25s ease,
+        transform .25s ease;
     }
 
+
+    .menu > a:hover {
+      color: #b77b20;
+
+      transform:
+        translateY(-2px);
+    }
+
+
+    .menu > a:not(.header-button)::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: #b77b20;
+
+      transition:
+        width .25s ease;
+    }
+
+
+    .menu > a:not(.header-button):hover::after {
+      width: 100%;
+    }
+
+
+    /* =========================================
+       BOTÓN REGISTRAR
+       ========================================= */
 
     .header-button {
       padding: 12px 18px;
@@ -131,14 +179,30 @@
 
       background: #4a3324;
       color: #ffffff;
+
+      transition:
+        background .25s ease,
+        transform .25s ease;
     }
 
 
     .header-button:hover {
       background: #684936;
       color: #ffffff !important;
+
+      transform:
+        translateY(-2px);
     }
 
+
+    .header-button::after {
+      display: none !important;
+    }
+
+
+    /* =========================================
+       ACCIONES
+       ========================================= */
 
     .nav-actions {
       display: flex;
@@ -148,6 +212,8 @@
 
 
     .icon-button {
+      position: relative;
+
       width: 40px;
       height: 40px;
 
@@ -155,11 +221,35 @@
       align-items: center;
       justify-content: center;
 
+      padding: 0;
+
       border: 1px solid #d9c9b6;
       border-radius: 50%;
 
       background: transparent;
       color: #4a3324;
+
+      cursor: pointer;
+
+      transition:
+        background .25s ease,
+        color .25s ease,
+        transform .25s ease;
+    }
+
+
+    .icon-button:hover {
+      background: rgba(
+        183,
+        123,
+        32,
+        .12
+      );
+
+      color: #b77b20;
+
+      transform:
+        translateY(-2px);
     }
 
 
@@ -170,15 +260,295 @@
       fill: none;
       stroke: currentColor;
       stroke-width: 1.6;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
 
     /* =========================================
-       PRESENTACIÓN
+       CONTADOR CARRITO
+       ========================================= */
+
+    .cart-count {
+      position: absolute;
+
+      top: -4px;
+      right: -4px;
+
+      min-width: 17px;
+      height: 17px;
+
+      padding: 1px 4px;
+
+      border-radius: 999px;
+
+      background: #b77b20;
+      color: #ffffff;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+
+    /* =========================================
+       CARRITO
+       ========================================= */
+
+    .cart-drawer {
+      position: fixed;
+
+      z-index: 1300;
+
+      top: 0;
+      right: 0;
+
+      width: min(
+        430px,
+        100%
+      );
+
+      height: 100dvh;
+
+      padding: 28px;
+
+      display: flex;
+      flex-direction: column;
+
+      background: #fffaf4;
+
+      box-shadow:
+        -18px 0 60px
+        rgba(
+          0,
+          0,
+          0,
+          .22
+        );
+
+      transform:
+        translateX(105%);
+
+      transition:
+        transform .28s ease;
+    }
+
+
+    .cart-drawer.is-open {
+      transform:
+        translateX(0);
+    }
+
+
+    .cart-drawer-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 20px;
+
+      padding-bottom: 20px;
+
+      border-bottom: 1px solid #e4d7c5;
+    }
+
+
+    .cart-drawer-header h2 {
+      margin: 7px 0 0;
+
+      font-size: 34px;
+      line-height: .95;
+    }
+
+
+    .panel-kicker {
+      margin: 0;
+
+      color: #b77b20;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+    }
+
+
+    .panel-close {
+      width: 34px;
+      height: 34px;
+
+      border: 1px solid #dfd1bd;
+      border-radius: 50%;
+
+      background: transparent;
+      color: #4a3324;
+
+      font-size: 26px;
+      line-height: 1;
+
+      cursor: pointer;
+    }
+
+
+    .cart-items {
+      flex: 1;
+
+      overflow: auto;
+
+      padding: 20px 0;
+    }
+
+
+    .cart-empty {
+      margin: 20px 0;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    .cart-item {
+      display: grid;
+
+      grid-template-columns:
+        1fr auto;
+
+      gap: 12px;
+
+      padding: 15px 0;
+
+      border-bottom: 1px solid #eadfce;
+    }
+
+
+    .cart-item h3 {
+      margin: 0 0 5px;
+
+      font-size: 24px;
+      line-height: .9;
+    }
+
+
+    .cart-item p {
+      margin: 0;
+
+      color: #765f4c;
+
+      font-size: 11px;
+    }
+
+
+    .remove-item {
+      align-self: start;
+
+      border: 0;
+
+      background: transparent;
+      color: #9f3d2c;
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+
+      cursor: pointer;
+    }
+
+
+    .cart-summary {
+      padding-top: 20px;
+
+      border-top: 1px solid #e4d7c5;
+    }
+
+
+    .cart-summary > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      font-size: 13px;
+    }
+
+
+    .cart-summary strong {
+      color: #b77b20;
+
+      font-family:
+        "Cormorant Garamond",
+        serif;
+
+      font-size: 29px;
+    }
+
+
+    .cart-checkout {
+      width: 100%;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      margin-top: 18px;
+      padding: 15px;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+      color: #ffffff;
+
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .8px;
+    }
+
+
+    .cart-checkout.is-disabled {
+      pointer-events: none;
+
+      opacity: .52;
+    }
+
+
+    .cart-summary p {
+      margin: 14px 0 0;
+
+      color: #765f4c;
+
+      font-size: 10px;
+      line-height: 1.6;
+
+      text-align: center;
+    }
+
+
+    .cart-backdrop {
+      position: fixed;
+
+      z-index: 1250;
+
+      inset: 0;
+
+      background:
+        rgba(
+          24,
+          22,
+          19,
+          .42
+        );
+    }
+
+
+    /* =========================================
+       HERO
        ========================================= */
 
     .hero {
       max-width: 1100px;
+
       margin: auto;
 
       padding: 80px 25px 50px;
@@ -219,6 +589,7 @@
 
     .hero p {
       max-width: 650px;
+
       margin: 25px auto 0;
 
       color: #765f4c;
@@ -234,6 +605,7 @@
 
     .contacto {
       max-width: 1150px;
+
       margin: auto;
 
       padding: 20px 25px 90px;
@@ -320,12 +692,12 @@
 
 
     .contact-item a:hover {
-      color: #a76f20;
+      color: #b77b20;
     }
 
 
     /* =========================================
-       REDES SOCIALES
+       REDES
        ========================================= */
 
     .socials {
@@ -348,20 +720,28 @@
 
       font-size: 11px;
       font-weight: 600;
+
+      transition:
+        background .25s ease,
+        transform .25s ease;
     }
 
 
     .social:hover {
       background: #eee2d2;
+
+      transform:
+        translateY(-2px);
     }
 
 
     /* =========================================
-       BOTÓN WHATSAPP
+       WHATSAPP
        ========================================= */
 
     .whatsapp {
       display: inline-flex;
+
       align-items: center;
       justify-content: center;
 
@@ -379,11 +759,18 @@
       font-size: 10px;
       font-weight: 700;
       letter-spacing: .8px;
+
+      transition:
+        background .25s ease,
+        transform .25s ease;
     }
 
 
     .whatsapp:hover {
       background: #684936;
+
+      transform:
+        translateY(-2px);
     }
 
 
@@ -459,6 +846,18 @@
       font-size: 9px;
       font-weight: 700;
       letter-spacing: .8px;
+
+      transition:
+        background .25s ease,
+        transform .25s ease;
+    }
+
+
+    .map-button:hover {
+      background: #684936;
+
+      transform:
+        translateY(-2px);
     }
 
 
@@ -479,12 +878,15 @@
 
     footer img {
       width: 120px;
+
       margin-bottom: 15px;
     }
 
 
     .footer-brand {
-      font-family: "Cormorant Garamond", serif;
+      font-family:
+        "Cormorant Garamond",
+        serif;
 
       font-size: 30px;
       font-weight: 600;
@@ -510,6 +912,7 @@
 
       .nav {
         flex-wrap: wrap;
+
         padding: 14px 18px;
       }
 
@@ -546,6 +949,7 @@
 
       .menu {
         width: auto;
+
         margin-left: auto;
       }
 
@@ -556,7 +960,8 @@
 
 
       .hero {
-        padding: 60px 20px 40px;
+        padding:
+          60px 20px 40px;
       }
 
 
@@ -566,7 +971,8 @@
 
 
       .contacto {
-        padding: 15px 18px 60px;
+        padding:
+          15px 18px 60px;
       }
 
 
@@ -643,8 +1049,54 @@
         </a>
 
 
-        <div class="nav-actions">
+        <div
+          class="nav-actions"
+          aria-label="Accesos rápidos"
+        >
 
+
+          <!-- CARRITO -->
+
+          <button
+            class="icon-button"
+            id="openCart"
+            type="button"
+            aria-label="Abrir carrito"
+          >
+
+            <svg viewBox="0 0 24 24">
+
+              <path
+                d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"
+              ></path>
+
+              <circle
+                cx="10"
+                cy="20"
+                r="1"
+              ></circle>
+
+              <circle
+                cx="17"
+                cy="20"
+                r="1"
+              ></circle>
+
+            </svg>
+
+
+            <span
+              class="cart-count"
+              id="cartCount"
+              hidden
+            >
+              0
+            </span>
+
+          </button>
+
+
+          <!-- MI CUENTA -->
 
           <a
             class="icon-button"
@@ -671,12 +1123,103 @@
 
         </div>
 
-
       </div>
 
     </nav>
 
   </header>
+
+
+
+  <!-- =========================================
+       CARRITO
+       ========================================= -->
+
+  <aside
+    class="cart-drawer"
+    id="cartDrawer"
+    aria-label="Carrito de compras"
+    aria-hidden="true"
+  >
+
+
+    <div class="cart-drawer-header">
+
+
+      <div>
+
+        <p class="panel-kicker">
+          TU SELECCIÓN
+        </p>
+
+        <h2>
+          Carrito
+        </h2>
+
+      </div>
+
+
+      <button
+        class="panel-close"
+        type="button"
+        id="closeCart"
+        aria-label="Cerrar carrito"
+      >
+        ×
+      </button>
+
+
+    </div>
+
+
+    <div
+      class="cart-items"
+      id="cartItems"
+    ></div>
+
+
+    <div class="cart-summary">
+
+
+      <div>
+
+        <span>
+          Total
+        </span>
+
+        <strong id="cartTotal">
+          S/ 0.00
+        </strong>
+
+      </div>
+
+
+      <a
+        class="cart-checkout"
+        href="micuenta.html"
+        id="cartCheckout"
+      >
+        CONTINUAR A MI CUENTA
+      </a>
+
+
+      <p>
+        Desde Mi cuenta podrás crear tu orden
+        e iniciar el proceso de compra.
+      </p>
+
+
+    </div>
+
+
+  </aside>
+
+
+  <div
+    class="cart-backdrop"
+    id="cartBackdrop"
+    hidden
+  ></div>
 
 
 
@@ -716,7 +1259,7 @@
 
 
   <!-- =========================================
-       INFORMACIÓN DE CONTACTO
+       CONTACTO
        ========================================= -->
 
   <main class="contacto">
@@ -725,9 +1268,7 @@
     <section class="contact-grid">
 
 
-      <!-- =====================================
-           DATOS DE CONTACTO
-           ===================================== -->
+      <!-- DATOS -->
 
       <div class="card">
 
@@ -744,11 +1285,9 @@
 
         <div class="contact-item">
 
-
           <strong>
             CORREO
           </strong>
-
 
           <a
             href="mailto:babygoldeperu@gmail.com"
@@ -756,17 +1295,14 @@
             babygoldeperu@gmail.com
           </a>
 
-
         </div>
 
 
         <div class="contact-item">
 
-
           <strong>
             TELÉFONO / WHATSAPP
           </strong>
-
 
           <a
             href="tel:+51936078406"
@@ -774,24 +1310,20 @@
             +51 936 078 406
           </a>
 
-
         </div>
 
 
         <div class="contact-item">
 
-
           <strong>
             DIRECCIÓN
           </strong>
-
 
           <span>
             Calle Putumayo N° 176
             <br>
             San Miguel, Lima, Perú
           </span>
-
 
         </div>
 
@@ -810,9 +1342,7 @@
 
 
 
-      <!-- =====================================
-           REDES SOCIALES
-           ===================================== -->
+      <!-- REDES -->
 
       <div class="card">
 
@@ -980,6 +1510,360 @@
 
 
   </footer>
+
+
+
+  <!-- =========================================
+       CARRITO — JAVASCRIPT
+       ========================================= -->
+
+  <script>
+
+    /* =========================================
+       PRODUCTOS
+       ========================================= */
+
+    const products = {
+
+      BLACK: {
+        name: "Black ID",
+        price: 36.90
+      },
+
+      PREMIUM: {
+        name: "Premium ID",
+        price: 30.00
+      }
+
+    };
+
+
+    /* =========================================
+       CARRITO
+       ========================================= */
+
+    const cartKey =
+      "babyGoldenCart";
+
+
+    function getCart() {
+
+      try {
+
+        return JSON.parse(
+          localStorage.getItem(
+            cartKey
+          )
+        ) || [];
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveCart(
+      cart
+    ) {
+
+      localStorage.setItem(
+        cartKey,
+        JSON.stringify(
+          cart
+        )
+      );
+
+    }
+
+
+    /* =========================================
+       ELEMENTOS
+       ========================================= */
+
+    const cartCount =
+      document.getElementById(
+        "cartCount"
+      );
+
+
+    const cartItems =
+      document.getElementById(
+        "cartItems"
+      );
+
+
+    const cartTotal =
+      document.getElementById(
+        "cartTotal"
+      );
+
+
+    const cartDrawer =
+      document.getElementById(
+        "cartDrawer"
+      );
+
+
+    const cartBackdrop =
+      document.getElementById(
+        "cartBackdrop"
+      );
+
+
+    /* =========================================
+       MOSTRAR CARRITO
+       ========================================= */
+
+    function renderCart() {
+
+      const cart =
+        getCart();
+
+
+      cartCount.hidden =
+        cart.length === 0;
+
+
+      cartCount.textContent =
+        cart.length;
+
+
+      const total =
+        cart.reduce(
+          (
+            sum,
+            id
+          ) => {
+
+            return sum +
+              (
+                products[id]?.price ||
+                0
+              );
+
+          },
+          0
+        );
+
+
+      cartTotal.textContent =
+        "S/ " +
+        total.toFixed(2);
+
+
+      if (
+        cart.length === 0
+      ) {
+
+        cartItems.innerHTML = `
+          <p class="cart-empty">
+            Tu carrito está vacío.
+            Agrega una Baby Golden ID
+            para continuar.
+          </p>
+        `;
+
+      } else {
+
+        cartItems.innerHTML =
+          cart
+            .map(
+              (
+                id,
+                index
+              ) => {
+
+                const product =
+                  products[id];
+
+
+                return `
+
+                  <div class="cart-item">
+
+                    <div>
+
+                      <h3>
+                        ${product.name}
+                      </h3>
+
+                      <p>
+                        Baby Golden Perú ·
+                        S/ ${product.price.toFixed(2)}
+                      </p>
+
+                    </div>
+
+                    <button
+                      class="remove-item"
+                      type="button"
+                      data-remove-item="${index}"
+                    >
+                      QUITAR
+                    </button>
+
+                  </div>
+
+                `;
+
+              }
+            )
+            .join("");
+
+      }
+
+
+      document
+        .querySelectorAll(
+          "[data-remove-item]"
+        )
+        .forEach(
+          button => {
+
+            button.addEventListener(
+              "click",
+              function() {
+
+                const cart =
+                  getCart();
+
+
+                cart.splice(
+                  Number(
+                    this.dataset.removeItem
+                  ),
+                  1
+                );
+
+
+                saveCart(
+                  cart
+                );
+
+
+                renderCart();
+
+              }
+            );
+
+          }
+        );
+
+
+      const checkout =
+        document.getElementById(
+          "cartCheckout"
+        );
+
+
+      checkout.classList.toggle(
+        "is-disabled",
+        cart.length === 0
+      );
+
+
+      checkout.href =
+        cart.length
+
+          ? "micuenta.html?carrito=" +
+            encodeURIComponent(
+              cart.join(",")
+            )
+
+          : "micuenta.html";
+
+    }
+
+
+    /* =========================================
+       ABRIR CARRITO
+       ========================================= */
+
+    function openCart() {
+
+      cartDrawer.classList.add(
+        "is-open"
+      );
+
+
+      cartDrawer.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      cartBackdrop.hidden =
+        false;
+
+
+      renderCart();
+
+    }
+
+
+    /* =========================================
+       CERRAR CARRITO
+       ========================================= */
+
+    function closeCart() {
+
+      cartDrawer.classList.remove(
+        "is-open"
+      );
+
+
+      cartDrawer.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      cartBackdrop.hidden =
+        true;
+
+    }
+
+
+    /* =========================================
+       BOTONES
+       ========================================= */
+
+    document
+      .getElementById(
+        "openCart"
+      )
+      .addEventListener(
+        "click",
+        openCart
+      );
+
+
+    document
+      .getElementById(
+        "closeCart"
+      )
+      .addEventListener(
+        "click",
+        closeCart
+      );
+
+
+    cartBackdrop.addEventListener(
+      "click",
+      closeCart
+    );
+
+
+    /* =========================================
+       INICIAR
+       ========================================= */
+
+    renderCart();
+
+  </script>
 
 
 </body>
