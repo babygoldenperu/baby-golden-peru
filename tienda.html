@@ -14,17 +14,46 @@
     Tienda | Baby Golden Perú
   </title>
 
+
+  <!-- =========================================
+       TIPOGRAFÍAS
+       ========================================= -->
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
   <style>
+
+    /* =========================================
+       BASE
+       ========================================= */
 
     * {
       box-sizing: border-box;
     }
 
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #fafafa;
-      color: #222;
+      background: #f7f1e8;
+      color: #4b3627;
+      font-family: "Montserrat", sans-serif;
+    }
+
+
+    h1,
+    h2,
+    h3 {
+      font-family: "Cormorant Garamond", serif;
+    }
+
+
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
 
@@ -33,101 +62,228 @@
        ========================================= */
 
     header {
-      padding: 20px;
-      background: #ffffff;
-      border-bottom: 1px solid #eeeeee;
-      text-align: center;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 28px;
+      background: #f7f1e8;
+      border-bottom: 1px solid #e5d7c5;
+      padding: 18px 30px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
 
 
-    /* =========================================
-       CONTENIDO
-       ========================================= */
-
-    main {
-      max-width: 1100px;
+    .header-inner {
+      max-width: 1200px;
       margin: auto;
-      padding: 30px 20px;
-    }
 
-    .intro {
-      text-align: center;
-      margin-bottom: 35px;
-    }
-
-    .intro h2 {
-      margin-bottom: 10px;
-    }
-
-
-    /* =========================================
-       PRODUCTOS
-       ========================================= */
-
-    .productos {
-      display: grid;
-      grid-template-columns:
-        repeat(
-          auto-fit,
-          minmax(
-            220px,
-            1fr
-          )
-        );
-
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       gap: 20px;
     }
 
 
-    .producto {
-      background: #ffffff;
-      border: 1px solid #eeeeee;
-      border-radius: 14px;
-      padding: 15px;
+    .logo {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 30px;
+      font-weight: 700;
+      color: #4b3627;
+    }
+
+
+    .menu {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+
+    .menu a:hover {
+      color: #9a6a2f;
+    }
+
+
+    .header-button {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: #4b3627;
+      color: #ffffff;
+    }
+
+
+    .icon-button {
+      width: 42px;
+      height: 42px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px solid #d8c8b5;
+      border-radius: 50%;
+
+      background: transparent;
+      cursor: pointer;
+    }
+
+
+    .icon-button svg {
+      width: 20px;
+      height: 20px;
+
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+    }
+
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+
+    /* =========================================
+       PRESENTACIÓN
+       ========================================= */
+
+    .hero {
+      max-width: 1100px;
+      margin: auto;
+      padding: 70px 25px 45px;
       text-align: center;
     }
 
 
-    .producto img {
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(42px, 6vw, 68px);
+      line-height: 1;
+    }
+
+
+    .hero p {
+      max-width: 650px;
+      margin: auto;
+      line-height: 1.7;
+      font-size: 15px;
+      color: #765e4a;
+    }
+
+
+    /* =========================================
+       TIENDA
+       ========================================= */
+
+    .tienda {
+      max-width: 1200px;
+      margin: auto;
+      padding: 20px 25px 70px;
+    }
+
+
+    .productos {
+      display: grid;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(
+            240px,
+            1fr
+          )
+        );
+
+      gap: 24px;
+    }
+
+
+    /* =========================================
+       TARJETA PRODUCTO
+       ========================================= */
+
+    .producto {
+      background: #fffaf4;
+      border: 1px solid #e5d7c5;
+      border-radius: 20px;
+      overflow: hidden;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+    }
+
+
+    .producto:hover {
+      transform: translateY(-4px);
+
+      box-shadow:
+        0 12px 30px
+        rgba(75, 54, 39, .10);
+    }
+
+
+    .producto-imagen {
       width: 100%;
-      height: 220px;
+      height: 300px;
       object-fit: cover;
-      border-radius: 10px;
+      display: block;
+      background: #eee5da;
     }
 
 
-    .producto h3 {
-      margin: 15px 0 8px;
+    .producto-contenido {
+      padding: 22px;
     }
 
 
-    .producto p {
-      margin: 8px 0;
-      line-height: 1.5;
+    .producto h2 {
+      margin: 0 0 8px;
+      font-size: 28px;
     }
 
 
-    .precio {
-      font-size: 20px;
-      font-weight: bold;
-      margin: 12px 0;
+    .producto-descripcion {
+      min-height: 48px;
+      margin: 0 0 18px;
+
+      color: #765e4a;
+      font-size: 14px;
+      line-height: 1.6;
     }
 
 
-    .boton {
-      display: inline-block;
-      padding: 11px 18px;
+    .producto-precio {
+      margin-bottom: 18px;
+
+      font-size: 22px;
+      font-weight: 700;
+      color: #9a6a2f;
+    }
+
+
+    .boton-comprar {
+      width: 100%;
+      padding: 13px 18px;
+
       border: none;
-      border-radius: 8px;
-      background: #222;
+      border-radius: 999px;
+
+      background: #4b3627;
       color: #ffffff;
-      text-decoration: none;
+
+      font-family: "Montserrat", sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+
       cursor: pointer;
+    }
+
+
+    .boton-comprar:hover {
+      background: #654936;
     }
 
 
@@ -136,11 +292,18 @@
        ========================================= */
 
     footer {
-      margin-top: 50px;
-      padding: 25px 20px;
+      padding: 35px 20px;
+
+      border-top: 1px solid #e5d7c5;
+
       text-align: center;
-      background: #ffffff;
-      border-top: 1px solid #eeeeee;
+      background: #efe4d5;
+    }
+
+
+    footer strong {
+      font-family: "Cormorant Garamond", serif;
+      font-size: 24px;
     }
 
 
@@ -149,11 +312,39 @@
        ========================================= */
 
     @media (
+      max-width: 850px
+    ) {
+
+      header {
+        padding: 15px 18px;
+      }
+
+
+      .header-inner {
+        flex-wrap: wrap;
+      }
+
+
+      .menu {
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+      }
+
+    }
+
+
+    @media (
       max-width: 600px
     ) {
 
-      .producto img {
-        height: 200px;
+      .hero {
+        padding-top: 45px;
+      }
+
+
+      .producto-imagen {
+        height: 260px;
       }
 
     }
@@ -172,198 +363,222 @@
 
   <header>
 
-    <h1>
-      Baby Golden Perú
-    </h1>
+    <div class="header-inner">
+
+      <a
+        href="index.html"
+        class="logo"
+      >
+        Baby Golden Perú
+      </a>
+
+
+      <nav class="menu">
+
+        <a href="index.html">
+          INICIO
+        </a>
+
+        <a href="tienda.html">
+          TIENDA
+        </a>
+
+        <a href="index.html#baby-golden-id">
+          BABY GOLDEN ID
+        </a>
+
+        <a href="index.html#contacto">
+          CONTACTO
+        </a>
+
+        <a
+          href="registro.html"
+          class="header-button"
+        >
+          REGISTRAR MI PERRITO
+        </a>
+
+
+        <div class="nav-actions">
+
+          <a
+            href="cuenta.html"
+            class="icon-button"
+            aria-label="Mi cuenta"
+          >
+
+            <svg viewBox="0 0 24 24">
+
+              <circle
+                cx="12"
+                cy="8"
+                r="3.5"
+              ></circle>
+
+              <path
+                d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"
+              ></path>
+
+            </svg>
+
+          </a>
+
+        </div>
+
+      </nav>
+
+    </div>
 
   </header>
 
 
   <!-- =========================================
-       CONTENIDO
+       PRESENTACIÓN
        ========================================= -->
 
-  <main>
+  <section class="hero">
 
-    <section class="intro">
+    <h1>
+      Tienda Baby Golden Perú
+    </h1>
 
-      <h2>
-        Tienda Baby Golden Perú
-      </h2>
+    <p>
+      Productos pensados para identificar,
+      consentir y acompañar a nuestros
+      perritos en cada aventura.
+    </p>
 
-      <p>
-        Productos pensados para consentir,
-        identificar y acompañar a nuestros
-        perritos.
-      </p>
-
-    </section>
+  </section>
 
 
-    <!-- =========================================
-         PRODUCTOS
-         ========================================= -->
+  <!-- =========================================
+       PRODUCTOS
+       ========================================= -->
 
-    <section
-      class="productos"
-      id="productos"
-    >
+  <main class="tienda">
 
-      <!-- PRODUCTO 1 -->
-
-      <article class="producto">
-
-        <img
-          src=""
-          alt="Baby Golden ID Premium"
-        >
-
-        <h3>
-          Baby Golden ID Premium
-        </h3>
-
-        <p>
-          Tarjeta de identificación
-          para tu perrito.
-        </p>
-
-        <div class="precio">
-          S/30.00
-        </div>
-
-        <button
-          class="boton"
-          type="button"
-        >
-          COMPRAR
-        </button>
-
-      </article>
+    <section class="productos">
 
 
-      <!-- PRODUCTO 2 -->
+      <!-- =====================================
+           BLACK ID
+           ===================================== -->
 
       <article class="producto">
 
         <img
+          class="producto-imagen"
           src=""
           alt="Baby Golden ID Black"
         >
 
-        <h3>
-          Baby Golden ID Black
-        </h3>
+        <div class="producto-contenido">
 
-        <p>
-          Identificación exclusiva
-          para tu perrito.
-        </p>
+          <h2>
+            BLACK ID
+          </h2>
 
-        <div class="precio">
-          S/36.90
+          <p class="producto-descripcion">
+            Tarjeta de identificación y
+            presentación para tu perrito,
+            con acceso a sus datos y
+            beneficios exclusivos.
+          </p>
+
+          <div class="producto-precio">
+            S/36.90
+          </div>
+
+          <button
+            class="boton-comprar"
+            type="button"
+          >
+            COMPRAR
+          </button>
+
         </div>
-
-        <button
-          class="boton"
-          type="button"
-        >
-          COMPRAR
-        </button>
 
       </article>
 
 
-      <!-- PRODUCTO 3 -->
+      <!-- =====================================
+           PREMIUM ID
+           ===================================== -->
 
       <article class="producto">
 
         <img
+          class="producto-imagen"
           src=""
-          alt="Producto Baby Golden Perú"
+          alt="Baby Golden ID Premium"
         >
 
-        <h3>
-          Producto 3
-        </h3>
+        <div class="producto-contenido">
 
-        <p>
-          Descripción del producto.
-        </p>
+          <h2>
+            PREMIUM ID
+          </h2>
 
-        <div class="precio">
-          S/00.00
+          <p class="producto-descripcion">
+            Identificación especial para
+            tu perrito y acceso a beneficios
+            de Baby Golden Perú.
+          </p>
+
+          <div class="producto-precio">
+            S/30.00
+          </div>
+
+          <button
+            class="boton-comprar"
+            type="button"
+          >
+            COMPRAR
+          </button>
+
         </div>
-
-        <button
-          class="boton"
-          type="button"
-        >
-          COMPRAR
-        </button>
 
       </article>
 
 
-      <!-- PRODUCTO 4 -->
+      <!-- =====================================
+           PRODUCTO 3
+           ===================================== -->
 
       <article class="producto">
 
         <img
+          class="producto-imagen"
           src=""
           alt="Producto Baby Golden Perú"
         >
 
-        <h3>
-          Producto 4
-        </h3>
+        <div class="producto-contenido">
 
-        <p>
-          Descripción del producto.
-        </p>
+          <h2>
+            Próximamente
+          </h2>
 
-        <div class="precio">
-          S/00.00
+          <p class="producto-descripcion">
+            Producto Baby Golden Perú.
+          </p>
+
+          <div class="producto-precio">
+            S/00.00
+          </div>
+
+          <button
+            class="boton-comprar"
+            type="button"
+            disabled
+          >
+            PRÓXIMAMENTE
+          </button>
+
         </div>
-
-        <button
-          class="boton"
-          type="button"
-        >
-          COMPRAR
-        </button>
 
       </article>
 
-
-      <!-- PRODUCTO 5 -->
-
-      <article class="producto">
-
-        <img
-          src=""
-          alt="Producto Baby Golden Perú"
-        >
-
-        <h3>
-          Producto 5
-        </h3>
-
-        <p>
-          Descripción del producto.
-        </p>
-
-        <div class="precio">
-          S/00.00
-        </div>
-
-        <button
-          class="boton"
-          type="button"
-        >
-          COMPRAR
-        </button>
-
-      </article>
 
     </section>
 
@@ -376,7 +591,14 @@
 
   <footer>
 
-    Baby Golden Perú
+    <strong>
+      Baby Golden Perú
+    </strong>
+
+    <p>
+      Una comunidad de amor, identificación
+      y tenencia responsable.
+    </p>
 
   </footer>
 
