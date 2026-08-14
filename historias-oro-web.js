@@ -1,6 +1,6 @@
 /* BABY GOLDEN PERÚ
    HISTORIAS DE ORO
-   Galería premium de 6 fotos
+   Galería premium — 6 fotos
 */
 
 (function () {
@@ -24,52 +24,55 @@
           SB_KEY
         );
 
+      /* =====================================
+         LEER LAS FOTOS REALES DE SUPABASE
+         La tabla usa:
+         imagen_url
+         orden
+         activo
+      ===================================== */
+
       const { data, error } =
         await sb
           .from("site_gallery")
           .select(
-            "slot,imagen_url,title,caption,published"
+            "id,imagen_url,titulo,descripcion,orden,activo,caption,published"
           )
-          .eq("published", true)
-          .in("slot", [
-            "historia_1",
-            "historia_2",
-            "historia_3",
-            "historia_4",
-            "historia_5",
-            "historia_6"
-          ]);
+          .eq("activo", true)
+          .order("orden", {
+            ascending: true
+          });
 
       if (error) {
+
         console.warn(
           "Historias de Oro:",
           error.message
         );
+
         return;
       }
 
+      /* Solo las fotos que tengan imagen */
+
       const fotos =
         (data || [])
-          .filter(f => f.imagen_url)
-          .sort((a, b) => {
+          .filter(function (foto) {
 
-            const na =
-              Number(
-                String(a.slot)
-                  .replace("historia_", "")
-              );
+            return (
+              foto.imagen_url &&
+              String(foto.imagen_url).trim() !== ""
+            );
 
-            const nb =
-              Number(
-                String(b.slot)
-                  .replace("historia_", "")
-              );
-
-            return na - nb;
-
-          });
+          })
+          .slice(0, 6);
 
       if (!fotos.length) return;
+
+
+      /* =====================================
+         ENCONTRAR EL CARRUSEL ANTIGUO
+      ===================================== */
 
       const antiguo =
         document.querySelector(
@@ -78,10 +81,15 @@
 
       if (!antiguo) return;
 
-      /* Ocultamos solamente el carrusel antiguo */
+
+      /* Ocultar solamente el carrusel antiguo */
+
       antiguo.style.display = "none";
 
-      /* Eliminamos una galería anterior si existiera */
+
+      /* Si ya existe nuestra galería,
+         la eliminamos para evitar duplicados */
+
       const anterior =
         document.getElementById(
           "historiasOroPremium"
@@ -91,9 +99,10 @@
         anterior.remove();
       }
 
-      /* ==========================
-         GALERÍA
-      ========================== */
+
+      /* =====================================
+         CREAR NUEVA GALERÍA
+      ===================================== */
 
       const galeria =
         document.createElement("section");
@@ -101,46 +110,88 @@
       galeria.id =
         "historiasOroPremium";
 
+
       galeria.innerHTML = `
 
 <style>
 
+/* =====================================
+   GALERÍA DESKTOP
+===================================== */
+
 #historiasOroPremium{
+
   width:100%;
+
   margin:0;
+
   padding:0;
+
 }
 
-#historiasOroPremium .ho-gallery{
+#historiasOroPremium
+.ho-gallery{
+
   width:100%;
+
   display:grid;
+
   grid-template-columns:
-    repeat(6, minmax(0,1fr));
+    repeat(6, minmax(0, 1fr));
+
   gap:12px;
+
 }
 
-#historiasOroPremium .ho-card{
+
+/* =====================================
+   TARJETAS
+===================================== */
+
+#historiasOroPremium
+.ho-card{
+
   position:relative;
+
+  width:100%;
+
   height:390px;
+
   overflow:hidden;
+
   border-radius:22px;
-  background:#e7dccb;
+
+  background:#e8ddce;
+
   cursor:pointer;
+
 }
 
-#historiasOroPremium .ho-card img{
+#historiasOroPremium
+.ho-card img{
+
   width:100%;
+
   height:100%;
+
   display:block;
+
   object-fit:cover;
+
   transition:
-    transform .65s ease;
+    transform .6s ease;
+
 }
 
 #historiasOroPremium
 .ho-card:hover img{
+
   transform:scale(1.05);
+
 }
+
+
+/* Degradado inferior */
 
 #historiasOroPremium
 .ho-card::after{
@@ -154,13 +205,17 @@
   background:
     linear-gradient(
       to top,
-      rgba(35,24,16,.68),
-      rgba(35,24,16,0)
+      rgba(30,21,14,.72),
+      rgba(30,21,14,0)
       55%
     );
 
   pointer-events:none;
+
 }
+
+
+/* Texto */
 
 #historiasOroPremium
 .ho-label{
@@ -171,9 +226,11 @@
 
   left:18px;
 
+  right:12px;
+
   bottom:18px;
 
-  color:white;
+  color:#fff;
 
   font-size:9px;
 
@@ -186,9 +243,9 @@
 }
 
 
-/* ==========================
+/* =====================================
    LIGHTBOX
-========================== */
+===================================== */
 
 #hoLightbox{
 
@@ -204,22 +261,25 @@
 
   justify-content:center;
 
+  padding:30px;
+
   background:
-    rgba(25,19,14,.94);
+    rgba(20,15,11,.95);
 
   backdrop-filter:
-    blur(15px);
+    blur(16px);
 
   -webkit-backdrop-filter:
-    blur(15px);
-
-  padding:30px;
+    blur(16px);
 
 }
 
 #hoLightbox.active{
+
   display:flex;
+
 }
+
 
 #hoLightboxImage{
 
@@ -242,7 +302,9 @@
 }
 
 
-/* BOTONES */
+/* =====================================
+   BOTONES DEL VISOR
+===================================== */
 
 #hoLightbox
 .ho-close,
@@ -272,17 +334,18 @@
   background:
     rgba(255,255,255,.08);
 
-  color:white;
+  color:#fff;
 
   cursor:pointer;
 
   font-size:28px;
 
-  z-index:3;
+  z-index:5;
 
 }
 
-#hoLightbox .ho-close{
+#hoLightbox
+.ho-close{
 
   top:24px;
 
@@ -290,7 +353,8 @@
 
 }
 
-#hoLightbox .ho-prev{
+#hoLightbox
+.ho-prev{
 
   left:25px;
 
@@ -301,7 +365,8 @@
 
 }
 
-#hoLightbox .ho-next{
+#hoLightbox
+.ho-next{
 
   right:25px;
 
@@ -313,9 +378,9 @@
 }
 
 
-/* ==========================
+/* =====================================
    TABLET
-========================== */
+===================================== */
 
 @media(max-width:1100px){
 
@@ -323,16 +388,16 @@
   .ho-gallery{
 
     grid-template-columns:
-      repeat(3,1fr);
+      repeat(3, 1fr);
 
   }
 
 }
 
 
-/* ==========================
+/* =====================================
    CELULAR
-========================== */
+===================================== */
 
 @media(max-width:600px){
 
@@ -347,13 +412,13 @@
 
     gap:12px;
 
+    padding:
+      0 16px 12px;
+
     scroll-snap-type:
       x mandatory;
 
     scrollbar-width:none;
-
-    padding:
-      0 16px 12px;
 
   }
 
@@ -395,14 +460,14 @@
   #hoLightbox
   .ho-prev{
 
-    left:9px;
+    left:8px;
 
   }
 
   #hoLightbox
   .ho-next{
 
-    right:9px;
+    right:8px;
 
   }
 
@@ -420,8 +485,12 @@
 </style>
 
 
+<!-- GALERÍA -->
+
 <div class="ho-gallery"></div>
 
+
+<!-- VISOR GRANDE -->
 
 <div
   id="hoLightbox"
@@ -430,6 +499,7 @@
 
   <button
     class="ho-close"
+    type="button"
     aria-label="Cerrar"
   >
     ×
@@ -437,6 +507,7 @@
 
   <button
     class="ho-prev"
+    type="button"
     aria-label="Foto anterior"
   >
     ‹
@@ -450,6 +521,7 @@
 
   <button
     class="ho-next"
+    type="button"
     aria-label="Foto siguiente"
   >
     ›
@@ -459,11 +531,18 @@
 
 `;
 
+
+      /* Insertar la nueva galería */
+
       antiguo.parentNode.insertBefore(
         galeria,
         antiguo
       );
 
+
+      /* =====================================
+         ELEMENTOS
+      ===================================== */
 
       const gallery =
         galeria.querySelector(
@@ -480,15 +559,16 @@
           "#hoLightboxImage"
         );
 
+
       let actual = 0;
 
 
-      /* ==========================
+      /* =====================================
          CREAR LAS 6 FOTOS
-      ========================== */
+      ===================================== */
 
       fotos.forEach(
-        (foto, index) => {
+        function (foto, index) {
 
           const card =
             document.createElement(
@@ -498,27 +578,26 @@
           card.className =
             "ho-card";
 
+
+          const titulo =
+            foto.titulo ||
+            foto.caption ||
+            "Historias de Oro";
+
+
           card.innerHTML = `
 
 <img
   src="${foto.imagen_url}"
-  alt="${
-    foto.title ||
-    "Historia de Oro — Baby Golden Perú"
-  }"
+  alt="${titulo}"
 >
 
-${
-  foto.title
-    ? `
-      <div class="ho-label">
-        ${foto.title}
-      </div>
-      `
-    : ""
-}
+<div class="ho-label">
+  ${titulo}
+</div>
 
 `;
+
 
           card.addEventListener(
             "click",
@@ -529,6 +608,7 @@ ${
             }
           );
 
+
           gallery.appendChild(
             card
           );
@@ -537,9 +617,9 @@ ${
       );
 
 
-      /* ==========================
+      /* =====================================
          ABRIR FOTO
-      ========================== */
+      ===================================== */
 
       function abrir(index){
 
@@ -547,22 +627,27 @@ ${
           (index + fotos.length)
           % fotos.length;
 
+
         lightboxImage.src =
           fotos[actual]
             .imagen_url;
 
+
         lightboxImage.alt =
-          fotos[actual].title ||
+          fotos[actual].titulo ||
           "Historia de Oro — Baby Golden Perú";
+
 
         lightbox.classList.add(
           "active"
         );
 
+
         lightbox.setAttribute(
           "aria-hidden",
           "false"
         );
+
 
         document.body.style.overflow =
           "hidden";
@@ -570,9 +655,9 @@ ${
       }
 
 
-      /* ==========================
+      /* =====================================
          CERRAR
-      ========================== */
+      ===================================== */
 
       function cerrar(){
 
@@ -580,12 +665,16 @@ ${
           "active"
         );
 
+
         lightbox.setAttribute(
           "aria-hidden",
           "true"
         );
 
-        lightboxImage.src = "";
+
+        lightboxImage.src =
+          "";
+
 
         document.body.style.overflow =
           "";
@@ -593,9 +682,9 @@ ${
       }
 
 
-      /* ==========================
-         SIGUIENTE / ANTERIOR
-      ========================== */
+      /* =====================================
+         SIGUIENTE
+      ===================================== */
 
       function siguiente(){
 
@@ -604,6 +693,11 @@ ${
         );
 
       }
+
+
+      /* =====================================
+         ANTERIOR
+      ===================================== */
 
       function anterior(){
 
@@ -614,6 +708,8 @@ ${
       }
 
 
+      /* Botones */
+
       lightbox
         .querySelector(
           ".ho-close"
@@ -623,6 +719,7 @@ ${
           cerrar
         );
 
+
       lightbox
         .querySelector(
           ".ho-next"
@@ -631,6 +728,7 @@ ${
           "click",
           siguiente
         );
+
 
       lightbox
         .querySelector(
@@ -642,7 +740,9 @@ ${
         );
 
 
-      /* Cerrar haciendo clic fuera */
+      /* =====================================
+         CLIC FUERA
+      ===================================== */
 
       lightbox.addEventListener(
         "click",
@@ -660,7 +760,9 @@ ${
       );
 
 
-      /* Teclado */
+      /* =====================================
+         TECLADO
+      ===================================== */
 
       document.addEventListener(
         "keydown",
@@ -676,6 +778,7 @@ ${
 
           }
 
+
           if(
             e.key === "Escape"
           ){
@@ -684,6 +787,7 @@ ${
 
           }
 
+
           if(
             e.key === "ArrowRight"
           ){
@@ -691,6 +795,7 @@ ${
             siguiente();
 
           }
+
 
           if(
             e.key === "ArrowLeft"
@@ -704,21 +809,25 @@ ${
       );
 
 
-      /* ==========================
-         SWIPE EN LIGHTBOX
-      ========================== */
+      /* =====================================
+         SWIPE DEL VISOR EN CELULAR
+      ===================================== */
 
       let inicioX = 0;
+
 
       lightbox.addEventListener(
         "touchstart",
         function(e){
 
           inicioX =
-            e.changedTouches[0].screenX;
+            e.changedTouches[0]
+              .screenX;
 
         },
-        { passive:true }
+        {
+          passive:true
+        }
       );
 
 
@@ -727,10 +836,13 @@ ${
         function(e){
 
           const finalX =
-            e.changedTouches[0].screenX;
+            e.changedTouches[0]
+              .screenX;
+
 
           const diferencia =
             finalX - inicioX;
+
 
           if(
             Math.abs(diferencia) < 50
@@ -740,7 +852,10 @@ ${
 
           }
 
-          if(diferencia < 0){
+
+          if(
+            diferencia < 0
+          ){
 
             siguiente();
 
@@ -751,11 +866,13 @@ ${
           }
 
         },
-        { passive:true }
+        {
+          passive:true
+        }
       );
 
-    }
 
+    }
     catch(error){
 
       console.warn(
@@ -767,6 +884,10 @@ ${
 
   }
 
+
+  /* =====================================
+     INICIAR
+  ===================================== */
 
   if(
     document.readyState ===
