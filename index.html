@@ -1237,12 +1237,22 @@
 
       .menu{
         width:100%;
-        justify-content:center;
-        gap:6px 11px;
-        flex-wrap:wrap;
+        justify-content:flex-start;
+        gap:6px 14px;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:2px 4px 6px;
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+      }
+
+      .menu::-webkit-scrollbar{
+        display:none;
       }
 
       .menu a{
+        flex:0 0 auto;
         font-size:8px;
         letter-spacing:.3px;
       }
@@ -1959,8 +1969,6 @@
         <a href="#inicio">INICIO</a>
 
         <a href="#tienda">TIENDA</a>
-
-        <a href="#baby-golden-id">BABY GOLDEN ID</a>
 
         <a href="beneficios.html">BENEFICIOS</a>
 
