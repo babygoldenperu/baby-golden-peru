@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Administración | Libro de Reclamaciones | Baby Golden Perú
+  </title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      background:#f6f0e6;
+      color:#3b2b20;
+      font-family:Arial,sans-serif;
+    }
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      background:#f6f0e6;
+      border-bottom:1px solid #ded1bf;
+    }
+
+    .nav{
+      max-width:1280px;
+      min-height:76px;
+      margin:auto;
+      padding:0 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+
+    .logo{
+      width:155px;
+      height:auto;
+      display:block;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.6px;
+    }
+
+    .menu a{
+      position:relative;
+      color:#3b2b20;
+      text-decoration:none;
+      transition:.25s ease;
+    }
+
+    .menu a:hover{
+      color:#b77b20;
+      transform:translateY(-2px);
+    }
+
+    .menu a:not(.header-button)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-7px;
+      width:0;
+      height:1px;
+      background:#b77b20;
+      transition:.25s ease;
+    }
+
+    .menu a:not(.header-button):hover::after{
+      width:100%;
+    }
+
+    .header-button{
+      padding:12px 17px;
+      border-radius:999px;
+      background:#4a3324;
+      color:#fff!important;
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+    }
+
+    .icon-button{
+      width:40px;
+      height:40px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border:1px solid #d9c9b6;
+      border-radius:50%;
+      color:#4a3324;
+      text-decoration:none;
+    }
+
+    .icon-button svg{
+      width:18px;
+      height:18px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.6;
+    }
+
+    main{
+      max-width:1200px;
+      margin:auto;
+      padding:60px 25px 90px;
+    }
+
+    .hero{
+      margin-bottom:30px;
+    }
+
+    .label{
+      color:#a76f20;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    h1{
+      margin:10px 0;
+      font-family:Georgia,serif;
+      font-size:48px;
+      font-weight:500;
+    }
+
+    .hero p{
+      color:#765f4c;
+      font-size:13px;
+    }
+
+    .admin-box{
+      padding:25px;
+      background:#fffaf4;
+      border:1px solid #decdb8;
+      border-radius:18px;
+      box-shadow:0 12px 35px rgba(57,42,28,.06);
+    }
+
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      margin-bottom:20px;
+    }
+
+    .filters{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    select,
+    button,
+    textarea{
+      font:inherit;
+    }
+
+    select{
+      padding:10px 12px;
+      border:1px solid #d9c9b6;
+      border-radius:8px;
+      background:#fff;
+    }
+
+    button{
+      border:0;
+      border-radius:8px;
+      padding:10px 15px;
+      cursor:pointer;
+      background:#4a3324;
+      color:#fff;
+      font-weight:700;
+    }
+
+    button:hover{
+      background:#684936;
+    }
+
+    .table-wrap{
+      overflow-x:auto;
+    }
+
+    table{
+      width:100%;
+      border-collapse:collapse;
+      min-width:900px;
+    }
+
+    th,
+    td{
+      padding:13px 10px;
+      border-bottom:1px solid #e5d9ca;
+      text-align:left;
+      vertical-align:top;
+      font-size:11px;
+    }
+
+    th{
+      color:#765f4c;
+      font-size:9px;
+      letter-spacing:.7px;
+      text-transform:uppercase;
+    }
+
+    .status{
+      display:inline-block;
+      padding:5px 8px;
+      border-radius:999px;
+      background:#eee2d2;
+      font-size:9px;
+      font-weight:700;
+    }
+
+    .empty,
+    .message{
+      padding:25px;
+      text-align:center;
+      color:#765f4c;
+    }
+
+    .hidden{
+      display:none!important;
+    }
+
+    #loginPanel{
+      max-width:430px;
+      margin:80px auto;
+    }
+
+    #loginPanel input{
+      width:100%;
+      margin:6px 0 12px;
+      padding:12px;
+      border:1px solid #d9c9b6;
+      border-radius:8px;
+    }
+
+    .detail{
+      margin-top:25px;
+      padding-top:25px;
+      border-top:1px solid #e5d9ca;
+    }
+
+    .detail-grid{
+      display:grid;
+      grid-template-columns:repeat(2,1fr);
+      gap:15px;
+    }
+
+    .detail-item{
+      padding:12px;
+      background:#f5ecdf;
+      border-radius:10px;
+    }
+
+    .detail-item strong{
+      display:block;
+      margin-bottom:5px;
+      font-size:9px;
+      text-transform:uppercase;
+      letter-spacing:.7px;
+    }
+
+    .detail-item span{
+      font-size:11px;
+      line-height:1.6;
+      white-space:pre-wrap;
+    }
+
+    .detail textarea{
+      width:100%;
+      min-height:110px;
+      margin:8px 0 15px;
+      padding:12px;
+      border:1px solid #d9c9b6;
+      border-radius:8px;
+      background:#fff;
+    }
+
+    footer{
+      background:#29251f;
+      color:#fff;
+      padding:60px 25px 40px;
+      text-align:center;
+    }
+
+    footer img{
+      width:155px;
+      margin:0 auto 20px;
+    }
+
+    .footer-brand{
+      color:#d5a34c;
+      letter-spacing:3px;
+      font-size:10px;
+      font-weight:700;
+    }
+
+    footer p{
+      color:#aaa197;
+      font-size:11px;
+      line-height:1.8;
+    }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px 22px;
+      max-width:850px;
+      margin:28px auto 0;
+      padding-top:22px;
+      border-top:1px solid rgba(255,255,255,.13);
+    }
+
+    .footer-links a{
+      color:#e3c99b;
+      font-size:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    @media(max-width:900px){
+
+      .nav{
+        min-height:64px;
+        padding:8px 12px;
+        overflow:hidden;
+      }
+
+      .logo{
+        width:112px;
+        flex:0 0 auto;
+      }
+
+      .menu{
+        flex:1;
+        min-width:0;
+        justify-content:flex-start;
+        gap:6px 14px;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        scrollbar-width:none;
+      }
+
+      .menu::-webkit-scrollbar{
+        display:none;
+      }
+
+      .menu a{
+        flex:0 0 auto;
+        font-size:8px;
+      }
+
+      .header-button{
+        padding:8px 12px;
+        font-size:8px;
+      }
+
+      .detail-grid{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:38px;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <header>
+
+    <nav class="nav">
+
+      <a href="index.html">
+        <img
+          src="BABY%20GOLDEN.png"
+          alt="Baby Golden Perú"
+          class="logo"
+        >
+      </a>
+
+      <div class="menu">
+
+        <a href="index.html">
+          INICIO
+        </a>
+
+        <a href="tienda.html">
+          TIENDA
+        </a>
+
+        <a href="beneficios.html">
+          BENEFICIOS
+        </a>
+
+        <a href="fotos.html">
+          FOTOS
+        </a>
+
+        <a href="contacto.html">
+          CONTACTO
+        </a>
+
+        <a
+          href="registro.html"
+          class="header-button"
+        >
+          REGISTRAR MI PERRITO
+        </a>
+
+      </div>
+
+      <div class="nav-actions">
+
+        <a
+          href="micuenta.html"
+          class="icon-button"
+          aria-label="Mi cuenta"
+        >
+
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="8" r="3.5"></circle>
+            <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
+          </svg>
+
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <section class="hero">
+
+      <div class="label">
+        ADMINISTRACIÓN
+      </div>
+
+      <h1>
+        Libro de Reclamaciones
+      </h1>
+
+      <p>
+        Gestión interna de reclamos y quejas.
+      </p>
+
+    </section>
+
+
+    <section
+      id="loginPanel"
+      class="admin-box hidden"
+    >
+
+      <h2>
+        Acceso administrativo
+      </h2>
+
+      <p>
+        Ingresa con una cuenta autorizada como administrador.
+      </p>
+
+      <label>
+        Correo
+      </label>
+
+      <input
+        id="email"
+        type="email"
+        autocomplete="username"
+      >
+
+      <label>
+        Contraseña
+      </label>
+
+      <input
+        id="password"
+        type="password"
+        autocomplete="current-password"
+      >
+
+      <button id="loginBtn">
+        INGRESAR
+      </button>
+
+      <div
+        id="loginMessage"
+        class="message"
+      ></div>
+
+    </section>
+
+
+    <section
+      id="adminPanel"
+      class="admin-box hidden"
+    >
+
+      <div class="topbar">
+
+        <div>
+
+          <strong id="adminEmail"></strong>
+
+          <div
+            id="sessionMessage"
+            class="message"
+          ></div>
+
+        </div>
+
+        <button id="logoutBtn">
+          CERRAR SESIÓN
+        </button>
+
+      </div>
+
+
+      <div class="filters">
+
+        <select id="estadoFiltro">
+
+          <option value="">
+            TODOS
+          </option>
+
+          <option value="PENDIENTE">
+            PENDIENTE
+          </option>
+
+          <option value="EN PROCESO">
+            EN PROCESO
+          </option>
+
+          <option value="ATENDIDO">
+            ATENDIDO
+          </option>
+
+        </select>
+
+        <button id="recargarBtn">
+          ACTUALIZAR
+        </button>
+
+      </div>
+
+
+      <div
+        id="tableMessage"
+        class="message"
+      ></div>
+
+
+      <div class="table-wrap">
+
+        <table>
+
+          <thead>
+
+            <tr>
+              <th>N.º</th>
+              <th>Fecha</th>
+              <th>Consumidor</th>
+              <th>Tipo</th>
+              <th>Producto</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+
+          </thead>
+
+          <tbody id="reclamacionesBody"></tbody>
+
+        </table>
+
+      </div>
+
+
+      <div
+        id="detalle"
+        class="detail hidden"
+      >
+
+        <h2>
+          Detalle de la reclamación
+        </h2>
+
+        <div
+          id="detalleGrid"
+          class="detail-grid"
+        ></div>
+
+
+        <h3>
+          Respuesta al consumidor
+        </h3>
+
+        <label>
+          Estado
+        </label>
+
+        <select id="respuestaEstado">
+
+          <option value="PENDIENTE">
+            PENDIENTE
+          </option>
+
+          <option value="EN PROCESO">
+            EN PROCESO
+          </option>
+
+          <option value="ATENDIDO">
+            ATENDIDO
+          </option>
+
+        </select>
+
+
+        <label>
+          Respuesta
+        </label>
+
+        <textarea
+          id="respuestaTexto"
+          placeholder="Escribe la respuesta que corresponda."
+        ></textarea>
+
+
+        <label>
+          Acciones adoptadas
+        </label>
+
+        <textarea
+          id="accionesTexto"
+          placeholder="Describe las acciones adoptadas."
+        ></textarea>
+
+
+        <button id="guardarRespuestaBtn">
+          GUARDAR RESPUESTA
+        </button>
+
+        <div
+          id="guardarMessage"
+          class="message"
+        ></div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <footer>
+
+    <img
+      src="BABY%20GOLDEN.png"
+      alt="Baby Golden Perú"
+    >
+
+    <div class="footer-brand">
+      BABY GOLDEN PERÚ
+    </div>
+
+    <p>
+      Comunidad · Tenencia responsable · Baby Golden ID
+    </p>
+
+    <p>
+      ♥ Una pata a la vez, construimos una comunidad mejor.
+    </p>
+
+    <div class="footer-links">
+
+      <a href="index.html#tienda">
+        Tienda
+      </a>
+
+      <a href="micuenta.html">
+        Mi cuenta
+      </a>
+
+      <a href="registro.html">
+        Registrar mi perrito
+      </a>
+
+      <a href="beneficios.html">
+        Beneficios
+      </a>
+
+      <a href="terminos.html">
+        Términos y condiciones
+      </a>
+
+      <a href="cambios.html">
+        Cambios y devoluciones
+      </a>
+
+      <a href="privacidad.html">
+        Política de privacidad
+      </a>
+
+      <a href="reclamaciones.html">
+        Libro de reclamaciones
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    const SB_URL =
+      "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+    const SB_KEY =
+      "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+    const sb =
+      window.supabase.createClient(
+        SB_URL,
+        SB_KEY
+      );
+
+
+    const loginPanel =
+      document.getElementById("loginPanel");
+
+    const adminPanel =
+      document.getElementById("adminPanel");
+
+    const loginMessage =
+      document.getElementById("loginMessage");
+
+    const tableMessage =
+      document.getElementById("tableMessage");
+
+    const detalle =
+      document.getElementById("detalle");
+
+    const detalleGrid =
+      document.getElementById("detalleGrid");
+
+    let reclamacionSeleccionada = null;
+
+
+    function escapar(value){
+
+      return String(
+        value ?? ""
+      )
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+    }
+
+
+    function mostrarLogin(){
+
+      loginPanel.classList.remove("hidden");
+      adminPanel.classList.add("hidden");
+
+    }
+
+
+    async function cargarPanel(){
+
+      const {
+        data:{
+          user
+        }
+      } =
+        await sb.auth.getUser();
+
+
+      if(!user){
+
+        mostrarLogin();
+        return;
+
+      }
+
+
+      const {
+        data: esAdmin,
+        error: adminError
+      } =
+        await sb.rpc("es_administrador");
+
+
+      if(adminError || !esAdmin){
+
+        await sb.auth.signOut();
+
+        loginMessage.textContent =
+          "Esta cuenta no tiene permisos administrativos.";
+
+        mostrarLogin();
+
+        return;
+
+      }
+
+
+      loginPanel.classList.add("hidden");
+      adminPanel.classList.remove("hidden");
+
+      document.getElementById("adminEmail").textContent =
+        user.email || "";
+
+      cargarReclamaciones();
+
+    }
+
+
+    async function cargarReclamaciones(){
+
+      tableMessage.textContent =
+        "Cargando reclamaciones...";
+
+
+      let query =
+        sb
+          .from("reclamaciones")
+          .select("*")
+          .order("created_at",{ascending:false});
+
+
+      const filtro =
+        document.getElementById("estadoFiltro").value;
+
+
+      if(filtro){
+
+        query =
+          query.eq("estado",filtro);
+
+      }
+
+
+      const {
+        data,
+        error
+      } =
+        await query;
+
+
+      if(error){
+
+        tableMessage.textContent =
+          "No se pudieron cargar las reclamaciones.";
+
+        return;
+
+      }
+
+
+      const body =
+        document.getElementById(
+          "reclamacionesBody"
+        );
+
+
+      body.innerHTML = "";
+
+
+      if(!data.length){
+
+        tableMessage.textContent =
+          "No hay reclamaciones para mostrar.";
+
+        return;
+
+      }
+
+
+      tableMessage.textContent =
+        `${data.length} reclamación(es).`;
+
+
+      data.forEach(item => {
+
+        const row =
+          document.createElement("tr");
+
+
+        row.innerHTML = `
+
+          <td>
+            <strong>
+              ${escapar(item.numero)}
+            </strong>
+          </td>
+
+          <td>
+            ${escapar(
+              new Date(item.fecha)
+                .toLocaleString("es-PE")
+            )}
+          </td>
+
+          <td>
+            ${escapar(item.nombre)}
+          </td>
+
+          <td>
+            ${escapar(item.tipo)}
+          </td>
+
+          <td>
+            ${escapar(item.producto)}
+          </td>
+
+          <td>
+            <span class="status">
+              ${escapar(item.estado)}
+            </span>
+          </td>
+
+          <td>
+            <button
+              type="button"
+              data-id="${item.id}"
+            >
+              VER
+            </button>
+          </td>
+
+        `;
+
+
+        row
+          .querySelector("button")
+          .addEventListener(
+            "click",
+            () => mostrarDetalle(item)
+          );
+
+
+        body.appendChild(row);
+
+      });
+
+    }
+
+
+    function mostrarDetalle(item){
+
+      reclamacionSeleccionada =
+        item;
+
+
+      detalle.classList.remove("hidden");
+
+
+      const campos = [
+
+        ["N.º de Hoja",item.numero],
+        ["Código",item.codigo],
+        ["Fecha",item.fecha],
+        ["Consumidor",item.nombre],
+        ["Documento",`${item.tipo_documento}: ${item.documento}`],
+        ["Domicilio",item.domicilio],
+        ["Teléfono",item.telefono],
+        ["Correo",item.email],
+        ["Representante",item.representante_nombre],
+        ["Producto / Servicio",item.producto],
+        ["Monto",item.monto ? `S/ ${item.monto}` : "No indicado"],
+        ["Descripción",item.descripcion_producto],
+        ["Tipo",item.tipo],
+        ["Detalle",item.detalle],
+        ["Pedido",item.pedido],
+        ["Medio de respuesta",item.medio_respuesta],
+        ["Estado",item.estado],
+        ["Respuesta",item.respuesta],
+        ["Acciones adoptadas",item.acciones_adoptadas],
+        ["Fecha de respuesta",item.fecha_respuesta]
+
+      ];
+
+
+      detalleGrid.innerHTML =
+        campos.map(
+          ([label,value]) => `
+
+            <div class="detail-item">
+
+              <strong>
+                ${escapar(label)}
+              </strong>
+
+              <span>
+                ${escapar(value || "—")}
+              </span>
+
+            </div>
+
+          `
+        ).join("");
+
+
+      document.getElementById(
+        "respuestaEstado"
+      ).value =
+        item.estado || "PENDIENTE";
+
+
+      document.getElementById(
+        "respuestaTexto"
+      ).value =
+        item.respuesta || "";
+
+
+      document.getElementById(
+        "accionesTexto"
+      ).value =
+        item.acciones_adoptadas || "";
+
+
+      detalle.scrollIntoView({
+        behavior:"smooth",
+        block:"start"
+      });
+
+    }
+
+
+    async function guardarRespuesta(){
+
+      if(!reclamacionSeleccionada){
+
+        return;
+
+      }
+
+
+      const estado =
+        document.getElementById(
+          "respuestaEstado"
+        ).value;
+
+
+      const respuesta =
+        document.getElementById(
+          "respuestaTexto"
+        ).value;
+
+
+      const acciones =
+        document.getElementById(
+          "accionesTexto"
+        ).value;
+
+
+      const message =
+        document.getElementById(
+          "guardarMessage"
+        );
+
+
+      message.textContent =
+        "Guardando...";
+
+
+      const {
+        error
+      } =
+        await sb.rpc(
+          "responder_reclamacion",
+          {
+            p_id:
+              reclamacionSeleccionada.id,
+
+            p_estado:
+              estado,
+
+            p_respuesta:
+              respuesta,
+
+            p_acciones_adoptadas:
+              acciones
+          }
+        );
+
+
+      if(error){
+
+        message.textContent =
+          "No se pudo guardar la respuesta.";
+
+        console.error(error);
+
+        return;
+
+      }
+
+
+      message.textContent =
+        "Respuesta guardada correctamente.";
+
+
+      await cargarReclamaciones();
+
+
+      const {
+        data
+      } =
+        await sb
+          .from("reclamaciones")
+          .select("*")
+          .eq(
+            "id",
+            reclamacionSeleccionada.id
+          )
+          .single();
+
+
+      if(data){
+
+        mostrarDetalle(data);
+
+      }
+
+    }
+
+
+    document
+      .getElementById("loginBtn")
+      .addEventListener(
+        "click",
+        async function(){
+
+          loginMessage.textContent =
+            "Ingresando...";
+
+
+          const email =
+            document.getElementById(
+              "email"
+            ).value.trim();
+
+
+          const password =
+            document.getElementById(
+              "password"
+            ).value;
+
+
+          const {
+            error
+          } =
+            await sb.auth.signInWithPassword({
+              email,
+              password
+            });
+
+
+          if(error){
+
+            loginMessage.textContent =
+              "Correo o contraseña incorrectos.";
+
+            return;
+
+          }
+
+
+          cargarPanel();
+
+        }
+      );
+
+
+    document
+      .getElementById("logoutBtn")
+      .addEventListener(
+        "click",
+        async function(){
+
+          await sb.auth.signOut();
+
+          mostrarLogin();
+
+        }
+      );
+
+
+    document
+      .getElementById("recargarBtn")
+      .addEventListener(
+        "click",
+        cargarReclamaciones
+      );
+
+
+    document
+      .getElementById("estadoFiltro")
+      .addEventListener(
+        "change",
+        cargarReclamaciones
+      );
+
+
+    document
+      .getElementById("guardarRespuestaBtn")
+      .addEventListener(
+        "click",
+        guardarRespuesta
+      );
+
+
+    sb.auth.onAuthStateChange(
+      () => cargarPanel()
+    );
+
+
+    cargarPanel();
+
+  </script>
+
+</body>
+
+</html>
