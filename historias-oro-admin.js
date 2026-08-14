@@ -1,586 +1,688 @@
-(function(){
-"use strict";
+/* BABY GOLDEN PERÚ — Historias de Oro
+   Galería premium de 6 fotos + visor ampliado.
+*/
 
-function start(){
+(function () {
+  "use strict";
 
-  const panel = document.getElementById("panelView");
-  const sb = window.supabaseClient;
+  const SB_URL =
+    "https://cxgcmrpqqaachnfavplh.supabase.co";
 
-  if(!panel || !sb || panel.classList.contains("hidden")){
-    return setTimeout(start,500);
-  }
+  const SB_KEY =
+    "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
-  if(document.getElementById("historiasOroAdmin")) return;
+  async function cargarHistoriasDeOro() {
 
-  const modulo = document.createElement("section");
+    try {
 
-  modulo.id = "historiasOroAdmin";
-  modulo.className = "card";
+      if (!window.supabase) return;
 
-  modulo.innerHTML = `
+      const sb =
+        window.supabase.createClient(
+          SB_URL,
+          SB_KEY
+        );
+
+      const { data, error } =
+        await sb
+          .from("site_gallery")
+          .select(
+            "slot,imagen_url,title,caption,published"
+          )
+          .eq("published", true)
+          .in(
+            "slot",
+            [
+              "historia_1",
+              "historia_2",
+              "historia_3",
+              "historia_4",
+              "historia_5",
+              "historia_6"
+            ]
+          )
+          .order(
+            "orden",
+            { ascending: true }
+          );
+
+      if (error) {
+        console.warn(
+          "Historias de Oro:",
+          error.message
+        );
+        return;
+      }
+
+      const fotos =
+        (data || [])
+          .filter(item => item.imagen_url);
+
+      if (!fotos.length) return;
+
+      const antigua =
+        document.querySelector(
+          ".stories-carousel"
+        );
+
+      if (!antigua) return;
+
+      antigua.style.display = "none";
+
+      let galeria =
+        document.getElementById(
+          "historiasOroPremium"
+        );
+
+      if (galeria) {
+        galeria.remove();
+      }
+
+      galeria =
+        document.createElement("div");
+
+      galeria.id =
+        "historiasOroPremium";
+
+      galeria.innerHTML = `
+
 <style>
 
-#historiasOroAdmin{
-  margin-top:28px;
+#historiasOroPremium{
+  width:100%;
 }
 
-#historiasOroAdmin .ho-k{
-  color:#b78324;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:2.5px;
-}
+#historiasOroPremium .ho-gallery{
 
-#historiasOroAdmin h2{
-  margin:6px 0;
-  font-family:Georgia,serif;
-  font-weight:500;
-  color:#332a22;
-}
+  width:100%;
 
-#historiasOroAdmin .ho-s{
-  color:#777;
-  font-size:13px;
-  margin:8px 0 22px;
-}
-
-#historiasOroAdmin .ho-g{
   display:grid;
-  grid-template-columns:repeat(4,1fr);
-  gap:16px;
+
+  grid-template-columns:
+    repeat(6,minmax(0,1fr));
+
+  gap:12px;
+
 }
 
-#historiasOroAdmin .ho-i{
-  border:1px solid #e7dfd4;
-  border-radius:16px;
-  padding:14px;
-  background:#fffdf9;
-}
+#historiasOroPremium .ho-card{
 
-#historiasOroAdmin .ho-n{
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:1.5px;
-  color:#b78324;
-  margin-bottom:8px;
-}
+  position:relative;
 
-#historiasOroAdmin .ho-p{
-  width:100%;
-  aspect-ratio:1;
-  border-radius:12px;
+  height:390px;
+
   overflow:hidden;
-  background:#f1ece4;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin-bottom:10px;
-}
 
-#historiasOroAdmin .ho-p img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
+  border-radius:20px;
 
-#historiasOroAdmin .ho-e{
-  color:#9b9389;
-  font-size:11px;
-  text-align:center;
-}
+  background:#e8ddce;
 
-#historiasOroAdmin input[type=file],
-#historiasOroAdmin input[type=text]{
-  width:100%;
-  box-sizing:border-box;
-  font-size:11px;
-}
-
-#historiasOroAdmin input[type=text]{
-  margin-top:8px;
-  border:1px solid #ded6cb;
-  border-radius:9px;
-  padding:9px 10px;
-}
-
-#historiasOroAdmin .ho-a{
-  display:flex;
-  gap:10px;
-  margin-top:20px;
-  flex-wrap:wrap;
-}
-
-#historiasOroAdmin button{
-  border:0;
-  border-radius:999px;
-  padding:11px 18px;
   cursor:pointer;
-  font-weight:700;
-  font-size:11px;
+
 }
 
-#historiasOroAdmin .ho-save{
-  background:#b78324;
+#historiasOroPremium .ho-card img{
+
+  width:100%;
+
+  height:100%;
+
+  object-fit:cover;
+
+  display:block;
+
+  transition:
+    transform .6s ease;
+
+}
+
+#historiasOroPremium
+.ho-card:hover img{
+
+  transform:scale(1.045);
+
+}
+
+#historiasOroPremium
+.ho-card::after{
+
+  content:"";
+
+  position:absolute;
+
+  inset:0;
+
+  background:
+    linear-gradient(
+      to top,
+      rgba(25,18,12,.55),
+      transparent 45%
+    );
+
+  pointer-events:none;
+
+}
+
+#historiasOroPremium .ho-label{
+
+  position:absolute;
+
+  z-index:2;
+
+  left:16px;
+
+  right:12px;
+
+  bottom:16px;
+
   color:#fff;
+
+  font-size:8px;
+
+  font-weight:700;
+
+  letter-spacing:1.8px;
+
+  text-transform:uppercase;
+
 }
 
-#historiasOroAdmin .ho-refresh{
-  background:#eee8df;
-  color:#40372f;
-}
 
-#historiasOroAdmin .ho-msg{
+/* LIGHTBOX */
+
+#hoLightbox{
+
+  position:fixed;
+
+  inset:0;
+
+  z-index:99999;
+
   display:none;
-  margin-top:12px;
-  padding:10px;
-  border-radius:10px;
-  font-size:12px;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:30px;
+
+  background:
+    rgba(20,16,12,.94);
+
+  backdrop-filter:blur(16px);
+
+  -webkit-backdrop-filter:blur(16px);
+
 }
 
-#historiasOroAdmin .ok{
-  display:block;
-  background:#edf7ef;
-  color:#2d7040;
+#hoLightbox.active{
+
+  display:flex;
+
 }
 
-#historiasOroAdmin .err{
-  display:block;
-  background:#fbecec;
-  color:#963d3d;
+#hoLightboxImage{
+
+  max-width:88vw;
+
+  max-height:86vh;
+
+  width:auto;
+
+  height:auto;
+
+  object-fit:contain;
+
+  border-radius:16px;
+
+  box-shadow:
+    0 35px 100px
+    rgba(0,0,0,.5);
+
 }
 
-@media(max-width:900px){
+#hoLightbox
+.ho-close,
+#hoLightbox
+.ho-prev,
+#hoLightbox
+.ho-next{
 
-  #historiasOroAdmin .ho-g{
-    grid-template-columns:repeat(2,1fr);
+  position:absolute;
+
+  width:46px;
+
+  height:46px;
+
+  border:
+    1px solid
+    rgba(255,255,255,.32);
+
+  border-radius:50%;
+
+  background:
+    rgba(255,255,255,.08);
+
+  color:#fff;
+
+  cursor:pointer;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  font-size:27px;
+
+}
+
+#hoLightbox .ho-close{
+
+  top:24px;
+
+  right:26px;
+
+}
+
+#hoLightbox .ho-prev{
+
+  left:24px;
+
+  top:50%;
+
+  transform:
+    translateY(-50%);
+
+}
+
+#hoLightbox .ho-next{
+
+  right:24px;
+
+  top:50%;
+
+  transform:
+    translateY(-50%);
+
+}
+
+
+/* TABLET */
+
+@media(max-width:1000px){
+
+  #historiasOroPremium
+  .ho-gallery{
+
+    grid-template-columns:
+      repeat(3,1fr);
+
+  }
+
+  #historiasOroPremium
+  .ho-card{
+
+    height:330px;
+
   }
 
 }
 
-@media(max-width:560px){
 
-  #historiasOroAdmin .ho-g{
-    grid-template-columns:1fr;
+/* CELULAR */
+
+@media(max-width:600px){
+
+  #historiasOroPremium
+  .ho-gallery{
+
+    display:flex;
+
+    overflow-x:auto;
+
+    gap:12px;
+
+    scroll-snap-type:
+      x mandatory;
+
+    scrollbar-width:none;
+
+    padding:
+      0 18px 8px;
+
+    margin:
+      0 -18px;
+
+  }
+
+  #historiasOroPremium
+  .ho-gallery::-webkit-scrollbar{
+
+    display:none;
+
+  }
+
+  #historiasOroPremium
+  .ho-card{
+
+    flex:
+      0 0 88vw;
+
+    height:470px;
+
+    border-radius:22px;
+
+    scroll-snap-align:center;
+
+  }
+
+  #hoLightbox{
+
+    padding:15px;
+
+  }
+
+  #hoLightboxImage{
+
+    max-width:94vw;
+
+    max-height:78vh;
+
+    border-radius:12px;
+
+  }
+
+  #hoLightbox .ho-prev{
+
+    left:10px;
+
+  }
+
+  #hoLightbox .ho-next{
+
+    right:10px;
+
+  }
+
+  #hoLightbox .ho-close{
+
+    top:15px;
+
+    right:15px;
+
   }
 
 }
 
 </style>
 
-<div class="ho-k">
-HISTORIAS DE ORO
-</div>
 
-<h2>
-Fotos de nuestra familia
-</h2>
+<div class="ho-gallery"></div>
 
-<div class="ho-s">
-Sube hasta 6 Goldens y fotos grupales que aparecerán en la web.
-</div>
-
-<div class="ho-g">
-
-${[1,2,3,4,5,6].map(n=>`
-
-<div class="ho-i">
-
-<div class="ho-n">
-FOTO 0${n}
-</div>
-
-<div class="ho-p" id="hoP${n}">
-<div class="ho-e">
-Sin fotografía
-</div>
-</div>
-
-<input
-id="hoF${n}"
-type="file"
-accept="image/jpeg,image/png,image/webp"
->
-
-<input
-id="hoT${n}"
-type="text"
-placeholder="Título opcional"
->
-
-</div>
-
-`).join("")}
-
-</div>
-
-<div class="ho-a">
-
-<button
-class="ho-save"
-id="hoSave"
->
-GUARDAR FOTOS
-</button>
-
-<button
-class="ho-refresh"
-id="hoRefresh"
->
-ACTUALIZAR
-</button>
-
-</div>
 
 <div
-id="hoMsg"
-class="ho-msg"
-></div>
+  id="hoLightbox"
+  aria-hidden="true"
+>
+
+  <button
+    class="ho-close"
+    aria-label="Cerrar"
+  >
+    ×
+  </button>
+
+  <button
+    class="ho-prev"
+    aria-label="Anterior"
+  >
+    ‹
+  </button>
+
+  <img
+    id="hoLightboxImage"
+    src=""
+    alt="Historia de Oro"
+  >
+
+  <button
+    class="ho-next"
+    aria-label="Siguiente"
+  >
+    ›
+  </button>
+
+</div>
+
 `;
 
-  panel.appendChild(modulo);
-
-  const mensaje = (texto,ok) => {
-
-    const caja = document.getElementById("hoMsg");
-
-    caja.textContent = texto;
-
-    caja.className =
-      "ho-msg " +
-      (ok ? "ok" : "err");
-
-  };
-
-
-  /* VISTA PREVIA */
-
-  [1,2,3,4,5,6].forEach(n => {
-
-    document
-      .getElementById("hoF"+n)
-      .addEventListener("change",function(){
-
-        const archivo = this.files[0];
-
-        if(!archivo) return;
-
-        if(
-          ![
-            "image/jpeg",
-            "image/png",
-            "image/webp"
-          ].includes(archivo.type)
-          ||
-          archivo.size > 8 * 1024 * 1024
-        ){
-
-          mensaje(
-            "La foto debe ser JPG, PNG o WEBP y pesar máximo 8 MB.",
-            false
-          );
-
-          this.value="";
-
-          return;
-        }
-
-        const lector = new FileReader();
-
-        lector.onload = function(e){
-
-          document
-            .getElementById("hoP"+n)
-            .innerHTML =
-            `<img src="${e.target.result}" alt="Vista previa">`;
-
-        };
-
-        lector.readAsDataURL(archivo);
-
-      });
-
-  });
-
-
-  /* CARGAR FOTOS EXISTENTES */
-
-  async function cargarFotos(){
-
-    const resultado =
-      await sb
-      .from("site_gallery")
-      .select(
-        "slot,title,imagen_url"
-      )
-      .in(
-  "slot",
-  [
-    "historia_1",
-    "historia_2",
-    "historia_3",
-    "historia_4",
-    "historia_5",
-    "historia_6"
-  ]
-)
-      .order("slot");
-
-    if(resultado.error){
-
-      mensaje(
-        resultado.error.message,
-        false
+      antigua.parentNode.insertBefore(
+        galeria,
+        antigua
       );
 
-      return;
-    }
-
-    (resultado.data || []).forEach(item => {
-
-      const numero =
-        Number(
-          item.slot.replace(
-            "historia_",
-            ""
-          )
+      const gallery =
+        galeria.querySelector(
+          ".ho-gallery"
         );
 
-      if(!numero) return;
+      const lightbox =
+        galeria.querySelector(
+          "#hoLightbox"
+        );
 
-      if(item.imagen_url){
+      const lightboxImage =
+        galeria.querySelector(
+          "#hoLightboxImage"
+        );
 
-        document
-        .getElementById(
-          "hoP"+numero
-        )
-        .innerHTML =
-        `<img src="${item.imagen_url}" alt="Historia de Oro">`;
-
-      }
-
-      document
-      .getElementById(
-        "hoT"+numero
-      )
-      .value =
-      item.title || "";
-
-    });
-
-  }
+      let actual = 0;
 
 
-  /* SUBIR FOTO */
+      fotos.forEach(
+        (item,index) => {
 
-  async function subirFoto(
-    archivo,
-    numero
-  ){
-
-    const extension =
-      archivo.name
-      .split(".")
-      .pop()
-      .toLowerCase();
-
-    const nombre =
-      `historias/${Date.now()}-${numero}-${Math.random().toString(36).slice(2)}.${extension}`;
-
-    const subida =
-      await sb.storage
-      .from("web-public")
-      .upload(
-        nombre,
-        archivo,
-        {
-          cacheControl:"31536000",
-          upsert:false,
-          contentType:archivo.type
-        }
-      );
-
-    if(subida.error)
-      throw subida.error;
-
-    return sb.storage
-      .from("web-public")
-      .getPublicUrl(nombre)
-      .data
-      .publicUrl;
-
-  }
-
-
-  /* GUARDAR */
-
-  async function guardar(){
-
-    const boton =
-      document.getElementById("hoSave");
-
-    boton.disabled=true;
-
-    boton.textContent=
-      "GUARDANDO...";
-
-    try{
-
-    for(
-  const numero of [1,2,3,4,5,6]
-){
-
-  const archivo =
-          document
-          .getElementById(
-            "hoF"+numero
-          )
-          .files[0];
-
-        const titulo =
-          document
-          .getElementById(
-            "hoT"+numero
-          )
-          .value
-          .trim();
-
-        let url=null;
-
-
-        if(archivo){
-
-          url =
-            await subirFoto(
-              archivo,
-              numero
+          const card =
+            document.createElement(
+              "article"
             );
 
-        }else{
+          card.className =
+            "ho-card";
 
-          const existente =
-            await sb
-            .from("site_gallery")
-            .select("imagen_url")
-            .eq(
-              "slot",
-              "historia_"+numero
-            )
-            .maybeSingle();
+          card.innerHTML = `
 
-          if(existente.error)
-            throw existente.error;
+<img
+  src="${item.imagen_url}"
+  alt="${
+    item.title ||
+    "Historia de Oro — Baby Golden Perú"
+  }"
+>
 
-          url =
-            existente.data
-            ?.imagen_url || null;
+${
+  item.title
+  ?
+  `<div class="ho-label">
+    ${item.title}
+  </div>`
+  :
+  ""
+}
+
+`;
+
+          card.addEventListener(
+            "click",
+            () => abrir(index)
+          );
+
+          gallery.appendChild(
+            card
+          );
 
         }
+      );
 
 
-        if(!url) continue;
+      function abrir(index){
 
+        actual =
+          (index + fotos.length)
+          % fotos.length;
 
-        const guardado =
-          await sb
-          .from("site_gallery")
-          .upsert({
+        lightboxImage.src =
+          fotos[actual]
+            .imagen_url;
 
-            slot:
-              "historia_"+numero,
+        lightboxImage.alt =
+          fotos[actual].title ||
+          "Historia de Oro — Baby Golden Perú";
 
-            title:
-              titulo || null,
+        lightbox.classList.add(
+          "active"
+        );
 
-            caption:
-              titulo || null,
+        lightbox.setAttribute(
+          "aria-hidden",
+          "false"
+        );
 
-            imagen_url:
-              url,
-
-            orden:
-              numero,
-
-            activo:
-              true,
-
-            published:
-              true,
-
-            updated_at:
-              new Date().toISOString()
-
-          },{
-            onConflict:"slot"
-          });
-
-
-        if(guardado.error)
-          throw guardado.error;
+        document.body.style.overflow =
+          "hidden";
 
       }
 
 
-      [1,2,3,4,5,6].forEach(n=>{
+      function cerrar(){
 
-        document
-        .getElementById(
-          "hoF"+n
-        )
-        .value="";
+        lightbox.classList.remove(
+          "active"
+        );
 
-      });
+        lightbox.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+        document.body.style.overflow =
+          "";
+
+      }
 
 
-      mensaje(
-        "Fotos de Historias de Oro guardadas correctamente.",
-        true
+      function siguiente(){
+
+        abrir(actual + 1);
+
+      }
+
+
+      function anterior(){
+
+        abrir(actual - 1);
+
+      }
+
+
+      lightbox
+        .querySelector(".ho-close")
+        .onclick = cerrar;
+
+      lightbox
+        .querySelector(".ho-next")
+        .onclick = siguiente;
+
+      lightbox
+        .querySelector(".ho-prev")
+        .onclick = anterior;
+
+
+      lightbox.addEventListener(
+        "click",
+        e => {
+
+          if(
+            e.target === lightbox
+          ){
+
+            cerrar();
+
+          }
+
+        }
       );
 
-      await cargarFotos();
 
+      document.addEventListener(
+        "keydown",
+        e => {
 
-    }catch(error){
+          if(
+            !lightbox
+              .classList
+              .contains("active")
+          ){
 
-      console.error(error);
+            return;
 
-      mensaje(
-        "No se pudieron guardar las fotos: " +
-        (error.message || "error"),
-        false
+          }
+
+          if(
+            e.key === "Escape"
+          ){
+
+            cerrar();
+
+          }
+
+          if(
+            e.key === "ArrowRight"
+          ){
+
+            siguiente();
+
+          }
+
+          if(
+            e.key === "ArrowLeft"
+          ){
+
+            anterior();
+
+          }
+
+        }
       );
 
-    }finally{
 
-      boton.disabled=false;
+    } catch(error){
 
-      boton.textContent=
-        "GUARDAR FOTOS";
+      console.warn(
+        "Error cargando Historias de Oro:",
+        error
+      );
 
     }
 
   }
 
 
-  document
-  .getElementById("hoSave")
-  .addEventListener(
-    "click",
-    guardar
-  );
+  if(
+    document.readyState ===
+    "loading"
+  ){
 
+    document.addEventListener(
+      "DOMContentLoaded",
+      cargarHistoriasDeOro
+    );
 
-  document
-  .getElementById("hoRefresh")
-  .addEventListener(
-    "click",
-    cargarFotos
-  );
+  }else{
 
+    cargarHistoriasDeOro();
 
-  cargarFotos();
-
-}
-
-start();
+  }
 
 })();
