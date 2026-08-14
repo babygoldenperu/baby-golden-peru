@@ -880,11 +880,23 @@
       if(error){
 
         tableMessage.textContent =
-          "No se pudieron cargar las reclamaciones.";
+          "No se pudieron cargar las reclamaciones: " +
+          error.message;
+
+        console.error(
+          "Error al cargar reclamaciones:",
+          error
+        );
 
         return;
 
       }
+
+
+      const dataNormalizada =
+        Array.isArray(data)
+          ? data
+          : [];
 
 
       const body =
@@ -896,7 +908,7 @@
       body.innerHTML = "";
 
 
-      if(!data.length){
+      if(!dataNormalizada.length){
 
         tableMessage.textContent =
           "No hay reclamaciones para mostrar.";
@@ -907,10 +919,10 @@
 
 
       tableMessage.textContent =
-        `${data.length} reclamación(es).`;
+        `${dataNormalizada.length} reclamación(es).`;
 
 
-      data.forEach(item => {
+      dataNormalizada.forEach(item => {
 
         const row =
           document.createElement("tr");
@@ -1253,4 +1265,3 @@
 </body>
 
 </html>
-
