@@ -176,12 +176,12 @@ Fotos de nuestra familia
 </h2>
 
 <div class="ho-s">
-Sube los Goldens y las fotos grupales que aparecerán en la web.
+Sube hasta 6 Goldens y fotos grupales que aparecerán en la web.
 </div>
 
 <div class="ho-g">
 
-${[1,2,3,4].map(n=>`
+${[1,2,3,4,5,6].map(n=>`
 
 <div class="ho-i">
 
@@ -313,14 +313,16 @@ class="ho-msg"
         "slot,title,imagen_url"
       )
       .in(
-        "slot",
-        [
-          "historia_1",
-          "historia_2",
-          "historia_3",
-          "historia_4"
-        ]
-      )
+  "slot",
+  [
+    "historia_1",
+    "historia_2",
+    "historia_3",
+    "historia_4",
+    "historia_5",
+    "historia_6"
+  ]
+)
       .order("slot");
 
     if(resultado.error){
@@ -423,9 +425,9 @@ class="ho-msg"
 
     try{
 
-      for(
-        const numero of [1,2,3,4]
-      ){
+     for(
+  const numero of [1,2,3,4,5,6]
+)
 
         const archivo =
           document
@@ -518,7 +520,7 @@ class="ho-msg"
       }
 
 
-      [1,2,3,4].forEach(n=>{
+      [1,2,3,4,5,6].forEach(n=>{
 
         document
         .getElementById(
