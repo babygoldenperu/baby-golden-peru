@@ -35,9 +35,11 @@
             "slot",
             [
               "historia_1",
-              "historia_2",
-              "historia_3",
-              "historia_4"
+"historia_2",
+"historia_3",
+"historia_4",
+"historia_5",
+"historia_6"
             ]
           )
           .order(
