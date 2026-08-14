@@ -1815,7 +1815,7 @@ const supabaseClient =
     SUPABASE_URL,
     SUPABASE_KEY
   );
-  
+  window.supabaseClient = supabaseClient;
 function escaparHTML(valor) {
 
   if (valor === null || valor === undefined) {
