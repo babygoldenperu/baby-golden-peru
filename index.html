@@ -1227,22 +1227,29 @@
       header{position:sticky}
 
       .nav{
-        min-height:auto;
-        padding:10px 12px 12px;
-        flex-direction:column;
-        gap:8px;
+        min-height:64px;
+        padding:8px 12px;
+        flex-direction:row;
+        align-items:center;
+        gap:10px;
+        overflow:hidden;
       }
 
-      .logo{width:145px}
+      .logo{
+        width:112px;
+        flex:0 0 auto;
+      }
 
       .menu{
-        width:100%;
+        width:auto;
+        min-width:0;
+        flex:1;
         justify-content:flex-start;
         gap:6px 14px;
         flex-wrap:nowrap;
         overflow-x:auto;
         overflow-y:hidden;
-        padding:2px 4px 6px;
+        padding:2px 4px 5px;
         scrollbar-width:none;
         -webkit-overflow-scrolling:touch;
       }
@@ -1258,9 +1265,13 @@
       }
 
       .header-button{
-        min-height:38px;
-        padding:9px 12px!important;
+        min-height:34px;
+        padding:8px 12px!important;
         font-size:8px!important;
+      }
+
+      .nav-actions{
+        flex:0 0 auto;
       }
 
       .heart{font-size:19px}
@@ -1974,6 +1985,12 @@
 
         <a href="fotos.html">FOTOS</a>
 
+        <a href="id.html">BUSCAR BABY GOLDEN ID</a>
+
+        <a href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html">
+          MI CUENTA
+        </a>
+
         <a href="#contacto">CONTACTO</a>
 
         <a
@@ -2489,14 +2506,6 @@
       ♥ Una pata a la vez, construimos una comunidad mejor.
     </p>
 
-    <div class="footer-links" aria-label="Enlaces principales">
-      <a href="#tienda">Tienda</a>
-      <a href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html">Mi cuenta</a>
-      <a href="registro.html">Registrar mi perrito</a>
-      <a href="id.html">Buscar Baby Golden ID</a>
-      <a href="beneficios.html">Beneficios</a>
-    </div>
-
   </footer>
 
 
@@ -2935,3 +2944,4 @@
 <script src="historias-oro-web.js"></script>
 </body>
 </html>
+
