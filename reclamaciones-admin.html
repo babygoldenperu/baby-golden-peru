@@ -860,30 +860,21 @@
         "Cargando reclamaciones...";
 
 
-      let query =
-        sb
-          .from("reclamaciones")
-          .select("*")
-          .order("created_at",{ascending:false});
-
-
       const filtro =
         document.getElementById("estadoFiltro").value;
-
-
-      if(filtro){
-
-        query =
-          query.eq("estado",filtro);
-
-      }
 
 
       const {
         data,
         error
       } =
-        await query;
+        await sb.rpc(
+          "obtener_reclamaciones_admin",
+          {
+            p_estado:
+              filtro || null
+          }
+        );
 
 
       if(error){
@@ -1262,3 +1253,4 @@
 </body>
 
 </html>
+
