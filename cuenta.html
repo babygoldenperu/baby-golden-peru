@@ -24,109 +24,1003 @@
 
     body {
       margin: 0;
+
+      background: #f7f0e6;
+      color: #3b2b20;
+
       font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      color: #222;
     }
 
-    .container {
+
+    /* =========================================
+       CABECERA
+       ========================================= */
+
+    header {
+      background: #f7f0e6;
+
+      border-bottom: 1px solid #ded1bf;
+    }
+
+
+    .nav {
       width: 100%;
-      max-width: 480px;
-      margin: 50px auto;
-      padding: 20px;
+      max-width: 1280px;
+
+      min-height: 76px;
+
+      margin: auto;
+      padding: 0 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 25px;
     }
 
-    .card {
-      background: #fff;
-      border-radius: 18px;
-      padding: 30px;
-      box-shadow: 0 8px 30px rgba(0,0,0,.08);
+
+    .logo {
+      width: 155px;
+
+      display: block;
     }
 
-    h1 {
-      text-align: center;
+
+    .menu {
+      display: flex;
+      align-items: center;
+
+      gap: 20px;
+
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .6px;
+    }
+
+
+    .menu a {
+      position: relative;
+
+      color: #3b2b20;
+      text-decoration: none;
+
+      transition: .25s ease;
+    }
+
+
+    .menu a:hover {
+      color: #b77b20;
+
+      transform: translateY(-2px);
+    }
+
+
+    .menu a:not(.header-button)::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      bottom: -7px;
+
+      width: 0;
+      height: 1px;
+
+      background: #b77b20;
+
+      transition: .25s ease;
+    }
+
+
+    .menu a:not(.header-button):hover::after {
+      width: 100%;
+    }
+
+
+    .header-button {
+      padding: 12px 17px;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+
+      color: #fff !important;
+    }
+
+
+    /* =========================================
+       ESTRUCTURA
+       ========================================= */
+
+    .page {
+      width: 100%;
+      max-width: 1180px;
+
+      margin: auto;
+
+      padding: 60px 28px 90px;
+    }
+
+
+    .eyebrow {
+      color: #a76f20;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: 3px;
+
       margin-bottom: 8px;
     }
 
-    .subtitle {
-      text-align: center;
-      color: #777;
-      margin-bottom: 25px;
+
+    .page-title {
+      margin: 0 0 10px;
+
+      font-family: Georgia, serif;
+
+      font-size: 48px;
+      font-weight: 500;
     }
 
-    label {
-      display: block;
-      margin-top: 15px;
-      margin-bottom: 6px;
+
+    .page-subtitle {
+      margin: 0 0 38px;
+
+      color: #765f4c;
+
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+
+    .account-layout {
+      display: grid;
+
+      grid-template-columns: 225px minmax(0, 1fr);
+
+      gap: 55px;
+
+      align-items: start;
+    }
+
+
+    /* =========================================
+       MENU DE CUENTA
+       ========================================= */
+
+    .account-menu {
+      padding-top: 5px;
+    }
+
+
+    .welcome {
+      display: flex;
+      align-items: center;
+
+      gap: 13px;
+
+      margin-bottom: 32px;
+    }
+
+
+    .avatar {
+      width: 58px;
+      height: 58px;
+
+      border-radius: 50%;
+
+      background: #dfd0bd;
+
+      display: grid;
+      place-items: center;
+
+      color: #6d513d;
+
+      font-family: Georgia, serif;
+
+      font-size: 22px;
       font-weight: 600;
     }
 
-    input {
-      width: 100%;
-      padding: 13px;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 15px;
+
+    .welcome-small {
+      margin-bottom: 3px;
+
+      color: #765f4c;
+
+      font-size: 11px;
     }
 
-    button {
+
+    .welcome-name {
+      max-width: 145px;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      color: #3b2b20;
+
+      font-family: Georgia, serif;
+
+      font-size: 18px;
+    }
+
+
+    .account-nav {
+      display: flex;
+      flex-direction: column;
+
+      border-left: 1px solid #d9c9b6;
+    }
+
+
+    .account-nav button {
+      position: relative;
+
       width: 100%;
-      padding: 13px;
-      margin-top: 18px;
-      border: none;
-      border-radius: 10px;
+
+      padding: 14px 18px;
+
+      border: 0;
+
+      background: transparent;
+
+      color: #765f4c;
+
+      text-align: left;
+
+      font-size: 12px;
+
       cursor: pointer;
+
+      transition: .2s ease;
+    }
+
+
+    .account-nav button:hover {
+      color: #a76f20;
+
+      background: rgba(255,255,255,.35);
+    }
+
+
+    .account-nav button.active {
+      color: #3b2b20;
+
+      background: rgba(255,255,255,.55);
+
       font-weight: 700;
-      font-size: 15px;
     }
 
-    .primary {
-      background: #222;
-      color: #fff;
+
+    .account-nav button.active::before {
+      content: "";
+
+      position: absolute;
+
+      left: -2px;
+      top: 0;
+      bottom: 0;
+
+      width: 3px;
+
+      background: #b77b20;
     }
 
-    .secondary {
-      background: #eee;
-      color: #222;
+
+    .logout-nav {
+      margin-top: 15px;
+
+      color: #9b493b !important;
     }
 
-    .link {
-      text-align: center;
-      margin-top: 18px;
-      cursor: pointer;
-      color: #555;
-      font-size: 14px;
+
+    /* =========================================
+       CONTENIDO
+       ========================================= */
+
+    .account-content {
+      min-width: 0;
     }
 
-    .hidden {
+
+    .account-section {
       display: none;
     }
+
+
+    .account-section.active {
+      display: block;
+    }
+
+
+    .section-title {
+      margin: 0 0 25px;
+
+      font-family: Georgia, serif;
+
+      font-size: 34px;
+      font-weight: 500;
+    }
+
+
+    .profile-card {
+      padding: 30px 32px;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+      border-radius: 4px;
+    }
+
+
+    .profile-grid {
+      display: grid;
+
+      grid-template-columns:
+        repeat(2, minmax(0, 1fr));
+
+      column-gap: 55px;
+      row-gap: 30px;
+    }
+
+
+    .profile-field {
+      min-width: 0;
+    }
+
+
+    .profile-field.full {
+      grid-column: 1 / -1;
+    }
+
+
+    .profile-label {
+      margin-bottom: 8px;
+
+      color: #765f4c;
+
+      font-size: 11px;
+    }
+
+
+    .profile-value {
+      min-height: 22px;
+
+      color: #3b2b20;
+
+      font-family: Georgia, serif;
+
+      font-size: 16px;
+
+      overflow-wrap: anywhere;
+    }
+
+
+    .profile-note {
+      margin-top: 28px;
+      padding-top: 20px;
+
+      border-top: 1px solid #eadfce;
+
+      color: #8a7564;
+
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       TARJETAS GENERALES
+       ========================================= */
+
+    .info-card {
+      padding: 28px 30px;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+      border-radius: 4px;
+
+      margin-bottom: 18px;
+    }
+
+
+    .info-card h3 {
+      margin: 0 0 9px;
+
+      font-family: Georgia, serif;
+
+      font-size: 21px;
+      font-weight: 500;
+    }
+
+
+    .info-card p {
+      margin: 0;
+
+      color: #765f4c;
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+
+    /* =========================================
+       PEDIDOS
+       ========================================= */
+
+    .orders-list {
+      display: flex;
+      flex-direction: column;
+
+      gap: 13px;
+    }
+
+
+    .order-card {
+      padding: 20px 22px;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+      border-radius: 4px;
+    }
+
+
+    .order-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      gap: 15px;
+    }
+
+
+    .order-number {
+      margin: 0 0 7px;
+
+      font-family: Georgia, serif;
+
+      font-size: 18px;
+    }
+
+
+    .order-date {
+      color: #8a7564;
+
+      font-size: 10px;
+    }
+
+
+    .order-status {
+      padding: 6px 10px;
+
+      border-radius: 999px;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      white-space: nowrap;
+    }
+
+
+    .status-pending {
+      background: #f3e4c9;
+      color: #8a5b12;
+    }
+
+
+    .status-paid {
+      background: #dce9f5;
+      color: #315d7a;
+    }
+
+
+    .status-complete {
+      background: #dcefdc;
+      color: #2f6b35;
+    }
+
+
+    .order-details {
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 15px;
+
+      margin-top: 20px;
+      padding-top: 17px;
+
+      border-top: 1px solid #eadfce;
+    }
+
+
+    .order-detail-label {
+      margin-bottom: 5px;
+
+      color: #8a7564;
+
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+
+    .order-detail-value {
+      color: #3b2b20;
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+
+    .empty-state {
+      padding: 45px 25px;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+
+      text-align: center;
+    }
+
+
+    .empty-state h3 {
+      margin: 0 0 8px;
+
+      font-family: Georgia, serif;
+
+      font-size: 23px;
+      font-weight: 500;
+    }
+
+
+    .empty-state p {
+      margin: 0;
+
+      color: #765f4c;
+
+      font-size: 11px;
+      line-height: 1.7;
+    }
+
+
+    .shop-link {
+      display: inline-block;
+
+      margin-top: 20px;
+
+      padding: 11px 18px;
+
+      border-radius: 999px;
+
+      background: #4a3324;
+
+      color: #fff;
+
+      text-decoration: none;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+
+    /* =========================================
+       AUTENTICACIÓN / DIRECCIONES
+       ========================================= */
+
+    .danger-button {
+      margin-top: 20px;
+
+      padding: 12px 18px;
+
+      border: 1px solid #b88b7f;
+      border-radius: 999px;
+
+      background: transparent;
+
+      color: #9b493b;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    /* =========================================
+       LOGIN
+       ========================================= */
+
+    .auth-wrapper {
+      width: 100%;
+      max-width: 520px;
+
+      margin: 25px auto 0;
+    }
+
+
+    .auth-card {
+      padding: 38px;
+
+      background: #fffaf4;
+
+      border: 1px solid #decdb8;
+      border-radius: 4px;
+    }
+
+
+    .auth-title {
+      margin: 0 0 9px;
+
+      font-family: Georgia, serif;
+
+      font-size: 34px;
+      font-weight: 500;
+    }
+
+
+    .auth-subtitle {
+      margin: 0 0 28px;
+
+      color: #765f4c;
+
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+
+    .field {
+      margin-bottom: 17px;
+    }
+
+
+    .field label {
+      display: block;
+
+      margin-bottom: 7px;
+
+      color: #765f4c;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+
+    .field input {
+      width: 100%;
+
+      padding: 13px;
+
+      border: 1px solid #d9c9b6;
+      border-radius: 4px;
+
+      background: #fff;
+
+      color: #3b2b20;
+
+      outline: none;
+    }
+
+
+    .field input:focus {
+      border-color: #b77b20;
+    }
+
+
+    .auth-button {
+      width: 100%;
+
+      padding: 14px;
+
+      border: 0;
+      border-radius: 999px;
+
+      background: #4a3324;
+
+      color: #fff;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      cursor: pointer;
+    }
+
+
+    .auth-links {
+      display: flex;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-top: 20px;
+    }
+
+
+    .text-button {
+      border: 0;
+
+      background: transparent;
+
+      color: #8a5f27;
+
+      font-size: 10px;
+
+      cursor: pointer;
+    }
+
 
     .message {
+      display: none;
+
       margin-top: 15px;
       padding: 12px;
-      border-radius: 10px;
-      display: none;
-      font-size: 14px;
+
+      border-radius: 4px;
+
+      font-size: 11px;
+      line-height: 1.6;
     }
 
-    .success {
-      background: #e8f5e9;
-      color: #256029;
+
+    .message.success {
+      display: block;
+
+      background: #e6f2e5;
+
+      color: #2f6b35;
     }
 
-    .error {
-      background: #ffebee;
-      color: #b00020;
+
+    .message.error {
+      display: block;
+
+      background: #f8e4e1;
+
+      color: #9b493b;
     }
 
-    .account-email {
+
+    /* =========================================
+       FOOTER
+       ========================================= */
+
+    footer {
+      background: #29251f;
+
+      padding: 45px 25px 35px;
+
+      color: #fff;
+
       text-align: center;
-      padding: 15px;
-      background: #f7f7f7;
-      border-radius: 12px;
-      margin: 20px 0;
-      word-break: break-word;
+    }
+
+
+    .footer-brand {
+      color: #d5a34c;
+
+      font-family: Georgia, serif;
+
+      font-size: 20px;
+    }
+
+
+    footer p {
+      margin: 9px 0;
+
+      color: #aaa197;
+
+      font-size: 11px;
+    }
+
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      gap: 10px 22px;
+
+      max-width: 900px;
+
+      margin: 25px auto 0;
+      padding-top: 20px;
+
+      border-top: 1px solid rgba(255,255,255,.13);
+    }
+
+
+    .footer-links a {
+      color: #e3c99b;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      text-decoration: none;
+    }
+
+
+    /* =========================================
+       RESPONSIVE
+       ========================================= */
+
+    @media(max-width: 850px) {
+
+      .nav {
+        min-height: 65px;
+
+        padding: 8px 12px;
+
+        gap: 12px;
+      }
+
+
+      .logo {
+        width: 112px;
+
+        flex: 0 0 auto;
+      }
+
+
+      .menu {
+        max-width:
+          calc(100vw - 135px);
+
+        overflow-x: auto;
+
+        flex: 1;
+
+        flex-wrap: nowrap;
+
+        justify-content: flex-start;
+
+        gap: 14px;
+
+        scrollbar-width: none;
+      }
+
+
+      .menu::-webkit-scrollbar {
+        display: none;
+      }
+
+
+      .menu a {
+        flex: 0 0 auto;
+
+        font-size: 8px;
+      }
+
+
+      .header-button {
+        padding: 8px 12px;
+      }
+
+
+      .page {
+        padding: 45px 17px 70px;
+      }
+
+
+      .page-title {
+        font-size: 39px;
+      }
+
+
+      .account-layout {
+        grid-template-columns: 1fr;
+
+        gap: 32px;
+      }
+
+
+      .account-menu {
+        padding: 0;
+      }
+
+
+      .welcome {
+        margin-bottom: 18px;
+      }
+
+
+      .account-nav {
+        flex-direction: row;
+
+        overflow-x: auto;
+
+        border-left: 0;
+        border-bottom: 1px solid #d9c9b6;
+
+        scrollbar-width: none;
+      }
+
+
+      .account-nav::-webkit-scrollbar {
+        display: none;
+      }
+
+
+      .account-nav button {
+        width: auto;
+
+        flex: 0 0 auto;
+
+        padding: 13px 15px;
+
+        white-space: nowrap;
+      }
+
+
+      .account-nav button.active::before {
+        left: 0;
+        right: 0;
+        bottom: -1px;
+        top: auto;
+
+        width: auto;
+        height: 3px;
+      }
+
+
+      .logout-nav {
+        margin-top: 0;
+      }
+
+
+      .profile-grid {
+        grid-template-columns: 1fr;
+
+        row-gap: 24px;
+      }
+
+
+      .profile-field.full {
+        grid-column: auto;
+      }
+
+
+      .order-details {
+        grid-template-columns: 1fr 1fr;
+      }
+
+    }
+
+
+    @media(max-width: 520px) {
+
+      .profile-card,
+      .info-card,
+      .order-card,
+      .auth-card {
+        padding: 22px;
+      }
+
+
+      .section-title {
+        font-size: 29px;
+      }
+
+
+      .order-top {
+        flex-direction: column;
+      }
+
+
+      .auth-links {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
     }
 
   </style>
@@ -137,713 +1031,1680 @@
 <body>
 
 
-<div class="container">
+  <!-- =========================================
+       CABECERA
+       ========================================= -->
+
+  <header>
+
+    <nav class="nav">
+
+      <a href="index.html">
+
+        <img
+          src="BABY%20GOLDEN.png"
+          alt="Baby Golden Perú"
+          class="logo"
+        >
+
+      </a>
 
 
-  <!-- LOGIN -->
+      <div class="menu">
 
-  <div
-    id="loginPanel"
-    class="card"
-  >
+        <a href="index.html">
+          INICIO
+        </a>
 
-    <h1>
-      Mi cuenta
-    </h1>
+        <a href="tienda.html">
+          TIENDA
+        </a>
 
-    <div class="subtitle">
+        <a href="beneficios.html">
+          BENEFICIOS
+        </a>
+
+        <a href="fotos.html">
+          FOTOS
+        </a>
+
+        <a href="contacto.html">
+          CONTACTO
+        </a>
+
+        <a
+          href="registro.html"
+          class="header-button"
+        >
+          REGISTRAR MI PERRITO
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================================
+       CONTENIDO PRINCIPAL
+       ========================================= -->
+
+  <main class="page">
+
+
+    <!-- LOGIN -->
+
+    <section
+      id="loginPanel"
+      class="auth-wrapper"
+    >
+
+      <div class="auth-card">
+
+        <div class="eyebrow">
+          BABY GOLDEN PERÚ
+        </div>
+
+        <h1 class="auth-title">
+          Mi cuenta
+        </h1>
+
+        <p class="auth-subtitle">
+          Ingresa a tu cuenta para consultar
+          tus datos y tus compras.
+        </p>
+
+
+        <form id="loginForm">
+
+          <div class="field">
+
+            <label for="loginEmail">
+              Correo electrónico
+            </label>
+
+            <input
+              type="email"
+              id="loginEmail"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="loginPassword">
+              Contraseña
+            </label>
+
+            <input
+              type="password"
+              id="loginPassword"
+              autocomplete="current-password"
+              required
+            >
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="auth-button"
+          >
+            INICIAR SESIÓN
+          </button>
+
+        </form>
+
+
+        <div
+          id="loginMessage"
+          class="message"
+        ></div>
+
+
+        <div class="auth-links">
+
+          <button
+            type="button"
+            class="text-button"
+            id="mostrarRegistro"
+          >
+            CREAR CUENTA
+          </button>
+
+          <button
+            type="button"
+            class="text-button"
+            id="mostrarRecuperar"
+          >
+            ¿OLVIDASTE TU CONTRASEÑA?
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- REGISTRO -->
+
+    <section
+      id="registroPanel"
+      class="auth-wrapper"
+      style="display:none;"
+    >
+
+      <div class="auth-card">
+
+        <div class="eyebrow">
+          BABY GOLDEN PERÚ
+        </div>
+
+        <h1 class="auth-title">
+          Crear cuenta
+        </h1>
+
+        <p class="auth-subtitle">
+          Crea tu cuenta para gestionar tus compras
+          y acceder a tu área personal.
+        </p>
+
+
+        <form id="registroForm">
+
+          <div class="field">
+
+            <label for="registroEmail">
+              Correo electrónico
+            </label>
+
+            <input
+              type="email"
+              id="registroEmail"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="registroPassword">
+              Contraseña
+            </label>
+
+            <input
+              type="password"
+              id="registroPassword"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            >
+
+          </div>
+
+
+          <div class="field">
+
+            <label for="registroPassword2">
+              Confirmar contraseña
+            </label>
+
+            <input
+              type="password"
+              id="registroPassword2"
+              minlength="6"
+              autocomplete="new-password"
+              required
+            >
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="auth-button"
+          >
+            CREAR CUENTA
+          </button>
+
+        </form>
+
+
+        <div
+          id="registroMessage"
+          class="message"
+        ></div>
+
+
+        <div class="auth-links">
+
+          <button
+            type="button"
+            class="text-button"
+            id="volverLogin"
+          >
+            ← VOLVER A INICIAR SESIÓN
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- RECUPERAR -->
+
+    <section
+      id="recuperarPanel"
+      class="auth-wrapper"
+      style="display:none;"
+    >
+
+      <div class="auth-card">
+
+        <div class="eyebrow">
+          BABY GOLDEN PERÚ
+        </div>
+
+        <h1 class="auth-title">
+          Recuperar contraseña
+        </h1>
+
+        <p class="auth-subtitle">
+          Te enviaremos un enlace para recuperar
+          el acceso a tu cuenta.
+        </p>
+
+
+        <form id="recuperarForm">
+
+          <div class="field">
+
+            <label for="recuperarEmail">
+              Correo electrónico
+            </label>
+
+            <input
+              type="email"
+              id="recuperarEmail"
+              autocomplete="email"
+              required
+            >
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="auth-button"
+          >
+            ENVIAR ENLACE
+          </button>
+
+        </form>
+
+
+        <div
+          id="recuperarMessage"
+          class="message"
+        ></div>
+
+
+        <div class="auth-links">
+
+          <button
+            type="button"
+            class="text-button"
+            id="volverLogin2"
+          >
+            ← VOLVER A INICIAR SESIÓN
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CUENTA -->
+
+    <section
+      id="cuentaPanel"
+      style="display:none;"
+    >
+
+      <div class="eyebrow">
+        ÁREA DE CLIENTE
+      </div>
+
+      <h1 class="page-title">
+        Mi cuenta
+      </h1>
+
+      <p class="page-subtitle">
+        Gestiona tu información y consulta
+        tus compras de Baby Golden Perú.
+      </p>
+
+
+      <div class="account-layout">
+
+
+        <!-- MENU -->
+
+        <aside class="account-menu">
+
+          <div class="welcome">
+
+            <div
+              id="avatar"
+              class="avatar"
+            >
+              BG
+            </div>
+
+
+            <div>
+
+              <div class="welcome-small">
+                Hola,
+              </div>
+
+              <div
+                id="welcomeName"
+                class="welcome-name"
+              >
+                Golden Lover
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <nav class="account-nav">
+
+            <button
+              type="button"
+              class="active"
+              data-section="perfil"
+            >
+              Perfil
+            </button>
+
+            <button
+              type="button"
+              data-section="direcciones"
+            >
+              Direcciones
+            </button>
+
+            <button
+              type="button"
+              data-section="autenticacion"
+            >
+              Autenticación
+            </button>
+
+            <button
+              type="button"
+              data-section="pedidos"
+            >
+              Pedidos
+            </button>
+
+            <button
+              type="button"
+              id="cerrarSesion"
+              class="logout-nav"
+            >
+              Salir
+            </button>
+
+          </nav>
+
+        </aside>
+
+
+        <!-- CONTENIDO -->
+
+        <div class="account-content">
+
+
+          <!-- PERFIL -->
+
+          <section
+            id="section-perfil"
+            class="account-section active"
+          >
+
+            <h2 class="section-title">
+              Perfil
+            </h2>
+
+
+            <div class="profile-card">
+
+              <div class="profile-grid">
+
+
+                <div class="profile-field">
+
+                  <div class="profile-label">
+                    Correo electrónico
+                  </div>
+
+                  <div
+                    id="perfilEmail"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                  <div class="profile-label">
+                    Estado de la cuenta
+                  </div>
+
+                  <div
+                    id="perfilEstado"
+                    class="profile-value"
+                  >
+                    Cuenta activa
+                  </div>
+
+                </div>
+
+
+                <div class="profile-field full">
+
+                  <div class="profile-label">
+                    Usuario
+                  </div>
+
+                  <div
+                    id="perfilUsuario"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
+
+              </div>
+
+
+              <div class="profile-note">
+                Tu cuenta está vinculada a tu correo electrónico.
+                Los datos personales adicionales se podrán incorporar
+                posteriormente cuando definamos los campos definitivos
+                del perfil.
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- DIRECCIONES -->
+
+          <section
+            id="section-direcciones"
+            class="account-section"
+          >
+
+            <h2 class="section-title">
+              Direcciones
+            </h2>
+
+
+            <div class="info-card">
+
+              <h3>
+                Mis direcciones
+              </h3>
+
+              <p>
+                Aquí podremos guardar las direcciones que utilices
+                para tus pedidos. Esta sección quedará preparada
+                para conectarla con el sistema de órdenes.
+              </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+              <h3>
+                Próximamente
+              </h3>
+
+              <p>
+                Agregaremos dirección de entrega, distrito,
+                provincia y departamento para facilitar
+                tus futuras compras.
+              </p>
+
+            </div>
+
+          </section>
+
+
+          <!-- AUTENTICACIÓN -->
+
+          <section
+            id="section-autenticacion"
+            class="account-section"
+          >
+
+            <h2 class="section-title">
+              Autenticación
+            </h2>
+
+
+            <div class="info-card">
+
+              <h3>
+                Cuenta protegida
+              </h3>
+
+              <p>
+                Tu acceso está gestionado mediante Supabase Auth.
+                Utilizas tu correo electrónico y contraseña para
+                ingresar a tu cuenta.
+              </p>
+
+            </div>
+
+
+            <div class="info-card">
+
+              <h3>
+                Correo de acceso
+              </h3>
+
+              <p id="authEmail">
+                —
+              </p>
+
+            </div>
+
+
+            <button
+              type="button"
+              id="cerrarSesion2"
+              class="danger-button"
+            >
+              CERRAR SESIÓN
+            </button>
+
+          </section>
+
+
+          <!-- PEDIDOS -->
+
+          <section
+            id="section-pedidos"
+            class="account-section"
+          >
+
+            <h2 class="section-title">
+              Pedidos
+            </h2>
+
+
+            <div id="misOrdenes">
+
+              <div class="empty-state">
+
+                <h3>
+                  Cargando tus pedidos
+                </h3>
+
+                <p>
+                  Estamos consultando tu historial.
+                </p>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================
+       FOOTER
+       ========================================= -->
+
+  <footer>
+
+    <div class="footer-brand">
       Baby Golden Perú
     </div>
 
-
-    <form id="loginForm">
-
-      <label>
-        Correo electrónico
-      </label>
-
-      <input
-        type="email"
-        id="loginEmail"
-        required
-      >
-
-
-      <label>
-        Contraseña
-      </label>
-
-      <input
-        type="password"
-        id="loginPassword"
-        required
-      >
-
-
-      <button
-        type="submit"
-        class="primary"
-      >
-        INICIAR SESIÓN
-      </button>
-
-    </form>
-
-
-    <div
-      id="loginMessage"
-      class="message"
-    ></div>
-
-
-    <div
-      id="mostrarRegistro"
-      class="link"
-    >
-      ¿No tienes cuenta? Crear cuenta
-    </div>
-
-
-    <div
-      id="mostrarRecuperar"
-      class="link"
-    >
-      ¿Olvidaste tu contraseña?
-    </div>
-
-  </div>
-
-
-
-  <!-- REGISTRO -->
-
-  <div
-    id="registroPanel"
-    class="card hidden"
-  >
-
-    <h1>
-      Crear cuenta
-    </h1>
-
-    <div class="subtitle">
-      Baby Golden Perú
-    </div>
-
-
-    <form id="registroForm">
-
-      <label>
-        Correo electrónico
-      </label>
-
-      <input
-        type="email"
-        id="registroEmail"
-        required
-      >
-
-
-      <label>
-        Contraseña
-      </label>
-
-      <input
-        type="password"
-        id="registroPassword"
-        minlength="6"
-        required
-      >
-
-
-      <label>
-        Confirmar contraseña
-      </label>
-
-      <input
-        type="password"
-        id="registroPassword2"
-        minlength="6"
-        required
-      >
-
-
-      <button
-        type="submit"
-        class="primary"
-      >
-        CREAR CUENTA
-      </button>
-
-    </form>
-
-
-    <div
-      id="registroMessage"
-      class="message"
-    ></div>
-
-
-    <div
-      id="volverLogin"
-      class="link"
-    >
-      Ya tengo una cuenta
-    </div>
-
-  </div>
-
-
-
-  <!-- RECUPERAR CONTRASEÑA -->
-
-  <div
-    id="recuperarPanel"
-    class="card hidden"
-  >
-
-    <h1>
-      Recuperar contraseña
-    </h1>
-
-    <div class="subtitle">
-      Te enviaremos un enlace a tu correo
-    </div>
-
-
-    <form id="recuperarForm">
-
-      <label>
-        Correo electrónico
-      </label>
-
-      <input
-        type="email"
-        id="recuperarEmail"
-        required
-      >
-
-
-      <button
-        type="submit"
-        class="primary"
-      >
-        ENVIAR ENLACE
-      </button>
-
-    </form>
-
-
-    <div
-      id="recuperarMessage"
-      class="message"
-    ></div>
-
-
-    <div
-      id="volverLogin2"
-      class="link"
-    >
-      Volver a iniciar sesión
-    </div>
-
-  </div>
-
-
-
-  <!-- CUENTA -->
-
-  <div
-    id="cuentaPanel"
-    class="card hidden"
-  >
-
-    <h1>
-      Mi cuenta
-    </h1>
-
-    <div class="subtitle">
-      Bienvenido a Baby Golden Perú
-    </div>
-
-
-    <div class="account-email">
-
-      <strong>
-        Cuenta:
-      </strong>
-
-      <br>
-
-      <span id="cuentaEmail">
-      </span>
+    <p>
+      Una comunidad de amor, identificación y tenencia responsable.
+    </p>
+
+    <div class="footer-links">
+
+      <a href="terminos.html">
+        Términos y condiciones
+      </a>
+
+      <a href="cambios.html">
+        Cambios y devoluciones
+      </a>
+
+      <a href="privacidad.html">
+        Política de privacidad
+      </a>
+
+      <a href="reclamaciones.html">
+        Libro de reclamaciones
+      </a>
+
+      <a href="contacto.html">
+        Contacto
+      </a>
 
     </div>
 
-
-    <button
-      type="button"
-      class="primary"
-      id="comprarPremium"
-    >
-      PREMIUM — S/30.00
-    </button>
+  </footer>
 
 
-    <button
-      type="button"
-      class="primary"
-      id="comprarBlack"
-    >
-      BLACK — S/36.90
-    </button>
+  <script>
+
+    const SUPABASE_URL =
+      "https://cxgcmrpqqaachnfavplh.supabase.co";
 
 
-    <button
-      type="button"
-      class="secondary"
-      id="cerrarSesion"
-    >
-      <hr
-  style="
-    margin:25px 0;
-    border:none;
-    border-top:1px solid #e5e5e5;
-  "
->
-
-<h2>
-  Mis compras
-</h2>
-
-<div id="misOrdenes">
-
-  <p>
-    Cargando compras...
-  </p>
-
-</div>
-      CERRAR SESIÓN
-    </button>
-
-  </div>
+    const SUPABASE_KEY =
+      "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
 
-</div>
-
-
-<script>
-
-const SUPABASE_URL =
-  "https://cxgcmrpqqaachnfavplh.supabase.co";
-
-const SUPABASE_KEY =
-  "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
-
-
-const supabaseClient =
-  window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-  );
-
-
-
-/* =========================================
-   ELEMENTOS
-   ========================================= */
-
-const loginPanel =
-  document.getElementById(
-    "loginPanel"
-  );
-
-const registroPanel =
-  document.getElementById(
-    "registroPanel"
-  );
-
-const recuperarPanel =
-  document.getElementById(
-    "recuperarPanel"
-  );
-
-const cuentaPanel =
-  document.getElementById(
-    "cuentaPanel"
-  );
-
-
-
-/* =========================================
-   MOSTRAR PANEL
-   ========================================= */
-
-function mostrarPanel(panel) {
-
-  loginPanel.classList.add(
-    "hidden"
-  );
-
-  registroPanel.classList.add(
-    "hidden"
-  );
-
-  recuperarPanel.classList.add(
-    "hidden"
-  );
-
-  cuentaPanel.classList.add(
-    "hidden"
-  );
-
-
-  panel.classList.remove(
-    "hidden"
-  );
-
-}
-
-
-
-/* =========================================
-   CAMBIAR A REGISTRO
-   ========================================= */
-
-document
-  .getElementById("mostrarRegistro")
-  .addEventListener(
-    "click",
-    function() {
-
-      mostrarPanel(
-        registroPanel
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
       );
 
-    }
-  );
 
+    /* =========================================
+       ELEMENTOS
+       ========================================= */
 
-
-/* =========================================
-   VOLVER LOGIN
-   ========================================= */
-
-document
-  .getElementById("volverLogin")
-  .addEventListener(
-    "click",
-    function() {
-
-      mostrarPanel(
-        loginPanel
+    const loginPanel =
+      document.getElementById(
+        "loginPanel"
       );
 
-    }
-  );
-
-
-
-document
-  .getElementById("volverLogin2")
-  .addEventListener(
-    "click",
-    function() {
-
-      mostrarPanel(
-        loginPanel
+    const registroPanel =
+      document.getElementById(
+        "registroPanel"
       );
 
-    }
-  );
-
-
-
-/* =========================================
-   RECUPERAR
-   ========================================= */
-
-document
-  .getElementById("mostrarRecuperar")
-  .addEventListener(
-    "click",
-    function() {
-
-      mostrarPanel(
-        recuperarPanel
+    const recuperarPanel =
+      document.getElementById(
+        "recuperarPanel"
       );
 
-    }
-  );
+    const cuentaPanel =
+      document.getElementById(
+        "cuentaPanel"
+      );
 
 
+    /* =========================================
+       MOSTRAR PANEL
+       ========================================= */
 
-/* =========================================
-   CREAR CUENTA
-   ========================================= */
+    function mostrarPanel(
+      panel
+    ) {
 
-document
-  .getElementById("registroForm")
-  .addEventListener(
-    "submit",
-    async function(event) {
+      loginPanel.style.display =
+        "none";
 
-      event.preventDefault();
+      registroPanel.style.display =
+        "none";
 
+      recuperarPanel.style.display =
+        "none";
 
-      const email =
-        document
-          .getElementById(
-            "registroEmail"
-          )
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const password =
-        document
-          .getElementById(
-            "registroPassword"
-          )
-          .value;
-
-
-      const password2 =
-        document
-          .getElementById(
-            "registroPassword2"
-          )
-          .value;
-
-
-      const message =
-        document.getElementById(
-          "registroMessage"
-        );
-
-
-      message.style.display =
+      cuentaPanel.style.display =
         "none";
 
 
-      if (
-        password !== password2
-      ) {
+      panel.style.display =
+        "block";
 
-        message.className =
-          "message error";
-
-        message.textContent =
-          "Las contraseñas no coinciden.";
-
-        message.style.display =
-          "block";
-
-        return;
-
-      }
+    }
 
 
-      const {
-        data,
-        error
-      } = await supabaseClient.auth.signUp({
+    /* =========================================
+       REGISTRO
+       ========================================= */
 
-        email: email,
+    document
+      .getElementById("mostrarRegistro")
+      .addEventListener(
+        "click",
+        function() {
 
-        password: password,
-
-        options: {
-
-          emailRedirectTo:
-            window.location.origin +
-            "/cuenta.html"
+          mostrarPanel(
+            registroPanel
+          );
 
         }
-
-      });
-
-
-      if (error) {
-
-  console.error(
-    "ERROR REGISTRO:",
-    error
-  );
-
-  message.className =
-    "message error";
-
-  message.textContent =
-    error.message;
-
-  message.style.display =
-    "block";
-
-  return;
-}
+      );
 
 
-message.className =
-  "message success";
+    document
+      .getElementById("volverLogin")
+      .addEventListener(
+        "click",
+        function() {
 
-message.innerHTML = `
-  <strong>¡Cuenta creada!</strong>
-  <br><br>
-  Hemos enviado un correo de confirmación a:
-  <br>
-  <strong>${email}</strong>
-  <br><br>
-  Confirma tu correo para activar tu cuenta.
-  <br><br>
+          mostrarPanel(
+            loginPanel
+          );
 
-  <button
-    type="button"
-    id="reenviarConfirmacion"
-    class="secondary"
-  >
-    REENVIAR CORREO
-  </button>
-`;
+        }
+      );
 
-message.style.display =
-  "block";
 
-      const reenviar =
-  document.getElementById(
-    "reenviarConfirmacion"
-  );
+    document
+      .getElementById("volverLogin2")
+      .addEventListener(
+        "click",
+        function() {
 
-if (reenviar) {
+          mostrarPanel(
+            loginPanel
+          );
 
-  reenviar.addEventListener(
-    "click",
-    async function() {
+        }
+      );
 
-      reenviar.disabled = true;
 
-      reenviar.textContent =
-        "ENVIANDO...";
+    document
+      .getElementById("mostrarRecuperar")
+      .addEventListener(
+        "click",
+        function() {
 
-      const {
-        error
-      } =
-        await supabaseClient.auth.resend({
-          type: "signup",
+          mostrarPanel(
+            recuperarPanel
+          );
 
-          email: email,
+        }
+      );
 
-          options: {
-            emailRedirectTo:
-              window.location.origin +
-              "/cuenta.html"
+
+    /* =========================================
+       CREAR CUENTA
+       ========================================= */
+
+    document
+      .getElementById("registroForm")
+      .addEventListener(
+        "submit",
+        async function(event) {
+
+          event.preventDefault();
+
+
+          const email =
+            document
+              .getElementById(
+                "registroEmail"
+              )
+              .value
+              .trim()
+              .toLowerCase();
+
+
+          const password =
+            document
+              .getElementById(
+                "registroPassword"
+              )
+              .value;
+
+
+          const password2 =
+            document
+              .getElementById(
+                "registroPassword2"
+              )
+              .value;
+
+
+          const message =
+            document.getElementById(
+              "registroMessage"
+            );
+
+
+          message.className =
+            "message";
+
+          message.style.display =
+            "none";
+
+
+          if (
+            password !== password2
+          ) {
+
+            message.className =
+              "message error";
+
+            message.textContent =
+              "Las contraseñas no coinciden.";
+
+            message.style.display =
+              "block";
+
+            return;
+
           }
 
-        });
 
-      if (error) {
+          const {
+            error
+          } =
+            await supabaseClient.auth
+              .signUp({
 
-        reenviar.disabled = false;
+                email: email,
 
-        reenviar.textContent =
-          "REENVIAR CORREO";
+                password: password,
 
-        alert(
-          "No se pudo reenviar el correo: " +
-          error.message
-        );
+                options: {
 
-        return;
-      }
+                  emailRedirectTo:
+                    window.location.origin +
+                    "/cuenta.html"
 
-      reenviar.textContent =
-        "CORREO ENVIADO";
+                }
+
+              });
+
+
+          if (error) {
+
+            console.error(
+              "ERROR REGISTRO:",
+              error
+            );
+
+
+            message.className =
+              "message error";
+
+            message.textContent =
+              error.message;
+
+            message.style.display =
+              "block";
+
+            return;
+
+          }
+
+
+          message.className =
+            "message success";
+
+          message.innerHTML = `
+            <strong>¡Cuenta creada!</strong>
+            <br><br>
+            Hemos enviado un correo de confirmación a:
+            <br>
+            <strong>${escapeHtml(email)}</strong>
+            <br><br>
+            Confirma tu correo para activar tu cuenta.
+          `;
+
+          message.style.display =
+            "block";
+
+
+          document
+            .getElementById(
+              "registroForm"
+            )
+            .reset();
+
+        }
+      );
+
+
+    /* =========================================
+       LOGIN
+       ========================================= */
+
+    document
+      .getElementById("loginForm")
+      .addEventListener(
+        "submit",
+        async function(event) {
+
+          event.preventDefault();
+
+
+          const email =
+            document
+              .getElementById(
+                "loginEmail"
+              )
+              .value
+              .trim()
+              .toLowerCase();
+
+
+          const password =
+            document
+              .getElementById(
+                "loginPassword"
+              )
+              .value;
+
+
+          const message =
+            document.getElementById(
+              "loginMessage"
+            );
+
+
+          message.style.display =
+            "none";
+
+
+          const {
+            data,
+            error
+          } =
+            await supabaseClient.auth
+              .signInWithPassword({
+
+                email: email,
+
+                password: password
+
+              });
+
+
+          if (error) {
+
+            console.error(
+              "ERROR LOGIN:",
+              error
+            );
+
+
+            message.className =
+              "message error";
+
+            message.textContent =
+              error.message;
+
+            message.style.display =
+              "block";
+
+            return;
+
+          }
+
+
+          mostrarCuenta(
+            data.user
+          );
+
+        }
+      );
+
+
+    /* =========================================
+       RECUPERAR CONTRASEÑA
+       ========================================= */
+
+    document
+      .getElementById("recuperarForm")
+      .addEventListener(
+        "submit",
+        async function(event) {
+
+          event.preventDefault();
+
+
+          const email =
+            document
+              .getElementById(
+                "recuperarEmail"
+              )
+              .value
+              .trim()
+              .toLowerCase();
+
+
+          const message =
+            document.getElementById(
+              "recuperarMessage"
+            );
+
+
+          const {
+            error
+          } =
+            await supabaseClient.auth
+              .resetPasswordForEmail(
+                email,
+                {
+
+                  redirectTo:
+                    window.location.origin +
+                    "/cuenta.html"
+
+                }
+              );
+
+
+          if (error) {
+
+            message.className =
+              "message error";
+
+            message.textContent =
+              error.message;
+
+          } else {
+
+            message.className =
+              "message success";
+
+            message.textContent =
+              "Te enviamos un enlace para recuperar tu contraseña.";
+
+          }
+
+
+          message.style.display =
+            "block";
+
+        }
+      );
+
+
+    /* =========================================
+       ESCAPAR HTML
+       ========================================= */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(
+        value ?? ""
+      )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
 
     }
-  );
-
-}
-
-document
-  .getElementById("registroForm")
-  .reset();
-
-    }
-  );
 
 
+    /* =========================================
+       MOSTRAR CUENTA
+       ========================================= */
 
-/* =========================================
-   LOGIN
-   ========================================= */
-
-document
-  .getElementById("loginForm")
-  .addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
+    function mostrarCuenta(
+      user
+    ) {
 
       const email =
-        document
-          .getElementById(
-            "loginEmail"
-          )
-          .value
-          .trim()
-          .toLowerCase();
+        user?.email || "";
 
 
-      const password =
-        document
-          .getElementById(
-            "loginPassword"
-          )
-          .value;
+      const nombre =
+        email
+          ? email.split("@")[0]
+          : "Golden Lover";
 
 
-      const message =
-        document.getElementById(
-          "loginMessage"
+      document.getElementById(
+        "perfilEmail"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "perfilUsuario"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "authEmail"
+      ).textContent =
+        email;
+
+
+      document.getElementById(
+        "welcomeName"
+      ).textContent =
+        nombre;
+
+
+      document.getElementById(
+        "avatar"
+      ).textContent =
+        nombre
+          .substring(0,2)
+          .toUpperCase();
+
+
+      mostrarPanel(
+        cuentaPanel
+      );
+
+
+      activarSeccion(
+        "perfil"
+      );
+
+
+      cargarMisOrdenes();
+
+    }
+
+
+    /* =========================================
+       NAVEGACIÓN DEL PANEL
+       ========================================= */
+
+    function activarSeccion(
+      nombre
+    ) {
+
+      document
+        .querySelectorAll(
+          ".account-section"
+        )
+        .forEach(
+          section => {
+
+            section.classList.remove(
+              "active"
+            );
+
+          }
         );
 
 
-      message.style.display =
-        "none";
+      document
+        .querySelectorAll(
+          ".account-nav button[data-section]"
+        )
+        .forEach(
+          button => {
+
+            button.classList.remove(
+              "active"
+            );
+
+          }
+        );
+
+
+      const section =
+        document.getElementById(
+          "section-" + nombre
+        );
+
+
+      const button =
+        document.querySelector(
+          `[data-section="${nombre}"]`
+        );
+
+
+      if(section) {
+
+        section.classList.add(
+          "active"
+        );
+
+      }
+
+
+      if(button) {
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+      if(nombre === "pedidos") {
+
+        cargarMisOrdenes();
+
+      }
+
+    }
+
+
+    document
+      .querySelectorAll(
+        ".account-nav button[data-section]"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              activarSeccion(
+                this.dataset.section
+              );
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =========================================
+       MIS ÓRDENES
+       ========================================= */
+
+    async function cargarMisOrdenes() {
+
+      const contenedor =
+        document.getElementById(
+          "misOrdenes"
+        );
+
+
+      contenedor.innerHTML = `
+        <div class="empty-state">
+          <h3>
+            Cargando tus pedidos
+          </h3>
+
+          <p>
+            Estamos consultando tu historial.
+          </p>
+        </div>
+      `;
+
+
+      const {
+        data: {
+          user
+        }
+      } =
+        await supabaseClient.auth
+          .getUser();
+
+
+      if(!user) {
+
+        contenedor.innerHTML = `
+          <div class="empty-state">
+            <h3>
+              Sesión requerida
+            </h3>
+
+            <p>
+              Debes iniciar sesión para consultar tus pedidos.
+            </p>
+          </div>
+        `;
+
+        return;
+
+      }
 
 
       const {
         data,
         error
-      } = await supabaseClient.auth
-        .signInWithPassword({
+      } =
+        await supabaseClient
+          .from("ordenes")
+          .select(`
+            id,
+            producto,
+            precio,
+            estado_pago,
+            estado_solicitud,
+            created_at
+          `)
+          .eq(
+            "user_id",
+            user.id
+          )
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          );
 
-          email: email,
 
-          password: password
-
-        });
-
-
-      if (error) {
+      if(error) {
 
         console.error(
-          "ERROR LOGIN:",
+          "ERROR MIS ORDENES:",
           error
         );
 
 
-        message.className =
-          "message error";
+        contenedor.innerHTML = `
+          <div class="empty-state">
+            <h3>
+              No pudimos cargar tus pedidos
+            </h3>
 
-        message.textContent =
-          error.message;
+            <p>
+              Inténtalo nuevamente más tarde.
+            </p>
+          </div>
+        `;
 
-        message.style.display =
-          "block";
+        return;
+
+      }
+
+
+      if(
+        !data ||
+        data.length === 0
+      ) {
+
+        contenedor.innerHTML = `
+          <div class="empty-state">
+
+            <h3>
+              Todavía no tienes pedidos
+            </h3>
+
+            <p>
+              Cuando realices una compra,
+              aparecerá aquí.
+            </p>
+
+            <a
+              href="tienda.html"
+              class="shop-link"
+            >
+              IR A LA TIENDA
+            </a>
+
+          </div>
+        `;
+
+        return;
+
+      }
+
+
+      contenedor.innerHTML =
+        data
+          .map(
+            orden => {
+
+              const estadoPago =
+                String(
+                  orden.estado_pago || ""
+                )
+                .toUpperCase();
+
+
+              const estadoSolicitud =
+                String(
+                  orden.estado_solicitud || ""
+                )
+                .toUpperCase();
+
+
+              let clase =
+                "status-pending";
+
+
+              if(
+                estadoSolicitud === "ATENDIDO" ||
+                estadoSolicitud === "COMPLETADO"
+              ) {
+
+                clase =
+                  "status-complete";
+
+              } else if(
+                estadoPago === "PAGADO" ||
+                estadoPago === "CONFIRMADO"
+              ) {
+
+                clase =
+                  "status-paid";
+
+              }
+
+
+              const fecha =
+                orden.created_at
+                  ? new Date(
+                      orden.created_at
+                    ).toLocaleDateString(
+                      "es-PE",
+                      {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric"
+                      }
+                    )
+                  : "—";
+
+
+              return `
+
+                <article class="order-card">
+
+                  <div class="order-top">
+
+                    <div>
+
+                      <h3 class="order-number">
+                        Orden #${escapeHtml(
+                          orden.id
+                        )}
+                      </h3>
+
+                      <div class="order-date">
+                        ${fecha}
+                      </div>
+
+                    </div>
+
+
+                    <span
+                      class="order-status ${clase}"
+                    >
+                      ${escapeHtml(
+                        orden.estado_solicitud ||
+                        "PENDIENTE"
+                      )}
+                    </span>
+
+                  </div>
+
+
+                  <div class="order-details">
+
+                    <div>
+
+                      <div class="order-detail-label">
+                        Producto
+                      </div>
+
+                      <div class="order-detail-value">
+                        ${escapeHtml(
+                          orden.producto
+                        )}
+                      </div>
+
+                    </div>
+
+
+                    <div>
+
+                      <div class="order-detail-label">
+                        Total
+                      </div>
+
+                      <div class="order-detail-value">
+                        S/${Number(
+                          orden.precio || 0
+                        ).toFixed(2)}
+                      </div>
+
+                    </div>
+
+
+                    <div>
+
+                      <div class="order-detail-label">
+                        Pago
+                      </div>
+
+                      <div class="order-detail-value">
+                        ${escapeHtml(
+                          orden.estado_pago ||
+                          "PENDIENTE"
+                        )}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              `;
+
+            }
+          )
+          .join("");
+
+    }
+
+
+    /* =========================================
+       CERRAR SESIÓN
+       ========================================= */
+
+    async function cerrarSesion() {
+
+      await supabaseClient.auth
+        .signOut();
+
+
+      mostrarPanel(
+        loginPanel
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "cerrarSesion"
+      )
+      .addEventListener(
+        "click",
+        cerrarSesion
+      );
+
+
+    document
+      .getElementById(
+        "cerrarSesion2"
+      )
+      .addEventListener(
+        "click",
+        cerrarSesion
+      );
+
+
+    /* =========================================
+       COMPROBAR SESIÓN
+       ========================================= */
+
+    async function comprobarSesion() {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .getSession();
+
+
+      if(
+        error ||
+        !data.session
+      ) {
+
+        mostrarPanel(
+          loginPanel
+        );
 
         return;
 
@@ -851,410 +2712,40 @@ document
 
 
       mostrarCuenta(
-        data.user
+        data.session.user
       );
 
     }
-  );
 
 
-
-/* =========================================
-   MOSTRAR CUENTA
-   ========================================= */
-
-function mostrarCuenta(
-  user
-) {
-
-  document.getElementById(
-    "cuentaEmail"
-  ).textContent =
-    user.email || "";
+    comprobarSesion();
 
 
-  mostrarPanel(
-    cuentaPanel
-  );
+    /* =========================================
+       CAMBIOS DE SESIÓN
+       ========================================= */
 
+    supabaseClient.auth
+      .onAuthStateChange(
+        (
+          event,
+          session
+        ) => {
 
-  cargarMisOrdenes();
+          if(
+            event === "SIGNED_OUT"
+          ) {
 
-}
+            mostrarPanel(
+              loginPanel
+            );
 
-
-
-/* =========================================
-   RECUPERAR CONTRASEÑA
-   ========================================= */
-
-document
-  .getElementById("recuperarForm")
-  .addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-
-      const email =
-        document
-          .getElementById(
-            "recuperarEmail"
-          )
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const message =
-        document.getElementById(
-          "recuperarMessage"
-        );
-
-
-      const {
-        error
-      } = await supabaseClient.auth
-        .resetPasswordForEmail(
-          email,
-          {
-            redirectTo:
-              window.location.origin +
-              "/cuenta.html"
           }
-        );
 
-
-      if (error) {
-
-        message.className =
-          "message error";
-
-        message.textContent =
-          error.message;
-
-      } else {
-
-        message.className =
-          "message success";
-
-        message.textContent =
-          "Te enviamos un enlace para recuperar tu contraseña.";
-
-      }
-
-
-      message.style.display =
-        "block";
-
-    }
-  );
-
-  /* =========================================
-   CARGAR MIS ÓRDENES
-   ========================================= */
-
-async function cargarMisOrdenes() {
-
-  const contenedor =
-    document.getElementById(
-      "misOrdenes"
-    );
-
-
-  contenedor.innerHTML =
-    "<p>Cargando compras...</p>";
-
-
-  const {
-    data: {
-      user
-    }
-  } =
-    await supabaseClient.auth
-      .getUser();
-
-
-  if (!user) {
-
-    contenedor.innerHTML =
-      "<p>Debes iniciar sesión.</p>";
-
-    return;
-
-  }
-
-
-  const {
-    data,
-    error
-  } =
-    await supabaseClient
-      .from("ordenes")
-      .select(`
-        id,
-        producto,
-        precio,
-        estado_pago,
-        estado_solicitud,
-        created_at
-      `)
-      .eq(
-        "user_id",
-        user.id
-      )
-      .order(
-        "created_at",
-        {
-          ascending: false
         }
       );
 
-
-  if (error) {
-
-    console.error(
-      "ERROR MIS ORDENES:",
-      error
-    );
-
-    contenedor.innerHTML =
-      `
-        <p style="color:#b00020;">
-          No se pudieron cargar tus compras.
-        </p>
-      `;
-
-    return;
-
-  }
-
-
-  if (
-    !data ||
-    data.length === 0
-  ) {
-
-    contenedor.innerHTML =
-      `
-        <p>
-          Todavía no tienes compras.
-        </p>
-      `;
-
-    return;
-
-  }
-
-
-  contenedor.innerHTML =
-    data.map(
-      orden => `
-
-        <div
-          style="
-            padding:15px;
-            margin-bottom:12px;
-            border:1px solid #e5e5e5;
-            border-radius:12px;
-          "
-        >
-
-          <strong>
-            Orden #${orden.id}
-          </strong>
-
-          <div style="margin-top:7px;">
-            Producto:
-            ${orden.producto}
-          </div>
-
-          <div style="margin-top:7px;">
-            Precio:
-            S/${Number(
-              orden.precio
-            ).toFixed(2)}
-          </div>
-
-          <div style="margin-top:7px;">
-            Pago:
-            <strong>
-              ${orden.estado_pago}
-            </strong>
-          </div>
-
-          <div style="margin-top:7px;">
-            Solicitud:
-            <strong>
-              ${orden.estado_solicitud}
-            </strong>
-          </div>
-
-        </div>
-
-      `
-    )
-    .join("");
-
-}
-
-/* =========================================
-   CREAR ORDEN DE COMPRA
-   ========================================= */
-
-async function crearOrden(producto) {
-
-  const boton =
-    producto === "PREMIUM"
-      ? document.getElementById("comprarPremium")
-      : document.getElementById("comprarBlack");
-
-  boton.disabled = true;
-
-  boton.textContent =
-    "CREANDO ORDEN...";
-
-  const {
-    data,
-    error
-  } = await supabaseClient.rpc(
-    "crear_orden_baby_golden",
-    {
-      p_producto: producto
-    }
-  );
-
-  if (error) {
-
-    console.error(
-      "ERROR CREANDO ORDEN:",
-      error
-    );
-
-    alert(
-      "No se pudo crear la orden: " +
-      error.message
-    );
-
-    boton.disabled = false;
-
-    boton.textContent =
-      producto === "PREMIUM"
-        ? "PREMIUM — S/30.00"
-        : "BLACK — S/36.90";
-
-    return;
-  }
-
-  const ordenId = data;
-
-  alert(
-    "Orden creada correctamente.\n\n" +
-    "Número de orden: " +
-    ordenId +
-    "\n\n" +
-    "Producto: " +
-    producto
-  );
-
-  boton.disabled = false;
-
-  boton.textContent =
-    producto === "PREMIUM"
-      ? "PREMIUM — S/30.00"
-      : "BLACK — S/36.90";
-
-}
-
-
-/* =========================================
-   BOTONES DE COMPRA
-   ========================================= */
-
-document
-  .getElementById("comprarPremium")
-  .addEventListener(
-    "click",
-    function() {
-
-      crearOrden("PREMIUM");
-
-    }
-  );
-
-
-document
-  .getElementById("comprarBlack")
-  .addEventListener(
-    "click",
-    function() {
-
-      crearOrden("BLACK");
-
-    }
-  );
-
-/* =========================================
-   CERRAR SESIÓN
-   ========================================= */
-
-document
-  .getElementById("cerrarSesion")
-  .addEventListener(
-    "click",
-    async function() {
-
-      await supabaseClient.auth
-        .signOut();
-
-      mostrarPanel(
-        loginPanel
-      );
-
-    }
-  );
-
-
-
-/* =========================================
-   COMPROBAR SESIÓN EXISTENTE
-   ========================================= */
-
-async function comprobarSesion() {
-
-  const {
-    data,
-    error
-  } = await supabaseClient.auth
-    .getSession();
-
-
-  if (
-    error
-    ||
-    !data.session
-  ) {
-
-    mostrarPanel(
-      loginPanel
-    );
-
-    return;
-
-  }
-
-
-  mostrarCuenta(
-    data.session.user
-  );
-
-}
-
-
-comprobarSesion();
-
-</script>
+  </script>
 
 
 </body>
