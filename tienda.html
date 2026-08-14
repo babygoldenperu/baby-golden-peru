@@ -14,6 +14,8 @@
     Tienda | Baby Golden Perú
   </title>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 
   <!-- =========================================
        TIPOGRAFÍAS
@@ -1299,10 +1301,10 @@
 
       <a
         class="cart-checkout"
-        href="micuenta.html"
+        href="checkout.html"
         id="cartCheckout"
       >
-        CONTINUAR A MI CUENTA
+        CONTINUAR A LA COMPRA
       </a>
 
 
@@ -1704,6 +1706,21 @@
       "babyGoldenCart";
 
 
+    const SUPABASE_URL =
+      "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
     function getCart() {
 
       try {
@@ -2046,8 +2063,53 @@
         totalItems === 0
       );
 
+      /*
+        Si el usuario ya inició sesión:
+        → checkout.html
+
+        Si no inició sesión:
+        → cuenta.html
+      */
+
       checkout.href =
-        "micuenta.html";
+        "cuenta.html";
+
+
+      checkout.dataset.loggedIn =
+        "false";
+
+
+      supabaseClient.auth
+        .getSession()
+        .then(
+          ({
+            data
+          }) => {
+
+            const session =
+              data?.session;
+
+
+            if(session){
+
+              checkout.href =
+                "checkout.html";
+
+              checkout.dataset.loggedIn =
+                "true";
+
+            } else {
+
+              checkout.href =
+                "cuenta.html";
+
+              checkout.dataset.loggedIn =
+                "false";
+
+            }
+
+          }
+        );
 
     }
 
@@ -2191,6 +2253,41 @@
     /* =========================================
        INICIAR
        ========================================= */
+
+    document
+      .getElementById("cartCheckout")
+      .addEventListener(
+        "click",
+        async function(event){
+
+          const {
+            data
+          } =
+            await supabaseClient.auth.getSession();
+
+
+          const session =
+            data?.session;
+
+
+          event.preventDefault();
+
+
+          if(session){
+
+            window.location.href =
+              "checkout.html";
+
+          } else {
+
+            window.location.href =
+              "cuenta.html";
+
+          }
+
+        }
+      );
+
 
     renderCart();
 
