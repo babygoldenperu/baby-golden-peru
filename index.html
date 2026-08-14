@@ -2172,15 +2172,30 @@
 .story-lightbox-caption{
   position:absolute;
   left:50%;
-  bottom:-46px;
+  bottom:-82px;
   transform:translateX(-50%);
-  width:max-content;
-  max-width:80vw;
+  width:min(760px,84vw);
   color:#fff;
-  font-size:10px;
-  font-weight:700;
-  letter-spacing:2px;
   text-align:center;
+  line-height:1.45;
+  text-shadow:0 2px 12px rgba(0,0,0,.35);
+}
+
+.story-lightbox-caption .slb-title{
+  display:block;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:2px;
+  text-transform:uppercase;
+}
+
+.story-lightbox-caption .slb-description{
+  display:block;
+  margin-top:6px;
+  font-size:13px;
+  font-weight:400;
+  letter-spacing:.2px;
+  color:rgba(255,255,255,.92);
 }
 
 @media(max-width:650px){
@@ -2191,7 +2206,18 @@
   .story-lightbox-prev,.story-lightbox-next{width:40px;height:40px}
   .story-lightbox-prev{left:8px}
   .story-lightbox-next{right:8px}
-  .story-lightbox-caption{bottom:-34px;font-size:8px;letter-spacing:1.4px}
+  .story-lightbox-caption{
+    bottom:-66px;
+    width:90vw;
+  }
+  .story-lightbox-caption .slb-title{
+    font-size:9px;
+    letter-spacing:1.4px;
+  }
+  .story-lightbox-caption .slb-description{
+    font-size:11px;
+    margin-top:4px;
+  }
 }
 </style>
 
@@ -2901,6 +2927,8 @@
         if(slide){
           slide.dataset.loaded="true";
           slide.dataset.slot=item.slot;
+          slide.dataset.title=item.title || "";
+          slide.dataset.description=item.caption || "";
         }
       });
 
@@ -3356,6 +3384,15 @@
        VISOR AMPLIADO
     ========================= */
 
+    function escapeLightboxText(value){
+      return String(value || "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+    }
+
     function openLightbox(number){
 
       if(
@@ -3396,9 +3433,28 @@
         "Historia de Oro";
 
       if(lightboxCaption){
-        lightboxCaption.textContent =
+
+        const title =
+          slide?.dataset.title ||
           label?.textContent ||
           "HISTORIAS DE ORO";
+
+        const description =
+          slide?.dataset.description ||
+          "";
+
+        lightboxCaption.innerHTML =
+          '<span class="slb-title">' +
+          escapeLightboxText(title) +
+          '</span>' +
+          (
+            description
+              ? '<span class="slb-description">' +
+                escapeLightboxText(description) +
+                '</span>'
+              : ''
+          );
+
       }
 
       lightbox.classList.add(
@@ -3891,4 +3947,4 @@
   })();
 </script>
 </body>
-</html
+</html>
