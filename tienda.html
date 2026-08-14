@@ -429,13 +429,31 @@
       display: grid;
 
       grid-template-columns:
-        1fr auto;
+        58px 1fr auto;
 
       gap: 12px;
+
+      align-items: start;
 
       padding: 15px 0;
 
       border-bottom: 1px solid #eadfce;
+    }
+
+
+    .cart-item-image {
+      width: 58px;
+      height: 58px;
+
+      object-fit: cover;
+
+      border-radius: 10px;
+
+      border: 1px solid #e3d4c2;
+
+      background: #f1e7d9;
+
+      display: block;
     }
 
 
@@ -1647,27 +1665,32 @@
 
       BLACK: {
         name: "Black ID",
-        price: 36.90
+        price: 36.90,
+        image: "black.jpeg"
       },
 
       PREMIUM: {
         name: "Premium ID",
-        price: 30.00
+        price: 30.00,
+        image: "premium.jpeg"
       },
 
       BANDANA: {
         name: "Bandana Baby Golden Perú",
-        price: 34.90
+        price: 34.90,
+        image: "bandana.jpeg"
       },
 
       POLO: {
         name: "Polo Baby Golden Perú",
-        price: 39.90
+        price: 39.90,
+        image: "polo.jpeg"
       },
 
       GORRO: {
         name: "Gorro Baby Golden Perú",
-        price: 79.90
+        price: 79.90,
+        image: "gorro.jpeg"
       }
 
     };
@@ -1860,6 +1883,12 @@
             return `
 
               <div class="cart-item">
+
+                <img
+                  class="cart-item-image"
+                  src="${product.image}"
+                  alt="${product.name}"
+                >
 
                 <div>
 
