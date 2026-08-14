@@ -33,56 +33,67 @@
 
 
     /* =========================================
-       CABECERA
+       CABECERA — ESTILO INDEX.HTML
        ========================================= */
 
     header {
+      width: 100%;
+      height: 114px;
+
       background: #f7f0e6;
 
-      border-bottom: 1px solid #ded1bf;
+      border-bottom: 1px solid #e2d6c6;
+
+      position: relative;
+      z-index: 20;
     }
 
 
     .nav {
       width: 100%;
       max-width: 1280px;
-
-      min-height: 76px;
+      height: 114px;
 
       margin: auto;
       padding: 0 28px;
 
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
 
-      gap: 25px;
+      gap: 28px;
     }
 
 
     .logo {
       width: 155px;
+      height: auto;
 
       display: block;
+
+      flex: 0 0 auto;
     }
 
 
     .menu {
       display: flex;
       align-items: center;
+      justify-content: center;
 
-      gap: 20px;
+      gap: 25px;
 
       font-size: 10px;
       font-weight: 700;
-      letter-spacing: .6px;
+      letter-spacing: .7px;
+
+      white-space: nowrap;
     }
 
 
     .menu a {
       position: relative;
 
-      color: #3b2b20;
+      color: #302a25;
       text-decoration: none;
 
       transition: .25s ease;
@@ -92,7 +103,7 @@
     .menu a:hover {
       color: #b77b20;
 
-      transform: translateY(-2px);
+      transform: translateY(-1px);
     }
 
 
@@ -102,7 +113,7 @@
       position: absolute;
 
       left: 0;
-      bottom: -7px;
+      bottom: -8px;
 
       width: 0;
       height: 1px;
@@ -119,13 +130,46 @@
 
 
     .header-button {
-      padding: 12px 17px;
+      padding: 14px 22px;
 
       border-radius: 999px;
 
-      background: #4a3324;
+      background: #bd7d17;
 
       color: #fff !important;
+
+      box-shadow:
+        0 12px 25px rgba(189,125,23,.18);
+    }
+
+
+    .header-icon {
+      width: 20px;
+      height: 20px;
+
+      display: grid;
+      place-items: center;
+
+      color: #302a25;
+
+      text-decoration: none;
+
+      transition: .25s ease;
+    }
+
+
+    .header-icon:hover {
+      color: #b77b20;
+
+      transform: translateY(-1px);
+    }
+
+
+    .header-icon svg {
+      width: 18px;
+      height: 18px;
+
+      stroke: currentColor;
     }
 
 
@@ -791,61 +835,62 @@
 
 
     /* =========================================
-       FOOTER
+       FOOTER — MISMO ESTILO QUE INDEX.HTML
        ========================================= */
 
     footer {
+      width: 100%;
+      min-height: 290px;
+      margin: 0;
+      padding: 58px 24px 42px;
+
       background: #29251f;
-
-      padding: 45px 25px 35px;
-
       color: #fff;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
 
       text-align: center;
     }
 
-
-    .footer-brand {
-      color: #d5a34c;
-
-      font-family: Georgia, serif;
-
-      font-size: 20px;
+    footer img {
+      width: 155px;
+      height: auto;
+      margin: 0 auto 23px;
+      display: block;
     }
 
+    .footer-brand {
+      margin: 0 0 9px;
+
+      color: #d5a34c;
+
+      font-family: 'Montserrat', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      line-height: 1.2;
+    }
 
     footer p {
-      margin: 9px 0;
+      margin: 0 0 9px;
 
       color: #aaa197;
 
+      font-family: 'Montserrat', sans-serif;
       font-size: 11px;
+      font-weight: 400;
+      line-height: 1.8;
     }
 
+    footer p:last-child {
+      margin-bottom: 0;
+    }
 
     .footer-links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-
-      gap: 10px 22px;
-
-      max-width: 900px;
-
-      margin: 25px auto 0;
-      padding-top: 20px;
-
-      border-top: 1px solid rgba(255,255,255,.13);
-    }
-
-
-    .footer-links a {
-      color: #e3c99b;
-
-      font-size: 10px;
-      font-weight: 700;
-
-      text-decoration: none;
+      display: none;
     }
 
 
@@ -855,17 +900,24 @@
 
     @media(max-width: 850px) {
 
+      header {
+        height: 82px;
+      }
+
+
       .nav {
-        min-height: 65px;
+        height: 82px;
 
-        padding: 8px 12px;
+        padding: 6px 12px;
 
-        gap: 12px;
+        gap: 13px;
+
+        justify-content: flex-start;
       }
 
 
       .logo {
-        width: 112px;
+        width: 105px;
 
         flex: 0 0 auto;
       }
@@ -873,7 +925,7 @@
 
       .menu {
         max-width:
-          calc(100vw - 135px);
+          calc(100vw - 118px);
 
         overflow-x: auto;
 
@@ -883,7 +935,7 @@
 
         justify-content: flex-start;
 
-        gap: 14px;
+        gap: 15px;
 
         scrollbar-width: none;
       }
@@ -902,7 +954,19 @@
 
 
       .header-button {
-        padding: 8px 12px;
+        padding: 9px 13px;
+      }
+
+
+      .header-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+
+      .header-icon svg {
+        width: 16px;
+        height: 16px;
       }
 
 
@@ -1035,35 +1099,50 @@
        CABECERA
        ========================================= -->
 
-  <!-- HEADER -->
   <header>
+
     <nav class="nav">
 
-      <a href="index.html" aria-label="Baby Golden Perú">
+      <a href="index.html">
+
         <img
           src="BABY%20GOLDEN.png"
           alt="Baby Golden Perú"
           class="logo"
         >
+
       </a>
+
 
       <div class="menu">
 
-        <a href="#inicio">INICIO</a>
+        <a href="index.html">
+          INICIO
+        </a>
 
-        <a href="tienda.html">TIENDA</a>
+        <a href="tienda.html">
+          TIENDA
+        </a>
 
-        <a href="beneficios.html">BENEFICIOS</a>
+        <a href="beneficios.html">
+          BENEFICIOS
+        </a>
 
-        <a href="fotos.html">FOTOS</a>
+        <a href="fotos.html">
+          FOTOS
+        </a>
 
-        <a href="id.html">BUSCAR BABY GOLDEN ID</a>
+        <a href="buscar-id.html">
+          BUSCAR BABY GOLDEN ID
+        </a>
 
         <a href="cuenta.html">
           MI CUENTA
         </a>
 
-        <a href="index.html#contacto">CONTACTO</a>
+        <a href="contacto.html">
+          CONTACTO
+        </a>
 
         <a
           href="registro.html"
@@ -1072,20 +1151,78 @@
           REGISTRAR MI PERRITO
         </a>
 
-        <div class="nav-actions" aria-label="Accesos rápidos">
-          <button class="icon-button" id="openSearch" type="button" aria-label="Buscar en Baby Golden Perú">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-          </button>
-          <a class="icon-button cart-button" href="tienda.html" aria-label="Ir a la tienda">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
-          </a>
-          <a class="icon-button" href="cuenta.html" aria-label="Ir a Mi cuenta">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path></svg>
-          </a>
-        </div>
+        <a
+          href="buscar.html"
+          class="header-icon"
+          aria-label="Buscar"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.7"
+          >
+            <circle
+              cx="11"
+              cy="11"
+              r="6.5"
+            ></circle>
+            <path
+              d="M16 16l4 4"
+            ></path>
+          </svg>
+        </a>
+
+        <a
+          href="tienda.html"
+          class="header-icon"
+          aria-label="Carrito"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.7"
+          >
+            <path
+              d="M4 5h2l2 11h9l2-8H7"
+            ></path>
+            <circle
+              cx="10"
+              cy="20"
+              r="1.3"
+            ></circle>
+            <circle
+              cx="17"
+              cy="20"
+              r="1.3"
+            ></circle>
+          </svg>
+        </a>
+
+        <a
+          href="cuenta.html"
+          class="header-icon"
+          aria-label="Mi cuenta"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke-width="1.7"
+          >
+            <circle
+              cx="12"
+              cy="8"
+              r="3.2"
+            ></circle>
+            <path
+              d="M5.5 20c.8-3.5 3-5.3 6.5-5.3s5.7 1.8 6.5 5.3"
+            ></path>
+          </svg>
+        </a>
 
       </div>
+
     </nav>
+
   </header>
 
 
