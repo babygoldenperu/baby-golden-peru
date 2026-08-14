@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#f6f0e6">
+  <title>Libro de Reclamaciones | Baby Golden Perú</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+    :root{
+      --cream:#f6f0e6;
+      --cream-2:#fffaf3;
+      --gold:#b77b20;
+      --gold-2:#d7ad63;
+      --gold-3:#ead9b8;
+      --brown:#2d2822;
+      --brown-2:#625a50;
+      --dark:#181613;
+      --white:#fff;
+      --line:rgba(183,123,32,.18);
+      --shadow:0 30px 80px rgba(48,35,20,.12);
+      --max:1320px;
+    }
+
+    *{box-sizing:border-box}
+
+    html{scroll-behavior:smooth}
+
+    body{
+      margin:0;
+      background:var(--cream);
+      color:var(--brown);
+      font-family:'Montserrat',sans-serif;
+      overflow-x:hidden;
+    }
+
+    img{max-width:100%;display:block}
+
+    a{color:inherit}
+
+    /* ================= HEADER ================= */
+
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      width:100%;
+      background:rgba(246,240,230,.90);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      width:min(var(--max),100%);
+      min-height:88px;
+      margin:auto;
+      padding:12px 34px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .logo{
+      width:165px;
+      height:auto;
+      flex:0 0 auto;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:27px;
+    }
+
+    .menu a{
+      position:relative;
+      text-decoration:none;
+      color:var(--brown);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      white-space:nowrap;
+      padding:12px 0;
+      transition:.25s ease;
+    }
+
+    .menu a:not(.header-button)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:5px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:.25s ease;
+    }
+
+    .menu a:hover{color:var(--gold)}
+    .menu a:hover::after{width:100%}
+
+    .header-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:45px;
+      padding:13px 21px!important;
+      border-radius:999px;
+      background:var(--gold);
+      color:#fff!important;
+      box-shadow:0 12px 28px rgba(183,123,32,.20);
+      transition:.25s ease;
+    }
+
+    .header-button:hover{
+      background:var(--brown);
+      transform:translateY(-2px);
+      box-shadow:0 15px 35px rgba(45,40,34,.18);
+    }
+
+    .heart{
+      color:var(--gold);
+      font-size:24px;
+      line-height:1;
+    }
+
+
+
+  .nav-actions{display:flex;align-items:center;gap:5px;margin-left:-8px}
+  .icon-button{position:relative;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;color:var(--brown);cursor:pointer;text-decoration:none;border-radius:50%;transition:.2s ease}
+  .icon-button:hover,.icon-button:focus-visible{background:rgba(183,123,32,.12);color:var(--gold);outline:none}
+  .icon-button svg,.search-field svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+  .cart-count{position:absolute;right:0;top:0;min-width:17px;height:17px;padding:1px 4px;border-radius:999px;background:var(--gold);color:#fff;font:700 9px/15px 'Montserrat',sans-serif;text-align:center}
+  .search-panel{position:fixed;top:76px;right:clamp(18px,4vw,62px);z-index:1200;width:min(360px,calc(100vw - 36px));padding:0}
+  .search-panel[hidden]{display:none}
+  .search-dialog{position:relative;padding:24px;border:1px solid #e1d1bb;border-radius:18px;background:var(--cream-2);box-shadow:0 20px 48px rgba(40,29,16,.22)}
+  .search-dialog h2,.cart-drawer h2{margin:7px 0 18px;font:500 34px/.95 'Cormorant Garamond',serif;color:var(--brown)}
+  .panel-kicker{margin:0;color:var(--gold);font-size:9px;font-weight:700;letter-spacing:2.5px}
+  .panel-close{width:34px;height:34px;border:1px solid #dfd1bd;border-radius:50%;background:transparent;color:var(--brown);font-size:26px;line-height:1;cursor:pointer}
+  .search-dialog .panel-close{position:absolute;right:20px;top:20px}
+  .search-field{display:flex;align-items:center;gap:12px;padding:0 16px;border:1px solid #d9c8ad;border-radius:14px;background:#fff;color:var(--gold)}
+  .search-field input{width:100%;padding:16px 0;border:0;background:transparent;color:var(--brown);font:500 14px 'Montserrat',sans-serif;outline:0}
+  .search-help{margin:14px 0 0;color:var(--brown-2);font-size:11px;line-height:1.6}
+  .cart-drawer{position:fixed;z-index:1300;top:0;right:0;display:flex;flex-direction:column;width:min(430px,100%);height:100dvh;padding:28px;background:var(--cream-2);box-shadow:-18px 0 60px rgba(0,0,0,.22);transform:translateX(105%);transition:transform .28s ease}
+  .cart-drawer.is-open{transform:translateX(0)}
+  .cart-drawer-header{display:flex;justify-content:space-between;gap:20px;align-items:start;padding-bottom:20px;border-bottom:1px solid #e4d7c5}
+  .cart-drawer-header h2{margin-bottom:0}
+  .cart-items{flex:1;overflow:auto;padding:20px 0}
+  .cart-empty{margin:20px 0;color:var(--brown-2);font-size:13px;line-height:1.7}
+  .cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:15px 0;border-bottom:1px solid #eadfce}
+  .cart-item h3{margin:0 0 5px;font:600 24px/.9 'Cormorant Garamond',serif}
+  .cart-item p{margin:0;color:var(--brown-2);font-size:11px}
+  .remove-item{align-self:start;border:0;background:transparent;color:#9f3d2c;font:700 10px 'Montserrat',sans-serif;letter-spacing:.5px;cursor:pointer}
+  .cart-summary{padding-top:20px;border-top:1px solid #e4d7c5}
+  .cart-summary>div{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+  .cart-summary strong{font:700 29px/1 'Cormorant Garamond',serif;color:var(--gold)}
+  .cart-checkout{width:100%;margin-top:18px}
+  .cart-checkout.is-disabled{pointer-events:none;opacity:.52}
+  .cart-summary p{margin:14px 0 0;color:var(--brown-2);font-size:10px;line-height:1.6;text-align:center}
+  .cart-backdrop{position:fixed;z-index:1250;inset:0;background:rgba(24,22,19,.42)}
+  .product-buy{font-family:'Montserrat',sans-serif;cursor:pointer}
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+  @media(max-width:1000px){.nav-actions{margin-left:0}.icon-button{width:34px;height:34px}.menu{gap:10px}.menu a{letter-spacing:.5px}.header-button{padding:11px 14px!important}}
+  @media(max-width:650px){.nav-actions{order:3}.search-panel{top:68px;right:12px;width:calc(100vw - 24px)}.search-dialog{padding:22px}.cart-drawer{padding:22px}.menu{justify-content:center}.menu a:not(.header-button){display:none}.nav{gap:10px}.logo{width:135px}}
+
+
+/* ================= LEGAL PAGE ================= */
+.legal-hero{max-width:1000px;margin:auto;padding:80px 25px 40px;text-align:center}
+.legal-label{margin-bottom:14px;color:var(--gold);font-size:11px;font-weight:700;letter-spacing:4px}
+.legal-hero h1{margin:0;font-family:'Cormorant Garamond',serif;font-size:clamp(58px,7vw,88px);line-height:.9;font-weight:500;letter-spacing:-2px}
+.legal-hero p{max-width:720px;margin:24px auto 0;color:var(--brown-2);font-size:14px;line-height:1.85}
+.legal{max-width:980px;margin:auto;padding:20px 25px 100px}
+.legal-card{padding:45px;background:var(--cream-2);border:1px solid #e4d6c0;border-radius:30px;box-shadow:var(--shadow)}
+.legal-card h2{margin:34px 0 12px;font-family:'Cormorant Garamond',serif;font-size:34px;line-height:.95;font-weight:600}
+.legal-card h2:first-child{margin-top:0}
+.legal-card p,.legal-card li{color:var(--brown-2);font-size:12px;line-height:1.85}
+.legal-card a{color:var(--gold);font-weight:600}
+.legal-card ul{padding-left:22px}
+.merchant{margin:22px 0 30px;padding:22px;background:#f2e7d5;border:1px solid #e2d1b8;border-radius:18px}
+.merchant p{margin:6px 0}
+.legal-links{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:38px}
+.legal-link{padding:16px;border:1px solid #decdb8;border-radius:14px;background:#fff;color:var(--brown)!important;font-size:9px;font-weight:700;letter-spacing:.8px;text-align:center;text-decoration:none;transition:.25s ease}
+.legal-link:hover{background:#f1e4cf;color:var(--gold)!important;transform:translateY(-3px)}
+@media(max-width:650px){
+  .legal-hero{padding:55px 18px 30px}
+  .legal-hero h1{font-size:55px}
+  .legal{padding:15px 18px 70px}
+  .legal-card{padding:28px 22px;border-radius:22px}
+  .legal-card h2{font-size:30px}
+  .legal-links{grid-template-columns:1fr}
+}
+
+  
+
+/* ================= RECLAMACIONES ================= */
+
+.form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+  margin-top:18px;
+}
+
+.form-grid .full{grid-column:1/-1}
+
+form label{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+  color:#4a3324;
+  font-size:10px;
+  font-weight:700;
+}
+
+input,select,textarea{
+  width:100%;
+  border:1px solid #d8c7b3;
+  border-radius:10px;
+  background:#fff;
+  color:#3b2b20;
+  padding:12px 13px;
+  font:500 12px "Montserrat",sans-serif;
+  outline:none;
+}
+
+textarea{min-height:125px;resize:vertical}
+
+input:focus,select:focus,textarea:focus{
+  border-color:#b77b20;
+  box-shadow:0 0 0 3px rgba(183,123,32,.10);
+}
+
+.form-note{
+  margin:0 0 12px!important;
+  font-size:10px!important;
+}
+
+.choice-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin:18px 0;
+}
+
+.choice{
+  flex-direction:row!important;
+  align-items:flex-start;
+  gap:10px!important;
+  padding:16px;
+  border:1px solid #decdb8;
+  border-radius:12px;
+  background:#f8f1e8;
+  cursor:pointer;
+}
+
+.choice input{
+  width:auto;
+  margin-top:3px;
+  accent-color:#b77b20;
+}
+
+.choice span{
+  display:flex;
+  flex-direction:column;
+  gap:5px;
+  color:#765f4c;
+  font-size:10px;
+  line-height:1.55;
+  font-weight:500;
+}
+
+.choice strong{
+  color:#4a3324;
+  font-size:10px;
+}
+
+.acceptance{
+  margin:24px 0;
+  padding:18px;
+  background:#f2e8da;
+  border:1px solid #decdb8;
+  border-radius:12px;
+}
+
+.check{
+  flex-direction:row!important;
+  align-items:flex-start;
+  gap:10px!important;
+  font-size:10px!important;
+  font-weight:500!important;
+  line-height:1.6;
+}
+
+.check input{
+  width:auto;
+  margin-top:3px;
+  accent-color:#b77b20;
+}
+
+.submit-button,.print-button{
+  width:100%;
+  min-height:48px;
+  border:0;
+  border-radius:999px;
+  background:#4a3324;
+  color:#fff;
+  font:700 9px "Montserrat",sans-serif;
+  letter-spacing:.8px;
+  cursor:pointer;
+  transition:background .25s ease,transform .25s ease;
+}
+
+.submit-button:hover,.print-button:hover{
+  background:#684936;
+  transform:translateY(-2px);
+}
+
+.submit-button:disabled{
+  opacity:.55;
+  cursor:wait;
+  transform:none;
+}
+
+.form-status{
+  min-height:22px;
+  margin-top:14px;
+  color:#a23b2d;
+  font-size:10px;
+  line-height:1.6;
+}
+
+.confirmation{
+  margin-top:30px;
+  padding:30px;
+  border:1px solid #b77b20;
+  border-radius:18px;
+  background:#f5eadb;
+}
+
+.confirmation-label{
+  color:#a76f20;
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2px;
+}
+
+.confirmation h2{
+  margin:8px 0;
+  font-size:34px;
+}
+
+.confirmation-data{
+  margin:22px 0;
+  padding:18px;
+  background:#fffaf4;
+  border:1px solid #decdb8;
+  border-radius:12px;
+}
+
+.confirmation-data p{margin:7px 0!important}
+
+.confirmation-data span{
+  color:#a76f20;
+  font-weight:700;
+}
+
+.response-note{font-size:10px!important}
+
+.legal-notice{
+  margin-top:30px;
+  padding:20px;
+  background:#f2e8da;
+  border:1px solid #decdb8;
+  border-radius:12px;
+}
+
+.legal-notice p{
+  margin:7px 0!important;
+  font-size:10px!important;
+}
+
+@media(max-width:700px){
+  .form-grid,.choice-grid{grid-template-columns:1fr}
+  .form-grid .full{grid-column:auto}
+}
+
+    .print-sheet{
+      margin-top:30px;
+      padding:28px;
+      border:1px solid #d8c9b5;
+      background:#fff;
+      color:#2d2822;
+      text-align:left;
+    }
+
+    .print-sheet-header{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      padding-bottom:18px;
+      border-bottom:2px solid #2d2822;
+    }
+
+    .print-sheet-title{
+      font-size:13px;
+      font-weight:800;
+      letter-spacing:1.5px;
+    }
+
+    .print-sheet-subtitle{
+      margin-top:5px;
+      color:#b77b20;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+    }
+
+    .print-sheet-number{
+      text-align:right;
+      font-size:10px;
+      line-height:1.7;
+    }
+
+    .print-provider{
+      margin:18px 0;
+      padding:15px;
+      background:#f7efe4;
+      border:1px solid #e1d3c0;
+    }
+
+    .print-provider p{
+      margin:5px 0;
+      color:#5f554a;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .print-section{
+      padding:17px 0;
+      border-bottom:1px solid #e1d8ca;
+    }
+
+    .print-section > strong{
+      display:block;
+      margin-bottom:10px;
+      color:#b77b20;
+      font-size:9px;
+      letter-spacing:1px;
+    }
+
+    .print-section p{
+      margin:6px 0;
+      color:#4e463d;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .print-box{
+      min-height:60px;
+      padding:10px;
+      white-space:pre-wrap;
+      border:1px solid #e1d8ca;
+      background:#fffdf9;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .print-footer-note{
+      margin-top:18px;
+      color:#5f554a;
+      font-size:9px;
+      line-height:1.6;
+    }
+
+    .print-signature{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:50px;
+      margin-top:45px;
+    }
+
+    .print-signature div{
+      text-align:center;
+    }
+
+    .print-signature span{
+      display:block;
+      height:1px;
+      background:#5b5147;
+      margin-bottom:7px;
+    }
+
+    .print-signature small{
+      color:#5f554a;
+      font-size:9px;
+    }
+
+    .print-destination{
+      margin-top:25px;
+      padding-top:12px;
+      border-top:1px solid #e1d8ca;
+      color:#756b60;
+      font-size:8px;
+      text-align:center;
+    }
+
+
+@media print{
+  @page{
+    size:A4;
+    margin:14mm;
+  }
+
+  body{
+    background:#fff;
+  }
+
+  header,
+  footer,
+  .legal-hero,
+  form,
+  .legal-links,
+  .legal-notice,
+  .confirmation-label,
+  .confirmation > h2,
+  .confirmation > p,
+  .confirmation-data,
+  .print-button,
+  .response-note{
+    display:none!important;
+  }
+
+  .legal,
+  .legal-card,
+  .confirmation,
+  .print-sheet{
+    max-width:none!important;
+    margin:0!important;
+    padding:0!important;
+    border:0!important;
+    box-shadow:none!important;
+    background:#fff!important;
+  }
+
+  .print-sheet{
+    display:block!important;
+  }
+}
+
+/* ================= FOOTER ================= */
+footer{background:#29251f;color:#fff;padding:70px 25px 40px;text-align:center}
+footer img{width:155px;margin:0 auto 20px}
+.footer-brand{color:#d5a34c;letter-spacing:3px;font-size:10px;font-weight:700}
+footer p{margin:8px 0;color:#aaa197;font-size:11px;line-height:1.8}
+.footer-links{display:flex;flex-wrap:wrap;justify-content:center;gap:10px 22px;max-width:760px;margin:28px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.13)}
+.footer-links a{color:#e3c99b;font-size:10px;font-weight:700;letter-spacing:.8px;text-decoration:none}
+.footer-links a:hover{color:#fff}
+
+</style>
+</head>
+<body>
+<!-- HEADER -->
+  <header>
+    <nav class="nav">
+
+      <a href="#inicio" aria-label="Baby Golden Perú">
+        <img
+          src="BABY%20GOLDEN.png"
+          alt="Baby Golden Perú"
+          class="logo"
+        >
+      </a>
+
+      <div class="menu">
+
+        <a href="#inicio">INICIO</a>
+
+        <a href="#tienda">TIENDA</a>
+
+        <a href="beneficios.html">BENEFICIOS</a>
+
+        <a href="fotos.html">FOTOS</a>
+
+        <a href="id.html">BUSCAR BABY GOLDEN ID</a>
+
+        <a href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html">
+          MI CUENTA
+        </a>
+
+        <a href="#contacto">CONTACTO</a>
+
+        <a
+          href="https://babygoldenperu.github.io/baby-golden-peru/registro.html"
+          class="header-button"
+        >
+          REGISTRAR MI PERRITO
+        </a>
+
+        <div class="nav-actions" aria-label="Accesos rápidos">
+          <button class="icon-button" id="openSearch" type="button" aria-label="Buscar en Baby Golden Perú">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+          </button>
+          <button class="icon-button cart-button" id="openCart" type="button" aria-label="Abrir carrito de compras">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
+            <span class="cart-count" id="cartCount" hidden>0</span>
+          </button>
+          <a class="icon-button" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" aria-label="Ir a Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path></svg>
+          </a>
+        </div>
+
+      </div>
+    </nav>
+  </header>
+
+  <div class="search-panel" id="searchPanel" hidden>
+    <div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
+      <button class="panel-close" type="button" data-close-panel="searchPanel" aria-label="Cerrar búsqueda">×</button>
+      <p class="panel-kicker">ENCUENTRA LO QUE BUSCAS</p>
+      <h2 id="searchTitle">Buscar en Baby Golden</h2>
+      <label class="sr-only" for="siteSearch">Escribe lo que deseas encontrar</label>
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        <input id="siteSearch" type="search" placeholder="Ej.: Premium ID, beneficios, registro">
+      </div>
+      <p class="search-help" id="searchHelp">Puedes buscar Premium ID, Black ID, beneficios, comunidad o registro.</p>
+    </div>
+  </div>
+
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <div>
+        <p class="panel-kicker">TU SELECCIÓN</p>
+        <h2>Carrito</h2>
+      </div>
+      <button class="panel-close" type="button" id="closeCart" aria-label="Cerrar carrito">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-summary">
+      <div><span>Total</span><strong id="cartTotal">S/ 0.00</strong></div>
+      <a class="button primary cart-checkout" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" id="cartCheckout">CONTINUAR A MI CUENTA</a>
+      <p>Desde Mi cuenta podrás crear tu orden e iniciar sesión de forma segura.</p>
+    </div>
+  </aside>
+  <div class="cart-backdrop" id="cartBackdrop" hidden></div>
+  
+<!-- =========================================
+       PRESENTACIÓN
+       ========================================= -->
+
+  <section class="legal-hero">
+    <div class="legal-label">BABY GOLDEN PERÚ</div>
+    <h1>Libro de Reclamaciones</h1>
+    <p>
+      Registra aquí tu queja o reclamo relacionado con los productos
+      o servicios de Baby Golden Perú. El registro es gratuito.
+    </p>
+  </section>
+
+  <main class="legal">
+    <article class="legal-card">
+
+      <div class="merchant">
+        <p><strong>Proveedor:</strong> Katya Sandra Davila Yarleque</p>
+        <p><strong>RUC:</strong> 10726671741</p>
+        <p><strong>Dirección:</strong> Calle Putumayo N.° 176, San Miguel, Lima, Perú</p>
+        <p><strong>Teléfono:</strong> +51 936 078 406</p>
+        <p><strong>Correo:</strong> babygoldeperu@gmail.com</p>
+      </div>
+
+      <h2>Hoja de Reclamación</h2>
+
+      <p>
+        Completa los campos solicitados. Al registrar la hoja se generará
+        una numeración correlativa y un código de identificación.
+      </p>
+
+      <form id="reclamacionForm" novalidate>
+
+        <h3>1. Datos del consumidor</h3>
+
+        <div class="form-grid">
+
+          <label>
+            Nombres y apellidos *
+            <input name="nombre" type="text" required maxlength="150">
+          </label>
+
+          <label>
+            Tipo de documento *
+            <select name="tipoDocumento" required>
+              <option value="">Seleccionar</option>
+              <option value="DNI">DNI</option>
+              <option value="CE">Carné de Extranjería</option>
+              <option value="PASAPORTE">Pasaporte</option>
+            </select>
+          </label>
+
+          <label>
+            Número de documento *
+            <input name="documento" type="text" required maxlength="30">
+          </label>
+
+          <label>
+            Teléfono *
+            <input name="telefono" type="tel" required maxlength="30">
+          </label>
+
+          <label class="full">
+            Correo electrónico *
+            <input name="email" type="email" required maxlength="150">
+          </label>
+
+          <label class="full">
+            Domicilio *
+            <input name="domicilio" type="text" required maxlength="250">
+          </label>
+
+        </div>
+
+
+        <h3>2. Padre, madre o representante del menor</h3>
+
+        <p class="form-note">
+          Completa esta sección únicamente si corresponde.
+        </p>
+
+        <div class="form-grid">
+
+          <label class="full">
+            Nombres y apellidos
+            <input name="representanteNombre" type="text" maxlength="150">
+          </label>
+
+          <label>
+            Documento
+            <input name="representanteDocumento" type="text" maxlength="30">
+          </label>
+
+          <label>
+            Domicilio
+            <input name="representanteDomicilio" type="text" maxlength="250">
+          </label>
+
+          <label>
+            Teléfono
+            <input name="representanteTelefono" type="tel" maxlength="30">
+          </label>
+
+          <label class="full">
+            Correo electrónico
+            <input name="representanteEmail" type="email" maxlength="150">
+          </label>
+
+        </div>
+
+
+        <h3>3. Producto o servicio</h3>
+
+        <div class="form-grid">
+
+          <label>
+            Producto o servicio contratado *
+            <input name="producto" type="text" required maxlength="200">
+          </label>
+
+          <label>
+            Monto reclamado (S/)
+            <input name="monto" type="number" min="0" step="0.01">
+          </label>
+
+          <label class="full">
+            Descripción del producto o servicio *
+            <textarea name="descripcionProducto" required maxlength="2000"></textarea>
+          </label>
+
+        </div>
+
+
+        <h3>4. Tipo de solicitud</h3>
+
+        <div class="choice-grid">
+
+          <label class="choice">
+            <input type="radio" name="tipo" value="RECLAMO" required>
+            <span>
+              <strong>RECLAMO</strong>
+              Disconformidad relacionada con el producto o servicio.
+            </span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="tipo" value="QUEJA" required>
+            <span>
+              <strong>QUEJA</strong>
+              Malestar por la atención o trato recibido.
+            </span>
+          </label>
+
+        </div>
+
+
+        <label>
+          Detalle de la queja o reclamo *
+          <textarea name="detalle" required maxlength="5000"></textarea>
+        </label>
+
+        <label>
+          Pedido concreto del consumidor *
+          <textarea name="pedido" required maxlength="3000"></textarea>
+        </label>
+
+
+        <h3>5. Medio para recibir la respuesta</h3>
+
+        <div class="choice-grid">
+
+          <label class="choice">
+            <input type="radio" name="medioRespuesta" value="CORREO" checked>
+            <span>
+              <strong>Correo electrónico</strong>
+              Usaremos el correo indicado en esta hoja.
+            </span>
+          </label>
+
+          <label class="choice">
+            <input type="radio" name="medioRespuesta" value="DOMICILIO">
+            <span>
+              <strong>Domicilio</strong>
+              Usaremos el domicilio indicado en esta hoja.
+            </span>
+          </label>
+
+        </div>
+
+
+        <div class="acceptance">
+          <label class="check">
+            <input type="checkbox" required>
+            <span>
+              Declaro que la información proporcionada es verdadera
+              y manifiesto mi conformidad con el contenido de esta hoja.
+            </span>
+          </label>
+        </div>
+
+
+        <button class="submit-button" type="submit" id="submitReclamacion">
+          REGISTRAR HOJA DE RECLAMACIÓN
+        </button>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite"></div>
+
+      </form>
+
+
+      <section class="confirmation" id="confirmation" hidden>
+
+        <div class="confirmation-label">REGISTRO COMPLETADO</div>
+
+        <h2>
+          Tu Hoja de Reclamación fue registrada.
+        </h2>
+
+        <p>
+          Guarda o imprime esta constancia. El número y código
+          identifican tu Hoja de Reclamación.
+        </p>
+
+        <div class="confirmation-data">
+          <p><strong>N.° de Hoja:</strong> <span id="confirmationNumber"></span></p>
+          <p><strong>Código:</strong> <span id="confirmationCode"></span></p>
+          <p><strong>Fecha:</strong> <span id="confirmationDate"></span></p>
+        </div>
+
+        <div class="print-sheet" id="printSheet">
+
+          <div class="print-sheet-header">
+            <div>
+              <div class="print-sheet-title">LIBRO DE RECLAMACIONES</div>
+              <div class="print-sheet-subtitle">HOJA DE RECLAMACIÓN</div>
+            </div>
+
+            <div class="print-sheet-number">
+              <strong id="printNumber"></strong>
+              <span id="printDate"></span>
+            </div>
+          </div>
+
+          <div class="print-provider">
+            <strong>PROVEEDOR</strong>
+            <p>Katya Sandra Davila Yarleque · RUC 10726671741</p>
+            <p>Calle Putumayo N.° 176, San Miguel, Lima, Perú</p>
+          </div>
+
+          <div class="print-section">
+            <strong>1. IDENTIFICACIÓN DEL CONSUMIDOR RECLAMANTE</strong>
+
+            <p><b>Nombre:</b> <span id="printNombre"></span></p>
+            <p><b>Documento:</b> <span id="printDocumento"></span></p>
+            <p><b>Domicilio:</b> <span id="printDomicilio"></span></p>
+            <p><b>Teléfono:</b> <span id="printTelefono"></span></p>
+            <p><b>Correo:</b> <span id="printEmail"></span></p>
+            <p><b>Representante:</b> <span id="printRepresentante"></span></p>
+          </div>
+
+          <div class="print-section">
+            <strong>2. IDENTIFICACIÓN DEL BIEN CONTRATADO</strong>
+
+            <p><b>Producto o servicio:</b> <span id="printProducto"></span></p>
+            <p><b>Monto reclamado:</b> S/ <span id="printMonto"></span></p>
+            <p><b>Descripción:</b></p>
+            <div class="print-box" id="printDescripcion"></div>
+          </div>
+
+          <div class="print-section">
+            <strong>3. DETALLE DE LA RECLAMACIÓN Y PEDIDO</strong>
+
+            <p><b>Tipo:</b> <span id="printTipo"></span></p>
+            <p><b>Detalle:</b></p>
+            <div class="print-box" id="printDetalle"></div>
+            <p><b>Pedido del consumidor:</b></p>
+            <div class="print-box" id="printPedido"></div>
+          </div>
+
+          <div class="print-section">
+            <strong>MEDIO PARA RECIBIR LA RESPUESTA</strong>
+            <p id="printMedioRespuesta"></p>
+          </div>
+
+          <div class="print-footer-note">
+            La formulación de la queja o reclamo no impide acudir a otras
+            vías de solución de controversias. El proveedor debe responder
+            en un plazo máximo de quince (15) días hábiles improrrogables,
+            conforme a la normativa vigente.
+          </div>
+
+          <div class="print-signature">
+            <div><span></span><small>Consumidor</small></div>
+            <div><span></span><small>Proveedor</small></div>
+          </div>
+
+          <div class="print-destination">
+            Destinatario: consumidor · proveedor · INDECOPI, según corresponda.
+          </div>
+
+        </div>
+
+        <button type="button" class="print-button" id="printConfirmation">
+          IMPRIMIR / GUARDAR CONSTANCIA
+        </button>
+
+        <p class="response-note">
+          Baby Golden Perú atenderá la solicitud dentro del plazo máximo
+          establecido por la normativa vigente.
+        </p>
+
+      </section>
+
+
+      <div class="legal-notice">
+        <strong>Importante:</strong>
+        <p>
+          La presentación de una queja o reclamo es gratuita. El proveedor
+          debe conservar el registro y atenderlo conforme a la normativa
+          aplicable.
+        </p>
+        <p>
+          Puedes imprimir o guardar una copia de esta Hoja de Reclamación
+          después de registrarla.
+        </p>
+      </div>
+
+
+      <div class="legal-links">
+
+        <a class="legal-link" href="terminos.html" target="_blank" rel="noopener">
+          TÉRMINOS Y CONDICIONES
+        </a>
+
+        <a class="legal-link" href="cambios.html" target="_blank" rel="noopener">
+          CAMBIOS Y DEVOLUCIONES
+        </a>
+
+        <a class="legal-link" href="privacidad.html" target="_blank" rel="noopener">
+          POLÍTICA DE PRIVACIDAD
+        </a>
+
+      </div>
+
+    </article>
+  </main>
+
+<!-- FOOTER -->
+  <footer id="contacto">
+
+    <img
+      src="BABY%20GOLDEN.png"
+      alt="Baby Golden Perú"
+    >
+
+    <div class="footer-brand">BABY GOLDEN PERÚ</div>
+
+    <p>
+      Comunidad · Tenencia responsable · Baby Golden ID
+    </p>
+
+    <p>
+      ♥ Una pata a la vez, construimos una comunidad mejor.
+    </p>
+
+    <div class="footer-links" aria-label="Enlaces principales">
+      <a href="index.html#tienda">Tienda</a>
+      <a href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html">Mi cuenta</a>
+      <a href="registro.html">Registrar mi perrito</a>
+      <a href="id.html">Buscar Baby Golden ID</a>
+      <a href="beneficios.html">Beneficios</a>
+      <a href="terminos.html">Términos y condiciones</a>
+      <a href="cambios.html">Cambios y devoluciones</a>
+      <a href="privacidad.html">Política de privacidad</a>
+      <a href="reclamaciones.html">Libro de reclamaciones</a>
+    </div>
+
+  </footer>
+<script>
+  (function(){
+    const products={BLACK:{name:'Black ID',price:36.90},PREMIUM:{name:'Premium ID',price:30.00}};
+    const cartKey='babyGoldenCart';
+    const getCart=()=>{try{return JSON.parse(localStorage.getItem(cartKey))||[]}catch{return[]}};
+    const saveCart=cart=>localStorage.setItem(cartKey,JSON.stringify(cart));
+    const count=document.getElementById('cartCount');
+    const items=document.getElementById('cartItems');
+    const total=document.getElementById('cartTotal');
+    const drawer=document.getElementById('cartDrawer');
+    const backdrop=document.getElementById('cartBackdrop');
+    function renderCart(){
+      const cart=getCart();
+      const qty=cart.length;
+      count.hidden=!qty; count.textContent=qty;
+      total.textContent='S/ '+cart.reduce((sum,id)=>sum+(products[id]?.price||0),0).toFixed(2);
+      items.innerHTML=qty?cart.map((id,index)=>{const p=products[id];return `<div class="cart-item"><div><h3>${p.name}</h3><p>Baby Golden Perú · S/ ${p.price.toFixed(2)}</p></div><button class="remove-item" type="button" data-remove-item="${index}">QUITAR</button></div>`}).join(''):'<p class="cart-empty">Tu carrito está vacío. Agrega una Baby Golden ID para continuar.</p>';
+      items.querySelectorAll('[data-remove-item]').forEach(btn=>btn.addEventListener('click',()=>{const cart=getCart();cart.splice(Number(btn.dataset.removeItem),1);saveCart(cart);renderCart()}));
+      const checkout=document.getElementById('cartCheckout');
+      checkout.href='https://babygoldenperu.github.io/baby-golden-peru/cuenta.html'+(qty?'?carrito='+encodeURIComponent(cart.join(',')): '');
+      checkout.setAttribute('aria-disabled',qty?'false':'true');
+      checkout.classList.toggle('is-disabled',!qty);
+    }
+    function openCart(){drawer.classList.add('is-open');drawer.setAttribute('aria-hidden','false');backdrop.hidden=false;renderCart()}
+    function closeCart(){drawer.classList.remove('is-open');drawer.setAttribute('aria-hidden','true');backdrop.hidden=true}
+    document.getElementById('openCart').addEventListener('click',openCart);
+    document.getElementById('closeCart').addEventListener('click',closeCart);
+    backdrop.addEventListener('click',closeCart);
+    document.querySelectorAll('[data-add-to-cart]').forEach(btn=>btn.addEventListener('click',()=>{const cart=getCart();cart.push(btn.dataset.addToCart);saveCart(cart);renderCart();openCart()}));
+    const searchPanel=document.getElementById('searchPanel');
+    const searchInput=document.getElementById('siteSearch');
+    const searchHelp=document.getElementById('searchHelp');
+    const destinations=[{terms:['premium'],target:'#tienda',label:'Premium ID'},{terms:['black'],target:'#tienda',label:'Black ID'},{terms:['beneficio','descuento'],target:'#beneficios',label:'Beneficios'},{terms:['comunidad','historia'],target:'#comunidad',label:'Comunidad'},{terms:['registro','registrar'],target:'#registro',label:'Registro'}];
+    document.getElementById('openSearch').addEventListener('click',()=>{searchPanel.hidden=false;searchInput.value='';searchHelp.textContent='Puedes buscar Premium ID, Black ID, beneficios, comunidad o registro.';setTimeout(()=>searchInput.focus(),0)});
+    document.querySelectorAll('[data-close-panel]').forEach(btn=>btn.addEventListener('click',()=>searchPanel.hidden=true));
+    searchPanel.addEventListener('click',event=>{if(event.target===searchPanel)searchPanel.hidden=true});
+    searchInput.addEventListener('input',()=>{const query=searchInput.value.toLowerCase().trim();const result=destinations.find(item=>item.terms.some(term=>query.includes(term)));if(!query){searchHelp.textContent='Puedes buscar Premium ID, Black ID, beneficios, comunidad o registro.';return}if(result){searchHelp.innerHTML=`Resultado: <strong>${result.label}</strong>. Presiona Enter para ir.`;searchInput.dataset.target=result.target}else{searchHelp.textContent='Aún no encontramos esa sección. Prueba con Premium, Black, beneficios, comunidad o registro.';searchInput.dataset.target=''}});
+    searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'&&searchInput.dataset.target){location.hash=searchInput.dataset.target;searchPanel.hidden=true}});
+    document.addEventListener('keydown',event=>{if(event.key==='Escape'){searchPanel.hidden=true;closeCart()}});
+    renderCart();
+  })();
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SB_URL="https://cxgcmrpqqaachnfavplh.supabase.co";
+const SB_KEY="sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+const sb=window.supabase.createClient(SB_URL,SB_KEY);
+
+const form=document.getElementById("reclamacionForm");
+const statusBox=document.getElementById("formStatus");
+const confirmation=document.getElementById("confirmation");
+
+form.addEventListener("submit",async function(event){
+  event.preventDefault();
+
+  const button=document.getElementById("submitReclamacion");
+  button.disabled=true;
+  statusBox.textContent="Registrando tu Hoja de Reclamación...";
+
+  const data=new FormData(form);
+
+  const payload={
+    nombre:data.get("nombre").trim(),
+    tipo_documento:data.get("tipoDocumento"),
+    documento:data.get("documento").trim(),
+    domicilio:data.get("domicilio").trim(),
+    telefono:data.get("telefono").trim(),
+    email:data.get("email").trim(),
+    representante_nombre:data.get("representanteNombre").trim(),
+    representante_documento:data.get("representanteDocumento").trim(),
+    representante_domicilio:data.get("representanteDomicilio").trim(),
+    representante_telefono:data.get("representanteTelefono").trim(),
+    representante_email:data.get("representanteEmail").trim(),
+    producto:data.get("producto").trim(),
+    monto:data.get("monto") ? Number(data.get("monto")) : null,
+    descripcion_producto:data.get("descripcionProducto").trim(),
+    tipo:data.get("tipo"),
+    detalle:data.get("detalle").trim(),
+    pedido:data.get("pedido").trim(),
+    medio_respuesta:data.get("medioRespuesta")
+  };
+
+  const {data:result,error}=await sb.rpc(
+    "registrar_reclamacion",
+    {p_data:payload}
+  );
+
+  if(error){
+    console.error(error);
+    statusBox.textContent=
+      "No pudimos registrar la Hoja. Verifica los datos e inténtalo nuevamente.";
+    button.disabled=false;
+    return;
+  }
+
+  const row=Array.isArray(result)?result[0]:result;
+
+  document.getElementById("confirmationNumber").textContent=row.numero;
+  document.getElementById("confirmationCode").textContent=row.codigo;
+  document.getElementById("confirmationDate").textContent=row.fecha;
+
+  const safe=(value)=>value || "No indicado";
+  const tipoDocumento=data.get("tipoDocumento");
+  const representanteNombre=data.get("representanteNombre").trim();
+  const representanteDocumento=data.get("representanteDocumento").trim();
+  const representanteDomicilio=data.get("representanteDomicilio").trim();
+  const representanteTelefono=data.get("representanteTelefono").trim();
+  const representanteEmail=data.get("representanteEmail").trim();
+
+  document.getElementById("printNumber").textContent=row.numero;
+  document.getElementById("printDate").textContent=row.fecha;
+  document.getElementById("printNombre").textContent=data.get("nombre").trim();
+  document.getElementById("printDocumento").textContent=tipoDocumento+" · "+data.get("documento").trim();
+  document.getElementById("printDomicilio").textContent=data.get("domicilio").trim();
+  document.getElementById("printTelefono").textContent=data.get("telefono").trim();
+  document.getElementById("printEmail").textContent=data.get("email").trim();
+
+  document.getElementById("printRepresentante").textContent =
+    representanteNombre
+      ? representanteNombre+" · "+safe(representanteDocumento)+" · "+
+        safe(representanteDomicilio)+" · "+safe(representanteTelefono)+" · "+
+        safe(representanteEmail)
+      : "No corresponde";
+
+  document.getElementById("printProducto").textContent=data.get("producto").trim();
+  document.getElementById("printMonto").textContent=data.get("monto") ? Number(data.get("monto")).toFixed(2) : "No indicado";
+  document.getElementById("printDescripcion").textContent=data.get("descripcionProducto").trim();
+  document.getElementById("printTipo").textContent=data.get("tipo");
+  document.getElementById("printDetalle").textContent=data.get("detalle").trim();
+  document.getElementById("printPedido").textContent=data.get("pedido").trim();
+  document.getElementById("printMedioRespuesta").textContent =
+    data.get("medioRespuesta")==="CORREO"
+      ? "Correo electrónico: "+data.get("email").trim()
+      : "Domicilio: "+data.get("domicilio").trim();
+
+  form.hidden=true;
+  statusBox.textContent="";
+  confirmation.hidden=false;
+
+  confirmation.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+});
+
+document.getElementById("printConfirmation").addEventListener(
+  "click",
+  ()=>window.print()
+);
+</script>
+
+</body>
+</html>
