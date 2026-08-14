@@ -1,0 +1,1098 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>
+    Checkout | Baby Golden Perú
+  </title>
+
+  <style>
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      background:#f6f0e6;
+      color:#3b2b20;
+      font-family:Arial,sans-serif;
+    }
+
+    header{
+      background:#f6f0e6;
+      border-bottom:1px solid #ded1bf;
+    }
+
+    .nav{
+      max-width:1280px;
+      min-height:76px;
+      margin:auto;
+      padding:0 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
+    }
+
+    .logo{
+      width:155px;
+      display:block;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.6px;
+    }
+
+    .menu a{
+      position:relative;
+      color:#3b2b20;
+      text-decoration:none;
+      transition:.25s ease;
+    }
+
+    .menu a:hover{
+      color:#b77b20;
+      transform:translateY(-2px);
+    }
+
+    .menu a:not(.header-button)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-7px;
+      width:0;
+      height:1px;
+      background:#b77b20;
+      transition:.25s ease;
+    }
+
+    .menu a:not(.header-button):hover::after{
+      width:100%;
+    }
+
+    .header-button{
+      padding:12px 17px;
+      border-radius:999px;
+      background:#4a3324;
+      color:#fff!important;
+    }
+
+    main{
+      max-width:1150px;
+      margin:auto;
+      padding:60px 25px 90px;
+    }
+
+    .label{
+      color:#a76f20;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    h1{
+      margin:10px 0 12px;
+      font-family:Georgia,serif;
+      font-size:48px;
+      font-weight:500;
+    }
+
+    .intro{
+      color:#765f4c;
+      font-size:13px;
+      margin-bottom:35px;
+    }
+
+    .checkout-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);
+      gap:28px;
+      align-items:start;
+    }
+
+    .box{
+      padding:28px;
+      background:#fffaf4;
+      border:1px solid #decdb8;
+      border-radius:18px;
+    }
+
+    .box h2{
+      margin:0 0 22px;
+      font-family:Georgia,serif;
+      font-size:27px;
+      font-weight:500;
+    }
+
+    .field-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
+    }
+
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
+    }
+
+    .field.full{
+      grid-column:1 / -1;
+    }
+
+    label{
+      color:#5e4938;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+    }
+
+    input,
+    select{
+      width:100%;
+      padding:13px 12px;
+      border:1px solid #d9c9b6;
+      border-radius:9px;
+      background:#fff;
+      color:#3b2b20;
+      outline:none;
+    }
+
+    input:focus,
+    select:focus{
+      border-color:#b77b20;
+    }
+
+    .required{
+      color:#a76f20;
+    }
+
+    .summary-item{
+      display:grid;
+      grid-template-columns:60px 1fr auto;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid #eadfce;
+    }
+
+    .summary-image{
+      width:60px;
+      height:60px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid #e3d4c2;
+      background:#f1e7d9;
+    }
+
+    .summary-name{
+      margin:0 0 5px;
+      font-size:12px;
+      font-weight:700;
+    }
+
+    .summary-meta{
+      margin:0;
+      color:#765f4c;
+      font-size:10px;
+      line-height:1.6;
+    }
+
+    .summary-price{
+      font-size:11px;
+      font-weight:700;
+      white-space:nowrap;
+    }
+
+    .total-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      padding-top:20px;
+      margin-top:8px;
+      border-top:1px solid #decdb8;
+    }
+
+    .total-label{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    .total-price{
+      color:#a76f20;
+      font-family:Georgia,serif;
+      font-size:28px;
+      font-weight:700;
+    }
+
+    .continue-button{
+      width:100%;
+      margin-top:22px;
+      padding:15px 20px;
+      border:0;
+      border-radius:999px;
+      background:#4a3324;
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.5px;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .continue-button:hover{
+      background:#684936;
+      transform:translateY(-1px);
+    }
+
+    .continue-button:disabled{
+      background:#aaa098;
+      cursor:not-allowed;
+      transform:none;
+    }
+
+    .notice{
+      margin-top:14px;
+      color:#8a7564;
+      font-size:10px;
+      line-height:1.6;
+      text-align:center;
+    }
+
+    .empty{
+      padding:35px 10px;
+      color:#765f4c;
+      text-align:center;
+      font-size:12px;
+    }
+
+    .back-link{
+      display:inline-block;
+      margin-top:20px;
+      color:#4a3324;
+      font-size:10px;
+      font-weight:700;
+      text-decoration:none;
+      letter-spacing:.5px;
+    }
+
+    .back-link:hover{
+      color:#b77b20;
+    }
+
+    .error{
+      margin-top:10px;
+      color:#9f3d2c;
+      font-size:10px;
+      line-height:1.5;
+    }
+
+    footer{
+      padding:50px 25px 35px;
+      background:#29251f;
+      color:#fff;
+      text-align:center;
+    }
+
+    .footer-brand{
+      color:#d5a34c;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    footer p{
+      color:#aaa197;
+      font-size:11px;
+      line-height:1.8;
+    }
+
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px 22px;
+      max-width:850px;
+      margin:25px auto 0;
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.13);
+    }
+
+    .footer-links a{
+      color:#e3c99b;
+      font-size:10px;
+      font-weight:700;
+      text-decoration:none;
+    }
+
+    @media(max-width:850px){
+
+      .nav{
+        min-height:64px;
+        padding:8px 12px;
+        gap:12px;
+      }
+
+      .logo{
+        width:112px;
+        flex:0 0 auto;
+      }
+
+      .menu{
+        flex:1;
+        max-width:calc(100vw - 135px);
+        overflow-x:auto;
+        scrollbar-width:none;
+        gap:14px;
+        flex-wrap:nowrap;
+        justify-content:flex-start;
+      }
+
+      .menu::-webkit-scrollbar{
+        display:none;
+      }
+
+      .menu a{
+        flex:0 0 auto;
+        font-size:8px;
+      }
+
+      .header-button{
+        padding:8px 12px;
+      }
+
+      .checkout-grid{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:38px;
+      }
+
+    }
+
+    @media(max-width:560px){
+
+      main{
+        padding:45px 16px 70px;
+      }
+
+      .box{
+        padding:20px;
+      }
+
+      .field-grid{
+        grid-template-columns:1fr;
+      }
+
+      .field.full{
+        grid-column:auto;
+      }
+
+      .summary-item{
+        grid-template-columns:52px 1fr;
+      }
+
+      .summary-image{
+        width:52px;
+        height:52px;
+      }
+
+      .summary-price{
+        grid-column:2;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+  <header>
+
+    <nav class="nav">
+
+      <a href="index.html">
+        <img
+          src="BABY%20GOLDEN.png"
+          alt="Baby Golden Perú"
+          class="logo"
+        >
+      </a>
+
+      <div class="menu">
+
+        <a href="index.html">
+          INICIO
+        </a>
+
+        <a href="tienda.html">
+          TIENDA
+        </a>
+
+        <a href="beneficios.html">
+          BENEFICIOS
+        </a>
+
+        <a href="fotos.html">
+          FOTOS
+        </a>
+
+        <a href="contacto.html">
+          CONTACTO
+        </a>
+
+        <a
+          href="registro.html"
+          class="header-button"
+        >
+          REGISTRAR MI PERRITO
+        </a>
+
+      </div>
+
+    </nav>
+
+  </header>
+
+
+  <main>
+
+    <div class="label">
+      FINALIZAR COMPRA
+    </div>
+
+    <h1>
+      Tus datos y tu pedido
+    </h1>
+
+    <p class="intro">
+      Revisa tu selección y completa tus datos para continuar.
+    </p>
+
+
+    <div class="checkout-grid">
+
+
+      <section class="box">
+
+        <h2>
+          Datos del comprador
+        </h2>
+
+        <form id="checkoutForm">
+
+          <div class="field-grid">
+
+            <div class="field">
+
+              <label for="nombre">
+                Nombre <span class="required">*</span>
+              </label>
+
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                autocomplete="given-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="apellidos">
+                Apellidos <span class="required">*</span>
+              </label>
+
+              <input
+                id="apellidos"
+                name="apellidos"
+                type="text"
+                autocomplete="family-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="email">
+                Correo electrónico <span class="required">*</span>
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="telefono">
+                Teléfono / WhatsApp <span class="required">*</span>
+              </label>
+
+              <input
+                id="telefono"
+                name="telefono"
+                type="tel"
+                autocomplete="tel"
+                required
+              >
+
+            </div>
+
+
+            <div class="field full">
+
+              <label for="direccion">
+                Dirección <span class="required">*</span>
+              </label>
+
+              <input
+                id="direccion"
+                name="direccion"
+                type="text"
+                autocomplete="street-address"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="distrito">
+                Distrito <span class="required">*</span>
+              </label>
+
+              <input
+                id="distrito"
+                name="distrito"
+                type="text"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="provincia">
+                Provincia <span class="required">*</span>
+              </label>
+
+              <input
+                id="provincia"
+                name="provincia"
+                type="text"
+                value="Lima"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="departamento">
+                Departamento <span class="required">*</span>
+              </label>
+
+              <input
+                id="departamento"
+                name="departamento"
+                type="text"
+                value="Lima"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="formError"
+            class="error"
+          ></div>
+
+
+          <button
+            type="submit"
+            class="continue-button"
+            id="continueButton"
+          >
+            CONTINUAR AL PAGO
+          </button>
+
+          <p class="notice">
+            En este paso todavía no se realizará ningún cobro.
+            Primero verificaremos el pedido y luego conectaremos
+            el proceso de pago con Culqi.
+          </p>
+
+        </form>
+
+      </section>
+
+
+      <aside class="box">
+
+        <h2>
+          Resumen del pedido
+        </h2>
+
+        <div id="summary"></div>
+
+        <div
+          id="summaryTotal"
+          class="total-row"
+        >
+
+          <span class="total-label">
+            Total
+          </span>
+
+          <span
+            id="total"
+            class="total-price"
+          >
+            S/ 0.00
+          </span>
+
+        </div>
+
+        <a
+          href="tienda.html"
+          class="back-link"
+        >
+          ← VOLVER A LA TIENDA
+        </a>
+
+      </aside>
+
+
+    </div>
+
+  </main>
+
+
+  <footer>
+
+    <div class="footer-brand">
+      BABY GOLDEN PERÚ
+    </div>
+
+    <p>
+      Comunidad · Tenencia responsable · Baby Golden ID
+    </p>
+
+    <p>
+      ♥ Una pata a la vez, construimos una comunidad mejor.
+    </p>
+
+    <div class="footer-links">
+
+      <a href="terminos.html">
+        Términos y condiciones
+      </a>
+
+      <a href="cambios.html">
+        Cambios y devoluciones
+      </a>
+
+      <a href="privacidad.html">
+        Política de privacidad
+      </a>
+
+      <a href="reclamaciones.html">
+        Libro de reclamaciones
+      </a>
+
+    </div>
+
+  </footer>
+
+
+  <script>
+
+    const cartKey =
+      "babyGoldenCart";
+
+
+    const products = {
+
+      BLACK: {
+        name: "Black ID",
+        price: 36.90,
+        image: "black.jpeg"
+      },
+
+      PREMIUM: {
+        name: "Premium ID",
+        price: 30.00,
+        image: "premium.jpeg"
+      },
+
+      BANDANA: {
+        name: "Bandana Baby Golden Perú",
+        price: 34.90,
+        image: "bandana.jpeg"
+      },
+
+      POLO: {
+        name: "Polo Baby Golden Perú",
+        price: 39.90,
+        image: "polo.jpeg"
+      },
+
+      GORRO: {
+        name: "Gorro Baby Golden Perú",
+        price: 79.90,
+        image: "gorro.jpeg"
+      }
+
+    };
+
+
+    function getCart(){
+
+      try{
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              cartKey
+            )
+          );
+
+
+        if(
+          saved &&
+          typeof saved === "object" &&
+          !Array.isArray(saved)
+        ){
+
+          return saved;
+
+        }
+
+
+        if(Array.isArray(saved)){
+
+          const converted = {};
+
+
+          saved.forEach(id => {
+
+            if(products[id]){
+
+              converted[id] =
+                (
+                  Number(
+                    converted[id]
+                  ) || 0
+                ) + 1;
+
+            }
+
+          });
+
+
+          localStorage.setItem(
+            cartKey,
+            JSON.stringify(
+              converted
+            )
+          );
+
+
+          return converted;
+
+        }
+
+
+        return {};
+
+      } catch{
+
+        return {};
+
+      }
+
+    }
+
+
+    function escapeHtml(value){
+
+      return String(
+        value ?? ""
+      )
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+
+    }
+
+
+    function renderSummary(){
+
+      const cart =
+        getCart();
+
+
+      const ids =
+        Object.keys(cart)
+        .filter(
+          id =>
+            products[id] &&
+            Number(cart[id]) > 0
+        );
+
+
+      const summary =
+        document.getElementById(
+          "summary"
+        );
+
+
+      const totalElement =
+        document.getElementById(
+          "total"
+        );
+
+
+      const button =
+        document.getElementById(
+          "continueButton"
+        );
+
+
+      if(!ids.length){
+
+        summary.innerHTML = `
+          <div class="empty">
+            Tu carrito está vacío.
+            <br><br>
+            Regresa a la tienda para agregar productos.
+          </div>
+        `;
+
+
+        totalElement.textContent =
+          "S/ 0.00";
+
+
+        button.disabled =
+          true;
+
+
+        return;
+
+      }
+
+
+      let total = 0;
+
+
+      summary.innerHTML =
+        ids.map(id => {
+
+          const product =
+            products[id];
+
+          const quantity =
+            Number(cart[id]);
+
+          const subtotal =
+            product.price * quantity;
+
+          total += subtotal;
+
+
+          return `
+
+            <div class="summary-item">
+
+              <img
+                class="summary-image"
+                src="${escapeHtml(product.image)}"
+                alt="${escapeHtml(product.name)}"
+              >
+
+              <div>
+
+                <p class="summary-name">
+                  ${escapeHtml(product.name)}
+                </p>
+
+                <p class="summary-meta">
+                  Cantidad: ${quantity}
+                  <br>
+                  S/ ${product.price.toFixed(2)}
+                  c/u
+                </p>
+
+              </div>
+
+              <div class="summary-price">
+                S/ ${subtotal.toFixed(2)}
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+
+      totalElement.textContent =
+        "S/ " + total.toFixed(2);
+
+
+      button.disabled =
+        false;
+
+    }
+
+
+    document
+      .getElementById("checkoutForm")
+      .addEventListener(
+        "submit",
+        function(event){
+
+          event.preventDefault();
+
+
+          const formError =
+            document.getElementById(
+              "formError"
+            );
+
+
+          const cart =
+            getCart();
+
+
+          const hasProducts =
+            Object.keys(cart)
+            .some(
+              id =>
+                products[id] &&
+                Number(cart[id]) > 0
+            );
+
+
+          if(!hasProducts){
+
+            formError.textContent =
+              "Tu carrito está vacío.";
+
+            return;
+
+          }
+
+
+          /*
+            Por ahora solo validamos y guardamos
+            los datos localmente para probar el flujo.
+
+            Todavía NO se crea una orden en Supabase
+            y todavía NO se realiza ningún cobro.
+          */
+
+          const formData =
+            new FormData(
+              this
+            );
+
+
+          const customer = {
+
+            nombre:
+              formData.get("nombre"),
+
+            apellidos:
+              formData.get("apellidos"),
+
+            email:
+              formData.get("email"),
+
+            telefono:
+              formData.get("telefono"),
+
+            direccion:
+              formData.get("direccion"),
+
+            distrito:
+              formData.get("distrito"),
+
+            provincia:
+              formData.get("provincia"),
+
+            departamento:
+              formData.get("departamento")
+
+          };
+
+
+          localStorage.setItem(
+            "babyGoldenCheckout",
+            JSON.stringify(
+              customer
+            )
+          );
+
+
+          formError.textContent =
+            "";
+
+
+          alert(
+            "Datos validados correctamente. El siguiente paso será crear la orden y conectar Culqi."
+          );
+
+        }
+      );
+
+
+    renderSummary();
+
+  </script>
+
+</body>
+
+</html>
