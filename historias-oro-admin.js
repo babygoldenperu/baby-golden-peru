@@ -425,11 +425,11 @@ class="ho-msg"
 
     try{
 
-     for(
+    for(
   const numero of [1,2,3,4,5,6]
-)
+){
 
-        const archivo =
+  const archivo =
           document
           .getElementById(
             "hoF"+numero
