@@ -254,7 +254,7 @@ class="ho-msg"
 
   /* VISTA PREVIA */
 
-  [1,2,3,4].forEach(n => {
+  [1,2,3,4,5,6].forEach(n => {
 
     document
       .getElementById("hoF"+n)
