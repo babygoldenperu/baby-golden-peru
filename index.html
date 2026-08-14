@@ -1959,6 +1959,169 @@
 }
 </style>
 
+
+<style>
+/* =========================================================
+   HISTORIAS DE ORO — VISOR AMPLIADO
+========================================================= */
+.story-image-button{
+  position:relative;
+  display:block;
+  width:100%;
+  height:100%;
+  padding:0;
+  margin:0;
+  border:0;
+  background:transparent;
+  cursor:zoom-in;
+  overflow:hidden;
+}
+
+.story-image-button img{
+  display:block;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.story-image-button:focus-visible{
+  outline:2px solid #d7ad63;
+  outline-offset:-3px;
+}
+
+.story-zoom{
+  position:absolute;
+  right:14px;
+  top:14px;
+  width:34px;
+  height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:rgba(255,250,243,.90);
+  color:#8b642d;
+  font:500 21px/1 Arial,sans-serif;
+  opacity:0;
+  transform:scale(.9);
+  transition:.25s ease;
+  box-shadow:0 8px 20px rgba(30,20,10,.16);
+}
+
+.story-image-button:hover .story-zoom,
+.story-image-button:focus-visible .story-zoom{
+  opacity:1;
+  transform:scale(1);
+}
+
+.story-lightbox{
+  position:fixed;
+  inset:0;
+  z-index:3000;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+  background:rgba(18,14,10,.88);
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.story-lightbox.is-open{
+  display:flex;
+}
+
+.story-lightbox-content{
+  position:relative;
+  width:min(1100px,92vw);
+  max-height:92vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.story-lightbox-image{
+  display:block;
+  max-width:100%;
+  max-height:82vh;
+  width:auto;
+  height:auto;
+  object-fit:contain;
+  border-radius:18px;
+  box-shadow:0 30px 90px rgba(0,0,0,.45);
+}
+
+.story-lightbox-close,
+.story-lightbox-prev,
+.story-lightbox-next{
+  position:absolute;
+  z-index:2;
+  width:46px;
+  height:46px;
+  border:1px solid rgba(255,255,255,.28);
+  border-radius:50%;
+  background:rgba(255,250,243,.94);
+  color:#6f5125;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 10px 28px rgba(0,0,0,.20);
+}
+
+.story-lightbox-close{
+  top:-18px;
+  right:-18px;
+  font-size:27px;
+}
+
+.story-lightbox-prev{
+  left:-24px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:28px;
+}
+
+.story-lightbox-next{
+  right:-24px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:28px;
+}
+
+.story-lightbox-close:hover,
+.story-lightbox-prev:hover,
+.story-lightbox-next:hover{
+  background:#b77b20;
+  color:#fff;
+}
+
+.story-lightbox-caption{
+  position:absolute;
+  left:50%;
+  bottom:-46px;
+  transform:translateX(-50%);
+  width:max-content;
+  max-width:80vw;
+  color:#fff;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:2px;
+  text-align:center;
+}
+
+@media(max-width:650px){
+  .story-lightbox{padding:16px}
+  .story-lightbox-content{width:96vw}
+  .story-lightbox-image{max-height:76vh;border-radius:14px}
+  .story-lightbox-close{top:-8px;right:-4px;width:40px;height:40px}
+  .story-lightbox-prev,.story-lightbox-next{width:40px;height:40px}
+  .story-lightbox-prev{left:8px}
+  .story-lightbox-next{right:8px}
+  .story-lightbox-caption{bottom:-34px;font-size:8px;letter-spacing:1.4px}
+}
+</style>
+
 </head>
 
 <body>
@@ -2157,25 +2320,55 @@
       <button class="story-arrow prev" type="button" aria-label="Historia anterior">‹</button>
 
       <div class="stories-track" id="storiesTrack">
-        <article class="story-slide">
-          <img id="storyPhoto1" src="IMG_3370.JPG" alt="Golden Retriever Baby Golden Perú">
+
+        <article class="story-slide" data-story-number="1">
+          <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 1">
+            <img id="storyPhoto1" src="IMG_3370.JPG" alt="Golden Retriever Baby Golden Perú">
+            <span class="story-zoom" aria-hidden="true">＋</span>
+          </button>
           <div class="story-slide-label">NUESTROS GOLDENS</div>
         </article>
 
-        <article class="story-slide">
-          <img id="storyPhoto2" src="_MG_3202%20copia.jpg.jpeg" alt="Golden Retriever Baby Golden Perú">
+        <article class="story-slide" data-story-number="2">
+          <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 2">
+            <img id="storyPhoto2" src="_MG_3202%20copia.jpg.jpeg" alt="Golden Retriever Baby Golden Perú">
+            <span class="story-zoom" aria-hidden="true">＋</span>
+          </button>
           <div class="story-slide-label">HISTORIAS DE ORO</div>
         </article>
 
-        <article class="story-slide">
-          <img id="storyPhoto3" src="bgp%20fondo%20amarillo.jpg.jpeg" alt="Encuentro de Baby Golden Perú">
+        <article class="story-slide" data-story-number="3">
+          <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 3">
+            <img id="storyPhoto3" src="bgp%20fondo%20amarillo.jpg.jpeg" alt="Encuentro de Baby Golden Perú">
+            <span class="story-zoom" aria-hidden="true">＋</span>
+          </button>
           <div class="story-slide-label">FOTOS GRUPALES</div>
         </article>
 
-        <article class="story-slide">
-          <img id="storyPhoto4" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+        <article class="story-slide" data-story-number="4">
+          <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 4">
+            <img id="storyPhoto4" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+            <span class="story-zoom" aria-hidden="true">＋</span>
+          </button>
           <div class="story-slide-label">MOMENTOS DE ORO</div>
         </article>
+
+        <article class="story-slide" data-story-number="5">
+          <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 5">
+            <img id="storyPhoto5" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+            <span class="story-zoom" aria-hidden="true">＋</span>
+          </button>
+          <div class="story-slide-label">HISTORIAS DE ORO</div>
+        </article>
+
+        <article class="story-slide" data-story-number="6">
+          <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 6">
+            <img id="storyPhoto6" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+            <span class="story-zoom" aria-hidden="true">＋</span>
+          </button>
+          <div class="story-slide-label">MOMENTOS DE ORO</div>
+        </article>
+
       </div>
 
       <button class="story-arrow next" type="button" aria-label="Siguiente historia">›</button>
@@ -2184,6 +2377,18 @@
     </div>
 
   </section>
+
+
+  <!-- VISOR AMPLIADO DE HISTORIAS DE ORO -->
+  <div class="story-lightbox" id="storyLightbox" aria-hidden="true">
+    <div class="story-lightbox-content" role="dialog" aria-modal="true" aria-label="Historia de Oro ampliada">
+      <button class="story-lightbox-close" id="storyLightboxClose" type="button" aria-label="Cerrar imagen">×</button>
+      <button class="story-lightbox-prev" id="storyLightboxPrev" type="button" aria-label="Foto anterior">‹</button>
+      <img class="story-lightbox-image" id="storyLightboxImage" src="" alt="">
+      <button class="story-lightbox-next" id="storyLightboxNext" type="button" aria-label="Foto siguiente">›</button>
+      <div class="story-lightbox-caption" id="storyLightboxCaption"></div>
+    </div>
+  </div>
 
 
   <section class="family-statement" aria-label="Nuestra familia">
@@ -2511,115 +2716,312 @@
 
 <script>
 /* =========================================================
-   BABY GOLDEN — CONTENIDO EDITABLE DESDE UN SOLO PANEL
-   Fallback: la web conserva el contenido estático si Supabase
-   no está disponible o todavía no se ha creado la tabla.
+   BABY GOLDEN — CONTENIDO EDITABLE DESDE SUPABASE
+   Compatible con site_gallery:
+   slot + imagen_url + title + caption + published
 ========================================================= */
 (function(){
+
   const SB_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
   const SB_KEY = "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
-  const load = () => {
-    if (!window.supabase) return;
+
+  const STORY_SLOTS = [
+    "historia_1",
+    "historia_2",
+    "historia_3",
+    "historia_4",
+    "historia_5",
+    "historia_6"
+  ];
+
+  function setText(id,value){
+    const el=document.getElementById(id);
+    if(el && value !== null && value !== undefined && value !== ""){
+      el.textContent=value;
+    }
+  }
+
+  function setFamilyContent(value,title){
+    if(value){
+      const el=document.querySelector(title ? ".family-statement h2" : ".family-statement p");
+      if(el) el.textContent=value;
+    }
+  }
+
+  async function loadEditableContent(){
+
+    if(!window.supabase) return;
+
     try{
-      const sb = window.supabase.createClient(SB_URL, SB_KEY);
 
-      sb.from("site_content")
-        .select("key,value")
-        .then(({data})=>{
-          if(!data) return;
-          const c = Object.fromEntries(data.map(x=>[x.key,x.value]));
-          const setText=(id,v)=>{const el=document.getElementById(id); if(el && v) el.textContent=v;};
-          setText("siteHeroKicker",c.hero_kicker);
-          setText("siteHeroLine1",c.hero_line1);
-          setText("siteHeroLine2",c.hero_line2);
-          setText("siteHeroLine3",c.hero_line3);
-          setText("siteHeroSubtitle",c.hero_subtitle);
-          if(c.hero_image){
-            const el=document.getElementById("siteHeroImage");
-            if(el) el.src=c.hero_image;
-          }
-          if(c.family_title){
-            const el=document.querySelector(".family-statement h2");
-            if(el) el.textContent=c.family_title;
-          }
-          if(c.family_text){
-            const el=document.querySelector(".family-statement p");
-            if(el) el.textContent=c.family_text;
-          }
-        });
+      const sb=window.supabase.createClient(SB_URL,SB_KEY);
 
-      sb.from("site_gallery")
-        .select("slot,image_url,title,caption,published")
+      /* =========================
+         CONTENIDO GENERAL
+      ========================= */
+
+      const contentResult=await sb
+        .from("site_content")
+        .select("key,value");
+
+      if(!contentResult.error && contentResult.data){
+
+        const content=Object.fromEntries(
+          contentResult.data.map(item=>[item.key,item.value])
+        );
+
+        setText("siteHeroKicker",content.hero_kicker);
+        setText("siteHeroLine1",content.hero_line1);
+        setText("siteHeroLine2",content.hero_line2);
+        setText("siteHeroLine3",content.hero_line3);
+        setText("siteHeroSubtitle",content.hero_subtitle);
+
+        if(content.hero_image){
+          const hero=document.getElementById("siteHeroImage");
+          if(hero) hero.src=content.hero_image;
+        }
+
+        setFamilyContent(content.family_title,true);
+        setFamilyContent(content.family_text,false);
+      }
+
+      /* =========================
+         HISTORIAS DE ORO — 6 FOTOS
+      ========================= */
+
+      const galleryResult=await sb
+        .from("site_gallery")
+        .select("slot,imagen_url,title,caption,published")
+        .in("slot",STORY_SLOTS)
         .eq("published",true)
-        .order("slot")
-        .then(({data})=>{
-          if(!data) return;
-          data.forEach(item=>{
-            const img=document.getElementById(item.slot);
-            if(img && item.image_url){
-              img.src=item.image_url;
-              img.alt=item.title || "Baby Golden Perú";
-            }
-          });
-        });
-    }catch(e){ console.warn("Contenido editable no disponible:",e); }
-  };
-  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",load);
-  else load();
+        .order("slot",{ascending:true});
+
+      if(galleryResult.error){
+        console.warn("Historias de Oro no disponibles:",galleryResult.error.message);
+        return;
+      }
+
+      const rows=galleryResult.data || [];
+
+      rows.forEach(item=>{
+
+        const numero=Number(
+          String(item.slot || "").replace("historia_","")
+        );
+
+        if(!numero || numero<1 || numero>6) return;
+
+        const img=document.getElementById("storyPhoto"+numero);
+        const slide=img ? img.closest(".story-slide") : null;
+        const label=slide ? slide.querySelector(".story-slide-label") : null;
+
+        if(img && item.imagen_url){
+          img.src=item.imagen_url;
+          img.alt=item.title || item.caption || "Historia de Oro · Baby Golden Perú";
+          img.dataset.remote="true";
+        }
+
+        if(label){
+          label.textContent=item.title || item.caption || "HISTORIAS DE ORO";
+        }
+
+        if(slide){
+          slide.dataset.loaded="true";
+          slide.dataset.slot=item.slot;
+        }
+      });
+
+      /*
+         Si una fila existe pero no tiene imagen, mantenemos la tarjeta
+         visible con su imagen local de respaldo. Así la página nunca
+         queda rota si Supabase tarda en responder.
+      */
+
+      document.querySelectorAll(".story-slide").forEach((slide,index)=>{
+        if(!slide.dataset.loaded){
+          slide.dataset.loaded="fallback";
+        }
+      });
+
+    }catch(error){
+      console.warn("Contenido editable no disponible:",error);
+    }
+
+  }
+
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",loadEditableContent);
+  }else{
+    loadEditableContent();
+  }
+
 })();
 </script>
 
 
 <script>
+/* =========================================================
+   HISTORIAS DE ORO — CARRUSEL + VISOR AMPLIADO
+========================================================= */
 (function(){
-  const track = document.getElementById('storiesTrack');
-  const dots = document.getElementById('storyDots');
-  if(!track || !dots) return;
 
-  const slides = Array.from(track.querySelectorAll('.story-slide'));
-  const prev = document.querySelector('.story-arrow.prev');
-  const next = document.querySelector('.story-arrow.next');
-  let index = 0;
+  function initStories(){
 
-  function visibleCount(){
-    return window.innerWidth <= 620 ? 1 : 3;
-  }
+    const track=document.getElementById("storiesTrack");
+    const dots=document.getElementById("storyDots");
+    const lightbox=document.getElementById("storyLightbox");
+    const lightboxImage=document.getElementById("storyLightboxImage");
+    const lightboxCaption=document.getElementById("storyLightboxCaption");
+    const lightboxClose=document.getElementById("storyLightboxClose");
+    const lightboxPrev=document.getElementById("storyLightboxPrev");
+    const lightboxNext=document.getElementById("storyLightboxNext");
 
-  function maxIndex(){
-    return Math.max(0, slides.length - visibleCount());
-  }
+    if(!track || !dots) return;
 
-  function renderDots(){
-    dots.innerHTML = '';
-    const count = maxIndex() + 1;
-    for(let i=0;i<count;i++){
-      const b=document.createElement('button');
-      b.className='story-dot' + (i===index?' active':'');
-      b.type='button';
-      b.setAttribute('aria-label','Mostrar historias '+(i+1));
-      b.addEventListener('click',()=>go(i));
-      dots.appendChild(b);
+    const slides=Array.from(track.querySelectorAll(".story-slide"));
+    const prev=document.querySelector(".story-arrow.prev");
+    const next=document.querySelector(".story-arrow.next");
+
+    let index=0;
+    let lightboxIndex=0;
+    let timer=null;
+
+    function visibleCount(){
+      return window.innerWidth<=620 ? 1 : 3;
     }
+
+    function maxIndex(){
+      return Math.max(0,slides.length-visibleCount());
+    }
+
+    function renderDots(){
+      dots.innerHTML="";
+
+      const count=maxIndex()+1;
+
+      for(let i=0;i<count;i++){
+        const button=document.createElement("button");
+        button.className="story-dot"+(i===index ? " active" : "");
+        button.type="button";
+        button.setAttribute("aria-label","Mostrar historias desde la foto "+(i+1));
+        button.addEventListener("click",()=>go(i));
+        dots.appendChild(button);
+      }
+    }
+
+    function go(target){
+
+      index=Math.max(0,Math.min(target,maxIndex()));
+
+      const first=slides[0];
+      if(!first) return;
+
+      const gap=parseFloat(getComputedStyle(track).gap)||0;
+      const amount=first.getBoundingClientRect().width+gap;
+
+      track.style.transform="translateX(-"+(index*amount)+"px)";
+
+      Array.from(dots.children).forEach((dot,n)=>{
+        dot.classList.toggle("active",n===index);
+      });
+    }
+
+    function restartAuto(){
+      if(timer) clearInterval(timer);
+
+      timer=setInterval(()=>{
+        if(document.hidden || lightbox?.classList.contains("is-open")) return;
+        go(index>=maxIndex() ? 0 : index+1);
+      },5000);
+    }
+
+    prev?.addEventListener("click",()=>go(index-1));
+    next?.addEventListener("click",()=>go(index+1));
+
+    /* =========================
+       VISOR AMPLIADO
+    ========================= */
+
+    function openLightbox(number){
+
+      if(!lightbox || !lightboxImage) return;
+
+      lightboxIndex=Math.max(0,Math.min(number,slides.length-1));
+
+      const slide=slides[lightboxIndex];
+      const image=slide?.querySelector("img");
+      const label=slide?.querySelector(".story-slide-label");
+
+      if(!image) return;
+
+      lightboxImage.src=image.currentSrc || image.src;
+      lightboxImage.alt=image.alt || "Historia de Oro";
+      lightboxCaption.textContent=label?.textContent || "HISTORIAS DE ORO";
+
+      lightbox.classList.add("is-open");
+      lightbox.setAttribute("aria-hidden","false");
+      document.body.style.overflow="hidden";
+
+      lightboxClose?.focus();
+    }
+
+    function closeLightbox(){
+
+      if(!lightbox) return;
+
+      lightbox.classList.remove("is-open");
+      lightbox.setAttribute("aria-hidden","true");
+      document.body.style.overflow="";
+    }
+
+    function moveLightbox(direction){
+      const nextIndex=(lightboxIndex+direction+slides.length)%slides.length;
+      openLightbox(nextIndex);
+    }
+
+    slides.forEach((slide,number)=>{
+      const button=slide.querySelector(".story-image-button");
+      if(button){
+        button.addEventListener("click",()=>openLightbox(number));
+      }
+    });
+
+    lightboxClose?.addEventListener("click",closeLightbox);
+    lightboxPrev?.addEventListener("click",()=>moveLightbox(-1));
+    lightboxNext?.addEventListener("click",()=>moveLightbox(1));
+
+    lightbox?.addEventListener("click",event=>{
+      if(event.target===lightbox) closeLightbox();
+    });
+
+    document.addEventListener("keydown",event=>{
+      if(!lightbox?.classList.contains("is-open")) return;
+
+      if(event.key==="Escape"){
+        closeLightbox();
+      }else if(event.key==="ArrowLeft"){
+        moveLightbox(-1);
+      }else if(event.key==="ArrowRight"){
+        moveLightbox(1);
+      }
+    });
+
+    window.addEventListener("resize",()=>{
+      renderDots();
+      go(Math.min(index,maxIndex()));
+    });
+
+    renderDots();
+    go(0);
+    restartAuto();
   }
 
-  function go(i){
-    index = Math.max(0, Math.min(i, maxIndex()));
-    const first = slides[0];
-    const gap = parseFloat(getComputedStyle(track).gap) || 0;
-    const amount = first.getBoundingClientRect().width + gap;
-    track.style.transform = 'translateX(-' + (index * amount) + 'px)';
-    Array.from(dots.children).forEach((d,n)=>d.classList.toggle('active',n===index));
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",initStories);
+  }else{
+    initStories();
   }
 
-  prev && prev.addEventListener('click',()=>go(index-1));
-  next && next.addEventListener('click',()=>go(index+1));
-
-  window.addEventListener('resize',()=>{ renderDots(); go(Math.min(index,maxIndex())); });
-  renderDots();
-
-  setInterval(()=>{
-    go(index >= maxIndex() ? 0 : index + 1);
-  }, 5000);
 })();
 </script>
 
@@ -2941,7 +3343,5 @@
     renderCart();
   })();
 </script>
-<script src="historias-oro-web.js"></script>
 </body>
 </html>
-
