@@ -1685,11 +1685,59 @@
 
       try {
 
-        return JSON.parse(
-          localStorage.getItem(
-            cartKey
-          )
-        ) || {};
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              cartKey
+            )
+          );
+
+
+        /*
+          Si existe un carrito antiguo
+          guardado como array, lo convertimos
+          al nuevo formato de cantidades.
+        */
+
+        if(Array.isArray(saved)){
+
+          const converted = {};
+
+
+          saved.forEach(id => {
+
+            if(products[id]){
+
+              converted[id] =
+                (
+                  Number(
+                    converted[id]
+                  ) || 0
+                ) + 1;
+
+            }
+
+          });
+
+
+          saveCart(converted);
+
+          return converted;
+
+        }
+
+
+        if(
+          saved &&
+          typeof saved === "object"
+        ){
+
+          return saved;
+
+        }
+
+
+        return {};
 
       } catch {
 
@@ -2079,7 +2127,6 @@
                 (Number(cart[id]) || 0) + 1;
 
               saveCart(cart);
-
 
               renderCart();
 
