@@ -2675,7 +2675,53 @@
           </button>
           <div class="story-slide-label">MOMENTOS DE ORO</div>
         </article>
+<article class="story-slide" data-story-number="7">
+  <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 7">
+    <img id="storyPhoto7" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+    <span class="story-zoom" aria-hidden="true">＋</span>
+  </button>
+  <div class="story-slide-label">HISTORIAS DE ORO</div>
+</article>
 
+<article class="story-slide" data-story-number="8">
+  <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 8">
+    <img id="storyPhoto8" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+    <span class="story-zoom" aria-hidden="true">＋</span>
+  </button>
+  <div class="story-slide-label">HISTORIAS DE ORO</div>
+</article>
+
+<article class="story-slide" data-story-number="9">
+  <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 9">
+    <img id="storyPhoto9" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+    <span class="story-zoom" aria-hidden="true">＋</span>
+  </button>
+  <div class="story-slide-label">HISTORIAS DE ORO</div>
+</article>
+
+<article class="story-slide" data-story-number="10">
+  <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 10">
+    <img id="storyPhoto10" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+    <span class="story-zoom" aria-hidden="true">＋</span>
+  </button>
+  <div class="story-slide-label">HISTORIAS DE ORO</div>
+</article>
+
+<article class="story-slide" data-story-number="11">
+  <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 11">
+    <img id="storyPhoto11" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+    <span class="story-zoom" aria-hidden="true">＋</span>
+  </button>
+  <div class="story-slide-label">HISTORIAS DE ORO</div>
+</article>
+
+<article class="story-slide" data-story-number="12">
+  <button class="story-image-button" type="button" aria-label="Abrir Historia de Oro 12">
+    <img id="storyPhoto12" src="IMG_3370.JPG" alt="Golden Retriever de nuestra comunidad">
+    <span class="story-zoom" aria-hidden="true">＋</span>
+  </button>
+  <div class="story-slide-label">HISTORIAS DE ORO</div>
+</article>
       </div>
 
       <button class="story-arrow next" type="button" aria-label="Siguiente historia">›</button>
@@ -2892,14 +2938,20 @@
   const SB_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
   const SB_KEY = "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
-  const STORY_SLOTS = [
-    "historia_1",
-    "historia_2",
-    "historia_3",
-    "historia_4",
-    "historia_5",
-    "historia_6"
-  ];
+ const STORY_SLOTS = [
+  "historia_1",
+  "historia_2",
+  "historia_3",
+  "historia_4",
+  "historia_5",
+  "historia_6",
+  "historia_7",
+  "historia_8",
+  "historia_9",
+  "historia_10",
+  "historia_11",
+  "historia_12"
+];
 
   function setText(id,value){
     const el=document.getElementById(id);
@@ -2976,7 +3028,7 @@
           String(item.slot || "").replace("historia_","")
         );
 
-        if(!numero || numero<1 || numero>6) return;
+        if(!numero || numero<1 || numero>12) return;
 
         const img=document.getElementById("storyPhoto"+numero);
         const slide=img ? img.closest(".story-slide") : null;
