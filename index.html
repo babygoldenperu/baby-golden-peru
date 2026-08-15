@@ -3973,35 +3973,637 @@
 </style>
 
 <script>
-  (function(){
-    const products={BLACK:{name:'Black ID',price:36.90},PREMIUM:{name:'Premium ID',price:30.00}};
-    const cartKey='babyGoldenCart';
-    const getCart=()=>{try{return JSON.parse(localStorage.getItem(cartKey))||[]}catch{return[]}};
-    const saveCart=cart=>localStorage.setItem(cartKey,JSON.stringify(cart));
-    const count=document.getElementById('cartCount');
-    const items=document.getElementById('cartItems');
-    const total=document.getElementById('cartTotal');
-    const drawer=document.getElementById('cartDrawer');
-    const backdrop=document.getElementById('cartBackdrop');
-    function renderCart(){
-      const cart=getCart();
-      const qty=cart.length;
-      count.hidden=!qty; count.textContent=qty;
-      total.textContent='S/ '+cart.reduce((sum,id)=>sum+(products[id]?.price||0),0).toFixed(2);
-      items.innerHTML=qty?cart.map((id,index)=>{const p=products[id];return `<div class="cart-item"><div><h3>${p.name}</h3><p>Baby Golden Perú · S/ ${p.price.toFixed(2)}</p></div><button class="remove-item" type="button" data-remove-item="${index}">QUITAR</button></div>`}).join(''):'<p class="cart-empty">Tu carrito está vacío. Agrega una Baby Golden ID para continuar.</p>';
-      items.querySelectorAll('[data-remove-item]').forEach(btn=>btn.addEventListener('click',()=>{const cart=getCart();cart.splice(Number(btn.dataset.removeItem),1);saveCart(cart);renderCart()}));
-      const checkout=document.getElementById('cartCheckout');
-      checkout.href='https://babygoldenperu.github.io/baby-golden-peru/cuenta.html'+(qty?'?carrito='+encodeURIComponent(cart.join(',')): '');
-      checkout.setAttribute('aria-disabled',qty?'false':'true');
-      checkout.classList.toggle('is-disabled',!qty);
+(function(){
+/* =========================================
+       PRODUCTOS
+       ========================================= */
+
+    const products = {
+
+      BLACK: {
+        name: "Black ID",
+        price: 36.90,
+        image: "black.jpeg"
+      },
+
+      PREMIUM: {
+        name: "Premium ID",
+        price: 30.00,
+        image: "premium.jpeg"
+      },
+
+      BANDANA: {
+        name: "Bandana Baby Golden Perú",
+        price: 34.90,
+        image: "bandana.jpeg"
+      },
+
+      POLO: {
+        name: "Polo Baby Golden Perú",
+        price: 39.90,
+        image: "polo.jpeg"
+      },
+
+      GORRO: {
+        name: "Gorro Baby Golden Perú",
+        price: 79.90,
+        image: "gorro.jpeg"
+      }
+
+    };
+
+
+    /* =========================================
+       CARRITO
+       ========================================= */
+
+    const cartKey =
+      "babyGoldenCart";
+
+
+    const SUPABASE_URL =
+      "https://cxgcmrpqqaachnfavplh.supabase.co";
+
+
+    const SUPABASE_KEY =
+      "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    function getCart() {
+
+      try {
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              cartKey
+            )
+          );
+
+
+        /*
+          Si existe un carrito antiguo
+          guardado como array, lo convertimos
+          al nuevo formato de cantidades.
+        */
+
+        if(Array.isArray(saved)){
+
+          const converted = {};
+
+
+          saved.forEach(id => {
+
+            if(products[id]){
+
+              converted[id] =
+                (
+                  Number(
+                    converted[id]
+                  ) || 0
+                ) + 1;
+
+            }
+
+          });
+
+
+          saveCart(converted);
+
+          return converted;
+
+        }
+
+
+        if(
+          saved &&
+          typeof saved === "object"
+        ){
+
+          return saved;
+
+        }
+
+
+        return {};
+
+      } catch {
+
+        return {};
+
+      }
+
     }
-    function openCart(){drawer.classList.add('is-open');drawer.setAttribute('aria-hidden','false');backdrop.hidden=false;renderCart()}
-    function closeCart(){drawer.classList.remove('is-open');drawer.setAttribute('aria-hidden','true');backdrop.hidden=true}
-    document.getElementById('openCart').addEventListener('click',openCart);
-    document.getElementById('closeCart').addEventListener('click',closeCart);
-    backdrop.addEventListener('click',closeCart);
-    document.querySelectorAll('[data-add-to-cart]').forEach(btn=>btn.addEventListener('click',()=>{const cart=getCart();cart.push(btn.dataset.addToCart);saveCart(cart);renderCart();openCart()}));
-    const searchPanel=document.getElementById('searchPanel');
+
+
+    function saveCart(
+      cart
+    ) {
+
+      localStorage.setItem(
+        cartKey,
+        JSON.stringify(
+          cart
+        )
+      );
+
+    }
+
+
+    /* =========================================
+       ELEMENTOS
+       ========================================= */
+
+    const cartCount =
+      document.getElementById(
+        "cartCount"
+      );
+
+
+    const cartItems =
+      document.getElementById(
+        "cartItems"
+      );
+
+
+    const cartTotal =
+      document.getElementById(
+        "cartTotal"
+      );
+
+
+    const cartDrawer =
+      document.getElementById(
+        "cartDrawer"
+      );
+
+
+    const cartBackdrop =
+      document.getElementById(
+        "cartBackdrop"
+      );
+
+
+    /* =========================================
+       MOSTRAR CARRITO
+       ========================================= */
+
+    function renderCart() {
+
+      const cart = getCart();
+
+      const ids =
+        Object.keys(cart).filter(
+          id =>
+            products[id] &&
+            Number(cart[id]) > 0
+        );
+
+      const totalItems =
+        ids.reduce(
+          (total, id) =>
+            total + Number(cart[id]),
+          0
+        );
+
+      cartCount.hidden =
+        totalItems === 0;
+
+      cartCount.textContent =
+        totalItems;
+
+      const total =
+        ids.reduce(
+          (sum, id) =>
+            sum +
+            products[id].price *
+            Number(cart[id]),
+          0
+        );
+
+      cartTotal.textContent =
+        "S/ " + total.toFixed(2);
+
+
+      if(totalItems === 0){
+
+        cartItems.innerHTML = `
+          <p class="cart-empty">
+            Tu carrito está vacío.
+            Agrega un producto para continuar.
+          </p>
+        `;
+
+      } else {
+
+        cartItems.innerHTML =
+          ids.map(id => {
+
+            const product =
+              products[id];
+
+            const quantity =
+              Number(cart[id]);
+
+            return `
+
+              <div class="cart-item">
+
+                <img
+                  class="cart-item-image"
+                  src="${product.image}"
+                  alt="${product.name}"
+                >
+
+                <div>
+
+                  <h3>
+                    ${product.name}
+                  </h3>
+
+                  <p>
+                    S/ ${product.price.toFixed(2)}
+                    · Subtotal:
+                    S/ ${(product.price * quantity).toFixed(2)}
+                  </p>
+
+                  <div
+                    style="
+                      display:flex;
+                      align-items:center;
+                      gap:8px;
+                      margin-top:8px;
+                    "
+                  >
+
+                    <button
+                      type="button"
+                      class="quantity-button"
+                      data-minus="${id}"
+                    >
+                      −
+                    </button>
+
+                    <span
+                      style="
+                        min-width:20px;
+                        text-align:center;
+                        font-size:11px;
+                        font-weight:700;
+                      "
+                    >
+                      ${quantity}
+                    </span>
+
+                    <button
+                      type="button"
+                      class="quantity-button"
+                      data-plus="${id}"
+                    >
+                      +
+                    </button>
+
+                  </div>
+
+                </div>
+
+                <button
+                  class="remove-item"
+                  type="button"
+                  data-remove="${id}"
+                >
+                  QUITAR
+                </button>
+
+              </div>
+
+            `;
+
+          }).join("");
+
+      }
+
+
+      document
+        .querySelectorAll("[data-minus]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            function(){
+
+              const cart = getCart();
+
+              const id =
+                this.dataset.minus;
+
+              cart[id] =
+                (Number(cart[id]) || 0) - 1;
+
+              if(cart[id] <= 0){
+                delete cart[id];
+              }
+
+              saveCart(cart);
+              renderCart();
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll("[data-plus]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            function(){
+
+              const cart = getCart();
+
+              const id =
+                this.dataset.plus;
+
+              cart[id] =
+                (Number(cart[id]) || 0) + 1;
+
+              saveCart(cart);
+              renderCart();
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll("[data-remove]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            function(){
+
+              const cart = getCart();
+
+              delete cart[
+                this.dataset.remove
+              ];
+
+              saveCart(cart);
+              renderCart();
+
+            }
+          );
+
+        });
+
+
+      const checkout =
+        document.getElementById(
+          "cartCheckout"
+        );
+
+      checkout.classList.toggle(
+        "is-disabled",
+        totalItems === 0
+      );
+
+      /*
+        Si el usuario ya inició sesión:
+        → checkout.html
+
+        Si no inició sesión:
+        → cuenta.html
+      */
+
+      checkout.href =
+        "cuenta.html";
+
+
+      checkout.dataset.loggedIn =
+        "false";
+
+
+      supabaseClient.auth
+        .getSession()
+        .then(
+          ({
+            data
+          }) => {
+
+            const session =
+              data?.session;
+
+
+            if(session){
+
+              checkout.href =
+                "checkout.html";
+
+              checkout.dataset.loggedIn =
+                "true";
+
+            } else {
+
+              checkout.href =
+                "cuenta.html";
+
+              checkout.dataset.loggedIn =
+                "false";
+
+            }
+
+          }
+        );
+
+    }
+
+
+    /* =========================================
+       ABRIR CARRITO
+       ========================================= */
+
+    function openCart() {
+
+      cartDrawer.classList.add(
+        "is-open"
+      );
+
+
+      cartDrawer.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+
+      cartBackdrop.hidden =
+        false;
+
+
+      renderCart();
+
+    }
+
+
+    /* =========================================
+       CERRAR CARRITO
+       ========================================= */
+
+    function closeCart() {
+
+      cartDrawer.classList.remove(
+        "is-open"
+      );
+
+
+      cartDrawer.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      cartBackdrop.hidden =
+        true;
+
+    }
+
+
+    /* =========================================
+       BOTONES
+       ========================================= */
+
+    document
+      .getElementById(
+        "openCart"
+      )
+      .addEventListener(
+        "click",
+        openCart
+      );
+
+
+    document
+      .getElementById(
+        "closeCart"
+      )
+      .addEventListener(
+        "click",
+        closeCart
+      );
+
+
+    cartBackdrop.addEventListener(
+      "click",
+      closeCart
+    );
+
+
+    /* =========================================
+       AGREGAR PRODUCTOS
+       ========================================= */
+
+    document
+      .querySelectorAll(
+        "[data-add-to-cart]"
+      )
+      .forEach(
+        button => {
+
+          button.addEventListener(
+            "click",
+            function() {
+
+              const cart =
+                getCart();
+
+              const id =
+                this.dataset.addToCart;
+
+              cart[id] =
+                (Number(cart[id]) || 0) + 1;
+
+              saveCart(cart);
+
+              renderCart();
+
+              openCart();
+
+            }
+          );
+
+        }
+      );
+
+
+    /* =========================================
+       ESC
+       ========================================= */
+
+    document.addEventListener(
+      "keydown",
+      function(event) {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeCart();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================
+       INICIAR
+       ========================================= */
+
+    document
+      .getElementById("cartCheckout")
+      .addEventListener(
+        "click",
+        async function(event){
+
+          const {
+            data
+          } =
+            await supabaseClient.auth.getSession();
+
+
+          const session =
+            data?.session;
+
+
+          event.preventDefault();
+
+
+          if(session){
+
+            window.location.href =
+              "checkout.html";
+
+          } else {
+
+            window.location.href =
+              "cuenta.html";
+
+          }
+
+        }
+      );
+
+const searchPanel=document.getElementById('searchPanel');
     const searchInput=document.getElementById('siteSearch');
     const searchHelp=document.getElementById('searchHelp');
     const destinations=[{terms:['premium'],target:'#tienda',label:'Premium ID'},{terms:['black'],target:'#tienda',label:'Black ID'},{terms:['beneficio','descuento'],target:'#beneficios',label:'Beneficios'},{terms:['comunidad','historia'],target:'#comunidad',label:'Comunidad'},{terms:['registro','registrar'],target:'#registro',label:'Registro'}];
@@ -4012,7 +4614,7 @@
     searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'&&searchInput.dataset.target){location.hash=searchInput.dataset.target;searchPanel.hidden=true}});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'){searchPanel.hidden=true;closeCart()}});
     renderCart();
-  })();
+})();
 </script>
 </body>
 </html>
