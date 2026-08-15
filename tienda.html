@@ -1092,6 +1092,662 @@
 
     }
 
+  
+    /* =========================================================
+       TIENDA — IDENTIDAD VISUAL COORDINADA CON INDEX.HTML
+       No modifica la lógica del carrito ni de los productos.
+    ========================================================= */
+
+    :root{
+      --cream:#f6f0e6;
+      --cream-2:#fffaf3;
+      --gold:#b77b20;
+      --gold-2:#d7ad63;
+      --gold-3:#ead9b8;
+      --brown:#2d2822;
+      --brown-2:#625a50;
+      --dark:#181613;
+      --white:#fff;
+      --line:rgba(183,123,32,.18);
+      --shadow:0 30px 80px rgba(48,35,20,.12);
+    }
+
+    body{
+      background:var(--cream);
+      color:var(--brown);
+      font-family:'Montserrat',sans-serif;
+    }
+
+    h1,h2,h3{
+      font-family:'Cormorant Garamond',serif;
+    }
+
+    /* HEADER */
+    header{
+      position:sticky;
+      top:0;
+      z-index:1000;
+      width:100%;
+      background:rgba(246,240,230,.90);
+      backdrop-filter:blur(18px);
+      -webkit-backdrop-filter:blur(18px);
+      border-bottom:1px solid var(--line);
+    }
+
+    .nav{
+      width:min(1320px,100%);
+      min-height:88px;
+      margin:auto;
+      padding:12px 34px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:28px;
+    }
+
+    .logo{
+      width:165px;
+      height:auto;
+      flex:0 0 auto;
+    }
+
+    .menu{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:27px;
+    }
+
+    .menu a{
+      position:relative;
+      text-decoration:none;
+      color:var(--brown);
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      white-space:nowrap;
+      padding:12px 0;
+      transition:.25s ease;
+    }
+
+    .menu a:not(.header-button)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:5px;
+      width:0;
+      height:1px;
+      background:var(--gold);
+      transition:.25s ease;
+    }
+
+    .menu a:hover{
+      color:var(--gold);
+    }
+
+    .menu a:hover::after{
+      width:100%;
+    }
+
+    .header-button{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      min-height:45px;
+      padding:13px 21px!important;
+      border-radius:999px;
+      background:var(--gold);
+      color:#fff!important;
+      box-shadow:0 12px 28px rgba(183,123,32,.20);
+      transition:.25s ease;
+    }
+
+    .header-button::after{
+      display:none!important;
+    }
+
+    .header-button:hover{
+      background:var(--brown);
+      color:#fff!important;
+      transform:translateY(-2px);
+      box-shadow:0 15px 35px rgba(45,40,34,.18);
+    }
+
+    .nav-actions{
+      display:flex;
+      align-items:center;
+      gap:5px;
+      flex:0 0 auto;
+    }
+
+    .icon-button{
+      position:relative;
+      width:38px;
+      height:38px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0;
+      border:0;
+      background:transparent;
+      color:var(--brown);
+      cursor:pointer;
+      text-decoration:none;
+      border-radius:50%;
+      transition:.2s ease;
+    }
+
+    .icon-button:hover,
+    .icon-button:focus-visible{
+      background:rgba(183,123,32,.12);
+      color:var(--gold);
+      outline:none;
+    }
+
+    .icon-button svg{
+      width:19px;
+      height:19px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.6;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .cart-count{
+      position:absolute;
+      right:0;
+      top:0;
+      min-width:17px;
+      height:17px;
+      padding:1px 4px;
+      border-radius:999px;
+      background:var(--gold);
+      color:#fff;
+      font:700 9px/15px 'Montserrat',sans-serif;
+      text-align:center;
+    }
+
+    /* SEARCH */
+    .search-panel{
+      position:fixed;
+      top:76px;
+      right:clamp(18px,4vw,62px);
+      z-index:1200;
+      width:min(360px,calc(100vw - 36px));
+      padding:0;
+    }
+
+    .search-panel[hidden]{
+      display:none;
+    }
+
+    .search-dialog{
+      position:relative;
+      padding:24px;
+      border:1px solid #e1d1bb;
+      border-radius:18px;
+      background:var(--cream-2);
+      box-shadow:0 20px 48px rgba(40,29,16,.22);
+    }
+
+    .search-dialog h2{
+      margin:7px 0 18px;
+      font:500 34px/.95 'Cormorant Garamond',serif;
+      color:var(--brown);
+    }
+
+    .search-dialog .panel-close{
+      position:absolute;
+      right:20px;
+      top:20px;
+    }
+
+    .panel-kicker{
+      margin:0;
+      color:var(--gold);
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:2.5px;
+    }
+
+    .panel-close{
+      width:34px;
+      height:34px;
+      border:1px solid #dfd1bd;
+      border-radius:50%;
+      background:transparent;
+      color:var(--brown);
+      font-size:26px;
+      line-height:1;
+      cursor:pointer;
+    }
+
+    .search-field{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding:0 16px;
+      border:1px solid #d9c8ad;
+      border-radius:14px;
+      background:#fff;
+      color:var(--gold);
+    }
+
+    .search-field svg{
+      width:19px;
+      height:19px;
+      fill:none;
+      stroke:currentColor;
+      stroke-width:1.6;
+      stroke-linecap:round;
+      stroke-linejoin:round;
+    }
+
+    .search-field input{
+      width:100%;
+      padding:16px 0;
+      border:0;
+      background:transparent;
+      color:var(--brown);
+      font:500 14px 'Montserrat',sans-serif;
+      outline:0;
+    }
+
+    .search-help{
+      margin:14px 0 0;
+      color:var(--brown-2);
+      font-size:11px;
+      line-height:1.6;
+    }
+
+    .sr-only{
+      position:absolute;
+      width:1px;
+      height:1px;
+      padding:0;
+      margin:-1px;
+      overflow:hidden;
+      clip:rect(0,0,0,0);
+      white-space:nowrap;
+      border:0;
+    }
+
+    /* SHOP HERO */
+    .shop-hero{
+      max-width:1320px;
+      margin:auto;
+      padding:105px 30px 70px;
+      text-align:center;
+    }
+
+    .shop-label{
+      margin-bottom:18px;
+      color:var(--gold);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:4px;
+    }
+
+    .shop-hero h1{
+      margin:0;
+      font-size:clamp(62px,7vw,100px);
+      line-height:.82;
+      font-weight:500;
+      letter-spacing:-2px;
+    }
+
+    .shop-hero h1 span{
+      color:var(--gold);
+    }
+
+    .shop-hero p{
+      max-width:650px;
+      margin:26px auto 0;
+      color:var(--brown-2);
+      font-size:14px;
+      line-height:1.85;
+    }
+
+    /* PRODUCT AREA */
+    .shop{
+      max-width:1250px;
+      margin:auto;
+      padding:20px 30px 115px;
+    }
+
+    .section-heading{
+      max-width:740px;
+      margin:0 auto 60px;
+      text-align:center;
+    }
+
+    .section-heading small{
+      color:#a9711c;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:4px;
+    }
+
+    .section-heading h2{
+      margin:14px 0 20px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(50px,5vw,72px);
+      line-height:.92;
+      font-weight:500;
+    }
+
+    .products{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:22px;
+    }
+
+    .product{
+      overflow:hidden;
+      background:var(--cream-2);
+      border:1px solid #dfd1bd;
+      border-radius:28px;
+      box-shadow:var(--shadow);
+      transition:.28s ease;
+    }
+
+    .product:hover{
+      transform:translateY(-5px);
+      box-shadow:0 34px 85px rgba(48,35,20,.15);
+    }
+
+    .product-image{
+      width:100%;
+      height:390px;
+      display:block;
+      object-fit:cover;
+      background:#e8dccb;
+      transition:transform .5s ease;
+    }
+
+    .product:hover .product-image{
+      transform:scale(1.018);
+    }
+
+    .product-body{
+      padding:30px 32px 34px;
+    }
+
+    .product-category{
+      display:block;
+      margin-bottom:9px;
+      color:var(--gold);
+      font-size:9px;
+      font-weight:700;
+      letter-spacing:2.5px;
+    }
+
+    .product h2{
+      margin:0 0 12px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:45px;
+      line-height:.9;
+      font-weight:500;
+    }
+
+    .product-description{
+      min-height:55px;
+      margin:0 0 20px;
+      color:var(--brown-2);
+      font-size:12px;
+      line-height:1.75;
+    }
+
+    .product-price{
+      margin-bottom:20px;
+      color:var(--gold);
+      font-family:'Cormorant Garamond',serif;
+      font-size:34px;
+      font-weight:700;
+      line-height:1;
+    }
+
+    .product-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .product-link{
+      flex:1;
+      min-height:46px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:0 16px;
+      border:1px solid #d7c5af;
+      border-radius:999px;
+      background:transparent;
+      color:var(--brown);
+      font-size:9px;
+      font-weight:800;
+      letter-spacing:.8px;
+      cursor:pointer;
+      transition:.25s ease;
+    }
+
+    .product-link:hover{
+      background:#eee2d2;
+      border-color:var(--gold);
+      color:var(--gold);
+      transform:translateY(-2px);
+    }
+
+    .product-buy{
+      background:var(--gold);
+      border-color:var(--gold);
+      color:#fff;
+    }
+
+    .product-buy:hover{
+      background:var(--brown);
+      border-color:var(--brown);
+      color:#fff;
+    }
+
+    /* COMING SOON */
+    .coming-soon{
+      margin-top:55px;
+      padding:65px 30px;
+      border:1px solid #e6d8c1;
+      border-radius:28px;
+      background:
+        radial-gradient(circle at top right,rgba(214,169,79,.16),transparent 35%),
+        linear-gradient(135deg,#f2e4cb,#fffaf1);
+      text-align:center;
+    }
+
+    .coming-soon small{
+      color:var(--gold);
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
+    }
+
+    .coming-soon h2{
+      margin:14px 0;
+      font-family:'Cormorant Garamond',serif;
+      font-size:45px;
+      line-height:.92;
+      font-weight:500;
+    }
+
+    .coming-soon p{
+      max-width:620px;
+      margin:auto;
+      color:var(--brown-2);
+      font-size:13px;
+      line-height:1.8;
+    }
+
+    /* FOOTER */
+    footer{
+      background:#29251f;
+      color:#fff;
+      padding:70px 25px 40px;
+      text-align:center;
+      border-top:0;
+    }
+
+    footer img{
+      width:155px;
+      margin:0 auto 20px;
+    }
+
+    .footer-brand{
+      color:#d5a34c;
+      letter-spacing:3px;
+      font-size:10px;
+      font-weight:700;
+      font-family:'Montserrat',sans-serif;
+    }
+
+    footer p{
+      margin:8px 0;
+      color:#aaa197;
+      font-size:11px;
+      line-height:1.8;
+    }
+
+    /* MOBILE — MISMO COMPORTAMIENTO VISUAL DEL INDEX */
+    @media(max-width:650px){
+
+      header{
+        position:sticky;
+      }
+
+      .nav{
+        min-height:64px;
+        padding:8px 12px;
+        flex-direction:row;
+        align-items:center;
+        gap:10px;
+        overflow:hidden;
+      }
+
+      .logo{
+        width:112px;
+        flex:0 0 auto;
+      }
+
+      .menu{
+        width:auto;
+        min-width:0;
+        flex:1;
+        justify-content:flex-start;
+        gap:6px 14px;
+        flex-wrap:nowrap;
+        overflow-x:auto;
+        overflow-y:hidden;
+        padding:2px 4px 5px;
+        scrollbar-width:none;
+        -webkit-overflow-scrolling:touch;
+      }
+
+      .menu::-webkit-scrollbar{
+        display:none;
+      }
+
+      .menu a{
+        flex:0 0 auto;
+        font-size:8px;
+        letter-spacing:.3px;
+      }
+
+      .header-button{
+        min-height:34px;
+        padding:8px 12px!important;
+        font-size:8px!important;
+      }
+
+      .nav-actions{
+        flex:0 0 auto;
+      }
+
+      .shop-hero{
+        padding:78px 18px 45px;
+      }
+
+      .shop-label{
+        font-size:9px;
+        letter-spacing:2.5px;
+      }
+
+      .shop-hero h1{
+        font-size:60px;
+        letter-spacing:-2px;
+      }
+
+      .shop-hero p{
+        font-size:14px;
+        line-height:1.75;
+      }
+
+      .shop{
+        padding:15px 18px 75px;
+      }
+
+      .section-heading{
+        margin-bottom:45px;
+      }
+
+      .section-heading h2{
+        font-size:45px;
+      }
+
+      .products{
+        grid-template-columns:1fr;
+        gap:18px;
+      }
+
+      .product-image{
+        height:330px;
+      }
+
+      .product-body{
+        padding:24px 22px 26px;
+      }
+
+      .product h2{
+        font-size:38px;
+      }
+
+      .product-actions{
+        flex-direction:column;
+      }
+
+      .product-link{
+        width:100%;
+        flex:none;
+      }
+
+      .coming-soon{
+        margin-top:38px;
+        padding:55px 22px;
+        border-radius:24px;
+      }
+
+      .coming-soon h2{
+        font-size:40px;
+      }
+
+      .search-panel{
+        top:70px;
+        right:12px;
+        width:calc(100vw - 24px);
+      }
+
+      footer{
+        padding:55px 20px 35px;
+      }
+    }
+
   </style>
 
 </head>
@@ -1101,140 +1757,126 @@
 
 
   <!-- =========================================
-       HEADER
+       HEADER — MISMO ESTILO VISUAL QUE INDEX
        ========================================= -->
 
   <header>
-
     <nav class="nav">
 
-
-      <a
-        href="index.html"
-        aria-label="Baby Golden Perú"
-      >
-
+      <a href="index.html#inicio" aria-label="Baby Golden Perú">
         <img
           src="BABY%20GOLDEN.png"
           alt="Baby Golden Perú"
           class="logo"
         >
-
       </a>
-
 
       <div class="menu">
 
+        <a href="index.html#inicio">INICIO</a>
 
-        <a href="index.html">
-          INICIO
-        </a>
+        <a href="beneficios.html">BENEFICIOS</a>
 
+        <a href="index.html#historias">HISTORIAS DE ORO</a>
 
-        <a href="tienda.html">
-          TIENDA
-        </a>
+        <a href="contacto.html">CONTACTO</a>
 
+        <a href="tienda.html" class="header-button">TIENDA</a>
 
-        <a href="index.html#baby-golden-id">
-          BABY GOLDEN ID
-        </a>
-
-
-        <a href="contacto.html">
-          CONTACTO
-        </a>
-
-
-        <a
-          href="registro.html"
-          class="header-button"
-        >
-          REGISTRAR MI PERRITO
-        </a>
-
-
-        <div
-          class="nav-actions"
-          aria-label="Accesos rápidos"
-        >
-
-
-          <!-- CARRITO -->
+        <div class="nav-actions" aria-label="Accesos rápidos">
 
           <button
             class="icon-button"
-            id="openCart"
+            id="openSearch"
             type="button"
-            aria-label="Abrir carrito"
+            aria-label="Buscar en Baby Golden Perú"
           >
-
-            <svg viewBox="0 0 24 24">
-
-              <path
-                d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"
-              ></path>
-
-              <circle
-                cx="10"
-                cy="20"
-                r="1"
-              ></circle>
-
-              <circle
-                cx="17"
-                cy="20"
-                r="1"
-              ></circle>
-
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4 4"></path>
             </svg>
-
-
-            <span
-              class="cart-count"
-              id="cartCount"
-              hidden
-            >
-              0
-            </span>
-
           </button>
 
+          <button
+            class="icon-button cart-button"
+            id="openCart"
+            type="button"
+            aria-label="Abrir carrito de compras"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
+              <circle cx="10" cy="20" r="1"></circle>
+              <circle cx="17" cy="20" r="1"></circle>
+            </svg>
 
-          <!-- MI CUENTA -->
+            <span class="cart-count" id="cartCount" hidden>0</span>
+          </button>
 
           <a
             class="icon-button"
             href="cuenta.html"
             aria-label="Ir a Mi cuenta"
           >
-
-            <svg viewBox="0 0 24 24">
-
-              <circle
-                cx="12"
-                cy="8"
-                r="3.5"
-              ></circle>
-
-              <path
-                d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"
-              ></path>
-
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5"></circle>
+              <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
             </svg>
-
           </a>
-
 
         </div>
 
       </div>
-
     </nav>
-
   </header>
 
+  <!-- BÚSQUEDA — MISMO ESTILO QUE INDEX -->
+  <div class="search-panel" id="searchPanel" hidden>
+    <div
+      class="search-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="searchTitle"
+    >
+      <button
+        class="panel-close"
+        type="button"
+        data-close-panel="searchPanel"
+        aria-label="Cerrar búsqueda"
+      >
+        ×
+      </button>
 
+      <p class="panel-kicker">
+        ENCUENTRA LO QUE BUSCAS
+      </p>
+
+      <h2 id="searchTitle">
+        Buscar en Baby Golden
+      </h2>
+
+      <label class="sr-only" for="siteSearch">
+        Escribe lo que deseas encontrar
+      </label>
+
+      <div class="search-field">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="m16 16 4 4"></path>
+        </svg>
+
+        <input
+          id="siteSearch"
+          type="search"
+          placeholder="Ej.: Premium ID, beneficios, registro"
+        >
+      </div>
+
+      <p class="search-help" id="searchHelp">
+        Puedes buscar Premium ID, Black ID, beneficios,
+        historias o registro.
+      </p>
+    </div>
+  </div>
 
   <!-- =========================================
        CARRITO
@@ -1304,7 +1946,7 @@
         href="checkout.html"
         id="cartCheckout"
       >
-        CONTINUAR A LA COMPRA
+        CONTINUAR A MI CUENTA
       </a>
 
 
@@ -1622,35 +2264,29 @@
 
 
   <!-- =========================================
-       FOOTER
+       FOOTER — MISMO ESTILO VISUAL QUE INDEX
        ========================================= -->
 
-  <footer>
-
+  <footer id="contacto">
 
     <img
       src="BABY%20GOLDEN.png"
       alt="Baby Golden Perú"
     >
 
-
     <div class="footer-brand">
       BABY GOLDEN PERÚ
     </div>
-
 
     <p>
       Comunidad · Tenencia responsable · Baby Golden ID
     </p>
 
-
     <p>
       ♥ Una pata a la vez, construimos una comunidad mejor.
     </p>
 
-
   </footer>
-
 
 
   <!-- =========================================
@@ -2293,6 +2929,160 @@
 
   </script>
 
+
+
+  <script>
+    /* =========================================================
+       BÚSQUEDA — MISMA EXPERIENCIA QUE INDEX.HTML
+       ========================================================= */
+    (function(){
+
+      const searchPanel =
+        document.getElementById("searchPanel");
+
+      const searchInput =
+        document.getElementById("siteSearch");
+
+      const searchHelp =
+        document.getElementById("searchHelp");
+
+      const openSearch =
+        document.getElementById("openSearch");
+
+      if(!searchPanel || !searchInput || !searchHelp || !openSearch){
+        return;
+      }
+
+      const destinations = [
+        {
+          terms:["premium"],
+          url:"index.html#tienda",
+          label:"Premium ID"
+        },
+        {
+          terms:["black"],
+          url:"index.html#tienda",
+          label:"Black ID"
+        },
+        {
+          terms:["beneficio","descuento"],
+          url:"beneficios.html",
+          label:"Beneficios"
+        },
+        {
+          terms:["historia","historias","fotos"],
+          url:"index.html#historias",
+          label:"Historias de Oro"
+        },
+        {
+          terms:["comunidad"],
+          url:"index.html#comunidad",
+          label:"Comunidad"
+        },
+        {
+          terms:["registro","registrar"],
+          url:"registro.html",
+          label:"Registro"
+        },
+        {
+          terms:["tienda","producto"],
+          url:"tienda.html",
+          label:"Tienda"
+        }
+      ];
+
+      openSearch.addEventListener("click",function(){
+        searchPanel.hidden = false;
+        searchInput.value = "";
+        searchInput.dataset.target = "";
+        searchHelp.textContent =
+          "Puedes buscar Premium ID, Black ID, beneficios, historias o registro.";
+        setTimeout(function(){
+          searchInput.focus();
+        },0);
+      });
+
+      document
+        .querySelectorAll("[data-close-panel]")
+        .forEach(function(button){
+          button.addEventListener("click",function(){
+            searchPanel.hidden = true;
+          });
+        });
+
+      searchInput.addEventListener("input",function(){
+
+        const query =
+          searchInput.value.toLowerCase().trim();
+
+        const result =
+          destinations.find(function(item){
+            return item.terms.some(function(term){
+              return query.includes(term);
+            });
+          });
+
+        if(!query){
+          searchHelp.textContent =
+            "Puedes buscar Premium ID, Black ID, beneficios, historias o registro.";
+          searchInput.dataset.target = "";
+          return;
+        }
+
+        if(result){
+          searchHelp.innerHTML =
+            "Resultado: <strong>" +
+            result.label +
+            "</strong>. Presiona Enter para ir.";
+
+          searchInput.dataset.target =
+            result.url;
+
+        }else{
+
+          searchHelp.textContent =
+            "Aún no encontramos esa sección. Prueba con Premium, Black, beneficios, historias o registro.";
+
+          searchInput.dataset.target = "";
+
+        }
+
+      });
+
+      searchInput.addEventListener("keydown",function(event){
+
+        if(
+          event.key === "Enter" &&
+          searchInput.dataset.target
+        ){
+
+          window.location.href =
+            searchInput.dataset.target;
+
+          searchPanel.hidden = true;
+
+        }
+
+      });
+
+      searchPanel.addEventListener("click",function(event){
+
+        if(event.target === searchPanel){
+          searchPanel.hidden = true;
+        }
+
+      });
+
+      document.addEventListener("keydown",function(event){
+
+        if(event.key === "Escape"){
+          searchPanel.hidden = true;
+        }
+
+      });
+
+    })();
+  </script>
 
 </body>
 
