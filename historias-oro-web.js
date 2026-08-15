@@ -1,6 +1,6 @@
 /* BABY GOLDEN PERÚ
    HISTORIAS DE ORO
-   Galería premium — 6 fotos
+   Galería premium — 12 fotos
 */
 
 (function () {
@@ -11,6 +11,21 @@
 
   const SB_KEY =
     "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+  const STORY_SLOTS = [
+    "historia_1",
+    "historia_2",
+    "historia_3",
+    "historia_4",
+    "historia_5",
+    "historia_6",
+    "historia_7",
+    "historia_8",
+    "historia_9",
+    "historia_10",
+    "historia_11",
+    "historia_12"
+  ];
 
   async function cargarHistoriasDeOro() {
 
@@ -25,20 +40,18 @@
         );
 
       /* =====================================
-         LEER LAS FOTOS REALES DE SUPABASE
-         La tabla usa:
-         imagen_url
-         orden
-         activo
+         LEER LAS 12 FOTOS DE SUPABASE
       ===================================== */
 
       const { data, error } =
         await sb
           .from("site_gallery")
           .select(
-            "id,imagen_url,titulo,descripcion,orden,activo,caption,published"
+            "id,slot,imagen_url,title,caption,orden,activo,published"
           )
+          .in("slot", STORY_SLOTS)
           .eq("activo", true)
+          .eq("published", true)
           .order("orden", {
             ascending: true
           });
@@ -53,7 +66,9 @@
         return;
       }
 
-      /* Solo las fotos que tengan imagen */
+      /* =====================================
+         SOLO FOTOS CON IMAGEN
+      ===================================== */
 
       const fotos =
         (data || [])
@@ -65,13 +80,21 @@
             );
 
           })
-          .slice(0, 6);
+          .sort(function (a, b) {
+
+            return (
+              Number(a.orden || 0) -
+              Number(b.orden || 0)
+            );
+
+          })
+          .slice(0, 12);
 
       if (!fotos.length) return;
 
 
       /* =====================================
-         ENCONTRAR EL CARRUSEL ANTIGUO
+         ENCONTRAR CARRUSEL ANTIGUO
       ===================================== */
 
       const antiguo =
@@ -82,13 +105,12 @@
       if (!antiguo) return;
 
 
-      /* Ocultar solamente el carrusel antiguo */
+      /* Ocultar carrusel antiguo */
 
       antiguo.style.display = "none";
 
 
-      /* Si ya existe nuestra galería,
-         la eliminamos para evitar duplicados */
+      /* Eliminar galería anterior */
 
       const anterior =
         document.getElementById(
@@ -191,7 +213,9 @@
 }
 
 
-/* Degradado inferior */
+/* =====================================
+   DEGRADADO
+===================================== */
 
 #historiasOroPremium
 .ho-card::after{
@@ -215,7 +239,9 @@
 }
 
 
-/* Texto */
+/* =====================================
+   TEXTO
+===================================== */
 
 #historiasOroPremium
 .ho-label{
@@ -303,7 +329,7 @@
 
 
 /* =====================================
-   BOTONES DEL VISOR
+   BOTONES
 ===================================== */
 
 #hoLightbox
@@ -532,7 +558,9 @@
 `;
 
 
-      /* Insertar la nueva galería */
+      /* =====================================
+         INSERTAR GALERÍA
+      ===================================== */
 
       antiguo.parentNode.insertBefore(
         galeria,
@@ -564,7 +592,7 @@
 
 
       /* =====================================
-         CREAR LAS 6 FOTOS
+         CREAR LAS 12 FOTOS
       ===================================== */
 
       fotos.forEach(
@@ -579,8 +607,14 @@
             "ho-card";
 
 
+          /*
+            El panel administrativo guarda:
+            title = título
+            caption = descripción
+          */
+
           const titulo =
-            foto.titulo ||
+            foto.title ||
             foto.caption ||
             "Historias de Oro";
 
@@ -634,7 +668,8 @@
 
 
         lightboxImage.alt =
-          fotos[actual].titulo ||
+          fotos[actual].title ||
+          fotos[actual].caption ||
           "Historia de Oro — Baby Golden Perú";
 
 
@@ -708,7 +743,9 @@
       }
 
 
-      /* Botones */
+      /* =====================================
+         BOTONES
+      ===================================== */
 
       lightbox
         .querySelector(
@@ -810,7 +847,7 @@
 
 
       /* =====================================
-         SWIPE DEL VISOR EN CELULAR
+         SWIPE EN CELULAR
       ===================================== */
 
       let inicioX = 0;
