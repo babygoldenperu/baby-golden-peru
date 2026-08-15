@@ -1,0 +1,1723 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Baby Golden Perú | Panel Unificado</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap');
+
+:root{
+    --crema:#f7f1e7;
+    --blanco:#fffaf3;
+    --dorado:#b78324;
+    --dorado-claro:#d8b26a;
+    --marron:#342a22;
+    --gris:#786f65;
+    --linea:#e4d8c8;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    background:var(--crema);
+    color:var(--marron);
+    font-family:Montserrat,Arial,sans-serif;
+}
+
+.contenedor{
+    width:min(1280px,94%);
+    margin:auto;
+    padding:30px 0 60px;
+}
+
+/* CABECERA */
+
+.header{
+    background:#29231e;
+    color:white;
+    border-radius:24px;
+    padding:28px 30px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.mini{
+    color:var(--dorado-claro);
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:3px;
+}
+
+.logo{
+    font-family:"Cormorant Garamond",serif;
+    font-size:42px;
+    font-weight:600;
+    line-height:.9;
+}
+
+.logo span{
+    color:var(--dorado-claro);
+}
+
+.botones{
+    display:flex;
+    gap:9px;
+    flex-wrap:wrap;
+}
+
+button{
+    border:0;
+    cursor:pointer;
+    border-radius:999px;
+    padding:12px 18px;
+    font-size:10px;
+    font-weight:700;
+    letter-spacing:.7px;
+}
+
+.btn-guardar{
+    background:var(--dorado);
+    color:white;
+}
+
+.btn-actualizar{
+    background:#eee6da;
+    color:var(--marron);
+}
+
+/* MENSAJES */
+
+.mensaje{
+    display:none;
+    padding:13px 16px;
+    border-radius:12px;
+    margin-bottom:18px;
+    font-size:12px;
+}
+
+.mensaje.exito{
+    display:block;
+    background:#edf7ef;
+    color:#2f7040;
+}
+
+.mensaje.error{
+    display:block;
+    background:#fbecec;
+    color:#963d3d;
+}
+
+/* TABS */
+
+.tabs{
+    display:flex;
+    gap:8px;
+    overflow-x:auto;
+    margin-bottom:20px;
+}
+
+.tab{
+    background:var(--blanco);
+    color:var(--marron);
+    border:1px solid var(--linea);
+    white-space:nowrap;
+}
+
+.tab.activo{
+    background:var(--dorado);
+    color:white;
+    border-color:var(--dorado);
+}
+
+/* PANELES */
+
+.panel{
+    display:none;
+}
+
+.panel.activo{
+    display:block;
+}
+
+.card{
+    background:var(--blanco);
+    border:1px solid var(--linea);
+    border-radius:20px;
+    padding:25px;
+    margin-bottom:18px;
+    box-shadow:0 15px 35px rgba(50,35,20,.05);
+}
+
+.titulo-seccion{
+    font-family:"Cormorant Garamond",serif;
+    font-size:38px;
+    line-height:.95;
+    margin:5px 0 20px;
+}
+
+.grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.campo.completo{
+    grid-column:1/-1;
+}
+
+.campo label{
+    display:block;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1px;
+    color:#806f5b;
+    margin-bottom:7px;
+}
+
+.campo input,
+.campo textarea{
+    width:100%;
+    border:1px solid var(--linea);
+    background:white;
+    border-radius:10px;
+    padding:12px;
+    color:var(--marron);
+    outline:none;
+}
+
+.campo textarea{
+    min-height:110px;
+    resize:vertical;
+}
+
+.campo input:focus,
+.campo textarea:focus{
+    border-color:var(--dorado);
+}
+
+/* PORTADA */
+
+.portada-grid{
+    display:grid;
+    grid-template-columns:250px 1fr;
+    gap:25px;
+}
+
+.preview{
+    width:100%;
+    aspect-ratio:1/1;
+    border-radius:16px;
+    overflow:hidden;
+    background:#eee5d7;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#998e80;
+    font-size:10px;
+    text-align:center;
+}
+
+.preview img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+.archivo{
+    width:100%;
+    margin-top:9px;
+    font-size:10px;
+}
+
+/* HISTORIAS */
+
+.historias{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:16px;
+}
+
+.historia{
+    background:#fffdf9;
+    border:1px solid var(--linea);
+    border-radius:17px;
+    padding:14px;
+}
+
+.historia-cabecera{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:9px;
+}
+
+.numero{
+    color:var(--dorado);
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:1.5px;
+}
+
+.publicar{
+    font-size:9px;
+    font-weight:700;
+}
+
+.historia .preview{
+    margin-bottom:8px;
+}
+
+.historia input[type="text"],
+.historia textarea{
+    width:100%;
+    border:1px solid var(--linea);
+    border-radius:9px;
+    padding:9px;
+    margin-top:7px;
+    background:white;
+    font-family:Montserrat,Arial,sans-serif;
+    font-size:11px;
+}
+
+.historia textarea{
+    min-height:75px;
+    resize:vertical;
+}
+
+.historia input[type="file"]{
+    width:100%;
+    font-size:9px;
+    margin:8px 0;
+}
+
+.nota{
+    color:var(--gris);
+    font-size:11px;
+    line-height:1.6;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+    .historias{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .portada-grid{
+        grid-template-columns:1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .contenedor{
+        width:94%;
+        padding-top:15px;
+    }
+
+    .header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .logo{
+        font-size:34px;
+    }
+
+    .grid,
+    .historias{
+        grid-template-columns:1fr;
+    }
+
+    .campo.completo{
+        grid-column:auto;
+    }
+
+    .botones{
+        width:100%;
+    }
+
+    .botones button{
+        flex:1;
+    }
+
+}
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<header class="header">
+
+    <div>
+        <div class="mini">
+            BABY GOLDEN PERÚ · ADMINISTRACIÓN
+        </div>
+
+        <div class="logo">
+            Panel <span>Unificado</span>
+        </div>
+    </div>
+
+    <div class="botones">
+
+        <button
+            class="btn-actualizar"
+            id="btnActualizar">
+            ACTUALIZAR
+        </button>
+
+        <button
+            class="btn-guardar"
+            id="btnGuardar">
+            GUARDAR CAMBIOS
+        </button>
+
+    </div>
+
+</header>
+
+
+<div id="mensaje" class="mensaje"></div>
+
+
+<nav class="tabs">
+
+    <button
+        class="tab activo"
+        data-panel="portada">
+        PORTADA
+    </button>
+
+    <button
+        class="tab"
+        data-panel="historias">
+        HISTORIAS DE ORO
+    </button>
+
+    <button
+        class="tab"
+        data-panel="esencia">
+        NUESTRA ESENCIA
+    </button>
+
+</nav>
+
+
+<!-- ================= PORTADA ================= -->
+
+<section
+    class="panel activo"
+    id="portada">
+
+    <div class="card">
+
+        <div class="mini">
+            PORTADA
+        </div>
+
+        <h2 class="titulo-seccion">
+            Contenido principal
+        </h2>
+
+        <div class="grid">
+
+            <div class="campo completo">
+                <label>
+                    FRASE SUPERIOR
+                </label>
+
+                <input
+                    id="hero_kicker"
+                    type="text">
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    LÍNEA 1
+                </label>
+
+                <input
+                    id="hero_line1"
+                    type="text">
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    LÍNEA 2
+                </label>
+
+                <input
+                    id="hero_line2"
+                    type="text">
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    LÍNEA 3 · DORADA
+                </label>
+
+                <input
+                    id="hero_line3"
+                    type="text">
+
+            </div>
+
+
+            <div class="campo">
+
+                <label>
+                    SUBTÍTULO
+                </label>
+
+                <textarea
+                    id="hero_subtitle"></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <div class="card">
+
+        <div class="mini">
+            IMAGEN PRINCIPAL
+        </div>
+
+        <h2 class="titulo-seccion">
+            Foto de portada
+        </h2>
+
+
+        <div class="portada-grid">
+
+            <div>
+
+                <div
+                    class="preview"
+                    id="heroPreview">
+
+                    Sin fotografía
+
+                </div>
+
+                <input
+                    class="archivo"
+                    id="heroFile"
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp">
+
+            </div>
+
+
+            <div class="nota">
+
+                Esta imagen reemplazará la fotografía
+                principal de la portada.
+
+                <br><br>
+
+                Formatos permitidos:
+
+                <b>JPG, PNG y WEBP</b>.
+
+                <br>
+
+                Tamaño máximo:
+
+                <b>8 MB</b>.
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= HISTORIAS ================= -->
+
+<section
+    class="panel"
+    id="historias">
+
+    <div class="card">
+
+        <div class="mini">
+            HISTORIAS DE ORO
+        </div>
+
+        <h2 class="titulo-seccion">
+            Las 12 historias
+        </h2>
+
+        <p class="nota">
+
+            Aquí podrás administrar las 12 fotografías
+            que utiliza tu sección de Historias de Oro.
+
+            Cada tarjeta corresponde a:
+
+            <b>historia_1</b> hasta
+            <b>historia_12</b>.
+
+        </p>
+
+    </div>
+
+
+    <div
+        class="historias"
+        id="listaHistorias">
+    </div>
+
+</section>
+
+
+<!-- ================= ESENCIA ================= -->
+
+<section
+    class="panel"
+    id="esencia">
+
+    <div class="card">
+
+        <div class="mini">
+            NUESTRA ESENCIA
+        </div>
+
+        <h2 class="titulo-seccion">
+            Mensaje de la comunidad
+        </h2>
+
+
+        <div class="grid">
+
+            <div class="campo completo">
+
+                <label>
+                    TÍTULO
+                </label>
+
+                <input
+                    id="family_title"
+                    type="text">
+
+            </div>
+
+
+            <div class="campo completo">
+
+                <label>
+                    TEXTO
+                </label>
+
+                <textarea
+                    id="family_text"></textarea>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+const SUPABASE_URL =
+"https://cxgcmrpqqaachnfavplh.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+
+const supabaseClient =
+supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+
+const contentKeys = [
+
+    "hero_kicker",
+    "hero_line1",
+    "hero_line2",
+    "hero_line3",
+    "hero_subtitle",
+    "family_title",
+    "family_text"
+
+];
+
+
+const numeros =
+Array.from(
+    {length:12},
+    (_,i)=>i+1
+);
+
+
+let historias = {};
+
+
+/* ================= MENSAJES ================= */
+
+function mostrarMensaje(texto, tipo){
+
+    const elemento =
+        document.getElementById("mensaje");
+
+    elemento.textContent =
+        texto;
+
+    elemento.className =
+        "mensaje " + tipo;
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+/* ================= VALIDACIÓN ================= */
+
+function validarImagen(archivo){
+
+    if(!archivo){
+
+        return true;
+
+    }
+
+
+    const formatos = [
+
+        "image/jpeg",
+        "image/png",
+        "image/webp"
+
+    ];
+
+
+    if(!formatos.includes(archivo.type)){
+
+        mostrarMensaje(
+            "Solo se permiten imágenes JPG, PNG o WEBP.",
+            "error"
+        );
+
+        return false;
+
+    }
+
+
+    if(
+        archivo.size >
+        8 * 1024 * 1024
+    ){
+
+        mostrarMensaje(
+            "La imagen no puede superar los 8 MB.",
+            "error"
+        );
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+/* ================= PREVIEW ================= */
+
+function mostrarPreview(
+    input,
+    contenedor
+){
+
+    const archivo =
+        input.files[0];
+
+
+    if(!archivo){
+
+        return;
+
+    }
+
+
+    if(!validarImagen(archivo)){
+
+        input.value = "";
+
+        return;
+
+    }
+
+
+    const lector =
+        new FileReader();
+
+
+    lector.onload =
+        function(evento){
+
+            contenedor.innerHTML =
+
+                '<img src="' +
+                evento.target.result +
+                '" alt="Vista previa">';
+
+        };
+
+
+    lector.readAsDataURL(archivo);
+
+}
+
+
+/* ================= CARGAR DATOS ================= */
+
+async function cargarDatos(){
+
+    try{
+
+        /* CONTENT */
+
+        const respuestaContent =
+
+            await supabaseClient
+
+                .from("site_content")
+
+                .select("key,value")
+
+                .in(
+                    "key",
+                    contentKeys
+                );
+
+
+        if(respuestaContent.error){
+
+            throw respuestaContent.error;
+
+        }
+
+
+        const datosContent =
+
+            {};
+
+
+        (
+            respuestaContent.data || []
+        ).forEach(
+
+            item => {
+
+                datosContent[item.key] =
+                    item.value;
+
+            }
+
+        );
+
+
+        contentKeys.forEach(
+
+            key => {
+
+                const campo =
+                    document.getElementById(key);
+
+                if(campo){
+
+                    campo.value =
+                        datosContent[key] || "";
+
+                }
+
+            }
+
+        );
+
+
+        if(
+            datosContent.hero_image
+        ){
+
+            document.getElementById(
+                "heroPreview"
+            ).innerHTML =
+
+                '<img src="' +
+                datosContent.hero_image +
+                '" alt="Portada">';
+
+        }
+
+
+        /* GALLERY */
+
+        const respuestaGallery =
+
+            await supabaseClient
+
+                .from("site_gallery")
+
+                .select(
+                    "slot,imagen_url,title,caption,published,activo,orden"
+                )
+
+                .in(
+                    "slot",
+                    numeros.map(
+                        n => "historia_" + n
+                    )
+                )
+
+
+                .order(
+                    "orden",
+                    {
+                        ascending:true
+                    }
+                );
+
+
+        if(respuestaGallery.error){
+
+            throw respuestaGallery.error;
+
+        }
+
+
+        historias = {};
+
+
+        (
+            respuestaGallery.data || []
+        ).forEach(
+
+            item => {
+
+                const numero =
+
+                    Number(
+                        String(item.slot)
+                            .replace(
+                                "historia_",
+                                ""
+                            )
+                    );
+
+
+                if(numero){
+
+                    historias[numero] =
+                        item;
+
+                }
+
+            }
+
+        );
+
+
+        dibujarHistorias();
+
+
+        mostrarMensaje(
+            "Contenido cargado correctamente.",
+            "exito"
+        );
+
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        mostrarMensaje(
+
+            "No se pudieron cargar los datos: " +
+            (error.message || "Error desconocido"),
+
+            "error"
+
+        );
+
+    }
+
+}
+
+
+/* ================= HISTORIAS ================= */
+
+function dibujarHistorias(){
+
+    const contenedor =
+        document.getElementById(
+            "listaHistorias"
+        );
+
+
+    contenedor.innerHTML = "";
+
+
+    numeros.forEach(
+
+        numero => {
+
+            const historia =
+                historias[numero] || {};
+
+
+            const tarjeta =
+                document.createElement(
+                    "article"
+                );
+
+
+            tarjeta.className =
+                "historia";
+
+
+            const imagen =
+
+                historia.imagen_url
+
+                    ?
+
+                '<img src="' +
+                historia.imagen_url +
+                '" alt="">'
+
+                    :
+
+                "Sin fotografía";
+
+
+            tarjeta.innerHTML =
+
+                '<div class="historia-cabecera">' +
+
+                    '<span class="numero">' +
+
+                        'HISTORIA ' +
+
+                        String(numero)
+                            .padStart(2,"0") +
+
+                    '</span>' +
+
+                    '<label class="publicar">' +
+
+                        '<input ' +
+
+                        'id="publicar_' +
+                        numero +
+
+                        '" ' +
+
+                        'type="checkbox" ' +
+
+                        (
+                            historia.published !== false
+                                ? "checked"
+                                : ""
+                        ) +
+
+                        '> PUBLICADA' +
+
+                    '</label>' +
+
+                '</div>' +
+
+
+                '<div class="preview" id="preview_' +
+                numero +
+                '">' +
+
+                    imagen +
+
+                '</div>' +
+
+
+                '<input ' +
+
+                    'id="archivo_' +
+                    numero +
+
+                    '" ' +
+
+                    'type="file" ' +
+
+                    'accept="image/jpeg,image/png,image/webp">' +
+
+
+                '<input ' +
+
+                    'id="titulo_' +
+                    numero +
+
+                    '" ' +
+
+                    'type="text" ' +
+
+                    'maxlength="120" ' +
+
+                    'placeholder="Título de la historia" ' +
+
+                    'value="' +
+                    escapar(
+                        historia.title || ""
+                    ) +
+                    '">' +
+
+
+                '<textarea ' +
+
+                    'id="descripcion_' +
+                    numero +
+
+                    '" ' +
+
+                    'maxlength="280" ' +
+
+                    'placeholder="Breve descripción..."' +
+
+                '>' +
+
+                    escapar(
+                        historia.caption || ""
+                    ) +
+
+                '</textarea>';
+
+
+            contenedor.appendChild(
+                tarjeta
+            );
+
+
+            const inputArchivo =
+
+                document.getElementById(
+                    "archivo_" + numero
+                );
+
+
+            inputArchivo.addEventListener(
+                "change",
+                function(){
+
+                    mostrarPreview(
+
+                        inputArchivo,
+
+                        document.getElementById(
+                            "preview_" + numero
+                        )
+
+                    );
+
+                }
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ================= ESCAPAR HTML ================= */
+
+function escapar(valor){
+
+    return String(valor)
+
+        .replace(
+            /&/g,
+            "&amp;"
+        )
+
+        .replace(
+            /</g,
+            "&lt;"
+        )
+
+        .replace(
+            />/g,
+            "&gt;"
+        )
+
+        .replace(
+            /"/g,
+            "&quot;"
+        )
+
+        .replace(
+            /'/g,
+            "&#039;"
+        );
+
+}
+
+
+/* ================= SUBIR IMAGEN ================= */
+
+async function subirImagen(
+    archivo,
+    carpeta
+){
+
+    const extension =
+
+        archivo.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+
+    const nombre =
+
+        Date.now() +
+        "-" +
+        Math.random()
+            .toString(36)
+            .substring(2) +
+        "." +
+        extension;
+
+
+    const ruta =
+        carpeta + "/" + nombre;
+
+
+    const respuesta =
+
+        await supabaseClient
+
+            .storage
+
+            .from("web-public")
+
+            .upload(
+                ruta,
+                archivo,
+                {
+                    cacheControl:"31536000",
+                    upsert:false,
+                    contentType:
+                        archivo.type
+                }
+            );
+
+
+    if(respuesta.error){
+
+        throw respuesta.error;
+
+    }
+
+
+    const url =
+
+        supabaseClient
+
+            .storage
+
+            .from("web-public")
+
+            .getPublicUrl(ruta)
+            .data
+            .publicUrl;
+
+
+    return url;
+
+}
+
+
+/* ================= GUARDAR CONTENT ================= */
+
+async function guardarContenido(
+    key,
+    value
+){
+
+    const respuesta =
+
+        await supabaseClient
+
+            .from("site_content")
+
+            .upsert(
+
+                {
+                    key:key,
+                    value:String(
+                        value || ""
+                    )
+                },
+
+                {
+                    onConflict:"key"
+                }
+
+            );
+
+
+    if(respuesta.error){
+
+        throw respuesta.error;
+
+    }
+
+}
+
+
+/* ================= GUARDAR TODO ================= */
+
+async function guardarTodo(){
+
+    const boton =
+        document.getElementById(
+            "btnGuardar"
+        );
+
+
+    boton.disabled = true;
+
+    boton.textContent =
+        "GUARDANDO...";
+
+
+    try{
+
+        /* TEXTOS */
+
+        for(
+            const key of contentKeys
+        ){
+
+            await guardarContenido(
+
+                key,
+
+                document.getElementById(
+                    key
+                ).value.trim()
+
+            );
+
+        }
+
+
+        /* PORTADA */
+
+        const archivoHero =
+
+            document.getElementById(
+                "heroFile"
+            ).files[0];
+
+
+        if(archivoHero){
+
+            if(
+                !validarImagen(
+                    archivoHero
+                )
+            ){
+
+                throw new Error(
+                    "La imagen de portada no es válida."
+                );
+
+            }
+
+
+            const urlHero =
+
+                await subirImagen(
+                    archivoHero,
+                    "hero"
+                );
+
+
+            await guardarContenido(
+                "hero_image",
+                urlHero
+            );
+
+        }
+
+
+        /* HISTORIAS */
+
+        for(
+            const numero of numeros
+        ){
+
+            const archivo =
+
+                document.getElementById(
+                    "archivo_" + numero
+                ).files[0];
+
+
+            const titulo =
+
+                document.getElementById(
+                    "titulo_" + numero
+                ).value.trim();
+
+
+            const descripcion =
+
+                document.getElementById(
+                    "descripcion_" + numero
+                ).value.trim();
+
+
+            const publicada =
+
+                document.getElementById(
+                    "publicar_" + numero
+                ).checked;
+
+
+            let imagenUrl =
+
+                historias[numero]
+                    ?.imagen_url || null;
+
+
+            if(archivo){
+
+                if(
+                    !validarImagen(
+                        archivo
+                    )
+                ){
+
+                    throw new Error(
+                        "La imagen de Historia " +
+                        numero +
+                        " no es válida."
+                    );
+
+                }
+
+
+                imagenUrl =
+
+                    await subirImagen(
+                        archivo,
+                        "historias"
+                    );
+
+            }
+
+
+            /* Si no existe imagen,
+               no creamos una historia vacía */
+
+            if(!imagenUrl){
+
+                if(
+                    historias[numero]
+                ){
+
+                    const actualizar =
+
+                        await supabaseClient
+
+                            .from("site_gallery")
+
+                            .update({
+
+                                title:
+                                    titulo || null,
+
+                                caption:
+                                    descripcion || null,
+
+                                published:
+                                    publicada,
+
+                                activo:
+                                    publicada,
+
+                                updated_at:
+                                    new Date()
+                                        .toISOString()
+
+                            })
+
+                            .eq(
+                                "slot",
+                                "historia_" +
+                                numero
+                            );
+
+
+                    if(
+                        actualizar.error
+                    ){
+
+                        throw actualizar.error;
+
+                    }
+
+                }
+
+
+                continue;
+
+            }
+
+
+            const guardarHistoria =
+
+                await supabaseClient
+
+                    .from("site_gallery")
+
+                    .upsert(
+
+                        {
+
+                            slot:
+                                "historia_" +
+                                numero,
+
+                            title:
+                                titulo || null,
+
+                            caption:
+                                descripcion || null,
+
+                            imagen_url:
+                                imagenUrl,
+
+                            orden:
+                                numero,
+
+                            published:
+                                publicada,
+
+                            activo:
+                                publicada,
+
+                            updated_at:
+                                new Date()
+                                    .toISOString()
+
+                        },
+
+                        {
+                            onConflict:"slot"
+                        }
+
+                    );
+
+
+            if(
+                guardarHistoria.error
+            ){
+
+                throw guardarHistoria.error;
+
+            }
+
+        }
+
+
+        document.getElementById(
+            "heroFile"
+        ).value = "";
+
+
+        mostrarMensaje(
+
+            "¡Listo! Los cambios fueron guardados correctamente.",
+
+            "exito"
+
+        );
+
+
+        await cargarDatos();
+
+    }
+
+    catch(error){
+
+        console.error(error);
+
+        mostrarMensaje(
+
+            "No se pudieron guardar los cambios: " +
+            (
+                error.message ||
+                "Error desconocido"
+            ),
+
+            "error"
+
+        );
+
+    }
+
+    finally{
+
+        boton.disabled = false;
+
+        boton.textContent =
+            "GUARDAR CAMBIOS";
+
+    }
+
+}
+
+
+/* ================= TABS ================= */
+
+document
+.querySelectorAll(".tab")
+.forEach(
+
+    tab => {
+
+        tab.addEventListener(
+            "click",
+            function(){
+
+                document
+                .querySelectorAll(".tab")
+                .forEach(
+                    t =>
+                        t.classList.remove(
+                            "activo"
+                        )
+                );
+
+
+                document
+                .querySelectorAll(".panel")
+                .forEach(
+                    p =>
+                        p.classList.remove(
+                            "activo"
+                        )
+                );
+
+
+                tab.classList.add(
+                    "activo"
+                );
+
+
+                document
+                .getElementById(
+                    tab.dataset.panel
+                )
+                .classList.add(
+                    "activo"
+                );
+
+            }
+        );
+
+    }
+
+);
+
+
+/* ================= EVENTOS ================= */
+
+document
+.getElementById("heroFile")
+.addEventListener(
+    "change",
+    function(){
+
+        mostrarPreview(
+
+            this,
+
+            document.getElementById(
+                "heroPreview"
+            )
+
+        );
+
+    }
+);
+
+
+document
+.getElementById("btnGuardar")
+.addEventListener(
+    "click",
+    guardarTodo
+);
+
+
+document
+.getElementById("btnActualizar")
+.addEventListener(
+    "click",
+    cargarDatos
+);
+
+
+/* ================= INICIO ================= */
+
+cargarDatos();
+
+</script>
+
+</body>
+</html>
