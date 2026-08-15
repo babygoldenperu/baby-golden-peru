@@ -1293,7 +1293,47 @@ if (
      BENEFICIOS BLACK
   ====================================== */
 
-  const beneficiosID = `
+ const beneficiosID = `
+
+  <div class="black-benefits">
+
+    <div class="black-benefits-title">
+      Beneficios Baby Golden ID
+    </div>
+
+    <div class="benefit">
+      <span>◆</span>
+      Identificación digital exclusiva
+    </div>
+
+    <div class="benefit">
+      <span>◆</span>
+      Perfil digital personalizado
+    </div>
+
+    <div class="benefit">
+      <span>◆</span>
+      Beneficios exclusivos de
+      Baby Golden Perú
+    </div>
+
+    ${
+      esBlack
+      ? `
+
+        <div class="benefit">
+          <span>◆</span>
+          Beneficios especiales en
+          merchandising de Baby Golden Perú
+        </div>
+
+      `
+      : ""
+    }
+
+  </div>
+
+`;
 
   <div class="id-benefits">
 
