@@ -17,6 +17,11 @@ function start(){
   modulo.id = "historiasOroAdmin";
   modulo.className = "card";
 
+  const HISTORIAS = Array.from(
+    {length:12},
+    (_,i)=>i+1
+  );
+
   modulo.innerHTML = `
 <style>
 
@@ -194,17 +199,17 @@ Fotos de nuestra familia
 </h2>
 
 <div class="ho-s">
-Administra las 6 fotografías, títulos y breves descripciones que aparecerán en la web.
+Administra hasta 12 fotografías, títulos y breves descripciones que aparecerán en la web.
 </div>
 
 <div class="ho-g">
 
-${[1,2,3,4,5,6].map(n=>`
+${HISTORIAS.map(n=>`
 
 <div class="ho-i">
 
   <div class="ho-n">
-    FOTO 0${n}
+    FOTO ${String(n).padStart(2,"0")}
   </div>
 
   <div class="ho-p" id="hoP${n}">
@@ -222,6 +227,7 @@ ${[1,2,3,4,5,6].map(n=>`
   <input
     id="hoT${n}"
     type="text"
+    maxlength="120"
     placeholder="Título de la historia"
   >
 
@@ -335,52 +341,55 @@ ${[1,2,3,4,5,6].map(n=>`
      PREVISUALIZACIÓN
   ========================================================= */
 
-  [1,2,3,4,5,6].forEach(n=>{
+  HISTORIAS.forEach(n=>{
 
-    document
-      .getElementById("hoF"+n)
-      .addEventListener(
-        "change",
-        function(){
+    const input =
+      document.getElementById("hoF"+n);
 
-          const file =
-            this.files &&
-            this.files[0];
+    if(!input) return;
 
-          if(!file) return;
+    input.addEventListener(
+      "change",
+      function(){
 
-          if(
-            !validarArchivo(file)
-          ){
+        const file =
+          this.files &&
+          this.files[0];
 
-            this.value="";
+        if(!file) return;
 
-            return;
+        if(
+          !validarArchivo(file)
+        ){
 
-          }
+          this.value="";
 
-          const reader =
-            new FileReader();
-
-          reader.onload =
-            function(e){
-
-              document
-                .getElementById("hoP"+n)
-                .innerHTML =
-                `
-                <img
-                  src="${e.target.result}"
-                  alt="Vista previa"
-                >
-                `;
-
-            };
-
-          reader.readAsDataURL(file);
+          return;
 
         }
-      );
+
+        const reader =
+          new FileReader();
+
+        reader.onload =
+          function(e){
+
+            document
+              .getElementById("hoP"+n)
+              .innerHTML =
+              `
+              <img
+                src="${e.target.result}"
+                alt="Vista previa"
+              >
+              `;
+
+          };
+
+        reader.readAsDataURL(file);
+
+      }
+    );
 
   });
 
@@ -397,18 +406,13 @@ ${[1,2,3,4,5,6].map(n=>`
         await sb
           .from("site_gallery")
           .select(
-            "slot,title,caption,imagen_url,orden"
+            "slot,title,caption,imagen_url,orden,published"
           )
           .in(
             "slot",
-            [
-              "historia_1",
-              "historia_2",
-              "historia_3",
-              "historia_4",
-              "historia_5",
-              "historia_6"
-            ]
+            HISTORIAS.map(
+              n=>"historia_"+n
+            )
           )
           .order(
             "orden",
@@ -438,7 +442,7 @@ ${[1,2,3,4,5,6].map(n=>`
           if(
             !numero ||
             numero < 1 ||
-            numero > 6
+            numero > 12
           ){
             return;
           }
@@ -584,8 +588,7 @@ ${[1,2,3,4,5,6].map(n=>`
     try{
 
       for(
-        const numero of
-        [1,2,3,4,5,6]
+        const numero of HISTORIAS
       ){
 
         const archivo =
@@ -671,6 +674,7 @@ ${[1,2,3,4,5,6].map(n=>`
 
         /*
           Si todavía no existe foto
+          y tampoco se seleccionó una nueva,
           no creamos una fila vacía.
         */
 
@@ -697,11 +701,6 @@ ${[1,2,3,4,5,6].map(n=>`
 
                 title:
                   titulo || null,
-
-                /*
-                  AQUÍ se guarda la
-                  descripción breve.
-                */
 
                 caption:
                   descripcion || null,
@@ -745,7 +744,7 @@ ${[1,2,3,4,5,6].map(n=>`
          Limpiar inputs de archivos
       --------------------------------- */
 
-      [1,2,3,4,5,6]
+      HISTORIAS
         .forEach(n=>{
 
           const input =
@@ -763,7 +762,7 @@ ${[1,2,3,4,5,6].map(n=>`
 
 
       msg(
-        "Fotos, títulos y descripciones guardados correctamente.",
+        "Las 12 Historias de Oro se guardaron correctamente.",
         true
       );
 
