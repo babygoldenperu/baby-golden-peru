@@ -867,34 +867,22 @@ header{
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
-
   min-height:45px !important;
   width:auto !important;
-
   padding:13px 21px !important;
   margin:0 !important;
-
   border:0 !important;
   border-radius:999px !important;
-
   background:#b77b20 !important;
   color:#fff !important;
-
   box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
-
-  transition:
-    background .25s ease,
-    color .25s ease,
-    transform .25s ease,
-    box-shadow .25s ease !important;
+  transition:.25s ease !important;
 }
 
 .menu > a.header-button:hover{
-  background:#000 !important;
+  background:#2d2822 !important;
   color:#fff !important;
   transform:translateY(-2px) !important;
-  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
-}
 }
 
 .nav-actions{
@@ -1134,6 +1122,240 @@ header{
 }
 </style>
 
+
+<style id="header-final-fix">
+/* =========================================================
+   HEADER FINAL — INDEX.HTML
+   This block is intentionally LAST so legacy page CSS cannot
+   change the desktop layout.
+   ========================================================= */
+
+header{
+  width:100% !important;
+  position:sticky !important;
+  top:0 !important;
+  z-index:10000 !important;
+  background:rgba(246,240,230,.90) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  border-bottom:1px solid rgba(183,123,32,.18) !important;
+}
+
+.nav{
+  width:min(1320px,100%) !important;
+  min-height:88px !important;
+  margin:0 auto !important;
+  padding:12px 34px !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:28px !important;
+  position:relative !important;
+  box-sizing:border-box !important;
+}
+
+.nav > a:first-child{
+  flex:0 0 auto !important;
+  display:flex !important;
+  width:auto !important;
+}
+
+.logo{
+  width:165px !important;
+  height:auto !important;
+  max-width:none !important;
+  display:block !important;
+}
+
+.menu{
+  width:auto !important;
+  max-width:none !important;
+  flex:0 0 auto !important;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:27px !important;
+  position:static !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+  opacity:1 !important;
+  visibility:visible !important;
+  pointer-events:auto !important;
+  transform:none !important;
+}
+
+.menu > a{
+  flex:0 0 auto !important;
+  width:auto !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  white-space:nowrap !important;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  color:#2d2822 !important;
+  background:transparent !important;
+  padding:12px 0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  text-decoration:none !important;
+}
+
+.menu > a.active{
+  color:#b77b20 !important;
+}
+
+.menu > a.header-button{
+  min-height:45px !important;
+  padding:13px 21px !important;
+  border-radius:999px !important;
+  background:#b77b20 !important;
+  color:#fff !important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+}
+
+.menu > a.header-button:hover{
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px) !important;
+}
+
+.nav-actions{
+  flex:0 0 auto !important;
+  width:auto !important;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:7px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+}
+
+.nav-actions .icon-button{
+  flex:0 0 38px !important;
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  color:#2d2822 !important;
+}
+
+.nav-actions .icon-button svg{
+  width:19px !important;
+  height:19px !important;
+  display:block !important;
+}
+
+.mobile-menu-toggle{
+  display:none !important;
+}
+
+/* MOBILE */
+@media (max-width:650px){
+
+  .nav{
+    min-height:64px !important;
+    padding:8px 14px !important;
+  }
+
+  .logo{
+    width:112px !important;
+  }
+
+  .mobile-menu-toggle{
+    display:flex !important;
+    flex:0 0 42px !important;
+    width:42px !important;
+    height:42px !important;
+    margin-left:auto !important;
+    padding:0 !important;
+    border:1px solid rgba(183,123,32,.25) !important;
+    border-radius:50% !important;
+    background:transparent !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex-direction:column !important;
+    gap:5px !important;
+  }
+
+  .menu{
+    position:absolute !important;
+    top:calc(100% + 1px) !important;
+    left:0 !important;
+    right:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    max-height:calc(100vh - 64px) !important;
+    overflow-y:auto !important;
+    display:none !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    gap:0 !important;
+    padding:10px 16px 18px !important;
+    background:#f6f0e6 !important;
+    border-top:1px solid rgba(183,123,32,.18) !important;
+    border-bottom:1px solid rgba(183,123,32,.18) !important;
+    box-shadow:0 18px 35px rgba(48,35,20,.13) !important;
+  }
+
+  .nav.menu-open .menu{
+    display:flex !important;
+  }
+
+  .menu > a{
+    width:100% !important;
+    min-height:45px !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    justify-content:flex-start !important;
+    padding:13px 8px !important;
+    font-size:10px !important;
+    border-bottom:1px solid rgba(183,123,32,.10) !important;
+  }
+
+  .menu > a.header-button{
+    justify-content:center !important;
+    min-height:42px !important;
+    margin:10px 0 4px !important;
+  }
+
+  .nav-actions{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    justify-content:flex-start !important;
+    gap:10px !important;
+    padding:12px 8px 2px !important;
+    border-top:1px solid rgba(183,123,32,.12) !important;
+  }
+
+  .nav-actions .icon-button{
+    flex:0 0 38px !important;
+  }
+}
+</style>
+
 </head>
 
 <body>
@@ -1143,11 +1365,7 @@ header{
   <nav class="nav">
 
     <a href="index.html" aria-label="Baby Golden Perú">
-      <img
-        src="BABY%20GOLDEN.png"
-        alt="Baby Golden Perú"
-        class="logo"
-      >
+      <img src="BABY%20GOLDEN.png" alt="Baby Golden Perú" class="logo">
     </a>
 
     <button
@@ -1158,9 +1376,7 @@ header{
       aria-expanded="false"
       aria-controls="mainMenu"
     >
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
 
     <div class="menu" id="mainMenu">
@@ -1169,30 +1385,22 @@ header{
 
       <a href="beneficios.html" class="active">BENEFICIOS</a>
 
+      <a href="index.html#historias">HISTORIAS DE ORO</a>
+
       <a href="contacto.html">CONTACTO</a>
 
       <a href="tienda.html" class="header-button">TIENDA</a>
 
       <div class="nav-actions" aria-label="Accesos rápidos">
 
-        <a
-          class="icon-button"
-          href="index.html"
-          aria-label="Buscar en Baby Golden Perú"
-          title="Buscar"
-        >
+        <a class="icon-button" href="index.html" aria-label="Buscar" title="Buscar">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="11" cy="11" r="6.5"></circle>
             <path d="m16 16 4 4"></path>
           </svg>
         </a>
 
-        <a
-          class="icon-button cart-button"
-          href="tienda.html"
-          aria-label="Abrir carrito de compras"
-          title="Carrito"
-        >
+        <a class="icon-button cart-button" href="tienda.html" aria-label="Carrito" title="Carrito">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
             <circle cx="10" cy="20" r="1"></circle>
@@ -1200,12 +1408,7 @@ header{
           </svg>
         </a>
 
-        <a
-          class="icon-button"
-          href="cuenta.html"
-          aria-label="Ir a Mi cuenta"
-          title="Mi cuenta"
-        >
+        <a class="icon-button" href="cuenta.html" aria-label="Mi cuenta" title="Mi cuenta">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <circle cx="12" cy="8" r="3.5"></circle>
             <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
@@ -1213,7 +1416,6 @@ header{
         </a>
 
       </div>
-
     </div>
   </nav>
 </header>
@@ -2145,4 +2347,3 @@ cargarBeneficios();
 </script>
 </body>
 </html>
-
