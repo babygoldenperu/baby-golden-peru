@@ -11,1860 +11,1715 @@
   >
 
   <title>
-    Contacto | Baby Golden Perú
+    Checkout | Baby Golden Perú
   </title>
-
-
-  <!-- =========================================
-       TIPOGRAFÍAS
-       ========================================= -->
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@400;500;600;700&display=swap"
-    rel="stylesheet"
-  >
-
 
   <style>
 
-    /* =========================================
-       BASE
-       ========================================= */
-
-    * {
-      box-sizing: border-box;
-    }
-
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-
-    body {
-      margin: 0;
-
-      background: #f6f0e6;
-      color: #3b2b20;
-
-      font-family: "Montserrat", sans-serif;
-    }
-
-
-    h1,
-    h2,
-    h3 {
-      font-family: "Cormorant Garamond", serif;
-    }
-
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-
-    button {
-      font-family: inherit;
-    }
-
-
-    /* =========================================
-       HEADER
-       ========================================= */
-
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-
-      background: rgba(
-        246,
-        240,
-        230,
-        .96
-      );
-
-      border-bottom: 1px solid #ded1bf;
-
-      backdrop-filter: blur(10px);
-    }
-
-
-    .nav {
-      max-width: 1280px;
-      min-height: 76px;
-
-      margin: auto;
-      padding: 0 28px;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 25px;
-    }
-
-
-    .logo {
-      width: 155px;
-      height: auto;
-      display: block;
-    }
-
-
-    /* =========================================
-       MENÚ
-       ========================================= */
-
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 22px;
-
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .7px;
-    }
-
-
-    .menu > a {
-      position: relative;
-
-      transition:
-        color .25s ease,
-        transform .25s ease;
-    }
-
-
-    .menu > a:hover {
-      color: #b77b20;
-
-      transform:
-        translateY(-2px);
-    }
-
-
-    .menu > a:not(.header-button)::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      bottom: -7px;
-
-      width: 0;
-      height: 1px;
-
-      background: #b77b20;
-
-      transition:
-        width .25s ease;
-    }
-
-
-    .menu > a:not(.header-button):hover::after {
-      width: 100%;
-    }
-
-
-    /* =========================================
-       BOTÓN REGISTRAR
-       ========================================= */
-
-    .header-button {
-      padding: 12px 18px;
-
-      border-radius: 999px;
-
-      background: #4a3324;
-      color: #ffffff;
-
-      transition:
-        background .25s ease,
-        transform .25s ease;
-    }
-
-
-    .header-button:hover {
-      background: #684936;
-      color: #ffffff !important;
-
-      transform:
-        translateY(-2px);
-    }
-
-
-    .header-button::after {
-      display: none !important;
-    }
-
-
-    /* =========================================
-       ACCIONES
-       ========================================= */
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-
-    .icon-button {
-      position: relative;
-
-      width: 40px;
-      height: 40px;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 0;
-
-      border: 1px solid #d9c9b6;
-      border-radius: 50%;
-
-      background: transparent;
-      color: #4a3324;
-
-      cursor: pointer;
-
-      transition:
-        background .25s ease,
-        color .25s ease,
-        transform .25s ease;
-    }
-
-
-    .icon-button:hover {
-      background: rgba(
-        183,
-        123,
-        32,
-        .12
-      );
-
-      color: #b77b20;
-
-      transform:
-        translateY(-2px);
-    }
-
-
-    .icon-button svg {
-      width: 19px;
-      height: 19px;
-
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.6;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-
-    /* =========================================
-       CONTADOR CARRITO
-       ========================================= */
-
-    .cart-count {
-      position: absolute;
-
-      top: -4px;
-      right: -4px;
-
-      min-width: 17px;
-      height: 17px;
-
-      padding: 1px 4px;
-
-      border-radius: 999px;
-
-      background: #b77b20;
-      color: #ffffff;
-
-      font-size: 9px;
-      font-weight: 700;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-
-    /* =========================================
-       CARRITO
-       ========================================= */
-
-    .cart-drawer {
-      position: fixed;
-
-      z-index: 1300;
-
-      top: 0;
-      right: 0;
-
-      width: min(
-        430px,
-        100%
-      );
-
-      height: 100dvh;
-
-      padding: 28px;
-
-      display: flex;
-      flex-direction: column;
-
-      background: #fffaf4;
-
-      box-shadow:
-        -18px 0 60px
-        rgba(
-          0,
-          0,
-          0,
-          .22
-        );
-
-      transform:
-        translateX(105%);
-
-      transition:
-        transform .28s ease;
-    }
-
-
-    .cart-drawer.is-open {
-      transform:
-        translateX(0);
+    *{
+      box-sizing:border-box;
     }
-
-
-    .cart-drawer-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-
-      gap: 20px;
-
-      padding-bottom: 20px;
-
-      border-bottom: 1px solid #e4d7c5;
-    }
-
-
-    .cart-drawer-header h2 {
-      margin: 7px 0 0;
-
-      font-size: 34px;
-      line-height: .95;
-    }
-
-
-    .panel-kicker {
-      margin: 0;
-
-      color: #b77b20;
-
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-    }
-
-
-    .panel-close {
-      width: 34px;
-      height: 34px;
-
-      border: 1px solid #dfd1bd;
-      border-radius: 50%;
 
-      background: transparent;
-      color: #4a3324;
-
-      font-size: 26px;
-      line-height: 1;
-
-      cursor: pointer;
+    body{
+      margin:0;
+      background:#f6f0e6;
+      color:#3b2b20;
+      font-family:Arial,sans-serif;
     }
-
-
-    .cart-items {
-      flex: 1;
 
-      overflow: auto;
-
-      padding: 20px 0;
+    header{
+      background:#f6f0e6;
+      border-bottom:1px solid #ded1bf;
     }
-
-
-    .cart-empty {
-      margin: 20px 0;
-
-      color: #765f4c;
 
-      font-size: 13px;
-      line-height: 1.7;
+    .nav{
+      max-width:1280px;
+      min-height:76px;
+      margin:auto;
+      padding:0 28px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:25px;
     }
 
-
-    .cart-item {
-      display: grid;
-
-      grid-template-columns:
-        1fr auto;
-
-      gap: 12px;
-
-      padding: 15px 0;
-
-      border-bottom: 1px solid #eadfce;
+    .logo{
+      width:155px;
+      display:block;
     }
-
 
-    .cart-item h3 {
-      margin: 0 0 5px;
-
-      font-size: 24px;
-      line-height: .9;
+    .menu{
+      display:flex;
+      align-items:center;
+      gap:20px;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.6px;
     }
-
-
-    .cart-item p {
-      margin: 0;
 
-      color: #765f4c;
-
-      font-size: 11px;
+    .menu a{
+      position:relative;
+      color:#3b2b20;
+      text-decoration:none;
+      transition:.25s ease;
     }
-
-
-    .remove-item {
-      align-self: start;
-
-      border: 0;
 
-      background: transparent;
-      color: #9f3d2c;
-
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .5px;
-
-      cursor: pointer;
+    .menu a:hover{
+      color:#b77b20;
+      transform:translateY(-2px);
     }
 
-
-    .cart-summary {
-      padding-top: 20px;
-
-      border-top: 1px solid #e4d7c5;
+    .menu a:not(.header-button)::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:-7px;
+      width:0;
+      height:1px;
+      background:#b77b20;
+      transition:.25s ease;
     }
-
 
-    .cart-summary > div {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      font-size: 13px;
+    .menu a:not(.header-button):hover::after{
+      width:100%;
     }
-
 
-    .cart-summary strong {
-      color: #b77b20;
+    
+.header-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
 
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 29px;
-    }
+  min-height:45px !important;
+  width:auto !important;
+  padding:13px 21px !important;
 
+  margin:0 !important;
+  border:0 !important;
+  border-radius:999px !important;
 
-    .cart-checkout {
-      width: 100%;
+  background:#b77b20 !important;
+  color:#fff !important;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  text-decoration:none !important;
 
-      margin-top: 18px;
-      padding: 15px;
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
 
-      border-radius: 999px;
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease !important;
+}
 
-      background: #4a3324;
-      color: #ffffff;
+.menu > a.header-button:hover,
+.header-button:hover{
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+}
 
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .8px;
+    main{
+      max-width:1150px;
+      margin:auto;
+      padding:60px 25px 90px;
     }
 
-
-    .cart-checkout.is-disabled {
-      pointer-events: none;
-
-      opacity: .52;
+    .label{
+      color:#a76f20;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
     }
-
-
-    .cart-summary p {
-      margin: 14px 0 0;
-
-      color: #765f4c;
 
-      font-size: 10px;
-      line-height: 1.6;
-
-      text-align: center;
+    h1{
+      margin:10px 0 12px;
+      font-family:Georgia,serif;
+      font-size:48px;
+      font-weight:500;
     }
-
-
-    .cart-backdrop {
-      position: fixed;
-
-      z-index: 1250;
 
-      inset: 0;
-
-      background:
-        rgba(
-          24,
-          22,
-          19,
-          .42
-        );
+    .intro{
+      color:#765f4c;
+      font-size:13px;
+      margin-bottom:35px;
     }
-
-
-    /* =========================================
-       HERO
-       ========================================= */
-
-    .hero {
-      max-width: 1100px;
-
-      margin: auto;
 
-      padding: 80px 25px 50px;
-
-      text-align: center;
+    .checkout-grid{
+      display:grid;
+      grid-template-columns:minmax(0,1.25fr) minmax(320px,.75fr);
+      gap:28px;
+      align-items:start;
     }
-
-
-    .hero-label {
-      margin-bottom: 15px;
-
-      color: #a76f20;
 
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 3px;
+    .box{
+      padding:28px;
+      background:#fffaf4;
+      border:1px solid #decdb8;
+      border-radius:18px;
     }
 
-
-    .hero h1 {
-      margin: 0;
-
-      font-size: clamp(
-        55px,
-        7vw,
-        85px
-      );
-
-      line-height: .9;
-      font-weight: 600;
+    .box h2{
+      margin:0 0 22px;
+      font-family:Georgia,serif;
+      font-size:27px;
+      font-weight:500;
     }
 
-
-    .hero h1 span {
-      color: #b77b20;
+    .field-grid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:16px;
     }
-
 
-    .hero p {
-      max-width: 650px;
-
-      margin: 25px auto 0;
-
-      color: #765f4c;
-
-      font-size: 13px;
-      line-height: 1.8;
+    .field{
+      display:flex;
+      flex-direction:column;
+      gap:7px;
     }
-
 
-    /* =========================================
-       CONTACTO
-       ========================================= */
-
-    .contacto {
-      max-width: 1150px;
-
-      margin: auto;
-
-      padding: 20px 25px 90px;
+    .field.full{
+      grid-column:1 / -1;
     }
-
-
-    .contact-grid {
-      display: grid;
 
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 25px;
+    label{
+      color:#5e4938;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.6px;
+      text-transform:uppercase;
     }
-
-
-    .card {
-      padding: 30px;
-
-      background: #fffaf4;
 
-      border: 1px solid #decdb8;
-      border-radius: 22px;
-
-      box-shadow:
-        0 16px 40px
-        rgba(
-          57,
-          42,
-          28,
-          .07
-        );
+    input,
+    select{
+      width:100%;
+      padding:13px 12px;
+      border:1px solid #d9c9b6;
+      border-radius:9px;
+      background:#fff;
+      color:#3b2b20;
+      outline:none;
     }
-
 
-    .card-label {
-      margin-bottom: 8px;
-
-      color: #a76f20;
-
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: 2px;
+    input:focus,
+    select:focus{
+      border-color:#b77b20;
     }
-
 
-    .card h2 {
-      margin: 0 0 20px;
-
-      font-size: 38px;
-      line-height: 1;
+    .required{
+      color:#a76f20;
     }
-
 
-    .contact-item {
-      padding: 17px 0;
-
-      border-bottom: 1px solid #e5d9cb;
+    .summary-item{
+      display:grid;
+      grid-template-columns:60px 1fr auto;
+      gap:12px;
+      padding:14px 0;
+      border-bottom:1px solid #eadfce;
     }
-
 
-    .contact-item:last-child {
-      border-bottom: none;
+    .summary-image{
+      width:60px;
+      height:60px;
+      object-fit:cover;
+      border-radius:10px;
+      border:1px solid #e3d4c2;
+      background:#f1e7d9;
     }
 
-
-    .contact-item strong {
-      display: block;
-
-      margin-bottom: 5px;
-
-      font-size: 10px;
-      letter-spacing: .7px;
+    .summary-name{
+      margin:0 0 5px;
+      font-size:12px;
+      font-weight:700;
     }
-
 
-    .contact-item a,
-    .contact-item span {
-      color: #765f4c;
-
-      font-size: 13px;
-      line-height: 1.6;
+    .summary-meta{
+      margin:0;
+      color:#765f4c;
+      font-size:10px;
+      line-height:1.6;
     }
-
 
-    .contact-item a:hover {
-      color: #b77b20;
+    .summary-price{
+      font-size:11px;
+      font-weight:700;
+      white-space:nowrap;
     }
-
-
-    /* =========================================
-       REDES
-       ========================================= */
 
-    .socials {
-      display: grid;
-      gap: 10px;
+    .total-row{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:15px;
+      padding-top:20px;
+      margin-top:8px;
+      border-top:1px solid #decdb8;
     }
-
-
-    .social {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      padding: 14px 16px;
-
-      border: 1px solid #decdb8;
-      border-radius: 12px;
-
-      background: #f7efe4;
 
-      font-size: 11px;
-      font-weight: 600;
-
-      transition:
-        background .25s ease,
-        transform .25s ease;
+    .total-label{
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:1px;
+      text-transform:uppercase;
     }
-
 
-    .social:hover {
-      background: #eee2d2;
-
-      transform:
-        translateY(-2px);
+    .total-price{
+      color:#a76f20;
+      font-family:Georgia,serif;
+      font-size:28px;
+      font-weight:700;
     }
-
-
-    /* =========================================
-       WHATSAPP
-       ========================================= */
-
-    .whatsapp {
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      width: 100%;
-
-      margin-top: 20px;
 
-      padding: 14px 20px;
-
-      border-radius: 999px;
-
-      background: #4a3324;
-      color: #ffffff;
-
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: .8px;
-
-      transition:
-        background .25s ease,
-        transform .25s ease;
+    .continue-button{
+      width:100%;
+      margin-top:22px;
+      padding:15px 20px;
+      border:0;
+      border-radius:999px;
+      background:#4a3324;
+      color:#fff;
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:.5px;
+      cursor:pointer;
+      transition:.25s ease;
     }
 
-
-    .whatsapp:hover {
-      background: #684936;
-
-      transform:
-        translateY(-2px);
+    .continue-button:hover{
+      background:#684936;
+      transform:translateY(-1px);
     }
-
-
-    /* =========================================
-       MAPA
-       ========================================= */
-
-    .map-card {
-      margin-top: 25px;
 
-      overflow: hidden;
-
-      background: #fffaf4;
-
-      border: 1px solid #decdb8;
-      border-radius: 22px;
-
-      box-shadow:
-        0 16px 40px
-        rgba(
-          57,
-          42,
-          28,
-          .07
-        );
+    .continue-button:disabled{
+      background:#aaa098;
+      cursor:not-allowed;
+      transform:none;
     }
-
 
-    .map-header {
-      padding: 28px;
+    .notice{
+      margin-top:14px;
+      color:#8a7564;
+      font-size:10px;
+      line-height:1.6;
+      text-align:center;
     }
 
-
-    .map-header h2 {
-      margin: 0 0 8px;
-
-      font-size: 38px;
+    .empty{
+      padding:35px 10px;
+      color:#765f4c;
+      text-align:center;
+      font-size:12px;
     }
-
-
-    .map-header p {
-      margin: 0;
-
-      color: #765f4c;
 
-      font-size: 12px;
-      line-height: 1.7;
+    .back-link{
+      display:inline-block;
+      margin-top:20px;
+      color:#4a3324;
+      font-size:10px;
+      font-weight:700;
+      text-decoration:none;
+      letter-spacing:.5px;
     }
 
-
-    .map {
-      width: 100%;
-      height: 420px;
-
-      display: block;
-
-      border: 0;
+    .back-link:hover{
+      color:#b77b20;
     }
-
-
-    .map-button {
-      display: inline-flex;
-
-      margin-top: 18px;
-
-      padding: 11px 18px;
-
-      border-radius: 999px;
-
-      background: #4a3324;
-      color: #ffffff;
 
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .8px;
-
-      transition:
-        background .25s ease,
-        transform .25s ease;
+    .error{
+      margin-top:10px;
+      color:#9f3d2c;
+      font-size:10px;
+      line-height:1.5;
     }
-
 
-    .map-button:hover {
-      background: #684936;
-
-      transform:
-        translateY(-2px);
+    footer{
+      padding:50px 25px 35px;
+      background:#29251f;
+      color:#fff;
+      text-align:center;
     }
-
 
-    /* =========================================
-       FOOTER
-       ========================================= */
-
-    footer {
-      padding: 45px 25px;
-
-      border-top: 1px solid #ded1bf;
-
-      background: #eee3d3;
-
-      text-align: center;
+    .footer-brand{
+      color:#d5a34c;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:3px;
     }
-
 
-    footer img {
-      width: 120px;
-
-      margin-bottom: 15px;
+    footer p{
+      color:#aaa197;
+      font-size:11px;
+      line-height:1.8;
     }
-
 
-    .footer-brand {
-      font-family:
-        "Cormorant Garamond",
-        serif;
-
-      font-size: 30px;
-      font-weight: 600;
+    .footer-links{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:10px 22px;
+      max-width:850px;
+      margin:25px auto 0;
+      padding-top:20px;
+      border-top:1px solid rgba(255,255,255,.13);
     }
-
 
-    footer p {
-      margin: 8px 0;
-
-      color: #765f4c;
-
-      font-size: 11px;
+    .footer-links a{
+      color:#e3c99b;
+      font-size:10px;
+      font-weight:700;
+      text-decoration:none;
     }
-
-
-    /* =========================================
-       MÓVIL
-       ========================================= */
-
-    @media (
-      max-width: 900px
-    ) {
 
-      .nav {
-        flex-wrap: wrap;
+    @media(max-width:850px){
 
-        padding: 14px 18px;
+      .nav{
+        min-height:64px;
+        padding:8px 12px;
+        gap:12px;
       }
 
-
-      .menu {
-        width: 100%;
-
-        justify-content: center;
-
-        gap: 12px;
+      .logo{
+        width:112px;
+        flex:0 0 auto;
       }
 
+      .menu{
+        flex:1;
+        max-width:calc(100vw - 135px);
+        overflow-x:auto;
+        scrollbar-width:none;
+        gap:14px;
+        flex-wrap:nowrap;
+        justify-content:flex-start;
+      }
 
-      .contact-grid {
-        grid-template-columns: 1fr;
+      .menu::-webkit-scrollbar{
+        display:none;
+      }
+
+      .menu a{
+        flex:0 0 auto;
+        font-size:8px;
+      }
+
+      .header-button{
+        padding:8px 12px;
+      }
+
+      .checkout-grid{
+        grid-template-columns:1fr;
+      }
+
+      h1{
+        font-size:38px;
       }
 
     }
 
+    @media(max-width:560px){
 
-    @media (
-      max-width: 620px
-    ) {
-
-      .logo {
-        width: 135px;
+      main{
+        padding:45px 16px 70px;
       }
 
-
-      .menu > a:not(.header-button) {
-        display: none;
+      .box{
+        padding:20px;
       }
 
-
-      .menu {
-        width: auto;
-
-        margin-left: auto;
+      .field-grid{
+        grid-template-columns:1fr;
       }
 
-
-      .header-button {
-        display: none;
+      .field.full{
+        grid-column:auto;
       }
 
-
-      .hero {
-        padding:
-          60px 20px 40px;
+      .summary-item{
+        grid-template-columns:52px 1fr;
       }
 
-
-      .hero h1 {
-        font-size: 58px;
+      .summary-image{
+        width:52px;
+        height:52px;
       }
 
-
-      .contacto {
-        padding:
-          15px 18px 60px;
-      }
-
-
-      .card {
-        padding: 24px;
-      }
-
-
-      .map {
-        height: 350px;
+      .summary-price{
+        grid-column:2;
       }
 
     }
 
   </style>
 
+
+<style id="baby-golden-master-header-checkout">
+/* =========================================================
+   HEADER MAESTRO — IGUAL AL INDEX.HTML
+   ========================================================= */
+
+header{
+  position:sticky !important;
+  top:0 !important;
+  z-index:10000 !important;
+  width:100% !important;
+  background:rgba(246,240,230,.90) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  border-bottom:1px solid rgba(183,123,32,.18) !important;
+}
+
+.nav{
+  width:min(1320px,100%) !important;
+  min-height:88px !important;
+  margin:0 auto !important;
+  padding:12px 34px !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:28px !important;
+  position:relative !important;
+}
+
+.nav > a:first-child{
+  display:flex !important;
+  align-items:center !important;
+  flex:0 0 auto !important;
+  width:auto !important;
+}
+
+.logo{
+  width:165px !important;
+  height:auto !important;
+  max-width:none !important;
+  display:block !important;
+}
+
+.menu{
+  width:auto !important;
+  max-width:none !important;
+  flex:0 0 auto !important;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:27px !important;
+  position:static !important;
+  padding:0 !important;
+  margin:0 !important;
+  background:transparent !important;
+  border:0 !important;
+  box-shadow:none !important;
+}
+
+.menu > a{
+  width:auto !important;
+  min-height:0 !important;
+  flex:0 0 auto !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  position:relative !important;
+  padding:12px 0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  background:transparent !important;
+  color:#2d2822 !important;
+  font-family:'Montserrat',Arial,Helvetica,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  white-space:nowrap !important;
+  text-decoration:none !important;
+  transition:.25s ease !important;
+}
+
+.menu > a:not(.header-button)::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  bottom:5px !important;
+  width:0 !important;
+  height:1px !important;
+  background:#b77b20 !important;
+  transition:.25s ease !important;
+}
+
+.menu > a:not(.header-button):hover{
+  color:#b77b20 !important;
+  transform:none !important;
+}
+
+.menu > a:not(.header-button):hover::after{
+  width:100% !important;
+}
+
+.header-button{
+  min-height:45px !important;
+  padding:13px 21px !important;
+  border:0 !important;
+  border-radius:999px !important;
+  background:#b77b20 !important;
+  color:#fff !important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+}
+
+.menu > a.header-button:hover{
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+}
+
+.nav-actions{
+  width:auto !important;
+  flex:0 0 auto !important;
+  display:flex !important;
+  flex-direction:row !important;
+  flex-wrap:nowrap !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  gap:7px !important;
+  margin:0 !important;
+  padding:0 !important;
+  border:0 !important;
+}
+
+.icon-button{
+  width:38px !important;
+  height:38px !important;
+  min-width:38px !important;
+  min-height:38px !important;
+  flex:0 0 38px !important;
+  display:grid !important;
+  place-items:center !important;
+  padding:0 !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  color:#2d2822 !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
+}
+
+.icon-button:hover{
+  background:rgba(183,123,32,.12) !important;
+  color:#b77b20 !important;
+}
+
+.icon-button svg{
+  width:19px !important;
+  height:19px !important;
+  display:block !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.6 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
+}
+
+.mobile-menu-toggle{
+  display:none !important;
+}
+
+/* =========================================================
+   FOOTER MAESTRO
+   ========================================================= */
+
+footer{
+  padding:70px 25px 40px !important;
+  background:#29251f !important;
+  color:#fff !important;
+  text-align:center !important;
+}
+
+.footer-logo{
+  width:155px !important;
+  height:auto !important;
+  display:block !important;
+  margin:0 auto 20px !important;
+}
+
+.footer-brand{
+  color:#d5a34c !important;
+  font-size:10px !important;
+  font-weight:700 !important;
+  letter-spacing:3px !important;
+}
+
+footer p{
+  margin:8px 0 !important;
+  color:#aaa197 !important;
+  font-size:11px !important;
+  line-height:1.8 !important;
+}
+
+.footer-links{
+  display:flex !important;
+  flex-wrap:wrap !important;
+  justify-content:center !important;
+  gap:10px 22px !important;
+  max-width:850px !important;
+  margin:25px auto 0 !important;
+  padding-top:20px !important;
+  border-top:1px solid rgba(255,255,255,.13) !important;
+}
+
+.footer-links a{
+  color:#e3c99b !important;
+  font-size:10px !important;
+  font-weight:700 !important;
+  text-decoration:none !important;
+}
+
+/* =========================================================
+   RESPONSIVE — MENU HAMBURGUESA
+   ========================================================= */
+
+@media(max-width:650px){
+
+  .nav{
+    min-height:64px !important;
+    padding:8px 14px !important;
+    gap:12px !important;
+  }
+
+  .logo{
+    width:112px !important;
+  }
+
+  .mobile-menu-toggle{
+    display:flex !important;
+    width:42px !important;
+    height:42px !important;
+    min-width:42px !important;
+    min-height:42px !important;
+    margin-left:auto !important;
+    padding:0 !important;
+    border:1px solid rgba(183,123,32,.25) !important;
+    border-radius:50% !important;
+    background:transparent !important;
+    color:#2d2822 !important;
+    align-items:center !important;
+    justify-content:center !important;
+    flex-direction:column !important;
+    gap:5px !important;
+    cursor:pointer !important;
+  }
+
+  .mobile-menu-toggle span{
+    display:block !important;
+    width:18px !important;
+    height:1.5px !important;
+    background:currentColor !important;
+    border-radius:999px !important;
+    transition:.25s ease !important;
+  }
+
+  .mobile-menu-toggle.is-open span:nth-child(1){
+    transform:translateY(6.5px) rotate(45deg) !important;
+  }
+
+  .mobile-menu-toggle.is-open span:nth-child(2){
+    opacity:0 !important;
+  }
+
+  .mobile-menu-toggle.is-open span:nth-child(3){
+    transform:translateY(-6.5px) rotate(-45deg) !important;
+  }
+
+  .menu{
+    position:absolute !important;
+    top:calc(100% + 1px) !important;
+    left:0 !important;
+    right:0 !important;
+    width:100% !important;
+    max-width:none !important;
+    max-height:calc(100vh - 64px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
+
+    display:none !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    justify-content:flex-start !important;
+    gap:0 !important;
+
+    padding:10px 16px 18px !important;
+
+    background:rgba(246,240,230,.98) !important;
+    border-top:1px solid rgba(183,123,32,.18) !important;
+    border-bottom:1px solid rgba(183,123,32,.18) !important;
+    border-left:0 !important;
+    border-right:0 !important;
+    border-radius:0 !important;
+    box-shadow:0 18px 35px rgba(48,35,20,.13) !important;
+  }
+
+  .nav.menu-open .menu{
+    display:flex !important;
+  }
+
+  .menu > a{
+    width:100% !important;
+    min-height:45px !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    padding:13px 8px !important;
+    border-bottom:1px solid rgba(183,123,32,.10) !important;
+    font-size:10px !important;
+    letter-spacing:.8px !important;
+  }
+
+  .menu > a:not(.header-button)::after{
+    display:none !important;
+  }
+
+  .menu > a.header-button{
+    justify-content:center !important;
+    min-height:42px !important;
+    margin:10px 0 4px !important;
+    padding:11px 15px !important;
+    border:0 !important;
+  }
+
+  .nav-actions{
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    flex-direction:row !important;
+    flex-wrap:nowrap !important;
+    justify-content:flex-start !important;
+    gap:10px !important;
+    padding:12px 8px 2px !important;
+    border-top:1px solid rgba(183,123,32,.12) !important;
+  }
+
+  .nav-actions .icon-button{
+    width:38px !important;
+    height:38px !important;
+    flex:0 0 38px !important;
+  }
+
+  main{
+    padding:45px 16px 70px !important;
+  }
+
+  h1{
+    font-size:38px !important;
+  }
+
+  .checkout-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .field-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .field.full{
+    grid-column:auto !important;
+  }
+
+  .box{
+    padding:20px !important;
+  }
+
+  .summary-item{
+    grid-template-columns:52px 1fr !important;
+  }
+
+  .summary-price{
+    grid-column:2 !important;
+  }
+
+  .footer-logo{
+    width:140px !important;
+  }
+}
+</style>
+
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+
+<style id="checkout-header-tienda-final">
+/* ÚLTIMA CAPA: TIENDA IGUAL A INDEX.HTML */
+.header-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:45px !important;
+  width:auto !important;
+  padding:13px 21px !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:999px !important;
+  background:#b77b20 !important;
+  color:#fff !important;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  text-decoration:none !important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+  transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease !important;
+}
+
+.menu > a.header-button:hover,
+.header-button:hover{
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+}
+
+.menu > a:not(.header-button){
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-weight:700 !important;
+}
+
+@media(max-width:650px){
+  .menu > a.header-button{
+    background:#b77b20 !important;
+    color:#fff !important;
+  }
+
+  .menu > a.header-button:hover{
+    background:#000 !important;
+    color:#fff !important;
+  }
+}
+</style>
+
+
+<style id="tienda-index-exacto">
+/* =========================================================
+   TIENDA — BOTÓN EXACTO DEL HEADER MAESTRO
+   Esta regla queda al FINAL para evitar conflictos.
+   ========================================================= */
+
+#mainMenu > a.header-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  box-sizing:border-box !important;
+  width:auto !important;
+  min-width:112px !important;
+  height:45px !important;
+  min-height:45px !important;
+
+  padding:0 21px !important;
+  margin:0 !important;
+
+  border:0 !important;
+  border-radius:999px !important;
+
+  background:#b77b20 !important;
+  background-color:#b77b20 !important;
+
+  color:#ffffff !important;
+  font-family:'Montserrat', Arial, sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  text-align:center !important;
+  text-decoration:none !important;
+  white-space:nowrap !important;
+
+  opacity:1 !important;
+  visibility:visible !important;
+
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+
+  transform:none !important;
+
+  transition:
+    background-color .25s ease !important,
+    background .25s ease !important,
+    color .25s ease !important,
+    transform .25s ease !important,
+    box-shadow .25s ease !important;
+}
+
+/* Estado normal */
+#mainMenu > a.header-button:link,
+#mainMenu > a.header-button:visited{
+  background:#b77b20 !important;
+  background-color:#b77b20 !important;
+  color:#ffffff !important;
+}
+
+/* Estado al pasar el mouse */
+#mainMenu > a.header-button:hover,
+#mainMenu > a.header-button:focus-visible{
+  background:#000000 !important;
+  background-color:#000000 !important;
+  color:#ffffff !important;
+
+  transform:translateY(-2px) !important;
+
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+  outline:none !important;
+}
+
+/* Evita que reglas genéricas del menú le agreguen subrayado */
+#mainMenu > a.header-button::after{
+  content:none !important;
+  display:none !important;
+}
+
+@media(max-width:650px){
+  #mainMenu > a.header-button{
+    width:100% !important;
+    min-width:0 !important;
+    height:42px !important;
+    min-height:42px !important;
+    margin:10px 0 4px !important;
+    padding:0 15px !important;
+    background:#b77b20 !important;
+    background-color:#b77b20 !important;
+  }
+
+  #mainMenu > a.header-button:hover{
+    background:#000000 !important;
+    background-color:#000000 !important;
+  }
+}
+</style>
+
 </head>
 
 
 <body>
 
-
-  <!-- =========================================
-       HEADER
-       ========================================= -->
-
   <header>
+  <nav class="nav">
 
-    <nav class="nav">
+    <a href="index.html" aria-label="Baby Golden Perú">
+      <img src="BABY%20GOLDEN.png" alt="Baby Golden Perú" class="logo">
+    </a>
 
+    <button
+      type="button"
+      class="mobile-menu-toggle"
+      id="mobileMenuToggle"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="mainMenu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-      <a
-        href="index.html"
-        aria-label="Baby Golden Perú"
-      >
+    <div class="menu" id="mainMenu">
 
-        <img
-          src="BABY%20GOLDEN.png"
-          alt="Baby Golden Perú"
-          class="logo"
-        >
+      <a href="index.html">INICIO</a>
+      <a href="beneficios.html">BENEFICIOS</a>
+      <a href="index.html#historias">HISTORIAS DE ORO</a>
+      <a href="contacto.html">CONTACTO</a>
+      <a href="tienda.html" class="header-button">TIENDA</a>
 
-      </a>
+      <div class="nav-actions" aria-label="Accesos rápidos">
 
-
-      <div class="menu">
-
-
-        <a href="index.html">
-          INICIO
+        <a class="icon-button" href="index.html" aria-label="Buscar" title="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m16 16 4 4"></path>
+          </svg>
         </a>
 
-
-        <a href="tienda.html">
-          TIENDA
+        <a class="icon-button cart-button" href="tienda.html" aria-label="Carrito" title="Carrito">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
+            <circle cx="10" cy="20" r="1"></circle>
+            <circle cx="17" cy="20" r="1"></circle>
+          </svg>
         </a>
 
-
-        <a href="index.html#baby-golden-id">
-          BABY GOLDEN ID
+        <a class="icon-button" href="cuenta.html" aria-label="Mi cuenta" title="Mi cuenta">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5"></circle>
+            <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
+          </svg>
         </a>
-
-
-        <a href="contacto.html">
-          CONTACTO
-        </a>
-
-
-        <a
-          href="registro.html"
-          class="header-button"
-        >
-          REGISTRAR MI PERRITO
-        </a>
-
-
-        <div
-          class="nav-actions"
-          aria-label="Accesos rápidos"
-        >
-
-
-          <!-- CARRITO -->
-
-          <button
-            class="icon-button"
-            id="openCart"
-            type="button"
-            aria-label="Abrir carrito"
-          >
-
-            <svg viewBox="0 0 24 24">
-
-              <path
-                d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"
-              ></path>
-
-              <circle
-                cx="10"
-                cy="20"
-                r="1"
-              ></circle>
-
-              <circle
-                cx="17"
-                cy="20"
-                r="1"
-              ></circle>
-
-            </svg>
-
-
-            <span
-              class="cart-count"
-              id="cartCount"
-              hidden
-            >
-              0
-            </span>
-
-          </button>
-
-
-          <!-- MI CUENTA -->
-
-          <a
-            class="icon-button"
-            href="micuenta.html"
-            aria-label="Ir a Mi cuenta"
-          >
-
-            <svg viewBox="0 0 24 24">
-
-              <circle
-                cx="12"
-                cy="8"
-                r="3.5"
-              ></circle>
-
-              <path
-                d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"
-              ></path>
-
-            </svg>
-
-          </a>
-
-
-        </div>
 
       </div>
-
-    </nav>
-
-  </header>
-
-
-
-  <!-- =========================================
-       CARRITO
-       ========================================= -->
-
-  <aside
-    class="cart-drawer"
-    id="cartDrawer"
-    aria-label="Carrito de compras"
-    aria-hidden="true"
-  >
-
-
-    <div class="cart-drawer-header">
-
-
-      <div>
-
-        <p class="panel-kicker">
-          TU SELECCIÓN
-        </p>
-
-        <h2>
-          Carrito
-        </h2>
-
-      </div>
-
-
-      <button
-        class="panel-close"
-        type="button"
-        id="closeCart"
-        aria-label="Cerrar carrito"
-      >
-        ×
-      </button>
-
-
     </div>
+  </nav>
+</header>
 
 
-    <div
-      class="cart-items"
-      id="cartItems"
-    ></div>
+  <main>
 
-
-    <div class="cart-summary">
-
-
-      <div>
-
-        <span>
-          Total
-        </span>
-
-        <strong id="cartTotal">
-          S/ 0.00
-        </strong>
-
-      </div>
-
-
-      <a
-        class="cart-checkout"
-        href="micuenta.html"
-        id="cartCheckout"
-      >
-        CONTINUAR A MI CUENTA
-      </a>
-
-
-      <p>
-        Desde Mi cuenta podrás crear tu orden
-        e iniciar el proceso de compra.
-      </p>
-
-
+    <div class="label">
+      FINALIZAR COMPRA
     </div>
-
-
-  </aside>
-
-
-  <div
-    class="cart-backdrop"
-    id="cartBackdrop"
-    hidden
-  ></div>
-
-
-
-  <!-- =========================================
-       PRESENTACIÓN
-       ========================================= -->
-
-  <section class="hero">
-
-
-    <div class="hero-label">
-      BABY GOLDEN PERÚ
-    </div>
-
 
     <h1>
-
-      Estamos para
-      <span>ayudarte.</span>
-
+      Tus datos y tu pedido
     </h1>
 
-
-    <p>
-
-      ¿Tienes alguna consulta sobre nuestros
-      productos, Baby Golden ID o quieres
-      comunicarte con nosotros?
-      Escríbenos. Estaremos encantados
-      de atenderte.
-
+    <p class="intro">
+      Revisa tu selección y completa tus datos para continuar.
     </p>
 
 
-  </section>
+    <div class="checkout-grid">
 
 
-
-  <!-- =========================================
-       CONTACTO
-       ========================================= -->
-
-  <main class="contacto">
-
-
-    <section class="contact-grid">
-
-
-      <!-- DATOS -->
-
-      <div class="card">
-
-
-        <div class="card-label">
-          INFORMACIÓN
-        </div>
-
+      <section class="box">
 
         <h2>
-          Contáctanos
+          Datos del comprador
         </h2>
 
+        <form id="checkoutForm">
 
-        <div class="contact-item">
+          <div class="field-grid">
 
-          <strong>
-            CORREO
-          </strong>
+            <div class="field">
 
-          <a
-            href="mailto:babygoldeperu@gmail.com"
+              <label for="nombre">
+                Nombre <span class="required">*</span>
+              </label>
+
+              <input
+                id="nombre"
+                name="nombre"
+                type="text"
+                autocomplete="given-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="apellidos">
+                Apellidos <span class="required">*</span>
+              </label>
+
+              <input
+                id="apellidos"
+                name="apellidos"
+                type="text"
+                autocomplete="family-name"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="email">
+                Correo electrónico <span class="required">*</span>
+              </label>
+
+              <input
+                id="email"
+                name="email"
+                type="email"
+                autocomplete="email"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="telefono">
+                Teléfono / WhatsApp <span class="required">*</span>
+              </label>
+
+              <input
+                id="telefono"
+                name="telefono"
+                type="tel"
+                autocomplete="tel"
+                required
+              >
+
+            </div>
+
+
+            <div class="field full">
+
+              <label for="direccion">
+                Dirección <span class="required">*</span>
+              </label>
+
+              <input
+                id="direccion"
+                name="direccion"
+                type="text"
+                autocomplete="street-address"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="distrito">
+                Distrito <span class="required">*</span>
+              </label>
+
+              <input
+                id="distrito"
+                name="distrito"
+                type="text"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="provincia">
+                Provincia <span class="required">*</span>
+              </label>
+
+              <input
+                id="provincia"
+                name="provincia"
+                type="text"
+                value="Lima"
+                required
+              >
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="departamento">
+                Departamento <span class="required">*</span>
+              </label>
+
+              <input
+                id="departamento"
+                name="departamento"
+                type="text"
+                value="Lima"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="formError"
+            class="error"
+          ></div>
+
+
+          <button
+            type="submit"
+            class="continue-button"
+            id="continueButton"
           >
-            babygoldeperu@gmail.com
-          </a>
+            CONTINUAR AL PAGO
+          </button>
 
-        </div>
+          <p class="notice">
+            En este paso todavía no se realizará ningún cobro.
+            Primero verificaremos el pedido y luego conectaremos
+            el proceso de pago con Culqi.
+          </p>
+
+        </form>
+
+      </section>
 
 
-        <div class="contact-item">
+      <aside class="box">
 
-          <strong>
-            TELÉFONO / WHATSAPP
-          </strong>
+        <h2>
+          Resumen del pedido
+        </h2>
 
-          <a
-            href="tel:+51936078406"
+        <div id="summary"></div>
+
+        <div
+          id="summaryTotal"
+          class="total-row"
+        >
+
+          <span class="total-label">
+            Total
+          </span>
+
+          <span
+            id="total"
+            class="total-price"
           >
-            +51 936 078 406
-          </a>
-
-        </div>
-
-
-        <div class="contact-item">
-
-          <strong>
-            DIRECCIÓN
-          </strong>
-
-          <span>
-            Calle Putumayo N° 176
-            <br>
-            San Miguel, Lima, Perú
+            S/ 0.00
           </span>
 
         </div>
 
-
         <a
-          class="whatsapp"
-          href="https://wa.me/51936078406"
-          target="_blank"
-          rel="noopener"
+          href="tienda.html"
+          class="back-link"
         >
-          ESCRIBIR POR WHATSAPP
+          ← VOLVER A LA TIENDA
         </a>
 
-
-      </div>
-
+      </aside>
 
 
-      <!-- REDES -->
-
-      <div class="card">
-
-
-        <div class="card-label">
-          COMUNIDAD
-        </div>
-
-
-        <h2>
-          Síguenos
-        </h2>
-
-
-        <div class="socials">
-
-
-          <a
-            class="social"
-            href="https://www.instagram.com/babygoldenperu/"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <span>
-              Instagram
-            </span>
-
-            <span>
-              @babygoldenperu
-            </span>
-
-          </a>
-
-
-          <a
-            class="social"
-            href="https://www.tiktok.com/@baby.golden.per"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <span>
-              TikTok
-            </span>
-
-            <span>
-              @baby.golden.per
-            </span>
-
-          </a>
-
-
-          <a
-            class="social"
-            href="https://www.facebook.com/babygoldenperu"
-            target="_blank"
-            rel="noopener"
-          >
-
-            <span>
-              Facebook
-            </span>
-
-            <span>
-              @babygoldenperu
-            </span>
-
-          </a>
-
-
-        </div>
-
-
-      </div>
-
-
-    </section>
-
-
-
-    <!-- =========================================
-         MAPA
-         ========================================= -->
-
-    <section class="map-card">
-
-
-      <div class="map-header">
-
-
-        <div class="card-label">
-          ENCUÉNTRANOS
-        </div>
-
-
-        <h2>
-          Nuestra ubicación
-        </h2>
-
-
-        <p>
-
-          Calle Putumayo N° 176,
-          San Miguel, Lima, Perú.
-
-        </p>
-
-
-        <a
-          class="map-button"
-          href="https://www.google.com/maps/search/?api=1&query=Calle+Putumayo+176,+San+Miguel,+Lima,+Peru"
-          target="_blank"
-          rel="noopener"
-        >
-          ABRIR EN GOOGLE MAPS
-        </a>
-
-
-      </div>
-
-
-      <iframe
-        class="map"
-        src="https://www.google.com/maps?q=Calle%20Putumayo%20176%2C%20San%20Miguel%2C%20Lima%2C%20Peru&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        title="Ubicación de Baby Golden Perú"
-      ></iframe>
-
-
-    </section>
-
+    </div>
 
   </main>
 
 
-
-  <!-- =========================================
-       FOOTER
-       ========================================= -->
-
   <footer>
 
+  <img
+    src="BABY%20GOLDEN.png"
+    alt="Baby Golden Perú"
+    class="footer-logo"
+  >
 
-    <img
-      src="BABY%20GOLDEN.png"
-      alt="Baby Golden Perú"
-    >
+  <div class="footer-brand">
+    BABY GOLDEN PERÚ
+  </div>
 
+  <p>
+    Comunidad · Tenencia responsable · Baby Golden ID
+  </p>
 
-    <div class="footer-brand">
-      BABY GOLDEN PERÚ
-    </div>
+  <p>
+    ♥ Una pata a la vez, construimos una comunidad mejor.
+  </p>
 
+</footer>
 
-    <p>
-      Comunidad · Tenencia responsable · Baby Golden ID
-    </p>
-
-
-    <p>
-      ♥ Una pata a la vez, construimos una comunidad mejor.
-    </p>
-
-
-  </footer>
-
-
-
-  <!-- =========================================
-       CARRITO — JAVASCRIPT
-       ========================================= -->
 
   <script>
-
-    /* =========================================
-       PRODUCTOS
-       ========================================= */
-
-    const products = {
-
-      BLACK: {
-        name: "Black ID",
-        price: 36.90
-      },
-
-      PREMIUM: {
-        name: "Premium ID",
-        price: 30.00
-      }
-
-    };
-
-
-    /* =========================================
-       CARRITO
-       ========================================= */
 
     const cartKey =
       "babyGoldenCart";
 
 
-    function getCart() {
+    const products = {
 
-      try {
+      BLACK: {
+        name: "Black ID",
+        price: 36.90,
+        image: "black.jpeg"
+      },
 
-        return JSON.parse(
-          localStorage.getItem(
-            cartKey
-          )
-        ) || [];
+      PREMIUM: {
+        name: "Premium ID",
+        price: 30.00,
+        image: "premium.jpeg"
+      },
 
-      } catch {
+      BANDANA: {
+        name: "Bandana Baby Golden Perú",
+        price: 34.90,
+        image: "bandana.jpeg"
+      },
 
-        return [];
+      POLO: {
+        name: "Polo Baby Golden Perú",
+        price: 39.90,
+        image: "polo.jpeg"
+      },
+
+      GORRO: {
+        name: "Gorro Baby Golden Perú",
+        price: 79.90,
+        image: "gorro.jpeg"
+      }
+
+    };
+
+
+    function getCart(){
+
+      try{
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              cartKey
+            )
+          );
+
+
+        if(
+          saved &&
+          typeof saved === "object" &&
+          !Array.isArray(saved)
+        ){
+
+          return saved;
+
+        }
+
+
+        if(Array.isArray(saved)){
+
+          const converted = {};
+
+
+          saved.forEach(id => {
+
+            if(products[id]){
+
+              converted[id] =
+                (
+                  Number(
+                    converted[id]
+                  ) || 0
+                ) + 1;
+
+            }
+
+          });
+
+
+          localStorage.setItem(
+            cartKey,
+            JSON.stringify(
+              converted
+            )
+          );
+
+
+          return converted;
+
+        }
+
+
+        return {};
+
+      } catch{
+
+        return {};
 
       }
 
     }
 
 
-    function saveCart(
-      cart
-    ) {
+    function escapeHtml(value){
 
-      localStorage.setItem(
-        cartKey,
-        JSON.stringify(
-          cart
-        )
-      );
+      return String(
+        value ?? ""
+      )
+      .replace(/&/g,"&amp;")
+      .replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;")
+      .replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
 
     }
 
 
-    /* =========================================
-       ELEMENTOS
-       ========================================= */
-
-    const cartCount =
-      document.getElementById(
-        "cartCount"
-      );
-
-
-    const cartItems =
-      document.getElementById(
-        "cartItems"
-      );
-
-
-    const cartTotal =
-      document.getElementById(
-        "cartTotal"
-      );
-
-
-    const cartDrawer =
-      document.getElementById(
-        "cartDrawer"
-      );
-
-
-    const cartBackdrop =
-      document.getElementById(
-        "cartBackdrop"
-      );
-
-
-    /* =========================================
-       MOSTRAR CARRITO
-       ========================================= */
-
-    function renderCart() {
+    function renderSummary(){
 
       const cart =
         getCart();
 
 
-      cartCount.hidden =
-        cart.length === 0;
-
-
-      cartCount.textContent =
-        cart.length;
-
-
-      const total =
-        cart.reduce(
-          (
-            sum,
-            id
-          ) => {
-
-            return sum +
-              (
-                products[id]?.price ||
-                0
-              );
-
-          },
-          0
+      const ids =
+        Object.keys(cart)
+        .filter(
+          id =>
+            products[id] &&
+            Number(cart[id]) > 0
         );
 
 
-      cartTotal.textContent =
-        "S/ " +
-        total.toFixed(2);
+      const summary =
+        document.getElementById(
+          "summary"
+        );
 
 
-      if (
-        cart.length === 0
-      ) {
+      const totalElement =
+        document.getElementById(
+          "total"
+        );
 
-        cartItems.innerHTML = `
-          <p class="cart-empty">
+
+      const button =
+        document.getElementById(
+          "continueButton"
+        );
+
+
+      if(!ids.length){
+
+        summary.innerHTML = `
+          <div class="empty">
             Tu carrito está vacío.
-            Agrega una Baby Golden ID
-            para continuar.
-          </p>
+            <br><br>
+            Regresa a la tienda para agregar productos.
+          </div>
         `;
 
-      } else {
 
-        cartItems.innerHTML =
-          cart
-            .map(
-              (
-                id,
-                index
-              ) => {
-
-                const product =
-                  products[id];
+        totalElement.textContent =
+          "S/ 0.00";
 
 
-                return `
+        button.disabled =
+          true;
 
-                  <div class="cart-item">
 
-                    <div>
-
-                      <h3>
-                        ${product.name}
-                      </h3>
-
-                      <p>
-                        Baby Golden Perú ·
-                        S/ ${product.price.toFixed(2)}
-                      </p>
-
-                    </div>
-
-                    <button
-                      class="remove-item"
-                      type="button"
-                      data-remove-item="${index}"
-                    >
-                      QUITAR
-                    </button>
-
-                  </div>
-
-                `;
-
-              }
-            )
-            .join("");
+        return;
 
       }
 
 
-      document
-        .querySelectorAll(
-          "[data-remove-item]"
-        )
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const cart =
-                  getCart();
+      let total = 0;
 
 
-                cart.splice(
-                  Number(
-                    this.dataset.removeItem
-                  ),
-                  1
-                );
+      summary.innerHTML =
+        ids.map(id => {
+
+          const product =
+            products[id];
+
+          const quantity =
+            Number(cart[id]);
+
+          const subtotal =
+            product.price * quantity;
+
+          total += subtotal;
 
 
-                saveCart(
-                  cart
-                );
+          return `
+
+            <div class="summary-item">
+
+              <img
+                class="summary-image"
+                src="${escapeHtml(product.image)}"
+                alt="${escapeHtml(product.name)}"
+              >
+
+              <div>
+
+                <p class="summary-name">
+                  ${escapeHtml(product.name)}
+                </p>
+
+                <p class="summary-meta">
+                  Cantidad: ${quantity}
+                  <br>
+                  S/ ${product.price.toFixed(2)}
+                  c/u
+                </p>
+
+              </div>
+
+              <div class="summary-price">
+                S/ ${subtotal.toFixed(2)}
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("");
 
 
-                renderCart();
-
-              }
-            );
-
-          }
-        );
+      totalElement.textContent =
+        "S/ " + total.toFixed(2);
 
 
-      const checkout =
-        document.getElementById(
-          "cartCheckout"
-        );
-
-
-      checkout.classList.toggle(
-        "is-disabled",
-        cart.length === 0
-      );
-
-
-      checkout.href =
-        cart.length
-
-          ? "micuenta.html?carrito=" +
-            encodeURIComponent(
-              cart.join(",")
-            )
-
-          : "micuenta.html";
-
-    }
-
-
-    /* =========================================
-       ABRIR CARRITO
-       ========================================= */
-
-    function openCart() {
-
-      cartDrawer.classList.add(
-        "is-open"
-      );
-
-
-      cartDrawer.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
-
-      cartBackdrop.hidden =
+      button.disabled =
         false;
 
-
-      renderCart();
-
     }
 
 
-    /* =========================================
-       CERRAR CARRITO
-       ========================================= */
-
-    function closeCart() {
-
-      cartDrawer.classList.remove(
-        "is-open"
-      );
-
-
-      cartDrawer.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-
-      cartBackdrop.hidden =
-        true;
-
-    }
-
-
-    /* =========================================
-       BOTONES
-       ========================================= */
-
     document
-      .getElementById(
-        "openCart"
-      )
+      .getElementById("checkoutForm")
       .addEventListener(
-        "click",
-        openCart
+        "submit",
+        function(event){
+
+          event.preventDefault();
+
+
+          const formError =
+            document.getElementById(
+              "formError"
+            );
+
+
+          const cart =
+            getCart();
+
+
+          const hasProducts =
+            Object.keys(cart)
+            .some(
+              id =>
+                products[id] &&
+                Number(cart[id]) > 0
+            );
+
+
+          if(!hasProducts){
+
+            formError.textContent =
+              "Tu carrito está vacío.";
+
+            return;
+
+          }
+
+
+          /*
+            Por ahora solo validamos y guardamos
+            los datos localmente para probar el flujo.
+
+            Todavía NO se crea una orden en Supabase
+            y todavía NO se realiza ningún cobro.
+          */
+
+          const formData =
+            new FormData(
+              this
+            );
+
+
+          const customer = {
+
+            nombre:
+              formData.get("nombre"),
+
+            apellidos:
+              formData.get("apellidos"),
+
+            email:
+              formData.get("email"),
+
+            telefono:
+              formData.get("telefono"),
+
+            direccion:
+              formData.get("direccion"),
+
+            distrito:
+              formData.get("distrito"),
+
+            provincia:
+              formData.get("provincia"),
+
+            departamento:
+              formData.get("departamento")
+
+          };
+
+
+          localStorage.setItem(
+            "babyGoldenCheckout",
+            JSON.stringify(
+              customer
+            )
+          );
+
+
+          formError.textContent =
+            "";
+
+
+          alert(
+            "Datos validados correctamente. El siguiente paso será crear la orden y conectar Culqi."
+          );
+
+        }
       );
 
 
-    document
-      .getElementById(
-        "closeCart"
-      )
-      .addEventListener(
-        "click",
-        closeCart
-      );
-
-
-    cartBackdrop.addEventListener(
-      "click",
-      closeCart
-    );
-
-
-    /* =========================================
-       INICIAR
-       ========================================= */
-
-    renderCart();
+    renderSummary();
 
   </script>
 
+
+<script id="index-header-menu-checkout">
+(function(){
+  const nav = document.querySelector(".nav");
+  const toggle = document.getElementById("mobileMenuToggle");
+  const menu = document.getElementById("mainMenu");
+
+  if(!nav || !toggle || !menu) return;
+
+  function closeMobileMenu(){
+    nav.classList.remove("menu-open");
+    toggle.classList.remove("is-open");
+    toggle.setAttribute("aria-expanded","false");
+    toggle.setAttribute("aria-label","Abrir menú de navegación");
+  }
+
+  toggle.addEventListener("click", function(event){
+    event.stopPropagation();
+
+    const open = !nav.classList.contains("menu-open");
+
+    nav.classList.toggle("menu-open", open);
+    toggle.classList.toggle("is-open", open);
+    toggle.setAttribute("aria-expanded", String(open));
+    toggle.setAttribute(
+      "aria-label",
+      open ? "Cerrar menú de navegación" : "Abrir menú de navegación"
+    );
+  });
+
+  menu.querySelectorAll("a").forEach(function(link){
+    link.addEventListener("click", closeMobileMenu);
+  });
+
+  document.addEventListener("click", function(event){
+    if(nav.classList.contains("menu-open") && !nav.contains(event.target)){
+      closeMobileMenu();
+    }
+  });
+
+  document.addEventListener("keydown", function(event){
+    if(event.key === "Escape") closeMobileMenu();
+  });
+
+  window.addEventListener("resize", function(){
+    if(window.innerWidth > 650) closeMobileMenu();
+  });
+})();
+</script>
 
 </body>
 
