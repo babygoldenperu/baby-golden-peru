@@ -3044,151 +3044,741 @@
 
 <script>
 /* =========================================================
-   BABY GOLDEN — CONTENIDO EDITABLE DESDE SUPABASE
-   Compatible con site_gallery:
-   slot + imagen_url + title + caption + published
+   BABY GOLDEN PERÚ — INDEX 100% EDITABLE
+   Fuente: Supabase
+   Tabla: site_content
+   Tabla: site_gallery
 ========================================================= */
-(function(){
+(function () {
 
   const SB_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
   const SB_KEY = "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
 
- const STORY_SLOTS = [
-  "historia_1",
-  "historia_2",
-  "historia_3",
-  "historia_4",
-  "historia_5",
-  "historia_6",
-  "historia_7",
-  "historia_8",
-  "historia_9",
-  "historia_10",
-  "historia_11",
-  "historia_12"
-];
+  const STORY_SLOTS = Array.from(
+    { length: 12 },
+    (_, i) => `historia_${i + 1}`
+  );
 
-  function setText(id,value){
-    const el=document.getElementById(id);
-    if(el && value !== null && value !== undefined && value !== ""){
-      el.textContent=value;
+  function text(selector, value) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) return;
+
+    const el = document.querySelector(selector);
+
+    if (el) {
+      el.textContent = value;
     }
   }
 
-  function setFamilyContent(value,title){
-    if(value){
-      const el=document.querySelector(title ? ".family-statement h2" : ".family-statement p");
-      if(el) el.textContent=value;
+  function html(selector, value) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) return;
+
+    const el = document.querySelector(selector);
+
+    if (el) {
+      el.innerHTML = value;
     }
   }
 
-  async function loadEditableContent(){
+  function attr(selector, attribute, value) {
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) return;
 
-    if(!window.supabase) return;
+    const el = document.querySelector(selector);
 
-    try{
+    if (el) {
+      el.setAttribute(attribute, value);
+    }
+  }
 
-      const sb=window.supabase.createClient(SB_URL,SB_KEY);
+  function money(value) {
 
-      /* =========================
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) return;
+
+    const number = Number(
+      String(value)
+        .replace("S/", "")
+        .replace(",", ".")
+        .trim()
+    );
+
+    if (Number.isNaN(number)) return;
+
+    return `S/ ${number.toFixed(2)}`;
+  }
+
+  async function cargarIndexEditable() {
+
+    if (!window.supabase) {
+      console.warn("Supabase no está disponible.");
+      return;
+    }
+
+    try {
+
+      const sb =
+        window.supabase.createClient(
+          SB_URL,
+          SB_KEY
+        );
+
+      /* =====================================================
          CONTENIDO GENERAL
-      ========================= */
+      ===================================================== */
 
-      const contentResult=await sb
+      const {
+        data: rows,
+        error
+      } = await sb
         .from("site_content")
-        .select("key,value");
+.select("clave,valor");
 
-      if(!contentResult.error && contentResult.data){
-
-        const content=Object.fromEntries(
-          contentResult.data.map(item=>[item.key,item.value])
+      if (error) {
+        console.warn(
+          "No se pudo cargar site_content:",
+          error.message
         );
-
-        setText("siteHeroKicker",content.hero_kicker);
-        setText("siteHeroLine1",content.hero_line1);
-        setText("siteHeroLine2",content.hero_line2);
-        setText("siteHeroLine3",content.hero_line3);
-        setText("siteHeroSubtitle",content.hero_subtitle);
-
-        if(content.hero_image){
-          const hero=document.getElementById("siteHeroImage");
-          if(hero) hero.src=content.hero_image;
-        }
-
-        setFamilyContent(content.family_title,true);
-        setFamilyContent(content.family_text,false);
       }
 
-      /* =========================
-         HISTORIAS DE ORO — 6 FOTOS
-      ========================= */
+      const content = Object.fromEntries(
+  (rows || []).map(row => [
+    row.clave,
+    row.valor
+  ])
+);
 
-      const galleryResult=await sb
-        .from("site_gallery")
-        .select("slot,imagen_url,title,caption,published")
-        .in("slot",STORY_SLOTS)
-        .eq("published",true)
-        .order("slot",{ascending:true});
 
-      if(galleryResult.error){
-        console.warn("Historias de Oro no disponibles:",galleryResult.error.message);
-        return;
-      }
+      /* =====================================================
+         HERO
+      ===================================================== */
 
-      const rows=galleryResult.data || [];
+      text(
+        "#siteHeroKicker",
+        content.hero_kicker
+      );
 
-      rows.forEach(item=>{
+      text(
+        "#siteHeroLine1",
+        content.hero_line1
+      );
 
-        const numero=Number(
-          String(item.slot || "").replace("historia_","")
+      text(
+        "#siteHeroLine2",
+        content.hero_line2
+      );
+
+      text(
+        "#siteHeroLine3",
+        content.hero_line3
+      );
+
+      text(
+        "#siteHeroLine4",
+        content.hero_line4
+      );
+
+      html(
+        "#siteHeroSubtitle",
+        content.hero_subtitle
+      );
+
+      attr(
+        "#siteHeroImage",
+        "src",
+        content.hero_image
+      );
+
+
+      /* =====================================================
+         COMUNIDAD
+      ===================================================== */
+
+      text(
+        ".community-label",
+        content.community_label
+      );
+
+      text(
+        ".community h2",
+        content.community_title
+      );
+
+      const communityParagraphs =
+        document.querySelectorAll(
+          ".community-copy p"
         );
 
-        if(!numero || numero<1 || numero>12) return;
+      if (
+        content.community_text_1 &&
+        communityParagraphs[0]
+      ) {
+        communityParagraphs[0].innerHTML =
+          content.community_text_1;
+      }
 
-        const img=document.getElementById("storyPhoto"+numero);
-        const slide=img ? img.closest(".story-slide") : null;
-        const label=slide ? slide.querySelector(".story-slide-label") : null;
+      if (
+        content.community_text_2 &&
+        communityParagraphs[1]
+      ) {
+        communityParagraphs[1].innerHTML =
+          content.community_text_2;
+      }
 
-        if(img && item.imagen_url){
-          img.src=item.imagen_url;
-          img.alt=item.title || item.caption || "Historia de Oro · Baby Golden Perú";
-          img.dataset.remote="true";
+      if (
+        content.community_text_3 &&
+        communityParagraphs[2]
+      ) {
+        communityParagraphs[2].innerHTML =
+          content.community_text_3;
+      }
+
+
+      /* =====================================================
+         VIDEO
+      ===================================================== */
+
+      const video =
+        document.querySelector(
+          ".community-video video"
+        );
+
+      if (
+        video &&
+        content.community_video
+      ) {
+
+        const source =
+          video.querySelector("source");
+
+        if (source) {
+          source.src =
+            content.community_video;
+        } else {
+          video.src =
+            content.community_video;
         }
 
-        if(label){
-          label.textContent=item.title || item.caption || "HISTORIAS DE ORO";
+        video.load();
+      }
+
+      attr(
+        ".community-video video",
+        "poster",
+        content.community_video_poster
+      );
+
+
+      /* =====================================================
+         NUESTRA ESENCIA
+      ===================================================== */
+
+      text(
+        ".family-statement small",
+        content.family_kicker
+      );
+
+      text(
+        ".family-statement h2",
+        content.family_title
+      );
+
+      text(
+        ".family-statement p",
+        content.family_text
+      );
+
+
+      /* =====================================================
+         BABY GOLDEN ID
+      ===================================================== */
+
+      text(
+        "#baby-golden-id",
+        content.id_title
+      );
+
+      const idSection =
+        document.querySelector(
+          "#tienda .section-heading"
+        );
+
+      if (idSection) {
+
+        const paragraphs =
+          idSection.querySelectorAll("p");
+
+        if (
+          content.id_description &&
+          paragraphs[0]
+        ) {
+          paragraphs[0].innerHTML =
+            content.id_description;
         }
 
-        if(slide){
-          slide.dataset.loaded="true";
-          slide.dataset.slot=item.slot;
-          slide.dataset.title=item.title || "";
-          slide.dataset.description=item.caption || "";
+        if (
+          content.id_intro &&
+          paragraphs[1]
+        ) {
+          paragraphs[1].innerHTML =
+            content.id_intro;
         }
-      });
+      }
 
-      /*
-         Si una fila existe pero no tiene imagen, mantenemos la tarjeta
-         visible con su imagen local de respaldo. Así la página nunca
-         queda rota si Supabase tarda en responder.
-      */
 
-      document.querySelectorAll(".story-slide").forEach((slide,index)=>{
-        if(!slide.dataset.loaded){
-          slide.dataset.loaded="fallback";
+      /* =====================================================
+         BLACK ID
+      ===================================================== */
+
+      const black =
+        document.querySelector(
+          ".id-product.black"
+        );
+
+      if (black) {
+
+        text(
+          ".id-product-body small",
+          content.black_label
+        );
+
+        text(
+          ".id-product-body h3",
+          content.black_name
+        );
+
+        const description =
+          black.querySelector(
+            ".id-product-body p"
+          );
+
+        if (
+          description &&
+          content.black_description
+        ) {
+          description.innerHTML =
+            content.black_description;
         }
-      });
 
-    }catch(error){
-      console.warn("Contenido editable no disponible:",error);
+        const price =
+          black.querySelector(
+            ".product-price"
+          );
+
+        if (
+          price &&
+          content.black_price
+        ) {
+          price.textContent =
+            money(content.black_price);
+        }
+
+        const image =
+          black.querySelector(
+            ".id-product-image img"
+          );
+
+        if (
+          image &&
+          content.black_image
+        ) {
+          image.src =
+            content.black_image;
+        }
+      }
+
+
+      /* =====================================================
+         PREMIUM ID
+      ===================================================== */
+
+      const premium =
+        document.querySelector(
+          ".id-product.premium"
+        );
+
+      if (premium) {
+
+        const small =
+          premium.querySelector(
+            ".id-product-body small"
+          );
+
+        const title =
+          premium.querySelector(
+            ".id-product-body h3"
+          );
+
+        const description =
+          premium.querySelector(
+            ".id-product-body p"
+          );
+
+        const price =
+          premium.querySelector(
+            ".product-price"
+          );
+
+        const image =
+          premium.querySelector(
+            ".id-product-image img"
+          );
+
+        if (
+          small &&
+          content.premium_label
+        ) {
+          small.textContent =
+            content.premium_label;
+        }
+
+        if (
+          title &&
+          content.premium_name
+        ) {
+          title.textContent =
+            content.premium_name;
+        }
+
+        if (
+          description &&
+          content.premium_description
+        ) {
+          description.innerHTML =
+            content.premium_description;
+        }
+
+        if (
+          price &&
+          content.premium_price
+        ) {
+          price.textContent =
+            money(content.premium_price);
+        }
+
+        if (
+          image &&
+          content.premium_image
+        ) {
+          image.src =
+            content.premium_image;
+        }
+      }
+
+
+      /* =====================================================
+         BENEFICIOS
+      ===================================================== */
+
+      text(
+        ".benefits-heading small",
+        content.benefits_kicker
+      );
+
+      text(
+        ".benefits-heading h2",
+        content.benefits_title
+      );
+
+      text(
+        ".benefits-heading p",
+        content.benefits_description
+      );
+
+      const benefits =
+        document.querySelectorAll(
+          ".benefit"
+        );
+
+      benefits.forEach(
+        (benefit, index) => {
+
+          const number =
+            index + 1;
+
+          const title =
+            benefit.querySelector("h3");
+
+          const description =
+            benefit.querySelector("p");
+
+          if (
+            title &&
+            content[`benefit_${number}_title`]
+          ) {
+            title.textContent =
+              content[`benefit_${number}_title`];
+          }
+
+          if (
+            description &&
+            content[`benefit_${number}_text`]
+          ) {
+            description.innerHTML =
+              content[`benefit_${number}_text`];
+          }
+
+        }
+      );
+
+
+      /* =====================================================
+         CTA
+      ===================================================== */
+
+      text(
+        ".cta h2",
+        content.cta_title
+      );
+
+      text(
+        ".cta p",
+        content.cta_description
+      );
+
+      const ctaButton =
+        document.querySelector(
+          ".cta .button"
+        );
+
+      if (
+        ctaButton &&
+        content.cta_button
+      ) {
+        ctaButton.textContent =
+          content.cta_button;
+      }
+
+      if (
+        ctaButton &&
+        content.cta_url
+      ) {
+        ctaButton.href =
+          content.cta_url;
+      }
+
+
+      /* =====================================================
+         FOOTER
+      ===================================================== */
+
+      text(
+        ".footer-brand",
+        content.footer_brand
+      );
+
+      const footerParagraphs =
+        document.querySelectorAll(
+          "footer p"
+        );
+
+      if (
+        footerParagraphs[0] &&
+        content.footer_text_1
+      ) {
+        footerParagraphs[0].innerHTML =
+          content.footer_text_1;
+      }
+
+      if (
+        footerParagraphs[1] &&
+        content.footer_text_2
+      ) {
+        footerParagraphs[1].innerHTML =
+          content.footer_text_2;
+      }
+
+      attr(
+        "footer img",
+        "src",
+        content.footer_logo
+      );
+
+
+      /* =====================================================
+         HISTORIAS DE ORO — 12
+      ===================================================== */
+
+      const gallery =
+        await sb
+          .from("site_gallery")
+          .select(
+            "slot,imagen_url,title,caption,published"
+          )
+          .in(
+            "slot",
+            STORY_SLOTS
+          )
+          .order(
+            "slot",
+            {
+              ascending: true
+            }
+          );
+
+      if (
+        gallery.error
+      ) {
+
+        console.warn(
+          "No se pudieron cargar las Historias de Oro:",
+          gallery.error.message
+        );
+
+      } else {
+
+        (gallery.data || [])
+          .forEach(item => {
+
+            const number =
+              Number(
+                String(item.slot)
+                  .replace(
+                    "historia_",
+                    ""
+                  )
+              );
+
+            if (
+              number < 1 ||
+              number > 12
+            ) {
+              return;
+            }
+
+            const image =
+              document.getElementById(
+                "storyPhoto" +
+                number
+              );
+
+            const slide =
+              image?.closest(
+                ".story-slide"
+              );
+
+            if (
+              image &&
+              item.imagen_url
+            ) {
+
+              image.src =
+                item.imagen_url;
+
+              image.alt =
+                item.title ||
+                "Historia de Oro · Baby Golden Perú";
+
+            }
+
+            if (slide) {
+
+              const label =
+                slide.querySelector(
+                  ".story-slide-label"
+                );
+
+              if (
+                label &&
+                item.title
+              ) {
+                label.textContent =
+                  item.title;
+              }
+
+              slide.dataset.title =
+                item.title || "";
+
+              slide.dataset.description =
+                item.caption || "";
+
+              slide.dataset.loaded =
+                "true";
+
+              slide.dataset.published =
+                item.published
+                  ? "true"
+                  : "false";
+
+              /*
+                Si la fila existe y está
+                despublicada, ocultamos
+                la historia.
+              */
+
+              if (
+                item.published === false
+              ) {
+                slide.style.display =
+                  "none";
+              } else {
+                slide.style.display =
+                  "";
+              }
+
+            }
+
+          });
+
+      }
+
+
+      /* =====================================================
+         REINICIAR VIDEO / IMÁGENES
+      ===================================================== */
+
+      document
+        .querySelectorAll(
+          "img[data-remote]"
+        )
+        .forEach(
+          img => img.dataset.remote = "true"
+        );
+
+
+      console.log(
+        "Baby Golden Perú: INDEX actualizado desde Supabase."
+      );
+
+    } catch (error) {
+
+      console.warn(
+        "INDEX editable:",
+        error
+      );
+
     }
 
   }
 
-  if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",loadEditableContent);
-  }else{
-    loadEditableContent();
+
+  if (
+    document.readyState ===
+    "loading"
+  ) {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      cargarIndexEditable
+    );
+
+  } else {
+
+    cargarIndexEditable();
+
   }
 
 })();
