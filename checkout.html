@@ -85,12 +85,41 @@
     }
 
     .header-button{
-      padding:12px 17px;
-      border-radius:999px;
-      background:#4a3324;
-      color:#fff!important;
-    }
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
 
+  min-height:45px;
+  padding:13px 21px;
+
+  border:0;
+  border-radius:999px;
+
+  background:#b77b20;
+  color:#fff!important;
+
+  font-family:'Montserrat',sans-serif;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:1px;
+
+  text-decoration:none;
+
+  box-shadow:0 12px 28px rgba(183,123,32,.20);
+
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+}
+    }
+.header-button:hover{
+  background:#000;
+  color:#fff!important;
+  transform:translateY(-2px);
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
+}
     main{
       max-width:1150px;
       margin:auto;
