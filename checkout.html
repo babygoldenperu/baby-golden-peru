@@ -84,42 +84,47 @@
       width:100%;
     }
 
-    .header-button{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
+    
+.header-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
 
-  min-height:45px;
-  padding:13px 21px;
+  min-height:45px !important;
+  width:auto !important;
+  padding:13px 21px !important;
 
-  border:0;
-  border-radius:999px;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:999px !important;
 
-  background:#b77b20;
-  color:#fff!important;
+  background:#b77b20 !important;
+  color:#fff !important;
 
-  font-family:'Montserrat',sans-serif;
-  font-size:11px;
-  font-weight:700;
-  letter-spacing:1px;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  text-decoration:none !important;
 
-  text-decoration:none;
-
-  box-shadow:0 12px 28px rgba(183,123,32,.20);
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
 
   transition:
     background .25s ease,
     color .25s ease,
     transform .25s ease,
-    box-shadow .25s ease;
+    box-shadow .25s ease !important;
 }
-    }
+
+.menu > a.header-button:hover,
 .header-button:hover{
-  background:#000;
-  color:#fff!important;
-  transform:translateY(-2px);
-  box-shadow:0 15px 35px rgba(0,0,0,.18);
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
 }
+
     main{
       max-width:1150px;
       margin:auto;
@@ -846,6 +851,160 @@ footer p{
 }
 </style>
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+
+
+<style id="checkout-header-tienda-final">
+/* ÚLTIMA CAPA: TIENDA IGUAL A INDEX.HTML */
+.header-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:45px !important;
+  width:auto !important;
+  padding:13px 21px !important;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:999px !important;
+  background:#b77b20 !important;
+  color:#fff !important;
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  text-decoration:none !important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+  transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease !important;
+}
+
+.menu > a.header-button:hover,
+.header-button:hover{
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+}
+
+.menu > a:not(.header-button){
+  font-family:'Montserrat',Arial,sans-serif !important;
+  font-weight:700 !important;
+}
+
+@media(max-width:650px){
+  .menu > a.header-button{
+    background:#b77b20 !important;
+    color:#fff !important;
+  }
+
+  .menu > a.header-button:hover{
+    background:#000 !important;
+    color:#fff !important;
+  }
+}
+</style>
+
+
+<style id="tienda-index-exacto">
+/* =========================================================
+   TIENDA — BOTÓN EXACTO DEL HEADER MAESTRO
+   Esta regla queda al FINAL para evitar conflictos.
+   ========================================================= */
+
+#mainMenu > a.header-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  box-sizing:border-box !important;
+  width:auto !important;
+  min-width:112px !important;
+  height:45px !important;
+  min-height:45px !important;
+
+  padding:0 21px !important;
+  margin:0 !important;
+
+  border:0 !important;
+  border-radius:999px !important;
+
+  background:#b77b20 !important;
+  background-color:#b77b20 !important;
+
+  color:#ffffff !important;
+  font-family:'Montserrat', Arial, sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  line-height:1 !important;
+  text-align:center !important;
+  text-decoration:none !important;
+  white-space:nowrap !important;
+
+  opacity:1 !important;
+  visibility:visible !important;
+
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+
+  transform:none !important;
+
+  transition:
+    background-color .25s ease !important,
+    background .25s ease !important,
+    color .25s ease !important,
+    transform .25s ease !important,
+    box-shadow .25s ease !important;
+}
+
+/* Estado normal */
+#mainMenu > a.header-button:link,
+#mainMenu > a.header-button:visited{
+  background:#b77b20 !important;
+  background-color:#b77b20 !important;
+  color:#ffffff !important;
+}
+
+/* Estado al pasar el mouse */
+#mainMenu > a.header-button:hover,
+#mainMenu > a.header-button:focus-visible{
+  background:#000000 !important;
+  background-color:#000000 !important;
+  color:#ffffff !important;
+
+  transform:translateY(-2px) !important;
+
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+  outline:none !important;
+}
+
+/* Evita que reglas genéricas del menú le agreguen subrayado */
+#mainMenu > a.header-button::after{
+  content:none !important;
+  display:none !important;
+}
+
+@media(max-width:650px){
+  #mainMenu > a.header-button{
+    width:100% !important;
+    min-width:0 !important;
+    height:42px !important;
+    min-height:42px !important;
+    margin:10px 0 4px !important;
+    padding:0 15px !important;
+    background:#b77b20 !important;
+    background-color:#b77b20 !important;
+  }
+
+  #mainMenu > a.header-button:hover{
+    background:#000000 !important;
+    background-color:#000000 !important;
+  }
+}
+</style>
+
 </head>
 
 
@@ -875,6 +1034,7 @@ footer p{
 
       <a href="index.html">INICIO</a>
       <a href="beneficios.html">BENEFICIOS</a>
+      <a href="index.html#historias">HISTORIAS DE ORO</a>
       <a href="contacto.html">CONTACTO</a>
       <a href="tienda.html" class="header-button">TIENDA</a>
 
@@ -1564,4 +1724,3 @@ footer p{
 </body>
 
 </html>
-
