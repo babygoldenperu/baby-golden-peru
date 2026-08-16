@@ -1111,7 +1111,833 @@ s<!DOCTYPE html>
       </div>
 
     </div>
+<!-- =========================================
+     CONTENIDO WEB
+========================================= -->
 
+<style>
+
+#contenidoWebAdmin {
+  margin-top: 35px;
+}
+
+.web-admin-head {
+  background: #fff;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.07);
+}
+
+.web-admin-kicker {
+  color: #b18a4a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.web-admin-title {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.web-admin-subtitle {
+  margin: 7px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+.web-section {
+  margin-top: 18px;
+  background: #fff;
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 25px rgba(0,0,0,.05);
+}
+
+.web-section h3 {
+  margin: 0 0 5px;
+  font-family: Georgia, serif;
+  font-size: 24px;
+  font-weight: 400;
+}
+
+.web-section-description {
+  margin: 0 0 20px;
+  color: #888;
+  font-size: 12px;
+}
+
+.web-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.web-full {
+  grid-column: 1 / -1;
+}
+
+.web-field label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.web-field input,
+.web-field textarea,
+.web-field select {
+  width: 100%;
+  padding: 12px 13px;
+  margin-bottom: 5px;
+  border: 1px solid #ddd;
+  border-radius: 11px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  background: #fff;
+}
+
+.web-field textarea {
+  min-height: 90px;
+  resize: vertical;
+}
+
+.web-image-preview {
+  margin-top: 10px;
+}
+
+.web-image-preview img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 12px;
+  background: #f5f2ed;
+  border: 1px solid #e5e0d8;
+}
+
+.web-save {
+  margin-top: 18px;
+  background: #b18a4a !important;
+}
+
+.web-message {
+  display: none;
+  margin-top: 12px;
+  padding: 12px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.web-success {
+  background: #edf7ef;
+  color: #27703c;
+}
+
+.web-error {
+  background: #faeaea;
+  color: #a33b3b;
+}
+
+.web-divider {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 25px 0;
+}
+
+@media(max-width:700px) {
+
+  .web-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .web-full {
+    grid-column: auto;
+  }
+
+}
+
+</style>
+
+
+<div id="contenidoWebAdmin">
+
+
+  <div class="web-admin-head">
+
+    <div class="web-admin-kicker">
+      CONTENIDO WEB
+    </div>
+
+    <h2 class="web-admin-title">
+      Administrar página principal
+    </h2>
+
+    <p class="web-admin-subtitle">
+      Edita los textos e imágenes que aparecen en el Home de Baby Golden Perú.
+    </p>
+
+  </div>
+
+
+  <!-- =====================================
+       PORTADA
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Portada
+    </h3>
+
+    <p class="web-section-description">
+      Contenido principal que aparece al ingresar a la página.
+    </p>
+
+
+    <div class="web-grid">
+
+      <div class="web-field web-full">
+
+        <label>
+          Texto pequeño
+        </label>
+
+        <input
+          id="webHeroKicker"
+          type="text"
+          placeholder="COMUNIDAD GOLDEN RETRIEVER"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Línea 1
+        </label>
+
+        <input
+          id="webHeroLine1"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Línea 2
+        </label>
+
+        <input
+          id="webHeroLine2"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Línea 3
+        </label>
+
+        <input
+          id="webHeroLine3"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Línea 4
+        </label>
+
+        <input
+          id="webHeroLine4"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="webHeroSubtitle"
+        ></textarea>
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Imagen de portada
+        </label>
+
+        <input
+          id="webHeroImage"
+          type="url"
+          placeholder="https://..."
+        >
+
+        <div
+          id="webHeroImagePreview"
+          class="web-image-preview"
+        ></div>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoWeb()"
+    >
+      GUARDAR PORTADA
+    </button>
+
+
+    <div
+      id="webHeroMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       COMUNIDAD
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      La comunidad
+    </h3>
+
+    <p class="web-section-description">
+      Texto y video de la sección de comunidad.
+    </p>
+
+
+    <div class="web-grid">
+
+      <div class="web-field web-full">
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="webCommunityTitle"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Texto 1
+        </label>
+
+        <textarea
+          id="webCommunityText1"
+        ></textarea>
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Texto 2
+        </label>
+
+        <textarea
+          id="webCommunityText2"
+        ></textarea>
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Texto 3
+        </label>
+
+        <textarea
+          id="webCommunityText3"
+        ></textarea>
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Video
+        </label>
+
+        <input
+          id="webCommunityVideo"
+          type="url"
+          placeholder="https://..."
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoComunidad()"
+    >
+      GUARDAR COMUNIDAD
+    </button>
+
+
+    <div
+      id="webCommunityMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       NUESTRA ESENCIA
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Nuestra esencia
+    </h3>
+
+
+    <div class="web-grid">
+
+      <div class="web-field web-full">
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="webEssenceTitle"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="webEssenceDescription"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoEsencia()"
+    >
+      GUARDAR ESENCIA
+    </button>
+
+
+    <div
+      id="webEssenceMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       BABY GOLDEN ID
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Baby Golden ID
+    </h3>
+
+
+    <div class="web-grid">
+
+      <div class="web-field web-full">
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="webIdTitle"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="webIdDescription"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoId()"
+    >
+      GUARDAR BABY GOLDEN ID
+    </button>
+
+
+    <div
+      id="webIdMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       BLACK ID
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Black ID
+    </h3>
+
+
+    <div class="web-grid">
+
+      <div class="web-field">
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          id="webBlackName"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Precio
+        </label>
+
+        <input
+          id="webBlackPrice"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="webBlackDescription"
+        ></textarea>
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Imagen
+        </label>
+
+        <input
+          id="webBlackImage"
+          type="url"
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoBlack()"
+    >
+      GUARDAR BLACK ID
+    </button>
+
+
+    <div
+      id="webBlackMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       PREMIUM ID
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Premium ID
+    </h3>
+
+
+    <div class="web-grid">
+
+      <div class="web-field">
+
+        <label>
+          Nombre
+        </label>
+
+        <input
+          id="webPremiumName"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Precio
+        </label>
+
+        <input
+          id="webPremiumPrice"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="webPremiumDescription"
+        ></textarea>
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Imagen
+        </label>
+
+        <input
+          id="webPremiumImage"
+          type="url"
+        >
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoPremium()"
+    >
+      GUARDAR PREMIUM ID
+    </button>
+
+
+    <div
+      id="webPremiumMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       CTA
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Llamado a la acción
+    </h3>
+
+
+    <div class="web-grid">
+
+      <div class="web-field">
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="webCtaTitle"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field">
+
+        <label>
+          Botón
+        </label>
+
+        <input
+          id="webCtaButton"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="web-field web-full">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="webCtaDescription"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoCTA()"
+    >
+      GUARDAR CTA
+    </button>
+
+
+    <div
+      id="webCtaMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================
+       FOOTER
+  ====================================== -->
+
+  <div class="web-section">
+
+    <h3>
+      Footer
+    </h3>
+
+
+    <div class="web-grid">
+
+      <div class="web-field web-full">
+
+        <label>
+          Texto
+        </label>
+
+        <textarea
+          id="webFooterText"
+        ></textarea>
+
+      </div>
+
+    </div>
+
+
+    <button
+      type="button"
+      class="web-save"
+      onclick="guardarContenidoFooter()"
+    >
+      GUARDAR FOOTER
+    </button>
+
+
+    <div
+      id="webFooterMessage"
+      class="web-message"
+    ></div>
+
+  </div>
+
+
+</div>
 
 <!-- GOLDEN BENEFITS CLUB — PANEL ÚNICO -->
 
