@@ -40,132 +40,192 @@
     a{color:inherit}
 
     /* ================= HEADER ================= */
-
-    header{
-      position:sticky;
-      top:0;
-      z-index:1000;
-      width:100%;
-      background:rgba(246,240,230,.90);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-      border-bottom:1px solid var(--line);
-    }
-
-    .nav{
-      width:min(var(--max),100%);
-      min-height:88px;
-      margin:auto;
-      padding:12px 34px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:28px;
-    }
-
-    .logo{
-      width:165px;
-      height:auto;
-      flex:0 0 auto;
-    }
-
-    .menu{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:27px;
-    }
-
-    .menu a{
-      position:relative;
-      text-decoration:none;
-      color:var(--brown);
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:1px;
-      white-space:nowrap;
-      padding:12px 0;
-      transition:.25s ease;
-    }
-
-    .menu a:not(.header-button)::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:5px;
-      width:0;
-      height:1px;
-      background:var(--gold);
-      transition:.25s ease;
-    }
-
-    .menu a:hover{color:var(--gold)}
-    .menu a:hover::after{width:100%}
-
-    .header-button{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:45px;
-      padding:13px 21px!important;
-      border-radius:999px;
-      background:var(--gold);
-      color:#fff!important;
-      box-shadow:0 12px 28px rgba(183,123,32,.20);
-      transition:.25s ease;
-    }
-
-    .header-button:hover{
-      background:var(--brown);
-      transform:translateY(-2px);
-      box-shadow:0 15px 35px rgba(45,40,34,.18);
-    }
-
-    .heart{
-      color:var(--gold);
-      font-size:24px;
-      line-height:1;
-    }
+header{position:sticky;top:0;z-index:10000;width:100%;background:rgba(246,240,230,.90);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid var(--line)}
+.nav{width:min(var(--max),100%);min-height:88px;margin:auto;padding:12px 34px;display:flex;align-items:center;justify-content:space-between;gap:28px;position:relative}
+.nav>a:first-child{display:flex;align-items:center;flex:0 0 auto;text-decoration:none}
+.logo{width:165px;height:auto;max-width:none;display:block;flex:0 0 auto}
+.menu{display:flex;align-items:center;justify-content:flex-end;gap:27px;flex:0 0 auto}
+.menu>a{position:relative;display:inline-flex;align-items:center;justify-content:center;width:auto;text-decoration:none;color:var(--brown);font-family:'Montserrat',sans-serif;font-size:11px;font-weight:700;letter-spacing:1px;white-space:nowrap;padding:12px 0;transition:.25s ease}
+.menu>a:not(.header-button)::after{content:"";position:absolute;left:0;bottom:5px;width:0;height:1px;background:var(--gold);transition:.25s ease}
+.menu>a:not(.header-button):hover{color:var(--gold)}
+.menu>a:not(.header-button):hover::after{width:100%}
+.header-button{display:inline-flex!important;align-items:center;justify-content:center;min-height:45px;padding:13px 21px!important;border-radius:999px;background:var(--gold);color:#fff!important;box-shadow:0 12px 28px rgba(183,123,32,.20);transition:background .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease}
+.menu>a.header-button:hover{background:#000;color:#fff!important;transform:translateY(-2px);box-shadow:0 15px 35px rgba(0,0,0,.18)}
+.nav-actions{display:flex;align-items:center;justify-content:flex-start;flex-direction:row;flex-wrap:nowrap;gap:7px;margin:0;padding:0;flex:0 0 auto}
+.icon-button{position:relative;width:38px;height:38px;min-width:38px;min-height:38px;flex:0 0 38px;display:grid;place-items:center;padding:0;border:0;background:transparent;color:var(--brown);cursor:pointer;text-decoration:none;border-radius:50%;transition:.2s ease}
+.icon-button:hover,.icon-button:focus-visible{background:rgba(183,123,32,.12);color:var(--gold);outline:none}
+.icon-button svg,.search-field svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
+.cart-count{position:absolute;right:0;top:0;min-width:17px;height:17px;padding:1px 4px;border-radius:999px;background:var(--gold);color:#fff;font:700 9px/15px 'Montserrat',sans-serif;text-align:center}
+.mobile-menu-toggle{display:none;width:42px;height:42px;min-width:42px;min-height:42px;padding:0;margin-left:auto;border:1px solid rgba(183,123,32,.25);border-radius:50%;background:transparent;color:var(--brown);align-items:center;justify-content:center;flex-direction:column;gap:5px;cursor:pointer}
+.mobile-menu-toggle span{display:block;width:18px;height:1.5px;border-radius:999px;background:currentColor;transition:transform .25s ease,opacity .25s ease}
+.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)}
+.mobile-menu-toggle.is-open span:nth-child(2){opacity:0}
+.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)}
+@media(max-width:1000px){.nav{padding:12px 22px}.menu{gap:16px}.menu>a{font-size:9px}}
+@media(max-width:650px){
+.nav{min-height:64px;padding:8px 14px;flex-direction:row;align-items:center;justify-content:space-between;gap:12px;overflow:visible}
+.logo{width:112px}.mobile-menu-toggle{display:flex}
+.menu{position:absolute;top:calc(100% + 1px);left:0;right:0;z-index:1100;width:100%;max-height:calc(100vh - 64px);overflow-y:auto;overflow-x:hidden;display:none;flex-direction:column;align-items:stretch;justify-content:flex-start;gap:0;padding:10px 16px 18px;background:rgba(246,240,230,.98);border-top:1px solid rgba(183,123,32,.18);border-bottom:1px solid rgba(183,123,32,.18);box-shadow:0 18px 35px rgba(48,35,20,.13);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.nav.menu-open .menu{display:flex}
+.menu>a{width:100%;flex:0 0 auto;min-height:45px;display:flex;align-items:center;justify-content:flex-start;padding:13px 8px;border-bottom:1px solid rgba(183,123,32,.10);font-size:10px;letter-spacing:.8px}
+.menu>a:not(.header-button)::after{display:none}
+.menu>a.header-button{min-height:42px;margin:10px 0 4px;padding:11px 15px!important;justify-content:center;border-bottom:0;font-size:9px}
+.nav-actions{width:100%;flex:0 0 auto;display:flex;flex-direction:row;flex-wrap:nowrap;justify-content:flex-start;align-items:center;gap:10px;padding:12px 8px 2px;margin:0;border-top:1px solid rgba(183,123,32,.12)}
+}
 
 
+/* ================= SEARCH + CART UI ================= */
+.search-panel{
+  position:fixed;
+  top:76px;
+  right:clamp(18px,4vw,62px);
+  z-index:1200;
+  width:min(360px,calc(100vw - 36px));
+  padding:0;
+}
+.search-panel[hidden]{display:none!important}
+.search-dialog{
+  position:relative;
+  padding:24px;
+  border:1px solid #e1d1bb;
+  border-radius:18px;
+  background:var(--cream-2);
+  box-shadow:0 20px 48px rgba(40,29,16,.22);
+}
+.search-dialog h2,
+.cart-drawer h2{
+  margin:7px 0 18px;
+  font:500 34px/.95 'Cormorant Garamond',serif;
+  color:var(--brown);
+}
+.panel-kicker{
+  margin:0;
+  color:var(--gold);
+  font-size:9px;
+  font-weight:700;
+  letter-spacing:2.5px;
+}
+.panel-close{
+  width:34px;
+  height:34px;
+  border:1px solid #dfd1bd;
+  border-radius:50%;
+  background:transparent;
+  color:var(--brown);
+  font-size:26px;
+  line-height:1;
+  cursor:pointer;
+}
+.search-dialog .panel-close{position:absolute;right:20px;top:20px}
+.search-field{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:0 16px;
+  border:1px solid #d9c8ad;
+  border-radius:14px;
+  background:#fff;
+  color:var(--gold);
+}
+.search-field input{
+  width:100%;
+  padding:16px 0;
+  border:0;
+  background:transparent;
+  color:var(--brown);
+  font:500 14px 'Montserrat',sans-serif;
+  outline:0;
+}
+.search-help{margin:14px 0 0;color:var(--brown-2);font-size:11px;line-height:1.6}
 
-  .nav-actions{display:flex;align-items:center;gap:5px;margin-left:-8px}
-  .icon-button{position:relative;width:38px;height:38px;display:inline-flex;align-items:center;justify-content:center;padding:0;border:0;background:transparent;color:var(--brown);cursor:pointer;text-decoration:none;border-radius:50%;transition:.2s ease}
-  .icon-button:hover,.icon-button:focus-visible{background:rgba(183,123,32,.12);color:var(--gold);outline:none}
-  .icon-button svg,.search-field svg{width:19px;height:19px;fill:none;stroke:currentColor;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round}
-  .cart-count{position:absolute;right:0;top:0;min-width:17px;height:17px;padding:1px 4px;border-radius:999px;background:var(--gold);color:#fff;font:700 9px/15px 'Montserrat',sans-serif;text-align:center}
-  .search-panel{position:fixed;top:76px;right:clamp(18px,4vw,62px);z-index:1200;width:min(360px,calc(100vw - 36px));padding:0}
-  .search-panel[hidden]{display:none}
-  .search-dialog{position:relative;padding:24px;border:1px solid #e1d1bb;border-radius:18px;background:var(--cream-2);box-shadow:0 20px 48px rgba(40,29,16,.22)}
-  .search-dialog h2,.cart-drawer h2{margin:7px 0 18px;font:500 34px/.95 'Cormorant Garamond',serif;color:var(--brown)}
-  .panel-kicker{margin:0;color:var(--gold);font-size:9px;font-weight:700;letter-spacing:2.5px}
-  .panel-close{width:34px;height:34px;border:1px solid #dfd1bd;border-radius:50%;background:transparent;color:var(--brown);font-size:26px;line-height:1;cursor:pointer}
-  .search-dialog .panel-close{position:absolute;right:20px;top:20px}
-  .search-field{display:flex;align-items:center;gap:12px;padding:0 16px;border:1px solid #d9c8ad;border-radius:14px;background:#fff;color:var(--gold)}
-  .search-field input{width:100%;padding:16px 0;border:0;background:transparent;color:var(--brown);font:500 14px 'Montserrat',sans-serif;outline:0}
-  .search-help{margin:14px 0 0;color:var(--brown-2);font-size:11px;line-height:1.6}
-  .cart-drawer{position:fixed;z-index:1300;top:0;right:0;display:flex;flex-direction:column;width:min(430px,100%);height:100dvh;padding:28px;background:var(--cream-2);box-shadow:-18px 0 60px rgba(0,0,0,.22);transform:translateX(105%);transition:transform .28s ease}
-  .cart-drawer.is-open{transform:translateX(0)}
-  .cart-drawer-header{display:flex;justify-content:space-between;gap:20px;align-items:start;padding-bottom:20px;border-bottom:1px solid #e4d7c5}
-  .cart-drawer-header h2{margin-bottom:0}
-  .cart-items{flex:1;overflow:auto;padding:20px 0}
-  .cart-empty{margin:20px 0;color:var(--brown-2);font-size:13px;line-height:1.7}
-  .cart-item{display:grid;grid-template-columns:1fr auto;gap:12px;padding:15px 0;border-bottom:1px solid #eadfce}
-  .cart-item h3{margin:0 0 5px;font:600 24px/.9 'Cormorant Garamond',serif}
-  .cart-item p{margin:0;color:var(--brown-2);font-size:11px}
-  .remove-item{align-self:start;border:0;background:transparent;color:#9f3d2c;font:700 10px 'Montserrat',sans-serif;letter-spacing:.5px;cursor:pointer}
-  .cart-summary{padding-top:20px;border-top:1px solid #e4d7c5}
-  .cart-summary>div{display:flex;justify-content:space-between;align-items:center;font-size:13px}
-  .cart-summary strong{font:700 29px/1 'Cormorant Garamond',serif;color:var(--gold)}
-  .cart-checkout{width:100%;margin-top:18px}
-  .cart-checkout.is-disabled{pointer-events:none;opacity:.52}
-  .cart-summary p{margin:14px 0 0;color:var(--brown-2);font-size:10px;line-height:1.6;text-align:center}
-  .cart-backdrop{position:fixed;z-index:1250;inset:0;background:rgba(24,22,19,.42)}
-  .product-buy{font-family:'Montserrat',sans-serif;cursor:pointer}
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-  @media(max-width:1000px){.nav-actions{margin-left:0}.icon-button{width:34px;height:34px}.menu{gap:10px}.menu a{letter-spacing:.5px}.header-button{padding:11px 14px!important}}
-  @media(max-width:650px){.nav-actions{order:3}.search-panel{top:68px;right:12px;width:calc(100vw - 24px)}.search-dialog{padding:22px}.cart-drawer{padding:22px}.menu{justify-content:center}.menu a:not(.header-button){display:none}.nav{gap:10px}.logo{width:135px}}
+/* CARRITO: debe ser un panel fijo a la derecha, no contenido de la página */
+.cart-drawer{
+  position:fixed!important;
+  z-index:1300!important;
+  top:0!important;
+  right:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  width:min(430px,100%)!important;
+  height:100dvh!important;
+  padding:28px!important;
+  margin:0!important;
+  box-sizing:border-box!important;
+  background:var(--cream-2)!important;
+  box-shadow:-18px 0 60px rgba(0,0,0,.22)!important;
+  transform:translateX(105%)!important;
+  transition:transform .28s ease!important;
+  overflow:hidden!important;
+}
+.cart-drawer.is-open{transform:translateX(0)!important}
+.cart-drawer[aria-hidden="true"]{visibility:visible}
+.cart-drawer-header{
+  display:flex;
+  justify-content:space-between;
+  gap:20px;
+  align-items:flex-start;
+  padding-bottom:20px;
+  border-bottom:1px solid #e4d7c5;
+  flex:0 0 auto;
+}
+.cart-drawer-header h2{margin-bottom:0}
+.cart-items{
+  flex:1 1 auto;
+  min-height:0;
+  overflow-y:auto;
+  padding:20px 0;
+}
+.cart-empty{margin:20px 0;color:var(--brown-2);font-size:13px;line-height:1.7}
+.cart-item{
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:12px;
+  padding:15px 0;
+  border-bottom:1px solid #eadfce;
+}
+.cart-item h3{margin:0 0 5px;font:600 24px/.9 'Cormorant Garamond',serif}
+.cart-item p{margin:0;color:var(--brown-2);font-size:11px}
+.remove-item{align-self:start;border:0;background:transparent;color:#9f3d2c;font:700 10px 'Montserrat',sans-serif;letter-spacing:.5px;cursor:pointer}
+.cart-summary{
+  flex:0 0 auto;
+  padding-top:20px;
+  border-top:1px solid #e4d7c5;
+}
+.cart-summary>div{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.cart-summary strong{font:700 29px/1 'Cormorant Garamond',serif;color:var(--gold)}
+.cart-checkout{
+  display:flex!important;
+  align-items:center!important;
+  justify-content:center!important;
+  width:100%!important;
+  min-height:45px!important;
+  margin-top:18px!important;
+  padding:13px 21px!important;
+  border-radius:999px!important;
+  background:var(--gold)!important;
+  color:#fff!important;
+  text-decoration:none!important;
+  font:700 10px 'Montserrat',sans-serif!important;
+  letter-spacing:.7px!important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20)!important;
+  transition:.25s ease!important;
+}
+.cart-checkout:hover{background:#000!important;color:#fff!important;transform:translateY(-2px)!important}
+.cart-checkout.is-disabled{pointer-events:none;opacity:.52}
+.cart-summary p{margin:14px 0 0;color:var(--brown-2);font-size:10px;line-height:1.6;text-align:center}
+.cart-backdrop{
+  position:fixed!important;
+  z-index:1250!important;
+  inset:0!important;
+  background:rgba(24,22,19,.42)!important;
+}
+.cart-backdrop[hidden]{display:none!important}
 
+@media(max-width:650px){
+  .search-panel{top:68px;right:12px;width:calc(100vw - 24px)}
+  .search-dialog{padding:22px}
+  .cart-drawer{width:min(430px,100vw)!important;padding:22px!important}
+}
 
 /* ================= LEGAL PAGE ================= */
 .legal-hero{max-width:1000px;margin:auto;padding:80px 25px 40px;text-align:center}
@@ -206,59 +266,34 @@ footer p{margin:8px 0;color:#aaa197;font-size:11px;line-height:1.8}
 </style>
 </head>
 <body>
-<!-- HEADER -->
-  <header>
-    <nav class="nav">
-
-      <a href="#inicio" aria-label="Baby Golden Perú">
-        <img
-          src="BABY%20GOLDEN.png"
-          alt="Baby Golden Perú"
-          class="logo"
-        >
-      </a>
-
-      <div class="menu">
-
-        <a href="#inicio">INICIO</a>
-
-        <a href="#tienda">TIENDA</a>
-
-        <a href="beneficios.html">BENEFICIOS</a>
-
-        <a href="fotos.html">FOTOS</a>
-
-        <a href="id.html">BUSCAR BABY GOLDEN ID</a>
-
-        <a href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html">
-          MI CUENTA
+<!-- HEADER — ESTILO MAESTRO DE INDEX.HTML -->
+<header>
+  <nav class="nav">
+    <a href="index.html" aria-label="Baby Golden Perú"><img src="BABY%20GOLDEN.png" alt="Baby Golden Perú" class="logo"></a>
+    <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mainMenu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="menu" id="mainMenu">
+      <a href="index.html">INICIO</a>
+      <a href="beneficios.html">BENEFICIOS</a>
+      <a href="index.html#historias">HISTORIAS DE ORO</a>
+      <a href="contacto.html">CONTACTO</a>
+      <a href="tienda.html" class="header-button">TIENDA</a>
+      <div class="nav-actions" aria-label="Accesos rápidos">
+        <button class="icon-button" id="openSearch" type="button" aria-label="Buscar en Baby Golden Perú" title="Buscar">
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+        </button>
+        <button class="icon-button cart-button" id="openCart" type="button" aria-label="Abrir carrito de compras" title="Carrito">
+          <svg viewBox="0 0 24 24"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
+          <span class="cart-count" id="cartCount" hidden>0</span>
+        </button>
+        <a class="icon-button" href="cuenta.html" aria-label="Ir a Mi cuenta" title="Mi cuenta">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path></svg>
         </a>
-
-        <a href="#contacto">CONTACTO</a>
-
-        <a
-          href="https://babygoldenperu.github.io/baby-golden-peru/registro.html"
-          class="header-button"
-        >
-          REGISTRAR MI PERRITO
-        </a>
-
-        <div class="nav-actions" aria-label="Accesos rápidos">
-          <button class="icon-button" id="openSearch" type="button" aria-label="Buscar en Baby Golden Perú">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-          </button>
-          <button class="icon-button cart-button" id="openCart" type="button" aria-label="Abrir carrito de compras">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
-            <span class="cart-count" id="cartCount" hidden>0</span>
-          </button>
-          <a class="icon-button" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" aria-label="Ir a Mi cuenta">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path></svg>
-          </a>
-        </div>
-
       </div>
-    </nav>
-  </header>
+    </div>
+  </nav>
+</header>
 
   <div class="search-panel" id="searchPanel" hidden>
     <div class="search-dialog" role="dialog" aria-modal="true" aria-labelledby="searchTitle">
@@ -644,6 +679,21 @@ footer p{margin:8px 0;color:#aaa197;font-size:11px;line-height:1.8}
 
   </footer>
 <script>
+(function(){
+  const nav=document.querySelector('.nav');
+  const toggle=document.getElementById('mobileMenuToggle');
+  const menu=document.getElementById('mainMenu');
+  if(!nav||!toggle||!menu)return;
+  function closeMenu(){nav.classList.remove('menu-open');toggle.classList.remove('is-open');toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Abrir menú de navegación')}
+  toggle.addEventListener('click',function(e){e.stopPropagation();const open=!nav.classList.contains('menu-open');nav.classList.toggle('menu-open',open);toggle.classList.toggle('is-open',open);toggle.setAttribute('aria-expanded',String(open));toggle.setAttribute('aria-label',open?'Cerrar menú de navegación':'Abrir menú de navegación')});
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',closeMenu));
+  document.addEventListener('click',e=>{if(nav.classList.contains('menu-open')&&!nav.contains(e.target))closeMenu()});
+  document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMenu()});
+  window.addEventListener('resize',()=>{if(window.innerWidth>650)closeMenu()});
+})();
+</script>
+
+<script>
   (function(){
     const products={BLACK:{name:'Black ID',price:36.90},PREMIUM:{name:'Premium ID',price:30.00}};
     const cartKey='babyGoldenCart';
@@ -687,3 +737,4 @@ footer p{margin:8px 0;color:#aaa197;font-size:11px;line-height:1.8}
 </script>
 </body>
 </html>
+
