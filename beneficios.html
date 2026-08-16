@@ -1028,64 +1028,373 @@ header {
 
 </style>
 
+<style id="index-header-exact">
+/* =========================================================
+   CABECERA — MISMA ESTRUCTURA VISUAL QUE INDEX.HTML
+   ========================================================= */
+
+header{
+  width:100%;
+  background:#f6f0e6;
+  border-bottom:1px solid #e1d4c1;
+  position:relative;
+  z-index:1000;
+}
+
+.nav{
+  width:min(1280px,100%);
+  min-height:88px;
+  margin:auto;
+  padding:12px 34px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:28px;
+}
+
+.nav > a:first-child{
+  display:flex;
+  align-items:center;
+  flex:0 0 auto;
+  text-decoration:none;
+}
+
+.logo{
+  width:165px !important;
+  height:auto !important;
+  display:block;
+  object-fit:contain;
+}
+
+.menu{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:27px;
+}
+
+.menu > a{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#302b25 !important;
+  background:transparent !important;
+  text-decoration:none;
+  font-family:Arial,Helvetica,sans-serif !important;
+  font-size:11px !important;
+  font-weight:700 !important;
+  letter-spacing:1px !important;
+  white-space:nowrap;
+  padding:12px 0 !important;
+  margin:0;
+  transition:.25s ease;
+}
+
+.menu > a:not(.header-button):not(.icon-button)::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:5px;
+  width:0;
+  height:1px;
+  background:#b77b20;
+  transition:.25s ease;
+}
+
+.menu > a:not(.header-button):not(.icon-button):hover{
+  color:#b77b20 !important;
+}
+
+.menu > a:not(.header-button):not(.icon-button):hover::after{
+  width:100%;
+}
+
+.menu > a.active{
+  color:#b77b20 !important;
+}
+
+.header-button{
+  min-height:45px;
+  padding:13px 21px !important;
+  border-radius:999px !important;
+  background:#b77b20 !important;
+  color:#fff !important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20);
+}
+
+.header-button:hover{
+  background:#3b2b20 !important;
+  color:#fff !important;
+  transform:translateY(-2px);
+}
+
+.nav-actions{
+  display:flex;
+  align-items:center;
+  gap:7px;
+  margin-left:0;
+}
+
+.icon-button{
+  width:38px;
+  height:38px;
+  display:grid !important;
+  place-items:center;
+  border-radius:50%;
+  background:transparent !important;
+  color:#302b25 !important;
+  text-decoration:none;
+  padding:0 !important;
+  transition:.2s ease;
+}
+
+.icon-button:hover{
+  background:rgba(183,123,32,.12) !important;
+  color:#b77b20 !important;
+}
+
+.icon-button svg{
+  width:19px;
+  height:19px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+
+.mobile-menu-toggle{
+  display:none;
+  width:42px;
+  height:42px;
+  padding:0;
+  border:1px solid rgba(183,123,32,.35);
+  border-radius:50%;
+  background:transparent;
+  color:#302b25;
+  align-items:center;
+  justify-content:center;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+}
+
+.mobile-menu-toggle span{
+  width:18px;
+  height:1.5px;
+  background:currentColor;
+  border-radius:999px;
+  transition:.25s ease;
+}
+
+.mobile-menu-toggle.is-open span:nth-child(1){
+  transform:translateY(6.5px) rotate(45deg);
+}
+
+.mobile-menu-toggle.is-open span:nth-child(2){
+  opacity:0;
+}
+
+.mobile-menu-toggle.is-open span:nth-child(3){
+  transform:translateY(-6.5px) rotate(-45deg);
+}
+
+@media(max-width:1050px){
+  .nav{
+    padding:12px 22px;
+    gap:18px;
+  }
+
+  .menu{
+    gap:18px;
+  }
+
+  .menu > a{
+    font-size:10px !important;
+    letter-spacing:.7px !important;
+  }
+
+  .header-button{
+    padding:12px 16px !important;
+  }
+}
+
+@media(max-width:700px){
+
+  .nav{
+    min-height:70px;
+    padding:9px 12px;
+    flex-direction:row;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .logo{
+    width:140px !important;
+  }
+
+  .mobile-menu-toggle{
+    display:flex;
+    margin-left:auto;
+  }
+
+  .menu{
+    position:absolute;
+    top:100%;
+    left:12px;
+    right:12px;
+
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+
+    gap:3px;
+    padding:10px;
+
+    background:#f6f0e6;
+    border:1px solid #e1d4c1;
+    border-radius:18px;
+    box-shadow:0 18px 45px rgba(40,29,16,.18);
+
+    opacity:0;
+    visibility:hidden;
+    pointer-events:none;
+    transform:translateY(-8px);
+
+    transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+  }
+
+  .nav.menu-open .menu{
+    opacity:1;
+    visibility:visible;
+    pointer-events:auto;
+    transform:translateY(0);
+  }
+
+  .menu > a{
+    width:100%;
+    min-height:43px;
+    justify-content:flex-start;
+    padding:12px 14px !important;
+    border-radius:10px;
+    font-size:10px !important;
+    letter-spacing:.7px !important;
+  }
+
+  .menu > a:not(.header-button):not(.icon-button)::after{
+    display:none;
+  }
+
+  .menu > a:hover{
+    background:rgba(183,123,32,.08) !important;
+  }
+
+  .menu .header-button{
+    justify-content:center;
+    margin-top:4px;
+  }
+
+  .nav-actions{
+    width:100%;
+    justify-content:center;
+    gap:9px;
+    padding:7px 0 3px;
+  }
+
+  .nav-actions .icon-button{
+    width:40px;
+    height:40px;
+  }
+}
+</style>
 </head>
 
 <body>
 
 <!-- HEADER -->
   <header>
-    <nav class="nav">
+  <nav class="nav">
 
-      <a href="#inicio" aria-label="Baby Golden Perú">
-        <img
-          src="BABY%20GOLDEN.png"
-          alt="Baby Golden Perú"
-          class="logo"
-        >
-      </a>
-
-      <button
-        type="button"
-        class="mobile-menu-toggle"
-        id="mobileMenuToggle"
-        aria-label="Abrir menú de navegación"
-        aria-expanded="false"
-        aria-controls="mainMenu"
+    <a href="index.html" aria-label="Baby Golden Perú">
+      <img
+        src="BABY%20GOLDEN.png"
+        alt="Baby Golden Perú"
+        class="logo"
       >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    </a>
+
+    <button
+      type="button"
+      class="mobile-menu-toggle"
+      id="mobileMenuToggle"
+      aria-label="Abrir menú de navegación"
+      aria-expanded="false"
+      aria-controls="mainMenu"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
     <div class="menu" id="mainMenu">
 
-  <a href="#inicio">INICIO</a>
+      <a href="index.html">INICIO</a>
 
-  <a href="beneficios.html" class="active">BENEFICIOS</a>
+      <a href="beneficios.html" class="active">BENEFICIOS</a>
 
-  <a href="#historias">HISTORIAS DE ORO</a>
+      <a href="index.html#historias">HISTORIAS DE ORO</a>
 
-  <a href="https://babygoldenperu.github.io/baby-golden-peru/contacto.html">CONTACTO</a>
+      <a href="index.html#contacto">CONTACTO</a>
 
-  <!-- TIENDA -->
-  <a href="tienda.html" class="header-button">TIENDA</a>
+      <a href="tienda.html" class="header-button">TIENDA</a>
 
-  <div class="nav-actions" aria-label="Accesos rápidos">
-          <button class="icon-button" id="openSearch" type="button" aria-label="Buscar en Baby Golden Perú">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
-          </button>
-          <button class="icon-button cart-button" id="openCart" type="button" aria-label="Abrir carrito de compras">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
-            <span class="cart-count" id="cartCount" hidden>0</span>
-          </button>
-          <a class="icon-button" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" aria-label="Ir a Mi cuenta">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path></svg>
-          </a>
-        </div>
+      <div class="nav-actions" aria-label="Accesos rápidos">
+
+        <a
+          class="icon-button"
+          href="index.html"
+          aria-label="Buscar"
+          title="Buscar"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle>
+            <path d="m16 16 4 4"></path>
+          </svg>
+        </a>
+
+        <a
+          class="icon-button cart-button"
+          href="tienda.html"
+          aria-label="Carrito"
+          title="Carrito"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
+            <circle cx="10" cy="20" r="1"></circle>
+            <circle cx="17" cy="20" r="1"></circle>
+          </svg>
+        </a>
+
+        <a
+          class="icon-button"
+          href="cuenta.html"
+          aria-label="Mi cuenta"
+          title="Mi cuenta"
+        >
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5"></circle>
+            <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
+          </svg>
+        </a>
 
       </div>
-    </nav>
-  </header>
+
+    </div>
+
+  </nav>
+</header>
 
 
 <div class="container">
@@ -1959,7 +2268,8 @@ cargarBeneficios();
 
 </script>
 
-<script>
+
+<script id="index-header-menu">
 (function(){
   const nav = document.querySelector(".nav");
   const toggle = document.getElementById("mobileMenuToggle");
@@ -1967,7 +2277,7 @@ cargarBeneficios();
 
   if(!nav || !toggle || !menu) return;
 
-  function closeMobileMenu(){
+  function closeMenu(){
     nav.classList.remove("menu-open");
     toggle.classList.remove("is-open");
     toggle.setAttribute("aria-expanded","false");
@@ -1989,29 +2299,27 @@ cargarBeneficios();
   });
 
   menu.querySelectorAll("a").forEach(function(link){
-    link.addEventListener("click", function(){
-      closeMobileMenu();
-    });
+    link.addEventListener("click", closeMenu);
   });
 
   document.addEventListener("click", function(event){
-    if(
-      nav.classList.contains("menu-open") &&
-      !nav.contains(event.target)
-    ){
-      closeMobileMenu();
+    if(nav.classList.contains("menu-open") && !nav.contains(event.target)){
+      closeMenu();
     }
   });
 
   document.addEventListener("keydown", function(event){
-    if(event.key === "Escape") closeMobileMenu();
+    if(event.key === "Escape"){
+      closeMenu();
+    }
   });
 
   window.addEventListener("resize", function(){
-    if(window.innerWidth > 650) closeMobileMenu();
+    if(window.innerWidth > 700){
+      closeMenu();
+    }
   });
 })();
 </script>
 </body>
 </html>
-
