@@ -867,22 +867,34 @@ header{
   display:inline-flex !important;
   align-items:center !important;
   justify-content:center !important;
+
   min-height:45px !important;
   width:auto !important;
+
   padding:13px 21px !important;
   margin:0 !important;
+
   border:0 !important;
   border-radius:999px !important;
+
   background:#b77b20 !important;
   color:#fff !important;
+
   box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
-  transition:.25s ease !important;
+
+  transition:
+    background .25s ease,
+    color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease !important;
 }
 
 .menu > a.header-button:hover{
-  background:#2d2822 !important;
+  background:#000 !important;
   color:#fff !important;
   transform:translateY(-2px) !important;
+  box-shadow:0 15px 35px rgba(0,0,0,.18) !important;
+}
 }
 
 .nav-actions{
@@ -1156,8 +1168,6 @@ header{
       <a href="index.html">INICIO</a>
 
       <a href="beneficios.html" class="active">BENEFICIOS</a>
-
-      <a href="index.html#historias">HISTORIAS DE ORO</a>
 
       <a href="contacto.html">CONTACTO</a>
 
