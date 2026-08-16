@@ -6591,6 +6591,678 @@ if (logoFile) {
 })();
 
 </script>
+  <!-- =========================================
+     CONTENIDO WEB
+========================================= -->
+
+<style>
+
+#contenidoWebAdmin {
+  margin-top: 35px;
+}
+
+.cw-head {
+  background: #fff;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.07);
+}
+
+.cw-kicker {
+  color: #b18a4a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.cw-title {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.cw-subtitle {
+  margin: 7px 0 22px;
+  color: #777;
+  font-size: 13px;
+}
+
+.cw-list {
+  margin-top: 18px;
+  display: grid;
+  gap: 15px;
+}
+
+.cw-card {
+  background: #fff;
+  border: 1px solid #e9e5df;
+  border-radius: 18px;
+  padding: 20px;
+}
+
+.cw-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+
+.cw-name {
+  font-family: Georgia, serif;
+  font-size: 22px;
+}
+
+.cw-key {
+  color: #999;
+  font-size: 11px;
+  margin-top: 4px;
+}
+
+.cw-status {
+  padding: 7px 11px;
+  border-radius: 20px;
+  font-size: 9px;
+  font-weight: bold;
+}
+
+.cw-active {
+  background: #edf7ef;
+  color: #27703c;
+}
+
+.cw-inactive {
+  background: #faeaea;
+  color: #a33b3b;
+}
+
+.cw-edit {
+  display: none;
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid #eee;
+}
+
+.cw-edit.open {
+  display: block;
+}
+
+.cw-edit label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+.cw-edit input,
+.cw-edit textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+}
+
+.cw-edit textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.cw-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 5px;
+}
+
+.cw-actions button {
+  width: auto;
+  padding: 10px 15px;
+}
+
+.cw-save {
+  background: #b18a4a !important;
+}
+
+.cw-loading,
+.cw-empty {
+  background: #fff;
+  border-radius: 18px;
+  padding: 30px;
+  text-align: center;
+  color: #888;
+}
+
+</style>
+
+
+<div id="contenidoWebAdmin">
+
+  <div class="cw-head">
+
+    <div class="cw-kicker">
+      ADMINISTRACIÓN WEB
+    </div>
+
+    <h2 class="cw-title">
+      Contenido de la web
+    </h2>
+
+    <p class="cw-subtitle">
+      Edita los textos principales de Baby Golden Perú.
+    </p>
+
+  </div>
+
+
+  <div
+    id="cwList"
+    class="cw-list"
+  >
+
+    <div class="cw-loading">
+      Cargando contenido...
+    </div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+(function () {
+
+  const cw =
+    window.supabaseClient;
+
+
+  const lista =
+    document.getElementById(
+      "cwList"
+    );
+
+
+  if (!cw) {
+
+    console.error(
+      "Supabase no está disponible."
+    );
+
+    return;
+
+  }
+
+
+  function escaparCW(valor) {
+
+    return String(
+      valor ?? ""
+    )
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  async function cargarContenidoWeb() {
+
+    lista.innerHTML = `
+      <div class="cw-loading">
+        Cargando contenido...
+      </div>
+    `;
+
+
+    const {
+      data,
+      error
+    } = await cw
+      .from("contenido_web")
+      .select("*")
+      .order("id", {
+        ascending: true
+      });
+
+
+    if (error) {
+
+      console.error(
+        "ERROR CONTENIDO WEB:",
+        error
+      );
+
+      lista.innerHTML = `
+        <div class="cw-empty">
+          No se pudo cargar el contenido.
+          <br><br>
+          ${escaparCW(error.message)}
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    if (!data || data.length === 0) {
+
+      lista.innerHTML = `
+        <div class="cw-empty">
+          No hay contenido registrado.
+        </div>
+      `;
+
+      return;
+
+    }
+
+
+    lista.innerHTML = "";
+
+
+    data.forEach(
+      function (item) {
+
+        pintarContenido(item);
+
+      }
+    );
+
+  }
+
+
+  function pintarContenido(item) {
+
+    const card =
+      document.createElement("div");
+
+
+    card.className =
+      "cw-card";
+
+
+    card.innerHTML = `
+
+      <div class="cw-card-header">
+
+        <div>
+
+          <div class="cw-name">
+            ${escaparCW(
+              item.titulo || item.clave
+            )}
+          </div>
+
+          <div class="cw-key">
+            Sección: ${escaparCW(
+              item.clave
+            )}
+          </div>
+
+        </div>
+
+
+        <span
+          class="
+            cw-status
+            ${
+              item.activo
+                ? "cw-active"
+                : "cw-inactive"
+            }
+          "
+        >
+          ${
+            item.activo
+              ? "ACTIVA"
+              : "INACTIVA"
+          }
+        </span>
+
+      </div>
+
+
+      <div class="cw-actions">
+
+        <button
+          type="button"
+          class="cw-edit-button"
+        >
+          EDITAR
+        </button>
+
+        <button
+          type="button"
+          class="cw-toggle-button secondary"
+        >
+          ${
+            item.activo
+              ? "DESACTIVAR"
+              : "ACTIVAR"
+          }
+        </button>
+
+      </div>
+
+
+      <div class="cw-edit">
+
+        <label>
+          Título
+        </label>
+
+        <input
+          data-cw="titulo"
+          value="${escaparCW(
+            item.titulo
+          )}"
+        >
+
+
+        <label>
+          Subtítulo
+        </label>
+
+        <input
+          data-cw="subtitulo"
+          value="${escaparCW(
+            item.subtitulo
+          )}"
+        >
+
+
+        <label>
+          Contenido
+        </label>
+
+        <textarea
+          data-cw="contenido"
+        >${escaparCW(
+          item.contenido
+        )}</textarea>
+
+
+        <label>
+          Imagen URL
+        </label>
+
+        <input
+          data-cw="imagen_url"
+          value="${escaparCW(
+            item.imagen_url
+          )}"
+          placeholder="https://..."
+        >
+
+
+        <label>
+          Enlace
+        </label>
+
+        <input
+          data-cw="enlace"
+          value="${escaparCW(
+            item.enlace
+          )}"
+          placeholder="https://..."
+        >
+
+
+        <div class="cw-actions">
+
+          <button
+            type="button"
+            class="cw-save"
+          >
+            GUARDAR CAMBIOS
+          </button>
+
+          <button
+            type="button"
+            class="secondary cw-cancel"
+          >
+            CANCELAR
+          </button>
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    lista.appendChild(card);
+
+
+    const editor =
+      card.querySelector(
+        ".cw-edit"
+      );
+
+
+    card
+      .querySelector(
+        ".cw-edit-button"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          editor.classList.toggle(
+            "open"
+          );
+
+        }
+      );
+
+
+    card
+      .querySelector(
+        ".cw-cancel"
+      )
+      .addEventListener(
+        "click",
+        function () {
+
+          editor.classList.remove(
+            "open"
+          );
+
+        }
+      );
+
+
+    card
+      .querySelector(
+        ".cw-toggle-button"
+      )
+      .addEventListener(
+        "click",
+        async function () {
+
+          const nuevoEstado =
+            !item.activo;
+
+
+          const confirmar =
+            confirm(
+              nuevoEstado
+                ? "¿Activar esta sección?"
+                : "¿Desactivar esta sección?"
+            );
+
+
+          if (!confirmar) {
+            return;
+          }
+
+
+          const {
+            error
+          } = await cw
+            .from("contenido_web")
+            .update({
+              activo:
+                nuevoEstado,
+              actualizado_en:
+                new Date()
+                  .toISOString()
+            })
+            .eq(
+              "id",
+              item.id
+            );
+
+
+          if (error) {
+
+            alert(
+              error.message
+            );
+
+            return;
+
+          }
+
+
+          cargarContenidoWeb();
+
+        }
+      );
+
+
+    card
+      .querySelector(
+        ".cw-save"
+      )
+      .addEventListener(
+        "click",
+        async function () {
+
+          const titulo =
+            card.querySelector(
+              '[data-cw="titulo"]'
+            ).value.trim();
+
+
+          const subtitulo =
+            card.querySelector(
+              '[data-cw="subtitulo"]'
+            ).value.trim();
+
+
+          const contenido =
+            card.querySelector(
+              '[data-cw="contenido"]'
+            ).value.trim();
+
+
+          const imagen =
+            card.querySelector(
+              '[data-cw="imagen_url"]'
+            ).value.trim();
+
+
+          const enlace =
+            card.querySelector(
+              '[data-cw="enlace"]'
+            ).value.trim();
+
+
+          if (!titulo) {
+
+            alert(
+              "El título no puede estar vacío."
+            );
+
+            return;
+
+          }
+
+
+          const {
+            error
+          } = await cw
+            .from("contenido_web")
+            .update({
+
+              titulo:
+                titulo,
+
+              subtitulo:
+                subtitulo || null,
+
+              contenido:
+                contenido || null,
+
+              imagen_url:
+                imagen || null,
+
+              enlace:
+                enlace || null,
+
+              actualizado_en:
+                new Date()
+                  .toISOString()
+
+            })
+            .eq(
+              "id",
+              item.id
+            );
+
+
+          if (error) {
+
+            console.error(
+              error
+            );
+
+            alert(
+              "No se pudo guardar: " +
+              error.message
+            );
+
+            return;
+
+          }
+
+
+          alert(
+            "Contenido actualizado correctamente."
+          );
+
+
+          cargarContenidoWeb();
+
+        }
+      );
+
+  }
+
+
+  window.cargarContenidoWeb =
+    cargarContenidoWeb;
+
+
+  /*
+    Solo cargar si el usuario
+    ya inició sesión.
+  */
+
+  cargarContenidoWeb();
+
+
+})();
+
+</script>
 <script src="historias-oro-admin.js"></script>
 </body>
 
