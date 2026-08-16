@@ -763,351 +763,100 @@ details[open] summary:after{
 }
 </style>
 
-<style id="index-header-exact">
-/* HEADER EXACTO DEL INDEX.HTML */
-    .nav{
-      width:min(var(--max),100%);
-      min-height:88px;
-      margin:auto;
-      padding:12px 34px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:28px;
-    }
-
-    .logo{
-      width:165px;
-      height:auto;
-      flex:0 0 auto;
-    }
-
-    .menu{
-      display:flex;
-      align-items:center;
-      justify-content:flex-end;
-      gap:27px;
-    }
-
-    .menu a{
-      position:relative;
-      text-decoration:none;
-      color:var(--brown);
-      font-size:11px;
-      font-weight:700;
-      letter-spacing:1px;
-      white-space:nowrap;
-      padding:12px 0;
-      transition:.25s ease;
-    }
-
-    .menu a:not(.header-button)::after{
-      content:"";
-      position:absolute;
-      left:0;
-      bottom:5px;
-      width:0;
-      height:1px;
-      background:var(--gold);
-      transition:.25s ease;
-    }
-
-    .menu a:hover{color:var(--gold)}
-    .menu a:hover::after{width:100%}
-
-    .header-button{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-height:45px;
-      padding:13px 21px!important;
-      border-radius:999px;
-      background:var(--gold);
-      color:#fff!important;
-      box-shadow:0 12px 28px rgba(183,123,32,.20);
-      transition:.25s ease;
-    }
-
-    .header-button:hover{
-      background:var(--brown);
-      transform:translateY(-2px);
-      box-shadow:0 15px 35px rgba(45,40,34,.18);
-    }
-
-    .heart{
-      color:var(--gold);
-      font-size:24px;
-      line-height:1;
-    }
-
-    /* ================= MOBILE MENU BUTTON ================= */
-
-    .mobile-menu-toggle{
-      display:none;
-      width:42px;
-      height:42px;
-      padding:0;
-      border:1px solid rgba(183,123,32,.25);
-      border-radius:50%;
-      background:transparent;
-      color:var(--brown);
-      align-items:center;
-      justify-content:center;
-      flex-direction:column;
-      gap:5px;
-      cursor:pointer;
-      flex:0 0 auto;
-      transition:.25s ease;
-    }
-
-    .mobile-menu-toggle:hover,
-    .mobile-menu-toggle:focus-visible{
-      color:var(--gold);
-      border-color:rgba(183,123,32,.55);
-      background:rgba(183,123,32,.08);
-      outline:none;
-    }
-
-    .mobile-menu-toggle span{
-      display:block;
-      width:18px;
-      height:1.5px;
-      border-radius:999px;
-      background:currentColor;
-      transition:transform .25s ease, opacity .25s ease;
-    }
-
-    .mobile-menu-toggle.is-open span:nth-child(1){
-      transform:translateY(6.5px) rotate(45deg);
-    }
-
-    .mobile-menu-toggle.is-open span:nth-child(2){
-      opacity:0;
-    }
-
-    .mobile-menu-toggle.is-open span:nth-child(3){
-      transform:translateY(-6.5px) rotate(-45deg);
-    }
-
-
-
-/* El header de beneficios usa exactamente la navegación del index. */
-header {
-  position:sticky;
-  top:0;
-  z-index:1000;
-  background:var(--cream-2);
-  border-bottom:1px solid var(--line);
-}
-
-@media(max-width:650px){
-  header {
-    position:sticky;
-    top:0;
-  }
-}
-
-/* TABLET HEADER — IGUAL AL INDEX */
-@media(max-width:1000px){
-  .nav{padding:12px 22px}
-  .menu{gap:16px}
-  .menu a{font-size:9px}
-}
-
-/* MOBILE HEADER — IGUAL AL INDEX */
-@media(max-width:650px){
-  header{
-    position:sticky;
-  }
-
-  .nav{
-    position:relative;
-    min-height:64px;
-    padding:8px 14px;
-    flex-direction:row;
-    align-items:center;
-    justify-content:space-between;
-    gap:12px;
-    overflow:visible;
-  }
-
-  .logo{
-    width:112px;
-    flex:0 0 auto;
-  }
-
-  .mobile-menu-toggle{
-    display:flex;
-    margin-left:auto;
-  }
-
-  .menu{
-    position:absolute;
-    top:calc(100% + 1px);
-    left:0;
-    right:0;
-    z-index:1100;
-
-    width:100%;
-    max-height:calc(100vh - 64px);
-    overflow-y:auto;
-    overflow-x:hidden;
-
-    display:none;
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
-    gap:0;
-
-    padding:10px 16px 18px;
-
-    background:rgba(246,240,230,.98);
-    border-top:1px solid var(--line);
-    border-bottom:1px solid rgba(183,123,32,.18);
-    box-shadow:0 18px 35px rgba(48,35,20,.13);
-    backdrop-filter:blur(18px);
-    -webkit-backdrop-filter:blur(18px);
-  }
-
-  .nav.menu-open .menu{
-    display:flex;
-  }
-
-  .menu a{
-    width:100%;
-    flex:0 0 auto;
-    min-height:45px;
-    display:flex;
-    align-items:center;
-    justify-content:flex-start;
-    padding:13px 8px;
-    border-bottom:1px solid rgba(183,123,32,.10);
-    font-size:10px;
-    letter-spacing:.8px;
-  }
-
-  .menu a:not(.header-button)::after{
-    display:none;
-  }
-
-  .menu a:hover{
-    transform:none;
-    background:rgba(183,123,32,.06);
-  }
-
-  .header-button{
-    min-height:42px!important;
-    margin:10px 0 4px;
-    padding:11px 15px!important;
-    justify-content:center!important;
-    border-bottom:0!important;
-    font-size:9px!important;
-  }
-
-  .nav-actions{
-    width:100%;
-    flex:0 0 auto;
-    display:flex;
-    justify-content:flex-start;
-    align-items:center;
-    gap:10px;
-    padding:12px 8px 2px;
-    margin:0;
-    border-top:1px solid rgba(183,123,32,.12);
-  }
-
-  .nav-actions .icon-button{
-    width:38px;
-    height:38px;
-  }
-
-  .heart{
-    font-size:19px;
-  }
-}
-
-</style>
-
-<style id="index-header-exact">
+<style id="baby-golden-index-header-final">
 /* =========================================================
-   CABECERA — MISMA ESTRUCTURA VISUAL QUE INDEX.HTML
+   BABY GOLDEN PERÚ — HEADER FINAL
+   Basado en la cabecera de index.html.
+   Esta capa prevalece sobre los estilos anteriores de esta página.
    ========================================================= */
 
 header{
-  width:100%;
-  background:#f6f0e6;
-  border-bottom:1px solid #e1d4c1;
-  position:relative;
-  z-index:1000;
+  position:sticky !important;
+  top:0 !important;
+  z-index:10000 !important;
+  width:100% !important;
+  background:rgba(246,240,230,.90) !important;
+  backdrop-filter:blur(18px) !important;
+  -webkit-backdrop-filter:blur(18px) !important;
+  border-bottom:1px solid rgba(183,123,32,.18) !important;
 }
 
 .nav{
-  width:min(1280px,100%);
-  min-height:88px;
-  margin:auto;
-  padding:12px 34px;
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:28px;
+  width:min(1320px,100%) !important;
+  min-height:88px !important;
+  margin:auto !important;
+  padding:12px 34px !important;
+  display:flex !important;
+  flex-direction:row !important;
+  align-items:center !important;
+  justify-content:space-between !important;
+  gap:28px !important;
+  position:relative !important;
 }
 
 .nav > a:first-child{
-  display:flex;
-  align-items:center;
-  flex:0 0 auto;
-  text-decoration:none;
+  display:flex !important;
+  align-items:center !important;
+  flex:0 0 auto !important;
+  text-decoration:none !important;
 }
 
 .logo{
   width:165px !important;
   height:auto !important;
-  display:block;
-  object-fit:contain;
+  max-width:none !important;
+  display:block !important;
+  flex:0 0 auto !important;
 }
 
 .menu{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  gap:27px;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-end !important;
+  gap:27px !important;
+  flex:0 0 auto !important;
 }
 
 .menu > a{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  color:#302b25 !important;
+  position:relative !important;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  width:auto !important;
+  min-height:0 !important;
+  color:#2d2822 !important;
   background:transparent !important;
-  text-decoration:none;
-  font-family:Arial,Helvetica,sans-serif !important;
+  text-decoration:none !important;
+  font-family:'Montserrat',Arial,Helvetica,sans-serif !important;
   font-size:11px !important;
   font-weight:700 !important;
   letter-spacing:1px !important;
-  white-space:nowrap;
+  white-space:nowrap !important;
   padding:12px 0 !important;
-  margin:0;
-  transition:.25s ease;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:0 !important;
+  transition:.25s ease !important;
 }
 
-.menu > a:not(.header-button):not(.icon-button)::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:5px;
-  width:0;
-  height:1px;
-  background:#b77b20;
-  transition:.25s ease;
+.menu > a:not(.header-button)::after{
+  content:"" !important;
+  position:absolute !important;
+  left:0 !important;
+  bottom:5px !important;
+  width:0 !important;
+  height:1px !important;
+  background:#b77b20 !important;
+  transition:.25s ease !important;
 }
 
-.menu > a:not(.header-button):not(.icon-button):hover{
+.menu > a:not(.header-button):hover{
   color:#b77b20 !important;
+  background:transparent !important;
 }
 
-.menu > a:not(.header-button):not(.icon-button):hover::after{
-  width:100%;
+.menu > a:not(.header-button):hover::after{
+  width:100% !important;
 }
 
 .menu > a.active{
@@ -1115,38 +864,55 @@ header{
 }
 
 .header-button{
-  min-height:45px;
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  min-height:45px !important;
+  width:auto !important;
   padding:13px 21px !important;
+  margin:0 !important;
+  border:0 !important;
   border-radius:999px !important;
   background:#b77b20 !important;
   color:#fff !important;
-  box-shadow:0 12px 28px rgba(183,123,32,.20);
+  box-shadow:0 12px 28px rgba(183,123,32,.20) !important;
+  transition:.25s ease !important;
 }
 
-.header-button:hover{
-  background:#3b2b20 !important;
+.menu > a.header-button:hover{
+  background:#2d2822 !important;
   color:#fff !important;
-  transform:translateY(-2px);
+  transform:translateY(-2px) !important;
 }
 
 .nav-actions{
-  display:flex;
-  align-items:center;
-  gap:7px;
-  margin-left:0;
+  display:flex !important;
+  align-items:center !important;
+  justify-content:flex-start !important;
+  width:auto !important;
+  margin:0 !important;
+  padding:0 !important;
+  gap:7px !important;
+  border:0 !important;
+  flex:0 0 auto !important;
 }
 
 .icon-button{
-  width:38px;
-  height:38px;
+  width:38px !important;
+  height:38px !important;
+  min-height:38px !important;
   display:grid !important;
-  place-items:center;
-  border-radius:50%;
-  background:transparent !important;
-  color:#302b25 !important;
-  text-decoration:none;
+  place-items:center !important;
+  flex:0 0 38px !important;
   padding:0 !important;
-  transition:.2s ease;
+  margin:0 !important;
+  border:0 !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  color:#2d2822 !important;
+  text-decoration:none !important;
+  cursor:pointer !important;
+  transition:.2s ease !important;
 }
 
 .icon-button:hover{
@@ -1155,166 +921,213 @@ header{
 }
 
 .icon-button svg{
-  width:19px;
-  height:19px;
-  fill:none;
-  stroke:currentColor;
-  stroke-width:1.6;
-  stroke-linecap:round;
-  stroke-linejoin:round;
+  width:19px !important;
+  height:19px !important;
+  fill:none !important;
+  stroke:currentColor !important;
+  stroke-width:1.6 !important;
+  stroke-linecap:round !important;
+  stroke-linejoin:round !important;
 }
 
 .mobile-menu-toggle{
-  display:none;
-  width:42px;
-  height:42px;
-  padding:0;
-  border:1px solid rgba(183,123,32,.35);
-  border-radius:50%;
-  background:transparent;
-  color:#302b25;
-  align-items:center;
-  justify-content:center;
-  flex-direction:column;
-  gap:5px;
-  cursor:pointer;
+  display:none !important;
+  width:42px !important;
+  height:42px !important;
+  min-width:42px !important;
+  min-height:42px !important;
+  padding:0 !important;
+  margin-left:auto !important;
+  border:1px solid rgba(183,123,32,.25) !important;
+  border-radius:50% !important;
+  background:transparent !important;
+  color:#2d2822 !important;
+  align-items:center !important;
+  justify-content:center !important;
+  flex-direction:column !important;
+  gap:5px !important;
+  cursor:pointer !important;
+}
+
+.mobile-menu-toggle:hover,
+.mobile-menu-toggle:focus-visible{
+  color:#b77b20 !important;
+  border-color:rgba(183,123,32,.55) !important;
+  background:rgba(183,123,32,.08) !important;
+  outline:none !important;
 }
 
 .mobile-menu-toggle span{
-  width:18px;
-  height:1.5px;
-  background:currentColor;
-  border-radius:999px;
-  transition:.25s ease;
+  display:block !important;
+  width:18px !important;
+  height:1.5px !important;
+  padding:0 !important;
+  margin:0 !important;
+  border-radius:999px !important;
+  background:currentColor !important;
+  transition:transform .25s ease,opacity .25s ease !important;
 }
 
 .mobile-menu-toggle.is-open span:nth-child(1){
-  transform:translateY(6.5px) rotate(45deg);
+  transform:translateY(6.5px) rotate(45deg) !important;
 }
 
 .mobile-menu-toggle.is-open span:nth-child(2){
-  opacity:0;
+  opacity:0 !important;
 }
 
 .mobile-menu-toggle.is-open span:nth-child(3){
-  transform:translateY(-6.5px) rotate(-45deg);
+  transform:translateY(-6.5px) rotate(-45deg) !important;
 }
 
-@media(max-width:1050px){
+@media(max-width:1000px){
   .nav{
-    padding:12px 22px;
-    gap:18px;
+    padding:12px 22px !important;
   }
 
   .menu{
-    gap:18px;
+    gap:16px !important;
   }
 
   .menu > a{
-    font-size:10px !important;
-    letter-spacing:.7px !important;
-  }
-
-  .header-button{
-    padding:12px 16px !important;
+    font-size:9px !important;
   }
 }
 
-@media(max-width:700px){
+@media(max-width:650px){
+
+  header{
+    position:sticky !important;
+    top:0 !important;
+  }
 
   .nav{
-    min-height:70px;
-    padding:9px 12px;
-    flex-direction:row;
-    justify-content:space-between;
-    gap:10px;
+    position:relative !important;
+    min-height:64px !important;
+    padding:8px 14px !important;
+    flex-direction:row !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:12px !important;
+    overflow:visible !important;
   }
 
   .logo{
-    width:140px !important;
+    width:112px !important;
+    max-width:112px !important;
+    flex:0 0 auto !important;
   }
 
   .mobile-menu-toggle{
-    display:flex;
-    margin-left:auto;
+    display:flex !important;
+    margin-left:auto !important;
   }
 
+  /* AQUÍ ESTÁ LA CORRECCIÓN PRINCIPAL:
+     las 5 opciones quedan dentro del menú móvil. */
   .menu{
-    position:absolute;
-    top:100%;
-    left:12px;
-    right:12px;
+    position:absolute !important;
+    top:calc(100% + 1px) !important;
+    left:0 !important;
+    right:0 !important;
+    z-index:1100 !important;
 
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-    justify-content:flex-start;
+    width:100% !important;
+    max-height:calc(100vh - 64px) !important;
+    overflow-y:auto !important;
+    overflow-x:hidden !important;
 
-    gap:3px;
-    padding:10px;
+    display:none !important;
+    flex-direction:column !important;
+    align-items:stretch !important;
+    justify-content:flex-start !important;
+    gap:0 !important;
 
-    background:#f6f0e6;
-    border:1px solid #e1d4c1;
-    border-radius:18px;
-    box-shadow:0 18px 45px rgba(40,29,16,.18);
+    padding:10px 16px 18px !important;
 
-    opacity:0;
-    visibility:hidden;
-    pointer-events:none;
-    transform:translateY(-8px);
+    background:rgba(246,240,230,.98) !important;
+    border-top:1px solid rgba(183,123,32,.18) !important;
+    border-bottom:1px solid rgba(183,123,32,.18) !important;
+    border-left:0 !important;
+    border-right:0 !important;
+    border-radius:0 !important;
+    box-shadow:0 18px 35px rgba(48,35,20,.13) !important;
 
-    transition:opacity .22s ease, transform .22s ease, visibility .22s ease;
+    opacity:1 !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+    transform:none !important;
+
+    backdrop-filter:blur(18px) !important;
+    -webkit-backdrop-filter:blur(18px) !important;
   }
 
   .nav.menu-open .menu{
-    opacity:1;
-    visibility:visible;
-    pointer-events:auto;
-    transform:translateY(0);
+    display:flex !important;
   }
 
   .menu > a{
-    width:100%;
-    min-height:43px;
-    justify-content:flex-start;
-    padding:12px 14px !important;
-    border-radius:10px;
+    width:100% !important;
+    flex:0 0 auto !important;
+    min-height:45px !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:flex-start !important;
+    padding:13px 8px !important;
+    margin:0 !important;
+    border:0 !important;
+    border-bottom:1px solid rgba(183,123,32,.10) !important;
+    border-radius:0 !important;
     font-size:10px !important;
-    letter-spacing:.7px !important;
+    letter-spacing:.8px !important;
+    transform:none !important;
   }
 
-  .menu > a:not(.header-button):not(.icon-button)::after{
-    display:none;
+  .menu > a:not(.header-button)::after{
+    display:none !important;
   }
 
   .menu > a:hover{
-    background:rgba(183,123,32,.08) !important;
+    transform:none !important;
+    background:rgba(183,123,32,.06) !important;
   }
 
-  .menu .header-button{
-    justify-content:center;
-    margin-top:4px;
+  .menu > a.header-button{
+    min-height:42px !important;
+    margin:10px 0 4px !important;
+    padding:11px 15px !important;
+    justify-content:center !important;
+    border:0 !important;
+    font-size:9px !important;
   }
 
   .nav-actions{
-    width:100%;
-    justify-content:center;
-    gap:9px;
-    padding:7px 0 3px;
+    width:100% !important;
+    flex:0 0 auto !important;
+    display:flex !important;
+    justify-content:flex-start !important;
+    align-items:center !important;
+    gap:10px !important;
+    padding:12px 8px 2px !important;
+    margin:0 !important;
+    border-top:1px solid rgba(183,123,32,.12) !important;
   }
 
   .nav-actions .icon-button{
-    width:40px;
-    height:40px;
+    width:38px !important;
+    height:38px !important;
+    min-width:38px !important;
+    flex-basis:38px !important;
   }
 }
 </style>
+
 </head>
 
 <body>
 
-<!-- HEADER -->
-  <header>
+<!-- HEADER — MISMA ESTRUCTURA QUE INDEX.HTML -->
+<header>
   <nav class="nav">
 
     <a href="index.html" aria-label="Baby Golden Perú">
@@ -1346,7 +1159,7 @@ header{
 
       <a href="index.html#historias">HISTORIAS DE ORO</a>
 
-      <a href="index.html#contacto">CONTACTO</a>
+      <a href="contacto.html">CONTACTO</a>
 
       <a href="tienda.html" class="header-button">TIENDA</a>
 
@@ -1355,7 +1168,7 @@ header{
         <a
           class="icon-button"
           href="index.html"
-          aria-label="Buscar"
+          aria-label="Buscar en Baby Golden Perú"
           title="Buscar"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1367,7 +1180,7 @@ header{
         <a
           class="icon-button cart-button"
           href="tienda.html"
-          aria-label="Carrito"
+          aria-label="Abrir carrito de compras"
           title="Carrito"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1380,7 +1193,7 @@ header{
         <a
           class="icon-button"
           href="cuenta.html"
-          aria-label="Mi cuenta"
+          aria-label="Ir a Mi cuenta"
           title="Mi cuenta"
         >
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -1392,7 +1205,6 @@ header{
       </div>
 
     </div>
-
   </nav>
 </header>
 
@@ -2323,3 +2135,4 @@ cargarBeneficios();
 </script>
 </body>
 </html>
+
