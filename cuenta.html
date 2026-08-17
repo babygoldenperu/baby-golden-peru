@@ -1089,6 +1089,46 @@
 
   </style>
 
+
+<style id="baby-golden-header-master">
+header{width:100%!important;height:auto!important;min-height:88px!important;position:sticky!important;top:0!important;z-index:10000!important;background:rgba(246,240,230,.90)!important;border-bottom:1px solid rgba(183,123,32,.18)!important;backdrop-filter:blur(18px)!important;-webkit-backdrop-filter:blur(18px)!important}
+.nav{width:min(1320px,100%)!important;max-width:none!important;min-height:88px!important;height:auto!important;margin:0 auto!important;padding:12px 34px!important;display:flex!important;flex-direction:row!important;align-items:center!important;justify-content:space-between!important;gap:28px!important;position:relative!important}
+.nav>a:first-child{display:flex!important;align-items:center!important;width:auto!important;flex:0 0 auto!important}
+.logo{width:165px!important;height:auto!important;max-width:none!important;display:block!important}
+.menu{width:auto!important;max-width:none!important;flex:0 0 auto!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-end!important;gap:27px!important;margin:0!important;padding:0!important;font-family:'Montserrat',Arial,sans-serif!important;font-size:11px!important;font-weight:700!important;letter-spacing:1px!important;white-space:nowrap!important;overflow:visible!important}
+.menu>a{position:relative!important;width:auto!important;flex:0 0 auto!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;min-height:0!important;padding:12px 0!important;margin:0!important;color:#2d2822!important;background:transparent!important;border:0!important;border-radius:0!important;font-family:'Montserrat',Arial,sans-serif!important;font-size:11px!important;font-weight:700!important;letter-spacing:1px!important;line-height:1!important;text-decoration:none!important;transition:color .25s ease,transform .25s ease!important}
+.menu>a:not(.header-button)::after{content:""!important;position:absolute!important;left:0!important;bottom:5px!important;width:0!important;height:1px!important;background:#b77b20!important;display:block!important;transition:width .25s ease!important}
+.menu>a:not(.header-button):hover{color:#b77b20!important;background:transparent!important;transform:translateY(-1px)!important}
+.menu>a:not(.header-button):hover::after{width:100%!important}
+.menu>a.header-button{display:inline-flex!important;align-items:center!important;justify-content:center!important;min-width:112px!important;height:45px!important;min-height:45px!important;padding:0 21px!important;margin:0!important;border:0!important;border-radius:999px!important;background:#b77b20!important;color:#fff!important;font-family:'Montserrat',Arial,sans-serif!important;font-size:11px!important;font-weight:700!important;letter-spacing:1px!important;line-height:1!important;box-shadow:0 12px 28px rgba(183,123,32,.20)!important;transition:background-color .25s ease,color .25s ease,transform .25s ease,box-shadow .25s ease!important}
+.menu>a.header-button::after{display:none!important;content:none!important}
+.menu>a.header-button:hover,.menu>a.header-button:focus-visible{background:#000!important;color:#fff!important;transform:translateY(-2px)!important;box-shadow:0 15px 35px rgba(0,0,0,.18)!important;outline:none!important}
+.nav-actions{width:auto!important;flex:0 0 auto!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:7px!important;margin:0!important;padding:0!important}
+.nav-actions .icon-button{position:relative!important;width:38px!important;height:38px!important;min-width:38px!important;min-height:38px!important;flex:0 0 38px!important;display:grid!important;place-items:center!important;padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;background:transparent!important;color:#2d2822!important;text-decoration:none!important;transition:background .2s ease,color .2s ease,transform .2s ease!important}
+.nav-actions .icon-button:hover{background:rgba(183,123,32,.12)!important;color:#b77b20!important;transform:translateY(-1px)!important}
+.nav-actions .icon-button svg{width:19px!important;height:19px!important;display:block!important;fill:none!important;stroke:currentColor!important;stroke-width:1.6!important;stroke-linecap:round!important;stroke-linejoin:round!important}
+.mobile-menu-toggle{display:none!important}
+
+@media(max-width:650px){
+header{min-height:64px!important}
+.nav{min-height:64px!important;padding:8px 14px!important;gap:12px!important}
+.logo{width:112px!important;max-width:112px!important}
+.mobile-menu-toggle{display:flex!important;flex:0 0 42px!important;width:42px!important;height:42px!important;min-width:42px!important;min-height:42px!important;margin-left:auto!important;padding:0!important;border:1px solid rgba(183,123,32,.25)!important;border-radius:50%!important;background:transparent!important;color:#2d2822!important;align-items:center!important;justify-content:center!important;flex-direction:column!important;gap:5px!important;cursor:pointer!important}
+.mobile-menu-toggle span{display:block!important;width:18px!important;height:1.5px!important;border-radius:999px!important;background:currentColor!important;transition:transform .25s ease,opacity .25s ease!important}
+.mobile-menu-toggle.is-open span:nth-child(1){transform:translateY(6.5px) rotate(45deg)!important}
+.mobile-menu-toggle.is-open span:nth-child(2){opacity:0!important}
+.mobile-menu-toggle.is-open span:nth-child(3){transform:translateY(-6.5px) rotate(-45deg)!important}
+.menu{position:absolute!important;top:calc(100% + 1px)!important;left:0!important;right:0!important;width:100%!important;max-width:none!important;max-height:calc(100vh - 64px)!important;overflow-y:auto!important;overflow-x:hidden!important;display:none!important;flex-direction:column!important;align-items:stretch!important;justify-content:flex-start!important;gap:0!important;padding:10px 16px 18px!important;margin:0!important;background:rgba(246,240,230,.98)!important;border-top:1px solid rgba(183,123,32,.18)!important;border-bottom:1px solid rgba(183,123,32,.18)!important;box-shadow:0 18px 35px rgba(48,35,20,.13)!important;opacity:1!important;visibility:visible!important;pointer-events:auto!important;transform:none!important}
+.nav.menu-open .menu{display:flex!important}
+.menu>a{width:100%!important;min-height:45px!important;flex:0 0 auto!important;display:flex!important;align-items:center!important;justify-content:flex-start!important;padding:13px 8px!important;margin:0!important;border:0!important;border-bottom:1px solid rgba(183,123,32,.10)!important;font-size:10px!important;letter-spacing:.8px!important}
+.menu>a:not(.header-button)::after{display:none!important}
+.menu>a:hover{transform:none!important;background:rgba(183,123,32,.06)!important}
+.menu>a.header-button{width:100%!important;min-width:0!important;height:42px!important;min-height:42px!important;justify-content:center!important;margin:10px 0 4px!important;padding:0 15px!important}
+.nav-actions{width:100%!important;flex:0 0 auto!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;padding:12px 8px 2px!important;margin:0!important;border-top:1px solid rgba(183,123,32,.12)!important}
+.nav-actions .icon-button{flex:0 0 38px!important}
+}
+</style>
+
 </head>
 
 
@@ -1100,130 +1140,45 @@
        ========================================= -->
 
   <header>
+  <nav class="nav">
+    <a href="index.html" aria-label="Baby Golden Perú">
+      <img src="BABY%20GOLDEN.png" alt="Baby Golden Perú" class="logo">
+    </a>
 
-    <nav class="nav">
+    <button type="button" class="mobile-menu-toggle" id="mobileMenuToggle"
+      aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mainMenu">
+      <span></span><span></span><span></span>
+    </button>
 
-      <a href="index.html">
+    <div class="menu" id="mainMenu">
+      <a href="index.html">INICIO</a>
+      <a href="beneficios.html">BENEFICIOS</a>
+      <a href="index.html#historias">HISTORIAS DE ORO</a>
+      <a href="contacto.html">CONTACTO</a>
+      <a href="tienda.html" class="header-button">TIENDA</a>
 
-        <img
-          src="BABY%20GOLDEN.png"
-          alt="Baby Golden Perú"
-          class="logo"
-        >
-
-      </a>
-
-
-      <div class="menu">
-
-        <a href="index.html">
-          INICIO
-        </a>
-
-        <a href="tienda.html">
-          TIENDA
-        </a>
-
-        <a href="beneficios.html">
-          BENEFICIOS
-        </a>
-
-        <a href="fotos.html">
-          FOTOS
-        </a>
-
-        <a href="buscar-id.html">
-          BUSCAR BABY GOLDEN ID
-        </a>
-
-        <a href="cuenta.html">
-          MI CUENTA
-        </a>
-
-        <a href="contacto.html">
-          CONTACTO
-        </a>
-
-        <a
-          href="registro.html"
-          class="header-button"
-        >
-          REGISTRAR MI PERRITO
-        </a>
-
-        <a
-          href="buscar.html"
-          class="header-icon"
-          aria-label="Buscar"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="1.7"
-          >
-            <circle
-              cx="11"
-              cy="11"
-              r="6.5"
-            ></circle>
-            <path
-              d="M16 16l4 4"
-            ></path>
+      <div class="nav-actions" aria-label="Accesos rápidos">
+        <a class="icon-button" href="buscar.html" aria-label="Buscar" title="Buscar">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4 4"></path>
           </svg>
         </a>
-
-        <a
-          href="tienda.html"
-          class="header-icon"
-          aria-label="Carrito"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="1.7"
-          >
-            <path
-              d="M4 5h2l2 11h9l2-8H7"
-            ></path>
-            <circle
-              cx="10"
-              cy="20"
-              r="1.3"
-            ></circle>
-            <circle
-              cx="17"
-              cy="20"
-              r="1.3"
-            ></circle>
+        <a class="icon-button" href="tienda.html" aria-label="Carrito" title="Carrito">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
+            <circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle>
           </svg>
         </a>
-
-        <a
-          href="cuenta.html"
-          class="header-icon"
-          aria-label="Mi cuenta"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke-width="1.7"
-          >
-            <circle
-              cx="12"
-              cy="8"
-              r="3.2"
-            ></circle>
-            <path
-              d="M5.5 20c.8-3.5 3-5.3 6.5-5.3s5.7 1.8 6.5 5.3"
-            ></path>
+        <a class="icon-button" href="cuenta.html" aria-label="Mi cuenta" title="Mi cuenta">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="8" r="3.5"></circle>
+            <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
           </svg>
         </a>
-
       </div>
-
-    </nav>
-
-  </header>
+    </div>
+  </nav>
+</header>
 
 
   <!-- =========================================
@@ -1860,7 +1815,23 @@
   </footer>
 
 
-  <script>
+  
+<script id="baby-golden-header-menu">
+(function(){
+  const toggle=document.getElementById("mobileMenuToggle");
+  const menu=document.getElementById("mainMenu");
+  const nav=document.querySelector("header .nav");
+  if(!toggle||!menu||!nav)return;
+  function closeMenu(){nav.classList.remove("menu-open");toggle.classList.remove("is-open");toggle.setAttribute("aria-expanded","false");}
+  toggle.addEventListener("click",function(){const open=nav.classList.toggle("menu-open");toggle.classList.toggle("is-open",open);toggle.setAttribute("aria-expanded",String(open));});
+  menu.querySelectorAll("a").forEach(a=>a.addEventListener("click",closeMenu));
+  document.addEventListener("click",e=>{if(!nav.contains(e.target))closeMenu();});
+  document.addEventListener("keydown",e=>{if(e.key==="Escape")closeMenu();});
+  window.addEventListener("resize",()=>{if(window.innerWidth>650)closeMenu();});
+})();
+</script>
+
+<script>
 
     const SUPABASE_URL =
       "https://cxgcmrpqqaachnfavplh.supabase.co";
