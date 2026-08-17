@@ -605,34 +605,300 @@ footer p {
 
 </style>
 
+
+<style id="baby-golden-header-maestro">
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.site-header{
+  width:100%;
+  height:114px;
+  background:rgba(247,244,237,.96);
+  border-bottom:1px solid #e2d6c6;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+}
+
+.site-nav{
+  width:100%;
+  max-width:1280px;
+  height:114px;
+  margin:0 auto;
+  padding:0 28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:28px;
+}
+
+.site-logo-link{
+  display:block;
+  flex:0 0 auto;
+  line-height:0;
+}
+
+.site-logo{
+  display:block;
+  width:155px;
+  height:auto;
+}
+
+.site-menu{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:25px;
+  white-space:nowrap;
+}
+
+.site-menu > a{
+  position:relative;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  color:#302a25;
+  text-decoration:none;
+  font-family:'Montserrat',Arial,sans-serif;
+  font-size:10px;
+  font-weight:700;
+  letter-spacing:.7px;
+  line-height:1;
+  transition:color .25s ease, transform .25s ease;
+}
+
+.site-menu > a:not(.site-store-button):not(.site-icon)::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-8px;
+  width:0;
+  height:1px;
+  background:#b77b20;
+  transition:width .25s ease;
+}
+
+.site-menu > a:not(.site-store-button):not(.site-icon):hover{
+  color:#b77b20;
+  transform:translateY(-1px);
+}
+
+.site-menu > a:not(.site-store-button):not(.site-icon):hover::after{
+  width:100%;
+}
+
+.site-store-button{
+  min-width:112px;
+  height:45px;
+  padding:0 21px;
+  border-radius:999px;
+  background:#b77b20 !important;
+  color:#fff !important;
+  box-shadow:0 12px 28px rgba(183,123,32,.20);
+  transition:background-color .25s ease, color .25s ease,
+             transform .25s ease, box-shadow .25s ease;
+}
+
+.site-store-button:hover,
+.site-store-button:focus-visible{
+  background:#000 !important;
+  color:#fff !important;
+  transform:translateY(-2px);
+  box-shadow:0 15px 35px rgba(0,0,0,.18);
+  outline:none;
+}
+
+.site-icon{
+  width:20px;
+  height:20px;
+  flex:0 0 20px;
+}
+
+.site-icon svg{
+  width:18px;
+  height:18px;
+  display:block;
+}
+
+.site-icon:hover{
+  color:#b77b20 !important;
+  transform:translateY(-1px);
+}
+
+.mobile-menu-button{
+  display:none;
+  width:42px;
+  height:42px;
+  padding:8px;
+  border:0;
+  background:transparent;
+  cursor:pointer;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:5px;
+}
+
+.mobile-menu-button span{
+  display:block;
+  width:22px;
+  height:2px;
+  background:#302a25;
+  transition:transform .25s ease, opacity .25s ease;
+}
+
+@media(max-width:850px){
+  .site-header{
+    height:82px;
+  }
+
+  .site-nav{
+    height:82px;
+    padding:6px 16px;
+    justify-content:space-between;
+    gap:10px;
+  }
+
+  .site-logo{
+    width:105px;
+  }
+
+  .site-menu{
+    position:absolute;
+    top:82px;
+    left:0;
+    right:0;
+    display:none;
+    flex-direction:column;
+    align-items:stretch;
+    justify-content:flex-start;
+    gap:0;
+    padding:14px 18px 20px;
+    background:#f7f4ed;
+    border-bottom:1px solid #e2d6c6;
+    box-shadow:0 16px 30px rgba(0,0,0,.08);
+    white-space:normal;
+  }
+
+  .site-menu.open{
+    display:flex;
+  }
+
+  .site-menu > a{
+    width:100%;
+    min-height:46px;
+    justify-content:flex-start;
+    padding:0 10px;
+    font-size:10px;
+  }
+
+  .site-menu > a:not(.site-store-button):not(.site-icon)::after{
+    display:none;
+  }
+
+  .site-store-button{
+    min-width:0;
+    width:100%;
+    height:44px;
+    min-height:44px !important;
+    justify-content:center !important;
+    margin:8px 0;
+    padding:0 15px !important;
+  }
+
+  .site-icon{
+    width:100%;
+    height:42px;
+    flex:0 0 42px;
+    justify-content:flex-start;
+  }
+
+  .site-icon svg{
+    width:18px;
+    height:18px;
+  }
+
+  .mobile-menu-button{
+    display:flex;
+  }
+
+  .mobile-menu-button.active span:nth-child(1){
+    transform:translateY(7px) rotate(45deg);
+  }
+
+  .mobile-menu-button.active span:nth-child(2){
+    opacity:0;
+  }
+
+  .mobile-menu-button.active span:nth-child(3){
+    transform:translateY(-7px) rotate(-45deg);
+  }
+}
+</style>
+
 </head>
 
 
 <body>
 
 
-<header>
 
-<div class="header-container">
+<header class="site-header">
 
-<div class="logo">
+  <nav class="site-nav">
 
-BABY <span>GOLDEN</span> PERÚ
+    <a href="index.html" class="site-logo-link" aria-label="Baby Golden Perú">
+      <img src="BABY%20GOLDEN.png" alt="Baby Golden Perú" class="site-logo">
+    </a>
 
-</div>
+    <div class="site-menu" id="mainMenu">
 
+      <a href="index.html">INICIO</a>
 
-<a
-href="beneficios.html"
-class="back">
+      <a href="beneficios.html">BENEFICIOS</a>
 
-← BENEFICIOS
+      <a href="index.html#historias-de-oro">HISTORIAS DE ORO</a>
 
-</a>
+      <a href="contacto.html">CONTACTO</a>
 
-</div>
+      <a href="tienda.html" class="site-store-button">TIENDA</a>
+
+      <a href="buscar.html" class="site-icon" aria-label="Buscar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <circle cx="11" cy="11" r="6.5"></circle>
+          <path d="M16 16l4 4"></path>
+        </svg>
+      </a>
+
+      <a href="tienda.html" class="site-icon" aria-label="Carrito">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <path d="M4 5h2l2 11h9l2-8H7"></path>
+          <circle cx="10" cy="20" r="1.3"></circle>
+          <circle cx="17" cy="20" r="1.3"></circle>
+        </svg>
+      </a>
+
+      <a href="cuenta.html" class="site-icon" aria-label="Mi cuenta">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7">
+          <circle cx="12" cy="8" r="3.2"></circle>
+          <path d="M5.5 20c.8-3.5 3-5.3 6.5-5.3s5.7 1.8 6.5 5.3"></path>
+        </svg>
+      </a>
+
+    </div>
+
+    <button class="mobile-menu-button" id="mobileMenuButton"
+            type="button" aria-label="Abrir menú" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+
+  </nav>
 
 </header>
+
 
 
 <section class="hero">
@@ -1476,6 +1742,30 @@ cargarBeneficio();
 
 </script>
 
+
+
+<script id="baby-golden-mobile-menu">
+(function(){
+  const button = document.getElementById('mobileMenuButton');
+  const menu = document.getElementById('mainMenu');
+
+  if (!button || !menu) return;
+
+  button.addEventListener('click', function(){
+    const open = menu.classList.toggle('open');
+    button.classList.toggle('active', open);
+    button.setAttribute('aria-expanded', String(open));
+  });
+
+  menu.querySelectorAll('a').forEach(function(link){
+    link.addEventListener('click', function(){
+      menu.classList.remove('open');
+      button.classList.remove('active');
+      button.setAttribute('aria-expanded', 'false');
+    });
+  });
+})();
+</script>
 
 </body>
 
