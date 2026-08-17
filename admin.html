@@ -1111,176 +1111,7 @@ s<!DOCTYPE html>
       </div>
 
     </div>
-<!-- =========================================
-     CONTENIDO WEB
-========================================= -->
 
-<style>
-
-#contenidoWebAdmin {
-  margin-top: 35px;
-}
-
-.web-admin-head {
-  background: #fff;
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.07);
-}
-
-.web-admin-kicker {
-  color: #b18a4a;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-
-.web-admin-title {
-  margin: 0;
-  font-family: Georgia, serif;
-  font-size: 32px;
-  font-weight: 400;
-}
-
-.web-admin-subtitle {
-  margin: 7px 0 0;
-  color: #777;
-  font-size: 13px;
-}
-
-.web-section {
-  margin-top: 18px;
-  background: #fff;
-  border-radius: 20px;
-  padding: 24px;
-  box-shadow: 0 8px 25px rgba(0,0,0,.05);
-}
-
-.web-section h3 {
-  margin: 0 0 5px;
-  font-family: Georgia, serif;
-  font-size: 24px;
-  font-weight: 400;
-}
-
-.web-section-description {
-  margin: 0 0 20px;
-  color: #888;
-  font-size: 12px;
-}
-
-.web-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.web-full {
-  grid-column: 1 / -1;
-}
-
-.web-field label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 11px;
-  font-weight: 700;
-}
-
-.web-field input,
-.web-field textarea,
-.web-field select {
-  width: 100%;
-  padding: 12px 13px;
-  margin-bottom: 5px;
-  border: 1px solid #ddd;
-  border-radius: 11px;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-  background: #fff;
-}
-
-.web-field textarea {
-  min-height: 90px;
-  resize: vertical;
-}
-
-.web-image-preview {
-  margin-top: 10px;
-}
-
-.web-image-preview img {
-  width: 150px;
-  height: 100px;
-  object-fit: cover;
-  border-radius: 12px;
-  background: #f5f2ed;
-  border: 1px solid #e5e0d8;
-}
-
-.web-save {
-  margin-top: 18px;
-  background: #b18a4a !important;
-}
-
-.web-message {
-  display: none;
-  margin-top: 12px;
-  padding: 12px;
-  border-radius: 10px;
-  font-size: 12px;
-}
-
-.web-success {
-  background: #edf7ef;
-  color: #27703c;
-}
-
-.web-error {
-  background: #faeaea;
-  color: #a33b3b;
-}
-
-.web-divider {
-  border: 0;
-  border-top: 1px solid #eee;
-  margin: 25px 0;
-}
-
-@media(max-width:700px) {
-
-  .web-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .web-full {
-    grid-column: auto;
-  }
-
-}
-
-</style>
-
-
-<div id="contenidoWebAdmin">
-
-
-  <div class="web-admin-head">
-
-    <div class="web-admin-kicker">
-      CONTENIDO WEB
-    </div>
-
-    <h2 class="web-admin-title">
-      Administrar página principal
-    </h2>
-
-    <p class="web-admin-subtitle">
-      Edita los textos e imágenes que aparecen en el Home de Baby Golden Perú.
-    </p>
-
-  </div>
 
 
   <!-- =====================================
@@ -2624,7 +2455,1198 @@ s<!DOCTYPE html>
 
 <script>
 
+<!-- =========================================================
+     ADMINISTRACIÓN DE CONTENIDO WEB
+     CONECTADO A site_content
+========================================================= -->
 
+<style>
+
+.cw-admin {
+  margin-top: 35px;
+}
+
+.cw-admin-header {
+  background: #fff;
+  border-radius: 22px;
+  padding: 28px;
+  box-shadow: 0 12px 35px rgba(0,0,0,.07);
+}
+
+.cw-admin-kicker {
+  color: #b18a4a;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+
+.cw-admin-title {
+  margin: 0;
+  font-family: Georgia, serif;
+  font-size: 32px;
+  font-weight: 400;
+}
+
+.cw-admin-subtitle {
+  margin: 8px 0 0;
+  color: #777;
+  font-size: 13px;
+}
+
+
+/* =========================================================
+   ACORDEÓN
+========================================================= */
+
+.cw-accordion {
+  margin-top: 15px;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #e9e5df;
+  box-shadow: 0 8px 25px rgba(0,0,0,.04);
+}
+
+.cw-accordion-header {
+  width: 100%;
+  border: 0;
+  background: #fff;
+  color: #292521;
+  padding: 20px 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  cursor: pointer;
+}
+
+.cw-accordion-header:hover {
+  opacity: 1;
+  background: #faf8f5;
+}
+
+.cw-accordion-title {
+  font-family: Georgia, serif;
+  font-size: 22px;
+  font-weight: 400;
+}
+
+.cw-accordion-description {
+  margin-top: 4px;
+  color: #999;
+  font-family: Arial, sans-serif;
+  font-size: 11px;
+}
+
+.cw-arrow {
+  width: auto !important;
+  min-width: 40px;
+  padding: 8px !important;
+  background: #f5f2ed !important;
+  color: #76552e !important;
+  border-radius: 50% !important;
+  font-size: 16px !important;
+  line-height: 1;
+}
+
+.cw-accordion-content {
+  display: none;
+  padding: 0 22px 25px;
+  border-top: 1px solid #eee;
+}
+
+.cw-accordion.open
+.cw-accordion-content {
+  display: block;
+}
+
+.cw-accordion.open
+.cw-arrow {
+  transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   CAMPOS
+========================================================= */
+
+.cw-field {
+  margin-top: 18px;
+}
+
+.cw-field label {
+  display: block;
+  margin-bottom: 7px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cw-field input,
+.cw-field textarea {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  font-family: Arial, sans-serif;
+  font-size: 13px;
+  background: #fff;
+}
+
+.cw-field textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
+.cw-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 15px;
+}
+
+.cw-full {
+  grid-column: 1 / -1;
+}
+
+
+/* =========================================================
+   IMAGEN
+========================================================= */
+
+.cw-image-preview {
+  margin-top: 12px;
+}
+
+.cw-image-preview img {
+  width: 180px;
+  height: 115px;
+  object-fit: cover;
+  border-radius: 14px;
+  background: #f5f2ed;
+  border: 1px solid #e5e0d8;
+}
+
+
+/* =========================================================
+   BOTÓN
+========================================================= */
+
+.cw-save {
+  margin-top: 22px;
+  background: #b18a4a !important;
+}
+
+.cw-message {
+  display: none;
+  margin-top: 12px;
+  padding: 12px 14px;
+  border-radius: 10px;
+  font-size: 12px;
+}
+
+.cw-success {
+  background: #edf7ef;
+  color: #27703c;
+}
+
+.cw-error {
+  background: #faeaea;
+  color: #a33b3b;
+}
+
+
+/* =========================================================
+   HISTORIAS
+========================================================= */
+
+.cw-gallery-info {
+  margin-top: 18px;
+  padding: 15px;
+  background: #faf8f5;
+  border-radius: 12px;
+  color: #777;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+
+@media(max-width:700px) {
+
+  .cw-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cw-full {
+    grid-column: auto;
+  }
+
+  .cw-admin-title {
+    font-size: 26px;
+  }
+
+}
+
+</style>
+
+
+<div
+  id="contenidoWebAdmin"
+  class="cw-admin"
+>
+
+
+  <!-- =======================================================
+       CABECERA
+  ======================================================== -->
+
+  <div class="cw-admin-header">
+
+    <div class="cw-admin-kicker">
+      ADMINISTRACIÓN WEB
+    </div>
+
+    <h2 class="cw-admin-title">
+      Contenido de Baby Golden Perú
+    </h2>
+
+    <p class="cw-admin-subtitle">
+      Edita el contenido que aparece directamente en la página principal.
+    </p>
+
+  </div>
+
+
+
+  <!-- =======================================================
+       PORTADA
+  ======================================================== -->
+
+  <div
+    class="cw-accordion"
+    id="cwPortada"
+  >
+
+    <button
+      type="button"
+      class="cw-accordion-header"
+    >
+
+      <div>
+
+        <div class="cw-accordion-title">
+          Portada
+        </div>
+
+        <div class="cw-accordion-description">
+          Texto principal e imagen del Home
+        </div>
+
+      </div>
+
+      <span class="cw-arrow">
+        ▼
+      </span>
+
+    </button>
+
+
+    <div class="cw-accordion-content">
+
+      <div class="cw-grid">
+
+
+        <div class="cw-field cw-full">
+
+          <label>
+            Texto pequeño
+          </label>
+
+          <input
+            id="cwHeroKicker"
+            type="text"
+            placeholder="LA COMUNIDAD MÁS GRANDE DE GOLDEN RETRIEVER EN PERÚ"
+          >
+
+        </div>
+
+
+        <div class="cw-field">
+
+          <label>
+            Línea 1
+          </label>
+
+          <input
+            id="cwHeroLine1"
+            type="text"
+            placeholder="MÁS QUE UNA"
+          >
+
+        </div>
+
+
+        <div class="cw-field">
+
+          <label>
+            Línea 2
+          </label>
+
+          <input
+            id="cwHeroLine2"
+            type="text"
+            placeholder="COMUNIDAD,"
+          >
+
+        </div>
+
+
+        <div class="cw-field">
+
+          <label>
+            Línea 3
+          </label>
+
+          <input
+            id="cwHeroLine3"
+            type="text"
+            placeholder="UNA FAMILIA."
+          >
+
+        </div>
+
+
+        <div class="cw-field">
+        </div>
+
+
+        <div class="cw-field cw-full">
+
+          <label>
+            Descripción
+          </label>
+
+          <textarea
+            id="cwHeroSubtitle"
+            placeholder="Texto que aparece debajo del título..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="cw-field cw-full">
+
+          <label>
+            Imagen de portada
+          </label>
+
+          <input
+            id="cwHeroImage"
+            type="url"
+            placeholder="https://..."
+          >
+
+          <div
+            id="cwHeroImagePreview"
+            class="cw-image-preview"
+          ></div>
+
+        </div>
+
+
+      </div>
+
+
+      <button
+        type="button"
+        id="cwSaveHero"
+        class="cw-save"
+      >
+        GUARDAR PORTADA
+      </button>
+
+
+      <div
+        id="cwHeroMessage"
+        class="cw-message"
+      ></div>
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =======================================================
+       LA COMUNIDAD
+  ======================================================== -->
+
+  <div
+    class="cw-accordion"
+    id="cwComunidad"
+  >
+
+    <button
+      type="button"
+      class="cw-accordion-header"
+    >
+
+      <div>
+
+        <div class="cw-accordion-title">
+          La comunidad
+        </div>
+
+        <div class="cw-accordion-description">
+          Texto principal de nuestra comunidad
+        </div>
+
+      </div>
+
+      <span class="cw-arrow">
+        ▼
+      </span>
+
+    </button>
+
+
+    <div class="cw-accordion-content">
+
+
+      <div class="cw-field">
+
+        <label>
+          Título
+        </label>
+
+        <input
+          id="cwFamilyTitle"
+          type="text"
+          placeholder="Más que una comunidad."
+        >
+
+      </div>
+
+
+      <div class="cw-field">
+
+        <label>
+          Descripción
+        </label>
+
+        <textarea
+          id="cwFamilyText"
+          placeholder="Texto de la comunidad..."
+        ></textarea>
+
+      </div>
+
+
+      <div class="cw-gallery-info">
+
+        Esta sección está conectada a los campos
+        <strong>family_title</strong> y
+        <strong>family_text</strong> de
+        <strong>site_content</strong>.
+
+      </div>
+
+
+      <button
+        type="button"
+        id="cwSaveFamily"
+        class="cw-save"
+      >
+        GUARDAR COMUNIDAD
+      </button>
+
+
+      <div
+        id="cwFamilyMessage"
+        class="cw-message"
+      ></div>
+
+
+    </div>
+
+  </div>
+
+
+
+  <!-- =======================================================
+       HISTORIAS DE ORO
+  ======================================================== -->
+
+  <div
+    class="cw-accordion"
+    id="cwHistorias"
+  >
+
+    <button
+      type="button"
+      class="cw-accordion-header"
+    >
+
+      <div>
+
+        <div class="cw-accordion-title">
+          Historias de Oro
+        </div>
+
+        <div class="cw-accordion-description">
+          Galería de fotografías de la comunidad
+        </div>
+
+      </div>
+
+      <span class="cw-arrow">
+        ▼
+      </span>
+
+    </button>
+
+
+    <div class="cw-accordion-content">
+
+
+      <div class="cw-gallery-info">
+
+        Las Historias de Oro utilizan la tabla
+        <strong>site_gallery</strong>.
+
+        <br><br>
+
+        Cada historia utiliza un slot:
+
+        <br>
+
+        <strong>historia_1</strong>,
+        <strong>historia_2</strong>,
+        <strong>historia_3</strong>,
+        <strong>historia_4</strong>,
+        <strong>historia_5</strong> y
+        <strong>historia_6</strong>.
+
+        <br><br>
+
+        Primero vamos a terminar el editor de contenido
+        principal y después incorporaremos aquí el
+        cargador de fotografías.
+
+      </div>
+
+
+    </div>
+
+  </div>
+
+
+</div>
+
+
+
+<script>
+
+(function () {
+
+
+  const sb =
+    window.supabaseClient;
+
+
+  if (!sb) {
+
+    console.error(
+      "Supabase no está disponible."
+    );
+
+    return;
+
+  }
+
+
+  /* =======================================================
+     ACORDEONES
+  ======================================================== */
+
+  const acordeones =
+    document.querySelectorAll(
+      "#contenidoWebAdmin .cw-accordion"
+    );
+
+
+  acordeones.forEach(
+    function (acordeon) {
+
+      const boton =
+        acordeon.querySelector(
+          ".cw-accordion-header"
+        );
+
+
+      boton.addEventListener(
+        "click",
+        function () {
+
+          const estabaAbierto =
+            acordeon.classList.contains(
+              "open"
+            );
+
+
+          /* cerrar todos */
+
+          acordeones.forEach(
+            function (otro) {
+
+              otro.classList.remove(
+                "open"
+              );
+
+            }
+          );
+
+
+          /* abrir seleccionado */
+
+          if (!estabaAbierto) {
+
+            acordeon.classList.add(
+              "open"
+            );
+
+          }
+
+        }
+      );
+
+    }
+  );
+
+
+  /* =======================================================
+     CARGAR SITE CONTENT
+  ======================================================== */
+
+  async function cargarContenidoWebAdmin() {
+
+
+    const {
+      data,
+      error
+    } =
+      await sb
+        .from("site_content")
+        .select("key,value");
+
+
+    if (error) {
+
+      console.error(
+        "ERROR CARGANDO SITE_CONTENT:",
+        error
+      );
+
+      mostrarMensajeCW(
+        "cwHeroMessage",
+        "No se pudo cargar el contenido: " +
+          error.message,
+        true
+      );
+
+      return;
+
+    }
+
+
+    const contenido = {};
+
+
+    (data || []).forEach(
+      function (fila) {
+
+        contenido[
+          fila.key
+        ] =
+          fila.value ?? "";
+
+      }
+    );
+
+
+    /* =========================
+       PORTADA
+    ========================= */
+
+    document.getElementById(
+      "cwHeroKicker"
+    ).value =
+      contenido.hero_kicker || "";
+
+
+    document.getElementById(
+      "cwHeroLine1"
+    ).value =
+      contenido.hero_line1 || "";
+
+
+    document.getElementById(
+      "cwHeroLine2"
+    ).value =
+      contenido.hero_line2 || "";
+
+
+    document.getElementById(
+      "cwHeroLine3"
+    ).value =
+      contenido.hero_line3 || "";
+
+
+    document.getElementById(
+      "cwHeroSubtitle"
+    ).value =
+      contenido.hero_subtitle || "";
+
+
+    document.getElementById(
+      "cwHeroImage"
+    ).value =
+      contenido.hero_image || "";
+
+
+    mostrarPreviewHero(
+      contenido.hero_image || ""
+    );
+
+
+    /* =========================
+       COMUNIDAD
+    ========================= */
+
+    document.getElementById(
+      "cwFamilyTitle"
+    ).value =
+      contenido.family_title || "";
+
+
+    document.getElementById(
+      "cwFamilyText"
+    ).value =
+      contenido.family_text || "";
+
+  }
+
+
+  /* =======================================================
+     PREVIEW IMAGEN
+  ======================================================== */
+
+  function mostrarPreviewHero(
+    url
+  ) {
+
+    const preview =
+      document.getElementById(
+        "cwHeroImagePreview"
+      );
+
+
+    if (!url) {
+
+      preview.innerHTML = "";
+
+      return;
+
+    }
+
+
+    preview.innerHTML = `
+
+      <img
+        src="${escaparCW(url)}"
+        alt="Vista previa de portada"
+        onerror="
+          this.style.display='none';
+        "
+      >
+
+    `;
+
+  }
+
+
+  document
+    .getElementById(
+      "cwHeroImage"
+    )
+    .addEventListener(
+      "input",
+      function () {
+
+        mostrarPreviewHero(
+          this.value.trim()
+        );
+
+      }
+    );
+
+
+  /* =======================================================
+     GUARDAR UNA CLAVE
+  ======================================================== */
+
+  async function guardarClave(
+    clave,
+    valor
+  ) {
+
+    const {
+      error
+    } =
+      await sb
+        .from("site_content")
+        .upsert(
+          {
+            key: clave,
+            value: valor
+          },
+          {
+            onConflict: "key"
+          }
+        );
+
+
+    if (error) {
+
+      throw error;
+
+    }
+
+  }
+
+
+  /* =======================================================
+     GUARDAR PORTADA
+  ======================================================== */
+
+  document
+    .getElementById(
+      "cwSaveHero"
+    )
+    .addEventListener(
+      "click",
+      async function () {
+
+
+        const boton =
+          this;
+
+
+        boton.disabled =
+          true;
+
+        boton.textContent =
+          "GUARDANDO...";
+
+
+        try {
+
+
+          await guardarClave(
+            "hero_kicker",
+            document
+              .getElementById(
+                "cwHeroKicker"
+              )
+              .value
+              .trim()
+          );
+
+
+          await guardarClave(
+            "hero_line1",
+            document
+              .getElementById(
+                "cwHeroLine1"
+              )
+              .value
+              .trim()
+          );
+
+
+          await guardarClave(
+            "hero_line2",
+            document
+              .getElementById(
+                "cwHeroLine2"
+              )
+              .value
+              .trim()
+          );
+
+
+          await guardarClave(
+            "hero_line3",
+            document
+              .getElementById(
+                "cwHeroLine3"
+              )
+              .value
+              .trim()
+          );
+
+
+          await guardarClave(
+            "hero_subtitle",
+            document
+              .getElementById(
+                "cwHeroSubtitle"
+              )
+              .value
+              .trim()
+          );
+
+
+          await guardarClave(
+            "hero_image",
+            document
+              .getElementById(
+                "cwHeroImage"
+              )
+              .value
+              .trim()
+          );
+
+
+          mostrarMensajeCW(
+            "cwHeroMessage",
+            "Portada guardada correctamente.",
+            false
+          );
+
+
+          mostrarPreviewHero(
+            document
+              .getElementById(
+                "cwHeroImage"
+              )
+              .value
+              .trim()
+          );
+
+
+        } catch (error) {
+
+
+          console.error(
+            "ERROR GUARDANDO PORTADA:",
+            error
+          );
+
+
+          mostrarMensajeCW(
+            "cwHeroMessage",
+            error.message ||
+              "No se pudo guardar la portada.",
+            true
+          );
+
+
+        } finally {
+
+
+          boton.disabled =
+            false;
+
+          boton.textContent =
+            "GUARDAR PORTADA";
+
+        }
+
+      }
+    );
+
+
+  /* =======================================================
+     GUARDAR COMUNIDAD
+  ======================================================== */
+
+  document
+    .getElementById(
+      "cwSaveFamily"
+    )
+    .addEventListener(
+      "click",
+      async function () {
+
+
+        const boton =
+          this;
+
+
+        boton.disabled =
+          true;
+
+        boton.textContent =
+          "GUARDANDO...";
+
+
+        try {
+
+
+          await guardarClave(
+            "family_title",
+            document
+              .getElementById(
+                "cwFamilyTitle"
+              )
+              .value
+              .trim()
+          );
+
+
+          await guardarClave(
+            "family_text",
+            document
+              .getElementById(
+                "cwFamilyText"
+              )
+              .value
+              .trim()
+          );
+
+
+          mostrarMensajeCW(
+            "cwFamilyMessage",
+            "Contenido de la comunidad guardado correctamente.",
+            false
+          );
+
+
+        } catch (error) {
+
+
+          console.error(
+            "ERROR GUARDANDO COMUNIDAD:",
+            error
+          );
+
+
+          mostrarMensajeCW(
+            "cwFamilyMessage",
+            error.message ||
+              "No se pudo guardar la comunidad.",
+            true
+          );
+
+
+        } finally {
+
+
+          boton.disabled =
+            false;
+
+          boton.textContent =
+            "GUARDAR COMUNIDAD";
+
+        }
+
+      }
+    );
+
+
+  /* =======================================================
+     MENSAJES
+  ======================================================== */
+
+  function mostrarMensajeCW(
+    id,
+    texto,
+    error
+  ) {
+
+    const elemento =
+      document.getElementById(
+        id
+      );
+
+
+    elemento.textContent =
+      texto;
+
+
+    elemento.className =
+      "cw-message " +
+      (
+        error
+          ? "cw-error"
+          : "cw-success"
+      );
+
+
+    elemento.style.display =
+      "block";
+
+
+    setTimeout(
+      function () {
+
+        elemento.style.display =
+          "none";
+
+      },
+      3500
+    );
+
+  }
+
+
+  /* =======================================================
+     ESCAPAR HTML
+  ======================================================== */
+
+  function escaparCW(
+    valor
+  ) {
+
+    return String(
+      valor ?? ""
+    )
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  /* =======================================================
+     EXPONER FUNCIÓN
+  ======================================================== */
+
+  window.cargarContenidoWebAdmin =
+    cargarContenidoWebAdmin;
+
+
+})();
+
+</script>
 /* ========================================
    SUPABASE
 ======================================== */
@@ -3711,19 +4733,38 @@ async function comprobarAdministrador() {
 
 
   loginView.classList.add(
-    "hidden"
-  );
+  "hidden"
+);
 
-  panelView.classList.remove(
-    "hidden"
-  );
+panelView.classList.remove(
+  "hidden"
+);
 
-  if (
-    typeof window.cargarGoldenBenefits === "function"
-  ) {
-    window.cargarGoldenBenefits();
-  }
 
+/* ================================
+   CARGAR GOLDEN BENEFITS
+================================ */
+
+if (
+  typeof window.cargarGoldenBenefits === "function"
+) {
+
+  window.cargarGoldenBenefits();
+
+}
+
+
+/* ================================
+   CARGAR CONTENIDO WEB
+================================ */
+
+if (
+  typeof window.cargarContenidoWebAdmin === "function"
+) {
+
+  await window.cargarContenidoWebAdmin();
+
+}
 }
 
 
@@ -6591,677 +7632,7 @@ if (logoFile) {
 })();
 
 </script>
-  <!-- =========================================
-     CONTENIDO WEB
-========================================= -->
-
-<style>
-
-#contenidoWebAdmin {
-  margin-top: 35px;
-}
-
-.cw-head {
-  background: #fff;
-  border-radius: 22px;
-  padding: 28px;
-  box-shadow: 0 12px 35px rgba(0,0,0,.07);
-}
-
-.cw-kicker {
-  color: #b18a4a;
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  text-transform: uppercase;
-  margin-bottom: 7px;
-}
-
-.cw-title {
-  margin: 0;
-  font-family: Georgia, serif;
-  font-size: 32px;
-  font-weight: 400;
-}
-
-.cw-subtitle {
-  margin: 7px 0 22px;
-  color: #777;
-  font-size: 13px;
-}
-
-.cw-list {
-  margin-top: 18px;
-  display: grid;
-  gap: 15px;
-}
-
-.cw-card {
-  background: #fff;
-  border: 1px solid #e9e5df;
-  border-radius: 18px;
-  padding: 20px;
-}
-
-.cw-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-}
-
-.cw-name {
-  font-family: Georgia, serif;
-  font-size: 22px;
-}
-
-.cw-key {
-  color: #999;
-  font-size: 11px;
-  margin-top: 4px;
-}
-
-.cw-status {
-  padding: 7px 11px;
-  border-radius: 20px;
-  font-size: 9px;
-  font-weight: bold;
-}
-
-.cw-active {
-  background: #edf7ef;
-  color: #27703c;
-}
-
-.cw-inactive {
-  background: #faeaea;
-  color: #a33b3b;
-}
-
-.cw-edit {
-  display: none;
-  margin-top: 18px;
-  padding-top: 18px;
-  border-top: 1px solid #eee;
-}
-
-.cw-edit.open {
-  display: block;
-}
-
-.cw-edit label {
-  display: block;
-  margin-bottom: 6px;
-  font-size: 11px;
-  font-weight: bold;
-}
-
-.cw-edit input,
-.cw-edit textarea {
-  width: 100%;
-  padding: 12px;
-  margin-bottom: 14px;
-  border: 1px solid #ddd;
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
-  font-size: 13px;
-}
-
-.cw-edit textarea {
-  min-height: 110px;
-  resize: vertical;
-}
-
-.cw-actions {
-  display: flex;
-  gap: 8px;
-  margin-top: 5px;
-}
-
-.cw-actions button {
-  width: auto;
-  padding: 10px 15px;
-}
-
-.cw-save {
-  background: #b18a4a !important;
-}
-
-.cw-loading,
-.cw-empty {
-  background: #fff;
-  border-radius: 18px;
-  padding: 30px;
-  text-align: center;
-  color: #888;
-}
-
-</style>
-
-
-<div id="contenidoWebAdmin">
-
-  <div class="cw-head">
-
-    <div class="cw-kicker">
-      ADMINISTRACIÓN WEB
-    </div>
-
-    <h2 class="cw-title">
-      Contenido de la web
-    </h2>
-
-    <p class="cw-subtitle">
-      Edita los textos principales de Baby Golden Perú.
-    </p>
-
-  </div>
-
-
-  <div
-    id="cwList"
-    class="cw-list"
-  >
-
-    <div class="cw-loading">
-      Cargando contenido...
-    </div>
-
-  </div>
-
-</div>
-
-
-<script>
-
-(function () {
-
-  const cw =
-    window.supabaseClient;
-
-
-  const lista =
-    document.getElementById(
-      "cwList"
-    );
-
-
-  if (!cw) {
-
-    console.error(
-      "Supabase no está disponible."
-    );
-
-    return;
-
-  }
-
-
-  function escaparCW(valor) {
-
-    return String(
-      valor ?? ""
-    )
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
-
-
-  async function cargarContenidoWeb() {
-
-    lista.innerHTML = `
-      <div class="cw-loading">
-        Cargando contenido...
-      </div>
-    `;
-
-
-    const {
-      data,
-      error
-    } = await cw
-      .from("contenido_web")
-      .select("*")
-      .order("id", {
-        ascending: true
-      });
-
-
-    if (error) {
-
-      console.error(
-        "ERROR CONTENIDO WEB:",
-        error
-      );
-
-      lista.innerHTML = `
-        <div class="cw-empty">
-          No se pudo cargar el contenido.
-          <br><br>
-          ${escaparCW(error.message)}
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    if (!data || data.length === 0) {
-
-      lista.innerHTML = `
-        <div class="cw-empty">
-          No hay contenido registrado.
-        </div>
-      `;
-
-      return;
-
-    }
-
-
-    lista.innerHTML = "";
-
-
-    data.forEach(
-      function (item) {
-
-        pintarContenido(item);
-
-      }
-    );
-
-  }
-
-
-  function pintarContenido(item) {
-
-    const card =
-      document.createElement("div");
-
-
-    card.className =
-      "cw-card";
-
-
-    card.innerHTML = `
-
-      <div class="cw-card-header">
-
-        <div>
-
-          <div class="cw-name">
-            ${escaparCW(
-              item.titulo || item.clave
-            )}
-          </div>
-
-          <div class="cw-key">
-            Sección: ${escaparCW(
-              item.clave
-            )}
-          </div>
-
-        </div>
-
-
-        <span
-          class="
-            cw-status
-            ${
-              item.activo
-                ? "cw-active"
-                : "cw-inactive"
-            }
-          "
-        >
-          ${
-            item.activo
-              ? "ACTIVA"
-              : "INACTIVA"
-          }
-        </span>
-
-      </div>
-
-
-      <div class="cw-actions">
-
-        <button
-          type="button"
-          class="cw-edit-button"
-        >
-          EDITAR
-        </button>
-
-        <button
-          type="button"
-          class="cw-toggle-button secondary"
-        >
-          ${
-            item.activo
-              ? "DESACTIVAR"
-              : "ACTIVAR"
-          }
-        </button>
-
-      </div>
-
-
-      <div class="cw-edit">
-
-        <label>
-          Título
-        </label>
-
-        <input
-          data-cw="titulo"
-          value="${escaparCW(
-            item.titulo
-          )}"
-        >
-
-
-        <label>
-          Subtítulo
-        </label>
-
-        <input
-          data-cw="subtitulo"
-          value="${escaparCW(
-            item.subtitulo
-          )}"
-        >
-
-
-        <label>
-          Contenido
-        </label>
-
-        <textarea
-          data-cw="contenido"
-        >${escaparCW(
-          item.contenido
-        )}</textarea>
-
-
-        <label>
-          Imagen URL
-        </label>
-
-        <input
-          data-cw="imagen_url"
-          value="${escaparCW(
-            item.imagen_url
-          )}"
-          placeholder="https://..."
-        >
-
-
-        <label>
-          Enlace
-        </label>
-
-        <input
-          data-cw="enlace"
-          value="${escaparCW(
-            item.enlace
-          )}"
-          placeholder="https://..."
-        >
-
-
-        <div class="cw-actions">
-
-          <button
-            type="button"
-            class="cw-save"
-          >
-            GUARDAR CAMBIOS
-          </button>
-
-          <button
-            type="button"
-            class="secondary cw-cancel"
-          >
-            CANCELAR
-          </button>
-
-        </div>
-
-      </div>
-
-    `;
-
-
-    lista.appendChild(card);
-
-
-    const editor =
-      card.querySelector(
-        ".cw-edit"
-      );
-
-
-    card
-      .querySelector(
-        ".cw-edit-button"
-      )
-      .addEventListener(
-        "click",
-        function () {
-
-          editor.classList.toggle(
-            "open"
-          );
-
-        }
-      );
-
-
-    card
-      .querySelector(
-        ".cw-cancel"
-      )
-      .addEventListener(
-        "click",
-        function () {
-
-          editor.classList.remove(
-            "open"
-          );
-
-        }
-      );
-
-
-    card
-      .querySelector(
-        ".cw-toggle-button"
-      )
-      .addEventListener(
-        "click",
-        async function () {
-
-          const nuevoEstado =
-            !item.activo;
-
-
-          const confirmar =
-            confirm(
-              nuevoEstado
-                ? "¿Activar esta sección?"
-                : "¿Desactivar esta sección?"
-            );
-
-
-          if (!confirmar) {
-            return;
-          }
-
-
-          const {
-            error
-          } = await cw
-            .from("contenido_web")
-            .update({
-              activo:
-                nuevoEstado,
-              actualizado_en:
-                new Date()
-                  .toISOString()
-            })
-            .eq(
-              "id",
-              item.id
-            );
-
-
-          if (error) {
-
-            alert(
-              error.message
-            );
-
-            return;
-
-          }
-
-
-          cargarContenidoWeb();
-
-        }
-      );
-
-
-    card
-      .querySelector(
-        ".cw-save"
-      )
-      .addEventListener(
-        "click",
-        async function () {
-
-          const titulo =
-            card.querySelector(
-              '[data-cw="titulo"]'
-            ).value.trim();
-
-
-          const subtitulo =
-            card.querySelector(
-              '[data-cw="subtitulo"]'
-            ).value.trim();
-
-
-          const contenido =
-            card.querySelector(
-              '[data-cw="contenido"]'
-            ).value.trim();
-
-
-          const imagen =
-            card.querySelector(
-              '[data-cw="imagen_url"]'
-            ).value.trim();
-
-
-          const enlace =
-            card.querySelector(
-              '[data-cw="enlace"]'
-            ).value.trim();
-
-
-          if (!titulo) {
-
-            alert(
-              "El título no puede estar vacío."
-            );
-
-            return;
-
-          }
-
-
-          const {
-            error
-          } = await cw
-            .from("contenido_web")
-            .update({
-
-              titulo:
-                titulo,
-
-              subtitulo:
-                subtitulo || null,
-
-              contenido:
-                contenido || null,
-
-              imagen_url:
-                imagen || null,
-
-              enlace:
-                enlace || null,
-
-              actualizado_en:
-                new Date()
-                  .toISOString()
-
-            })
-            .eq(
-              "id",
-              item.id
-            );
-
-
-          if (error) {
-
-            console.error(
-              error
-            );
-
-            alert(
-              "No se pudo guardar: " +
-              error.message
-            );
-
-            return;
-
-          }
-
-
-          alert(
-            "Contenido actualizado correctamente."
-          );
-
-
-          cargarContenidoWeb();
-
-        }
-      );
-
-  }
-
-
-  window.cargarContenidoWeb =
-    cargarContenidoWeb;
-
-
-  /*
-    Solo cargar si el usuario
-    ya inició sesión.
-  */
-
-  cargarContenidoWeb();
-
-
-})();
-
+ 
 </script>
 <script src="historias-oro-admin.js"></script>
 </body>
