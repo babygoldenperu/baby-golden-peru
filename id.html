@@ -893,7 +893,13 @@ async function cargarPerfil() {
   }
 
 
-  if (!data) {
+  const perfil =
+    Array.isArray(data)
+      ? data[0]
+      : data;
+
+
+  if (!perfil) {
 
     document.getElementById(
       "app"
@@ -916,8 +922,10 @@ async function cargarPerfil() {
      DETECTAR TIPO DE ID
   ====================================== */
 
+  const dataPerfil = perfil;
+
   const esBlack =
-    data.tipo_id === "Black ID";
+    dataPerfil.tipo_id === "Black ID";
 
 
   const claseTarjeta =
@@ -944,7 +952,7 @@ async function cargarPerfil() {
   let fotoUrl = "";
 
 
-  if (data.foto_url) {
+  if (dataPerfil.foto_url) {
 
     const {
       data: fotoFirmada,
@@ -954,7 +962,7 @@ async function cargarPerfil() {
         .storage
         .from("fotos-perritos")
         .createSignedUrl(
-          data.foto_url,
+          dataPerfil.foto_url,
           3600
         );
 
@@ -981,9 +989,9 @@ async function cargarPerfil() {
   ====================================== */
 
   document.title =
-    data.nombre_perrito +
+    dataPerfil.nombre_perrito +
     " | " +
-    data.baby_golden_id;
+    dataPerfil.baby_golden_id;
 
 
   /* ======================================
@@ -1000,7 +1008,7 @@ async function cargarPerfil() {
           <img
             class="photo"
             src="${escaparHTML(fotoUrl)}"
-            alt="Fotografía de ${escaparHTML(data.nombre_perrito)}"
+            alt="Fotografía de ${escaparHTML(dataPerfil.nombre_perrito)}"
           >
 
         </div>
@@ -1016,16 +1024,16 @@ async function cargarPerfil() {
 let botonesContacto = "";
 
 const tieneRedSocial =
-  data.red_social &&
-  String(data.red_social).trim() !== "";
+  dataPerfil.red_social &&
+  String(dataPerfil.red_social).trim() !== "";
 
 const tieneCelular =
-  data.celular &&
-  String(data.celular).trim() !== "";
+  dataPerfil.celular &&
+  String(dataPerfil.celular).trim() !== "";
 
 const tieneWhatsApp =
-  data.whatsapp &&
-  String(data.whatsapp).trim() !== "";
+  dataPerfil.whatsapp &&
+  String(dataPerfil.whatsapp).trim() !== "";
 
 
 if (
@@ -1043,7 +1051,7 @@ if (
         ? `
           <a
             class="contact-button"
-            href="${escaparHTML(data.red_social)}"
+            href="${escaparHTML(dataPerfil.red_social)}"
             target="_blank"
             rel="noopener noreferrer"
           >
@@ -1059,7 +1067,7 @@ if (
         ? `
           <a
             class="contact-button"
-            href="tel:${escaparHTML(data.celular)}"
+            href="tel:${escaparHTML(dataPerfil.celular)}"
           >
             Llamar
           </a>
@@ -1074,7 +1082,7 @@ if (
           <a
             class="contact-button"
             href="https://wa.me/${String(
-  data.whatsapp
+  dataPerfil.whatsapp
 ).replace(/\D/g, "")}"
             target="_blank"
             rel="noopener noreferrer"
@@ -1096,23 +1104,23 @@ if (
 let informacionMedica = "";
 
 const tieneAlergias =
-  String(data.alergias || "").trim().toLowerCase() === "sí";
+  String(dataPerfil.alergias || "").trim().toLowerCase() === "sí";
 
 const tieneCondicion =
-  String(data.condicion_medica || "").trim().toLowerCase() === "sí";
+  String(dataPerfil.condicion_medica || "").trim().toLowerCase() === "sí";
 
 const tomaMedicamento =
-  String(data.medicamento || "").trim().toLowerCase() === "sí";
+  String(dataPerfil.medicamento || "").trim().toLowerCase() === "sí";
 
 const vacunas =
-  String(data.vacunas_al_dia || "").trim();
+  String(dataPerfil.vacunas_al_dia || "").trim();
 
 
 if (
-  data.alergias ||
-  data.condicion_medica ||
-  data.medicamento ||
-  data.vacunas_al_dia
+  dataPerfil.alergias ||
+  dataPerfil.condicion_medica ||
+  dataPerfil.medicamento ||
+  dataPerfil.vacunas_al_dia
 ) {
 
   informacionMedica = `
@@ -1130,7 +1138,7 @@ if (
         <!-- ALERGIAS -->
 
         ${
-          data.alergias
+          dataPerfil.alergias
 
           ? `
 
@@ -1146,7 +1154,7 @@ if (
 
             ${
               tieneAlergias &&
-              data.detalle_alergias
+              dataPerfil.detalle_alergias
 
               ? `
 
@@ -1155,7 +1163,7 @@ if (
                 <div class="medical-detail">
   └ <strong>Detalle:</strong>
   ${escaparHTML(
-    data.detalle_alergias
+    dataPerfil.detalle_alergias
   )}
 </div>
               `
@@ -1174,7 +1182,7 @@ if (
         <!-- CONDICIÓN MÉDICA -->
 
         ${
-          data.condicion_medica
+          dataPerfil.condicion_medica
 
           ? `
 
@@ -1190,7 +1198,7 @@ if (
 
             ${
               tieneCondicion &&
-              data.detalle_condicion
+              dataPerfil.detalle_condicion
 
               ? `
 
@@ -1199,7 +1207,7 @@ if (
                 <div class="medical-detail">
   └ <strong>Detalle:</strong>
   ${escaparHTML(
-    data.detalle_condicion
+    dataPerfil.detalle_condicion
   )}
 </div>
 
@@ -1219,7 +1227,7 @@ if (
         <!-- MEDICAMENTO -->
 
         ${
-          data.medicamento
+          dataPerfil.medicamento
 
           ? `
 
@@ -1235,7 +1243,7 @@ if (
 
             ${
               tomaMedicamento &&
-              data.detalle_medicamento
+              dataPerfil.detalle_medicamento
 
               ? `
 
@@ -1244,7 +1252,7 @@ if (
                 <div class="medical-detail">
   └ <strong>Detalle:</strong>
   ${escaparHTML(
-    data.detalle_medicamento
+    dataPerfil.detalle_medicamento
   )}
 </div>
 
@@ -1264,7 +1272,7 @@ if (
         <!-- VACUNAS -->
 
         ${
-          data.vacunas_al_dia
+          dataPerfil.vacunas_al_dia
 
           ? `
 
@@ -1313,82 +1321,19 @@ if (
 
     <div class="benefit">
       <span>◆</span>
-      Beneficios exclusivos de
-      Baby Golden Perú
+      Beneficios exclusivos de Baby Golden Perú
     </div>
 
     ${
       esBlack
       ? `
-
         <div class="benefit">
           <span>◆</span>
-          Beneficios especiales en
-          merchandising de Baby Golden Perú
+          Beneficios especiales en merchandising de Baby Golden Perú
         </div>
-
       `
       : ""
     }
-
-  </div>
-
-`;
-
-  <div class="id-benefits">
-
-    <div class="id-benefits-title">
-
-      Beneficios Baby Golden ID
-
-    </div>
-
-
-    <div class="benefit">
-
-      <span>◆</span>
-
-      Identificación digital exclusiva
-
-    </div>
-
-
-    <div class="benefit">
-
-      <span>◆</span>
-
-      Perfil digital personalizado
-
-    </div>
-
-
-    <div class="benefit">
-
-      <span>◆</span>
-
-      Beneficios exclusivos de
-      Baby Golden Perú
-
-    </div>
-
-
-    ${
-      esBlack
-      ? `
-
-        <div class="benefit">
-
-          <span>◆</span>
-
-          Beneficios especiales en
-          merchandising de Baby Golden Perú
-
-        </div>
-
-      `
-      : ""
-    }
-
 
   </div>
 
@@ -1412,7 +1357,7 @@ if (
       <strong>
 
         ${
-          data.tiene_microchip
+          dataPerfil.tiene_microchip
             ? "Registrado"
             : "No registrado"
         }
@@ -1458,7 +1403,7 @@ if (
       <div class="id-badge">
 
         ${escaparHTML(
-          data.baby_golden_id
+          dataPerfil.baby_golden_id
         )}
 
       </div>
@@ -1467,7 +1412,7 @@ if (
       <div class="id-type">
 
         ${escaparHTML(
-          data.tipo_id
+          dataPerfil.tipo_id
         )}
 
       </div>
@@ -1476,7 +1421,7 @@ if (
       <h1 class="name">
 
         ${escaparHTML(
-          data.nombre_perrito
+          dataPerfil.nombre_perrito
         )}
 
       </h1>
@@ -1485,7 +1430,7 @@ if (
       <div class="breed">
 
         ${escaparHTML(
-          data.raza
+          dataPerfil.raza
         )}
 
       </div>
@@ -1514,7 +1459,7 @@ if (
           <span class="value">
 
             ${formatearFecha(
-              data.fecha_nacimiento
+              dataPerfil.fecha_nacimiento
             )}
 
           </span>
@@ -1534,7 +1479,7 @@ if (
           <span class="value">
 
             ${escaparHTML(
-              data.sexo
+              dataPerfil.sexo
             )}
 
           </span>
@@ -1554,7 +1499,7 @@ if (
           <span class="value">
 
             ${escaparHTML(
-              data.tipo_id
+              dataPerfil.tipo_id
             )}
 
           </span>
@@ -1574,7 +1519,7 @@ if (
           <span class="value">
 
             ${escaparHTML(
-              data.baby_golden_id
+              dataPerfil.baby_golden_id
             )}
 
           </span>
@@ -1586,7 +1531,7 @@ if (
 
 
       ${
-        data.caracteristicas
+        dataPerfil.caracteristicas
 
         ? `
 
@@ -1596,7 +1541,7 @@ if (
 
               Sobre
               ${escaparHTML(
-                data.nombre_perrito
+                dataPerfil.nombre_perrito
               )}
 
             </h2>
@@ -1605,7 +1550,7 @@ if (
             <div class="info">
 
               ${escaparHTML(
-                data.caracteristicas
+                dataPerfil.caracteristicas
               )}
 
             </div>
@@ -1619,7 +1564,7 @@ if (
 
 
       ${
-        data.tutor_1
+        dataPerfil.tutor_1
 
         ? `
 
@@ -1635,19 +1580,19 @@ if (
             <div class="info">
 
               ${escaparHTML(
-                data.tutor_1
+                dataPerfil.tutor_1
               )}
 
 
               ${
-                data.tutor_2
+                dataPerfil.tutor_2
 
                 ? `
 
                   <br>
 
                   ${escaparHTML(
-                    data.tutor_2
+                    dataPerfil.tutor_2
                   )}
 
                 `
@@ -1711,7 +1656,7 @@ const urlPerfil =
   window.location.origin +
   window.location.pathname +
   "?id=" +
-  encodeURIComponent(data.baby_golden_id);
+  encodeURIComponent(dataPerfil.baby_golden_id);
 
 new QRCode(
   document.getElementById("qr-code"),
