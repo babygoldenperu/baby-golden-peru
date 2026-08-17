@@ -2498,7 +2498,7 @@ window.supabaseClient = supabaseClient;
     } =
       await sb
         .from("site_content")
-        .select("key,value");
+        .select("clave,valor");
 
 
     if (error) {
@@ -2527,9 +2527,9 @@ window.supabaseClient = supabaseClient;
       function (fila) {
 
         contenido[
-          fila.key
+          fila.clave
         ] =
-          fila.value ?? "";
+          fila.valor ?? "";
 
       }
     );
@@ -2668,11 +2668,11 @@ window.supabaseClient = supabaseClient;
         .from("site_content")
         .upsert(
           {
-            key: clave,
-            value: valor
+            clave: clave,
+            valor: valor
           },
           {
-            onConflict: "key"
+            onConflict: "clave"
           }
         );
 
