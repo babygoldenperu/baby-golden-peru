@@ -5459,7 +5459,8 @@ revisarSesion();
 
     card.className =
       "gb-card";
-
+card.dataset.marcaId = marca.id;
+card.dataset.beneficioId = beneficio?.id || "";
 
     const logo =
       marca.logo_url
@@ -6974,6 +6975,7 @@ if (logoFile) {
 </script>
  
 <script src="historias-oro-admin.js"></script>
+  <script src="admin-beneficio-productos.js"></script>
 </body>
 
 </html>
