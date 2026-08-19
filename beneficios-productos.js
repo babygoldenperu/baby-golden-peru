@@ -264,7 +264,7 @@
     modal.classList.add("open");
     document.body.style.overflow = "hidden";
     modal.querySelector(".products-title").textContent =
-      `Productos · ${title || "Marca Aliada"}`;
+      `Productos · ${title || "Marca Aliada"} (Fotos referenciales)`;
 
     stage.innerHTML = `<div class="products-empty">Cargando productos...</div>`;
     counter.textContent = "";
