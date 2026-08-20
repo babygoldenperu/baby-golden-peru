@@ -2543,6 +2543,53 @@
     line-height:1.6;
   }
 }
+  /* =========================================================
+   CORRECCIÓN — BOTÓN SIGUIENTE DEL VISOR
+   Nunca debe quedar encima del panel de texto.
+========================================================= */
+
+.story-lightbox-content{
+  --caption-width:390px;
+  --caption-gap:28px;
+}
+
+/* Botón anterior: permanece junto al borde izquierdo de la foto */
+.story-lightbox-prev{
+  left:-24px !important;
+}
+
+/* Botón siguiente: queda entre la foto y el panel */
+.story-lightbox-next{
+  right:calc(var(--caption-width) + var(--caption-gap) + 8px) !important;
+}
+
+/* En móvil el botón vuelve al borde derecho de la pantalla */
+@media(max-width:850px){
+
+  .story-lightbox-content{
+    --caption-width:0px;
+    --caption-gap:0px;
+  }
+
+  .story-lightbox-next{
+    right:8px !important;
+  }
+
+  .story-lightbox-prev{
+    left:8px !important;
+  }
+}
+
+@media(max-width:650px){
+
+  .story-lightbox-next{
+    right:5px !important;
+  }
+
+  .story-lightbox-prev{
+    left:5px !important;
+  }
+}
 </style>
 
 </head>
