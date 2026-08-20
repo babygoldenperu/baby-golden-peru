@@ -233,7 +233,7 @@ ${HISTORIAS.map(n=>`
 
   <textarea
     id="hoD${n}"
-    maxlength="280"
+    maxlength="1000"
     placeholder="Breve descripción que aparecerá al abrir la foto..."
   ></textarea>
 
