@@ -764,6 +764,7 @@ details[open] summary:after{
   }
 
 }
+  
 </style>
 
 <style id="baby-golden-index-header-final">
@@ -1357,6 +1358,31 @@ header{
     flex:0 0 38px !important;
   }
 }
+/* =========================================================
+   CORRECCIÓN FINAL — HEADER DE BENEFICIOS
+   La cabecera ya no se superpone al contenido al hacer scroll.
+========================================================= */
+
+header{
+  position:relative !important;
+  top:auto !important;
+  z-index:1000 !important;
+}
+
+.nav{
+  position:relative !important;
+}
+
+/* En celular tampoco debe quedar pegada arriba */
+@media (max-width:650px){
+
+  header{
+    position:relative !important;
+    top:auto !important;
+  }
+
+}
+  
 </style>
 
 </head>
