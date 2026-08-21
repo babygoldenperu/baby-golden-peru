@@ -207,6 +207,11 @@ h1{
   flex:1;
 }
 
+.brand-audience-tags{display:flex;justify-content:flex-end;align-items:center;gap:7px;flex-wrap:wrap;margin:0 0 10px;}
+.brand-audience-tag{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.6px;white-space:nowrap;}
+.brand-audience-tag.pet{background:#eaf4ec;color:#2f6f43;border:1px solid #bdd9c5;}
+.brand-audience-tag.human{background:#f7edf8;color:#76518a;border:1px solid #dbc5e3;}
+
 .brand-name{
   font-family:Georgia,"Times New Roman",serif;
   font-size:27px;
@@ -1631,6 +1636,22 @@ function accessLabels(beneficio){
 
 
 /* =========================
+   AUDIENCIA DEL BENEFICIO
+========================= */
+
+function audienceTags(beneficio){
+  const tags = [];
+  if(beneficio.aplica_mascota){
+    tags.push(`<span class="brand-audience-tag pet">🐾 MASCOTA</span>`);
+  }
+  if(beneficio.aplica_humano){
+    tags.push(`<span class="brand-audience-tag human">👤 HUMANO</span>`);
+  }
+  return tags.join("");
+}
+
+
+/* =========================
    URL
 ========================= */
 
@@ -1893,6 +1914,10 @@ function render(){
               <div
                 class="brand-info"
               >
+
+                <div class="brand-audience-tags">
+                  ${audienceTags(item)}
+                </div>
 
                 <h2
                   class="brand-name"
@@ -2193,6 +2218,8 @@ async function cargarBeneficios(){
         acceso_id,
         acceso_black,
         acceso_premium,
+        aplica_mascota,
+        aplica_humano,
         estado,
 
         marca:marcas_afiliadas!inner(
