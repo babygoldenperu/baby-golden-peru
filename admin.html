@@ -7064,6 +7064,323 @@ if (logoFile) {
 
 </script>
  
+
+<!-- =========================================================
+     ADMIN — MENÚ PRINCIPAL ORGANIZADO
+========================================================= -->
+<style id="admin-organized-menu-styles">
+  .admin-module-menu{
+    margin:0 0 24px;
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:12px;
+  }
+
+  .admin-module-button{
+    width:100% !important;
+    min-height:76px !important;
+    padding:16px 18px !important;
+    border:1px solid #e6dfd5 !important;
+    border-radius:18px !important;
+    background:#fff !important;
+    color:#292521 !important;
+    box-shadow:0 8px 25px rgba(42,34,25,.045) !important;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:space-between !important;
+    gap:14px !important;
+    text-align:left !important;
+    transition:transform .2s ease,box-shadow .2s ease,border-color .2s ease !important;
+  }
+
+  .admin-module-button:hover{
+    opacity:1 !important;
+    transform:translateY(-1px) !important;
+    box-shadow:0 12px 30px rgba(42,34,25,.08) !important;
+    border-color:#d8c6aa !important;
+  }
+
+  .admin-module-button.is-open{
+    border-color:#b18a4a !important;
+    box-shadow:0 12px 32px rgba(177,138,74,.12) !important;
+  }
+
+  .admin-module-copy{
+    min-width:0;
+  }
+
+  .admin-module-kicker{
+    display:block;
+    margin-bottom:5px;
+    color:#b18a4a;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:2px;
+    text-transform:uppercase;
+  }
+
+  .admin-module-title{
+    display:block;
+    font-family:Georgia,"Times New Roman",serif;
+    font-size:19px;
+    line-height:1.15;
+    font-weight:400;
+  }
+
+  .admin-module-description{
+    display:block;
+    margin-top:5px;
+    color:#8a837b;
+    font-family:Arial,Helvetica,sans-serif;
+    font-size:11px;
+    line-height:1.4;
+  }
+
+  .admin-module-chevron{
+    flex:0 0 32px;
+    width:32px;
+    height:32px;
+    border-radius:50%;
+    background:#f5f2ed;
+    color:#8a6b43;
+    display:grid;
+    place-items:center;
+    font-size:14px;
+    transition:transform .2s ease,background .2s ease;
+  }
+
+  .admin-module-button.is-open .admin-module-chevron{
+    transform:rotate(180deg);
+    background:#b18a4a;
+    color:#fff;
+  }
+
+  .admin-module-panel{
+    display:none;
+    margin:0 0 22px;
+    animation:adminModuleOpen .22s ease;
+  }
+
+  .admin-module-panel.is-open{
+    display:block;
+  }
+
+  @keyframes adminModuleOpen{
+    from{opacity:0;transform:translateY(-5px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+
+  #adminModuleSearch,
+  #adminModuleGestion,
+  #adminModuleGolden,
+  #adminModuleWeb,
+  #adminModuleHistorias{
+    scroll-margin-top:20px;
+  }
+
+  .admin-module-history-note{
+    background:#fff;
+    border:1px solid #e9e5df;
+    border-radius:18px;
+    padding:20px;
+    color:#777;
+    font-size:12px;
+    line-height:1.6;
+  }
+
+  @media(max-width:700px){
+    .admin-module-menu{
+      grid-template-columns:1fr;
+      gap:10px;
+    }
+
+    .admin-module-button{
+      min-height:70px !important;
+      padding:14px 15px !important;
+      border-radius:16px !important;
+    }
+
+    .admin-module-title{
+      font-size:18px;
+    }
+  }
+</style>
+
+<script id="admin-organized-menu-script">
+(function(){
+  function initAdminOrganizedMenu(){
+    const panel = document.getElementById('panelView');
+    if(!panel || document.getElementById('adminModuleMenu')) return;
+
+    const searchInput = document.getElementById('buscarId');
+    const searchCard = searchInput ? searchInput.closest('.card') : null;
+    const gestion = document.getElementById('gestionSolicitudes');
+    const golden = document.getElementById('goldenBenefitsAdmin');
+    const web = document.getElementById('contenidoWebAdmin');
+    const historias = document.getElementById('cwHistorias');
+
+    if(!searchCard || !gestion || !golden || !web || !historias) return;
+
+    const header = panel.querySelector('.header');
+    if(!header) return;
+
+    const menu = document.createElement('div');
+    menu.id = 'adminModuleMenu';
+    menu.className = 'admin-module-menu';
+
+    const modules = [
+      {
+        id:'search',
+        title:'Buscar Baby Golden ID',
+        description:'Consulta y abre el perfil de una ID registrada.',
+        target:searchCard,
+        kicker:'GESTIÓN DE ID'
+      },
+      {
+        id:'gestion',
+        title:'Gestión Baby Golden ID',
+        description:'Solicitudes pendientes, aprobaciones e historial.',
+        target:gestion,
+        kicker:'SOLICITUDES'
+      },
+      {
+        id:'golden',
+        title:'Marcas afiliadas',
+        description:'Administra marcas y beneficios del Golden Benefits Club.',
+        target:golden,
+        kicker:'GOLDEN BENEFITS'
+      },
+      {
+        id:'web',
+        title:'Administración web',
+        description:'Edita el contenido y las secciones de la página.',
+        target:web,
+        kicker:'CONTENIDO WEB'
+      },
+      {
+        id:'historias',
+        title:'Historias de Oro',
+        description:'Gestiona la galería y las historias de la comunidad.',
+        target:historias,
+        kicker:'COMUNIDAD'
+      }
+    ];
+
+    // Place the menu immediately below the admin header.
+    header.insertAdjacentElement('afterend', menu);
+
+    const wrappers = {};
+
+    function createPanel(key, target){
+      const wrapper = document.createElement('div');
+      wrapper.className = 'admin-module-panel';
+      wrapper.id = 'adminModule' + key.charAt(0).toUpperCase() + key.slice(1);
+      target.parentNode.insertBefore(wrapper, target);
+      wrapper.appendChild(target);
+      wrappers[key] = wrapper;
+      return wrapper;
+    }
+
+    // The web module remains intact; its internal accordions continue to work.
+    createPanel('search', searchCard);
+    createPanel('gestion', gestion);
+    createPanel('golden', golden);
+    createPanel('web', web);
+
+    // Historias de Oro is already an accordion inside Administración Web.
+    // Keep it there to preserve the existing JS, and use a dedicated top-level shortcut.
+    const historyPanel = document.createElement('div');
+    historyPanel.className = 'admin-module-panel';
+    historyPanel.id = 'adminModuleHistorias';
+    const historyNote = document.createElement('div');
+    historyNote.className = 'admin-module-history-note';
+    historyNote.innerHTML = '<strong>Historias de Oro</strong><br>Esta sección se encuentra dentro de Administración web. Al abrir este módulo se mostrará directamente su editor.';
+    historyPanel.appendChild(historyNote);
+    web.parentNode.insertBefore(historyPanel, web.nextSibling);
+    wrappers.historias = historyPanel;
+
+    modules.forEach(function(mod){
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'admin-module-button';
+      button.dataset.module = mod.id;
+      button.innerHTML = `
+        <span class="admin-module-copy">
+          <span class="admin-module-kicker">${mod.kicker}</span>
+          <span class="admin-module-title">${mod.title}</span>
+          <span class="admin-module-description">${mod.description}</span>
+        </span>
+        <span class="admin-module-chevron" aria-hidden="true">⌄</span>
+      `;
+      menu.appendChild(button);
+    });
+
+    const buttons = Array.from(menu.querySelectorAll('.admin-module-button'));
+
+    function closeAll(except){
+      Object.keys(wrappers).forEach(function(key){
+        if(key !== except) wrappers[key].classList.remove('is-open');
+      });
+      buttons.forEach(function(btn){
+        btn.classList.toggle('is-open', btn.dataset.module === except && !!except);
+      });
+    }
+
+    function openModule(key){
+      closeAll(key);
+      const panelToOpen = wrappers[key];
+      if(!panelToOpen) return;
+      panelToOpen.classList.add('is-open');
+
+      if(key === 'historias'){
+        // Open Administración Web first, then its Historias de Oro accordion.
+        closeAll('web');
+        wrappers.web.classList.add('is-open');
+        const accordion = document.getElementById('cwHistorias');
+        if(accordion){
+          document.querySelectorAll('#contenidoWebAdmin .cw-accordion').forEach(function(item){
+            item.classList.remove('open');
+          });
+          accordion.classList.add('open');
+          setTimeout(function(){
+            accordion.scrollIntoView({behavior:'smooth', block:'start'});
+          }, 40);
+        }
+        buttons.forEach(function(btn){
+          btn.classList.toggle('is-open', btn.dataset.module === 'historias');
+        });
+      } else {
+        setTimeout(function(){
+          panelToOpen.scrollIntoView({behavior:'smooth', block:'start'});
+        }, 40);
+      }
+    }
+
+    buttons.forEach(function(button){
+      button.addEventListener('click', function(){
+        const key = button.dataset.module;
+        const isOpen = button.classList.contains('is-open');
+        if(isOpen){
+          closeAll(null);
+        } else {
+          openModule(key);
+        }
+      });
+    });
+
+    // Everything stays hidden until the administrator chooses a module.
+    closeAll(null);
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', initAdminOrganizedMenu);
+  } else {
+    initAdminOrganizedMenu();
+  }
+})();
+</script>
+
 <script src="historias-oro-admin.js"></script>
   <script src="admin-beneficio-productos.js"></script>
 </body>
