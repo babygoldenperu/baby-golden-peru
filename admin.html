@@ -1359,6 +1359,13 @@
   color: #fff;
 }
 
+.gb-audience-options { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:15px; }
+.gb-audience-option { position:relative; }
+.gb-audience-option input { position:absolute; opacity:0; pointer-events:none; }
+.gb-audience-option span { display:block; padding:9px 13px; border-radius:20px; background:#f5f2ed; color:#555; border:1px solid #e4ddd3; cursor:pointer; font-size:11px; font-weight:700; }
+.gb-audience-pet input:checked + span { background:#eaf4ec; color:#2f6f43; border-color:#bdd9c5; }
+.gb-audience-human input:checked + span { background:#f7edf8; color:#76518a; border-color:#dbc5e3; }
+
 .gb-save {
   background: #b18a4a !important;
 }
@@ -1694,6 +1701,20 @@
 
 
       <div class="gb-full">
+
+        <label>
+          ¿Para quién aplica este beneficio?
+        </label>
+        <div class="gb-audience-options">
+          <label class="gb-audience-option gb-audience-pet">
+            <input id="gbAplicaMascota" type="checkbox">
+            <span>🐾 MASCOTA</span>
+          </label>
+          <label class="gb-audience-option gb-audience-human">
+            <input id="gbAplicaHumano" type="checkbox">
+            <span>👤 HUMANO</span>
+          </label>
+        </div>
 
         <label>
           ¿Quién puede utilizarlo?</label>
@@ -5586,6 +5607,10 @@ card.dataset.beneficioId = beneficio?.id || "";
 
               </div>
 
+              <div class="gb-access">
+                Aplica para: ${audienciaGB(beneficio)}
+              </div>
+
             </div>
 
           `
@@ -5773,6 +5798,25 @@ card.dataset.beneficioId = beneficio?.id || "";
 
 
                 <div class="gb-full">
+
+                  <label>
+                    ¿Para quién aplica este beneficio?
+                  </label>
+
+                  <div class="gb-audience-options">
+                    <label class="gb-audience-option gb-audience-pet">
+                      <input type="checkbox" data-audience="mascota" ${
+                        beneficio.aplica_mascota ? "checked" : ""
+                      }>
+                      <span>🐾 MASCOTA</span>
+                    </label>
+                    <label class="gb-audience-option gb-audience-human">
+                      <input type="checkbox" data-audience="humano" ${
+                        beneficio.aplica_humano ? "checked" : ""
+                      }>
+                      <span>👤 HUMANO</span>
+                    </label>
+                  </div>
 
                   <label>
                     Acceso
@@ -6171,6 +6215,9 @@ const logoFile =
         "gbAccessPremium"
       ).checked;
 
+    const aplicaMascota = document.getElementById("gbAplicaMascota").checked;
+    const aplicaHumano = document.getElementById("gbAplicaHumano").checked;
+
 
     if (!nombre) {
 
@@ -6217,6 +6264,12 @@ const logoFile =
 
       return;
 
+    }
+
+
+    if (!aplicaMascota && !aplicaHumano) {
+      alert("Selecciona si el beneficio aplica para mascota, humano o ambos.");
+      return;
     }
 
 
@@ -6401,6 +6454,12 @@ if (logoFile) {
 
         acceso_premium:
           accesoPremium,
+
+        aplica_mascota:
+          aplicaMascota,
+
+        aplica_humano:
+          aplicaHumano,
 
         estado:
           true
@@ -6602,6 +6661,9 @@ if (logoFile) {
           '[data-access="premium"]'
         ).checked;
 
+      const aplicaMascota = card.querySelector('[data-audience="mascota"]').checked;
+      const aplicaHumano = card.querySelector('[data-audience="humano"]').checked;
+
 
       if (
         !accesoId &&
@@ -6615,6 +6677,12 @@ if (logoFile) {
 
         return;
 
+      }
+
+
+      if (!aplicaMascota && !aplicaHumano) {
+        alert("Selecciona si el beneficio aplica para mascota, humano o ambos.");
+        return;
       }
 
 
@@ -6668,7 +6736,13 @@ if (logoFile) {
             accesoBlack,
 
           acceso_premium:
-            accesoPremium
+            accesoPremium,
+
+          aplica_mascota:
+            aplicaMascota,
+
+          aplica_humano:
+            aplicaHumano
 
         })
         .eq(
@@ -6777,6 +6851,14 @@ if (logoFile) {
   }
 
 
+  function audienciaGB(beneficio) {
+    const audiencias = [];
+    if (beneficio.aplica_mascota) audiencias.push("🐾 MASCOTA");
+    if (beneficio.aplica_humano) audiencias.push("👤 HUMANO");
+    return audiencias.length ? audiencias.join(" + ") : "SIN DEFINIR";
+  }
+
+
   function valorGB(
     id
   ) {
@@ -6826,7 +6908,9 @@ if (logoFile) {
 
       "gbAccessId",
       "gbAccessBlack",
-      "gbAccessPremium"
+      "gbAccessPremium",
+      "gbAplicaMascota",
+      "gbAplicaHumano"
 
     ].forEach(
       function (id) {
