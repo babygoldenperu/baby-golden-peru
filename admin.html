@@ -264,6 +264,11 @@
 
   </style>
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 
@@ -1359,12 +1364,13 @@
   color: #fff;
 }
 
-.gb-audience-options { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:15px; }
+.gb-audience-options { display:flex; flex-wrap:wrap; gap:9px; margin-bottom:15px; }
 .gb-audience-option { position:relative; }
 .gb-audience-option input { position:absolute; opacity:0; pointer-events:none; }
-.gb-audience-option span { display:block; padding:9px 13px; border-radius:20px; background:#f5f2ed; color:#555; border:1px solid #e4ddd3; cursor:pointer; font-size:11px; font-weight:700; }
-.gb-audience-pet input:checked + span { background:#eaf4ec; color:#2f6f43; border-color:#bdd9c5; }
-.gb-audience-human input:checked + span { background:#f7edf8; color:#76518a; border-color:#dbc5e3; }
+.gb-audience-option span { display:flex; align-items:center; justify-content:center; min-width:118px; padding:10px 15px; border-radius:999px; background:#f8f6f2; color:#5f5952; border:1px solid #e3ddd4; cursor:pointer; font-family:"Montserrat",Arial,Helvetica,sans-serif; font-size:9px; font-weight:700; letter-spacing:1.05px; text-transform:uppercase; transition:all .2s ease; }
+.gb-audience-option span:hover { border-color:#cdbb9e; transform:translateY(-1px); }
+.gb-audience-pet input:checked + span { background:#edf5ef; color:#356c48; border-color:#c8dccd; box-shadow:0 5px 14px rgba(53,108,72,.08); }
+.gb-audience-human input:checked + span { background:#f6eff7; color:#775583; border-color:#dfcfe4; box-shadow:0 5px 14px rgba(119,85,131,.08); }
 
 .gb-save {
   background: #b18a4a !important;
@@ -1708,11 +1714,11 @@
         <div class="gb-audience-options">
           <label class="gb-audience-option gb-audience-pet">
             <input id="gbAplicaMascota" type="checkbox">
-            <span>🐾 MASCOTA</span>
+            <span>MASCOTA</span>
           </label>
           <label class="gb-audience-option gb-audience-human">
             <input id="gbAplicaHumano" type="checkbox">
-            <span>👤 HUMANO</span>
+            <span>HUMANO</span>
           </label>
         </div>
 
@@ -5808,13 +5814,13 @@ card.dataset.beneficioId = beneficio?.id || "";
                       <input type="checkbox" data-audience="mascota" ${
                         beneficio.aplica_mascota ? "checked" : ""
                       }>
-                      <span>🐾 MASCOTA</span>
+                      <span>MASCOTA</span>
                     </label>
                     <label class="gb-audience-option gb-audience-human">
                       <input type="checkbox" data-audience="humano" ${
                         beneficio.aplica_humano ? "checked" : ""
                       }>
-                      <span>👤 HUMANO</span>
+                      <span>HUMANO</span>
                     </label>
                   </div>
 
@@ -6853,8 +6859,8 @@ if (logoFile) {
 
   function audienciaGB(beneficio) {
     const audiencias = [];
-    if (beneficio.aplica_mascota) audiencias.push("🐾 MASCOTA");
-    if (beneficio.aplica_humano) audiencias.push("👤 HUMANO");
+    if (beneficio.aplica_mascota) audiencias.push("MASCOTA");
+    if (beneficio.aplica_humano) audiencias.push("HUMANO");
     return audiencias.length ? audiencias.join(" + ") : "SIN DEFINIR";
   }
 
