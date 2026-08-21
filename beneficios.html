@@ -207,14 +207,14 @@ h1{
   flex:1;
 }
 
-.brand-audience-tags{display:flex;justify-content:flex-end;align-items:center;gap:7px;flex-wrap:wrap;margin:0 0 10px;}
-.brand-audience-tag{display:inline-flex;align-items:center;gap:5px;padding:6px 10px;border-radius:999px;font-size:9px;line-height:1;font-weight:800;letter-spacing:.6px;white-space:nowrap;}
-.brand-audience-tag.pet{background:#eaf4ec;color:#2f6f43;border:1px solid #bdd9c5;}
-.brand-audience-tag.human{background:#f7edf8;color:#76518a;border:1px solid #dbc5e3;}
+.brand-audience-tags{display:flex;justify-content:flex-end;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 11px;}
+.brand-audience-tag{display:inline-flex;align-items:center;justify-content:center;padding:6px 11px;border-radius:999px;font-family:"Montserrat",Arial,Helvetica,sans-serif;font-size:8.5px;line-height:1;font-weight:700;letter-spacing:1.15px;white-space:nowrap;text-transform:uppercase;}
+.brand-audience-tag.pet{background:#edf5ef;color:#356c48;border:1px solid #c8dccd;}
+.brand-audience-tag.human{background:#f6eff7;color:#775583;border:1px solid #dfcfe4;}
 
 .brand-name{
-  font-family:Georgia,"Times New Roman",serif;
-  font-size:27px;
+  font-family:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  font-size:29px;
   line-height:1.1;
   margin:0 0 5px;
 }
@@ -1390,6 +1390,11 @@ header{
   
 </style>
 
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Montserrat:wght@500;600;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
@@ -1642,10 +1647,10 @@ function accessLabels(beneficio){
 function audienceTags(beneficio){
   const tags = [];
   if(beneficio.aplica_mascota){
-    tags.push(`<span class="brand-audience-tag pet">🐾 MASCOTA</span>`);
+    tags.push(`<span class="brand-audience-tag pet">MASCOTA</span>`);
   }
   if(beneficio.aplica_humano){
-    tags.push(`<span class="brand-audience-tag human">👤 HUMANO</span>`);
+    tags.push(`<span class="brand-audience-tag human">HUMANO</span>`);
   }
   return tags.join("");
 }
