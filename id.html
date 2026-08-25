@@ -586,7 +586,48 @@
 
       margin-right: 7px;
     }
+/* ========================================
+   ENLACE TODOS LOS BENEFICIOS
+======================================== */
 
+.benefits-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  margin-top: 14px;
+  padding: 12px 15px;
+
+  border: 1px solid #6c532c;
+  border-radius: 12px;
+
+  background: linear-gradient(
+    145deg,
+    #252525,
+    #181818
+  );
+
+  color: #d6b26a !important;
+
+  text-decoration: none !important;
+
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.benefits-link:hover {
+  background: #d6b26a;
+  color: #111111 !important;
+  transform: translateY(-1px);
+}
 /* ========================================
    QR
 ======================================== */
@@ -1303,6 +1344,8 @@ if (
 
  const beneficiosID = `
 
+ const beneficiosID = `
+
   <div class="black-benefits">
 
     <div class="black-benefits-title">
@@ -1335,7 +1378,19 @@ if (
       : ""
     }
 
+    <a
+      class="benefits-link"
+      href="/beneficios.html"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      Ver todos los beneficios
+      <span aria-hidden="true">→</span>
+    </a>
+
   </div>
+
+`;
 
 `;
 
