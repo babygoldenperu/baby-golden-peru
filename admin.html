@@ -2732,7 +2732,7 @@ window.supabaseClient = supabaseClient;
 
   const acordeones =
     document.querySelectorAll(
-      "#contenidoWebAdmin .cw-accordion"
+      ".cw-accordion"
     );
 
 
@@ -8838,7 +8838,8 @@ if (logoFile) {
   #adminModuleSearch,
   #adminModuleGestion,
   #adminModuleGolden,
-  #adminModuleWeb{
+  #adminModuleWeb,
+  #adminModuleHistorias{
     scroll-margin-top:20px;
   }
 
@@ -8906,9 +8907,16 @@ if (logoFile) {
       {
         id:'web',
         title:'Administración web',
-        description:'Edita el contenido y las secciones de la página.',
+        description:'Edita portada y contenido general de la página.',
         target:web,
         kicker:'CONTENIDO WEB'
+      },
+      {
+        id:'historias',
+        title:'Historias de Oro',
+        description:'Administra las 12 historias y sus fotografías.',
+        target:null,
+        kicker:'COMUNIDAD'
       },
     ];
 
@@ -8927,11 +8935,31 @@ if (logoFile) {
       return wrapper;
     }
 
-    // The web module remains intact; its internal accordions continue to work.
     createPanel('search', searchCard);
     createPanel('gestion', gestion);
     createPanel('golden', golden);
     createPanel('web', web);
+
+    /*
+      Historias de Oro es un módulo independiente.
+      El editor real ya existe dentro de Administración Web;
+      lo movemos físicamente aquí para evitar tenerlo duplicado
+      o crear un "atajo" que dependa de otro módulo.
+    */
+    const historias = document.getElementById('cwHistorias');
+
+    if(historias){
+      const historyWrapper = document.createElement('div');
+      historyWrapper.className = 'admin-module-panel';
+      historyWrapper.id = 'adminModuleHistorias';
+      historyWrapper.appendChild(historias);
+      wrappers.historias = historyWrapper;
+
+      wrappers.web.parentNode.insertBefore(
+        historyWrapper,
+        wrappers.web.nextSibling
+      );
+    }
 
     modules.forEach(function(mod){
       const button = document.createElement('button');
@@ -8995,8 +9023,6 @@ if (logoFile) {
 })();
 </script>
 
-<script src="historias-oro-admin.js"></script>
-  <script src="admin-beneficio-productos.js"></script>
 </body>
 
 </html>
