@@ -2190,24 +2190,35 @@
         </div>
 
 
-        <div class="cw-field cw-full">
+       <div class="cw-field cw-full">
 
-          <label>
-            Imagen de portada
-          </label>
+  <label>
+    Imagen de portada
+  </label>
 
-          <input
-            id="cwHeroImage"
-            type="url"
-            placeholder="https://..."
-          >
+  <input
+    id="cwHeroImageFile"
+    type="file"
+    accept="image/jpeg,image/png,image/webp"
+  >
 
-          <div
-            id="cwHeroImagePreview"
-            class="cw-image-preview"
-          ></div>
+  <small class="cw-file-help">
+    JPG, PNG o WEBP · Máximo 8 MB
+  </small>
 
-        </div>
+  <div
+    id="cwHeroFileName"
+    class="cw-file-name"
+  >
+    Ningún archivo seleccionado
+  </div>
+
+  <div
+    id="cwHeroImagePreview"
+    class="cw-image-preview"
+  ></div>
+
+</div>
 
 
       </div>
