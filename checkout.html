@@ -1321,353 +1321,328 @@ footer p{
 </footer>
 
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
+    /*
+      BABY GOLDEN PERÚ — CHECKOUT
+      PASO: validar carrito + crear pedido en Supabase.
 
-    const cartKey =
-      "babyGoldenCart";
+      IMPORTANTE:
+      - El anon key de Supabase NO es un secreto; puede estar en frontend.
+      - NO colocar aquí el service_role key.
+    */
+    const SUPABASE_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
+    const SUPABASE_ANON_KEY = "PEGA_AQUI_TU_SUPABASE_ANON_KEY";
 
+    const supabaseClient =
+      window.supabase?.createClient
+        ? window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+        : null;
 
-    const products = {
+    const cartKey = "babyGoldenCart";
 
-      BLACK: {
-        name: "Black ID",
-        price: 36.90,
-        image: "black.jpeg"
-      },
-
-      PREMIUM: {
-        name: "Premium ID",
-        price: 30.00,
-        image: "premium.jpeg"
-      },
-
-      BANDANA: {
-        name: "Bandana Baby Golden Perú",
-        price: 34.90,
-        image: "bandana.jpeg"
-      },
-
-      POLO: {
-        name: "Polo Baby Golden Perú",
-        price: 39.90,
-        image: "polo.jpeg"
-      },
-
-      GORRO: {
-        name: "Gorro Baby Golden Perú",
-        price: 79.90,
-        image: "gorro.jpeg"
-      }
-
-    };
-
+    let products = {};
+    let productsLoaded = false;
+    let checkoutBusy = false;
 
     function getCart(){
-
       try{
+        const saved = JSON.parse(localStorage.getItem(cartKey));
 
-        const saved =
-          JSON.parse(
-            localStorage.getItem(
-              cartKey
-            )
-          );
-
-
-        if(
-          saved &&
-          typeof saved === "object" &&
-          !Array.isArray(saved)
-        ){
-
+        if(saved && typeof saved === "object" && !Array.isArray(saved)){
           return saved;
-
         }
-
 
         if(Array.isArray(saved)){
-
           const converted = {};
-
-
           saved.forEach(id => {
-
-            if(products[id]){
-
-              converted[id] =
-                (
-                  Number(
-                    converted[id]
-                  ) || 0
-                ) + 1;
-
-            }
-
+            converted[id] = (Number(converted[id]) || 0) + 1;
           });
-
-
-          localStorage.setItem(
-            cartKey,
-            JSON.stringify(
-              converted
-            )
-          );
-
-
+          localStorage.setItem(cartKey, JSON.stringify(converted));
           return converted;
-
         }
 
-
         return {};
-
-      } catch{
-
+      }catch{
         return {};
-
       }
-
     }
-
 
     function escapeHtml(value){
-
-      return String(
-        value ?? ""
-      )
-      .replace(/&/g,"&amp;")
-      .replace(/</g,"&lt;")
-      .replace(/>/g,"&gt;")
-      .replace(/"/g,"&quot;")
-      .replace(/'/g,"&#039;");
-
+      return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
     }
 
+    function formatMoney(value){
+      return "S/ " + Number(value || 0).toFixed(2);
+    }
 
-    function renderSummary(){
-
-      const cart =
-        getCart();
-
-
-      const ids =
-        Object.keys(cart)
-        .filter(
-          id =>
-            products[id] &&
-            Number(cart[id]) > 0
-        );
-
-
-      const summary =
-        document.getElementById(
-          "summary"
-        );
-
-
-      const totalElement =
-        document.getElementById(
-          "total"
-        );
-
-
-      const button =
-        document.getElementById(
-          "continueButton"
-        );
-
-
-      if(!ids.length){
-
-        summary.innerHTML = `
-          <div class="empty">
-            Tu carrito está vacío.
-            <br><br>
-            Regresa a la tienda para agregar productos.
-          </div>
-        `;
-
-
-        totalElement.textContent =
-          "S/ 0.00";
-
-
-        button.disabled =
-          true;
-
-
-        return;
-
+    async function loadProducts(){
+      if(!supabaseClient){
+        throw new Error("No se pudo iniciar Supabase. Revisa la configuración.");
       }
 
+      const { data, error } = await supabaseClient
+        .from("productos")
+        .select("id,sku,nombre,precio,stock,imagen_url,activo,maneja_stock")
+        .eq("activo", true);
+
+      if(error) throw error;
+
+      products = {};
+      (data || []).forEach(product => {
+        products[product.sku] = product;
+      });
+
+      productsLoaded = true;
+    }
+
+    function getCartLines(){
+      const cart = getCart();
+
+      return Object.entries(cart)
+        .map(([sku, quantity]) => ({
+          sku,
+          quantity: Math.floor(Number(quantity))
+        }))
+        .filter(item => item.quantity > 0);
+    }
+
+    function validateCartAgainstProducts(){
+      const lines = getCartLines();
+
+      if(!lines.length){
+        return { ok:false, message:"Tu carrito está vacío." };
+      }
+
+      for(const line of lines){
+        const product = products[line.sku];
+
+        if(!product){
+          return {
+            ok:false,
+            message:`El producto "${line.sku}" ya no está disponible. Regresa a la tienda.`
+          };
+        }
+
+        if(product.maneja_stock && line.quantity > Number(product.stock)){
+          return {
+            ok:false,
+            message:`No hay suficiente stock de ${product.nombre}. Disponible: ${product.stock}.`
+          };
+        }
+      }
+
+      return { ok:true, lines };
+    }
+
+    function renderSummary(){
+      const summary = document.getElementById("summary");
+      const totalElement = document.getElementById("total");
+      const button = document.getElementById("continueButton");
+
+      const cart = validateCartAgainstProducts();
+
+      if(!cart.ok){
+        summary.innerHTML = `
+          <div class="empty">
+            ${escapeHtml(cart.message)}
+            <br><br>
+            <a href="tienda.html" class="back-link">← VOLVER A LA TIENDA</a>
+          </div>
+        `;
+        totalElement.textContent = "S/ 0.00";
+        button.disabled = true;
+        return;
+      }
 
       let total = 0;
 
+      summary.innerHTML = cart.lines.map(line => {
+        const product = products[line.sku];
+        const quantity = line.quantity;
+        const price = Number(product.precio);
+        const subtotal = price * quantity;
 
-      summary.innerHTML =
-        ids.map(id => {
+        total += subtotal;
 
-          const product =
-            products[id];
+        const image = product.imagen_url || "BABY%20GOLDEN.png";
 
-          const quantity =
-            Number(cart[id]);
+        return `
+          <div class="summary-item">
+            <img
+              class="summary-image"
+              src="${escapeHtml(image)}"
+              alt="${escapeHtml(product.nombre)}"
+            >
 
-          const subtotal =
-            product.price * quantity;
+            <div>
+              <p class="summary-name">
+                ${escapeHtml(product.nombre)}
+              </p>
 
-          total += subtotal;
-
-
-          return `
-
-            <div class="summary-item">
-
-              <img
-                class="summary-image"
-                src="${escapeHtml(product.image)}"
-                alt="${escapeHtml(product.name)}"
-              >
-
-              <div>
-
-                <p class="summary-name">
-                  ${escapeHtml(product.name)}
-                </p>
-
-                <p class="summary-meta">
-                  Cantidad: ${quantity}
-                  <br>
-                  S/ ${product.price.toFixed(2)}
-                  c/u
-                </p>
-
-              </div>
-
-              <div class="summary-price">
-                S/ ${subtotal.toFixed(2)}
-              </div>
-
+              <p class="summary-meta">
+                Cantidad: ${quantity}
+                <br>
+                ${formatMoney(price)} c/u
+                ${product.maneja_stock ? `<br>Stock disponible: ${Number(product.stock)}` : ""}
+              </p>
             </div>
 
-          `;
+            <div class="summary-price">
+              ${formatMoney(subtotal)}
+            </div>
+          </div>
+        `;
+      }).join("");
 
-        }).join("");
-
-
-      totalElement.textContent =
-        "S/ " + total.toFixed(2);
-
-
-      button.disabled =
-        false;
-
+      totalElement.textContent = formatMoney(total);
+      button.disabled = false;
     }
 
+    async function createOrder(customer, lines){
+      if(!supabaseClient){
+        throw new Error("Supabase no está configurado.");
+      }
 
-    document
-      .getElementById("checkoutForm")
-      .addEventListener(
-        "submit",
-        function(event){
+      const cartPayload = {};
+      lines.forEach(line => {
+        cartPayload[line.sku] = line.quantity;
+      });
 
-          event.preventDefault();
-
-
-          const formError =
-            document.getElementById(
-              "formError"
-            );
-
-
-          const cart =
-            getCart();
-
-
-          const hasProducts =
-            Object.keys(cart)
-            .some(
-              id =>
-                products[id] &&
-                Number(cart[id]) > 0
-            );
-
-
-          if(!hasProducts){
-
-            formError.textContent =
-              "Tu carrito está vacío.";
-
-            return;
-
-          }
-
-
-          /*
-            Por ahora solo validamos y guardamos
-            los datos localmente para probar el flujo.
-
-            Todavía NO se crea una orden en Supabase
-            y todavía NO se realiza ningún cobro.
-          */
-
-          const formData =
-            new FormData(
-              this
-            );
-
-
-          const customer = {
-
-            nombre:
-              formData.get("nombre"),
-
-            apellidos:
-              formData.get("apellidos"),
-
-            email:
-              formData.get("email"),
-
-            telefono:
-              formData.get("telefono"),
-
-            direccion:
-              formData.get("direccion"),
-
-            distrito:
-              formData.get("distrito"),
-
-            provincia:
-              formData.get("provincia"),
-
-            departamento:
-              formData.get("departamento")
-
-          };
-
-
-          localStorage.setItem(
-            "babyGoldenCheckout",
-            JSON.stringify(
-              customer
-            )
-          );
-
-
-          formError.textContent =
-            "";
-
-
-          alert(
-            "Datos validados correctamente. El siguiente paso será crear la orden y conectar Culqi."
-          );
-
+      /*
+        La función RPC será la encargada de volver a validar
+        precios/productos en el servidor antes de crear el pedido.
+      */
+      const { data, error } = await supabaseClient.rpc(
+        "crear_pedido_tienda",
+        {
+          p_customer: customer,
+          p_cart: cartPayload
         }
       );
 
+      if(error) throw error;
 
-    renderSummary();
+      return data;
+    }
 
+    document
+      .getElementById("checkoutForm")
+      .addEventListener("submit", async function(event){
+        event.preventDefault();
+
+        if(checkoutBusy) return;
+
+        const formError = document.getElementById("formError");
+        const button = document.getElementById("continueButton");
+
+        formError.textContent = "";
+
+        try{
+          if(!productsLoaded){
+            await loadProducts();
+          }
+
+          const validation = validateCartAgainstProducts();
+
+          if(!validation.ok){
+            formError.textContent = validation.message;
+            renderSummary();
+            return;
+          }
+
+          const formData = new FormData(this);
+
+          const customer = {
+            nombre: String(formData.get("nombre") || "").trim(),
+            apellidos: String(formData.get("apellidos") || "").trim(),
+            email: String(formData.get("email") || "").trim(),
+            telefono: String(formData.get("telefono") || "").trim(),
+            direccion: String(formData.get("direccion") || "").trim(),
+            distrito: String(formData.get("distrito") || "").trim(),
+            provincia: String(formData.get("provincia") || "").trim(),
+            departamento: String(formData.get("departamento") || "").trim()
+          };
+
+          checkoutBusy = true;
+          button.disabled = true;
+          button.textContent = "VERIFICANDO PEDIDO...";
+
+          const order = await createOrder(customer, validation.lines);
+
+          localStorage.setItem(
+            "babyGoldenCheckout",
+            JSON.stringify(customer)
+          );
+
+          if(order?.numero_pedido){
+            localStorage.setItem(
+              "babyGoldenLastOrder",
+              JSON.stringify(order)
+            );
+          }
+
+          formError.textContent = "";
+          button.textContent = "PEDIDO CREADO";
+
+          alert(
+            `Pedido #BG-${String(order.numero_pedido).padStart(6,"0")} creado correctamente.`
+          );
+
+          /*
+            Siguiente fase:
+            enviar este pedido a Mercado Pago.
+          */
+
+        }catch(error){
+          console.error("Error creando pedido:", error);
+
+          formError.textContent =
+            error?.message ||
+            "No pudimos crear tu pedido. Inténtalo nuevamente.";
+
+          button.disabled = false;
+          button.textContent = "CONTINUAR AL PAGO";
+          checkoutBusy = false;
+        }
+      });
+
+    async function initCheckout(){
+      const button = document.getElementById("continueButton");
+
+      try{
+        if(SUPABASE_ANON_KEY === "PEGA_AQUI_TU_SUPABASE_ANON_KEY"){
+          throw new Error(
+            "Falta configurar la clave pública (anon key) de Supabase en checkout.html."
+          );
+        }
+
+        await loadProducts();
+        renderSummary();
+
+      }catch(error){
+        console.error("Error inicializando checkout:", error);
+
+        document.getElementById("summary").innerHTML = `
+          <div class="empty">
+            No pudimos cargar los productos.
+            <br><br>
+            ${escapeHtml(error.message)}
+          </div>
+        `;
+
+        document.getElementById("total").textContent = "S/ 0.00";
+        button.disabled = true;
+      }
+    }
+
+    initCheckout();
   </script>
 
 
