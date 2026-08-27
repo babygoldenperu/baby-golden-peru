@@ -1601,7 +1601,7 @@ footer p{
           */
           const { data: payment, error: paymentError } =
             await supabaseClient.functions.invoke(
-              "crear-preferencia-mercadopago",
+              "mercadopago-checkout",
               {
                 body: {
                   pedido_id: order.id
