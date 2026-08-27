@@ -1247,9 +1247,8 @@ footer p{
           </button>
 
           <p class="notice">
-            En este paso todavía no se realizará ningún cobro.
-            Primero verificaremos el pedido y luego conectaremos
-            el proceso de pago con Culqi.
+            Primero verificaremos tu pedido y luego serás
+            redirigido a Mercado Pago para completar el pago de forma segura.
           </p>
 
         </form>
@@ -1588,17 +1587,53 @@ footer p{
             );
           }
 
-          formError.textContent = "";
-          button.textContent = "PEDIDO CREADO";
+          if(!order?.id){
+            throw new Error(
+              "El pedido fue creado, pero no recibimos su identificador."
+            );
+          }
 
-          alert(
-            `Pedido #BG-${String(order.numero_pedido).padStart(6,"0")} creado correctamente.`
-          );
+          button.textContent = "CONECTANDO CON MERCADO PAGO...";
 
           /*
-            Siguiente fase:
-            enviar este pedido a Mercado Pago.
+            La Edge Function crea la Order de Mercado Pago en servidor.
+            La credencial privada de Mercado Pago nunca se expone aquí.
           */
+          const { data: payment, error: paymentError } =
+            await supabaseClient.functions.invoke(
+              "crear-preferencia-mercadopago",
+              {
+                body: {
+                  pedido_id: order.id
+                }
+              }
+            );
+
+          if(paymentError){
+            let detail = "";
+
+            try{
+              const errorBody = await paymentError.context?.json?.();
+              detail = errorBody?.error || "";
+            }catch{}
+
+            throw new Error(
+              detail ||
+              paymentError.message ||
+              "No pudimos conectar el pedido con Mercado Pago."
+            );
+          }
+
+          if(!payment?.checkout_url){
+            throw new Error(
+              "Mercado Pago no devolvió el enlace de pago."
+            );
+          }
+
+          formError.textContent = "";
+          button.textContent = "REDIRIGIENDO A MERCADO PAGO...";
+
+          window.location.href = payment.checkout_url;
 
         }catch(error){
           console.error("Error creando pedido:", error);
@@ -1642,6 +1677,45 @@ footer p{
       }
     }
 
+    function handleMercadoPagoReturn(){
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get("mp_status");
+
+      if(!status) return;
+
+      const formError = document.getElementById("formError");
+      const button = document.getElementById("continueButton");
+
+      if(status === "success"){
+        formError.style.color = "#3f7a45";
+        formError.textContent =
+          "Pago aprobado. Estamos confirmando tu pedido.";
+        button.textContent = "PAGO APROBADO";
+        button.disabled = true;
+      }else if(status === "pending"){
+        formError.style.color = "#8a6a2f";
+        formError.textContent =
+          "Tu pago quedó pendiente. Te mostraremos la confirmación cuando Mercado Pago lo confirme.";
+        button.textContent = "PAGO PENDIENTE";
+      }else if(status === "failure"){
+        formError.style.color = "#9f3d2c";
+        formError.textContent =
+          "El pago no fue completado. Puedes volver a intentarlo.";
+        button.textContent = "INTENTAR NUEVAMENTE";
+        button.disabled = false;
+        checkoutBusy = false;
+      }
+
+      params.delete("mp_status");
+      const cleanUrl =
+        window.location.pathname +
+        (params.toString() ? "?" + params.toString() : "") +
+        window.location.hash;
+
+      window.history.replaceState({}, document.title, cleanUrl);
+    }
+
+    handleMercadoPagoReturn();
     initCheckout();
   </script>
 
