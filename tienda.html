@@ -297,6 +297,238 @@
 
 
     /* =========================================
+       PRODUCTOS DESDE SUPABASE
+       ========================================= */
+
+    const fallbackProductImages = {
+      BLACK: "black.jpeg",
+      PREMIUM: "premium.jpeg",
+      BANDANA: "bandana.jpeg",
+      POLO: "polo.jpeg",
+      GORRO: "gorro.jpeg"
+    };
+
+
+    async function loadProductsFromSupabase() {
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient
+          .from("productos")
+          .select(`
+            sku,
+            nombre,
+            descripcion,
+            categoria,
+            precio,
+            stock,
+            imagen_url,
+            activo,
+            maneja_stock
+          `)
+          .eq("activo", true)
+          .order("created_at", {
+            ascending: true
+          });
+
+
+        if(error) {
+          console.error(
+            "No se pudieron cargar los productos desde Supabase:",
+            error
+          );
+          return;
+        }
+
+
+        if(!Array.isArray(data) || data.length === 0) {
+          return;
+        }
+
+
+        const loadedProducts = {};
+
+
+        data.forEach(product => {
+
+          const sku =
+            String(product.sku || "")
+              .trim()
+              .toUpperCase();
+
+
+          if(!sku) return;
+
+
+          loadedProducts[sku] = {
+
+            name:
+              product.nombre || sku,
+
+            price:
+              Number(product.precio) || 0,
+
+            image:
+              product.imagen_url ||
+              fallbackProductImages[sku] ||
+              "BABY%20GOLDEN.png",
+
+            description:
+              product.descripcion || "",
+
+            category:
+              product.categoria || "BABY GOLDEN PERÚ",
+
+            stock:
+              Number(product.stock) || 0,
+
+            manejaStock:
+              Boolean(product.maneja_stock),
+
+            activo:
+              Boolean(product.activo)
+
+          };
+
+        });
+
+
+        products =
+          loadedProducts;
+
+
+        updateProductCards();
+        renderCart();
+
+      } catch(error) {
+
+        console.error(
+          "Error cargando productos desde Supabase:",
+          error
+        );
+
+      }
+
+    }
+
+
+    function updateProductCards() {
+
+      document
+        .querySelectorAll("[data-add-to-cart]")
+        .forEach(button => {
+
+          const sku =
+            String(button.dataset.addToCart || "")
+              .toUpperCase();
+
+          const product =
+            products[sku];
+
+          if(!product) return;
+
+
+          const card =
+            button.closest(".product");
+
+          if(!card) return;
+
+
+          const image =
+            card.querySelector(".product-image");
+
+          const title =
+            card.querySelector("h2");
+
+          const category =
+            card.querySelector(".product-category");
+
+          const description =
+            card.querySelector(".product-description");
+
+          const price =
+            card.querySelector(".product-price");
+
+
+          if(image) {
+            image.src =
+              product.image;
+
+            image.alt =
+              product.name;
+          }
+
+
+          if(title) {
+            title.textContent =
+              product.name;
+          }
+
+
+          if(category) {
+            category.textContent =
+              product.category;
+          }
+
+
+          if(description) {
+            description.textContent =
+              product.description;
+          }
+
+
+          if(price) {
+            price.textContent =
+              "S/ " +
+              product.price.toFixed(2);
+          }
+
+
+          const agotado =
+            product.manejaStock &&
+            product.stock <= 0;
+
+
+          button.disabled =
+            agotado;
+
+          button.textContent =
+            agotado
+              ? "AGOTADO"
+              : "AGREGAR AL CARRITO";
+
+
+          button.setAttribute(
+            "aria-disabled",
+            agotado
+              ? "true"
+              : "false"
+          );
+
+
+          if(agotado) {
+
+            button.classList.add(
+              "is-disabled"
+            );
+
+          } else {
+
+            button.classList.remove(
+              "is-disabled"
+            );
+
+          }
+
+        });
+
+    }
+
+
+    /* =========================================
        CARRITO
        ========================================= */
 
@@ -2441,36 +2673,70 @@
        PRODUCTOS
        ========================================= */
 
-    const products = {
+    /*
+      PRODUCTOS
+      ----------
+      Estos son solo datos de respaldo para que la tienda
+      siga mostrando contenido si Supabase tarda o no responde.
+      La fuente principal de precio, stock, nombre, descripción
+      y estado será la tabla public.productos.
+    */
+
+    let products = {
 
       BLACK: {
         name: "Black ID",
         price: 36.90,
-        image: "black.jpeg"
+        image: "black.jpeg",
+        description: "La identidad digital para los Goldens que quieren llevar a Baby Golden Perú con ellos.",
+        category: "BABY GOLDEN ID",
+        stock: 0,
+        manejaStock: false,
+        activo: true
       },
 
       PREMIUM: {
         name: "Premium ID",
         price: 30.00,
-        image: "premium.jpeg"
+        image: "premium.jpeg",
+        description: "Una experiencia más completa para tu compañero de vida, con la identidad digital Baby Golden.",
+        category: "BABY GOLDEN ID",
+        stock: 0,
+        manejaStock: false,
+        activo: true
       },
 
       BANDANA: {
         name: "Bandana Baby Golden Perú",
         price: 34.90,
-        image: "bandana.jpeg"
+        image: "bandana.jpeg",
+        description: "Bandana oficial Baby Golden Perú, pensada para acompañar a tu Golden en paseos, encuentros y celebraciones.",
+        category: "MERCHANDISING",
+        stock: 50,
+        manejaStock: true,
+        activo: true
       },
 
       POLO: {
         name: "Polo Baby Golden Perú",
         price: 39.90,
-        image: "polo.jpeg"
+        image: "polo.jpeg",
+        description: "Polo oficial Baby Golden Perú para llevar nuestra comunidad contigo dentro y fuera de cada encuentro.",
+        category: "MERCHANDISING",
+        stock: 50,
+        manejaStock: true,
+        activo: true
       },
 
       GORRO: {
         name: "Gorro Baby Golden Perú",
         price: 79.90,
-        image: "gorro.jpeg"
+        image: "gorro.jpeg",
+        description: "Gorro oficial Baby Golden Perú, pensado para complementar tus looks y los encuentros de la comunidad.",
+        category: "MERCHANDISING",
+        stock: 50,
+        manejaStock: true,
+        activo: true
       }
 
     };
@@ -2796,8 +3062,26 @@
               const id =
                 this.dataset.plus;
 
+              const currentQuantity =
+                Number(cart[id]) || 0;
+
+              const product =
+                products[id];
+
+
+              if(
+                product &&
+                product.manejaStock &&
+                currentQuantity >= product.stock
+              ) {
+
+                return;
+
+              }
+
+
               cart[id] =
-                (Number(cart[id]) || 0) + 1;
+                currentQuantity + 1;
 
               saveCart(cart);
               renderCart();
@@ -2992,8 +3276,30 @@
               const id =
                 this.dataset.addToCart;
 
+              const currentQuantity =
+                Number(cart[id]) || 0;
+
+              const product =
+                products[id];
+
+
+              if(!product) {
+                return;
+              }
+
+
+              if(
+                product.manejaStock &&
+                currentQuantity >= product.stock
+              ) {
+
+                return;
+
+              }
+
+
               cart[id] =
-                (Number(cart[id]) || 0) + 1;
+                currentQuantity + 1;
 
               saveCart(cart);
 
@@ -3068,6 +3374,12 @@
 
 
     renderCart();
+
+    /*
+      Primero mostramos el respaldo local.
+      Luego Supabase reemplaza los datos cuando responde.
+    */
+    loadProductsFromSupabase();
 
   </script>
 
@@ -3280,4 +3592,3 @@
 </body>
 
 </html>
-
