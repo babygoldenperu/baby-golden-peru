@@ -297,238 +297,6 @@
 
 
     /* =========================================
-       PRODUCTOS DESDE SUPABASE
-       ========================================= */
-
-    const fallbackProductImages = {
-      BLACK: "black.jpeg",
-      PREMIUM: "premium.jpeg",
-      BANDANA: "bandana.jpeg",
-      POLO: "polo.jpeg",
-      GORRO: "gorro.jpeg"
-    };
-
-
-    async function loadProductsFromSupabase() {
-
-      try {
-
-        const {
-          data,
-          error
-        } = await supabaseClient
-          .from("productos")
-          .select(`
-            sku,
-            nombre,
-            descripcion,
-            categoria,
-            precio,
-            stock,
-            imagen_url,
-            activo,
-            maneja_stock
-          `)
-          .eq("activo", true)
-          .order("created_at", {
-            ascending: true
-          });
-
-
-        if(error) {
-          console.error(
-            "No se pudieron cargar los productos desde Supabase:",
-            error
-          );
-          return;
-        }
-
-
-        if(!Array.isArray(data) || data.length === 0) {
-          return;
-        }
-
-
-        const loadedProducts = {};
-
-
-        data.forEach(product => {
-
-          const sku =
-            String(product.sku || "")
-              .trim()
-              .toUpperCase();
-
-
-          if(!sku) return;
-
-
-          loadedProducts[sku] = {
-
-            name:
-              product.nombre || sku,
-
-            price:
-              Number(product.precio) || 0,
-
-            image:
-              product.imagen_url ||
-              fallbackProductImages[sku] ||
-              "BABY%20GOLDEN.png",
-
-            description:
-              product.descripcion || "",
-
-            category:
-              product.categoria || "BABY GOLDEN PERÚ",
-
-            stock:
-              Number(product.stock) || 0,
-
-            manejaStock:
-              Boolean(product.maneja_stock),
-
-            activo:
-              Boolean(product.activo)
-
-          };
-
-        });
-
-
-        products =
-          loadedProducts;
-
-
-        updateProductCards();
-        renderCart();
-
-      } catch(error) {
-
-        console.error(
-          "Error cargando productos desde Supabase:",
-          error
-        );
-
-      }
-
-    }
-
-
-    function updateProductCards() {
-
-      document
-        .querySelectorAll("[data-add-to-cart]")
-        .forEach(button => {
-
-          const sku =
-            String(button.dataset.addToCart || "")
-              .toUpperCase();
-
-          const product =
-            products[sku];
-
-          if(!product) return;
-
-
-          const card =
-            button.closest(".product");
-
-          if(!card) return;
-
-
-          const image =
-            card.querySelector(".product-image");
-
-          const title =
-            card.querySelector("h2");
-
-          const category =
-            card.querySelector(".product-category");
-
-          const description =
-            card.querySelector(".product-description");
-
-          const price =
-            card.querySelector(".product-price");
-
-
-          if(image) {
-            image.src =
-              product.image;
-
-            image.alt =
-              product.name;
-          }
-
-
-          if(title) {
-            title.textContent =
-              product.name;
-          }
-
-
-          if(category) {
-            category.textContent =
-              product.category;
-          }
-
-
-          if(description) {
-            description.textContent =
-              product.description;
-          }
-
-
-          if(price) {
-            price.textContent =
-              "S/ " +
-              product.price.toFixed(2);
-          }
-
-
-          const agotado =
-            product.manejaStock &&
-            product.stock <= 0;
-
-
-          button.disabled =
-            agotado;
-
-          button.textContent =
-            agotado
-              ? "AGOTADO"
-              : "AGREGAR AL CARRITO";
-
-
-          button.setAttribute(
-            "aria-disabled",
-            agotado
-              ? "true"
-              : "false"
-          );
-
-
-          if(agotado) {
-
-            button.classList.add(
-              "is-disabled"
-            );
-
-          } else {
-
-            button.classList.remove(
-              "is-disabled"
-            );
-
-          }
-
-        });
-
-    }
-
-
-    /* =========================================
        CARRITO
        ========================================= */
 
@@ -2668,6 +2436,239 @@
        ========================================= -->
 
   <script>
+
+    /* =========================================
+       PRODUCTOS DESDE SUPABASE
+       ========================================= */
+
+    const fallbackProductImages = {
+      BLACK: "black.jpeg",
+      PREMIUM: "premium.jpeg",
+      BANDANA: "bandana.jpeg",
+      POLO: "polo.jpeg",
+      GORRO: "gorro.jpeg"
+    };
+
+
+    async function loadProductsFromSupabase() {
+
+      try {
+
+        const {
+          data,
+          error
+        } = await supabaseClient
+          .from("productos")
+          .select(`
+            sku,
+            nombre,
+            descripcion,
+            categoria,
+            precio,
+            stock,
+            imagen_url,
+            activo,
+            maneja_stock
+          `)
+          .eq("activo", true)
+          .order("created_at", {
+            ascending: true
+          });
+
+
+        if(error) {
+          console.error(
+            "No se pudieron cargar los productos desde Supabase:",
+            error
+          );
+          return;
+        }
+
+
+        if(!Array.isArray(data) || data.length === 0) {
+          return;
+        }
+
+
+        const loadedProducts = {};
+
+
+        data.forEach(product => {
+
+          const sku =
+            String(product.sku || "")
+              .trim()
+              .toUpperCase();
+
+
+          if(!sku) return;
+
+
+          loadedProducts[sku] = {
+
+            name:
+              product.nombre || sku,
+
+            price:
+              Number(product.precio) || 0,
+
+            image:
+              product.imagen_url ||
+              fallbackProductImages[sku] ||
+              "BABY%20GOLDEN.png",
+
+            description:
+              product.descripcion || "",
+
+            category:
+              product.categoria || "BABY GOLDEN PERÚ",
+
+            stock:
+              Number(product.stock) || 0,
+
+            manejaStock:
+              Boolean(product.maneja_stock),
+
+            activo:
+              Boolean(product.activo)
+
+          };
+
+        });
+
+
+        products =
+          loadedProducts;
+
+
+        updateProductCards();
+        renderCart();
+
+      } catch(error) {
+
+        console.error(
+          "Error cargando productos desde Supabase:",
+          error
+        );
+
+      }
+
+    }
+
+
+    function updateProductCards() {
+
+      document
+        .querySelectorAll("[data-add-to-cart]")
+        .forEach(button => {
+
+          const sku =
+            String(button.dataset.addToCart || "")
+              .toUpperCase();
+
+          const product =
+            products[sku];
+
+          if(!product) return;
+
+
+          const card =
+            button.closest(".product");
+
+          if(!card) return;
+
+
+          const image =
+            card.querySelector(".product-image");
+
+          const title =
+            card.querySelector("h2");
+
+          const category =
+            card.querySelector(".product-category");
+
+          const description =
+            card.querySelector(".product-description");
+
+          const price =
+            card.querySelector(".product-price");
+
+
+          if(image) {
+            image.src =
+              product.image;
+
+            image.alt =
+              product.name;
+          }
+
+
+          if(title) {
+            title.textContent =
+              product.name;
+          }
+
+
+          if(category) {
+            category.textContent =
+              product.category;
+          }
+
+
+          if(description) {
+            description.textContent =
+              product.description;
+          }
+
+
+          if(price) {
+            price.textContent =
+              "S/ " +
+              product.price.toFixed(2);
+          }
+
+
+          const agotado =
+            product.manejaStock &&
+            product.stock <= 0;
+
+
+          button.disabled =
+            agotado;
+
+          button.textContent =
+            agotado
+              ? "AGOTADO"
+              : "AGREGAR AL CARRITO";
+
+
+          button.setAttribute(
+            "aria-disabled",
+            agotado
+              ? "true"
+              : "false"
+          );
+
+
+          if(agotado) {
+
+            button.classList.add(
+              "is-disabled"
+            );
+
+          } else {
+
+            button.classList.remove(
+              "is-disabled"
+            );
+
+          }
+
+        });
+
+    }
+
+
 
     /* =========================================
        PRODUCTOS
