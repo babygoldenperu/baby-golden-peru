@@ -33,11 +33,35 @@
 
       if (!window.supabase) return;
 
+      /* =====================================
+         CONEXIÓN CON SUPABASE
+      ===================================== */
+
+      if (
+        !document.querySelector(
+          'link[data-bgp-supabase-preconnect]'
+        )
+      ) {
+
+        const preconnect =
+          document.createElement("link");
+
+        preconnect.rel = "preconnect";
+        preconnect.href = SB_URL;
+        preconnect.dataset.bgpSupabasePreconnect = "true";
+
+        document.head.appendChild(
+          preconnect
+        );
+
+      }
+
       const sb =
         window.supabase.createClient(
           SB_URL,
           SB_KEY
         );
+
 
       /* =====================================
          LEER LAS 12 FOTOS DE SUPABASE
@@ -56,6 +80,7 @@
             ascending: true
           });
 
+
       if (error) {
 
         console.warn(
@@ -64,7 +89,9 @@
         );
 
         return;
+
       }
+
 
       /* =====================================
          SOLO FOTOS CON IMAGEN
@@ -90,6 +117,7 @@
           })
           .slice(0, 12);
 
+
       if (!fotos.length) return;
 
 
@@ -102,28 +130,32 @@
           ".stories-carousel"
         );
 
+
       if (!antiguo) return;
 
-
-      /* Ocultar carrusel antiguo */
 
       antiguo.style.display = "none";
 
 
-      /* Eliminar galería anterior */
+      /* =====================================
+         ELIMINAR GALERÍA ANTERIOR
+      ===================================== */
 
       const anterior =
         document.getElementById(
           "historiasOroPremium"
         );
 
+
       if (anterior) {
+
         anterior.remove();
+
       }
 
 
       /* =====================================
-         CREAR NUEVA GALERÍA
+         CREAR GALERÍA
       ===================================== */
 
       const galeria =
@@ -144,9 +176,7 @@
 #historiasOroPremium{
 
   width:100%;
-
   margin:0;
-
   padding:0;
 
 }
@@ -202,6 +232,8 @@
 
   transition:
     transform .6s ease;
+
+  content-visibility:auto;
 
 }
 
@@ -374,7 +406,6 @@
 .ho-close{
 
   top:24px;
-
   right:28px;
 
 }
@@ -383,7 +414,6 @@
 .ho-prev{
 
   left:25px;
-
   top:50%;
 
   transform:
@@ -395,7 +425,6 @@
 .ho-next{
 
   right:25px;
-
   top:50%;
 
   transform:
@@ -448,12 +477,14 @@
 
   }
 
+
   #historiasOroPremium
   .ho-gallery::-webkit-scrollbar{
 
     display:none;
 
   }
+
 
   #historiasOroPremium
   .ho-card{
@@ -469,11 +500,13 @@
 
   }
 
+
   #hoLightbox{
 
     padding:15px;
 
   }
+
 
   #hoLightboxImage{
 
@@ -483,12 +516,14 @@
 
   }
 
+
   #hoLightbox
   .ho-prev{
 
     left:8px;
 
   }
+
 
   #hoLightbox
   .ho-next{
@@ -497,11 +532,11 @@
 
   }
 
+
   #hoLightbox
   .ho-close{
 
     top:12px;
-
     right:12px;
 
   }
@@ -531,6 +566,7 @@
     ×
   </button>
 
+
   <button
     class="ho-prev"
     type="button"
@@ -539,11 +575,13 @@
     ‹
   </button>
 
+
   <img
     id="hoLightboxImage"
     src=""
     alt="Historia de Oro"
   >
+
 
   <button
     class="ho-next"
@@ -577,10 +615,12 @@
           ".ho-gallery"
         );
 
+
       const lightbox =
         galeria.querySelector(
           "#hoLightbox"
         );
+
 
       const lightboxImage =
         galeria.querySelector(
@@ -589,6 +629,63 @@
 
 
       let actual = 0;
+
+
+      /* =====================================
+         CREAR URL DE MINIATURA
+      ===================================== */
+
+      function crearMiniaturaSupabase(
+        url,
+        width,
+        quality
+      ) {
+
+        try {
+
+          const parsed =
+            new URL(url);
+
+          const marker =
+            "/storage/v1/object/public/";
+
+          const posicion =
+            parsed.pathname.indexOf(
+              marker
+            );
+
+
+          if (posicion === -1) {
+
+            return url;
+
+          }
+
+
+          const ruta =
+            parsed.pathname.substring(
+              posicion + marker.length
+            );
+
+
+          return (
+            parsed.origin +
+            "/storage/v1/render/image/public/" +
+            ruta +
+            "?width=" +
+            encodeURIComponent(width) +
+            "&quality=" +
+            encodeURIComponent(quality)
+          );
+
+        }
+        catch(error) {
+
+          return url;
+
+        }
+
+      }
 
 
       /* =====================================
@@ -603,15 +700,10 @@
               "article"
             );
 
+
           card.className =
             "ho-card";
 
-
-          /*
-            El panel administrativo guarda:
-            title = título
-            caption = descripción
-          */
 
           const titulo =
             foto.title ||
@@ -619,11 +711,39 @@
             "Historias de Oro";
 
 
+          /*
+            La tarjeta utiliza una versión
+            optimizada de la imagen.
+
+            La imagen original solamente
+            se utiliza cuando el usuario
+            abre el visor.
+          */
+
+          const imagenOriginal =
+            String(
+              foto.imagen_url
+            ).trim();
+
+
+          const imagenMiniatura =
+            crearMiniaturaSupabase(
+              imagenOriginal,
+              800,
+              70
+            );
+
+
           card.innerHTML = `
 
 <img
-  src="${foto.imagen_url}"
+  src="${imagenMiniatura}"
+  data-full-src="${imagenOriginal}"
   alt="${titulo}"
+  loading="lazy"
+  decoding="async"
+  width="800"
+  height="800"
 >
 
 <div class="ho-label">
@@ -655,22 +775,39 @@
          ABRIR FOTO
       ===================================== */
 
-      function abrir(index){
+      function abrir(index) {
 
         actual =
           (index + fotos.length)
           % fotos.length;
 
 
+        /*
+          IMPORTANTE:
+          aquí usamos la imagen original
+          para conservar máxima calidad
+          en el visor.
+        */
+
         lightboxImage.src =
-          fotos[actual]
-            .imagen_url;
+          String(
+            fotos[actual]
+              .imagen_url
+          ).trim();
 
 
         lightboxImage.alt =
           fotos[actual].title ||
           fotos[actual].caption ||
           "Historia de Oro — Baby Golden Perú";
+
+
+        lightboxImage.loading =
+          "eager";
+
+
+        lightboxImage.decoding =
+          "async";
 
 
         lightbox.classList.add(
@@ -694,7 +831,7 @@
          CERRAR
       ===================================== */
 
-      function cerrar(){
+      function cerrar() {
 
         lightbox.classList.remove(
           "active"
@@ -721,7 +858,7 @@
          SIGUIENTE
       ===================================== */
 
-      function siguiente(){
+      function siguiente() {
 
         abrir(
           actual + 1
@@ -734,7 +871,7 @@
          ANTERIOR
       ===================================== */
 
-      function anterior(){
+      function anterior() {
 
         abrir(
           actual - 1
@@ -783,11 +920,11 @@
 
       lightbox.addEventListener(
         "click",
-        function(e){
+        function(e) {
 
-          if(
+          if (
             e.target === lightbox
-          ){
+          ) {
 
             cerrar();
 
@@ -803,40 +940,40 @@
 
       document.addEventListener(
         "keydown",
-        function(e){
+        function(e) {
 
-          if(
+          if (
             !lightbox
               .classList
               .contains("active")
-          ){
+          ) {
 
             return;
 
           }
 
 
-          if(
+          if (
             e.key === "Escape"
-          ){
+          ) {
 
             cerrar();
 
           }
 
 
-          if(
+          if (
             e.key === "ArrowRight"
-          ){
+          ) {
 
             siguiente();
 
           }
 
 
-          if(
+          if (
             e.key === "ArrowLeft"
-          ){
+          ) {
 
             anterior();
 
@@ -855,7 +992,7 @@
 
       lightbox.addEventListener(
         "touchstart",
-        function(e){
+        function(e) {
 
           inicioX =
             e.changedTouches[0]
@@ -870,7 +1007,7 @@
 
       lightbox.addEventListener(
         "touchend",
-        function(e){
+        function(e) {
 
           const finalX =
             e.changedTouches[0]
@@ -881,22 +1018,23 @@
             finalX - inicioX;
 
 
-          if(
+          if (
             Math.abs(diferencia) < 50
-          ){
+          ) {
 
             return;
 
           }
 
 
-          if(
+          if (
             diferencia < 0
-          ){
+          ) {
 
             siguiente();
 
-          }else{
+          }
+          else {
 
             anterior();
 
@@ -910,7 +1048,7 @@
 
 
     }
-    catch(error){
+    catch(error) {
 
       console.warn(
         "Error cargando Historias de Oro:",
@@ -926,17 +1064,18 @@
      INICIAR
   ===================================== */
 
-  if(
+  if (
     document.readyState ===
     "loading"
-  ){
+  ) {
 
     document.addEventListener(
       "DOMContentLoaded",
       cargarHistoriasDeOro
     );
 
-  }else{
+  }
+  else {
 
     cargarHistoriasDeOro();
 
