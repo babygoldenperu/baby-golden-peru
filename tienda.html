@@ -2174,6 +2174,9 @@
 
         <img class="product-image"
           src="black.jpeg"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           alt="Baby Golden Perú Black ID">
 
         <div class="product-body">
@@ -2217,6 +2220,9 @@
 
         <img class="product-image"
           src="premium.jpeg"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           alt="Baby Golden Perú Premium ID">
 
         <div class="product-body">
@@ -2260,6 +2266,9 @@
 
         <img class="product-image"
           src="bandana.jpeg"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           alt="Bandana Baby Golden Perú">
 
         <div class="product-body">
@@ -2299,6 +2308,9 @@
 
         <img class="product-image"
           src="polo.jpeg"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           alt="Polo Baby Golden Perú">
 
         <div class="product-body">
@@ -2338,6 +2350,9 @@
 
         <img class="product-image"
           src="gorro.jpeg"
+          loading="lazy"
+          decoding="async"
+          fetchpriority="low"
           alt="Gorro Baby Golden Perú">
 
         <div class="product-body">
@@ -2448,6 +2463,188 @@
       POLO: "polo.jpeg",
       GORRO: "gorro.jpeg"
     };
+
+
+    /* =========================================================
+       OPTIMIZACIÓN DE IMÁGENES — REDUCE CACHED EGRESS
+       Convierte URLs públicas de Supabase Storage al endpoint
+       de transformación de imágenes y limita el tamaño/calidad.
+       Las imágenes locales (GitHub) no se modifican.
+    ========================================================= */
+
+    function optimizeImageUrl(url, width = 800, quality = 65) {
+
+      if(!url) return "";
+
+      const rawUrl = String(url).trim();
+
+      if(!rawUrl) return "";
+
+      try {
+
+        const parsed = new URL(rawUrl);
+
+        /*
+          Supabase Storage:
+          /storage/v1/object/public/bucket/path
+          →
+          /storage/v1/render/image/public/bucket/path
+        */
+
+        const objectMarker = "/storage/v1/object/public/";
+
+        if(parsed.pathname.includes(objectMarker)) {
+
+          parsed.pathname =
+            parsed.pathname.replace(
+              objectMarker,
+              "/storage/v1/render/image/public/"
+            );
+
+          parsed.searchParams.set(
+            "width",
+            String(width)
+          );
+
+          parsed.searchParams.set(
+            "quality",
+            String(quality)
+          );
+
+          return parsed.toString();
+
+        }
+
+        /*
+          Si ya es una URL de transformación de Supabase,
+          solo aseguramos width y quality.
+        */
+
+        if(
+          parsed.pathname.includes(
+            "/storage/v1/render/image/"
+          )
+        ) {
+
+          parsed.searchParams.set(
+            "width",
+            String(width)
+          );
+
+          parsed.searchParams.set(
+            "quality",
+            String(quality)
+          );
+
+          return parsed.toString();
+
+        }
+
+        /*
+          URLs externas o locales:
+          no las alteramos.
+        */
+
+        return rawUrl;
+
+      } catch {
+
+        return rawUrl;
+
+      }
+
+    }
+
+
+    function setOptimizedImage(
+      image,
+      url,
+      alt = "",
+      options = {}
+    ) {
+
+      if(!image || !url) return;
+
+      const width =
+        Number(options.width) || 800;
+
+      const quality =
+        Number(options.quality) || 65;
+
+      const optimized =
+        optimizeImageUrl(
+          url,
+          width,
+          quality
+        );
+
+      /*
+        No reasignamos src si la imagen ya está usando
+        exactamente la misma URL. Esto evita descargas
+        repetidas al volver a renderizar el carrito.
+      */
+
+      if(image.src !== new URL(
+        optimized,
+        window.location.href
+      ).href) {
+
+        image.src = optimized;
+
+      }
+
+      if(alt) {
+        image.alt = alt;
+      }
+
+      image.loading =
+        options.loading || "lazy";
+
+      image.decoding = "async";
+
+      image.setAttribute(
+        "fetchpriority",
+        options.fetchpriority || "low"
+      );
+
+      /*
+        Si una URL transformada no estuviera disponible,
+        volvemos automáticamente a la URL original.
+      */
+
+      if(!image.dataset.fallbackBound){
+
+        image.dataset.fallbackBound = "true";
+
+        image.addEventListener(
+          "error",
+          function(){
+
+            const original =
+              image.dataset.originalUrl;
+
+            if(
+              original &&
+              image.src !== new URL(
+                original,
+                window.location.href
+              ).href
+            ){
+
+              image.dataset.fallbackUsed = "true";
+              image.src = original;
+
+            }
+
+          },
+          { once: true }
+        );
+
+      }
+
+      image.dataset.originalUrl = String(url);
+
+    }
 
 
     async function loadProductsFromSupabase() {
@@ -2595,11 +2792,19 @@
 
 
           if(image) {
-            image.src =
-              product.image;
 
-            image.alt =
-              product.name;
+            setOptimizedImage(
+              image,
+              product.image,
+              product.name,
+              {
+                width: 800,
+                quality: 65,
+                loading: "lazy",
+                fetchpriority: "low"
+              }
+            );
+
           }
 
 
@@ -2948,8 +3153,12 @@
 
                 <img
                   class="cart-item-image"
-                  src="${product.image}"
+                  data-cart-image="${id}"
+                  src="${optimizeImageUrl(product.image, 260, 60)}"
                   alt="${product.name}"
+                  loading="lazy"
+                  decoding="async"
+                  fetchpriority="low"
                 >
 
                 <div>
@@ -3017,6 +3226,37 @@
             `;
 
           }).join("");
+
+        /*
+          Las miniaturas del carrito usan una versión mucho
+          más pequeña para no descargar imágenes de 5 MB.
+        */
+
+        cartItems
+          .querySelectorAll("[data-cart-image]")
+          .forEach(function(image){
+
+            const id =
+              image.dataset.cartImage;
+
+            const product =
+              products[id];
+
+            if(!product) return;
+
+            setOptimizedImage(
+              image,
+              product.image,
+              product.name,
+              {
+                width: 260,
+                quality: 60,
+                loading: "lazy",
+                fetchpriority: "low"
+              }
+            );
+
+          });
 
       }
 
