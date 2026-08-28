@@ -48,7 +48,9 @@
 
         preconnect.rel = "preconnect";
         preconnect.href = SB_URL;
-        preconnect.dataset.bgpSupabasePreconnect = "true";
+
+        preconnect.dataset
+          .bgpSupabasePreconnect = "true";
 
         document.head.appendChild(
           preconnect
@@ -64,7 +66,7 @@
 
 
       /* =====================================
-         LEER LAS 12 FOTOS DE SUPABASE
+         LEER LAS 12 FOTOS
       ===================================== */
 
       const { data, error } =
@@ -103,7 +105,9 @@
 
             return (
               foto.imagen_url &&
-              String(foto.imagen_url).trim() !== ""
+              String(
+                foto.imagen_url
+              ).trim() !== ""
             );
 
           })
@@ -134,7 +138,8 @@
       if (!antiguo) return;
 
 
-      antiguo.style.display = "none";
+      antiguo.style.display =
+        "none";
 
 
       /* =====================================
@@ -159,7 +164,9 @@
       ===================================== */
 
       const galeria =
-        document.createElement("section");
+        document.createElement(
+          "section"
+        );
 
       galeria.id =
         "historiasOroPremium";
@@ -180,6 +187,7 @@
   padding:0;
 
 }
+
 
 #historiasOroPremium
 .ho-gallery{
@@ -219,6 +227,7 @@
 
 }
 
+
 #historiasOroPremium
 .ho-card img{
 
@@ -236,6 +245,7 @@
   content-visibility:auto;
 
 }
+
 
 #historiasOroPremium
 .ho-card:hover img{
@@ -332,6 +342,7 @@
 
 }
 
+
 #hoLightbox.active{
 
   display:flex;
@@ -402,6 +413,7 @@
 
 }
 
+
 #hoLightbox
 .ho-close{
 
@@ -410,10 +422,12 @@
 
 }
 
+
 #hoLightbox
 .ho-prev{
 
   left:25px;
+
   top:50%;
 
   transform:
@@ -421,10 +435,12 @@
 
 }
 
+
 #hoLightbox
 .ho-next{
 
   right:25px;
+
   top:50%;
 
   transform:
@@ -632,7 +648,7 @@
 
 
       /* =====================================
-         CREAR URL DE MINIATURA
+         CREAR URL OPTIMIZADA SUPABASE
       ===================================== */
 
       function crearMiniaturaSupabase(
@@ -646,8 +662,10 @@
           const parsed =
             new URL(url);
 
+
           const marker =
             "/storage/v1/object/public/";
+
 
           const posicion =
             parsed.pathname.indexOf(
@@ -673,9 +691,13 @@
             "/storage/v1/render/image/public/" +
             ruta +
             "?width=" +
-            encodeURIComponent(width) +
+            encodeURIComponent(
+              width
+            ) +
             "&quality=" +
-            encodeURIComponent(quality)
+            encodeURIComponent(
+              quality
+            )
           );
 
         }
@@ -689,7 +711,7 @@
 
 
       /* =====================================
-         CREAR LAS 12 FOTOS
+         CREAR LAS FOTOS
       ===================================== */
 
       fotos.forEach(
@@ -712,12 +734,11 @@
 
 
           /*
-            La tarjeta utiliza una versión
+            La galería utiliza una versión
             optimizada de la imagen.
 
-            La imagen original solamente
-            se utiliza cuando el usuario
-            abre el visor.
+            Esto evita descargar los originales
+            de varios MB al cargar la página.
           */
 
           const imagenOriginal =
@@ -782,18 +803,28 @@
           % fotos.length;
 
 
-        /*
-          IMPORTANTE:
-          aquí usamos la imagen original
-          para conservar máxima calidad
-          en el visor.
-        */
-
-        lightboxImage.src =
+        const imagenOriginal =
           String(
             fotos[actual]
               .imagen_url
           ).trim();
+
+
+        /*
+          El visor utiliza una versión
+          de alta calidad optimizada.
+
+          Máximo 1600 px y calidad 82,
+          evitando descargar el original
+          de 5–8 MB.
+        */
+
+        lightboxImage.src =
+          crearMiniaturaSupabase(
+            imagenOriginal,
+            1600,
+            82
+          );
 
 
         lightboxImage.alt =
