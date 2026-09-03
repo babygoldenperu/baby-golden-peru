@@ -1005,6 +1005,119 @@ footer p{
 }
 </style>
 
+<style id="payment-confirmation-style">
+
+    /* =========================================================
+       CONFIRMACIÓN DE PAGO — BABY GOLDEN PERÚ
+       Solo se muestra después de volver de Mercado Pago.
+       No modifica el flujo de creación/cobro del pedido.
+       ========================================================= */
+    .payment-confirmation{
+      display:none;
+      margin:0 0 28px;
+      padding:28px;
+      background:#fffaf4;
+      border:1px solid #decdb8;
+      border-radius:18px;
+      box-shadow:0 12px 30px rgba(59,43,32,.06);
+    }
+
+    .payment-confirmation.is-visible{
+      display:block;
+    }
+
+    .payment-confirmation-inner{
+      display:flex;
+      align-items:flex-start;
+      gap:18px;
+    }
+
+    .payment-confirmation-icon{
+      width:48px;
+      height:48px;
+      flex:0 0 48px;
+      display:grid;
+      place-items:center;
+      border-radius:50%;
+      background:#e8f2e8;
+      color:#3f7a45;
+      font-size:24px;
+      font-weight:700;
+    }
+
+    .payment-confirmation-copy{
+      flex:1;
+    }
+
+    .payment-confirmation-label{
+      margin:0 0 6px;
+      color:#3f7a45;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:2px;
+      text-transform:uppercase;
+    }
+
+    .payment-confirmation h2{
+      margin:0 0 8px;
+      color:#3b2b20;
+      font-family:Georgia,serif;
+      font-size:32px;
+      font-weight:500;
+    }
+
+    .payment-confirmation p{
+      margin:0;
+      color:#765f4c;
+      font-size:12px;
+      line-height:1.7;
+    }
+
+    .payment-confirmation-order{
+      margin-top:14px !important;
+      color:#a76f20 !important;
+      font-weight:700;
+    }
+
+    .payment-confirmation.pending .payment-confirmation-icon{
+      background:#f5ecd9;
+      color:#a76f20;
+    }
+
+    .payment-confirmation.pending .payment-confirmation-label{
+      color:#a76f20;
+    }
+
+    .payment-confirmation.failure .payment-confirmation-icon{
+      background:#f7e5e1;
+      color:#9f3d2c;
+    }
+
+    .payment-confirmation.failure .payment-confirmation-label{
+      color:#9f3d2c;
+    }
+
+    @media(max-width:560px){
+      .payment-confirmation{
+        padding:22px;
+      }
+
+      .payment-confirmation-inner{
+        gap:14px;
+      }
+
+      .payment-confirmation-icon{
+        width:42px;
+        height:42px;
+        flex-basis:42px;
+      }
+
+      .payment-confirmation h2{
+        font-size:27px;
+      }
+    }
+
+</style>
 </head>
 
 
@@ -1081,6 +1194,48 @@ footer p{
       Revisa tu selección y completa tus datos para continuar.
     </p>
 
+
+    <section
+      id="paymentConfirmation"
+      class="payment-confirmation"
+      aria-live="polite"
+    >
+      <div class="payment-confirmation-inner">
+
+        <div
+          id="paymentConfirmationIcon"
+          class="payment-confirmation-icon"
+          aria-hidden="true"
+        >
+          ✓
+        </div>
+
+        <div class="payment-confirmation-copy">
+
+          <div
+            id="paymentConfirmationLabel"
+            class="payment-confirmation-label"
+          >
+            PAGO CONFIRMADO
+          </div>
+
+          <h2 id="paymentConfirmationTitle">
+            ¡Pago confirmado!
+          </h2>
+
+          <p id="paymentConfirmationText">
+            Tu pago fue recibido correctamente.
+          </p>
+
+          <p
+            id="paymentConfirmationOrder"
+            class="payment-confirmation-order"
+          ></p>
+
+        </div>
+
+      </div>
+    </section>
 
     <div class="checkout-grid">
 
@@ -1345,6 +1500,16 @@ footer p{
     let productsLoaded = false;
     let checkoutBusy = false;
 
+    // Las imágenes de la tienda tienen respaldo local porque
+    // imagen_url puede estar vacío en Supabase.
+    const fallbackProductImages = {
+      BLACK: "black.jpeg",
+      PREMIUM: "premium.jpeg",
+      BANDANA: "bandana.jpeg",
+      POLO: "polo.jpeg",
+      GORRO: "gorro.jpeg"
+    };
+
     function getCart(){
       try{
         const saved = JSON.parse(localStorage.getItem(cartKey));
@@ -1470,7 +1635,10 @@ footer p{
 
         total += subtotal;
 
-        const image = product.imagen_url || "BABY%20GOLDEN.png";
+        const image =
+          product.imagen_url ||
+          fallbackProductImages[line.sku] ||
+          "BABY%20GOLDEN.png";
 
         return `
           <div class="summary-item">
@@ -1478,6 +1646,7 @@ footer p{
               class="summary-image"
               src="${escapeHtml(image)}"
               alt="${escapeHtml(product.nombre)}"
+              onerror="this.onerror=null;this.src='BABY%20GOLDEN.png';"
             >
 
             <div>
@@ -1677,11 +1846,48 @@ footer p{
       }
     }
 
+
+    function showPaymentConfirmation(type, title, text, orderNumber){
+      const card = document.getElementById("paymentConfirmation");
+      const icon = document.getElementById("paymentConfirmationIcon");
+      const label = document.getElementById("paymentConfirmationLabel");
+      const titleElement = document.getElementById("paymentConfirmationTitle");
+      const textElement = document.getElementById("paymentConfirmationText");
+      const orderElement = document.getElementById("paymentConfirmationOrder");
+
+      card.className = "payment-confirmation is-visible";
+
+      if(type === "pending"){
+        card.classList.add("pending");
+        icon.textContent = "•";
+        label.textContent = "PAGO EN CONFIRMACIÓN";
+      }else if(type === "failure"){
+        card.classList.add("failure");
+        icon.textContent = "!";
+        label.textContent = "PAGO NO CONFIRMADO";
+      }else{
+        icon.textContent = "✓";
+        label.textContent = "PAGO CONFIRMADO";
+      }
+
+      titleElement.textContent = title;
+      textElement.textContent = text;
+      orderElement.textContent = orderNumber
+        ? `Pedido #BG-${String(orderNumber).padStart(6,"0")}`
+        : "";
+    }
+
+
     async function verifyReturnedOrder(pedidoId, status){
       const formError = document.getElementById("formError");
       const button = document.getElementById("continueButton");
 
       if(status === "failure"){
+        showPaymentConfirmation(
+          "failure",
+          "Pago no confirmado",
+          "El pago no fue completado. Puedes volver a intentarlo."
+        );
         formError.style.color = "#9f3d2c";
         formError.textContent =
           "El pago no fue completado. Puedes volver a intentarlo.";
@@ -1692,6 +1898,11 @@ footer p{
       }
 
       if(!pedidoId){
+        showPaymentConfirmation(
+          "pending",
+          "Pago en confirmación",
+          "Pago aprobado. Estamos confirmando tu pedido. No necesitas pagar nuevamente."
+        );
         formError.style.color = "#8a6a2f";
         formError.textContent =
           "Pago aprobado. Estamos confirmando tu pedido. No necesitas pagar nuevamente.";
@@ -1720,6 +1931,12 @@ footer p{
           const estado = String(data?.estado || "").toUpperCase();
 
           if(estado === "PAGADO"){
+            showPaymentConfirmation(
+              "success",
+              "¡Pago confirmado!",
+              "Tu pago fue recibido correctamente y tu pedido quedó registrado.",
+              data.numero_pedido
+            );
             formError.style.color = "#3f7a45";
             formError.textContent =
               `¡Pago confirmado! Tu pedido #BG-${String(data.numero_pedido || "").padStart(6,"0")} fue registrado correctamente.`;
@@ -1730,6 +1947,12 @@ footer p{
           }
 
           if(estado === "CANCELADO"){
+            showPaymentConfirmation(
+              "failure",
+              "Pago no confirmado",
+              "El pago no fue confirmado. Puedes volver a intentarlo.",
+              data.numero_pedido
+            );
             formError.style.color = "#9f3d2c";
             formError.textContent =
               "El pago no fue confirmado. Puedes volver a intentarlo.";
@@ -1744,6 +1967,11 @@ footer p{
           }
         }
 
+        showPaymentConfirmation(
+          "pending",
+          "Pago en confirmación",
+          "Tu pago fue recibido y estamos esperando la confirmación final. No necesitas pagar nuevamente."
+        );
         formError.style.color = "#8a6a2f";
         formError.textContent =
           "Tu pago fue recibido y estamos esperando la confirmación final. No necesitas pagar nuevamente.";
