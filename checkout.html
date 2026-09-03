@@ -1677,46 +1677,115 @@ footer p{
       }
     }
 
-    function handleMercadoPagoReturn(){
-      const params = new URLSearchParams(window.location.search);
-      const status = params.get("mp_status");
-
-      if(!status) return;
-
+    async function verifyReturnedOrder(pedidoId, status){
       const formError = document.getElementById("formError");
       const button = document.getElementById("continueButton");
 
-      if(status === "success"){
-        formError.style.color = "#3f7a45";
-        formError.textContent =
-          "Pago aprobado. Estamos confirmando tu pedido.";
-        button.textContent = "PAGO APROBADO";
-        button.disabled = true;
-      }else if(status === "pending"){
-        formError.style.color = "#8a6a2f";
-        formError.textContent =
-          "Tu pago quedó pendiente. Te mostraremos la confirmación cuando Mercado Pago lo confirme.";
-        button.textContent = "PAGO PENDIENTE";
-      }else if(status === "failure"){
+      if(status === "failure"){
         formError.style.color = "#9f3d2c";
         formError.textContent =
           "El pago no fue completado. Puedes volver a intentarlo.";
         button.textContent = "INTENTAR NUEVAMENTE";
         button.disabled = false;
         checkoutBusy = false;
+        return;
       }
 
+      if(!pedidoId){
+        formError.style.color = "#8a6a2f";
+        formError.textContent =
+          "Pago aprobado. Estamos confirmando tu pedido. No necesitas pagar nuevamente.";
+        button.textContent = "PAGO EN CONFIRMACIÓN";
+        button.disabled = true;
+        checkoutBusy = true;
+        return;
+      }
+
+      try{
+        formError.style.color = "#8a6a2f";
+        formError.textContent = "Verificando el estado real de tu pedido...";
+        button.textContent = "VERIFICANDO PAGO...";
+        button.disabled = true;
+        checkoutBusy = true;
+
+        for(let attempt = 0; attempt < 6; attempt++){
+          const { data, error } =
+            await supabaseClient.functions.invoke(
+              "mercadopago-order-status",
+              { body: { pedido_id: pedidoId } }
+            );
+
+          if(error) throw error;
+
+          const estado = String(data?.estado || "").toUpperCase();
+
+          if(estado === "PAGADO"){
+            formError.style.color = "#3f7a45";
+            formError.textContent =
+              `¡Pago confirmado! Tu pedido #BG-${String(data.numero_pedido || "").padStart(6,"0")} fue registrado correctamente.`;
+            button.textContent = "PAGO CONFIRMADO";
+            button.disabled = true;
+            checkoutBusy = true;
+            return;
+          }
+
+          if(estado === "CANCELADO"){
+            formError.style.color = "#9f3d2c";
+            formError.textContent =
+              "El pago no fue confirmado. Puedes volver a intentarlo.";
+            button.textContent = "INTENTAR NUEVAMENTE";
+            button.disabled = false;
+            checkoutBusy = false;
+            return;
+          }
+
+          if(attempt < 5){
+            await new Promise(resolve => setTimeout(resolve, 2000));
+          }
+        }
+
+        formError.style.color = "#8a6a2f";
+        formError.textContent =
+          "Tu pago fue recibido y estamos esperando la confirmación final. No necesitas pagar nuevamente.";
+        button.textContent = "PAGO EN CONFIRMACIÓN";
+        button.disabled = true;
+        checkoutBusy = true;
+
+      }catch(error){
+        console.error("Error verificando pedido:", error);
+
+        formError.style.color = "#8a6a2f";
+        formError.textContent =
+          "Pago aprobado. Estamos confirmando tu pedido. No necesitas pagar nuevamente.";
+        button.textContent = "PAGO EN CONFIRMACIÓN";
+        button.disabled = true;
+        checkoutBusy = true;
+      }
+    }
+
+    async function handleMercadoPagoReturn(){
+      const params = new URLSearchParams(window.location.search);
+      const status = params.get("mp_status");
+      const pedidoId = params.get("pedido_id");
+
+      if(!status) return;
+
       params.delete("mp_status");
+      params.delete("pedido_id");
+
       const cleanUrl =
         window.location.pathname +
         (params.toString() ? "?" + params.toString() : "") +
         window.location.hash;
 
       window.history.replaceState({}, document.title, cleanUrl);
+
+      await verifyReturnedOrder(pedidoId, status);
     }
 
-    handleMercadoPagoReturn();
-    initCheckout();
+    initCheckout().then(() => {
+      handleMercadoPagoReturn();
+    });
   </script>
 
 
