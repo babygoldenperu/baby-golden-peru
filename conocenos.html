@@ -1,4845 +1,4271 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Conócenos | Baby Golden Perú</title>
+    <title>Conócenos | Baby Golden Perú</title>
 
-  <meta
-    name="description"
-    content="Conoce Baby Golden Perú, nuestra fundadora, nuestro propósito, nuestras áreas y la comunidad que deja huellas."
-  >
+    <meta
+        name="description"
+        content="Conoce Baby Golden Perú, nuestra fundadora, nuestras áreas y la comunidad que trabaja por un mundo mejor, una pata a la vez."
+    >
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <link
-    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  >
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+        rel="stylesheet"
+    >
 
-  <style>
+    <!-- ICONOS -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+    >
 
-    :root {
-      --gold: #c99a52;
-      --gold-dark: #a97835;
-      --gold-light: #dfbd83;
+    <style>
 
-      --cream: #fffaf3;
-      --cream-dark: #f5ead9;
-      --cream-deep: #ead9c0;
+        /* =========================================================
+           VARIABLES
+        ========================================================= */
 
-      --brown: #302219;
-      --brown-soft: #5d4b3e;
-      --text: #75675d;
+        :root {
+            --gold: #c99a52;
+            --gold-dark: #a97835;
+            --gold-light: #dfbd83;
 
-      --white: #ffffff;
-      --border: #eadcc9;
+            --cream: #fffaf3;
+            --cream-dark: #f5ead9;
+            --cream-deep: #ead9c0;
 
-      --shadow-sm:
-        0 10px 30px rgba(73,49,24,.07);
+            --brown: #302219;
+            --brown-soft: #5d4b3e;
+            --text: #75675d;
 
-      --shadow-md:
-        0 20px 55px rgba(73,49,24,.12);
+            --white: #ffffff;
 
-      --shadow-lg:
-        0 30px 80px rgba(73,49,24,.18);
+            --border: #eadcc9;
 
-      --radius-md: 24px;
+            --shadow-soft: 0 20px 60px rgba(48, 34, 25, 0.08);
+            --shadow-card: 0 18px 45px rgba(48, 34, 25, 0.12);
 
-      --max-width: 1240px;
-    }
+            --radius: 24px;
+            --radius-small: 16px;
+
+            --header-height: 82px;
+        }
 
+
+        /* =========================================================
+           RESET
+        ========================================================= */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "DM Sans", sans-serif;
+            color: var(--brown);
+            background: var(--cream);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
 
-    /* =====================================================
-       RESET
-    ====================================================== */
+        img {
+            max-width: 100%;
+            display: block;
+        }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
 
-    html {
-      scroll-behavior: smooth;
-    }
+        button {
+            font-family: inherit;
+        }
 
-    body {
-      font-family: "DM Sans", sans-serif;
 
-      color: var(--brown);
+        /* =========================================================
+           CONTAINER
+        ========================================================= */
 
-      background: var(--cream);
+        .container {
+            width: min(1180px, calc(100% - 40px));
+            margin: 0 auto;
+        }
 
-      line-height: 1.6;
 
-      overflow-x: hidden;
-    }
+        /* =========================================================
+           HEADER
+        ========================================================= */
 
-    img {
-      width: 100%;
-      display: block;
-    }
+        .site-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: var(--header-height);
 
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
+            display: flex;
+            align-items: center;
 
-    button {
-      font-family: inherit;
-      border: 0;
-      cursor: pointer;
-    }
+            z-index: 1000;
 
-    .container {
-      width:
-        min(
-          calc(100% - 48px),
-          var(--max-width)
-        );
+            background: rgba(255, 250, 243, 0.92);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
 
-      margin: 0 auto;
-    }
+            border-bottom: 1px solid rgba(234, 220, 201, 0.75);
 
+            transition:
+                background 0.3s ease,
+                box-shadow 0.3s ease;
+        }
 
-    /* =====================================================
-       HEADER
-    ====================================================== */
+        .site-header.scrolled {
+            background: rgba(255, 250, 243, 0.98);
+            box-shadow: 0 8px 30px rgba(48, 34, 25, 0.08);
+        }
 
-    .site-header {
-      position: fixed;
+        .header-inner {
+            width: min(1380px, calc(100% - 48px));
+            height: 100%;
+            margin: 0 auto;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 28px;
+        }
 
-      top: 0;
-      left: 0;
+        .brand {
+            display: flex;
+            align-items: center;
+            flex-shrink: 0;
+        }
 
-      width: 100%;
+        .brand img {
+            width: 135px;
+            height: auto;
+            object-fit: contain;
+        }
 
-      z-index: 1000;
+        .main-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 25px;
 
-      padding: 18px 0;
+            flex: 1;
+        }
 
-      transition: all .35s ease;
-    }
+        .main-nav a {
+            position: relative;
 
-    .site-header.scrolled {
-      padding: 10px 0;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
-      background:
-        rgba(255,250,243,.94);
+            color: var(--brown-soft);
 
-      backdrop-filter:
-        blur(18px);
+            transition: color 0.25s ease;
+        }
 
-      box-shadow:
-        0 8px 30px rgba(48,34,25,.08);
-    }
+        .main-nav a::after {
+            content: "";
 
-    .header-inner {
-      position: relative;
+            position: absolute;
+            left: 0;
+            bottom: -7px;
 
-      width:
-        min(
-          calc(100% - 32px),
-          1380px
-        );
+            width: 0;
+            height: 2px;
 
-      min-height: 74px;
+            background: var(--gold);
 
-      margin: 0 auto;
+            transition: width 0.25s ease;
+        }
 
-      padding:
-        10px 18px 10px 20px;
+        .main-nav a:hover,
+        .main-nav a.active {
+            color: var(--gold-dark);
+        }
 
-      display: flex;
+        .main-nav a:hover::after,
+        .main-nav a.active::after {
+            width: 100%;
+        }
 
-      align-items: center;
+        .main-nav .nav-shop {
+            padding: 11px 18px;
 
-      gap: 25px;
+            color: var(--white);
+            background: var(--gold);
 
-      background:
-        rgba(255,255,255,.92);
+            border-radius: 999px;
 
-      border:
-        1px solid rgba(234,220,201,.85);
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
 
-      border-radius: 22px;
+        .main-nav .nav-shop::after {
+            display: none;
+        }
 
-      box-shadow:
-        0 12px 40px rgba(63,43,23,.08);
+        .main-nav .nav-shop:hover {
+            color: var(--white);
+            background: #000;
+            transform: translateY(-1px);
+        }
 
-      backdrop-filter:
-        blur(16px);
-    }
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 17px;
 
-    .logo {
-      flex-shrink: 0;
+            flex-shrink: 0;
+        }
 
-      display: flex;
+        .header-action {
+            width: 38px;
+            height: 38px;
 
-      align-items: center;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .logo img {
-      width: 154px;
+            color: var(--brown);
 
-      max-height: 56px;
+            border-radius: 50%;
 
-      object-fit: contain;
-    }
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
 
-    .main-nav {
-      margin-left: auto;
+        .header-action:hover {
+            color: var(--gold-dark);
+            background: var(--cream-dark);
+        }
 
-      display: flex;
+        .account-action {
+            width: auto;
 
-      align-items: center;
+            display: flex;
+            align-items: center;
+            gap: 7px;
 
-      gap: 5px;
-    }
+            border-radius: 20px;
+            padding: 7px 10px;
+        }
 
-    .main-nav a {
-      position: relative;
+        .account-action span {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
 
-      padding:
-        11px 13px;
+        .mobile-menu-btn {
+            display: none;
 
-      color:
-        var(--brown-soft);
+            width: 42px;
+            height: 42px;
 
-      font-size: 13px;
+            align-items: center;
+            justify-content: center;
 
-      font-weight: 600;
+            border: 0;
+            background: transparent;
 
-      white-space: nowrap;
+            color: var(--brown);
+            font-size: 20px;
 
-      transition: .25s ease;
-    }
+            cursor: pointer;
+        }
 
-    .main-nav a:not(.shop-link)::after {
-      content: "";
 
-      position: absolute;
+        /* =========================================================
+           HERO
+        ========================================================= */
 
-      left: 13px;
-      right: 13px;
+        .hero {
+            position: relative;
 
-      bottom: 5px;
+            min-height: 720px;
+            height: 88vh;
 
-      height: 2px;
+            display: flex;
+            align-items: center;
 
-      background:
-        var(--gold);
+            background-image:
+                linear-gradient(
+                    90deg,
+                    rgba(30, 20, 14, 0.78) 0%,
+                    rgba(30, 20, 14, 0.54) 45%,
+                    rgba(30, 20, 14, 0.22) 100%
+                ),
+                url("assets/conocenos-hero.jpg");
 
-      border-radius: 20px;
+            background-size: cover;
+            background-position: center;
+        }
 
-      transform:
-        scaleX(0);
+        .hero-content {
+            position: relative;
+            z-index: 2;
 
-      transition:
-        transform .25s ease;
-    }
+            max-width: 680px;
 
-    .main-nav a:hover {
-      color:
-        var(--gold-dark);
-    }
+            padding-top: 70px;
 
-    .main-nav a:not(.shop-link):hover::after {
-      transform:
-        scaleX(1);
-    }
+            color: var(--white);
+        }
 
-    .shop-link {
-      margin-left: 8px;
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
 
-      padding:
-        12px 20px !important;
+            margin-bottom: 22px;
 
-      color:
-        var(--white) !important;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--gold-dark)
-        );
+            color: var(--gold-light);
+        }
 
-      border-radius: 100px;
+        .eyebrow::before {
+            content: "";
 
-      box-shadow:
-        0 8px 18px rgba(169,120,53,.22);
-    }
+            width: 34px;
+            height: 1px;
 
-    .shop-link:hover {
-      color:
-        var(--white) !important;
+            background: var(--gold-light);
+        }
 
-      background:
-        var(--brown);
+        .hero h1 {
+            font-family: "Playfair Display", serif;
 
-      transform:
-        translateY(-1px);
-    }
+            font-size: clamp(54px, 7vw, 88px);
+            line-height: 0.98;
 
-    .header-actions {
-      display: flex;
+            margin-bottom: 25px;
+        }
 
-      align-items: center;
+        .hero-description {
+            max-width: 610px;
 
-      gap: 7px;
+            font-size: 17px;
+            line-height: 1.8;
 
-      margin-left: 8px;
-    }
+            color: rgba(255, 255, 255, 0.9);
 
-    .header-icon {
-      width: 40px;
-      height: 40px;
+            margin-bottom: 28px;
+        }
 
-      display: grid;
+        .hero-motto {
+            font-family: "Playfair Display", serif;
 
-      place-items: center;
+            font-size: 20px;
+            font-style: italic;
 
-      border-radius: 50%;
+            color: var(--gold-light);
+        }
 
-      background: transparent;
 
-      color: var(--brown);
+        /* =========================================================
+           SECTION COMMON
+        ========================================================= */
 
-      transition: .25s ease;
-    }
+        .section {
+            padding: 105px 0;
+        }
 
-    .header-icon:hover {
-      color:
-        var(--gold-dark);
+        .section-header {
+            max-width: 700px;
+            margin-bottom: 55px;
+        }
 
-      background:
-        var(--cream-dark);
+        .section-header.center {
+            margin-left: auto;
+            margin-right: auto;
+            text-align: center;
+        }
 
-      transform:
-        translateY(-2px);
-    }
+        .section-kicker {
+            margin-bottom: 13px;
 
-    .header-icon svg {
-      width: 19px;
-      height: 19px;
+            color: var(--gold-dark);
 
-      stroke-width: 1.8;
-    }
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+        }
 
-    .mobile-menu {
-      display: none;
+        .section-title {
+            font-family: "Playfair Display", serif;
 
-      width: 42px;
-      height: 42px;
+            font-size: clamp(38px, 5vw, 58px);
+            line-height: 1.08;
 
-      margin-left: auto;
+            color: var(--brown);
 
-      place-items: center;
+            margin-bottom: 18px;
+        }
 
-      border-radius: 50%;
+        .section-description {
+            font-size: 16px;
+            color: var(--text);
+            line-height: 1.8;
+        }
 
-      background:
-        var(--cream-dark);
 
-      color:
-        var(--brown);
-    }
+        /* =========================================================
+           QUIÉN ESTÁ DETRÁS
+        ========================================================= */
 
+        .founder-section {
+            background: var(--cream-dark);
+        }
 
-    /* =====================================================
-       HERO
-    ====================================================== */
+        .founder-grid {
+            display: grid;
+            grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+            gap: 80px;
+            align-items: center;
+        }
 
-    .hero {
-      position: relative;
+        .founder-image-wrap {
+            position: relative;
+        }
 
-      min-height: 760px;
+        .founder-image {
+            width: 100%;
+            aspect-ratio: 0.88;
+            object-fit: cover;
 
-      display: flex;
+            border-radius: 28px;
 
-      align-items: center;
+            box-shadow: var(--shadow-card);
+        }
 
-      overflow: hidden;
+        .founder-image-wrap::after {
+            content: "";
 
-      background:
-        linear-gradient(
-          90deg,
-          rgba(37,25,17,.84) 0%,
-          rgba(37,25,17,.65) 38%,
-          rgba(37,25,17,.18) 76%,
-          rgba(37,25,17,.08) 100%
-        ),
-        url("assets/conocenos-hero.jpg")
-        center / cover no-repeat;
-    }
+            position: absolute;
 
-    .hero::before {
-      content: "";
+            width: 120px;
+            height: 120px;
 
-      position: absolute;
+            right: -22px;
+            bottom: -22px;
 
-      width: 480px;
-      height: 480px;
+            border: 1px solid var(--gold);
 
-      left: -260px;
-      bottom: -250px;
+            border-radius: 50%;
 
-      border:
-        1px solid rgba(255,255,255,.16);
+            opacity: 0.45;
 
-      border-radius: 50%;
-    }
+            z-index: 0;
+        }
 
-    .hero::after {
-      content: "";
+        .founder-info {
+            position: relative;
+            z-index: 2;
+        }
 
-      position: absolute;
+        .founder-role {
+            margin-bottom: 18px;
 
-      width: 650px;
-      height: 650px;
+            color: var(--gold-dark);
 
-      left: -360px;
-      bottom: -350px;
+            font-size: 12px;
+            font-weight: 700;
 
-      border:
-        1px solid rgba(255,255,255,.09);
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
 
-      border-radius: 50%;
-    }
+        .founder-name {
+            font-family: "Playfair Display", serif;
 
-    .hero-content {
-      position: relative;
+            font-size: clamp(44px, 5vw, 65px);
+            line-height: 1;
 
-      z-index: 2;
+            margin-bottom: 25px;
+        }
 
-      width:
-        min(
-          calc(100% - 48px),
-          var(--max-width)
-        );
+        .founder-text {
+            font-size: 16px;
+            line-height: 1.9;
 
-      margin: 0 auto;
+            color: var(--text);
 
-      padding-top: 95px;
-    }
+            margin-bottom: 30px;
+        }
 
-    .hero-copy {
-      max-width: 690px;
+        .founder-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
 
-      color:
-        var(--white);
-    }
+            margin-bottom: 34px;
+        }
 
-    .eyebrow {
-      display: inline-flex;
+        .founder-tag {
+            padding: 9px 15px;
 
-      align-items: center;
+            border: 1px solid var(--border);
+            border-radius: 999px;
 
-      gap: 11px;
+            background: rgba(255, 255, 255, 0.48);
 
-      margin-bottom: 20px;
+            color: var(--brown-soft);
 
-      color:
-        #f2d7a9;
+            font-size: 12px;
+            font-weight: 600;
+        }
 
-      font-size: 12px;
+        .founder-quote {
+            padding-left: 22px;
 
-      font-weight: 700;
+            border-left: 3px solid var(--gold);
 
-      letter-spacing: .2em;
-    }
+            font-family: "Playfair Display", serif;
+            font-size: 22px;
+            line-height: 1.5;
+            font-style: italic;
 
-    .eyebrow::before {
-      content: "";
+            color: var(--brown);
+        }
 
-      width: 38px;
-      height: 1px;
 
-      background:
-        #f2d7a9;
-    }
+        /* =========================================================
+           PROPÓSITO
+        ========================================================= */
 
-    .hero h1 {
-      margin-bottom: 22px;
+        .purpose-section {
+            background: var(--cream);
+        }
 
-      font-family:
-        "Playfair Display",
-        serif;
+        .purpose-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
 
-      font-size:
-        clamp(64px,8vw,108px);
+        .purpose-card {
+            padding: 35px 28px;
 
-      line-height: .95;
+            min-height: 250px;
 
-      font-weight: 600;
+            background: var(--white);
 
-      letter-spacing: -.04em;
-    }
+            border: 1px solid var(--border);
+            border-radius: var(--radius-small);
 
-    .hero-description {
-      max-width: 610px;
+            box-shadow: var(--shadow-soft);
 
-      margin-bottom: 30px;
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
 
-      color:
-        rgba(255,255,255,.88);
+        .purpose-card:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--shadow-card);
+        }
 
-      font-size: 18px;
+        .purpose-icon {
+            width: 55px;
+            height: 55px;
 
-      line-height: 1.8;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .hero-motto {
-      display: inline-block;
+            margin-bottom: 25px;
 
-      padding-left: 18px;
+            border-radius: 50%;
 
-      border-left:
-        2px solid var(--gold-light);
+            background: var(--cream-dark);
 
-      color:
-        #fff4df;
+            color: var(--gold-dark);
 
-      font-family:
-        "Playfair Display",
-        serif;
+            font-size: 21px;
+        }
 
-      font-size: 22px;
+        .purpose-card h3 {
+            font-family: "Playfair Display", serif;
 
-      font-style: italic;
-    }
+            font-size: 25px;
 
-    .hero-scroll {
-      position: absolute;
+            margin-bottom: 12px;
+        }
 
-      left: 50%;
-      bottom: 30px;
+        .purpose-card p {
+            color: var(--text);
 
-      z-index: 2;
+            font-size: 14px;
+            line-height: 1.75;
+        }
 
-      transform:
-        translateX(-50%);
 
-      color:
-        rgba(255,255,255,.78);
+        /* =========================================================
+           NUESTRAS ÁREAS
+        ========================================================= */
 
-      font-size: 10px;
+        .areas-section {
+            background: var(--cream-dark);
+        }
 
-      font-weight: 700;
+        .areas-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 28px;
+        }
 
-      letter-spacing: .18em;
+        .area-card {
+            position: relative;
 
-      text-align: center;
-    }
+            overflow: hidden;
 
-    .hero-scroll span {
-      display: block;
+            background: var(--white);
 
-      width: 1px;
-      height: 45px;
+            border-radius: var(--radius);
 
-      margin:
-        9px auto 0;
+            box-shadow: var(--shadow-soft);
 
-      background:
-        rgba(255,255,255,.55);
-    }
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
 
+        .area-card:hover {
+            transform: translateY(-7px);
+            box-shadow: var(--shadow-card);
+        }
 
-    /* =====================================================
-       SECCIONES
-    ====================================================== */
+        /* ---------- AREA CAROUSEL ---------- */
 
-    .section {
-      padding: 120px 0;
-    }
+        .area-carousel {
+            position: relative;
 
-    .section-heading {
-      max-width: 700px;
+            height: 330px;
 
-      margin-bottom: 55px;
-    }
+            overflow: hidden;
 
-    .section-kicker {
-      display: inline-flex;
+            background: #e8ddd0;
+        }
 
-      align-items: center;
+        .carousel-track {
+            display: flex;
 
-      gap: 9px;
+            width: 100%;
+            height: 100%;
 
-      margin-bottom: 13px;
+            transition: transform 0.45s ease;
+        }
 
-      color:
-        var(--gold-dark);
+        .carousel-slide {
+            position: relative;
 
-      font-size: 11px;
+            min-width: 100%;
+            height: 100%;
 
-      font-weight: 800;
+            flex: 0 0 100%;
+        }
 
-      letter-spacing: .18em;
+        .carousel-slide img {
+            width: 100%;
+            height: 100%;
 
-      text-transform: uppercase;
-    }
+            object-fit: cover;
+        }
 
-    .section-kicker::before {
-      content: "";
+        .carousel-slide::after {
+            content: "";
 
-      width: 28px;
-      height: 1px;
+            position: absolute;
+            inset: 0;
 
-      background:
-        var(--gold);
-    }
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.04),
+                rgba(0, 0, 0, 0.16)
+            );
 
-    .section-title {
-      font-family:
-        "Playfair Display",
-        serif;
+            pointer-events: none;
+        }
 
-      font-size:
-        clamp(42px,5vw,64px);
+        .carousel-arrow {
+            position: absolute;
+            top: 50%;
 
-      line-height: 1.05;
+            transform: translateY(-50%);
 
-      letter-spacing: -.035em;
+            width: 39px;
+            height: 39px;
 
-      font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-      color:
-        var(--brown);
-    }
+            border: 0;
+            border-radius: 50%;
 
-    .section-intro {
-      max-width: 640px;
+            background: rgba(255, 255, 255, 0.9);
 
-      margin-top: 17px;
+            color: var(--brown);
 
-      color:
-        var(--text);
+            cursor: pointer;
 
-      font-size: 16px;
+            opacity: 0;
 
-      line-height: 1.8;
-    }
+            transition:
+                opacity 0.25s ease,
+                background 0.25s ease,
+                color 0.25s ease;
+            
+            z-index: 5;
+        }
 
+        .area-card:hover .carousel-arrow {
+            opacity: 1;
+        }
 
-    /* =====================================================
-       QUIÉN ESTÁ DETRÁS
-    ====================================================== */
+        .carousel-arrow:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
 
-    .founder-section {
-      position: relative;
+        .carousel-prev {
+            left: 15px;
+        }
 
-      padding: 130px 0;
+        .carousel-next {
+            right: 15px;
+        }
 
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(201,154,82,.11),
-          transparent 25%
-        ),
-        var(--cream-dark);
+        .carousel-dots {
+            position: absolute;
 
-      overflow: hidden;
-    }
+            left: 50%;
+            bottom: 15px;
 
-    .founder-section::before {
-      content: "";
+            transform: translateX(-50%);
 
-      position: absolute;
+            display: flex;
+            align-items: center;
+            gap: 6px;
 
-      width: 550px;
-      height: 550px;
+            z-index: 6;
+        }
 
-      top: -260px;
-      right: -180px;
+        .carousel-dot {
+            width: 7px;
+            height: 7px;
 
-      border:
-        1px solid rgba(169,120,53,.14);
+            border: 0;
+            border-radius: 50%;
 
-      border-radius: 50%;
-    }
+            background: rgba(255, 255, 255, 0.65);
 
-    .founder-section::after {
-      content: "";
+            cursor: pointer;
 
-      position: absolute;
+            transition:
+                width 0.25s ease,
+                background 0.25s ease;
+        }
 
-      width: 720px;
-      height: 720px;
+        .carousel-dot.active {
+            width: 22px;
+            border-radius: 999px;
+            background: var(--gold);
+        }
 
-      top: -350px;
-      right: -265px;
+        .area-content {
+            padding: 28px 28px 30px;
+        }
 
-      border:
-        1px solid rgba(169,120,53,.08);
+        .area-number {
+            margin-bottom: 9px;
 
-      border-radius: 50%;
-    }
+            color: var(--gold-dark);
 
-    .founder-layout {
-      position: relative;
+            font-size: 11px;
+            font-weight: 700;
 
-      z-index: 2;
+            letter-spacing: 0.15em;
+        }
 
-      display: grid;
+        .area-content h3 {
+            font-family: "Playfair Display", serif;
 
-      grid-template-columns:
-        .9fr 1.1fr;
+            font-size: 28px;
+            line-height: 1.15;
 
-      gap: 85px;
+            margin-bottom: 13px;
+        }
 
-      align-items: center;
-    }
+        .area-content p {
+            color: var(--text);
 
-    .founder-image-wrap {
-      position: relative;
-    }
+            font-size: 14px;
+            line-height: 1.75;
 
-    .founder-image {
-      position: relative;
+            margin-bottom: 20px;
+        }
 
-      z-index: 2;
+        .area-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
 
-      height: 620px;
+            border: 0;
+            background: transparent;
 
-      object-fit: cover;
+            color: var(--gold-dark);
 
-      border-radius:
-        180px 180px 28px 28px;
+            font-size: 12px;
+            font-weight: 700;
 
-      box-shadow:
-        var(--shadow-lg);
-    }
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
 
-    .founder-image-wrap::before {
-      content: "";
+            cursor: pointer;
 
-      position: absolute;
+            transition:
+                color 0.25s ease,
+                gap 0.25s ease;
+        }
 
-      z-index: 1;
+        .area-button:hover {
+            color: var(--brown);
+            gap: 13px;
+        }
 
-      top: 28px;
-      left: -25px;
+        /* Cuando solamente hay una foto */
+        .area-card.single-slide .carousel-arrow,
+        .area-card.single-slide .carousel-dots {
+            display: none;
+        }
 
-      width: 100%;
-      height: 100%;
 
-      border:
-        1px solid var(--gold);
+        /* =========================================================
+           NUESTRA COMUNIDAD
+        ========================================================= */
 
-      border-radius:
-        180px 180px 28px 28px;
+        .community-section {
+            background: var(--cream);
+        }
 
-      opacity: .55;
-    }
+        .community-card {
+            position: relative;
 
-    .founder-badge {
-      position: absolute;
+            min-height: 650px;
 
-      z-index: 3;
+            overflow: hidden;
 
-      right: -32px;
-      bottom: 42px;
+            border-radius: 30px;
 
-      width: 125px;
-      height: 125px;
+            background: var(--brown);
 
-      display: grid;
+            box-shadow: var(--shadow-card);
+        }
 
-      place-items: center;
+        .community-carousel {
+            position: absolute;
+            inset: 0;
 
-      padding: 15px;
+            z-index: 1;
 
-      border-radius: 50%;
+            overflow: hidden;
+        }
 
-      background:
-        var(--brown);
+        .community-track {
+            display: flex;
 
-      color:
-        var(--white);
+            width: 100%;
+            height: 100%;
 
-      text-align: center;
+            transition: transform 0.65s ease;
+        }
 
-      box-shadow:
-        var(--shadow-md);
-    }
+        .community-slide {
+            min-width: 100%;
+            height: 100%;
 
-    .founder-badge span:first-child {
-      display: block;
+            flex: 0 0 100%;
+        }
 
-      color:
-        var(--gold-light);
+        .community-slide img {
+            width: 100%;
+            height: 100%;
 
-      font-size: 10px;
+            object-fit: cover;
+        }
 
-      font-weight: 800;
+        .community-card::after {
+            content: "";
 
-      letter-spacing: .12em;
-    }
+            position: absolute;
+            inset: 0;
 
-    .founder-badge span:last-child {
-      display: block;
+            z-index: 2;
 
-      margin-top: 4px;
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(32, 23, 17, 0.82) 0%,
+                    rgba(32, 23, 17, 0.56) 42%,
+                    rgba(32, 23, 17, 0.12) 100%
+                );
+        }
 
-      font-family:
-        "Playfair Display",
-        serif;
+        .community-content {
+            position: relative;
+            z-index: 4;
 
-      font-size: 19px;
-    }
+            min-height: 650px;
 
-    .founder-name {
-      margin-bottom: 4px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
 
-      font-family:
-        "Playfair Display",
-        serif;
+            max-width: 570px;
 
-      font-size:
-        clamp(48px,5vw,68px);
+            padding: 70px;
+            
+            color: var(--white);
+        }
 
-      line-height: 1;
-    }
+        .community-kicker {
+            margin-bottom: 18px;
 
-    .founder-role {
-      margin-bottom: 28px;
+            color: var(--gold-light);
 
-      color:
-        var(--gold-dark);
+            font-size: 11px;
+            font-weight: 700;
 
-      font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
 
-      font-weight: 800;
+        .community-content h3 {
+            font-family: "Playfair Display", serif;
 
-      letter-spacing: .18em;
-    }
+            font-size: clamp(50px, 6vw, 76px);
+            line-height: 0.98;
 
-    .founder-copy p {
-      margin-bottom: 23px;
+            margin-bottom: 24px;
+        }
 
-      color:
-        var(--text);
+        .community-content p {
+            max-width: 470px;
 
-      font-size: 16px;
+            color: rgba(255, 255, 255, 0.88);
 
-      line-height: 1.9;
-    }
+            font-size: 16px;
+            line-height: 1.8;
 
-    .founder-tags {
-      display: flex;
+            margin-bottom: 25px;
+        }
 
-      flex-wrap: wrap;
+        .community-motto {
+            font-family: "Playfair Display", serif;
 
-      gap: 9px;
+            font-size: 19px;
+            font-style: italic;
 
-      margin-top: 30px;
-    }
+            color: var(--gold-light);
+        }
 
-    .founder-tag {
-      padding:
-        9px 15px;
+        .community-arrow {
+            position: absolute;
+            top: 50%;
 
-      border:
-        1px solid rgba(169,120,53,.3);
+            transform: translateY(-50%);
 
-      border-radius: 100px;
+            z-index: 7;
 
-      color:
-        var(--brown-soft);
+            width: 46px;
+            height: 46px;
 
-      background:
-        rgba(255,255,255,.38);
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-      font-size: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            border-radius: 50%;
 
-      font-weight: 600;
-    }
+            background: rgba(255, 255, 255, 0.14);
 
-    .founder-quote {
-      margin-top: 35px;
+            color: var(--white);
 
-      padding:
-        30px 34px;
+            backdrop-filter: blur(8px);
 
-      border-left:
-        3px solid var(--gold);
+            cursor: pointer;
 
-      border-radius:
-        0 25px 25px 0;
+            transition:
+                background 0.25s ease,
+                border-color 0.25s ease;
+        }
 
-      background:
-        rgba(255,255,255,.55);
+        .community-arrow:hover {
+            background: var(--gold);
+            border-color: var(--gold);
+        }
 
-      box-shadow:
-        var(--shadow-sm);
-    }
+        .community-prev {
+            right: 83px;
+        }
 
-    .founder-quote p {
-      margin: 0;
+        .community-next {
+            right: 25px;
+        }
 
-      color:
-        var(--brown);
+        .community-dots {
+            position: absolute;
 
-      font-family:
-        "Playfair Display",
-        serif;
+            z-index: 7;
 
-      font-size: 22px;
+            right: 28px;
+            bottom: 28px;
 
-      line-height: 1.5;
+            display: flex;
+            gap: 7px;
+        }
 
-      font-style: italic;
-    }
+        .community-dot {
+            width: 8px;
+            height: 8px;
 
+            border: 0;
+            border-radius: 50%;
 
-    /* =====================================================
-       PROPÓSITO
-    ====================================================== */
+            background: rgba(255, 255, 255, 0.55);
 
-    .action-section {
-      background:
-        var(--white);
-    }
+            cursor: pointer;
 
-    .action-layout {
-      display: grid;
+            transition:
+                width 0.25s ease,
+                background 0.25s ease;
+        }
 
-      grid-template-columns:
-        .8fr 1.2fr;
+        .community-dot.active {
+            width: 24px;
+            border-radius: 999px;
+            background: var(--gold);
+        }
 
-      gap: 90px;
 
-      align-items: start;
-    }
+        /* =========================================================
+           CTA
+        ========================================================= */
 
-    .action-heading {
-      position: sticky;
+        .cta-section {
+            position: relative;
 
-      top: 130px;
-    }
+            padding: 105px 0;
 
-    .action-grid {
-      display: grid;
+            background: var(--brown);
 
-      grid-template-columns:
-        repeat(2,1fr);
+            overflow: hidden;
+        }
 
-      gap: 20px;
-    }
+        .cta-section::before {
+            content: "";
 
-    .action-card {
-      min-height: 230px;
+            position: absolute;
 
-      padding: 32px;
+            width: 450px;
+            height: 450px;
 
-      background:
-        var(--cream);
+            right: -180px;
+            top: -230px;
 
-      border:
-        1px solid var(--border);
+            border: 1px solid rgba(201, 154, 82, 0.35);
 
-      border-radius:
-        var(--radius-md);
+            border-radius: 50%;
+        }
 
-      transition: .3s ease;
-    }
+        .cta-section::after {
+            content: "";
 
-    .action-card:hover {
-      transform:
-        translateY(-6px);
+            position: absolute;
 
-      box-shadow:
-        var(--shadow-sm);
+            width: 280px;
+            height: 280px;
 
-      border-color:
-        rgba(201,154,82,.5);
-    }
+            left: -150px;
+            bottom: -160px;
 
-    .action-icon {
-      width: 52px;
-      height: 52px;
+            border: 1px solid rgba(201, 154, 82, 0.22);
 
-      display: grid;
+            border-radius: 50%;
+        }
 
-      place-items: center;
+        .cta-content {
+            position: relative;
+            z-index: 2;
 
-      margin-bottom: 24px;
+            max-width: 760px;
 
-      border:
-        1px solid var(--border);
+            margin: 0 auto;
 
-      border-radius: 50%;
+            text-align: center;
 
-      background:
-        var(--white);
+            color: var(--white);
+        }
 
-      color:
-        var(--gold-dark);
-    }
+        .cta-label {
+            margin-bottom: 15px;
 
-    .action-icon svg {
-      width: 22px;
-      height: 22px;
-    }
+            color: var(--gold-light);
 
-    .action-card h3 {
-      margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: 700;
 
-      font-family:
-        "Playfair Display",
-        serif;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
 
-      font-size: 24px;
-    }
+        .cta-content h2 {
+            font-family: "Playfair Display", serif;
 
-    .action-card p {
-      color:
-        var(--text);
+            font-size: clamp(43px, 6vw, 68px);
+            line-height: 1.05;
 
-      font-size: 14px;
+            margin-bottom: 22px;
+        }
 
-      line-height: 1.7;
-    }
+        .cta-content p {
+            max-width: 620px;
 
+            margin: 0 auto 32px;
 
-    /* =====================================================
-       ÁREAS
-    ====================================================== */
+            color: rgba(255, 255, 255, 0.76);
 
-    .areas-section {
-      color:
-        var(--white);
+            font-size: 16px;
+            line-height: 1.8;
+        }
 
-      background:
-        linear-gradient(
-          rgba(48,34,25,.97),
-          rgba(48,34,25,.97)
-        ),
-        url("assets/conocenos-hero.jpg")
-        center / cover;
-    }
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
 
-    .areas-section .section-kicker {
-      color:
-        var(--gold-light);
-    }
+            padding: 15px 27px;
 
-    .areas-section .section-kicker::before {
-      background:
-        var(--gold-light);
-    }
+            border: 0;
+            border-radius: 999px;
 
-    .areas-section .section-title {
-      color:
-        var(--white);
-    }
+            background: var(--gold);
+            color: var(--white);
 
-    .areas-section .section-intro {
-      color:
-        rgba(255,255,255,.67);
-    }
+            font-size: 12px;
+            font-weight: 700;
 
-    .areas-grid {
-      display: grid;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
 
-      grid-template-columns:
-        repeat(3,1fr);
+            cursor: pointer;
 
-      gap: 20px;
-    }
+            transition:
+                background 0.25s ease,
+                transform 0.25s ease;
+        }
 
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--brown);
 
-    /* =====================================================
-       TARJETA DEL ÁREA
-    ====================================================== */
+            transform: translateY(-2px);
+        }
 
-    .area-card {
-      position: relative;
 
-      min-height: 455px;
+        /* =========================================================
+           FOOTER
+        ========================================================= */
 
-      overflow: hidden;
+        .site-footer {
+            padding: 45px 0 25px;
 
-      border-radius: 28px;
+            background: #241a14;
 
-      background:
-        #3a2a20;
+            color: var(--white);
+        }
 
-      border:
-        1px solid rgba(255,255,255,.09);
+        .footer-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
 
-      box-shadow:
-        0 20px 50px rgba(0,0,0,.16);
-    }
+            gap: 30px;
 
+            padding-bottom: 32px;
 
-    /* =====================================================
-       CARRUSEL
-    ====================================================== */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
 
-    .area-carousel {
-      position: absolute;
+        .footer-brand img {
+            width: 145px;
 
-      inset: 0;
+            filter: brightness(0) invert(1);
+            opacity: 0.95;
+        }
 
-      overflow: hidden;
-    }
+        .footer-motto {
+            margin-top: 13px;
 
-    .carousel-track {
-      display: flex;
+            color: rgba(255, 255, 255, 0.68);
 
-      width: 100%;
-      height: 100%;
+            font-family: "Playfair Display", serif;
+            font-size: 15px;
+            font-style: italic;
+        }
 
-      transition:
-        transform .55s cubic-bezier(.4,0,.2,1);
+        .footer-bottom {
+            padding-top: 22px;
 
-      will-change:
-        transform;
-    }
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
 
-    .carousel-slide {
-      position: relative;
+            color: rgba(255, 255, 255, 0.48);
 
-      flex:
-        0 0 100%;
+            font-size: 12px;
+        }
 
-      width: 100%;
-      height: 100%;
-    }
 
-    .carousel-slide img {
-      width: 100%;
-      height: 100%;
+        /* =========================================================
+           MODAL
+        ========================================================= */
 
-      object-fit: cover;
+        .modal {
+            position: fixed;
+            inset: 0;
 
-      user-select: none;
+            z-index: 2000;
 
-      -webkit-user-drag: none;
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
+            padding: 20px;
 
-    /* =====================================================
-       OVERLAY
-    ====================================================== */
+            background: rgba(25, 17, 12, 0.68);
 
-    .area-card::after {
-      content: "";
+            backdrop-filter: blur(7px);
 
-      position: absolute;
+            opacity: 0;
+            visibility: hidden;
 
-      z-index: 1;
+            transition:
+                opacity 0.3s ease,
+                visibility 0.3s ease;
+        }
 
-      inset: 0;
+        .modal.open {
+            opacity: 1;
+            visibility: visible;
+        }
 
-      pointer-events: none;
+        .modal-box {
+            position: relative;
 
-      background:
-        linear-gradient(
-          to top,
-          rgba(22,14,9,.98) 0%,
-          rgba(22,14,9,.68) 43%,
-          rgba(22,14,9,.08) 100%
-        );
-    }
+            width: min(640px, 100%);
 
+            padding: 45px;
 
-    /* =====================================================
-       FLECHAS
-    ====================================================== */
+            background: var(--cream);
 
-    .carousel-arrow {
-      position: absolute;
+            border-radius: 26px;
 
-      z-index: 8;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.25);
 
-      top: 38%;
+            transform: translateY(20px) scale(0.98);
 
-      width: 40px;
-      height: 40px;
+            transition: transform 0.3s ease;
+        }
 
-      display: grid;
+        .modal.open .modal-box {
+            transform: translateY(0) scale(1);
+        }
 
-      place-items: center;
+        .modal-close {
+            position: absolute;
 
-      border:
-        1px solid rgba(255,255,255,.3);
+            top: 18px;
+            right: 18px;
 
-      border-radius: 50%;
+            width: 38px;
+            height: 38px;
 
-      background:
-        rgba(30,20,13,.45);
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-      backdrop-filter:
-        blur(8px);
+            border: 0;
+            border-radius: 50%;
 
-      color:
-        var(--white);
+            background: var(--cream-dark);
 
-      font-size: 23px;
+            color: var(--brown);
 
-      line-height: 1;
+            cursor: pointer;
 
-      opacity: 0;
+            transition:
+                background 0.25s ease,
+                color 0.25s ease;
+        }
 
-      transition:
-        .3s ease;
-    }
+        .modal-close:hover {
+            background: var(--gold);
+            color: var(--white);
+        }
 
-    .area-card:hover .carousel-arrow {
-      opacity: 1;
-    }
+        .modal-kicker {
+            margin-bottom: 9px;
 
-    .carousel-arrow:hover {
-      background:
-        rgba(201,154,82,.92);
+            color: var(--gold-dark);
 
-      border-color:
-        var(--gold);
-    }
+            font-size: 11px;
+            font-weight: 700;
 
-    .carousel-prev {
-      left: 14px;
-    }
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
 
-    .carousel-next {
-      right: 14px;
-    }
+        .modal-box h2 {
+            font-family: "Playfair Display", serif;
 
-    .area-card.single-slide .carousel-arrow {
-      display: none;
-    }
+            font-size: 39px;
+            line-height: 1.1;
 
+            margin-bottom: 28px;
+        }
 
-    /* =====================================================
-       PUNTOS
-    ====================================================== */
+        .modal-options {
+            display: grid;
+            gap: 15px;
+        }
 
-    .carousel-dots {
-      position: absolute;
+        .modal-option {
+            display: flex;
+            align-items: flex-start;
+            gap: 18px;
 
-      z-index: 9;
+            padding: 22px;
 
-      top: 18px;
-      left: 50%;
+            background: var(--white);
 
-      transform:
-        translateX(-50%);
+            border: 1px solid var(--border);
+            border-radius: 17px;
 
-      display: flex;
+            transition:
+                border-color 0.25s ease,
+                transform 0.25s ease;
+        }
 
-      align-items: center;
+        .modal-option:hover {
+            border-color: var(--gold);
+            transform: translateY(-2px);
+        }
 
-      justify-content: center;
+        .modal-option-icon {
+            width: 45px;
+            height: 45px;
 
-      gap: 6px;
+            flex-shrink: 0;
 
-      max-width:
-        calc(100% - 60px);
-    }
+            display: flex;
+            align-items: center;
+            justify-content: center;
 
-    .carousel-dot {
-      flex:
-        0 0 auto;
+            background: var(--cream-dark);
 
-      width: 6px;
-      height: 6px;
+            border-radius: 50%;
 
-      padding: 0;
+            color: var(--gold-dark);
+        }
 
-      border-radius: 50%;
+        .modal-option-content {
+            flex: 1;
+        }
 
-      background:
-        rgba(255,255,255,.45);
+        .modal-option-content h3 {
+            margin-bottom: 5px;
 
-      transition:
-        .25s ease;
-    }
+            font-family: "Playfair Display", serif;
+            font-size: 21px;
+        }
 
-    .carousel-dot.active {
-      width: 19px;
+        .modal-option-content p {
+            color: var(--text);
 
-      border-radius: 10px;
+            font-size: 13px;
+            line-height: 1.6;
 
-      background:
-        var(--gold-light);
-    }
+            margin-bottom: 11px;
+        }
 
-    .area-card.single-slide .carousel-dots {
-      display: none;
-    }
+        .modal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
 
+            color: var(--gold-dark);
 
-    /* =====================================================
-       CONTENIDO ÁREA
-    ====================================================== */
+            font-size: 11px;
+            font-weight: 700;
 
-    .area-content {
-      position: absolute;
+            letter-spacing: 0.07em;
+            text-transform: uppercase;
+        }
 
-      z-index: 10;
 
-      left: 0;
-      right: 0;
-      bottom: 0;
+        /* =========================================================
+           AREA DETAIL MODAL
+        ========================================================= */
 
-      padding: 30px;
-    }
+        .area-modal-description {
+            color: var(--text);
 
-    .area-index {
-      margin-bottom: 10px;
+            font-size: 15px;
+            line-height: 1.8;
 
-      color:
-        var(--gold-light);
+            margin-bottom: 24px;
+        }
 
-      font-size: 10px;
+        .area-functions-title {
+            margin-bottom: 12px;
 
-      font-weight: 800;
+            font-size: 11px;
+            font-weight: 700;
 
-      letter-spacing: .18em;
-    }
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
 
-    .area-content h3 {
-      margin-bottom: 8px;
+            color: var(--gold-dark);
+        }
 
-      font-family:
-        "Playfair Display",
-        serif;
+        .area-functions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
 
-      font-size: 29px;
+        .area-function {
+            padding: 8px 12px;
 
-      line-height: 1.05;
-    }
+            border-radius: 999px;
 
-    .area-content p {
-      margin-bottom: 20px;
+            background: var(--cream-dark);
 
-      color:
-        rgba(255,255,255,.74);
+            color: var(--brown-soft);
 
-      font-size: 13px;
+            font-size: 12px;
+            font-weight: 600;
+        }
 
-      line-height: 1.65;
-    }
 
-    .area-button {
-      display: inline-flex;
+        /* =========================================================
+           REVEAL ANIMATION
+        ========================================================= */
 
-      align-items: center;
+        .reveal {
+            opacity: 0;
+            transform: translateY(25px);
 
-      gap: 9px;
+            transition:
+                opacity 0.75s ease,
+                transform 0.75s ease;
+        }
 
-      padding: 10px 0;
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
 
-      color:
-        var(--white);
 
-      background:
-        transparent;
+        /* =========================================================
+           RESPONSIVE TABLET
+        ========================================================= */
 
-      font-size: 10px;
+        @media (max-width: 1050px) {
 
-      font-weight: 800;
+            .main-nav {
+                gap: 16px;
+            }
 
-      letter-spacing: .14em;
+            .main-nav a {
+                font-size: 10px;
+            }
 
-      text-transform: uppercase;
-    }
+            .header-actions {
+                gap: 8px;
+            }
 
-    .area-button span {
-      color:
-        var(--gold-light);
+            .purpose-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-      transition:
-        transform .25s ease;
-    }
+            .areas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
 
-    .area-button:hover span {
-      transform:
-        translateX(5px);
-    }
+            .founder-grid {
+                gap: 50px;
+            }
 
+        }
 
-    /* =====================================================
-       COMUNIDAD
-    ====================================================== */
 
-    .community-section {
-      background:
-        var(--cream);
-    }
+        /* =========================================================
+           RESPONSIVE MOBILE
+        ========================================================= */
 
-    .community-card {
-      position: relative;
+        @media (max-width: 800px) {
 
-      min-height: 450px;
+            :root {
+                --header-height: 72px;
+            }
 
-      overflow: hidden;
+            .container {
+                width: min(100% - 30px, 600px);
+            }
 
-      border-radius: 34px;
+            .header-inner {
+                width: calc(100% - 30px);
+            }
 
-      box-shadow:
-        var(--shadow-lg);
-    }
+            .brand img {
+                width: 118px;
+            }
 
-    .community-image {
-      position: absolute;
+            .main-nav {
+                position: fixed;
 
-      inset: 0;
+                top: var(--header-height);
+                left: 15px;
+                right: 15px;
 
-      width: 100%;
-      height: 100%;
+                display: none;
 
-      object-fit: cover;
-    }
+                flex-direction: column;
+                align-items: stretch;
 
-    .community-card::after {
-      content: "";
+                gap: 0;
 
-      position: absolute;
+                padding: 15px;
 
-      inset: 0;
+                background: rgba(255, 250, 243, 0.98);
 
-      background:
-        linear-gradient(
-          90deg,
-          rgba(31,21,15,.92),
-          rgba(31,21,15,.53) 50%,
-          rgba(31,21,15,.12)
-        );
-    }
+                border: 1px solid var(--border);
+                border-radius: 18px;
 
-    .community-content {
-      position: relative;
+                box-shadow: var(--shadow-card);
+            }
 
-      z-index: 2;
+            .main-nav.open {
+                display: flex;
+            }
 
-      width: 55%;
+            .main-nav a {
+                padding: 13px 10px;
 
-      min-height: 450px;
+                font-size: 11px;
+            }
 
-      padding: 70px 65px;
+            .main-nav a::after {
+                display: none;
+            }
 
-      display: flex;
+            .main-nav .nav-shop {
+                text-align: center;
+                margin-top: 5px;
+            }
 
-      justify-content: center;
+            .header-actions {
+                display: none;
+            }
 
-      flex-direction: column;
+            .mobile-menu-btn {
+                display: flex;
+            }
 
-      color:
-        var(--white);
-    }
+            .hero {
+                min-height: 680px;
+                height: auto;
 
-    .community-content .section-kicker {
-      color:
-        var(--gold-light);
-    }
+                background-position: 58% center;
+            }
 
-    .community-content .section-kicker::before {
-      background:
-        var(--gold-light);
-    }
+            .hero-content {
+                padding: 120px 0 80px;
+            }
 
-    .community-content h2 {
-      margin-bottom: 20px;
+            .hero h1 {
+                font-size: 58px;
+            }
 
-      font-family:
-        "Playfair Display",
-        serif;
+            .hero-description {
+                font-size: 15px;
+            }
 
-      font-size:
-        clamp(42px,5vw,64px);
+            .section {
+                padding: 75px 0;
+            }
 
-      line-height: 1;
-    }
+            .section-header {
+                margin-bottom: 38px;
+            }
 
-    .community-content p {
-      max-width: 520px;
+            .founder-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
 
-      color:
-        rgba(255,255,255,.78);
+            .founder-image {
+                aspect-ratio: 1 / 1;
+            }
 
-      font-size: 16px;
+            .founder-image-wrap::after {
+                width: 85px;
+                height: 85px;
+                right: -10px;
+                bottom: -10px;
+            }
 
-      line-height: 1.8;
-    }
+            .purpose-grid {
+                grid-template-columns: 1fr;
+            }
 
-    .community-counter {
-      display: inline-flex;
+            .purpose-card {
+                min-height: auto;
+            }
 
-      align-items: center;
+            .areas-grid {
+                grid-template-columns: 1fr;
+            }
 
-      gap: 15px;
+            .area-carousel {
+                height: 300px;
+            }
 
-      margin-top: 30px;
+            .carousel-arrow {
+                opacity: 1;
+            }
 
-      color:
-        var(--white);
+            .community-card {
+                min-height: 650px;
+            }
 
-      font-size: 12px;
+            .community-content {
+                min-height: 650px;
+                padding: 40px 30px 100px;
+                justify-content: flex-end;
+            }
 
-      font-weight: 700;
+            .community-content h3 {
+                font-size: 51px;
+            }
 
-      letter-spacing: .12em;
+            .community-card::after {
+                background:
+                    linear-gradient(
+                        to top,
+                        rgba(32, 23, 17, 0.88) 0%,
+                        rgba(32, 23, 17, 0.5) 52%,
+                        rgba(32, 23, 17, 0.12) 100%
+                    );
+            }
 
-      text-transform: uppercase;
-    }
+            .community-prev {
+                right: 75px;
+                bottom: 25px;
+                top: auto;
+                transform: none;
+            }
 
-    .community-counter::before {
-      content: "♥";
+            .community-next {
+                right: 20px;
+                bottom: 25px;
+                top: auto;
+                transform: none;
+            }
 
-      width: 39px;
-      height: 39px;
+            .community-dots {
+                left: 25px;
+                right: auto;
+                bottom: 42px;
+            }
 
-      display: grid;
+            .cta-section {
+                padding: 75px 0;
+            }
 
-      place-items: center;
+            .footer-main {
+                flex-direction: column;
+                align-items: flex-start;
+            }
 
-      border:
-        1px solid rgba(255,255,255,.25);
+            .footer-bottom {
+                flex-direction: column;
+            }
 
-      border-radius: 50%;
+            .modal-box {
+                padding: 35px 22px 25px;
+            }
 
-      color:
-        var(--gold-light);
-    }
+            .modal-box h2 {
+                font-size: 32px;
+            }
 
+        }
 
-    /* =====================================================
-       CTA
-    ====================================================== */
 
-    .cta-section {
-      position: relative;
+        /* =========================================================
+           MOBILE SMALL
+        ========================================================= */
 
-      padding: 120px 0 130px;
+        @media (max-width: 480px) {
 
-      background:
-        var(--cream-dark);
+            .hero h1 {
+                font-size: 50px;
+            }
 
-      text-align: center;
+            .section-title {
+                font-size: 39px;
+            }
 
-      overflow: hidden;
-    }
+            .founder-name {
+                font-size: 44px;
+            }
 
-    .cta-section::before,
-    .cta-section::after {
-      content: "♥";
+            .founder-quote {
+                font-size: 19px;
+            }
 
-      position: absolute;
+            .area-carousel {
+                height: 260px;
+            }
 
-      color:
-        rgba(201,154,82,.1);
+            .area-content {
+                padding: 24px 21px 27px;
+            }
 
-      font-size: 260px;
+            .community-card {
+                min-height: 600px;
+            }
 
-      font-family: serif;
+            .community-content {
+                min-height: 600px;
+                padding: 35px 23px 100px;
+            }
 
-      line-height: 1;
-    }
+            .community-content h3 {
+                font-size: 44px;
+            }
 
-    .cta-section::before {
-      left: -60px;
-      top: -70px;
+            .community-content p {
+                font-size: 14px;
+            }
 
-      transform:
-        rotate(-20deg);
-    }
+        }
 
-    .cta-section::after {
-      right: -50px;
-      bottom: -100px;
-
-      transform:
-        rotate(18deg);
-    }
-
-    .cta-content {
-      position: relative;
-
-      z-index: 2;
-
-      max-width: 760px;
-
-      margin: 0 auto;
-    }
-
-    .cta-label {
-      margin-bottom: 15px;
-
-      color:
-        var(--gold-dark);
-
-      font-size: 11px;
-
-      font-weight: 800;
-
-      letter-spacing: .2em;
-    }
-
-    .cta-title {
-      margin-bottom: 18px;
-
-      font-family:
-        "Playfair Display",
-        serif;
-
-      font-size:
-        clamp(45px,6vw,72px);
-
-      line-height: 1;
-
-      letter-spacing: -.04em;
-    }
-
-    .cta-text {
-      max-width: 620px;
-
-      margin:
-        0 auto 32px;
-
-      color:
-        var(--text);
-
-      font-size: 16px;
-
-      line-height: 1.8;
-    }
-
-    .primary-button {
-      display: inline-flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 12px;
-
-      min-height: 54px;
-
-      padding:
-        0 27px;
-
-      color:
-        var(--white);
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--gold-dark)
-        );
-
-      border-radius: 100px;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      letter-spacing: .12em;
-
-      text-transform: uppercase;
-
-      box-shadow:
-        0 14px 30px rgba(169,120,53,.25);
-
-      transition:
-        .3s ease;
-    }
-
-    .primary-button:hover {
-      background:
-        var(--brown);
-
-      transform:
-        translateY(-3px);
-
-      box-shadow:
-        0 18px 35px rgba(48,34,25,.2);
-    }
-
-
-    /* =====================================================
-       FOOTER
-    ====================================================== */
-
-    footer {
-      padding:
-        60px 0 25px;
-
-      background:
-        var(--brown);
-
-      color:
-        var(--white);
-    }
-
-    .footer-main {
-      display: flex;
-
-      align-items: center;
-
-      justify-content: space-between;
-
-      gap: 30px;
-
-      padding-bottom: 40px;
-    }
-
-    .footer-logo img {
-      width: 170px;
-
-      filter:
-        brightness(0)
-        invert(1);
-
-      opacity: .96;
-    }
-
-    .footer-motto {
-      color:
-        rgba(255,255,255,.65);
-
-      font-family:
-        "Playfair Display",
-        serif;
-
-      font-size: 18px;
-
-      font-style: italic;
-    }
-
-    .footer-bottom {
-      padding-top: 20px;
-
-      border-top:
-        1px solid rgba(255,255,255,.1);
-
-      display: flex;
-
-      justify-content: space-between;
-
-      gap: 20px;
-
-      color:
-        rgba(255,255,255,.43);
-
-      font-size: 11px;
-    }
-
-
-    /* =====================================================
-       MODALES
-    ====================================================== */
-
-    .modal {
-      position: fixed;
-
-      inset: 0;
-
-      z-index: 2000;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      padding: 25px;
-
-      background:
-        rgba(29,19,13,.67);
-
-      backdrop-filter:
-        blur(10px);
-
-      opacity: 0;
-
-      visibility: hidden;
-
-      pointer-events: none;
-
-      transition:
-        .3s ease;
-    }
-
-    .modal.active {
-      opacity: 1;
-
-      visibility: visible;
-
-      pointer-events: auto;
-    }
-
-    .modal-box {
-      position: relative;
-
-      width:
-        min(
-          100%,
-          720px
-        );
-
-      max-height: 90vh;
-
-      overflow-y: auto;
-
-      padding: 45px;
-
-      background:
-        var(--cream);
-
-      border-radius: 30px;
-
-      box-shadow:
-        var(--shadow-lg);
-
-      transform:
-        translateY(25px)
-        scale(.98);
-
-      transition:
-        .35s ease;
-    }
-
-    .modal.active .modal-box {
-      transform:
-        translateY(0)
-        scale(1);
-    }
-
-    .modal-close {
-      position: absolute;
-
-      top: 18px;
-      right: 18px;
-
-      width: 42px;
-      height: 42px;
-
-      display: grid;
-
-      place-items: center;
-
-      border-radius: 50%;
-
-      background:
-        var(--cream-dark);
-
-      color:
-        var(--brown);
-
-      font-size: 22px;
-
-      transition:
-        .25s ease;
-    }
-
-    .modal-close:hover {
-      background:
-        var(--brown);
-
-      color:
-        var(--white);
-
-      transform:
-        rotate(90deg);
-    }
-
-    .modal-kicker {
-      margin-bottom: 10px;
-
-      color:
-        var(--gold-dark);
-
-      font-size: 10px;
-
-      font-weight: 800;
-
-      letter-spacing: .18em;
-
-      text-transform: uppercase;
-    }
-
-    .modal-title {
-      margin-bottom: 18px;
-
-      font-family:
-        "Playfair Display",
-        serif;
-
-      font-size: 42px;
-
-      line-height: 1.05;
-    }
-
-    .modal-description {
-      color:
-        var(--text);
-
-      font-size: 15px;
-
-      line-height: 1.8;
-    }
-
-    .modal-list {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2,1fr);
-
-      gap: 10px;
-
-      margin-top: 28px;
-
-      list-style: none;
-    }
-
-    .modal-list li {
-      padding:
-        13px 15px;
-
-      border-radius: 12px;
-
-      background:
-        var(--white);
-
-      border:
-        1px solid var(--border);
-
-      color:
-        var(--brown-soft);
-
-      font-size: 13px;
-
-      font-weight: 600;
-    }
-
-    .modal-list li::before {
-      content: "✓";
-
-      margin-right: 8px;
-
-      color:
-        var(--gold-dark);
-
-      font-weight: 800;
-    }
-
-
-    /* =====================================================
-       MODAL SER PARTE
-    ====================================================== */
-
-    .join-options {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2,1fr);
-
-      gap: 18px;
-
-      margin-top: 28px;
-    }
-
-    .join-option {
-      display: flex;
-
-      flex-direction: column;
-
-      min-height: 235px;
-
-      padding: 27px;
-
-      background:
-        var(--white);
-
-      border:
-        1px solid var(--border);
-
-      border-radius: 22px;
-
-      transition:
-        .3s ease;
-    }
-
-    .join-option:hover {
-      transform:
-        translateY(-5px);
-
-      box-shadow:
-        var(--shadow-sm);
-
-      border-color:
-        var(--gold-light);
-    }
-
-    .join-option-icon {
-      width: 48px;
-      height: 48px;
-
-      display: grid;
-
-      place-items: center;
-
-      margin-bottom: 22px;
-
-      border-radius: 50%;
-
-      background:
-        var(--cream-dark);
-
-      color:
-        var(--gold-dark);
-    }
-
-    .join-option h3 {
-      margin-bottom: 9px;
-
-      font-family:
-        "Playfair Display",
-        serif;
-
-      font-size: 23px;
-
-      line-height: 1.15;
-    }
-
-    .join-option p {
-      margin-bottom: 20px;
-
-      color:
-        var(--text);
-
-      font-size: 13px;
-
-      line-height: 1.65;
-    }
-
-    .join-option a {
-      margin-top: auto;
-
-      color:
-        var(--gold-dark);
-
-      font-size: 11px;
-
-      font-weight: 800;
-
-      letter-spacing: .1em;
-
-      text-transform: uppercase;
-    }
-
-
-    /* =====================================================
-       REVEAL
-    ====================================================== */
-
-    .reveal {
-      opacity: 0;
-
-      transform:
-        translateY(28px);
-
-      transition:
-        opacity .7s ease,
-        transform .7s ease;
-    }
-
-    .reveal.visible {
-      opacity: 1;
-
-      transform:
-        translateY(0);
-    }
-
-
-    /* =====================================================
-       RESPONSIVE
-    ====================================================== */
-
-    @media (max-width: 1150px) {
-
-      .main-nav {
-        gap: 0;
-      }
-
-      .main-nav a {
-        padding-left: 8px;
-        padding-right: 8px;
-
-        font-size: 12px;
-      }
-
-      .main-nav a:not(.shop-link)::after {
-        left: 8px;
-        right: 8px;
-      }
-
-      .founder-layout {
-        gap: 55px;
-      }
-
-      .areas-grid {
-        grid-template-columns:
-          repeat(2,1fr);
-      }
-
-    }
-
-
-    @media (max-width: 900px) {
-
-      .header-inner {
-        min-height: 66px;
-      }
-
-      .main-nav,
-      .header-actions {
-        display: none;
-      }
-
-      .mobile-menu {
-        display: grid;
-      }
-
-      .header-mobile-open .main-nav {
-        position: absolute;
-
-        top:
-          calc(100% + 10px);
-
-        left: 0;
-        right: 0;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-        padding: 12px;
-
-        background:
-          var(--white);
-
-        border:
-          1px solid var(--border);
-
-        border-radius: 20px;
-
-        box-shadow:
-          var(--shadow-md);
-      }
-
-      .header-mobile-open .main-nav a {
-        padding:
-          13px 15px;
-      }
-
-      .header-mobile-open .shop-link {
-        margin-left: 0;
-
-        margin-top: 5px;
-
-        text-align: center;
-      }
-
-      .hero {
-        min-height: 700px;
-      }
-
-      .hero-description {
-        font-size: 16px;
-      }
-
-      .founder-layout,
-      .action-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .founder-image {
-        height: 560px;
-      }
-
-      .action-heading {
-        position: static;
-      }
-
-      .community-content {
-        width: 70%;
-      }
-
-    }
-
-
-    @media (max-width: 650px) {
-
-      .container,
-      .hero-content {
-        width:
-          min(
-            calc(100% - 30px),
-            var(--max-width)
-          );
-      }
-
-      .section {
-        padding: 85px 0;
-      }
-
-      .header-inner {
-        width:
-          calc(100% - 20px);
-
-        padding:
-          8px 10px 8px 14px;
-
-        border-radius: 17px;
-      }
-
-      .logo img {
-        width: 132px;
-      }
-
-      .hero {
-        min-height: 650px;
-
-        background:
-          linear-gradient(
-            90deg,
-            rgba(37,25,17,.84),
-            rgba(37,25,17,.4)
-          ),
-          url("assets/conocenos-hero.jpg")
-          center / cover no-repeat;
-      }
-
-      .hero-content {
-        padding-top: 90px;
-      }
-
-      .hero h1 {
-        font-size: 64px;
-      }
-
-      .hero-description {
-        max-width: 100%;
-
-        font-size: 15px;
-
-        line-height: 1.7;
-      }
-
-      .hero-motto {
-        font-size: 18px;
-      }
-
-      .action-grid,
-      .areas-grid,
-      .join-options {
-        grid-template-columns: 1fr;
-      }
-
-      .founder-section {
-        padding: 90px 0;
-      }
-
-      .founder-layout {
-        gap: 50px;
-      }
-
-      .founder-image {
-        height: 480px;
-
-        border-radius:
-          140px 140px 22px 22px;
-      }
-
-      .founder-image-wrap::before {
-        border-radius:
-          140px 140px 22px 22px;
-      }
-
-      .founder-badge {
-        right: 10px;
-        bottom: 25px;
-
-        width: 100px;
-        height: 100px;
-      }
-
-      .founder-name {
-        font-size: 50px;
-      }
-
-      .founder-quote {
-        padding: 23px;
-      }
-
-      .founder-quote p {
-        font-size: 19px;
-      }
-
-      .action-layout {
-        gap: 45px;
-      }
-
-      .area-card {
-        min-height: 430px;
-      }
-
-      .carousel-arrow {
-        opacity: 1;
-
-        width: 36px;
-        height: 36px;
-      }
-
-      .community-card,
-      .community-content {
-        min-height: 520px;
-      }
-
-      .community-content {
-        width: 100%;
-
-        padding:
-          50px 30px;
-
-        justify-content:
-          flex-end;
-      }
-
-      .community-card::after {
-        background:
-          linear-gradient(
-            to top,
-            rgba(31,21,15,.94),
-            rgba(31,21,15,.2)
-          );
-      }
-
-      .cta-section {
-        padding: 90px 0;
-      }
-
-      .footer-main,
-      .footer-bottom {
-        flex-direction: column;
-
-        align-items: flex-start;
-      }
-
-      .modal {
-        padding: 14px;
-      }
-
-      .modal-box {
-        padding:
-          35px 23px 25px;
-
-        border-radius: 23px;
-      }
-
-      .modal-title {
-        font-size: 35px;
-      }
-
-      .modal-list {
-        grid-template-columns: 1fr;
-      }
-
-      .join-options {
-        grid-template-columns: 1fr;
-      }
-
-    }
-
-  </style>
+    </style>
 </head>
 
 
 <body>
 
 
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
+    <!-- =========================================================
+         HEADER
+    ========================================================= -->
 
-  <header
-    class="site-header"
-    id="siteHeader"
-  >
+    <header class="site-header" id="siteHeader">
 
-    <div class="header-inner">
+        <div class="header-inner">
 
-
-      <a
-        href="index.html"
-        class="logo"
-        aria-label="Baby Golden Perú"
-      >
-
-        <img
-          src="assets/logo-baby-golden-peru.png"
-          alt="Baby Golden Perú"
-        >
-
-      </a>
+            <a href="index.html" class="brand">
+                <img
+                    src="assets/logo-baby-golden-peru.png"
+                    alt="Baby Golden Perú"
+                >
+            </a>
 
 
-      <nav
-        class="main-nav"
-        id="mainNav"
-      >
+            <nav class="main-nav" id="mainNav">
 
-        <a href="index.html">
-          INICIO
-        </a>
+                <a href="index.html">
+                    Inicio
+                </a>
 
-        <a href="conocenos.html">
-          CONÓCENOS
-        </a>
+                <a href="conocenos.html" class="active">
+                    Conócenos
+                </a>
 
-        <a href="beneficios.html">
-          BENEFICIOS
-        </a>
+                <a href="beneficios.html">
+                    Beneficios
+                </a>
 
-        <a href="historias-de-oro.html">
-          HISTORIAS DE ORO
-        </a>
+                <a href="historias-de-oro.html">
+                    Historias de Oro
+                </a>
 
-        <a href="contacto.html">
-          CONTACTO
-        </a>
+                <a href="contacto.html">
+                    Contacto
+                </a>
 
-        <a
-          href="tienda.html"
-          class="shop-link"
-        >
-          TIENDA
-        </a>
+                <a
+                    href="tienda.html"
+                    class="nav-shop"
+                >
+                    Tienda
+                </a>
 
-      </nav>
+            </nav>
 
 
-      <div class="header-actions">
+            <div class="header-actions">
 
-        <button
-          class="header-icon"
-          aria-label="Buscar"
-        >
+                <a
+                    href="buscar.html"
+                    class="header-action"
+                    aria-label="Buscar"
+                >
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </a>
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
+                <a
+                    href="carrito.html"
+                    class="header-action"
+                    aria-label="Carrito"
+                >
+                    <i class="fa-solid fa-bag-shopping"></i>
+                </a>
 
-            <circle
-              cx="11"
-              cy="11"
-              r="7"
-            ></circle>
+                <a
+                    href="cuenta.html"
+                    class="header-action account-action"
+                    aria-label="Mi cuenta"
+                >
+                    <i class="fa-regular fa-user"></i>
+                    <span>Mi cuenta</span>
+                </a>
 
-            <path
-              d="m20 20-4-4"
-            ></path>
-
-          </svg>
-
-        </button>
-
-
-        <a
-          href="carrito.html"
-          class="header-icon"
-          aria-label="Carrito"
-        >
-
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
-
-            <path
-              d="M6 7h12l1 13H5L6 7Z"
-            ></path>
-
-            <path
-              d="M9 7a3 3 0 0 1 6 0"
-            ></path>
-
-          </svg>
-
-        </a>
+            </div>
 
 
-        <a
-          href="cuenta.html"
-          class="header-icon"
-          aria-label="Mi cuenta"
-        >
+            <button
+                class="mobile-menu-btn"
+                id="mobileMenuBtn"
+                aria-label="Abrir menú"
+                aria-expanded="false"
+            >
+                <i class="fa-solid fa-bars"></i>
+            </button>
 
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-          >
+        </div>
 
-            <circle
-              cx="12"
-              cy="8"
-              r="3.5"
-            ></circle>
-
-            <path
-              d="M5 20a7 7 0 0 1 14 0"
-            ></path>
-
-          </svg>
-
-        </a>
-
-      </div>
+    </header>
 
 
-      <button
-        class="mobile-menu"
-        id="mobileMenu"
-        aria-label="Abrir menú"
-        aria-expanded="false"
-      >
 
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-        >
-
-          <path d="M4 7h16"></path>
-          <path d="M4 12h16"></path>
-          <path d="M4 17h16"></path>
-
-        </svg>
-
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================================
-       MAIN
-  ====================================================== -->
-
-  <main>
-
-
-    <!-- ===================================================
+    <!-- =========================================================
          HERO
-    ==================================================== -->
+    ========================================================= -->
 
     <section class="hero">
 
-      <div class="hero-content">
+        <div class="container">
 
-        <div class="hero-copy reveal">
+            <div class="hero-content reveal">
 
-          <div class="eyebrow">
-            BABY GOLDEN PERÚ
-          </div>
+                <div class="eyebrow">
+                    Baby Golden Perú
+                </div>
 
-          <h1>
-            Conócenos
-          </h1>
+                <h1>
+                    Conócenos
+                </h1>
 
-          <p class="hero-description">
-            Somos una comunidad creada desde el amor por los perros,
-            la tenencia responsable y el deseo de construir un mundo
-            donde cada huella tenga un propósito.
-          </p>
+                <p class="hero-description">
+                    Somos una comunidad creada desde el amor por los perros,
+                    la tenencia responsable y el deseo de construir un mundo
+                    mejor para ellos y para las personas que los aman.
+                </p>
 
-          <div class="hero-motto">
-            Juntos por un mundo mejor, una pata a la vez.
-          </div>
+                <div class="hero-motto">
+                    Juntos por un mundo mejor, una pata a la vez.
+                </div>
+
+            </div>
 
         </div>
-
-      </div>
-
-
-      <div class="hero-scroll">
-        DESCUBRE
-        <span></span>
-      </div>
 
     </section>
 
 
-    <!-- ===================================================
+
+    <!-- =========================================================
          QUIÉN ESTÁ DETRÁS
-    ==================================================== -->
+    ========================================================= -->
 
     <section
-      class="founder-section"
-      id="quien-esta-detras"
+        class="section founder-section"
+        id="quien-esta-detras"
     >
 
-      <div class="container">
+        <div class="container">
 
-        <div class="founder-layout">
+            <div class="founder-grid">
 
+                <div class="founder-image-wrap reveal">
 
-          <div class="founder-image-wrap reveal">
+                    <img
+                        src="assets/fundadora-sandra.jpg"
+                        alt="Sandra, fundadora de Baby Golden Perú"
+                        class="founder-image"
+                    >
 
-            <img
-              class="founder-image"
-              src="assets/fundadora-sandra.jpg"
-              alt="Sandra, fundadora de Baby Golden Perú"
-              onerror="this.src='assets/conocenos-hero.jpg'"
-            >
-
-            <div class="founder-badge">
-
-              <div>
-
-                <span>
-                  BABY GOLDEN
-                </span>
-
-                <span>
-                  PERÚ
-                </span>
-
-              </div>
-
-            </div>
-
-          </div>
+                </div>
 
 
-          <div class="founder-copy reveal">
+                <div class="founder-info reveal">
 
-            <div class="section-kicker">
-              QUIÉN ESTÁ DETRÁS
-            </div>
+                    <div class="section-kicker">
+                        Quién está detrás
+                    </div>
 
-            <h2 class="founder-name">
-              Sandra
-            </h2>
+                    <div class="founder-role">
+                        Fundadora & Directora General
+                    </div>
 
-            <div class="founder-role">
-              FUNDADORA &amp; DIRECTORA GENERAL
-            </div>
+                    <h2 class="founder-name">
+                        Sandra
+                    </h2>
 
-            <p>
-              Baby Golden Perú nació de una visión basada en el amor,
-              la responsabilidad y el deseo de construir una comunidad
-              donde cada persona pueda aportar.
-            </p>
+                    <p class="founder-text">
+                        Baby Golden Perú nació de una visión basada en el amor,
+                        la responsabilidad y el deseo de construir una comunidad
+                        donde cada persona pueda aportar. Su liderazgo busca unir
+                        personas, marcas, instituciones y comunidades para
+                        desarrollar proyectos que creen experiencias positivas
+                        y generen un impacto real.
+                    </p>
 
-            <p>
-              Su liderazgo busca unir personas, marcas, instituciones
-              y comunidades para desarrollar proyectos que generen
-              experiencias positivas y un impacto real.
-            </p>
 
-            <div class="founder-tags">
+                    <div class="founder-tags">
 
-              <span class="founder-tag">
-                Liderazgo
-              </span>
+                        <span class="founder-tag">
+                            Liderazgo
+                        </span>
 
-              <span class="founder-tag">
-                Visión
-              </span>
+                        <span class="founder-tag">
+                            Visión
+                        </span>
 
-              <span class="founder-tag">
-                Comunidad
-              </span>
+                        <span class="founder-tag">
+                            Comunidad
+                        </span>
 
-              <span class="founder-tag">
-                Compromiso
-              </span>
+                        <span class="founder-tag">
+                            Compromiso
+                        </span>
+
+                    </div>
+
+
+                    <div class="founder-quote">
+                        “Los perritos dejan huellas en nuestra vida, y juntos
+                        podemos dejar huellas en el mundo.”
+                    </div>
+
+                </div>
 
             </div>
-
-            <div class="founder-quote">
-
-              <p>
-                “Los perritos dejan huellas en nuestra vida,
-                y juntos podemos dejar huellas en el mundo.”
-              </p>
-
-            </div>
-
-          </div>
 
         </div>
-
-      </div>
 
     </section>
 
 
-    <!-- ===================================================
-         PROPÓSITO
-    ==================================================== -->
 
-    <section
-      class="section action-section"
-    >
+    <!-- =========================================================
+         NUESTRO PROPÓSITO
+    ========================================================= -->
 
-      <div class="container">
+    <section class="section purpose-section">
 
-        <div class="action-layout">
+        <div class="container">
 
+            <div class="section-header center reveal">
 
-          <div class="action-heading reveal">
+                <div class="section-kicker">
+                    Lo que hacemos
+                </div>
 
-            <div class="section-kicker">
-              LO QUE HACEMOS
+                <h2 class="section-title">
+                    Nuestro propósito en acción
+                </h2>
+
+                <p class="section-description">
+                    Cada proyecto nace con la intención de conectar,
+                    acompañar y generar experiencias que hagan la diferencia.
+                </p>
+
             </div>
 
-            <h2 class="section-title">
-              Nuestro propósito<br>
-              en acción.
-            </h2>
 
-            <p class="section-intro">
-              Cada actividad, alianza y proyecto busca convertir
-              el amor por nuestros perros en acciones que generen
-              experiencias y cambios positivos.
-            </p>
-
-          </div>
+            <div class="purpose-grid">
 
 
-          <div class="action-grid">
+                <article class="purpose-card reveal">
+
+                    <div class="purpose-icon">
+                        <i class="fa-solid fa-paw"></i>
+                    </div>
+
+                    <h3>
+                        Comunidad
+                    </h3>
+
+                    <p>
+                        Creamos espacios donde las personas que aman a los
+                        perros puedan conocerse, compartir y crecer juntas.
+                    </p>
+
+                </article>
 
 
-            <article class="action-card reveal">
+                <article class="purpose-card reveal">
 
-              <div class="action-icon">
+                    <div class="purpose-icon">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
 
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
+                    <h3>
+                        Bienestar
+                    </h3>
 
-                  <circle
-                    cx="12"
-                    cy="12"
-                    r="8"
-                  ></circle>
+                    <p>
+                        Promovemos el cuidado responsable y una vida más
+                        saludable, feliz y respetuosa para nuestros compañeros.
+                    </p>
 
-                  <path d="M8 12h8"></path>
-                  <path d="M12 8v8"></path>
-
-                </svg>
-
-              </div>
-
-              <h3>
-                Comunidad
-              </h3>
-
-              <p>
-                Creamos espacios para conectar personas,
-                compartir experiencias y fortalecer vínculos.
-              </p>
-
-            </article>
+                </article>
 
 
-            <article class="action-card reveal">
+                <article class="purpose-card reveal">
 
-              <div class="action-icon">
+                    <div class="purpose-icon">
+                        <i class="fa-solid fa-hand-holding-heart"></i>
+                    </div>
 
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
+                    <h3>
+                        Solidaridad
+                    </h3>
 
-                  <path
-                    d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10Z"
-                  ></path>
+                    <p>
+                        Apoyamos casos y acciones que buscan brindar nuevas
+                        oportunidades y hogares responsables.
+                    </p>
 
-                </svg>
-
-              </div>
-
-              <h3>
-                Bienestar
-              </h3>
-
-              <p>
-                Promovemos el cuidado, la educación y la tenencia
-                responsable para mejorar la vida de nuestros perros.
-              </p>
-
-            </article>
+                </article>
 
 
-            <article class="action-card reveal">
+                <article class="purpose-card reveal">
 
-              <div class="action-icon">
+                    <div class="purpose-icon">
+                        <i class="fa-solid fa-star"></i>
+                    </div>
 
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
+                    <h3>
+                        Experiencias
+                    </h3>
 
-                  <path d="M12 3v18"></path>
-                  <path d="M5 8h14"></path>
+                    <p>
+                        Organizamos actividades y proyectos que convierten el
+                        amor por los perros en momentos para recordar.
+                    </p>
 
-                  <path
-                    d="M7 8a5 5 0 0 0 10 0"
-                  ></path>
-
-                </svg>
-
-              </div>
-
-              <h3>
-                Solidaridad
-              </h3>
-
-              <p>
-                Nos involucramos en iniciativas y casos que necesitan
-                apoyo, difusión y una comunidad dispuesta a ayudar.
-              </p>
-
-            </article>
+                </article>
 
 
-            <article class="action-card reveal">
-
-              <div class="action-icon">
-
-                <svg
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                >
-
-                  <rect
-                    x="3"
-                    y="5"
-                    width="18"
-                    height="14"
-                    rx="3"
-                  ></rect>
-
-                  <path
-                    d="m8 13 2.5 2.5L16 10"
-                  ></path>
-
-                </svg>
-
-              </div>
-
-              <h3>
-                Experiencias
-              </h3>
-
-              <p>
-                Organizamos encuentros y actividades que convierten
-                la vida junto a nuestros perros en momentos inolvidables.
-              </p>
-
-            </article>
-
-          </div>
+            </div>
 
         </div>
-
-      </div>
 
     </section>
 
 
-    <!-- ===================================================
+
+    <!-- =========================================================
          NUESTRAS ÁREAS
-    ==================================================== -->
+    ========================================================= -->
 
-    <section
-      class="section areas-section"
-      id="nuestras-areas"
-    >
+    <section class="section areas-section" id="areas">
 
-      <div class="container">
+        <div class="container">
+
+            <div class="section-header reveal">
+
+                <div class="section-kicker">
+                    El equipo
+                </div>
+
+                <h2 class="section-title">
+                    Nuestras áreas
+                </h2>
+
+                <p class="section-description">
+                    Detrás de cada actividad, proyecto y experiencia existe
+                    un equipo que aporta su tiempo, talento y compromiso.
+                </p>
+
+            </div>
 
 
-        <div class="section-heading reveal">
+            <div class="areas-grid">
 
-          <div class="section-kicker">
-            NUESTRO EQUIPO
-          </div>
 
-          <h2 class="section-title">
-            Nuestras áreas.
-          </h2>
+                <!-- =================================================
+                     VENTAS
+                ================================================= -->
 
-          <p class="section-intro">
-            Detrás de cada actividad existe un equipo que aporta
-            tiempo, talento y compromiso para hacer crecer nuestra comunidad.
-          </p>
+                <article
+                    class="area-card reveal"
+                    data-area="ventas"
+                >
+
+                    <div class="area-carousel">
+
+                        <div class="carousel-track">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/ventas/ventas-1.jpg"
+                                    alt="Área de Ventas Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/ventas/ventas-2.jpg"
+                                    alt="Representante del Área de Ventas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/ventas/ventas-3.jpg"
+                                    alt="Equipo de Ventas Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/ventas/ventas-4.jpg"
+                                    alt="Área de Ventas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/ventas/ventas-5.jpg"
+                                    alt="Representante del Área de Ventas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="carousel-arrow carousel-prev"
+                            type="button"
+                            aria-label="Foto anterior"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+
+                        <button
+                            class="carousel-arrow carousel-next"
+                            type="button"
+                            aria-label="Foto siguiente"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+
+                        <div class="carousel-dots"></div>
+
+                    </div>
+
+
+                    <div class="area-content">
+
+                        <div class="area-number">
+                            01 / ÁREA
+                        </div>
+
+                        <h3>
+                            Ventas
+                        </h3>
+
+                        <p>
+                            El Área de Ventas se encarga de gestionar el
+                            merchandising y los productos de Baby Golden Perú,
+                            buscando que nuestra identidad también pueda
+                            acompañar a cada miembro de la comunidad.
+                        </p>
+
+                        <button
+                            class="area-button"
+                            type="button"
+                            data-open-area="ventas"
+                        >
+                            Conocer área
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     LEGAL
+                ================================================= -->
+
+                <article
+                    class="area-card reveal"
+                    data-area="legal"
+                >
+
+                    <div class="area-carousel">
+
+                        <div class="carousel-track">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/legal/legal-1.jpg"
+                                    alt="Área Legal Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/legal/legal-2.jpg"
+                                    alt="Representante del Área Legal"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/legal/legal-3.jpg"
+                                    alt="Equipo Legal Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/legal/legal-4.jpg"
+                                    alt="Área Legal"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/legal/legal-5.jpg"
+                                    alt="Representante del Área Legal"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="carousel-arrow carousel-prev"
+                            type="button"
+                            aria-label="Foto anterior"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button
+                            class="carousel-arrow carousel-next"
+                            type="button"
+                            aria-label="Foto siguiente"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-dots"></div>
+
+                    </div>
+
+
+                    <div class="area-content">
+
+                        <div class="area-number">
+                            02 / ÁREA
+                        </div>
+
+                        <h3>
+                            Legal
+                        </h3>
+
+                        <p>
+                            El Área Legal brinda soporte documental y
+                            orientación para que las actividades de Baby
+                            Golden Perú se desarrollen de manera ordenada
+                            y responsable.
+                        </p>
+
+                        <button
+                            class="area-button"
+                            type="button"
+                            data-open-area="legal"
+                        >
+                            Conocer área
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     ADOPCIONES
+                ================================================= -->
+
+                <article
+                    class="area-card reveal"
+                    data-area="adopciones"
+                >
+
+                    <div class="area-carousel">
+
+                        <div class="carousel-track">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/adopciones/adopciones-1.jpg"
+                                    alt="Área de Adopciones Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/adopciones/adopciones-2.jpg"
+                                    alt="Representante del Área de Adopciones"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/adopciones/adopciones-3.jpg"
+                                    alt="Equipo de Adopciones"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/adopciones/adopciones-4.jpg"
+                                    alt="Área de Adopciones"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/adopciones/adopciones-5.jpg"
+                                    alt="Representante del Área de Adopciones"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="carousel-arrow carousel-prev"
+                            type="button"
+                            aria-label="Foto anterior"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button
+                            class="carousel-arrow carousel-next"
+                            type="button"
+                            aria-label="Foto siguiente"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-dots"></div>
+
+                    </div>
+
+
+                    <div class="area-content">
+
+                        <div class="area-number">
+                            03 / ÁREA
+                        </div>
+
+                        <h3>
+                            Adopciones
+                        </h3>
+
+                        <p>
+                            El Área de Adopciones acompaña la difusión y
+                            seguimiento de casos que buscan encontrar hogares
+                            responsables y comprometidos.
+                        </p>
+
+                        <button
+                            class="area-button"
+                            type="button"
+                            data-open-area="adopciones"
+                        >
+                            Conocer área
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     EVENTOS
+                ================================================= -->
+
+                <article
+                    class="area-card reveal"
+                    data-area="eventos"
+                >
+
+                    <div class="area-carousel">
+
+                        <div class="carousel-track">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/eventos/eventos-1.jpg"
+                                    alt="Área de Eventos Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/eventos/eventos-2.jpg"
+                                    alt="Representante del Área de Eventos"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/eventos/eventos-3.jpg"
+                                    alt="Equipo de Eventos"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/eventos/eventos-4.jpg"
+                                    alt="Área de Eventos"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/eventos/eventos-5.jpg"
+                                    alt="Representante del Área de Eventos"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="carousel-arrow carousel-prev"
+                            type="button"
+                            aria-label="Foto anterior"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button
+                            class="carousel-arrow carousel-next"
+                            type="button"
+                            aria-label="Foto siguiente"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-dots"></div>
+
+                    </div>
+
+
+                    <div class="area-content">
+
+                        <div class="area-number">
+                            04 / ÁREA
+                        </div>
+
+                        <h3>
+                            Eventos
+                        </h3>
+
+                        <p>
+                            El Área de Eventos convierte las ideas de la
+                            comunidad en experiencias, actividades y encuentros
+                            que fortalecen nuestros vínculos.
+                        </p>
+
+                        <button
+                            class="area-button"
+                            type="button"
+                            data-open-area="eventos"
+                        >
+                            Conocer área
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     REDES
+                ================================================= -->
+
+                <article
+                    class="area-card reveal"
+                    data-area="redes"
+                >
+
+                    <div class="area-carousel">
+
+                        <div class="carousel-track">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/redes/redes-1.jpg"
+                                    alt="Área de Redes, Marketing y Audiovisual"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/redes/redes-2.jpg"
+                                    alt="Representante del Área de Redes"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/redes/redes-3.jpg"
+                                    alt="Equipo de Redes y Marketing"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/redes/redes-4.jpg"
+                                    alt="Área Audiovisual Baby Golden Perú"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/redes/redes-5.jpg"
+                                    alt="Representante del Área Audiovisual"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="carousel-arrow carousel-prev"
+                            type="button"
+                            aria-label="Foto anterior"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button
+                            class="carousel-arrow carousel-next"
+                            type="button"
+                            aria-label="Foto siguiente"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-dots"></div>
+
+                    </div>
+
+
+                    <div class="area-content">
+
+                        <div class="area-number">
+                            05 / ÁREA
+                        </div>
+
+                        <h3>
+                            Redes, Marketing & Audiovisual
+                        </h3>
+
+                        <p>
+                            El Área de Redes, Marketing & Audiovisual comunica
+                            nuestra identidad, historias, actividades y
+                            proyectos mediante contenido creativo y estratégico.
+                        </p>
+
+                        <button
+                            class="area-button"
+                            type="button"
+                            data-open-area="redes"
+                        >
+                            Conocer área
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- =================================================
+                     ALIANZAS
+                ================================================= -->
+
+                <article
+                    class="area-card reveal"
+                    data-area="alianzas"
+                >
+
+                    <div class="area-carousel">
+
+                        <div class="carousel-track">
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/alianzas/alianzas-1.jpg"
+                                    alt="Área de Alianzas Estratégicas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/alianzas/alianzas-2.jpg"
+                                    alt="Representante del Área de Alianzas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/alianzas/alianzas-3.jpg"
+                                    alt="Equipo de Alianzas Estratégicas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/alianzas/alianzas-4.jpg"
+                                    alt="Área de Alianzas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                            <div class="carousel-slide">
+                                <img
+                                    src="assets/equipo/alianzas/alianzas-5.jpg"
+                                    alt="Representante del Área de Alianzas"
+                                    loading="lazy"
+                                >
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            class="carousel-arrow carousel-prev"
+                            type="button"
+                            aria-label="Foto anterior"
+                        >
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+
+                        <button
+                            class="carousel-arrow carousel-next"
+                            type="button"
+                            aria-label="Foto siguiente"
+                        >
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+
+                        <div class="carousel-dots"></div>
+
+                    </div>
+
+
+                    <div class="area-content">
+
+                        <div class="area-number">
+                            06 / ÁREA
+                        </div>
+
+                        <h3>
+                            Alianzas Estratégicas
+                        </h3>
+
+                        <p>
+                            El Área de Alianzas Estratégicas desarrolla
+                            relaciones con marcas, empresas, instituciones
+                            y comunidades para crear proyectos que generen valor.
+                        </p>
+
+                        <button
+                            class="area-button"
+                            type="button"
+                            data-open-area="alianzas"
+                        >
+                            Conocer área
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+
+                    </div>
+
+                </article>
+
+
+            </div>
 
         </div>
-
-
-        <div class="areas-grid">
-
-
-          <!-- =================================================
-               01 VENTAS
-          ================================================== -->
-
-          <article
-            class="area-card reveal"
-            data-carousel
-          >
-
-            <div class="area-carousel">
-
-              <div class="carousel-track">
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/ventas/ventas-1.jpg"
-                    alt="Representante del Área de Ventas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/ventas/ventas-2.jpg"
-                    alt="Representante del Área de Ventas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/ventas/ventas-3.jpg"
-                    alt="Representante del Área de Ventas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/ventas/ventas-4.jpg"
-                    alt="Representante del Área de Ventas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/ventas/ventas-5.jpg"
-                    alt="Representante del Área de Ventas"
-                  >
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="carousel-arrow carousel-prev"
-              aria-label="Representante anterior"
-            >
-              ‹
-            </button>
-
-
-            <button
-              class="carousel-arrow carousel-next"
-              aria-label="Siguiente representante"
-            >
-              ›
-            </button>
-
-
-            <div class="carousel-dots"></div>
-
-
-            <div class="area-content">
-
-              <div class="area-index">
-                01 / ÁREA
-              </div>
-
-              <h3>
-                Ventas
-              </h3>
-
-              <p>
-                Merchandising, productos y coordinación comercial
-                de Baby Golden Perú.
-              </p>
-
-              <button
-                class="area-button"
-                data-area="ventas"
-              >
-                CONOCER MÁS
-                <span>→</span>
-              </button>
-
-            </div>
-
-          </article>
-
-
-          <!-- =================================================
-               02 LEGAL
-          ================================================== -->
-
-          <article
-            class="area-card reveal"
-            data-carousel
-          >
-
-            <div class="area-carousel">
-
-              <div class="carousel-track">
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/legal/legal-1.jpg"
-                    alt="Representante del Área Legal"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/legal/legal-2.jpg"
-                    alt="Representante del Área Legal"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/legal/legal-3.jpg"
-                    alt="Representante del Área Legal"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/legal/legal-4.jpg"
-                    alt="Representante del Área Legal"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/legal/legal-5.jpg"
-                    alt="Representante del Área Legal"
-                  >
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="carousel-arrow carousel-prev"
-              aria-label="Representante anterior"
-            >
-              ‹
-            </button>
-
-
-            <button
-              class="carousel-arrow carousel-next"
-              aria-label="Siguiente representante"
-            >
-              ›
-            </button>
-
-
-            <div class="carousel-dots"></div>
-
-
-            <div class="area-content">
-
-              <div class="area-index">
-                02 / ÁREA
-              </div>
-
-              <h3>
-                Legal
-              </h3>
-
-              <p>
-                Soporte documental y orientación para nuestras
-                actividades institucionales.
-              </p>
-
-              <button
-                class="area-button"
-                data-area="legal"
-              >
-                CONOCER MÁS
-                <span>→</span>
-              </button>
-
-            </div>
-
-          </article>
-
-
-          <!-- =================================================
-               03 ADOPCIONES
-          ================================================== -->
-
-          <article
-            class="area-card reveal"
-            data-carousel
-          >
-
-            <div class="area-carousel">
-
-              <div class="carousel-track">
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/adopciones/adopciones-1.jpg"
-                    alt="Representante del Área de Adopciones"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/adopciones/adopciones-2.jpg"
-                    alt="Representante del Área de Adopciones"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/adopciones/adopciones-3.jpg"
-                    alt="Representante del Área de Adopciones"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/adopciones/adopciones-4.jpg"
-                    alt="Representante del Área de Adopciones"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/adopciones/adopciones-5.jpg"
-                    alt="Representante del Área de Adopciones"
-                  >
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="carousel-arrow carousel-prev"
-              aria-label="Representante anterior"
-            >
-              ‹
-            </button>
-
-
-            <button
-              class="carousel-arrow carousel-next"
-              aria-label="Siguiente representante"
-            >
-              ›
-            </button>
-
-
-            <div class="carousel-dots"></div>
-
-
-            <div class="area-content">
-
-              <div class="area-index">
-                03 / ÁREA
-              </div>
-
-              <h3>
-                Adopciones
-              </h3>
-
-              <p>
-                Difusión y acompañamiento de casos que buscan
-                hogares responsables.
-              </p>
-
-              <button
-                class="area-button"
-                data-area="adopciones"
-              >
-                CONOCER MÁS
-                <span>→</span>
-              </button>
-
-            </div>
-
-          </article>
-
-
-          <!-- =================================================
-               04 EVENTOS
-          ================================================== -->
-
-          <article
-            class="area-card reveal"
-            data-carousel
-          >
-
-            <div class="area-carousel">
-
-              <div class="carousel-track">
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/eventos/eventos-1.jpg"
-                    alt="Representante del Área de Eventos"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/eventos/eventos-2.jpg"
-                    alt="Representante del Área de Eventos"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/eventos/eventos-3.jpg"
-                    alt="Representante del Área de Eventos"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/eventos/eventos-4.jpg"
-                    alt="Representante del Área de Eventos"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/eventos/eventos-5.jpg"
-                    alt="Representante del Área de Eventos"
-                  >
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="carousel-arrow carousel-prev"
-              aria-label="Representante anterior"
-            >
-              ‹
-            </button>
-
-
-            <button
-              class="carousel-arrow carousel-next"
-              aria-label="Siguiente representante"
-            >
-              ›
-            </button>
-
-
-            <div class="carousel-dots"></div>
-
-
-            <div class="area-content">
-
-              <div class="area-index">
-                04 / ÁREA
-              </div>
-
-              <h3>
-                Eventos
-              </h3>
-
-              <p>
-                Planificación y producción de experiencias
-                para nuestra comunidad.
-              </p>
-
-              <button
-                class="area-button"
-                data-area="eventos"
-              >
-                CONOCER MÁS
-                <span>→</span>
-              </button>
-
-            </div>
-
-          </article>
-
-
-          <!-- =================================================
-               05 REDES
-          ================================================== -->
-
-          <article
-            class="area-card reveal"
-            data-carousel
-          >
-
-            <div class="area-carousel">
-
-              <div class="carousel-track">
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/redes/redes-1.jpg"
-                    alt="Representante del Área de Redes, Marketing y Audiovisual"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/redes/redes-2.jpg"
-                    alt="Representante del Área de Redes, Marketing y Audiovisual"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/redes/redes-3.jpg"
-                    alt="Representante del Área de Redes, Marketing y Audiovisual"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/redes/redes-4.jpg"
-                    alt="Representante del Área de Redes, Marketing y Audiovisual"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/redes/redes-5.jpg"
-                    alt="Representante del Área de Redes, Marketing y Audiovisual"
-                  >
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="carousel-arrow carousel-prev"
-              aria-label="Representante anterior"
-            >
-              ‹
-            </button>
-
-
-            <button
-              class="carousel-arrow carousel-next"
-              aria-label="Siguiente representante"
-            >
-              ›
-            </button>
-
-
-            <div class="carousel-dots"></div>
-
-
-            <div class="area-content">
-
-              <div class="area-index">
-                05 / ÁREA
-              </div>
-
-              <h3>
-                Redes, Marketing &amp; Audiovisual
-              </h3>
-
-              <p>
-                Contenido, comunicación, marketing y producción
-                audiovisual de nuestra comunidad.
-              </p>
-
-              <button
-                class="area-button"
-                data-area="redes"
-              >
-                CONOCER MÁS
-                <span>→</span>
-              </button>
-
-            </div>
-
-          </article>
-
-
-          <!-- =================================================
-               06 ALIANZAS
-          ================================================== -->
-
-          <article
-            class="area-card reveal"
-            data-carousel
-          >
-
-            <div class="area-carousel">
-
-              <div class="carousel-track">
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/alianzas/alianzas-1.jpg"
-                    alt="Representante del Área de Alianzas Estratégicas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/alianzas/alianzas-2.jpg"
-                    alt="Representante del Área de Alianzas Estratégicas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/alianzas/alianzas-3.jpg"
-                    alt="Representante del Área de Alianzas Estratégicas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/alianzas/alianzas-4.jpg"
-                    alt="Representante del Área de Alianzas Estratégicas"
-                  >
-                </div>
-
-
-                <div class="carousel-slide">
-                  <img
-                    src="assets/equipo/alianzas/alianzas-5.jpg"
-                    alt="Representante del Área de Alianzas Estratégicas"
-                  >
-                </div>
-
-
-              </div>
-
-            </div>
-
-
-            <button
-              class="carousel-arrow carousel-prev"
-              aria-label="Representante anterior"
-            >
-              ‹
-            </button>
-
-
-            <button
-              class="carousel-arrow carousel-next"
-              aria-label="Siguiente representante"
-            >
-              ›
-            </button>
-
-
-            <div class="carousel-dots"></div>
-
-
-            <div class="area-content">
-
-              <div class="area-index">
-                06 / ÁREA
-              </div>
-
-              <h3>
-                Alianzas Estratégicas
-              </h3>
-
-              <p>
-                Relaciones con marcas, empresas, instituciones
-                y comunidades.
-              </p>
-
-              <button
-                class="area-button"
-                data-area="alianzas"
-              >
-                CONOCER MÁS
-                <span>→</span>
-              </button>
-
-            </div>
-
-          </article>
-
-
-        </div>
-
-      </div>
 
     </section>
 
 
-    <!-- ===================================================
+
+    <!-- =========================================================
          NUESTRA COMUNIDAD
-    ==================================================== -->
+    ========================================================= -->
 
     <section
-      class="section community-section"
+        class="section community-section"
+        id="comunidad"
     >
 
-      <div class="container">
+        <div class="container">
 
-        <div class="community-card reveal">
+            <div class="section-header center reveal">
 
-          <img
-            class="community-image"
-            src="assets/comunidad-miembros.jpg"
-            alt="Miembros Baby Golden"
-            onerror="this.src='assets/conocenos-hero.jpg'"
-          >
+                <div class="section-kicker">
+                    Nuestra comunidad
+                </div>
 
-          <div class="community-content">
+                <h2 class="section-title">
+                    Una comunidad que deja huellas
+                </h2>
 
-            <div class="section-kicker">
-              NUESTRA COMUNIDAD
+                <p class="section-description">
+                    Detrás de Baby Golden Perú existen personas que comparten
+                    una misma pasión: el amor y respeto por nuestros perros.
+                </p>
+
             </div>
 
-            <h2>
-              Miembros<br>
-              Baby Golden
-            </h2>
 
-            <p>
-              Personas y familias que forman parte de nuestra
-              comunidad y comparten el amor por los perros.
-            </p>
+            <div class="community-card reveal">
 
-            <div class="community-counter">
-              Una comunidad que deja huellas
+
+                <!-- CARRUSEL DE 5 FOTOS -->
+
+                <div class="community-carousel">
+
+                    <div class="community-track">
+
+                        <div class="community-slide">
+                            <img
+                                src="assets/comunidad/miembros-1.jpg"
+                                alt="Miembros de la comunidad Baby Golden Perú"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="community-slide">
+                            <img
+                                src="assets/comunidad/miembros-2.jpg"
+                                alt="Miembros de Baby Golden Perú"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="community-slide">
+                            <img
+                                src="assets/comunidad/miembros-3.jpg"
+                                alt="Comunidad Baby Golden Perú"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="community-slide">
+                            <img
+                                src="assets/comunidad/miembros-4.jpg"
+                                alt="Familias Baby Golden Perú"
+                                loading="lazy"
+                            >
+                        </div>
+
+                        <div class="community-slide">
+                            <img
+                                src="assets/comunidad/miembros-5.jpg"
+                                alt="Miembros de la comunidad Baby Golden"
+                                loading="lazy"
+                            >
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- CONTENIDO -->
+
+                <div class="community-content">
+
+                    <div class="community-kicker">
+                        Nuestra comunidad
+                    </div>
+
+                    <h3>
+                        Miembros<br>
+                        Baby Golden
+                    </h3>
+
+                    <p>
+                        Personas y familias que forman parte de nuestra
+                        comunidad y comparten el amor por los perros.
+                    </p>
+
+                    <div class="community-motto">
+                        Una comunidad que deja huellas.
+                    </div>
+
+                </div>
+
+
+                <!-- FLECHAS -->
+
+                <button
+                    class="community-arrow community-prev"
+                    type="button"
+                    aria-label="Foto anterior"
+                >
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <button
+                    class="community-arrow community-next"
+                    type="button"
+                    aria-label="Foto siguiente"
+                >
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+
+
+                <!-- DOTS -->
+
+                <div class="community-dots">
+
+                    <button
+                        class="community-dot active"
+                        type="button"
+                        aria-label="Ir a foto 1"
+                    ></button>
+
+                    <button
+                        class="community-dot"
+                        type="button"
+                        aria-label="Ir a foto 2"
+                    ></button>
+
+                    <button
+                        class="community-dot"
+                        type="button"
+                        aria-label="Ir a foto 3"
+                    ></button>
+
+                    <button
+                        class="community-dot"
+                        type="button"
+                        aria-label="Ir a foto 4"
+                    ></button>
+
+                    <button
+                        class="community-dot"
+                        type="button"
+                        aria-label="Ir a foto 5"
+                    ></button>
+
+                </div>
+
+
             </div>
-
-          </div>
 
         </div>
-
-      </div>
 
     </section>
 
 
-    <!-- ===================================================
+
+    <!-- =========================================================
          CTA
-    ==================================================== -->
+    ========================================================= -->
 
     <section class="cta-section">
 
-      <div class="container">
+        <div class="container">
 
-        <div class="cta-content reveal">
+            <div class="cta-content reveal">
 
-          <div class="cta-label">
-            SÉ PARTE
-          </div>
+                <div class="cta-label">
+                    Sé parte
+                </div>
 
-          <h2 class="cta-title">
-            Juntos hacemos<br>
-            la diferencia.
-          </h2>
+                <h2>
+                    Juntos hacemos<br>
+                    la diferencia.
+                </h2>
 
-          <p class="cta-text">
-            Forma parte de Baby Golden Perú y acompáñanos a seguir
-            construyendo una comunidad que deja huellas.
-          </p>
+                <p>
+                    Forma parte de Baby Golden Perú y acompáñanos a seguir
+                    construyendo una comunidad que deja huellas.
+                </p>
 
-          <button
-            class="primary-button"
-            id="joinButton"
-          >
-            QUIERO SER PARTE
-            <span>→</span>
-          </button>
+                <button
+                    class="btn-primary"
+                    type="button"
+                    id="joinBtn"
+                >
+                    Quiero ser parte
+                    <i class="fa-solid fa-arrow-right"></i>
+                </button>
+
+            </div>
 
         </div>
-
-      </div>
 
     </section>
 
-  </main>
 
 
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
+    <!-- =========================================================
+         FOOTER
+    ========================================================= -->
 
-  <footer>
+    <footer class="site-footer">
 
-    <div class="container">
+        <div class="container">
 
-      <div class="footer-main">
+            <div class="footer-main">
 
-        <a
-          href="index.html"
-          class="footer-logo"
+                <div class="footer-brand">
+
+                    <img
+                        src="assets/logo-baby-golden-peru.png"
+                        alt="Baby Golden Perú"
+                    >
+
+                    <div class="footer-motto">
+                        Juntos por un mundo mejor, una pata a la vez. ♥
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="footer-bottom">
+
+                <span>
+                    © 2026 Baby Golden Perú.
+                </span>
+
+                <span>
+                    Comunidad que deja huellas.
+                </span>
+
+                <span>
+                    Lima, Perú.
+                </span>
+
+            </div>
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =========================================================
+         MODAL — QUIERO SER PARTE
+    ========================================================= -->
+
+    <div
+        class="modal"
+        id="joinModal"
+        aria-hidden="true"
+    >
+
+        <div
+            class="modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="joinModalTitle"
         >
 
-          <img
-            src="assets/logo-baby-golden-peru.png"
-            alt="Baby Golden Perú"
-          >
-
-        </a>
-
-        <div class="footer-motto">
-          Juntos por un mundo mejor, una pata a la vez. ♥
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          © 2026 Baby Golden Perú.
-        </span>
-
-        <span>
-          Comunidad que deja huellas.
-        </span>
-
-        <span>
-          Lima, Perú.
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =====================================================
-       MODAL ÁREAS
-  ====================================================== -->
-
-  <div
-    class="modal"
-    id="areaModal"
-  >
-
-    <div class="modal-box">
-
-      <button
-        class="modal-close"
-        data-close="areaModal"
-        aria-label="Cerrar"
-      >
-        ×
-      </button>
-
-      <div class="modal-kicker">
-        ÁREA BABY GOLDEN
-      </div>
-
-      <h2
-        class="modal-title"
-        id="modalTitle"
-      >
-        Área
-      </h2>
-
-      <p
-        class="modal-description"
-        id="modalDescription"
-      ></p>
-
-      <ul
-        class="modal-list"
-        id="modalList"
-      ></ul>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       MODAL QUIERO SER PARTE
-  ====================================================== -->
-
-  <div
-    class="modal"
-    id="joinModal"
-  >
-
-    <div class="modal-box">
-
-      <button
-        class="modal-close"
-        data-close="joinModal"
-        aria-label="Cerrar"
-      >
-        ×
-      </button>
-
-      <div class="modal-kicker">
-        BABY GOLDEN PERÚ
-      </div>
-
-      <h2 class="modal-title">
-        ¿Cómo quieres<br>
-        ser parte?
-      </h2>
-
-
-      <div class="join-options">
-
-
-        <div class="join-option">
-
-          <div class="join-option-icon">
-
-            <svg
-              width="21"
-              height="21"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
+            <button
+                class="modal-close"
+                type="button"
+                id="closeJoinModal"
+                aria-label="Cerrar"
             >
-
-              <circle
-                cx="12"
-                cy="8"
-                r="3"
-              ></circle>
-
-              <path
-                d="M5 20a7 7 0 0 1 14 0"
-              ></path>
-
-            </svg>
-
-          </div>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
 
-          <h3>
-            Quiero ser voluntario/a
-          </h3>
+            <div class="modal-kicker">
+                Baby Golden Perú
+            </div>
 
-          <p>
-            Forma parte de nuestras áreas y ayúdanos
-            a seguir dejando huellas.
-          </p>
+            <h2 id="joinModalTitle">
+                ¿Cómo quieres ser parte?
+            </h2>
 
-          <a href="contacto.html#contacto">
-            QUIERO PARTICIPAR →
-          </a>
+
+            <div class="modal-options">
+
+
+                <!-- VOLUNTARIO -->
+
+                <div class="modal-option">
+
+                    <div class="modal-option-icon">
+                        <i class="fa-solid fa-hands-helping"></i>
+                    </div>
+
+                    <div class="modal-option-content">
+
+                        <h3>
+                            Quiero ser voluntario/a
+                        </h3>
+
+                        <p>
+                            Forma parte de nuestras áreas y ayúdanos a seguir
+                            dejando huellas.
+                        </p>
+
+                        <a
+                            href="contacto.html#contacto"
+                            class="modal-link"
+                        >
+                            Quiero participar
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+                <!-- MARCA -->
+
+                <div class="modal-option">
+
+                    <div class="modal-option-icon">
+                        <i class="fa-solid fa-handshake"></i>
+                    </div>
+
+                    <div class="modal-option-content">
+
+                        <h3>
+                            Quiero ser marca
+                        </h3>
+
+                        <p>
+                            Conecta tu marca con Baby Golden Perú y
+                            construyamos juntos nuevas experiencias.
+                        </p>
+
+                        <a
+                            href="https://marcas.babygoldenperu.com/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="modal-link"
+                        >
+                            Quiero ser aliado
+                            <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+
+            </div>
 
         </div>
-
-
-        <div class="join-option">
-
-          <div class="join-option-icon">
-
-            <svg
-              width="21"
-              height="21"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-            >
-
-              <rect
-                x="3"
-                y="5"
-                width="18"
-                height="14"
-                rx="2"
-              ></rect>
-
-              <path
-                d="M8 5V3h8v2"
-              ></path>
-
-              <path
-                d="M8 12h8"
-              ></path>
-
-            </svg>
-
-          </div>
-
-
-          <h3>
-            Quiero ser marca
-          </h3>
-
-          <p>
-            Conecta tu marca con Baby Golden Perú y
-            construyamos juntos nuevas experiencias.
-          </p>
-
-          <a
-            href="https://marcas.babygoldenperu.com/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            CONECTAR MI MARCA →
-          </a>
-
-        </div>
-
-
-      </div>
 
     </div>
 
-  </div>
 
 
-  <!-- =====================================================
-       JAVASCRIPT
-  ====================================================== -->
+    <!-- =========================================================
+         MODAL — ÁREAS
+    ========================================================= -->
 
-  <script>
+    <div
+        class="modal"
+        id="areaModal"
+        aria-hidden="true"
+    >
 
+        <div
+            class="modal-box"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="areaModalTitle"
+        >
 
-    /* =====================================================
-       HEADER
-    ====================================================== */
-
-    const siteHeader =
-      document.getElementById(
-        "siteHeader"
-      );
-
-
-    function handleHeader() {
-
-      if (
-        window.scrollY > 30
-      ) {
-
-        siteHeader.classList.add(
-          "scrolled"
-        );
-
-      } else {
-
-        siteHeader.classList.remove(
-          "scrolled"
-        );
-
-      }
-
-    }
+            <button
+                class="modal-close"
+                type="button"
+                id="closeAreaModal"
+                aria-label="Cerrar"
+            >
+                <i class="fa-solid fa-xmark"></i>
+            </button>
 
 
-    window.addEventListener(
-      "scroll",
-      handleHeader
-    );
+            <div class="modal-kicker">
+                Nuestras áreas
+            </div>
+
+            <h2 id="areaModalTitle">
+                Área
+            </h2>
+
+            <p
+                class="area-modal-description"
+                id="areaModalDescription"
+            ></p>
+
+            <div class="area-functions-title">
+                Funciones principales
+            </div>
+
+            <div
+                class="area-functions"
+                id="areaFunctions"
+            ></div>
+
+        </div>
+
+    </div>
 
 
-    handleHeader();
+
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================= -->
+
+    <script>
+
+        document.addEventListener("DOMContentLoaded", function () {
 
 
-    /* =====================================================
-       MENÚ MÓVIL
-    ====================================================== */
+            /* =====================================================
+               HEADER SCROLL
+            ===================================================== */
 
-    const mobileMenu =
-      document.getElementById(
-        "mobileMenu"
-      );
+            const siteHeader = document.getElementById("siteHeader");
 
+            function handleHeaderScroll() {
 
-    mobileMenu.addEventListener(
-      "click",
-      () => {
-
-        const isOpen =
-          siteHeader.classList.toggle(
-            "header-mobile-open"
-          );
-
-
-        mobileMenu.setAttribute(
-          "aria-expanded",
-          isOpen
-            ? "true"
-            : "false"
-        );
-
-      }
-    );
-
-
-    document
-      .querySelectorAll(
-        ".main-nav a"
-      )
-      .forEach(link => {
-
-        link.addEventListener(
-          "click",
-          () => {
-
-            siteHeader.classList.remove(
-              "header-mobile-open"
-            );
-
-            mobileMenu.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       ANIMACIONES
-    ====================================================== */
-
-    const revealElements =
-      document.querySelectorAll(
-        ".reveal"
-      );
-
-
-    const revealObserver =
-      new IntersectionObserver(
-        (entries, observer) => {
-
-          entries.forEach(
-            entry => {
-
-              if (
-                entry.isIntersecting
-              ) {
-
-                entry.target.classList.add(
-                  "visible"
-                );
-
-                observer.unobserve(
-                  entry.target
-                );
-
-              }
+                if (window.scrollY > 30) {
+                    siteHeader.classList.add("scrolled");
+                } else {
+                    siteHeader.classList.remove("scrolled");
+                }
 
             }
-          );
 
-        },
-        {
-          threshold: .12
-        }
-      );
+            handleHeaderScroll();
 
-
-    revealElements.forEach(
-      element => {
-
-        revealObserver.observe(
-          element
-        );
-
-      }
-    );
+            window.addEventListener(
+                "scroll",
+                handleHeaderScroll,
+                { passive: true }
+            );
 
 
-    /* =====================================================
-       CARRUSELES DE REPRESENTANTES
-       
-       IMPORTANTE:
-       Cada tarjeta puede tener 1, 2, 3, 4, 5
-       o las fotos que quieras.
+            /* =====================================================
+               MOBILE MENU
+            ===================================================== */
 
-       El sistema detecta automáticamente
-       cuántas fotos tiene cada tarjeta.
-    ====================================================== */
+            const mobileMenuBtn =
+                document.getElementById("mobileMenuBtn");
 
-    document
-      .querySelectorAll(
-        "[data-carousel]"
-      )
-      .forEach(card => {
+            const mainNav =
+                document.getElementById("mainNav");
 
+            mobileMenuBtn.addEventListener("click", function () {
 
-        const track =
-          card.querySelector(
-            ".carousel-track"
-          );
+                const isOpen =
+                    mainNav.classList.toggle("open");
 
-
-        const slides =
-          Array.from(
-            card.querySelectorAll(
-              ".carousel-slide"
-            )
-          );
-
-
-        const prev =
-          card.querySelector(
-            ".carousel-prev"
-          );
-
-
-        const next =
-          card.querySelector(
-            ".carousel-next"
-          );
-
-
-        const dotsContainer =
-          card.querySelector(
-            ".carousel-dots"
-          );
-
-
-        let current =
-          0;
-
-
-        let autoplay = null;
-
-
-        /*
-         * Si no hay fotos,
-         * ocultamos el carrusel.
-         */
-
-        if (
-          slides.length === 0
-        ) {
-
-          card.style.display =
-            "none";
-
-          return;
-
-        }
-
-
-        /*
-         * Si solamente hay una foto,
-         * ocultamos flechas y puntos.
-         */
-
-        if (
-          slides.length === 1
-        ) {
-
-          card.classList.add(
-            "single-slide"
-          );
-
-        }
-
-
-        /*
-         * Crear automáticamente
-         * los puntos según las fotos.
-         */
-
-        if (
-          slides.length > 1
-        ) {
-
-          slides.forEach(
-            (_, index) => {
-
-              const dot =
-                document.createElement(
-                  "button"
+                mobileMenuBtn.setAttribute(
+                    "aria-expanded",
+                    isOpen ? "true" : "false"
                 );
 
+                const icon =
+                    mobileMenuBtn.querySelector("i");
 
-              dot.type =
-                "button";
+                if (isOpen) {
 
+                    icon.classList.remove("fa-bars");
+                    icon.classList.add("fa-xmark");
 
-              dot.className =
-                "carousel-dot";
+                } else {
 
-
-              dot.setAttribute(
-                "aria-label",
-                `Ir al representante ${index + 1}`
-              );
-
-
-              if (
-                index === 0
-              ) {
-
-                dot.classList.add(
-                  "active"
-                );
-
-              }
-
-
-              dot.addEventListener(
-                "click",
-                event => {
-
-                  event.stopPropagation();
-
-                  goTo(index);
-
-                  restartAutoplay();
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
 
                 }
-              );
-
-
-              dotsContainer.appendChild(
-                dot
-              );
-
-            }
-          );
-
-        }
-
-
-        const dots =
-          Array.from(
-            card.querySelectorAll(
-              ".carousel-dot"
-            )
-          );
-
-
-        function updateCarousel() {
-
-          track.style.transform =
-            `translateX(-${current * 100}%)`;
-
-
-          dots.forEach(
-            (dot, index) => {
-
-              dot.classList.toggle(
-                "active",
-                index === current
-              );
-
-            }
-          );
-
-        }
-
-
-        function goTo(index) {
-
-          current =
-            (
-              index + slides.length
-            )
-            %
-            slides.length;
-
-
-          updateCarousel();
-
-        }
-
-
-        function nextSlide() {
-
-          if (
-            slides.length <= 1
-          ) {
-
-            return;
-
-          }
-
-
-          goTo(
-            current + 1
-          );
-
-        }
-
-
-        function prevSlide() {
-
-          if (
-            slides.length <= 1
-          ) {
-
-            return;
-
-          }
-
-
-          goTo(
-            current - 1
-          );
-
-        }
-
-
-        function startAutoplay() {
-
-          if (
-            slides.length <= 1
-          ) {
-
-            return;
-
-          }
-
-
-          clearInterval(
-            autoplay
-          );
-
-
-          autoplay =
-            setInterval(
-              nextSlide,
-              5000
-            );
-
-        }
-
-
-        function stopAutoplay() {
-
-          clearInterval(
-            autoplay
-          );
-
-        }
-
-
-        function restartAutoplay() {
-
-          stopAutoplay();
-
-          startAutoplay();
-
-        }
-
-
-        /*
-         * Flecha siguiente
-         */
-
-        next.addEventListener(
-          "click",
-          event => {
-
-            event.stopPropagation();
-
-            nextSlide();
-
-            restartAutoplay();
-
-          }
-        );
-
-
-        /*
-         * Flecha anterior
-         */
-
-        prev.addEventListener(
-          "click",
-          event => {
-
-            event.stopPropagation();
-
-            prevSlide();
-
-            restartAutoplay();
-
-          }
-        );
-
-
-        /*
-         * Pausar al pasar
-         * el mouse por encima.
-         */
-
-        card.addEventListener(
-          "mouseenter",
-          () => {
-
-            stopAutoplay();
-
-          }
-        );
-
-
-        card.addEventListener(
-          "mouseleave",
-          () => {
-
-            startAutoplay();
-
-          }
-        );
-
-
-        /*
-         * Soporte táctil.
-         */
-
-        let touchStartX =
-          0;
-
-        let touchEndX =
-          0;
-
-
-        track.addEventListener(
-          "touchstart",
-          event => {
-
-            touchStartX =
-              event
-                .changedTouches[0]
-                .screenX;
-
-            stopAutoplay();
-
-          },
-          {
-            passive: true
-          }
-        );
-
-
-        track.addEventListener(
-          "touchend",
-          event => {
-
-            touchEndX =
-              event
-                .changedTouches[0]
-                .screenX;
-
-
-            const difference =
-              touchStartX -
-              touchEndX;
-
-
-            if (
-              Math.abs(difference) > 45
-            ) {
-
-              if (
-                difference > 0
-              ) {
-
-                nextSlide();
-
-              } else {
-
-                prevSlide();
-
-              }
-
-            }
-
-
-            startAutoplay();
-
-          },
-          {
-            passive: true
-          }
-        );
-
-
-        /*
-         * Estado inicial.
-         */
-
-        updateCarousel();
-
-        startAutoplay();
-
-      });
-
-
-    /* =====================================================
-       INFORMACIÓN DE LAS ÁREAS
-    ====================================================== */
-
-    const areas = {
-
-
-      ventas: {
-
-        title:
-          "Ventas",
-
-        description:
-          "El Área de Ventas se encarga de gestionar el merchandising y los productos de Baby Golden Perú, buscando que nuestra identidad también pueda acompañar a cada miembro de la comunidad.",
-
-        functions: [
-
-          "Gestión de merchandising",
-
-          "Coordinación de pedidos",
-
-          "Control de productos",
-
-          "Coordinación comercial",
-
-          "Apoyo en eventos"
-
-        ]
-
-      },
-
-
-      legal: {
-
-        title:
-          "Legal",
-
-        description:
-          "El Área Legal brinda soporte documental y orientación para que las actividades de Baby Golden Perú se desarrollen de manera ordenada y responsable.",
-
-        functions: [
-
-          "Reglamentos internos",
-
-          "Documentación institucional",
-
-          "Revisión de convenios",
-
-          "Orientación legal",
-
-          "Apoyo institucional"
-
-        ]
-
-      },
-
-
-      adopciones: {
-
-        title:
-          "Adopciones",
-
-        description:
-          "El Área de Adopciones acompaña la difusión y seguimiento de casos que buscan encontrar hogares responsables y comprometidos.",
-
-        functions: [
-
-          "Recepción de casos",
-
-          "Difusión",
-
-          "Evaluación de adoptantes",
-
-          "Seguimiento",
-
-          "Acompañamiento"
-
-        ]
-
-      },
-
-
-      eventos: {
-
-        title:
-          "Eventos",
-
-        description:
-          "El Área de Eventos convierte las ideas de la comunidad en experiencias, actividades y encuentros que fortalecen nuestros vínculos.",
-
-        functions: [
-
-          "Planificación",
-
-          "Producción",
-
-          "Logística",
-
-          "Coordinación de voluntarios",
-
-          "Coordinación con aliados"
-
-        ]
-
-      },
-
-
-      redes: {
-
-        title:
-          "Redes, Marketing & Audiovisual",
-
-        description:
-          "El Área de Redes, Marketing & Audiovisual comunica nuestra identidad, historias, actividades y proyectos mediante contenido creativo y estratégico.",
-
-        functions: [
-
-          "Redes sociales",
-
-          "Creación de contenido",
-
-          "Marketing",
-
-          "Fotografía",
-
-          "Video y edición",
-
-          "Diseño gráfico"
-
-        ]
-
-      },
-
-
-      alianzas: {
-
-        title:
-          "Alianzas Estratégicas",
-
-        description:
-          "El Área de Alianzas Estratégicas desarrolla relaciones con marcas, empresas, instituciones y comunidades para crear proyectos que generen valor.",
-
-        functions: [
-
-          "Alianzas con marcas",
-
-          "Convenios",
-
-          "Relaciones institucionales",
-
-          "Proyectos conjuntos",
-
-          "Patrocinios",
-
-          "Colaboraciones"
-
-        ]
-
-      }
-
-    };
-
-
-    /* =====================================================
-       MODAL DE ÁREAS
-    ====================================================== */
-
-    const areaModal =
-      document.getElementById(
-        "areaModal"
-      );
-
-
-    const modalTitle =
-      document.getElementById(
-        "modalTitle"
-      );
-
-
-    const modalDescription =
-      document.getElementById(
-        "modalDescription"
-      );
-
-
-    const modalList =
-      document.getElementById(
-        "modalList"
-      );
-
-
-    document
-      .querySelectorAll(
-        ".area-button"
-      )
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const areaKey =
-              button.dataset.area;
-
-
-            const area =
-              areas[areaKey];
-
-
-            if (!area) {
-
-              return;
-
-            }
-
-
-            modalTitle.textContent =
-              area.title;
-
-
-            modalDescription.textContent =
-              area.description;
-
-
-            modalList.innerHTML =
-              area.functions
-                .map(
-                  item =>
-                    `<li>${item}</li>`
-                )
-                .join("");
-
-
-            areaModal.classList.add(
-              "active"
-            );
-
-
-            document.body.style.overflow =
-              "hidden";
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       MODAL QUIERO SER PARTE
-    ====================================================== */
-
-    const joinButton =
-      document.getElementById(
-        "joinButton"
-      );
-
-
-    const joinModal =
-      document.getElementById(
-        "joinModal"
-      );
-
-
-    joinButton.addEventListener(
-      "click",
-      () => {
-
-        joinModal.classList.add(
-          "active"
-        );
-
-
-        document.body.style.overflow =
-          "hidden";
-
-      }
-    );
-
-
-    /* =====================================================
-       CERRAR MODALES
-    ====================================================== */
-
-    document
-      .querySelectorAll(
-        "[data-close]"
-      )
-      .forEach(button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const modalId =
-              button.dataset.close;
-
-
-            const modal =
-              document.getElementById(
-                modalId
-              );
-
-
-            if (modal) {
-
-              modal.classList.remove(
-                "active"
-              );
-
-            }
-
-
-            document.body.style.overflow =
-              "";
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       CERRAR AL HACER CLICK FUERA
-    ====================================================== */
-
-    document
-      .querySelectorAll(
-        ".modal"
-      )
-      .forEach(modal => {
-
-        modal.addEventListener(
-          "click",
-          event => {
-
-            if (
-              event.target === modal
-            ) {
-
-              modal.classList.remove(
-                "active"
-              );
-
-
-              document.body.style.overflow =
-                "";
-
-            }
-
-          }
-        );
-
-      });
-
-
-    /* =====================================================
-       ESC PARA CERRAR
-    ====================================================== */
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key === "Escape"
-        ) {
-
-          document
-            .querySelectorAll(
-              ".modal.active"
-            )
-            .forEach(modal => {
-
-              modal.classList.remove(
-                "active"
-              );
 
             });
 
 
-          document.body.style.overflow =
-            "";
+            mainNav.querySelectorAll("a").forEach(function (link) {
 
-        }
+                link.addEventListener("click", function () {
 
-      }
-    );
+                    mainNav.classList.remove("open");
 
-  </script>
+                    mobileMenuBtn.setAttribute(
+                        "aria-expanded",
+                        "false"
+                    );
+
+                    const icon =
+                        mobileMenuBtn.querySelector("i");
+
+                    icon.classList.remove("fa-xmark");
+                    icon.classList.add("fa-bars");
+
+                });
+
+            });
+
+
+            /* =====================================================
+               AREA CAROUSELS
+               
+               IMPORTANTE:
+               Si una carpeta tiene solo 1, 2, 3, 4 o 5 fotos,
+               las imágenes que no existan serán eliminadas
+               automáticamente para evitar imágenes rotas.
+            ===================================================== */
+
+            document
+                .querySelectorAll(".area-card")
+                .forEach(function (card) {
+
+                    const carousel =
+                        card.querySelector(".area-carousel");
+
+                    if (!carousel) return;
+
+                    const track =
+                        carousel.querySelector(".carousel-track");
+
+                    const dotsContainer =
+                        carousel.querySelector(".carousel-dots");
+
+                    const prevBtn =
+                        carousel.querySelector(".carousel-prev");
+
+                    const nextBtn =
+                        carousel.querySelector(".carousel-next");
+
+
+                    let currentIndex = 0;
+
+
+                    /* ---------------------------------------------
+                       ELIMINAR AUTOMÁTICAMENTE FOTOS QUE NO EXISTAN
+                    --------------------------------------------- */
+
+                    const images =
+                        track.querySelectorAll("img");
+
+
+                    images.forEach(function (img) {
+
+                        img.addEventListener(
+                            "error",
+                            function () {
+
+                                const slide =
+                                    img.closest(".carousel-slide");
+
+                                if (slide) {
+                                    slide.remove();
+                                }
+
+                                setupCarousel();
+
+                            },
+                            { once: true }
+                        );
+
+                    });
+
+
+                    function setupCarousel() {
+
+                        const slides =
+                            track.querySelectorAll(".carousel-slide");
+
+
+                        /* -----------------------------------------
+                           SI NO HAY FOTOS
+                        ----------------------------------------- */
+
+                        if (slides.length === 0) {
+
+                            card.style.display = "none";
+
+                            return;
+                        }
+
+
+                        /* -----------------------------------------
+                           SI SOLO HAY UNA FOTO
+                        ----------------------------------------- */
+
+                        if (slides.length === 1) {
+
+                            card.classList.add("single-slide");
+
+                            currentIndex = 0;
+
+                        } else {
+
+                            card.classList.remove("single-slide");
+
+                        }
+
+
+                        /* -----------------------------------------
+                           CREAR DOTS
+                        ----------------------------------------- */
+
+                        dotsContainer.innerHTML = "";
+
+
+                        slides.forEach(function (_, index) {
+
+                            const dot =
+                                document.createElement("button");
+
+                            dot.type = "button";
+
+                            dot.className = "carousel-dot";
+
+                            dot.setAttribute(
+                                "aria-label",
+                                "Ir a foto " + (index + 1)
+                            );
+
+
+                            dot.addEventListener(
+                                "click",
+                                function () {
+
+                                    currentIndex = index;
+
+                                    updateCarousel();
+
+                                }
+                            );
+
+
+                            dotsContainer.appendChild(dot);
+
+                        });
+
+
+                        updateCarousel();
+
+                    }
+
+
+                    function updateCarousel() {
+
+                        const slides =
+                            track.querySelectorAll(".carousel-slide");
+
+
+                        if (slides.length === 0) {
+                            return;
+                        }
+
+
+                        if (
+                            currentIndex >= slides.length
+                        ) {
+                            currentIndex = 0;
+                        }
+
+
+                        if (
+                            currentIndex < 0
+                        ) {
+                            currentIndex = slides.length - 1;
+                        }
+
+
+                        track.style.transform =
+                            "translateX(-" +
+                            (currentIndex * 100) +
+                            "%)";
+
+
+                        const dots =
+                            dotsContainer.querySelectorAll(
+                                ".carousel-dot"
+                            );
+
+
+                        dots.forEach(function (dot, index) {
+
+                            dot.classList.toggle(
+                                "active",
+                                index === currentIndex
+                            );
+
+                        });
+
+                    }
+
+
+                    prevBtn.addEventListener(
+                        "click",
+                        function () {
+
+                            currentIndex--;
+
+                            updateCarousel();
+
+                        }
+                    );
+
+
+                    nextBtn.addEventListener(
+                        "click",
+                        function () {
+
+                            currentIndex++;
+
+                            updateCarousel();
+
+                        }
+                    );
+
+
+                    /* ---------------------------------------------
+                       SWIPE EN CELULAR
+                    --------------------------------------------- */
+
+                    let touchStartX = 0;
+                    let touchEndX = 0;
+
+
+                    carousel.addEventListener(
+                        "touchstart",
+                        function (event) {
+
+                            touchStartX =
+                                event.changedTouches[0].screenX;
+
+                        },
+                        { passive: true }
+                    );
+
+
+                    carousel.addEventListener(
+                        "touchend",
+                        function (event) {
+
+                            touchEndX =
+                                event.changedTouches[0].screenX;
+
+
+                            const difference =
+                                touchStartX - touchEndX;
+
+
+                            if (Math.abs(difference) < 45) {
+                                return;
+                            }
+
+
+                            if (difference > 0) {
+
+                                currentIndex++;
+
+                            } else {
+
+                                currentIndex--;
+
+                            }
+
+
+                            updateCarousel();
+
+                        },
+                        { passive: true }
+                    );
+
+
+                    setupCarousel();
+
+                });
+
+
+
+            /* =====================================================
+               DATOS DE LAS ÁREAS
+            ===================================================== */
+
+            const areasData = {
+
+                ventas: {
+
+                    title: "Ventas",
+
+                    description:
+                        "El Área de Ventas se encarga de gestionar el merchandising y los productos de Baby Golden Perú, buscando que nuestra identidad también pueda acompañar a cada miembro de la comunidad.",
+
+                    functions: [
+                        "Gestión de merchandising",
+                        "Coordinación de pedidos",
+                        "Control de productos",
+                        "Coordinación comercial",
+                        "Apoyo en eventos"
+                    ]
+
+                },
+
+
+                legal: {
+
+                    title: "Legal",
+
+                    description:
+                        "El Área Legal brinda soporte documental y orientación para que las actividades de Baby Golden Perú se desarrollen de manera ordenada y responsable.",
+
+                    functions: [
+                        "Reglamentos internos",
+                        "Documentación institucional",
+                        "Revisión de convenios",
+                        "Orientación legal",
+                        "Apoyo institucional"
+                    ]
+
+                },
+
+
+                adopciones: {
+
+                    title: "Adopciones",
+
+                    description:
+                        "El Área de Adopciones acompaña la difusión y seguimiento de casos que buscan encontrar hogares responsables y comprometidos.",
+
+                    functions: [
+                        "Recepción de casos",
+                        "Difusión",
+                        "Evaluación de adoptantes",
+                        "Seguimiento",
+                        "Acompañamiento"
+                    ]
+
+                },
+
+
+                eventos: {
+
+                    title: "Eventos",
+
+                    description:
+                        "El Área de Eventos convierte las ideas de la comunidad en experiencias, actividades y encuentros que fortalecen nuestros vínculos.",
+
+                    functions: [
+                        "Planificación",
+                        "Producción",
+                        "Logística",
+                        "Coordinación de voluntarios",
+                        "Coordinación con aliados"
+                    ]
+
+                },
+
+
+                redes: {
+
+                    title: "Redes, Marketing & Audiovisual",
+
+                    description:
+                        "El Área de Redes, Marketing & Audiovisual comunica nuestra identidad, historias, actividades y proyectos mediante contenido creativo y estratégico.",
+
+                    functions: [
+                        "Redes sociales",
+                        "Creación de contenido",
+                        "Marketing",
+                        "Fotografía",
+                        "Video y edición",
+                        "Diseño gráfico"
+                    ]
+
+                },
+
+
+                alianzas: {
+
+                    title: "Alianzas Estratégicas",
+
+                    description:
+                        "El Área de Alianzas Estratégicas desarrolla relaciones con marcas, empresas, instituciones y comunidades para crear proyectos que generen valor.",
+
+                    functions: [
+                        "Alianzas con marcas",
+                        "Convenios",
+                        "Relaciones institucionales",
+                        "Proyectos conjuntos",
+                        "Patrocinios",
+                        "Colaboraciones"
+                    ]
+
+                }
+
+            };
+
+
+            /* =====================================================
+               MODAL DE ÁREAS
+            ===================================================== */
+
+            const areaModal =
+                document.getElementById("areaModal");
+
+            const closeAreaModal =
+                document.getElementById("closeAreaModal");
+
+            const areaModalTitle =
+                document.getElementById("areaModalTitle");
+
+            const areaModalDescription =
+                document.getElementById(
+                    "areaModalDescription"
+                );
+
+            const areaFunctions =
+                document.getElementById("areaFunctions");
+
+
+            document
+                .querySelectorAll("[data-open-area]")
+                .forEach(function (button) {
+
+                    button.addEventListener(
+                        "click",
+                        function () {
+
+                            const areaKey =
+                                button.dataset.openArea;
+
+                            const data =
+                                areasData[areaKey];
+
+                            if (!data) return;
+
+
+                            areaModalTitle.textContent =
+                                data.title;
+
+
+                            areaModalDescription.textContent =
+                                data.description;
+
+
+                            areaFunctions.innerHTML = "";
+
+
+                            data.functions.forEach(
+                                function (item) {
+
+                                    const span =
+                                        document.createElement("span");
+
+                                    span.className =
+                                        "area-function";
+
+                                    span.textContent =
+                                        item;
+
+                                    areaFunctions.appendChild(span);
+
+                                }
+                            );
+
+
+                            areaModal.classList.add("open");
+
+                            areaModal.setAttribute(
+                                "aria-hidden",
+                                "false"
+                            );
+
+                            document.body.style.overflow =
+                                "hidden";
+
+                        }
+                    );
+
+                });
+
+
+            function closeAreaModalFunction() {
+
+                areaModal.classList.remove("open");
+
+                areaModal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                document.body.style.overflow = "";
+
+            }
+
+
+            closeAreaModal.addEventListener(
+                "click",
+                closeAreaModalFunction
+            );
+
+
+            areaModal.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target === areaModal
+                    ) {
+
+                        closeAreaModalFunction();
+
+                    }
+
+                }
+            );
+
+
+
+            /* =====================================================
+               MODAL QUIERO SER PARTE
+            ===================================================== */
+
+            const joinBtn =
+                document.getElementById("joinBtn");
+
+            const joinModal =
+                document.getElementById("joinModal");
+
+            const closeJoinModal =
+                document.getElementById("closeJoinModal");
+
+
+            joinBtn.addEventListener(
+                "click",
+                function () {
+
+                    joinModal.classList.add("open");
+
+                    joinModal.setAttribute(
+                        "aria-hidden",
+                        "false"
+                    );
+
+                    document.body.style.overflow =
+                        "hidden";
+
+                }
+            );
+
+
+            function closeJoinModalFunction() {
+
+                joinModal.classList.remove("open");
+
+                joinModal.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+                document.body.style.overflow = "";
+
+            }
+
+
+            closeJoinModal.addEventListener(
+                "click",
+                closeJoinModalFunction
+            );
+
+
+            joinModal.addEventListener(
+                "click",
+                function (event) {
+
+                    if (
+                        event.target === joinModal
+                    ) {
+
+                        closeJoinModalFunction();
+
+                    }
+
+                }
+            );
+
+
+            /* =====================================================
+               ESC PARA CERRAR MODALES
+            ===================================================== */
+
+            document.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (event.key !== "Escape") {
+                        return;
+                    }
+
+
+                    if (
+                        joinModal.classList.contains("open")
+                    ) {
+
+                        closeJoinModalFunction();
+
+                    }
+
+
+                    if (
+                        areaModal.classList.contains("open")
+                    ) {
+
+                        closeAreaModalFunction();
+
+                    }
+
+                }
+            );
+
+
+
+            /* =====================================================
+               COMMUNITY CAROUSEL
+               5 FOTOS
+            ===================================================== */
+
+            const communityCarousel =
+                document.querySelector(
+                    ".community-carousel"
+                );
+
+
+            if (communityCarousel) {
+
+                const communityTrack =
+                    communityCarousel.querySelector(
+                        ".community-track"
+                    );
+
+                const communitySlides =
+                    communityCarousel.querySelectorAll(
+                        ".community-slide"
+                    );
+
+                const communityPrev =
+                    document.querySelector(
+                        ".community-prev"
+                    );
+
+                const communityNext =
+                    document.querySelector(
+                        ".community-next"
+                    );
+
+                const communityDots =
+                    document.querySelectorAll(
+                        ".community-dot"
+                    );
+
+
+                let communityCurrent = 0;
+
+                let communityTimer;
+
+
+                function updateCommunityCarousel() {
+
+                    communityTrack.style.transform =
+                        "translateX(-" +
+                        (communityCurrent * 100) +
+                        "%)";
+
+
+                    communityDots.forEach(
+                        function (dot, index) {
+
+                            dot.classList.toggle(
+                                "active",
+                                index === communityCurrent
+                            );
+
+                        }
+                    );
+
+                }
+
+
+                function goToCommunitySlide(index) {
+
+                    if (
+                        index >= communitySlides.length
+                    ) {
+
+                        index = 0;
+
+                    }
+
+
+                    if (index < 0) {
+
+                        index =
+                            communitySlides.length - 1;
+
+                    }
+
+
+                    communityCurrent = index;
+
+                    updateCommunityCarousel();
+
+                }
+
+
+                function nextCommunitySlide() {
+
+                    goToCommunitySlide(
+                        communityCurrent + 1
+                    );
+
+                }
+
+
+                function previousCommunitySlide() {
+
+                    goToCommunitySlide(
+                        communityCurrent - 1
+                    );
+
+                }
+
+
+                communityNext.addEventListener(
+                    "click",
+                    function () {
+
+                        nextCommunitySlide();
+
+                        restartCommunityAutoplay();
+
+                    }
+                );
+
+
+                communityPrev.addEventListener(
+                    "click",
+                    function () {
+
+                        previousCommunitySlide();
+
+                        restartCommunityAutoplay();
+
+                    }
+                );
+
+
+                communityDots.forEach(
+                    function (dot, index) {
+
+                        dot.addEventListener(
+                            "click",
+                            function () {
+
+                                goToCommunitySlide(index);
+
+                                restartCommunityAutoplay();
+
+                            }
+                        );
+
+                    }
+                );
+
+
+                /* ---------------------------------------------
+                   AUTOPLAY
+                --------------------------------------------- */
+
+                function startCommunityAutoplay() {
+
+                    communityTimer =
+                        setInterval(
+                            nextCommunitySlide,
+                            5000
+                        );
+
+                }
+
+
+                function stopCommunityAutoplay() {
+
+                    clearInterval(
+                        communityTimer
+                    );
+
+                }
+
+
+                function restartCommunityAutoplay() {
+
+                    stopCommunityAutoplay();
+
+                    startCommunityAutoplay();
+
+                }
+
+
+                communityCarousel.addEventListener(
+                    "mouseenter",
+                    stopCommunityAutoplay
+                );
+
+
+                communityCarousel.addEventListener(
+                    "mouseleave",
+                    startCommunityAutoplay
+                );
+
+
+                /* ---------------------------------------------
+                   SWIPE COMMUNITY
+                --------------------------------------------- */
+
+                let communityTouchStartX = 0;
+                let communityTouchEndX = 0;
+
+
+                communityCarousel.addEventListener(
+                    "touchstart",
+                    function (event) {
+
+                        communityTouchStartX =
+                            event.changedTouches[0].screenX;
+
+                        stopCommunityAutoplay();
+
+                    },
+                    { passive: true }
+                );
+
+
+                communityCarousel.addEventListener(
+                    "touchend",
+                    function (event) {
+
+                        communityTouchEndX =
+                            event.changedTouches[0].screenX;
+
+
+                        const difference =
+                            communityTouchStartX -
+                            communityTouchEndX;
+
+
+                        if (Math.abs(difference) >= 45) {
+
+                            if (difference > 0) {
+
+                                nextCommunitySlide();
+
+                            } else {
+
+                                previousCommunitySlide();
+
+                            }
+
+                        }
+
+
+                        restartCommunityAutoplay();
+
+                    },
+                    { passive: true }
+                );
+
+
+                updateCommunityCarousel();
+
+                startCommunityAutoplay();
+
+            }
+
+
+
+            /* =====================================================
+               REVEAL ON SCROLL
+            ===================================================== */
+
+            const revealElements =
+                document.querySelectorAll(".reveal");
+
+
+            const revealObserver =
+                new IntersectionObserver(
+                    function (entries, observer) {
+
+                        entries.forEach(
+                            function (entry) {
+
+                                if (
+                                    entry.isIntersecting
+                                ) {
+
+                                    entry.target.classList.add(
+                                        "visible"
+                                    );
+
+                                    observer.unobserve(
+                                        entry.target
+                                    );
+
+                                }
+
+                            }
+                        );
+
+                    },
+                    {
+                        threshold: 0.12
+                    }
+                );
+
+
+            revealElements.forEach(
+                function (element) {
+
+                    revealObserver.observe(element);
+
+                }
+            );
+
+
+        });
+
+    </script>
 
 </body>
 </html>
-```
