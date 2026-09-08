@@ -1863,11 +1863,11 @@ footer p{
     // Las imágenes de la tienda tienen respaldo local porque
     // imagen_url puede estar vacío en Supabase.
     const fallbackProductImages = {
-      BLACK: "black.jpeg",
-      PREMIUM: "premium.jpeg",
-      BANDANA: "bandana.jpeg",
-      POLO: "polo.jpeg",
-      GORRO: "gorro.jpeg"
+      BLACK: "img/productos/black.jpeg",
+      PREMIUM: "img/productos/premium.jpeg",
+      BANDANA: "img/productos/bandana.jpeg",
+      POLO: "img/productos/polo.jpeg",
+      GORRO: "img/productos/gorro.jpeg"
     };
 
     function getCart(){
@@ -2076,7 +2076,9 @@ footer p{
         const quantity = line.quantity;
         const price = Number(product.precio);
         const itemSubtotal = price * quantity;
-        const image = product.imagen_url || "BABY%20GOLDEN.png";
+        const image = product.imagen_url && !String(product.imagen_url).startsWith("data:image/")
+          ? product.imagen_url
+          : (fallbackProductImages[product.sku] || "img/logo/BABY%20GOLDEN.png");
 
         return `
           <div class="summary-item">
