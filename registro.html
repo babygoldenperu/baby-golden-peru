@@ -690,7 +690,9 @@
 
 <div id="contenidoRegistro" style="display:none;">
   
- <form id="registroForm">
+ <p id="avisoAccesoCompra" class="notice" style="margin-bottom:18px;"></p>
+
+<form id="registroForm">
 
 
     <!-- ID -->
@@ -1606,192 +1608,249 @@ enviarAcceso.addEventListener(
 comprobarAccesoRegistro();
   const formulario = document.querySelector("form");
 
- formulario.addEventListener("submit", async function(event) {
+  let accesoActual = null;
 
-  event.preventDefault();
+  async function cargarAccesoActual() {
+    const { data: { session } } =
+      await supabaseClient.auth.getSession();
 
-  const boton = formulario.querySelector(".submit");
+    if (!session) return null;
 
-  boton.disabled = true;
-  boton.textContent = "ENVIANDO...";
+    const { data, error } = await supabaseClient
+      .from("accesos_registro")
+      .select("id, producto, orden_id")
+      .eq("user_id", session.user.id)
+      .eq("activo", true)
+      .eq("utilizado", false)
+      .order("created_at", { ascending: true })
+      .limit(1);
 
-  try {
+    if (error) throw error;
 
-    const datos = new FormData(formulario);
+    accesoActual = data?.[0] || null;
+    return accesoActual;
+  }
 
-    /* 1. CREAR EL REGISTRO DEL PERRITO */
+  async function comprobarAccesoRegistro() {
+    try {
+      const { data: { session } } =
+        await supabaseClient.auth.getSession();
 
-    const { data, error } = await supabaseClient.rpc(
-      "crear_baby_golden_id",
-      {
-        p_tipo_id: datos.get("tipo_id"),
-        p_nombre_perrito: datos.get("nombre_perrito"),
-        p_fecha_nacimiento: datos.get("fecha_nacimiento") || null,
-        p_sexo: datos.get("sexo"),
-        p_raza: datos.get("raza"),
-        p_caracteristicas: datos.get("caracteristicas") || null,
-
-        p_tiene_microchip:
-          datos.get("microchip") === "Sí",
-
-        p_numero_microchip:
-          datos.get("numero_microchip") || null,
-
-        p_red_social:
-          datos.get("red_social"),
-
-        p_nombre_tutor_1:
-          datos.get("tutor_1"),
-
-        p_dni_tutor_1:
-          datos.get("dni_1"),
-
-        p_nombre_tutor_2:
-          datos.get("tutor_2") || null,
-
-        p_dni_tutor_2:
-          datos.get("dni_2") || null,
-
-        p_celular:
-          datos.get("celular"),
-
-        p_correo:
-          datos.get("correo"),
-
-        p_distrito:
-          datos.get("distrito"),
-
-        p_emergencia_nombre:
-          datos.get("emergencia_nombre"),
-
-        p_emergencia_celular:
-          datos.get("emergencia_celular"),
-
-        p_alergias:
-          datos.get("alergias"),
-
-        p_detalle_alergias:
-          datos.get("detalle_alergias") || null,
-
-        p_condicion_medica:
-          datos.get("condicion"),
-
-        p_detalle_condicion:
-          datos.get("detalle_condicion") || null,
-
-        p_medicamento:
-          datos.get("medicamento"),
-
-        p_detalle_medicamento:
-          datos.get("detalle_medicamento") || null,
-
-        p_vacunas_al_dia:
-          datos.get("vacunas") || null,
-
-        p_mostrar_celular:
-          datos.get("mostrar_celular") === "Sí",
-
-        p_habilitar_whatsapp:
-          datos.get("whatsapp") === "Sí"
+      if (!session) {
+        accesoRegistro.style.display = "block";
+        contenidoRegistro.style.display = "none";
+        return;
       }
-    );
 
-    if (error) {
-      throw error;
+      const acceso = await cargarAccesoActual();
+
+      if (!acceso) {
+        accesoRegistro.style.display = "block";
+        contenidoRegistro.style.display = "none";
+        mensajeAcceso.textContent =
+          "Este correo no tiene un Baby Golden ID disponible para registrar.";
+        return;
+      }
+
+      accesoRegistro.style.display = "none";
+      contenidoRegistro.style.display = "block";
+
+      const tipo = String(acceso.producto || "").toUpperCase();
+      const selector = formulario.querySelector('[name="tipo_id"]');
+
+      if (selector && (tipo === "PREMIUM" || tipo === "BLACK")) {
+        selector.value = tipo;
+        selector.dataset.lockedByPurchase = "true";
+      }
+
+      const aviso = document.getElementById("avisoAccesoCompra");
+      if (aviso) {
+        aviso.textContent =
+          `Tienes autorizado un registro ${tipo === "BLACK" ? "Black ID" : "Premium ID"}.`;
+      }
+
+    } catch (error) {
+      console.error("ERROR ACCESO:", error);
+      accesoRegistro.style.display = "block";
+      contenidoRegistro.style.display = "none";
+      mensajeAcceso.textContent =
+        "No pudimos verificar tu autorización. Inténtalo nuevamente.";
+    }
+  }
+
+  enviarAcceso.addEventListener("click", async function() {
+    const email = correoAcceso.value.trim();
+
+    if (!email) {
+      mensajeAcceso.textContent =
+        "Ingresa tu correo electrónico.";
+      return;
     }
 
-    const perritoId = data;
+    enviarAcceso.disabled = true;
+    enviarAcceso.textContent = "ENVIANDO...";
 
-
-    /* 2. TOMAR LA FOTOGRAFÍA */
-
-    const archivoFoto = datos.get("foto_perrito");
-
-    if (!archivoFoto || archivoFoto.size === 0) {
-      throw new Error("No se encontró la fotografía del perrito.");
-    }
-
-
-    /* 3. CREAR UN NOMBRE ÚNICO PARA LA FOTO */
-
-    const extension =
-      archivoFoto.name.split(".").pop().toLowerCase();
-
-    const nombreArchivo =
-      "perritos/" +
-      perritoId +
-      "-" +
-      Date.now() +
-      "." +
-      extension;
-
-
-    /* 4. SUBIR LA FOTO A SUPABASE STORAGE */
-
-    const { error: errorFoto } =
-      await supabaseClient.storage
-        .from("fotos-perritos")
-        .upload(nombreArchivo, archivoFoto, {
-          cacheControl: "3600",
-          upsert: false,
-          contentType: archivoFoto.type
+    try {
+      const { error } =
+        await supabaseClient.auth.signInWithOtp({
+          email,
+          options: {
+            emailRedirectTo:
+              window.location.origin + window.location.pathname
+          }
         });
 
-    if (errorFoto) {
-      throw errorFoto;
+      if (error) throw error;
+
+      mensajeAcceso.textContent =
+        "Te enviamos un enlace a tu correo. Revisa tu bandeja de entrada.";
+    } catch (error) {
+      console.error("ERROR LOGIN:", error);
+      mensajeAcceso.textContent =
+        error?.message || "No pudimos enviar el acceso.";
+    } finally {
+      enviarAcceso.disabled = false;
+      enviarAcceso.textContent = "ENVIAR ACCESO";
     }
+  });
 
+  formulario.addEventListener("submit", async function(event) {
+    event.preventDefault();
 
-    /* 5. GUARDAR LA RUTA DE LA FOTO EN EL PERRITO */
+    const boton = formulario.querySelector(".submit");
+    boton.disabled = true;
+    boton.textContent = "CREANDO TU BABY GOLDEN ID...";
 
-    const { error: errorGuardarFoto } =
-      await supabaseClient.rpc(
-        "guardar_foto_baby_golden",
+    try {
+      const acceso = await cargarAccesoActual();
+
+      if (!acceso) {
+        throw new Error(
+          "No tienes un registro disponible. Verifica que tu compra haya sido confirmada."
+        );
+      }
+
+      const datos = new FormData(formulario);
+
+      const tipoCompra = String(acceso.producto || "").toUpperCase();
+
+      if (tipoCompra !== "PREMIUM" && tipoCompra !== "BLACK") {
+        throw new Error("El acceso de registro no corresponde a un Baby Golden ID válido.");
+      }
+
+      /* El backend toma el acceso comprado como fuente de verdad. */
+      datos.set("tipo_id", tipoCompra);
+
+      const { data, error } = await supabaseClient.rpc(
+        "crear_baby_golden_id",
         {
-          p_perrito_id: perritoId,
-          p_foto_url: nombreArchivo
+          p_tipo_id: tipoCompra,
+          p_nombre_perrito: datos.get("nombre_perrito"),
+          p_fecha_nacimiento: datos.get("fecha_nacimiento") || null,
+          p_sexo: datos.get("sexo"),
+          p_raza: datos.get("raza"),
+          p_caracteristicas: datos.get("caracteristicas") || null,
+          p_tiene_microchip: datos.get("microchip") === "Sí",
+          p_numero_microchip: datos.get("numero_microchip") || null,
+          p_red_social: datos.get("red_social"),
+          p_nombre_tutor_1: datos.get("tutor_1"),
+          p_dni_tutor_1: datos.get("dni_1"),
+          p_nombre_tutor_2: datos.get("tutor_2") || null,
+          p_dni_tutor_2: datos.get("dni_2") || null,
+          p_celular: datos.get("celular"),
+          p_correo: datos.get("correo"),
+          p_distrito: datos.get("distrito"),
+          p_emergencia_nombre: datos.get("emergencia_nombre"),
+          p_emergencia_celular: datos.get("emergencia_celular"),
+          p_alergias: datos.get("alergias"),
+          p_detalle_alergias: datos.get("detalle_alergias") || null,
+          p_condicion_medica: datos.get("condicion"),
+          p_detalle_condicion: datos.get("detalle_condicion") || null,
+          p_medicamento: datos.get("medicamento"),
+          p_detalle_medicamento: datos.get("detalle_medicamento") || null,
+          p_vacunas_al_dia: datos.get("vacunas") || null,
+          p_mostrar_celular: datos.get("mostrar_celular") === "Sí",
+          p_habilitar_whatsapp: datos.get("whatsapp") === "Sí"
         }
       );
 
-    if (errorGuardarFoto) {
-      throw errorGuardarFoto;
+      if (error) throw error;
+
+      const perritoId = data;
+      const babyGoldenId =
+        "BGP-" + String(perritoId).padStart(5, "0");
+
+      const archivoFoto = datos.get("foto_perrito");
+
+      if (!archivoFoto || archivoFoto.size === 0) {
+        throw new Error("No se encontró la fotografía del perrito.");
+      }
+
+      const extension =
+        archivoFoto.name.split(".").pop().toLowerCase();
+
+      const nombreArchivo =
+        "perritos/" +
+        perritoId +
+        "-" +
+        Date.now() +
+        "." +
+        extension;
+
+      const { error: errorFoto } =
+        await supabaseClient.storage
+          .from("fotos-perritos")
+          .upload(nombreArchivo, archivoFoto, {
+            cacheControl: "3600",
+            upsert: false,
+            contentType: archivoFoto.type
+          });
+
+      if (errorFoto) throw errorFoto;
+
+      const { error: errorGuardarFoto } =
+        await supabaseClient.rpc(
+          "guardar_foto_baby_golden",
+          {
+            p_perrito_id: perritoId,
+            p_foto_url: nombreArchivo
+          }
+        );
+
+      if (errorGuardarFoto) throw errorGuardarFoto;
+
+      alert(
+        "¡REGISTRO COMPLETADO! 🐾\n\n" +
+        "Tu Baby Golden ID es:\n\n" +
+        babyGoldenId +
+        "\n\n" +
+        "Tipo: " +
+        (tipoCompra === "BLACK" ? "BLACK ID" : "PREMIUM ID") +
+        "\n\n" +
+        "Tu registro quedó vinculado a tu cuenta.\n" +
+        "Ahora aparecerá en «Mis perritos»."
+      );
+
+      formulario.reset();
+      await comprobarAccesoRegistro();
+
+      window.location.href = "cuenta.html";
+
+    } catch (error) {
+      console.error("ERROR SUPABASE:", error);
+
+      alert(
+        "No pudimos completar el registro.\n\n" +
+        (error?.message || JSON.stringify(error))
+      );
+
+    } finally {
+      boton.disabled = false;
+      boton.textContent = "SOLICITAR MI BABY GOLDEN ID";
     }
+  });
 
-
-    /* 6. MOSTRAR CONFIRMACIÓN */
-
-    alert(
-      "¡Registro recibido correctamente!\n\n" +
-      "Número interno del registro: BGP-" +
-      String(perritoId).padStart(5, "0") +
-      "\n\n" +
-      "La fotografía también fue guardada correctamente.\n\n" +
-      "Pronto podremos convertirlo en tu Baby Golden ID."
-    );
-
-
-    /* 7. LIMPIAR FORMULARIO */
-
-    formulario.reset();
-
-
-  } catch (error) {
-
-    console.error("ERROR SUPABASE:", error);
-
-    alert(
-      "ERROR REAL DE SUPABASE:\n\n" +
-      (error.message || JSON.stringify(error))
-    );
-
-  } finally {
-
-    boton.disabled = false;
-    boton.textContent = "SOLICITAR MI BABY GOLDEN ID";
-
-  }
-
-});
+  comprobarAccesoRegistro();
 </script>
   
 
