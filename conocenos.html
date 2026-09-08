@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -11,10 +12,6 @@
     content="Conoce Baby Golden Perú, nuestra fundadora, nuestro propósito, nuestras áreas y la comunidad que deja huellas."
   >
 
-  <!-- =====================================================
-       GOOGLE FONTS
-  ====================================================== -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -25,10 +22,6 @@
 
   <style>
 
-    /* =====================================================
-       VARIABLES
-    ====================================================== */
-
     :root {
       --gold: #c99a52;
       --gold-dark: #a97835;
@@ -36,37 +29,19 @@
 
       --cream: #fffaf3;
       --cream-dark: #f5ead9;
-      --cream-deep: #ead9c0;
-
       --brown: #302219;
       --brown-soft: #5d4b3e;
-
       --text: #75675d;
-
       --white: #ffffff;
-
       --border: #eadcc9;
 
-      --shadow-sm:
-        0 10px 30px rgba(73, 49, 24, 0.07);
+      --shadow-sm: 0 10px 30px rgba(73,49,24,.07);
+      --shadow-md: 0 20px 55px rgba(73,49,24,.12);
+      --shadow-lg: 0 30px 80px rgba(73,49,24,.18);
 
-      --shadow-md:
-        0 20px 55px rgba(73, 49, 24, 0.12);
-
-      --shadow-lg:
-        0 30px 80px rgba(73, 49, 24, 0.18);
-
-      --radius-sm: 16px;
       --radius-md: 24px;
-      --radius-lg: 34px;
-
       --max-width: 1240px;
     }
-
-
-    /* =====================================================
-       RESET
-    ====================================================== */
 
     * {
       box-sizing: border-box;
@@ -116,113 +91,81 @@
       position: fixed;
       top: 0;
       left: 0;
-
       width: 100%;
-
       z-index: 1000;
-
       padding: 18px 0;
-
-      transition: all 0.35s ease;
+      transition: all .35s ease;
     }
 
     .site-header.scrolled {
       padding: 10px 0;
-
-      background: rgba(255, 250, 243, 0.94);
-
+      background: rgba(255,250,243,.94);
       backdrop-filter: blur(18px);
-
-      box-shadow:
-        0 8px 30px rgba(48, 34, 25, 0.08);
+      box-shadow: 0 8px 30px rgba(48,34,25,.08);
     }
 
     .header-inner {
       width: min(calc(100% - 32px), 1380px);
-
       min-height: 74px;
-
       margin: 0 auto;
-
       padding: 10px 18px 10px 20px;
 
       display: flex;
       align-items: center;
-
       gap: 25px;
 
-      background:
-        rgba(255, 255, 255, 0.92);
-
-      border:
-        1px solid rgba(234, 220, 201, 0.85);
-
+      background: rgba(255,255,255,.92);
+      border: 1px solid rgba(234,220,201,.85);
       border-radius: 22px;
 
-      box-shadow:
-        0 12px 40px rgba(63, 43, 23, 0.08);
-
+      box-shadow: 0 12px 40px rgba(63,43,23,.08);
       backdrop-filter: blur(16px);
     }
 
     .logo {
+      flex-shrink: 0;
       display: flex;
       align-items: center;
-
-      flex-shrink: 0;
     }
 
     .logo img {
       width: 154px;
       max-height: 56px;
-
       object-fit: contain;
     }
 
     .main-nav {
       margin-left: auto;
-
       display: flex;
       align-items: center;
-
       gap: 5px;
     }
 
     .main-nav a {
       position: relative;
-
       padding: 11px 13px;
 
       color: var(--brown-soft);
-
       font-size: 13px;
       font-weight: 600;
-
       white-space: nowrap;
 
-      transition: 0.25s ease;
+      transition: .25s ease;
     }
 
     .main-nav a:not(.shop-link)::after {
       content: "";
-
       position: absolute;
-
       left: 13px;
       right: 13px;
-
       bottom: 5px;
-
       height: 2px;
 
       background: var(--gold);
-
       border-radius: 20px;
 
       transform: scaleX(0);
-
-      transition:
-        transform 0.25s ease;
+      transition: transform .25s ease;
     }
 
     .main-nav a:hover {
@@ -235,38 +178,31 @@
 
     .shop-link {
       margin-left: 8px;
-
       padding: 12px 20px !important;
 
       color: var(--white) !important;
 
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold),
-          var(--gold-dark)
-        );
+      background: linear-gradient(
+        135deg,
+        var(--gold),
+        var(--gold-dark)
+      );
 
       border-radius: 100px;
 
       box-shadow:
-        0 8px 18px rgba(169, 120, 53, 0.22);
+        0 8px 18px rgba(169,120,53,.22);
     }
 
     .shop-link:hover {
-      color: var(--white) !important;
-
       background: var(--brown);
-
       transform: translateY(-1px);
     }
 
     .header-actions {
       display: flex;
       align-items: center;
-
       gap: 7px;
-
       margin-left: 8px;
     }
 
@@ -278,26 +214,22 @@
       place-items: center;
 
       border-radius: 50%;
-
       background: transparent;
 
       color: var(--brown);
 
-      transition: 0.25s ease;
+      transition: .25s ease;
     }
 
     .header-icon:hover {
       color: var(--gold-dark);
-
       background: var(--cream-dark);
-
       transform: translateY(-2px);
     }
 
     .header-icon svg {
       width: 19px;
       height: 19px;
-
       stroke-width: 1.8;
     }
 
@@ -314,7 +246,6 @@
       border-radius: 50%;
 
       background: var(--cream-dark);
-
       color: var(--brown);
     }
 
@@ -336,10 +267,10 @@
       background:
         linear-gradient(
           90deg,
-          rgba(37, 25, 17, 0.84) 0%,
-          rgba(37, 25, 17, 0.65) 38%,
-          rgba(37, 25, 17, 0.18) 76%,
-          rgba(37, 25, 17, 0.08) 100%
+          rgba(37,25,17,.84) 0%,
+          rgba(37,25,17,.65) 38%,
+          rgba(37,25,17,.18) 76%,
+          rgba(37,25,17,.08) 100%
         ),
         url("assets/conocenos-hero.jpg")
         center / cover no-repeat;
@@ -356,8 +287,7 @@
       left: -260px;
       bottom: -250px;
 
-      border:
-        1px solid rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,.16);
 
       border-radius: 50%;
     }
@@ -373,15 +303,13 @@
       left: -360px;
       bottom: -350px;
 
-      border:
-        1px solid rgba(255,255,255,0.09);
+      border: 1px solid rgba(255,255,255,.09);
 
       border-radius: 50%;
     }
 
     .hero-content {
       position: relative;
-
       z-index: 2;
 
       width: min(calc(100% - 48px), var(--max-width));
@@ -393,7 +321,6 @@
 
     .hero-copy {
       max-width: 690px;
-
       color: var(--white);
     }
 
@@ -410,7 +337,7 @@
       font-size: 12px;
       font-weight: 700;
 
-      letter-spacing: 0.2em;
+      letter-spacing: .2em;
     }
 
     .eyebrow::before {
@@ -430,13 +357,13 @@
         serif;
 
       font-size:
-        clamp(64px, 8vw, 108px);
+        clamp(64px,8vw,108px);
 
-      line-height: 0.95;
+      line-height: .95;
 
       font-weight: 600;
 
-      letter-spacing: -0.04em;
+      letter-spacing: -.04em;
     }
 
     .hero-description {
@@ -445,7 +372,7 @@
       margin-bottom: 30px;
 
       color:
-        rgba(255,255,255,0.88);
+        rgba(255,255,255,.88);
 
       font-size: 18px;
 
@@ -483,12 +410,12 @@
         translateX(-50%);
 
       color:
-        rgba(255,255,255,0.78);
+        rgba(255,255,255,.78);
 
       font-size: 10px;
       font-weight: 700;
 
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
 
       text-align: center;
     }
@@ -499,16 +426,15 @@
       width: 1px;
       height: 45px;
 
-      margin:
-        9px auto 0;
+      margin: 9px auto 0;
 
       background:
-        rgba(255,255,255,0.55);
+        rgba(255,255,255,.55);
     }
 
 
     /* =====================================================
-       GENERAL SECTIONS
+       SECTIONS
     ====================================================== */
 
     .section {
@@ -517,14 +443,12 @@
 
     .section-heading {
       max-width: 700px;
-
       margin-bottom: 55px;
     }
 
     .section-kicker {
       display: inline-flex;
       align-items: center;
-
       gap: 9px;
 
       margin-bottom: 13px;
@@ -534,7 +458,7 @@
       font-size: 11px;
       font-weight: 800;
 
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
 
       text-transform: uppercase;
     }
@@ -554,11 +478,11 @@
         serif;
 
       font-size:
-        clamp(42px, 5vw, 64px);
+        clamp(42px,5vw,64px);
 
       line-height: 1.05;
 
-      letter-spacing: -0.035em;
+      letter-spacing: -.035em;
 
       font-weight: 600;
 
@@ -590,7 +514,7 @@
       background:
         radial-gradient(
           circle at 90% 10%,
-          rgba(201,154,82,0.11),
+          rgba(201,154,82,.11),
           transparent 25%
         ),
         var(--cream-dark);
@@ -610,7 +534,7 @@
       right: -180px;
 
       border:
-        1px solid rgba(169,120,53,0.14);
+        1px solid rgba(169,120,53,.14);
 
       border-radius: 50%;
     }
@@ -627,7 +551,7 @@
       right: -265px;
 
       border:
-        1px solid rgba(169,120,53,0.08);
+        1px solid rgba(169,120,53,.08);
 
       border-radius: 50%;
     }
@@ -640,7 +564,7 @@
       display: grid;
 
       grid-template-columns:
-        0.9fr 1.1fr;
+        .9fr 1.1fr;
 
       gap: 85px;
 
@@ -663,7 +587,8 @@
       border-radius:
         180px 180px 28px 28px;
 
-      box-shadow: var(--shadow-lg);
+      box-shadow:
+        var(--shadow-lg);
     }
 
     .founder-image-wrap::before {
@@ -685,7 +610,7 @@
       border-radius:
         180px 180px 28px 28px;
 
-      opacity: 0.55;
+      opacity: .55;
     }
 
     .founder-badge {
@@ -700,6 +625,7 @@
       height: 125px;
 
       display: grid;
+
       place-items: center;
 
       padding: 15px;
@@ -712,7 +638,8 @@
 
       text-align: center;
 
-      box-shadow: var(--shadow-md);
+      box-shadow:
+        var(--shadow-md);
     }
 
     .founder-badge span:first-child {
@@ -724,7 +651,7 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
     }
 
     .founder-badge span:last-child {
@@ -747,7 +674,7 @@
         serif;
 
       font-size:
-        clamp(48px, 5vw, 68px);
+        clamp(48px,5vw,68px);
 
       line-height: 1;
     }
@@ -761,7 +688,7 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
     }
 
     .founder-copy p {
@@ -788,14 +715,14 @@
       padding: 9px 15px;
 
       border:
-        1px solid rgba(169,120,53,0.3);
+        1px solid rgba(169,120,53,.3);
 
       border-radius: 100px;
 
       color: var(--brown-soft);
 
       background:
-        rgba(255,255,255,0.38);
+        rgba(255,255,255,.38);
 
       font-size: 12px;
 
@@ -803,8 +730,6 @@
     }
 
     .founder-quote {
-      position: relative;
-
       margin-top: 35px;
 
       padding: 30px 34px;
@@ -816,9 +741,10 @@
         0 25px 25px 0;
 
       background:
-        rgba(255,255,255,0.55);
+        rgba(255,255,255,.55);
 
-      box-shadow: var(--shadow-sm);
+      box-shadow:
+        var(--shadow-sm);
     }
 
     .founder-quote p {
@@ -839,7 +765,7 @@
 
 
     /* =====================================================
-       PROPÓSITO EN ACCIÓN
+       PROPÓSITO
     ====================================================== */
 
     .action-section {
@@ -850,7 +776,7 @@
       display: grid;
 
       grid-template-columns:
-        0.8fr 1.2fr;
+        .8fr 1.2fr;
 
       gap: 90px;
 
@@ -867,7 +793,7 @@
       display: grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
       gap: 20px;
     }
@@ -885,16 +811,18 @@
       border-radius:
         var(--radius-md);
 
-      transition: 0.3s ease;
+      transition: .3s ease;
     }
 
     .action-card:hover {
-      transform: translateY(-6px);
+      transform:
+        translateY(-6px);
 
-      box-shadow: var(--shadow-sm);
+      box-shadow:
+        var(--shadow-sm);
 
       border-color:
-        rgba(201,154,82,0.5);
+        rgba(201,154,82,.5);
     }
 
     .action-icon {
@@ -902,6 +830,7 @@
       height: 52px;
 
       display: grid;
+
       place-items: center;
 
       margin-bottom: 24px;
@@ -949,8 +878,8 @@
 
       background:
         linear-gradient(
-          rgba(48,34,25,0.97),
-          rgba(48,34,25,0.97)
+          rgba(48,34,25,.97),
+          rgba(48,34,25,.97)
         ),
         url("assets/conocenos-hero.jpg")
         center / cover;
@@ -970,22 +899,27 @@
 
     .areas-section .section-intro {
       color:
-        rgba(255,255,255,0.67);
+        rgba(255,255,255,.67);
     }
 
     .areas-grid {
       display: grid;
 
       grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3,1fr);
 
       gap: 20px;
     }
 
+
+    /* =====================================================
+       TARJETA DEL ÁREA
+    ====================================================== */
+
     .area-card {
       position: relative;
 
-      min-height: 420px;
+      min-height: 455px;
 
       overflow: hidden;
 
@@ -994,24 +928,49 @@
       background: #3a2a20;
 
       border:
-        1px solid rgba(255,255,255,0.09);
+        1px solid rgba(255,255,255,.09);
 
       box-shadow:
-        0 20px 50px rgba(0,0,0,0.16);
+        0 20px 50px rgba(0,0,0,.16);
     }
 
-    .area-image {
+
+    /* =====================================================
+       CARRUSEL
+    ====================================================== */
+
+    .area-carousel {
       position: absolute;
 
       inset: 0;
 
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+
+      width: 100%;
+      height: 100%;
+
+      transition:
+        transform .55s cubic-bezier(.4,0,.2,1);
+    }
+
+    .carousel-slide {
+      position: relative;
+
+      flex: 0 0 100%;
+
+      width: 100%;
+      height: 100%;
+    }
+
+    .carousel-slide img {
       width: 100%;
       height: 100%;
 
       object-fit: cover;
-
-      transition:
-        transform 0.6s ease;
     }
 
     .area-card::after {
@@ -1019,25 +978,135 @@
 
       position: absolute;
 
+      z-index: 1;
+
       inset: 0;
+
+      pointer-events: none;
 
       background:
         linear-gradient(
           to top,
-          rgba(22,14,9,0.97) 0%,
-          rgba(22,14,9,0.64) 45%,
-          rgba(22,14,9,0.06) 100%
+          rgba(22,14,9,.98) 0%,
+          rgba(22,14,9,.68) 43%,
+          rgba(22,14,9,.10) 100%
         );
     }
 
-    .area-card:hover .area-image {
-      transform: scale(1.07);
+
+    /* =====================================================
+       FLECHAS
+    ====================================================== */
+
+    .carousel-arrow {
+      position: absolute;
+
+      z-index: 5;
+
+      top: 32%;
+
+      width: 38px;
+      height: 38px;
+
+      display: grid;
+
+      place-items: center;
+
+      border:
+        1px solid rgba(255,255,255,.3);
+
+      border-radius: 50%;
+
+      background:
+        rgba(30,20,13,.42);
+
+      backdrop-filter:
+        blur(8px);
+
+      color: var(--white);
+
+      font-size: 21px;
+
+      opacity: 0;
+
+      transition:
+        .3s ease;
     }
+
+    .area-card:hover .carousel-arrow {
+      opacity: 1;
+    }
+
+    .carousel-arrow:hover {
+      background:
+        rgba(201,154,82,.9);
+
+      border-color:
+        var(--gold);
+    }
+
+    .carousel-prev {
+      left: 14px;
+    }
+
+    .carousel-next {
+      right: 14px;
+    }
+
+
+    /* =====================================================
+       INDICADORES
+    ====================================================== */
+
+    .carousel-dots {
+      position: absolute;
+
+      z-index: 6;
+
+      top: 18px;
+      left: 50%;
+
+      transform:
+        translateX(-50%);
+
+      display: flex;
+
+      gap: 6px;
+    }
+
+    .carousel-dot {
+      width: 6px;
+      height: 6px;
+
+      padding: 0;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.45);
+
+      transition:
+        .25s ease;
+    }
+
+    .carousel-dot.active {
+      width: 19px;
+
+      border-radius: 10px;
+
+      background:
+        var(--gold-light);
+    }
+
+
+    /* =====================================================
+       CONTENIDO DEL ÁREA
+    ====================================================== */
 
     .area-content {
       position: absolute;
 
-      z-index: 2;
+      z-index: 7;
 
       left: 0;
       right: 0;
@@ -1055,7 +1124,7 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
     }
 
     .area-content h3 {
@@ -1074,7 +1143,7 @@
       margin-bottom: 20px;
 
       color:
-        rgba(255,255,255,0.74);
+        rgba(255,255,255,.74);
 
       font-size: 13px;
 
@@ -1098,7 +1167,7 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.14em;
+      letter-spacing: .14em;
 
       text-transform: uppercase;
     }
@@ -1107,7 +1176,7 @@
       color: var(--gold-light);
 
       transition:
-        transform 0.25s ease;
+        transform .25s ease;
     }
 
     .area-button:hover span {
@@ -1133,7 +1202,8 @@
 
       border-radius: 34px;
 
-      box-shadow: var(--shadow-lg);
+      box-shadow:
+        var(--shadow-lg);
     }
 
     .community-image {
@@ -1157,9 +1227,9 @@
       background:
         linear-gradient(
           90deg,
-          rgba(31,21,15,0.92),
-          rgba(31,21,15,0.53) 50%,
-          rgba(31,21,15,0.12)
+          rgba(31,21,15,.92),
+          rgba(31,21,15,.53) 50%,
+          rgba(31,21,15,.12)
         );
     }
 
@@ -1199,7 +1269,7 @@
         serif;
 
       font-size:
-        clamp(42px, 5vw, 64px);
+        clamp(42px,5vw,64px);
 
       line-height: 1;
     }
@@ -1208,7 +1278,7 @@
       max-width: 520px;
 
       color:
-        rgba(255,255,255,0.78);
+        rgba(255,255,255,.78);
 
       font-size: 16px;
 
@@ -1230,7 +1300,7 @@
 
       font-weight: 700;
 
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
 
       text-transform: uppercase;
     }
@@ -1242,10 +1312,11 @@
       height: 39px;
 
       display: grid;
+
       place-items: center;
 
       border:
-        1px solid rgba(255,255,255,0.25);
+        1px solid rgba(255,255,255,.25);
 
       border-radius: 50%;
 
@@ -1276,7 +1347,7 @@
       position: absolute;
 
       color:
-        rgba(201,154,82,0.1);
+        rgba(201,154,82,.1);
 
       font-size: 260px;
 
@@ -1320,7 +1391,7 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.2em;
+      letter-spacing: .2em;
     }
 
     .cta-title {
@@ -1331,11 +1402,11 @@
         serif;
 
       font-size:
-        clamp(45px, 6vw, 72px);
+        clamp(45px,6vw,72px);
 
       line-height: 1;
 
-      letter-spacing: -0.04em;
+      letter-spacing: -.04em;
     }
 
     .cta-text {
@@ -1378,14 +1449,14 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.12em;
+      letter-spacing: .12em;
 
       text-transform: uppercase;
 
       box-shadow:
-        0 14px 30px rgba(169,120,53,0.25);
+        0 14px 30px rgba(169,120,53,.25);
 
-      transition: 0.3s ease;
+      transition: .3s ease;
     }
 
     .primary-button:hover {
@@ -1395,7 +1466,7 @@
         translateY(-3px);
 
       box-shadow:
-        0 18px 35px rgba(48,34,25,0.2);
+        0 18px 35px rgba(48,34,25,.2);
     }
 
 
@@ -1430,12 +1501,12 @@
         brightness(0)
         invert(1);
 
-      opacity: 0.96;
+      opacity: .96;
     }
 
     .footer-motto {
       color:
-        rgba(255,255,255,0.65);
+        rgba(255,255,255,.65);
 
       font-family:
         "Playfair Display",
@@ -1450,7 +1521,7 @@
       padding-top: 20px;
 
       border-top:
-        1px solid rgba(255,255,255,0.1);
+        1px solid rgba(255,255,255,.1);
 
       display: flex;
 
@@ -1459,14 +1530,14 @@
       gap: 20px;
 
       color:
-        rgba(255,255,255,0.43);
+        rgba(255,255,255,.43);
 
       font-size: 11px;
     }
 
 
     /* =====================================================
-       MODAL
+       MODALES
     ====================================================== */
 
     .modal {
@@ -1485,7 +1556,7 @@
       padding: 25px;
 
       background:
-        rgba(29,19,13,0.67);
+        rgba(29,19,13,.67);
 
       backdrop-filter:
         blur(10px);
@@ -1496,7 +1567,7 @@
 
       pointer-events: none;
 
-      transition: 0.3s ease;
+      transition: .3s ease;
     }
 
     .modal.active {
@@ -1510,7 +1581,7 @@
     .modal-box {
       position: relative;
 
-      width: min(100%, 720px);
+      width: min(100%,720px);
 
       max-height: 90vh;
 
@@ -1522,13 +1593,14 @@
 
       border-radius: 30px;
 
-      box-shadow: var(--shadow-lg);
+      box-shadow:
+        var(--shadow-lg);
 
       transform:
         translateY(25px)
-        scale(0.98);
+        scale(.98);
 
-      transition: 0.35s ease;
+      transition: .35s ease;
     }
 
     .modal.active .modal-box {
@@ -1547,6 +1619,7 @@
       height: 42px;
 
       display: grid;
+
       place-items: center;
 
       border-radius: 50%;
@@ -1557,7 +1630,7 @@
 
       font-size: 22px;
 
-      transition: 0.25s ease;
+      transition: .25s ease;
     }
 
     .modal-close:hover {
@@ -1578,7 +1651,7 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.18em;
+      letter-spacing: .18em;
 
       text-transform: uppercase;
     }
@@ -1607,7 +1680,7 @@
       display: grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
       gap: 10px;
 
@@ -1645,14 +1718,14 @@
 
 
     /* =====================================================
-       JOIN MODAL
+       JOIN
     ====================================================== */
 
     .join-options {
       display: grid;
 
       grid-template-columns:
-        repeat(2, 1fr);
+        repeat(2,1fr);
 
       gap: 18px;
 
@@ -1675,7 +1748,7 @@
 
       border-radius: 22px;
 
-      transition: 0.3s ease;
+      transition: .3s ease;
     }
 
     .join-option:hover {
@@ -1694,6 +1767,7 @@
       height: 48px;
 
       display: grid;
+
       place-items: center;
 
       margin-bottom: 22px;
@@ -1736,14 +1810,14 @@
 
       font-weight: 800;
 
-      letter-spacing: 0.1em;
+      letter-spacing: .1em;
 
       text-transform: uppercase;
     }
 
 
     /* =====================================================
-       ANIMACIONES
+       REVEAL
     ====================================================== */
 
     .reveal {
@@ -1753,8 +1827,8 @@
         translateY(28px);
 
       transition:
-        opacity 0.7s ease,
-        transform 0.7s ease;
+        opacity .7s ease,
+        transform .7s ease;
     }
 
     .reveal.visible {
@@ -1769,7 +1843,7 @@
        RESPONSIVE
     ====================================================== */
 
-    @media (max-width: 1150px) {
+    @media (max-width:1150px) {
 
       .main-nav {
         gap: 0;
@@ -1778,7 +1852,6 @@
       .main-nav a {
         padding-left: 8px;
         padding-right: 8px;
-
         font-size: 12px;
       }
 
@@ -1793,13 +1866,13 @@
 
       .areas-grid {
         grid-template-columns:
-          repeat(2, 1fr);
+          repeat(2,1fr);
       }
 
     }
 
 
-    @media (max-width: 900px) {
+    @media (max-width:900px) {
 
       .header-inner {
         min-height: 66px;
@@ -1881,7 +1954,7 @@
     }
 
 
-    @media (max-width: 650px) {
+    @media (max-width:650px) {
 
       .container,
       .hero-content {
@@ -1916,8 +1989,8 @@
         background:
           linear-gradient(
             90deg,
-            rgba(37,25,17,0.84),
-            rgba(37,25,17,0.4)
+            rgba(37,25,17,.84),
+            rgba(37,25,17,.4)
           ),
           url("assets/conocenos-hero.jpg")
           center / cover no-repeat;
@@ -1994,7 +2067,14 @@
       }
 
       .area-card {
-        min-height: 390px;
+        min-height: 430px;
+      }
+
+      .carousel-arrow {
+        opacity: 1;
+
+        width: 36px;
+        height: 36px;
       }
 
       .community-card,
@@ -2016,8 +2096,8 @@
         background:
           linear-gradient(
             to top,
-            rgba(31,21,15,0.94),
-            rgba(31,21,15,0.2)
+            rgba(31,21,15,.94),
+            rgba(31,21,15,.2)
           );
       }
 
@@ -2068,7 +2148,10 @@
        HEADER
   ====================================================== -->
 
-  <header class="site-header" id="siteHeader">
+  <header
+    class="site-header"
+    id="siteHeader"
+  >
 
     <div class="header-inner">
 
@@ -2077,14 +2160,19 @@
         class="logo"
         aria-label="Baby Golden Perú"
       >
+
         <img
           src="assets/logo-baby-golden-peru.png"
           alt="Baby Golden Perú"
         >
+
       </a>
 
 
-      <nav class="main-nav" id="mainNav">
+      <nav
+        class="main-nav"
+        id="mainNav"
+      >
 
         <a href="index.html">
           INICIO
@@ -2118,8 +2206,6 @@
 
       <div class="header-actions">
 
-        <!-- Buscar -->
-
         <button
           class="header-icon"
           aria-label="Buscar"
@@ -2146,8 +2232,6 @@
         </button>
 
 
-        <!-- Carrito -->
-
         <a
           href="carrito.html"
           class="header-icon"
@@ -2172,8 +2256,6 @@
 
         </a>
 
-
-        <!-- Cuenta -->
 
         <a
           href="cuenta.html"
@@ -2204,8 +2286,6 @@
       </div>
 
 
-      <!-- Mobile -->
-
       <button
         class="mobile-menu"
         id="mobileMenu"
@@ -2235,7 +2315,7 @@
 
 
   <!-- =====================================================
-       CONTENIDO
+       MAIN
   ====================================================== -->
 
   <main>
@@ -2296,8 +2376,6 @@
         <div class="founder-layout">
 
 
-          <!-- FOTO -->
-
           <div class="founder-image-wrap reveal">
 
             <img
@@ -2327,24 +2405,19 @@
           </div>
 
 
-          <!-- INFORMACIÓN -->
-
           <div class="founder-copy reveal">
 
             <div class="section-kicker">
               QUIÉN ESTÁ DETRÁS
             </div>
 
-
             <h2 class="founder-name">
               Sandra
             </h2>
 
-
             <div class="founder-role">
-              FUNDADORA  
+              FUNDADORA &amp; DIRECTORA GENERAL
             </div>
-
 
             <p>
               Baby Golden Perú nació de una visión basada en el amor,
@@ -2352,13 +2425,11 @@
               donde cada persona pueda aportar.
             </p>
 
-
             <p>
               Su liderazgo busca unir personas, marcas, instituciones
               y comunidades para desarrollar proyectos que generen
               experiencias positivas y un impacto real.
             </p>
-
 
             <div class="founder-tags">
 
@@ -2380,7 +2451,6 @@
 
             </div>
 
-
             <div class="founder-quote">
 
               <p>
@@ -2400,17 +2470,17 @@
 
 
     <!-- ===================================================
-         NUESTRO PROPÓSITO
+         PROPÓSITO EN ACCIÓN
     ==================================================== -->
 
-    <section class="section action-section">
+    <section
+      class="section action-section"
+    >
 
       <div class="container">
 
         <div class="action-layout">
 
-
-          <!-- TEXTO -->
 
           <div class="action-heading reveal">
 
@@ -2431,8 +2501,6 @@
 
           </div>
 
-
-          <!-- CARDS -->
 
           <div class="action-grid">
 
@@ -2587,7 +2655,10 @@
          NUESTRAS ÁREAS
     ==================================================== -->
 
-    <section class="section areas-section">
+    <section
+      class="section areas-section"
+      id="nuestras-areas"
+    >
 
       <div class="container">
 
@@ -2613,16 +2684,91 @@
         <div class="areas-grid">
 
 
-          <!-- VENTAS -->
+          <!-- =================================================
+               VENTAS
+          ================================================== -->
 
-          <article class="area-card reveal">
+          <article
+            class="area-card reveal"
+            data-carousel
+          >
 
-            <img
-              class="area-image"
-              src="assets/equipo/lider-ventas.jpg"
-              alt="Área de Ventas"
-              onerror="this.src='assets/conocenos-hero.jpg'"
+            <div class="area-carousel">
+
+              <div class="carousel-track">
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/ventas/ventas-1.jpg"
+                    alt="Área de Ventas - foto 1"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/ventas/ventas-2.jpg"
+                    alt="Área de Ventas - foto 2"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/ventas/ventas-3.jpg"
+                    alt="Área de Ventas - foto 3"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/ventas/ventas-4.jpg"
+                    alt="Área de Ventas - foto 4"
+                  >
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="carousel-arrow carousel-prev"
+              aria-label="Foto anterior"
             >
+              ‹
+            </button>
+
+            <button
+              class="carousel-arrow carousel-next"
+              aria-label="Siguiente foto"
+            >
+              ›
+            </button>
+
+
+            <div class="carousel-dots">
+
+              <button
+                class="carousel-dot active"
+                aria-label="Foto 1"
+              ></button>
+
+              <button
+                class="carousel-dot"
+                aria-label="Foto 2"
+              ></button>
+
+              <button
+                class="carousel-dot"
+                aria-label="Foto 3"
+              ></button>
+
+              <button
+                class="carousel-dot"
+                aria-label="Foto 4"
+              ></button>
+
+            </div>
+
 
             <div class="area-content">
 
@@ -2652,16 +2798,76 @@
           </article>
 
 
-          <!-- LEGAL -->
+          <!-- =================================================
+               LEGAL
+          ================================================== -->
 
-          <article class="area-card reveal">
+          <article
+            class="area-card reveal"
+            data-carousel
+          >
 
-            <img
-              class="area-image"
-              src="assets/equipo/lider-legal.jpg"
-              alt="Área Legal"
-              onerror="this.src='assets/conocenos-hero.jpg'"
+            <div class="area-carousel">
+
+              <div class="carousel-track">
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/legal/legal-1.jpg"
+                    alt="Área Legal - foto 1"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/legal/legal-2.jpg"
+                    alt="Área Legal - foto 2"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/legal/legal-3.jpg"
+                    alt="Área Legal - foto 3"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/legal/legal-4.jpg"
+                    alt="Área Legal - foto 4"
+                  >
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="carousel-arrow carousel-prev"
+              aria-label="Foto anterior"
             >
+              ‹
+            </button>
+
+            <button
+              class="carousel-arrow carousel-next"
+              aria-label="Siguiente foto"
+            >
+              ›
+            </button>
+
+
+            <div class="carousel-dots">
+
+              <button class="carousel-dot active"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+
+            </div>
+
 
             <div class="area-content">
 
@@ -2691,16 +2897,76 @@
           </article>
 
 
-          <!-- ADOPCIONES -->
+          <!-- =================================================
+               ADOPCIONES
+          ================================================== -->
 
-          <article class="area-card reveal">
+          <article
+            class="area-card reveal"
+            data-carousel
+          >
 
-            <img
-              class="area-image"
-              src="assets/equipo/lider-adopciones.jpg"
-              alt="Área de Adopciones"
-              onerror="this.src='assets/conocenos-hero.jpg'"
+            <div class="area-carousel">
+
+              <div class="carousel-track">
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/adopciones/adopciones-1.jpg"
+                    alt="Área de Adopciones - foto 1"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/adopciones/adopciones-2.jpg"
+                    alt="Área de Adopciones - foto 2"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/adopciones/adopciones-3.jpg"
+                    alt="Área de Adopciones - foto 3"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/adopciones/adopciones-4.jpg"
+                    alt="Área de Adopciones - foto 4"
+                  >
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="carousel-arrow carousel-prev"
+              aria-label="Foto anterior"
             >
+              ‹
+            </button>
+
+            <button
+              class="carousel-arrow carousel-next"
+              aria-label="Siguiente foto"
+            >
+              ›
+            </button>
+
+
+            <div class="carousel-dots">
+
+              <button class="carousel-dot active"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+
+            </div>
+
 
             <div class="area-content">
 
@@ -2730,16 +2996,76 @@
           </article>
 
 
-          <!-- EVENTOS -->
+          <!-- =================================================
+               EVENTOS
+          ================================================== -->
 
-          <article class="area-card reveal">
+          <article
+            class="area-card reveal"
+            data-carousel
+          >
 
-            <img
-              class="area-image"
-              src="assets/equipo/lider-eventos.jpg"
-              alt="Área de Eventos"
-              onerror="this.src='assets/conocenos-hero.jpg'"
+            <div class="area-carousel">
+
+              <div class="carousel-track">
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/eventos/eventos-1.jpg"
+                    alt="Área de Eventos - foto 1"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/eventos/eventos-2.jpg"
+                    alt="Área de Eventos - foto 2"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/eventos/eventos-3.jpg"
+                    alt="Área de Eventos - foto 3"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/eventos/eventos-4.jpg"
+                    alt="Área de Eventos - foto 4"
+                  >
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="carousel-arrow carousel-prev"
+              aria-label="Foto anterior"
             >
+              ‹
+            </button>
+
+            <button
+              class="carousel-arrow carousel-next"
+              aria-label="Siguiente foto"
+            >
+              ›
+            </button>
+
+
+            <div class="carousel-dots">
+
+              <button class="carousel-dot active"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+
+            </div>
+
 
             <div class="area-content">
 
@@ -2769,16 +3095,76 @@
           </article>
 
 
-          <!-- REDES -->
+          <!-- =================================================
+               REDES
+          ================================================== -->
 
-          <article class="area-card reveal">
+          <article
+            class="area-card reveal"
+            data-carousel
+          >
 
-            <img
-              class="area-image"
-              src="assets/equipo/lider-redes.jpg"
-              alt="Área de Redes, Marketing y Audiovisual"
-              onerror="this.src='assets/conocenos-hero.jpg'"
+            <div class="area-carousel">
+
+              <div class="carousel-track">
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/redes/redes-1.jpg"
+                    alt="Área de Redes - foto 1"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/redes/redes-2.jpg"
+                    alt="Área de Redes - foto 2"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/redes/redes-3.jpg"
+                    alt="Área de Redes - foto 3"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/redes/redes-4.jpg"
+                    alt="Área de Redes - foto 4"
+                  >
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="carousel-arrow carousel-prev"
+              aria-label="Foto anterior"
             >
+              ‹
+            </button>
+
+            <button
+              class="carousel-arrow carousel-next"
+              aria-label="Siguiente foto"
+            >
+              ›
+            </button>
+
+
+            <div class="carousel-dots">
+
+              <button class="carousel-dot active"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+
+            </div>
+
 
             <div class="area-content">
 
@@ -2808,16 +3194,76 @@
           </article>
 
 
-          <!-- ALIANZAS -->
+          <!-- =================================================
+               ALIANZAS
+          ================================================== -->
 
-          <article class="area-card reveal">
+          <article
+            class="area-card reveal"
+            data-carousel
+          >
 
-            <img
-              class="area-image"
-              src="assets/equipo/lider-alianzas.jpg"
-              alt="Área de Alianzas Estratégicas"
-              onerror="this.src='assets/conocenos-hero.jpg'"
+            <div class="area-carousel">
+
+              <div class="carousel-track">
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/alianzas/alianzas-1.jpg"
+                    alt="Área de Alianzas - foto 1"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/alianzas/alianzas-2.jpg"
+                    alt="Área de Alianzas - foto 2"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/alianzas/alianzas-3.jpg"
+                    alt="Área de Alianzas - foto 3"
+                  >
+                </div>
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/alianzas/alianzas-4.jpg"
+                    alt="Área de Alianzas - foto 4"
+                  >
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <button
+              class="carousel-arrow carousel-prev"
+              aria-label="Foto anterior"
             >
+              ‹
+            </button>
+
+            <button
+              class="carousel-arrow carousel-next"
+              aria-label="Siguiente foto"
+            >
+              ›
+            </button>
+
+
+            <div class="carousel-dots">
+
+              <button class="carousel-dot active"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+              <button class="carousel-dot"></button>
+
+            </div>
+
 
             <div class="area-content">
 
@@ -2857,7 +3303,9 @@
          NUESTRA COMUNIDAD
     ==================================================== -->
 
-    <section class="section community-section">
+    <section
+      class="section community-section"
+    >
 
       <div class="container">
 
@@ -3009,10 +3457,7 @@
         ×
       </button>
 
-      <div
-        class="modal-kicker"
-        id="modalKicker"
-      >
+      <div class="modal-kicker">
         ÁREA BABY GOLDEN
       </div>
 
@@ -3057,11 +3502,9 @@
         ×
       </button>
 
-
       <div class="modal-kicker">
         BABY GOLDEN PERÚ
       </div>
-
 
       <h2 class="modal-title">
         ¿Cómo quieres<br>
@@ -3105,12 +3548,10 @@
             Quiero ser voluntario/a
           </h3>
 
-
           <p>
             Forma parte de nuestras áreas y ayúdanos
             a seguir dejando huellas.
           </p>
-
 
           <a href="contacto.html#contacto">
             QUIERO PARTICIPAR →
@@ -3158,12 +3599,10 @@
             Quiero ser marca
           </h3>
 
-
           <p>
             Conecta tu marca con Baby Golden Perú y
             construyamos juntos nuevas experiencias.
           </p>
-
 
           <a
             href="https://marcas.babygoldenperu.com/"
@@ -3190,22 +3629,30 @@
 
 
     /* =====================================================
-       HEADER AL HACER SCROLL
+       HEADER
     ====================================================== */
 
     const siteHeader =
-      document.getElementById("siteHeader");
+      document.getElementById(
+        "siteHeader"
+      );
 
 
     function handleHeader() {
 
-      if (window.scrollY > 30) {
+      if (
+        window.scrollY > 30
+      ) {
 
-        siteHeader.classList.add("scrolled");
+        siteHeader.classList.add(
+          "scrolled"
+        );
 
       } else {
 
-        siteHeader.classList.remove("scrolled");
+        siteHeader.classList.remove(
+          "scrolled"
+        );
 
       }
 
@@ -3222,11 +3669,13 @@
 
 
     /* =====================================================
-       MENÚ MOBILE
+       MOBILE MENU
     ====================================================== */
 
     const mobileMenu =
-      document.getElementById("mobileMenu");
+      document.getElementById(
+        "mobileMenu"
+      );
 
 
     mobileMenu.addEventListener(
@@ -3241,7 +3690,9 @@
 
         mobileMenu.setAttribute(
           "aria-expanded",
-          isOpen ? "true" : "false"
+          isOpen
+            ? "true"
+            : "false"
         );
 
       }
@@ -3272,11 +3723,13 @@
 
 
     /* =====================================================
-       ANIMACIONES AL HACER SCROLL
+       REVEAL
     ====================================================== */
 
     const revealElements =
-      document.querySelectorAll(".reveal");
+      document.querySelectorAll(
+        ".reveal"
+      );
 
 
     const revealObserver =
@@ -3303,18 +3756,274 @@
 
         },
         {
-          threshold: 0.12
+          threshold: .12
         }
       );
 
 
-    revealElements.forEach(element => {
+    revealElements.forEach(
+      element => {
 
-      revealObserver.observe(
-        element
-      );
+        revealObserver.observe(
+          element
+        );
 
-    });
+      }
+    );
+
+
+    /* =====================================================
+       CARRUSELES
+    ====================================================== */
+
+    document
+      .querySelectorAll(
+        "[data-carousel]"
+      )
+      .forEach(card => {
+
+
+        const track =
+          card.querySelector(
+            ".carousel-track"
+          );
+
+
+        const slides =
+          card.querySelectorAll(
+            ".carousel-slide"
+          );
+
+
+        const prev =
+          card.querySelector(
+            ".carousel-prev"
+          );
+
+
+        const next =
+          card.querySelector(
+            ".carousel-next"
+          );
+
+
+        const dots =
+          card.querySelectorAll(
+            ".carousel-dot"
+          );
+
+
+        let current =
+          0;
+
+
+        let autoplay;
+
+
+        function updateCarousel() {
+
+          track.style.transform =
+            `translateX(-${current * 100}%)`;
+
+
+          dots.forEach(
+            (dot, index) => {
+
+              dot.classList.toggle(
+                "active",
+                index === current
+              );
+
+            }
+          );
+
+        }
+
+
+        function goTo(index) {
+
+          current =
+            (index + slides.length)
+            % slides.length;
+
+          updateCarousel();
+
+        }
+
+
+        function nextSlide() {
+
+          goTo(
+            current + 1
+          );
+
+        }
+
+
+        function prevSlide() {
+
+          goTo(
+            current - 1
+          );
+
+        }
+
+
+        function startAutoplay() {
+
+          clearInterval(
+            autoplay
+          );
+
+
+          autoplay =
+            setInterval(
+              nextSlide,
+              4500
+            );
+
+        }
+
+
+        function stopAutoplay() {
+
+          clearInterval(
+            autoplay
+          );
+
+        }
+
+
+        next.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            nextSlide();
+
+            startAutoplay();
+
+          }
+        );
+
+
+        prev.addEventListener(
+          "click",
+          event => {
+
+            event.stopPropagation();
+
+            prevSlide();
+
+            startAutoplay();
+
+          }
+        );
+
+
+        dots.forEach(
+          (dot, index) => {
+
+            dot.addEventListener(
+              "click",
+              event => {
+
+                event.stopPropagation();
+
+                goTo(index);
+
+                startAutoplay();
+
+              }
+            );
+
+          }
+        );
+
+
+        card.addEventListener(
+          "mouseenter",
+          stopAutoplay
+        );
+
+
+        card.addEventListener(
+          "mouseleave",
+          startAutoplay
+        );
+
+
+        /*
+         * Soporte táctil para móvil
+         */
+
+        let touchStartX = 0;
+
+        let touchEndX = 0;
+
+
+        track.addEventListener(
+          "touchstart",
+          event => {
+
+            touchStartX =
+              event.changedTouches[0].screenX;
+
+            stopAutoplay();
+
+          },
+          {
+            passive: true
+          }
+        );
+
+
+        track.addEventListener(
+          "touchend",
+          event => {
+
+            touchEndX =
+              event.changedTouches[0].screenX;
+
+
+            const difference =
+              touchStartX - touchEndX;
+
+
+            if (
+              Math.abs(difference) > 45
+            ) {
+
+              if (
+                difference > 0
+              ) {
+
+                nextSlide();
+
+              } else {
+
+                prevSlide();
+
+              }
+
+            }
+
+
+            startAutoplay();
+
+          },
+          {
+            passive: true
+          }
+        );
+
+
+        updateCarousel();
+
+        startAutoplay();
+
+      });
 
 
     /* =====================================================
@@ -3326,7 +4035,8 @@
 
       ventas: {
 
-        title: "Ventas",
+        title:
+          "Ventas",
 
         description:
           "El Área de Ventas se encarga de gestionar el merchandising y los productos de Baby Golden Perú, buscando que nuestra identidad también pueda acompañar a cada miembro de la comunidad.",
@@ -3350,7 +4060,8 @@
 
       legal: {
 
-        title: "Legal",
+        title:
+          "Legal",
 
         description:
           "El Área Legal brinda soporte documental y orientación para que las actividades de Baby Golden Perú se desarrollen de manera ordenada y responsable.",
@@ -3374,7 +4085,8 @@
 
       adopciones: {
 
-        title: "Adopciones",
+        title:
+          "Adopciones",
 
         description:
           "El Área de Adopciones acompaña la difusión y seguimiento de casos que buscan encontrar hogares responsables y comprometidos.",
@@ -3398,7 +4110,8 @@
 
       eventos: {
 
-        title: "Eventos",
+        title:
+          "Eventos",
 
         description:
           "El Área de Eventos convierte las ideas de la comunidad en experiencias, actividades y encuentros que fortalecen nuestros vínculos.",
@@ -3505,7 +4218,9 @@
 
 
     document
-      .querySelectorAll("[data-area]")
+      .querySelectorAll(
+        "[data-area]"
+      )
       .forEach(button => {
 
         button.addEventListener(
@@ -3593,7 +4308,9 @@
     ====================================================== */
 
     document
-      .querySelectorAll("[data-close]")
+      .querySelectorAll(
+        "[data-close]"
+      )
       .forEach(button => {
 
         button.addEventListener(
@@ -3629,7 +4346,7 @@
 
 
     /* =====================================================
-       CERRAR AL HACER CLICK FUERA
+       CLICK FUERA DEL MODAL
     ====================================================== */
 
     document
@@ -3648,6 +4365,7 @@
                 "active"
               );
 
+
               document.body.style.overflow =
                 "";
 
@@ -3660,7 +4378,7 @@
 
 
     /* =====================================================
-       CERRAR CON ESC
+       ESC
     ====================================================== */
 
     document.addEventListener(
@@ -3696,3 +4414,4 @@
 
 </body>
 </html>
+```
