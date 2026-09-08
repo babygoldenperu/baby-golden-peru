@@ -1380,7 +1380,7 @@
     .community-card {
       position: relative;
 
-      min-height: 450px;
+      min-height: 600px;
 
       overflow: hidden;
 
@@ -1390,15 +1390,104 @@
         var(--shadow-lg);
     }
 
-    .community-image {
+    .community-carousel {
       position: absolute;
-
       inset: 0;
+      z-index: 0;
+      overflow: hidden;
+    }
 
+    .community-track {
+      display: flex;
       width: 100%;
       height: 100%;
+      transition: transform .55s cubic-bezier(.4,0,.2,1);
+      will-change: transform;
+    }
 
+    .community-slide {
+      flex: 0 0 100%;
+      width: 100%;
+      height: 100%;
+    }
+
+    .community-slide img {
+      display: block;
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      object-position: center;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+
+    .community-card::after {
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .community-content {
+      z-index: 3;
+    }
+
+    .community-arrow {
+      position: absolute;
+      z-index: 5;
+      top: 50%;
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      transform: translateY(-50%);
+      border: 1px solid rgba(255,255,255,.35);
+      border-radius: 50%;
+      background: rgba(31,21,15,.38);
+      backdrop-filter: blur(8px);
+      color: var(--white);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .community-arrow:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .community-prev {
+      right: 78px;
+    }
+
+    .community-next {
+      right: 24px;
+    }
+
+    .community-dots {
+      position: absolute;
+      z-index: 5;
+      right: 24px;
+      bottom: 24px;
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .community-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 0;
+      border-radius: 50%;
+      background: rgba(255,255,255,.65);
+      cursor: pointer;
+      transition: .25s ease;
+    }
+
+    .community-dot.active {
+      width: 22px;
+      border-radius: 10px;
+      background: var(--gold-light);
     }
 
     .community-card::after {
@@ -1424,7 +1513,7 @@
 
       width: 55%;
 
-      min-height: 450px;
+      min-height: 600px;
 
       padding: 70px 65px;
 
@@ -2307,7 +2396,25 @@
 
       .community-card,
       .community-content {
-        min-height: 520px;
+        min-height: 600px;
+      }
+
+      .community-arrow {
+        width: 36px;
+        height: 36px;
+      }
+
+      .community-prev {
+        right: 62px;
+      }
+
+      .community-next {
+        right: 18px;
+      }
+
+      .community-dots {
+        right: 18px;
+        bottom: 18px;
       }
 
       .community-content {
@@ -3565,12 +3672,36 @@
 
         <div class="community-card reveal">
 
-          <img
-            class="community-image"
-            src="assets/comunidad-miembros.jpg"
-            alt="Miembros Baby Golden"
-            onerror="this.src='assets/conocenos-hero.jpg'"
-          >
+          <div class="community-carousel">
+            <div class="community-track">
+              <div class="community-slide">
+                <img src="assets/comunidad/miembros-1.jpg" alt="Miembros Baby Golden 1">
+              </div>
+              <div class="community-slide">
+                <img src="assets/comunidad/miembros-2.jpg" alt="Miembros Baby Golden 2">
+              </div>
+              <div class="community-slide">
+                <img src="assets/comunidad/miembros-3.jpg" alt="Miembros Baby Golden 3">
+              </div>
+              <div class="community-slide">
+                <img src="assets/comunidad/miembros-4.jpg" alt="Miembros Baby Golden 4">
+              </div>
+              <div class="community-slide">
+                <img src="assets/comunidad/miembros-5.jpg" alt="Miembros Baby Golden 5">
+              </div>
+            </div>
+          </div>
+
+          <button type="button" class="community-arrow community-prev" aria-label="Foto anterior">‹</button>
+          <button type="button" class="community-arrow community-next" aria-label="Foto siguiente">›</button>
+
+          <div class="community-dots">
+            <button type="button" class="community-dot active" aria-label="Ir a la foto 1"></button>
+            <button type="button" class="community-dot" aria-label="Ir a la foto 2"></button>
+            <button type="button" class="community-dot" aria-label="Ir a la foto 3"></button>
+            <button type="button" class="community-dot" aria-label="Ir a la foto 4"></button>
+            <button type="button" class="community-dot" aria-label="Ir a la foto 5"></button>
+          </div>
 
           <div class="community-content">
 
@@ -4838,8 +4969,101 @@
       }
     );
 
-  </script>
+  
+
+  /* =====================================================
+     CARRUSEL — MIEMBROS BABY GOLDEN
+  ====================================================== */
+  const communityCarousel = document.querySelector(".community-carousel");
+
+  if (communityCarousel) {
+    const communityCard = communityCarousel.closest(".community-card");
+    const communityTrack = communityCarousel.querySelector(".community-track");
+    const communitySlides = Array.from(
+      communityCarousel.querySelectorAll(".community-slide")
+    );
+    const communityPrev = communityCard.querySelector(".community-prev");
+    const communityNext = communityCard.querySelector(".community-next");
+    const communityDots = Array.from(
+      communityCard.querySelectorAll(".community-dot")
+    );
+
+    let communityCurrent = 0;
+    let communityTimer = null;
+
+    function updateCommunityCarousel() {
+      communityTrack.style.transform =
+        `translateX(-${communityCurrent * 100}%)`;
+
+      communityDots.forEach((dot, index) => {
+        dot.classList.toggle("active", index === communityCurrent);
+      });
+    }
+
+    function goToCommunitySlide(index) {
+      if (index >= communitySlides.length) index = 0;
+      if (index < 0) index = communitySlides.length - 1;
+
+      communityCurrent = index;
+      updateCommunityCarousel();
+    }
+
+    function startCommunityAutoplay() {
+      clearInterval(communityTimer);
+      communityTimer = setInterval(() => {
+        goToCommunitySlide(communityCurrent + 1);
+      }, 5000);
+    }
+
+    communityPrev.addEventListener("click", () => {
+      goToCommunitySlide(communityCurrent - 1);
+      startCommunityAutoplay();
+    });
+
+    communityNext.addEventListener("click", () => {
+      goToCommunitySlide(communityCurrent + 1);
+      startCommunityAutoplay();
+    });
+
+    communityDots.forEach((dot, index) => {
+      dot.addEventListener("click", () => {
+        goToCommunitySlide(index);
+        startCommunityAutoplay();
+      });
+    });
+
+    communityCard.addEventListener("mouseenter", () => {
+      clearInterval(communityTimer);
+    });
+
+    communityCard.addEventListener("mouseleave", startCommunityAutoplay);
+
+    let touchStartX = 0;
+
+    communityCarousel.addEventListener("touchstart", (event) => {
+      touchStartX = event.changedTouches[0].screenX;
+      clearInterval(communityTimer);
+    }, { passive: true });
+
+    communityCarousel.addEventListener("touchend", (event) => {
+      const touchEndX = event.changedTouches[0].screenX;
+      const difference = touchStartX - touchEndX;
+
+      if (Math.abs(difference) >= 45) {
+        goToCommunitySlide(
+          communityCurrent + (difference > 0 ? 1 : -1)
+        );
+      }
+
+      startCommunityAutoplay();
+    }, { passive: true });
+
+    updateCommunityCarousel();
+    startCommunityAutoplay();
+  }
+</script>
 
 </body>
 </html>
+
 ```
