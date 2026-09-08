@@ -1706,6 +1706,38 @@ header{min-height:64px!important}
                 <div class="profile-field">
 
                   <div class="profile-label">
+                    Nombres
+                  </div>
+
+                  <div
+                    id="perfilNombres"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                  <div class="profile-label">
+                    Apellidos
+                  </div>
+
+                  <div
+                    id="perfilApellidos"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                  <div class="profile-label">
                     Correo electrónico
                   </div>
 
@@ -1735,7 +1767,23 @@ header{min-height:64px!important}
                 </div>
 
 
-                <div class="profile-field full">
+                <div class="profile-field">
+
+                  <div class="profile-label">
+                    Método de acceso
+                  </div>
+
+                  <div
+                    id="perfilMetodo"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
+
+                <div class="profile-field">
 
                   <div class="profile-label">
                     Usuario
@@ -1755,10 +1803,8 @@ header{min-height:64px!important}
 
 
               <div class="profile-note">
-                Tu cuenta está vinculada a tu correo electrónico.
-                Los datos personales adicionales se podrán incorporar
-                posteriormente cuando definamos los campos definitivos
-                del perfil.
+                Aquí puedes consultar los datos básicos asociados a tu
+                cuenta y el método con el que ingresas a Baby Golden Perú.
               </div>
 
             </div>
@@ -1828,10 +1874,8 @@ header{min-height:64px!important}
                 Cuenta protegida
               </h3>
 
-              <p>
+              <p id="authDescripcion">
                 Tu acceso está gestionado mediante Supabase Auth.
-                Utilizas tu correo electrónico y contraseña para
-                ingresar a tu cuenta.
               </p>
 
             </div>
@@ -2505,13 +2549,29 @@ header{min-height:64px!important}
         user?.user_metadata || {};
 
 
-      const nombre =
-        metadata.nombre ||
+      const nombreCompleto =
         metadata.full_name ||
         metadata.name ||
+        `${metadata.nombre || ""} ${metadata.apellidos || ""}`.trim() ||
         (email
           ? email.split("@")[0]
           : "Golden Lover");
+
+
+      const nombres =
+        metadata.given_name ||
+        metadata.nombre ||
+        (nombreCompleto.includes(" ")
+          ? nombreCompleto.split(" ")[0]
+          : nombreCompleto);
+
+
+      const apellidos =
+        metadata.family_name ||
+        metadata.apellidos ||
+        (nombreCompleto.includes(" ")
+          ? nombreCompleto.split(" ").slice(1).join(" ")
+          : "—");
 
 
       const fotoGoogle =
@@ -2520,10 +2580,41 @@ header{min-height:64px!important}
         "";
 
 
+      const proveedores =
+        user?.app_metadata?.providers ||
+        [];
+
+
+      const metodoAcceso =
+        proveedores.includes("google")
+          ? "Google"
+          : proveedores.includes("email")
+            ? "Correo electrónico"
+            : "—";
+
+
+      document.getElementById(
+        "perfilNombres"
+      ).textContent =
+        nombres || "—";
+
+
+      document.getElementById(
+        "perfilApellidos"
+      ).textContent =
+        apellidos || "—";
+
+
       document.getElementById(
         "perfilEmail"
       ).textContent =
         email;
+
+
+      document.getElementById(
+        "perfilMetodo"
+      ).textContent =
+        metodoAcceso;
 
 
       document.getElementById(
@@ -2538,10 +2629,21 @@ header{min-height:64px!important}
         email;
 
 
+      const authDescripcion =
+        document.getElementById("authDescripcion");
+
+      if(authDescripcion) {
+        authDescripcion.textContent =
+          metodoAcceso === "Google"
+            ? "Tu acceso está gestionado mediante Supabase Auth y vinculado a tu cuenta de Google."
+            : "Tu acceso está gestionado mediante Supabase Auth y vinculado a tu correo electrónico.";
+      }
+
+
       document.getElementById(
         "welcomeName"
       ).textContent =
-        nombre;
+        nombreCompleto;
 
 
       const avatar =
@@ -2563,8 +2665,11 @@ header{min-height:64px!important}
       } else {
 
         avatar.textContent =
-          nombre
-            .substring(0,2)
+          nombreCompleto
+            .split(/\s+/)
+            .slice(0,2)
+            .map(part => part.charAt(0))
+            .join("")
             .toUpperCase();
 
       }
