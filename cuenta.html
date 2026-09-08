@@ -444,60 +444,6 @@
     }
 
 
-
-    .profile-edit-actions {
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      margin-top:28px;
-      padding-top:20px;
-      border-top:1px solid #eadfce;
-    }
-
-    .profile-edit-button,
-    .profile-save-button,
-    .profile-cancel-button {
-      padding:12px 18px;
-      border-radius:999px;
-      font-size:10px;
-      font-weight:700;
-      cursor:pointer;
-      border:1px solid #d9c9b6;
-    }
-
-    .profile-edit-button,
-    .profile-save-button {
-      background:#4a3324;
-      color:#fff;
-      border-color:#4a3324;
-    }
-
-    .profile-cancel-button {
-      background:transparent;
-      color:#765f4c;
-    }
-
-    .profile-input {
-      width:100%;
-      padding:11px 12px;
-      border:1px solid #d9c9b6;
-      border-radius:4px;
-      background:#fff;
-      color:#3b2b20;
-      font:16px Georgia, serif;
-      outline:none;
-    }
-
-    .profile-input:focus {
-      border-color:#b77b20;
-    }
-
-    .profile-locked {
-      color:#8a7564;
-      font-size:10px;
-      line-height:1.6;
-    }
-
     .profile-note {
       margin-top: 28px;
       padding-top: 20px;
@@ -1756,57 +1702,109 @@ header{min-height:64px!important}
 
               <div class="profile-grid">
 
-                <div class="profile-field">
-                  <div class="profile-label">Nombres</div>
-                  <div id="perfilNombres" class="profile-value">—</div>
-                </div>
 
                 <div class="profile-field">
-                  <div class="profile-label">Apellidos</div>
-                  <div id="perfilApellidos" class="profile-value">—</div>
+
+                  <div class="profile-label">
+                    Nombres
+                  </div>
+
+                  <div
+                    id="perfilNombres"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
                 </div>
 
-                <div class="profile-field">
-                  <div class="profile-label">Correo electrónico</div>
-                  <div id="perfilEmail" class="profile-value">—</div>
-                  <div class="profile-locked">El correo de acceso no se modifica desde este formulario.</div>
-                </div>
 
                 <div class="profile-field">
-                  <div class="profile-label">Teléfono</div>
-                  <div id="perfilTelefono" class="profile-value">—</div>
+
+                  <div class="profile-label">
+                    Apellidos
+                  </div>
+
+                  <div
+                    id="perfilApellidos"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
                 </div>
 
-                <div class="profile-field">
-                  <div class="profile-label">DNI</div>
-                  <div id="perfilDni" class="profile-value">—</div>
-                </div>
 
                 <div class="profile-field">
-                  <div class="profile-label">Fecha de nacimiento</div>
-                  <div id="perfilFechaNacimiento" class="profile-value">—</div>
+
+                  <div class="profile-label">
+                    Correo electrónico
+                  </div>
+
+                  <div
+                    id="perfilEmail"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
                 </div>
 
-                <div class="profile-field">
-                  <div class="profile-label">Estado de la cuenta</div>
-                  <div id="perfilEstado" class="profile-value">Cuenta activa</div>
-                </div>
 
                 <div class="profile-field">
-                  <div class="profile-label">Método de acceso</div>
-                  <div id="perfilMetodo" class="profile-value">—</div>
+
+                  <div class="profile-label">
+                    Estado de la cuenta
+                  </div>
+
+                  <div
+                    id="perfilEstado"
+                    class="profile-value"
+                  >
+                    Cuenta activa
+                  </div>
+
                 </div>
+
+
+                <div class="profile-field">
+
+                  <div class="profile-label">
+                    Método de acceso
+                  </div>
+
+                  <div
+                    id="perfilMetodo"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
+
+                <div class="profile-field">
+
+                  <div class="profile-label">
+                    Usuario
+                  </div>
+
+                  <div
+                    id="perfilUsuario"
+                    class="profile-value"
+                  >
+                    —
+                  </div>
+
+                </div>
+
 
               </div>
 
-              <div id="perfilEditActions" class="profile-edit-actions">
-                <button id="editarPerfilBtn" type="button" class="profile-edit-button">
-                  ✏️ EDITAR MIS DATOS
-                </button>
-              </div>
 
               <div class="profile-note">
-                Puedes actualizar tus datos personales cuando quieras. Tus cambios se guardan de forma segura en tu cuenta.
+                Aquí puedes consultar los datos básicos asociados a tu
+                cuenta y el método con el que ingresas a Baby Golden Perú.
               </div>
 
             </div>
@@ -2535,142 +2533,6 @@ header{min-height:64px!important}
     }
 
 
-
-    /* =========================================
-       PERFIL EDITABLE
-       ========================================= */
-
-    let perfilUsuarioActual = null;
-
-    function valorPerfil(v) {
-      return v ? String(v) : "";
-    }
-
-    function renderizarPerfilModoEdicion(editando) {
-      const campos = [
-        ["perfilNombres", "nombres", "text", "Nombres"],
-        ["perfilApellidos", "apellidos", "text", "Apellidos"],
-        ["perfilTelefono", "telefono", "tel", "Teléfono"],
-        ["perfilDni", "dni", "text", "DNI"],
-        ["perfilFechaNacimiento", "fecha_nacimiento", "date", "Fecha de nacimiento"]
-      ];
-
-      campos.forEach(([id, key, type, label]) => {
-        const el = document.getElementById(id);
-        if (!el) return;
-
-        if (editando) {
-          const actual = perfilUsuarioActual?.[key] || "";
-          el.innerHTML = `<input class="profile-input" id="input_${key}" type="${type}" aria-label="${label}" value="${escapeHtml(actual)}">`;
-        } else {
-          const actual = perfilUsuarioActual?.[key] || "";
-          el.textContent = actual || "—";
-        }
-      });
-
-      const email = document.getElementById("perfilEmail");
-      if (email) email.textContent = perfilUsuarioActual?.email || "—";
-
-      const acciones = document.getElementById("perfilEditActions");
-      if (!acciones) return;
-
-      acciones.innerHTML = editando
-        ? `
-          <button id="guardarPerfilBtn" type="button" class="profile-save-button">GUARDAR CAMBIOS</button>
-          <button id="cancelarPerfilBtn" type="button" class="profile-cancel-button">CANCELAR</button>
-        `
-        : `
-          <button id="editarPerfilBtn" type="button" class="profile-edit-button">✏️ EDITAR MIS DATOS</button>
-        `;
-
-      if (editando) {
-        document.getElementById("guardarPerfilBtn")?.addEventListener("click", guardarPerfil);
-        document.getElementById("cancelarPerfilBtn")?.addEventListener("click", () => {
-          renderizarPerfilModoEdicion(false);
-        });
-      } else {
-        document.getElementById("editarPerfilBtn")?.addEventListener("click", () => {
-          renderizarPerfilModoEdicion(true);
-        });
-      }
-    }
-
-    async function cargarPerfilUsuario(user) {
-      perfilUsuarioActual = {
-        email: user?.email || "",
-        nombres: user?.user_metadata?.nombre || user?.user_metadata?.given_name || "",
-        apellidos: user?.user_metadata?.apellidos || user?.user_metadata?.family_name || "",
-        telefono: "",
-        dni: "",
-        fecha_nacimiento: ""
-      };
-
-      const { data, error } = await supabaseClient
-        .from("perfiles_usuario")
-        .select("nombres, apellidos, telefono, dni, fecha_nacimiento")
-        .eq("id", user.id)
-        .maybeSingle();
-
-      if (!error && data) {
-        perfilUsuarioActual = {
-          ...perfilUsuarioActual,
-          nombres: data.nombres || perfilUsuarioActual.nombres,
-          apellidos: data.apellidos || perfilUsuarioActual.apellidos,
-          telefono: data.telefono || "",
-          dni: data.dni || "",
-          fecha_nacimiento: data.fecha_nacimiento || ""
-        };
-      }
-
-      renderizarPerfilModoEdicion(false);
-    }
-
-    async function guardarPerfil() {
-      if (!perfilUsuarioActual?.id) return;
-
-      const get = (key) => document.getElementById(`input_${key}`)?.value.trim() || "";
-
-      const nuevos = {
-        nombres: get("nombres"),
-        apellidos: get("apellidos"),
-        telefono: get("telefono"),
-        dni: get("dni"),
-        fecha_nacimiento: get("fecha_nacimiento") || null
-      };
-
-      const { error } = await supabaseClient
-        .from("perfiles_usuario")
-        .upsert({
-          id: perfilUsuarioActual.id,
-          ...nuevos,
-          updated_at: new Date().toISOString()
-        }, { onConflict: "id" });
-
-      if (error) {
-        alert("No se pudieron guardar los cambios. Inténtalo nuevamente.");
-        console.error(error);
-        return;
-      }
-
-      const { error: authError } = await supabaseClient.auth.updateUser({
-        data: {
-          nombre: nuevos.nombres,
-          apellidos: nuevos.apellidos,
-          full_name: `${nuevos.nombres} ${nuevos.apellidos}`.trim()
-        }
-      });
-
-      if (authError) console.warn("No se actualizó el metadata de Auth:", authError);
-
-      perfilUsuarioActual = { ...perfilUsuarioActual, ...nuevos };
-
-      document.getElementById("welcomeName").textContent =
-        `${nuevos.nombres} ${nuevos.apellidos}`.trim() || "Golden Lover";
-
-      renderizarPerfilModoEdicion(false);
-      alert("Tus datos fueron actualizados correctamente.");
-    }
-
     /* =========================================
        MOSTRAR CUENTA
        ========================================= */
@@ -2682,12 +2544,6 @@ header{min-height:64px!important}
       const email =
         user?.email || "";
 
-
-      perfilUsuarioActual = {
-        ...(perfilUsuarioActual || {}),
-        id: user?.id || "",
-        email: user?.email || ""
-      };
 
       const metadata =
         user?.user_metadata || {};
@@ -2818,8 +2674,6 @@ header{min-height:64px!important}
 
       }
 
-
-      await cargarPerfilUsuario(user);
 
       mostrarPanel(
         cuentaPanel
