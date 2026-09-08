@@ -29,19 +29,33 @@
 
       --cream: #fffaf3;
       --cream-dark: #f5ead9;
+      --cream-deep: #ead9c0;
+
       --brown: #302219;
       --brown-soft: #5d4b3e;
       --text: #75675d;
+
       --white: #ffffff;
       --border: #eadcc9;
 
-      --shadow-sm: 0 10px 30px rgba(73,49,24,.07);
-      --shadow-md: 0 20px 55px rgba(73,49,24,.12);
-      --shadow-lg: 0 30px 80px rgba(73,49,24,.18);
+      --shadow-sm:
+        0 10px 30px rgba(73,49,24,.07);
+
+      --shadow-md:
+        0 20px 55px rgba(73,49,24,.12);
+
+      --shadow-lg:
+        0 30px 80px rgba(73,49,24,.18);
 
       --radius-md: 24px;
+
       --max-width: 1240px;
     }
+
+
+    /* =====================================================
+       RESET
+    ====================================================== */
 
     * {
       box-sizing: border-box;
@@ -55,9 +69,13 @@
 
     body {
       font-family: "DM Sans", sans-serif;
+
       color: var(--brown);
+
       background: var(--cream);
+
       line-height: 1.6;
+
       overflow-x: hidden;
     }
 
@@ -78,7 +96,12 @@
     }
 
     .container {
-      width: min(calc(100% - 48px), var(--max-width));
+      width:
+        min(
+          calc(100% - 48px),
+          var(--max-width)
+        );
+
       margin: 0 auto;
     }
 
@@ -89,65 +112,108 @@
 
     .site-header {
       position: fixed;
+
       top: 0;
       left: 0;
+
       width: 100%;
+
       z-index: 1000;
+
       padding: 18px 0;
+
       transition: all .35s ease;
     }
 
     .site-header.scrolled {
       padding: 10px 0;
-      background: rgba(255,250,243,.94);
-      backdrop-filter: blur(18px);
-      box-shadow: 0 8px 30px rgba(48,34,25,.08);
+
+      background:
+        rgba(255,250,243,.94);
+
+      backdrop-filter:
+        blur(18px);
+
+      box-shadow:
+        0 8px 30px rgba(48,34,25,.08);
     }
 
     .header-inner {
-      width: min(calc(100% - 32px), 1380px);
+      position: relative;
+
+      width:
+        min(
+          calc(100% - 32px),
+          1380px
+        );
+
       min-height: 74px;
+
       margin: 0 auto;
-      padding: 10px 18px 10px 20px;
+
+      padding:
+        10px 18px 10px 20px;
 
       display: flex;
+
       align-items: center;
+
       gap: 25px;
 
-      background: rgba(255,255,255,.92);
-      border: 1px solid rgba(234,220,201,.85);
+      background:
+        rgba(255,255,255,.92);
+
+      border:
+        1px solid rgba(234,220,201,.85);
+
       border-radius: 22px;
 
-      box-shadow: 0 12px 40px rgba(63,43,23,.08);
-      backdrop-filter: blur(16px);
+      box-shadow:
+        0 12px 40px rgba(63,43,23,.08);
+
+      backdrop-filter:
+        blur(16px);
     }
 
     .logo {
       flex-shrink: 0;
+
       display: flex;
+
       align-items: center;
     }
 
     .logo img {
       width: 154px;
+
       max-height: 56px;
+
       object-fit: contain;
     }
 
     .main-nav {
       margin-left: auto;
+
       display: flex;
+
       align-items: center;
+
       gap: 5px;
     }
 
     .main-nav a {
       position: relative;
-      padding: 11px 13px;
 
-      color: var(--brown-soft);
+      padding:
+        11px 13px;
+
+      color:
+        var(--brown-soft);
+
       font-size: 13px;
+
       font-weight: 600;
+
       white-space: nowrap;
 
       transition: .25s ease;
@@ -155,38 +221,53 @@
 
     .main-nav a:not(.shop-link)::after {
       content: "";
+
       position: absolute;
+
       left: 13px;
       right: 13px;
+
       bottom: 5px;
+
       height: 2px;
 
-      background: var(--gold);
+      background:
+        var(--gold);
+
       border-radius: 20px;
 
-      transform: scaleX(0);
-      transition: transform .25s ease;
+      transform:
+        scaleX(0);
+
+      transition:
+        transform .25s ease;
     }
 
     .main-nav a:hover {
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
     }
 
     .main-nav a:not(.shop-link):hover::after {
-      transform: scaleX(1);
+      transform:
+        scaleX(1);
     }
 
     .shop-link {
       margin-left: 8px;
-      padding: 12px 20px !important;
 
-      color: var(--white) !important;
+      padding:
+        12px 20px !important;
 
-      background: linear-gradient(
-        135deg,
-        var(--gold),
-        var(--gold-dark)
-      );
+      color:
+        var(--white) !important;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold),
+          var(--gold-dark)
+        );
 
       border-radius: 100px;
 
@@ -195,14 +276,23 @@
     }
 
     .shop-link:hover {
-      background: var(--brown);
-      transform: translateY(-1px);
+      color:
+        var(--white) !important;
+
+      background:
+        var(--brown);
+
+      transform:
+        translateY(-1px);
     }
 
     .header-actions {
       display: flex;
+
       align-items: center;
+
       gap: 7px;
+
       margin-left: 8px;
     }
 
@@ -211,9 +301,11 @@
       height: 40px;
 
       display: grid;
+
       place-items: center;
 
       border-radius: 50%;
+
       background: transparent;
 
       color: var(--brown);
@@ -222,14 +314,20 @@
     }
 
     .header-icon:hover {
-      color: var(--gold-dark);
-      background: var(--cream-dark);
-      transform: translateY(-2px);
+      color:
+        var(--gold-dark);
+
+      background:
+        var(--cream-dark);
+
+      transform:
+        translateY(-2px);
     }
 
     .header-icon svg {
       width: 19px;
       height: 19px;
+
       stroke-width: 1.8;
     }
 
@@ -245,8 +343,11 @@
 
       border-radius: 50%;
 
-      background: var(--cream-dark);
-      color: var(--brown);
+      background:
+        var(--cream-dark);
+
+      color:
+        var(--brown);
     }
 
 
@@ -260,6 +361,7 @@
       min-height: 760px;
 
       display: flex;
+
       align-items: center;
 
       overflow: hidden;
@@ -287,7 +389,8 @@
       left: -260px;
       bottom: -250px;
 
-      border: 1px solid rgba(255,255,255,.16);
+      border:
+        1px solid rgba(255,255,255,.16);
 
       border-radius: 50%;
     }
@@ -303,16 +406,22 @@
       left: -360px;
       bottom: -350px;
 
-      border: 1px solid rgba(255,255,255,.09);
+      border:
+        1px solid rgba(255,255,255,.09);
 
       border-radius: 50%;
     }
 
     .hero-content {
       position: relative;
+
       z-index: 2;
 
-      width: min(calc(100% - 48px), var(--max-width));
+      width:
+        min(
+          calc(100% - 48px),
+          var(--max-width)
+        );
 
       margin: 0 auto;
 
@@ -321,20 +430,25 @@
 
     .hero-copy {
       max-width: 690px;
-      color: var(--white);
+
+      color:
+        var(--white);
     }
 
     .eyebrow {
       display: inline-flex;
+
       align-items: center;
 
       gap: 11px;
 
       margin-bottom: 20px;
 
-      color: #f2d7a9;
+      color:
+        #f2d7a9;
 
       font-size: 12px;
+
       font-weight: 700;
 
       letter-spacing: .2em;
@@ -346,7 +460,8 @@
       width: 38px;
       height: 1px;
 
-      background: #f2d7a9;
+      background:
+        #f2d7a9;
     }
 
     .hero h1 {
@@ -387,7 +502,8 @@
       border-left:
         2px solid var(--gold-light);
 
-      color: #fff4df;
+      color:
+        #fff4df;
 
       font-family:
         "Playfair Display",
@@ -413,6 +529,7 @@
         rgba(255,255,255,.78);
 
       font-size: 10px;
+
       font-weight: 700;
 
       letter-spacing: .18em;
@@ -426,7 +543,8 @@
       width: 1px;
       height: 45px;
 
-      margin: 9px auto 0;
+      margin:
+        9px auto 0;
 
       background:
         rgba(255,255,255,.55);
@@ -434,7 +552,7 @@
 
 
     /* =====================================================
-       SECTIONS
+       SECCIONES
     ====================================================== */
 
     .section {
@@ -443,19 +561,24 @@
 
     .section-heading {
       max-width: 700px;
+
       margin-bottom: 55px;
     }
 
     .section-kicker {
       display: inline-flex;
+
       align-items: center;
+
       gap: 9px;
 
       margin-bottom: 13px;
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
 
       font-size: 11px;
+
       font-weight: 800;
 
       letter-spacing: .18em;
@@ -469,7 +592,8 @@
       width: 28px;
       height: 1px;
 
-      background: var(--gold);
+      background:
+        var(--gold);
     }
 
     .section-title {
@@ -486,7 +610,8 @@
 
       font-weight: 600;
 
-      color: var(--brown);
+      color:
+        var(--brown);
     }
 
     .section-intro {
@@ -494,7 +619,8 @@
 
       margin-top: 17px;
 
-      color: var(--text);
+      color:
+        var(--text);
 
       font-size: 16px;
 
@@ -632,9 +758,11 @@
 
       border-radius: 50%;
 
-      background: var(--brown);
+      background:
+        var(--brown);
 
-      color: var(--white);
+      color:
+        var(--white);
 
       text-align: center;
 
@@ -645,7 +773,8 @@
     .founder-badge span:first-child {
       display: block;
 
-      color: var(--gold-light);
+      color:
+        var(--gold-light);
 
       font-size: 10px;
 
@@ -682,7 +811,8 @@
     .founder-role {
       margin-bottom: 28px;
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
 
       font-size: 12px;
 
@@ -694,7 +824,8 @@
     .founder-copy p {
       margin-bottom: 23px;
 
-      color: var(--text);
+      color:
+        var(--text);
 
       font-size: 16px;
 
@@ -712,14 +843,16 @@
     }
 
     .founder-tag {
-      padding: 9px 15px;
+      padding:
+        9px 15px;
 
       border:
         1px solid rgba(169,120,53,.3);
 
       border-radius: 100px;
 
-      color: var(--brown-soft);
+      color:
+        var(--brown-soft);
 
       background:
         rgba(255,255,255,.38);
@@ -732,7 +865,8 @@
     .founder-quote {
       margin-top: 35px;
 
-      padding: 30px 34px;
+      padding:
+        30px 34px;
 
       border-left:
         3px solid var(--gold);
@@ -750,7 +884,8 @@
     .founder-quote p {
       margin: 0;
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       font-family:
         "Playfair Display",
@@ -769,7 +904,8 @@
     ====================================================== */
 
     .action-section {
-      background: var(--white);
+      background:
+        var(--white);
     }
 
     .action-layout {
@@ -803,7 +939,8 @@
 
       padding: 32px;
 
-      background: var(--cream);
+      background:
+        var(--cream);
 
       border:
         1px solid var(--border);
@@ -840,9 +977,11 @@
 
       border-radius: 50%;
 
-      background: var(--white);
+      background:
+        var(--white);
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
     }
 
     .action-icon svg {
@@ -861,7 +1000,8 @@
     }
 
     .action-card p {
-      color: var(--text);
+      color:
+        var(--text);
 
       font-size: 14px;
 
@@ -874,7 +1014,8 @@
     ====================================================== */
 
     .areas-section {
-      color: var(--white);
+      color:
+        var(--white);
 
       background:
         linear-gradient(
@@ -886,15 +1027,18 @@
     }
 
     .areas-section .section-kicker {
-      color: var(--gold-light);
+      color:
+        var(--gold-light);
     }
 
     .areas-section .section-kicker::before {
-      background: var(--gold-light);
+      background:
+        var(--gold-light);
     }
 
     .areas-section .section-title {
-      color: var(--white);
+      color:
+        var(--white);
     }
 
     .areas-section .section-intro {
@@ -925,7 +1069,8 @@
 
       border-radius: 28px;
 
-      background: #3a2a20;
+      background:
+        #3a2a20;
 
       border:
         1px solid rgba(255,255,255,.09);
@@ -955,12 +1100,16 @@
 
       transition:
         transform .55s cubic-bezier(.4,0,.2,1);
+
+      will-change:
+        transform;
     }
 
     .carousel-slide {
       position: relative;
 
-      flex: 0 0 100%;
+      flex:
+        0 0 100%;
 
       width: 100%;
       height: 100%;
@@ -971,7 +1120,16 @@
       height: 100%;
 
       object-fit: cover;
+
+      user-select: none;
+
+      -webkit-user-drag: none;
     }
+
+
+    /* =====================================================
+       OVERLAY
+    ====================================================== */
 
     .area-card::after {
       content: "";
@@ -989,7 +1147,7 @@
           to top,
           rgba(22,14,9,.98) 0%,
           rgba(22,14,9,.68) 43%,
-          rgba(22,14,9,.10) 100%
+          rgba(22,14,9,.08) 100%
         );
     }
 
@@ -1001,12 +1159,12 @@
     .carousel-arrow {
       position: absolute;
 
-      z-index: 5;
+      z-index: 8;
 
-      top: 32%;
+      top: 38%;
 
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
 
       display: grid;
 
@@ -1018,14 +1176,17 @@
       border-radius: 50%;
 
       background:
-        rgba(30,20,13,.42);
+        rgba(30,20,13,.45);
 
       backdrop-filter:
         blur(8px);
 
-      color: var(--white);
+      color:
+        var(--white);
 
-      font-size: 21px;
+      font-size: 23px;
+
+      line-height: 1;
 
       opacity: 0;
 
@@ -1039,7 +1200,7 @@
 
     .carousel-arrow:hover {
       background:
-        rgba(201,154,82,.9);
+        rgba(201,154,82,.92);
 
       border-color:
         var(--gold);
@@ -1053,15 +1214,19 @@
       right: 14px;
     }
 
+    .area-card.single-slide .carousel-arrow {
+      display: none;
+    }
+
 
     /* =====================================================
-       INDICADORES
+       PUNTOS
     ====================================================== */
 
     .carousel-dots {
       position: absolute;
 
-      z-index: 6;
+      z-index: 9;
 
       top: 18px;
       left: 50%;
@@ -1071,10 +1236,20 @@
 
       display: flex;
 
+      align-items: center;
+
+      justify-content: center;
+
       gap: 6px;
+
+      max-width:
+        calc(100% - 60px);
     }
 
     .carousel-dot {
+      flex:
+        0 0 auto;
+
       width: 6px;
       height: 6px;
 
@@ -1098,15 +1273,19 @@
         var(--gold-light);
     }
 
+    .area-card.single-slide .carousel-dots {
+      display: none;
+    }
+
 
     /* =====================================================
-       CONTENIDO DEL ÁREA
+       CONTENIDO ÁREA
     ====================================================== */
 
     .area-content {
       position: absolute;
 
-      z-index: 7;
+      z-index: 10;
 
       left: 0;
       right: 0;
@@ -1118,7 +1297,8 @@
     .area-index {
       margin-bottom: 10px;
 
-      color: var(--gold-light);
+      color:
+        var(--gold-light);
 
       font-size: 10px;
 
@@ -1159,9 +1339,11 @@
 
       padding: 10px 0;
 
-      color: var(--white);
+      color:
+        var(--white);
 
-      background: transparent;
+      background:
+        transparent;
 
       font-size: 10px;
 
@@ -1173,7 +1355,8 @@
     }
 
     .area-button span {
-      color: var(--gold-light);
+      color:
+        var(--gold-light);
 
       transition:
         transform .25s ease;
@@ -1190,7 +1373,8 @@
     ====================================================== */
 
     .community-section {
-      background: var(--cream);
+      background:
+        var(--cream);
     }
 
     .community-card {
@@ -1250,15 +1434,18 @@
 
       flex-direction: column;
 
-      color: var(--white);
+      color:
+        var(--white);
     }
 
     .community-content .section-kicker {
-      color: var(--gold-light);
+      color:
+        var(--gold-light);
     }
 
     .community-content .section-kicker::before {
-      background: var(--gold-light);
+      background:
+        var(--gold-light);
     }
 
     .community-content h2 {
@@ -1294,7 +1481,8 @@
 
       margin-top: 30px;
 
-      color: var(--white);
+      color:
+        var(--white);
 
       font-size: 12px;
 
@@ -1320,7 +1508,8 @@
 
       border-radius: 50%;
 
-      color: var(--gold-light);
+      color:
+        var(--gold-light);
     }
 
 
@@ -1333,7 +1522,8 @@
 
       padding: 120px 0 130px;
 
-      background: var(--cream-dark);
+      background:
+        var(--cream-dark);
 
       text-align: center;
 
@@ -1385,7 +1575,8 @@
     .cta-label {
       margin-bottom: 15px;
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
 
       font-size: 11px;
 
@@ -1415,7 +1606,8 @@
       margin:
         0 auto 32px;
 
-      color: var(--text);
+      color:
+        var(--text);
 
       font-size: 16px;
 
@@ -1426,15 +1618,18 @@
       display: inline-flex;
 
       align-items: center;
+
       justify-content: center;
 
       gap: 12px;
 
       min-height: 54px;
 
-      padding: 0 27px;
+      padding:
+        0 27px;
 
-      color: var(--white);
+      color:
+        var(--white);
 
       background:
         linear-gradient(
@@ -1456,11 +1651,13 @@
       box-shadow:
         0 14px 30px rgba(169,120,53,.25);
 
-      transition: .3s ease;
+      transition:
+        .3s ease;
     }
 
     .primary-button:hover {
-      background: var(--brown);
+      background:
+        var(--brown);
 
       transform:
         translateY(-3px);
@@ -1475,11 +1672,14 @@
     ====================================================== */
 
     footer {
-      padding: 60px 0 25px;
+      padding:
+        60px 0 25px;
 
-      background: var(--brown);
+      background:
+        var(--brown);
 
-      color: var(--white);
+      color:
+        var(--white);
     }
 
     .footer-main {
@@ -1567,7 +1767,8 @@
 
       pointer-events: none;
 
-      transition: .3s ease;
+      transition:
+        .3s ease;
     }
 
     .modal.active {
@@ -1581,7 +1782,11 @@
     .modal-box {
       position: relative;
 
-      width: min(100%,720px);
+      width:
+        min(
+          100%,
+          720px
+        );
 
       max-height: 90vh;
 
@@ -1589,7 +1794,8 @@
 
       padding: 45px;
 
-      background: var(--cream);
+      background:
+        var(--cream);
 
       border-radius: 30px;
 
@@ -1600,7 +1806,8 @@
         translateY(25px)
         scale(.98);
 
-      transition: .35s ease;
+      transition:
+        .35s ease;
     }
 
     .modal.active .modal-box {
@@ -1624,19 +1831,24 @@
 
       border-radius: 50%;
 
-      background: var(--cream-dark);
+      background:
+        var(--cream-dark);
 
-      color: var(--brown);
+      color:
+        var(--brown);
 
       font-size: 22px;
 
-      transition: .25s ease;
+      transition:
+        .25s ease;
     }
 
     .modal-close:hover {
-      background: var(--brown);
+      background:
+        var(--brown);
 
-      color: var(--white);
+      color:
+        var(--white);
 
       transform:
         rotate(90deg);
@@ -1645,7 +1857,8 @@
     .modal-kicker {
       margin-bottom: 10px;
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
 
       font-size: 10px;
 
@@ -1669,7 +1882,8 @@
     }
 
     .modal-description {
-      color: var(--text);
+      color:
+        var(--text);
 
       font-size: 15px;
 
@@ -1690,16 +1904,19 @@
     }
 
     .modal-list li {
-      padding: 13px 15px;
+      padding:
+        13px 15px;
 
       border-radius: 12px;
 
-      background: var(--white);
+      background:
+        var(--white);
 
       border:
         1px solid var(--border);
 
-      color: var(--brown-soft);
+      color:
+        var(--brown-soft);
 
       font-size: 13px;
 
@@ -1711,14 +1928,15 @@
 
       margin-right: 8px;
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
 
       font-weight: 800;
     }
 
 
     /* =====================================================
-       JOIN
+       MODAL SER PARTE
     ====================================================== */
 
     .join-options {
@@ -1741,14 +1959,16 @@
 
       padding: 27px;
 
-      background: var(--white);
+      background:
+        var(--white);
 
       border:
         1px solid var(--border);
 
       border-radius: 22px;
 
-      transition: .3s ease;
+      transition:
+        .3s ease;
     }
 
     .join-option:hover {
@@ -1774,9 +1994,11 @@
 
       border-radius: 50%;
 
-      background: var(--cream-dark);
+      background:
+        var(--cream-dark);
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
     }
 
     .join-option h3 {
@@ -1794,7 +2016,8 @@
     .join-option p {
       margin-bottom: 20px;
 
-      color: var(--text);
+      color:
+        var(--text);
 
       font-size: 13px;
 
@@ -1804,7 +2027,8 @@
     .join-option a {
       margin-top: auto;
 
-      color: var(--gold-dark);
+      color:
+        var(--gold-dark);
 
       font-size: 11px;
 
@@ -1843,7 +2067,7 @@
        RESPONSIVE
     ====================================================== */
 
-    @media (max-width:1150px) {
+    @media (max-width: 1150px) {
 
       .main-nav {
         gap: 0;
@@ -1852,6 +2076,7 @@
       .main-nav a {
         padding-left: 8px;
         padding-right: 8px;
+
         font-size: 12px;
       }
 
@@ -1872,7 +2097,7 @@
     }
 
 
-    @media (max-width:900px) {
+    @media (max-width: 900px) {
 
       .header-inner {
         min-height: 66px;
@@ -1904,7 +2129,8 @@
 
         padding: 12px;
 
-        background: var(--white);
+        background:
+          var(--white);
 
         border:
           1px solid var(--border);
@@ -1916,11 +2142,13 @@
       }
 
       .header-mobile-open .main-nav a {
-        padding: 13px 15px;
+        padding:
+          13px 15px;
       }
 
       .header-mobile-open .shop-link {
         margin-left: 0;
+
         margin-top: 5px;
 
         text-align: center;
@@ -1954,7 +2182,7 @@
     }
 
 
-    @media (max-width:650px) {
+    @media (max-width: 650px) {
 
       .container,
       .hero-content {
@@ -2154,6 +2382,7 @@
   >
 
     <div class="header-inner">
+
 
       <a
         href="index.html"
@@ -2385,7 +2614,6 @@
               onerror="this.src='assets/conocenos-hero.jpg'"
             >
 
-
             <div class="founder-badge">
 
               <div>
@@ -2470,7 +2698,7 @@
 
 
     <!-- ===================================================
-         PROPÓSITO EN ACCIÓN
+         PROPÓSITO
     ==================================================== -->
 
     <section
@@ -2522,7 +2750,6 @@
                   ></circle>
 
                   <path d="M8 12h8"></path>
-
                   <path d="M12 8v8"></path>
 
                 </svg>
@@ -2582,7 +2809,6 @@
                 >
 
                   <path d="M12 3v18"></path>
-
                   <path d="M5 8h14"></path>
 
                   <path
@@ -2685,7 +2911,7 @@
 
 
           <!-- =================================================
-               VENTAS
+               01 VENTAS
           ================================================== -->
 
           <article
@@ -2697,33 +2923,46 @@
 
               <div class="carousel-track">
 
+
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/ventas/ventas-1.jpg"
-                    alt="Área de Ventas - foto 1"
+                    alt="Representante del Área de Ventas"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/ventas/ventas-2.jpg"
-                    alt="Área de Ventas - foto 2"
+                    alt="Representante del Área de Ventas"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/ventas/ventas-3.jpg"
-                    alt="Área de Ventas - foto 3"
+                    alt="Representante del Área de Ventas"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/ventas/ventas-4.jpg"
-                    alt="Área de Ventas - foto 4"
+                    alt="Representante del Área de Ventas"
                   >
                 </div>
+
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/ventas/ventas-5.jpg"
+                    alt="Representante del Área de Ventas"
+                  >
+                </div>
+
 
               </div>
 
@@ -2732,42 +2971,21 @@
 
             <button
               class="carousel-arrow carousel-prev"
-              aria-label="Foto anterior"
+              aria-label="Representante anterior"
             >
               ‹
             </button>
 
+
             <button
               class="carousel-arrow carousel-next"
-              aria-label="Siguiente foto"
+              aria-label="Siguiente representante"
             >
               ›
             </button>
 
 
-            <div class="carousel-dots">
-
-              <button
-                class="carousel-dot active"
-                aria-label="Foto 1"
-              ></button>
-
-              <button
-                class="carousel-dot"
-                aria-label="Foto 2"
-              ></button>
-
-              <button
-                class="carousel-dot"
-                aria-label="Foto 3"
-              ></button>
-
-              <button
-                class="carousel-dot"
-                aria-label="Foto 4"
-              ></button>
-
-            </div>
+            <div class="carousel-dots"></div>
 
 
             <div class="area-content">
@@ -2799,7 +3017,7 @@
 
 
           <!-- =================================================
-               LEGAL
+               02 LEGAL
           ================================================== -->
 
           <article
@@ -2811,33 +3029,46 @@
 
               <div class="carousel-track">
 
+
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/legal/legal-1.jpg"
-                    alt="Área Legal - foto 1"
+                    alt="Representante del Área Legal"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/legal/legal-2.jpg"
-                    alt="Área Legal - foto 2"
+                    alt="Representante del Área Legal"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/legal/legal-3.jpg"
-                    alt="Área Legal - foto 3"
+                    alt="Representante del Área Legal"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/legal/legal-4.jpg"
-                    alt="Área Legal - foto 4"
+                    alt="Representante del Área Legal"
                   >
                 </div>
+
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/legal/legal-5.jpg"
+                    alt="Representante del Área Legal"
+                  >
+                </div>
+
 
               </div>
 
@@ -2846,27 +3077,21 @@
 
             <button
               class="carousel-arrow carousel-prev"
-              aria-label="Foto anterior"
+              aria-label="Representante anterior"
             >
               ‹
             </button>
 
+
             <button
               class="carousel-arrow carousel-next"
-              aria-label="Siguiente foto"
+              aria-label="Siguiente representante"
             >
               ›
             </button>
 
 
-            <div class="carousel-dots">
-
-              <button class="carousel-dot active"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-
-            </div>
+            <div class="carousel-dots"></div>
 
 
             <div class="area-content">
@@ -2898,7 +3123,7 @@
 
 
           <!-- =================================================
-               ADOPCIONES
+               03 ADOPCIONES
           ================================================== -->
 
           <article
@@ -2910,33 +3135,46 @@
 
               <div class="carousel-track">
 
+
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/adopciones/adopciones-1.jpg"
-                    alt="Área de Adopciones - foto 1"
+                    alt="Representante del Área de Adopciones"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/adopciones/adopciones-2.jpg"
-                    alt="Área de Adopciones - foto 2"
+                    alt="Representante del Área de Adopciones"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/adopciones/adopciones-3.jpg"
-                    alt="Área de Adopciones - foto 3"
+                    alt="Representante del Área de Adopciones"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/adopciones/adopciones-4.jpg"
-                    alt="Área de Adopciones - foto 4"
+                    alt="Representante del Área de Adopciones"
                   >
                 </div>
+
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/adopciones/adopciones-5.jpg"
+                    alt="Representante del Área de Adopciones"
+                  >
+                </div>
+
 
               </div>
 
@@ -2945,27 +3183,21 @@
 
             <button
               class="carousel-arrow carousel-prev"
-              aria-label="Foto anterior"
+              aria-label="Representante anterior"
             >
               ‹
             </button>
 
+
             <button
               class="carousel-arrow carousel-next"
-              aria-label="Siguiente foto"
+              aria-label="Siguiente representante"
             >
               ›
             </button>
 
 
-            <div class="carousel-dots">
-
-              <button class="carousel-dot active"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-
-            </div>
+            <div class="carousel-dots"></div>
 
 
             <div class="area-content">
@@ -2997,7 +3229,7 @@
 
 
           <!-- =================================================
-               EVENTOS
+               04 EVENTOS
           ================================================== -->
 
           <article
@@ -3009,33 +3241,46 @@
 
               <div class="carousel-track">
 
+
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/eventos/eventos-1.jpg"
-                    alt="Área de Eventos - foto 1"
+                    alt="Representante del Área de Eventos"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/eventos/eventos-2.jpg"
-                    alt="Área de Eventos - foto 2"
+                    alt="Representante del Área de Eventos"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/eventos/eventos-3.jpg"
-                    alt="Área de Eventos - foto 3"
+                    alt="Representante del Área de Eventos"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/eventos/eventos-4.jpg"
-                    alt="Área de Eventos - foto 4"
+                    alt="Representante del Área de Eventos"
                   >
                 </div>
+
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/eventos/eventos-5.jpg"
+                    alt="Representante del Área de Eventos"
+                  >
+                </div>
+
 
               </div>
 
@@ -3044,27 +3289,21 @@
 
             <button
               class="carousel-arrow carousel-prev"
-              aria-label="Foto anterior"
+              aria-label="Representante anterior"
             >
               ‹
             </button>
 
+
             <button
               class="carousel-arrow carousel-next"
-              aria-label="Siguiente foto"
+              aria-label="Siguiente representante"
             >
               ›
             </button>
 
 
-            <div class="carousel-dots">
-
-              <button class="carousel-dot active"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-
-            </div>
+            <div class="carousel-dots"></div>
 
 
             <div class="area-content">
@@ -3096,7 +3335,7 @@
 
 
           <!-- =================================================
-               REDES
+               05 REDES
           ================================================== -->
 
           <article
@@ -3108,33 +3347,46 @@
 
               <div class="carousel-track">
 
+
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/redes/redes-1.jpg"
-                    alt="Área de Redes - foto 1"
+                    alt="Representante del Área de Redes, Marketing y Audiovisual"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/redes/redes-2.jpg"
-                    alt="Área de Redes - foto 2"
+                    alt="Representante del Área de Redes, Marketing y Audiovisual"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/redes/redes-3.jpg"
-                    alt="Área de Redes - foto 3"
+                    alt="Representante del Área de Redes, Marketing y Audiovisual"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/redes/redes-4.jpg"
-                    alt="Área de Redes - foto 4"
+                    alt="Representante del Área de Redes, Marketing y Audiovisual"
                   >
                 </div>
+
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/redes/redes-5.jpg"
+                    alt="Representante del Área de Redes, Marketing y Audiovisual"
+                  >
+                </div>
+
 
               </div>
 
@@ -3143,27 +3395,21 @@
 
             <button
               class="carousel-arrow carousel-prev"
-              aria-label="Foto anterior"
+              aria-label="Representante anterior"
             >
               ‹
             </button>
 
+
             <button
               class="carousel-arrow carousel-next"
-              aria-label="Siguiente foto"
+              aria-label="Siguiente representante"
             >
               ›
             </button>
 
 
-            <div class="carousel-dots">
-
-              <button class="carousel-dot active"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-
-            </div>
+            <div class="carousel-dots"></div>
 
 
             <div class="area-content">
@@ -3195,7 +3441,7 @@
 
 
           <!-- =================================================
-               ALIANZAS
+               06 ALIANZAS
           ================================================== -->
 
           <article
@@ -3207,33 +3453,46 @@
 
               <div class="carousel-track">
 
+
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/alianzas/alianzas-1.jpg"
-                    alt="Área de Alianzas - foto 1"
+                    alt="Representante del Área de Alianzas Estratégicas"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/alianzas/alianzas-2.jpg"
-                    alt="Área de Alianzas - foto 2"
+                    alt="Representante del Área de Alianzas Estratégicas"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/alianzas/alianzas-3.jpg"
-                    alt="Área de Alianzas - foto 3"
+                    alt="Representante del Área de Alianzas Estratégicas"
                   >
                 </div>
+
 
                 <div class="carousel-slide">
                   <img
                     src="assets/equipo/alianzas/alianzas-4.jpg"
-                    alt="Área de Alianzas - foto 4"
+                    alt="Representante del Área de Alianzas Estratégicas"
                   >
                 </div>
+
+
+                <div class="carousel-slide">
+                  <img
+                    src="assets/equipo/alianzas/alianzas-5.jpg"
+                    alt="Representante del Área de Alianzas Estratégicas"
+                  >
+                </div>
+
 
               </div>
 
@@ -3242,27 +3501,21 @@
 
             <button
               class="carousel-arrow carousel-prev"
-              aria-label="Foto anterior"
+              aria-label="Representante anterior"
             >
               ‹
             </button>
 
+
             <button
               class="carousel-arrow carousel-next"
-              aria-label="Siguiente foto"
+              aria-label="Siguiente representante"
             >
               ›
             </button>
 
 
-            <div class="carousel-dots">
-
-              <button class="carousel-dot active"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-              <button class="carousel-dot"></button>
-
-            </div>
+            <div class="carousel-dots"></div>
 
 
             <div class="area-content">
@@ -3291,6 +3544,7 @@
             </div>
 
           </article>
+
 
         </div>
 
@@ -3515,8 +3769,6 @@
       <div class="join-options">
 
 
-        <!-- VOLUNTARIO -->
-
         <div class="join-option">
 
           <div class="join-option-icon">
@@ -3559,8 +3811,6 @@
 
         </div>
 
-
-        <!-- MARCA -->
 
         <div class="join-option">
 
@@ -3613,6 +3863,7 @@
           </a>
 
         </div>
+
 
       </div>
 
@@ -3669,7 +3920,7 @@
 
 
     /* =====================================================
-       MOBILE MENU
+       MENÚ MÓVIL
     ====================================================== */
 
     const mobileMenu =
@@ -3700,7 +3951,9 @@
 
 
     document
-      .querySelectorAll(".main-nav a")
+      .querySelectorAll(
+        ".main-nav a"
+      )
       .forEach(link => {
 
         link.addEventListener(
@@ -3723,7 +3976,7 @@
 
 
     /* =====================================================
-       REVEAL
+       ANIMACIONES
     ====================================================== */
 
     const revealElements =
@@ -3736,23 +3989,25 @@
       new IntersectionObserver(
         (entries, observer) => {
 
-          entries.forEach(entry => {
+          entries.forEach(
+            entry => {
 
-            if (
-              entry.isIntersecting
-            ) {
+              if (
+                entry.isIntersecting
+              ) {
 
-              entry.target.classList.add(
-                "visible"
-              );
+                entry.target.classList.add(
+                  "visible"
+                );
 
-              observer.unobserve(
-                entry.target
-              );
+                observer.unobserve(
+                  entry.target
+                );
+
+              }
 
             }
-
-          });
+          );
 
         },
         {
@@ -3773,7 +4028,14 @@
 
 
     /* =====================================================
-       CARRUSELES
+       CARRUSELES DE REPRESENTANTES
+       
+       IMPORTANTE:
+       Cada tarjeta puede tener 1, 2, 3, 4, 5
+       o las fotos que quieras.
+
+       El sistema detecta automáticamente
+       cuántas fotos tiene cada tarjeta.
     ====================================================== */
 
     document
@@ -3790,8 +4052,10 @@
 
 
         const slides =
-          card.querySelectorAll(
-            ".carousel-slide"
+          Array.from(
+            card.querySelectorAll(
+              ".carousel-slide"
+            )
           );
 
 
@@ -3807,9 +4071,9 @@
           );
 
 
-        const dots =
-          card.querySelectorAll(
-            ".carousel-dot"
+        const dotsContainer =
+          card.querySelector(
+            ".carousel-dots"
           );
 
 
@@ -3817,7 +4081,115 @@
           0;
 
 
-        let autoplay;
+        let autoplay = null;
+
+
+        /*
+         * Si no hay fotos,
+         * ocultamos el carrusel.
+         */
+
+        if (
+          slides.length === 0
+        ) {
+
+          card.style.display =
+            "none";
+
+          return;
+
+        }
+
+
+        /*
+         * Si solamente hay una foto,
+         * ocultamos flechas y puntos.
+         */
+
+        if (
+          slides.length === 1
+        ) {
+
+          card.classList.add(
+            "single-slide"
+          );
+
+        }
+
+
+        /*
+         * Crear automáticamente
+         * los puntos según las fotos.
+         */
+
+        if (
+          slides.length > 1
+        ) {
+
+          slides.forEach(
+            (_, index) => {
+
+              const dot =
+                document.createElement(
+                  "button"
+                );
+
+
+              dot.type =
+                "button";
+
+
+              dot.className =
+                "carousel-dot";
+
+
+              dot.setAttribute(
+                "aria-label",
+                `Ir al representante ${index + 1}`
+              );
+
+
+              if (
+                index === 0
+              ) {
+
+                dot.classList.add(
+                  "active"
+                );
+
+              }
+
+
+              dot.addEventListener(
+                "click",
+                event => {
+
+                  event.stopPropagation();
+
+                  goTo(index);
+
+                  restartAutoplay();
+
+                }
+              );
+
+
+              dotsContainer.appendChild(
+                dot
+              );
+
+            }
+          );
+
+        }
+
+
+        const dots =
+          Array.from(
+            card.querySelectorAll(
+              ".carousel-dot"
+            )
+          );
 
 
         function updateCarousel() {
@@ -3843,8 +4215,12 @@
         function goTo(index) {
 
           current =
-            (index + slides.length)
-            % slides.length;
+            (
+              index + slides.length
+            )
+            %
+            slides.length;
+
 
           updateCarousel();
 
@@ -3852,6 +4228,15 @@
 
 
         function nextSlide() {
+
+          if (
+            slides.length <= 1
+          ) {
+
+            return;
+
+          }
+
 
           goTo(
             current + 1
@@ -3862,6 +4247,15 @@
 
         function prevSlide() {
 
+          if (
+            slides.length <= 1
+          ) {
+
+            return;
+
+          }
+
+
           goTo(
             current - 1
           );
@@ -3871,6 +4265,15 @@
 
         function startAutoplay() {
 
+          if (
+            slides.length <= 1
+          ) {
+
+            return;
+
+          }
+
+
           clearInterval(
             autoplay
           );
@@ -3879,7 +4282,7 @@
           autoplay =
             setInterval(
               nextSlide,
-              4500
+              5000
             );
 
         }
@@ -3894,6 +4297,19 @@
         }
 
 
+        function restartAutoplay() {
+
+          stopAutoplay();
+
+          startAutoplay();
+
+        }
+
+
+        /*
+         * Flecha siguiente
+         */
+
         next.addEventListener(
           "click",
           event => {
@@ -3902,11 +4318,15 @@
 
             nextSlide();
 
-            startAutoplay();
+            restartAutoplay();
 
           }
         );
 
+
+        /*
+         * Flecha anterior
+         */
 
         prev.addEventListener(
           "click",
@@ -3916,51 +4336,46 @@
 
             prevSlide();
 
+            restartAutoplay();
+
+          }
+        );
+
+
+        /*
+         * Pausar al pasar
+         * el mouse por encima.
+         */
+
+        card.addEventListener(
+          "mouseenter",
+          () => {
+
+            stopAutoplay();
+
+          }
+        );
+
+
+        card.addEventListener(
+          "mouseleave",
+          () => {
+
             startAutoplay();
 
           }
         );
 
 
-        dots.forEach(
-          (dot, index) => {
-
-            dot.addEventListener(
-              "click",
-              event => {
-
-                event.stopPropagation();
-
-                goTo(index);
-
-                startAutoplay();
-
-              }
-            );
-
-          }
-        );
-
-
-        card.addEventListener(
-          "mouseenter",
-          stopAutoplay
-        );
-
-
-        card.addEventListener(
-          "mouseleave",
-          startAutoplay
-        );
-
-
         /*
-         * Soporte táctil para móvil
+         * Soporte táctil.
          */
 
-        let touchStartX = 0;
+        let touchStartX =
+          0;
 
-        let touchEndX = 0;
+        let touchEndX =
+          0;
 
 
         track.addEventListener(
@@ -3968,7 +4383,9 @@
           event => {
 
             touchStartX =
-              event.changedTouches[0].screenX;
+              event
+                .changedTouches[0]
+                .screenX;
 
             stopAutoplay();
 
@@ -3984,11 +4401,14 @@
           event => {
 
             touchEndX =
-              event.changedTouches[0].screenX;
+              event
+                .changedTouches[0]
+                .screenX;
 
 
             const difference =
-              touchStartX - touchEndX;
+              touchStartX -
+              touchEndX;
 
 
             if (
@@ -4018,6 +4438,10 @@
           }
         );
 
+
+        /*
+         * Estado inicial.
+         */
 
         updateCarousel();
 
@@ -4219,7 +4643,7 @@
 
     document
       .querySelectorAll(
-        "[data-area]"
+        ".area-button"
       )
       .forEach(button => {
 
@@ -4236,7 +4660,9 @@
 
 
             if (!area) {
+
               return;
+
             }
 
 
@@ -4346,11 +4772,13 @@
 
 
     /* =====================================================
-       CLICK FUERA DEL MODAL
+       CERRAR AL HACER CLICK FUERA
     ====================================================== */
 
     document
-      .querySelectorAll(".modal")
+      .querySelectorAll(
+        ".modal"
+      )
       .forEach(modal => {
 
         modal.addEventListener(
@@ -4378,7 +4806,7 @@
 
 
     /* =====================================================
-       ESC
+       ESC PARA CERRAR
     ====================================================== */
 
     document.addEventListener(
