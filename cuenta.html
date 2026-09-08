@@ -1,5 +1,4 @@
-<!DOCTYPE html>
-<html lang="es">
+
 
 <head>
 
@@ -443,6 +442,35 @@
       overflow-wrap: anywhere;
     }
 
+
+
+    .profile-editable {
+      width: 100%;
+      min-height: 22px;
+      box-sizing: border-box;
+      margin: 0;
+      padding: 7px 10px;
+      border: 1px solid #d6b35a;
+      border-radius: 8px;
+      background: #fff8df;
+      color: #3b2b20;
+      font-family: Georgia, serif;
+      font-size: 16px;
+      outline: none;
+      overflow-wrap: anywhere;
+    }
+
+    .profile-editable:disabled {
+      opacity: 1;
+      cursor: default;
+    }
+
+    .profile-editable.is-editing {
+      background: #fff0b8;
+      border: 2px solid #c89520;
+      box-shadow: 0 0 0 3px rgba(200, 149, 32, .14);
+      cursor: text;
+    }
 
     .profile-note {
       margin-top: 28px;
@@ -1736,12 +1764,7 @@ header{min-height:64px!important}
                     Nombres
                   </div>
 
-                  <div
-                    id="perfilNombres"
-                    class="profile-value"
-                  >
-                    —
-                  </div>
+                  <input id="perfilNombres" class="profile-value profile-editable" type="text" autocomplete="given-name" value="" disabled>
 
                 </div>
 
@@ -1752,12 +1775,7 @@ header{min-height:64px!important}
                     Apellidos
                   </div>
 
-                  <div
-                    id="perfilApellidos"
-                    class="profile-value"
-                  >
-                    —
-                  </div>
+                  <input id="perfilApellidos" class="profile-value profile-editable" type="text" autocomplete="family-name" value="" disabled>
 
                 </div>
 
@@ -1828,29 +1846,7 @@ header{min-height:64px!important}
 
               </div>
 
-
-              <div
-                id="perfilEdicion"
-                style="display:none;margin-top:22px;"
-              >
-                <div class="profile-grid">
-                  <div class="profile-field">
-                    <label class="profile-label" for="editarNombres">Nombres</label>
-                    <input id="editarNombres" type="text" autocomplete="given-name" class="profile-edit-input">
-                  </div>
-                  <div class="profile-field">
-                    <label class="profile-label" for="editarApellidos">Apellidos</label>
-                    <input id="editarApellidos" type="text" autocomplete="family-name" class="profile-edit-input">
-                  </div>
-                </div>
-                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
-                  <button type="button" id="guardarDatosPerfil" class="profile-action-button">Guardar cambios</button>
-                  <button type="button" id="cancelarEdicionPerfil" class="profile-action-button secondary">Cancelar</button>
-                </div>
-                <div id="perfilEdicionMensaje" class="message" style="display:none;margin-top:12px;"></div>
-              </div>
-
-              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
                 <button type="button" id="modificarDatosPerfil" class="profile-action-button">Modificar datos</button>
               </div>
 
@@ -2647,14 +2643,14 @@ header{min-height:64px!important}
 
       document.getElementById(
         "perfilNombres"
-      ).textContent =
-        nombres || "—";
+      ).value =
+        nombres || "";
 
 
       document.getElementById(
         "perfilApellidos"
-      ).textContent =
-        apellidos || "—";
+      ).value =
+        apellidos || "";
 
 
       document.getElementById(
@@ -3132,42 +3128,48 @@ header{min-height:64px!important}
        ========================================= */
 
     const modificarDatosPerfil = document.getElementById("modificarDatosPerfil");
-    const perfilEdicion = document.getElementById("perfilEdicion");
-    const editarNombres = document.getElementById("editarNombres");
-    const editarApellidos = document.getElementById("editarApellidos");
-    const guardarDatosPerfil = document.getElementById("guardarDatosPerfil");
-    const cancelarEdicionPerfil = document.getElementById("cancelarEdicionPerfil");
-    const perfilEdicionMensaje = document.getElementById("perfilEdicionMensaje");
+    const perfilNombres = document.getElementById("perfilNombres");
+    const perfilApellidos = document.getElementById("perfilApellidos");
+
+    let valoresPerfilOriginales = {
+      nombres: "",
+      apellidos: ""
+    };
 
     modificarDatosPerfil.addEventListener("click", function() {
-      const nombresActuales = document.getElementById("perfilNombres").textContent.trim();
-      const apellidosActuales = document.getElementById("perfilApellidos").textContent.trim();
-      editarNombres.value = nombresActuales === "—" ? "" : nombresActuales;
-      editarApellidos.value = apellidosActuales === "—" ? "" : apellidosActuales;
-      perfilEdicionMensaje.style.display = "none";
-      perfilEdicion.style.display = "block";
-      editarNombres.focus();
-    });
+      const estaEditando = !perfilNombres.disabled;
 
-    cancelarEdicionPerfil.addEventListener("click", function() {
-      perfilEdicion.style.display = "none";
-      perfilEdicionMensaje.style.display = "none";
-    });
-
-    guardarDatosPerfil.addEventListener("click", async function() {
-      const nombres = editarNombres.value.trim();
-      const apellidos = editarApellidos.value.trim();
-      perfilEdicionMensaje.style.display = "none";
-
-      if(!nombres || !apellidos) {
-        perfilEdicionMensaje.className = "message error";
-        perfilEdicionMensaje.textContent = "Completa nombres y apellidos.";
-        perfilEdicionMensaje.style.display = "block";
+      if(estaEditando) {
+        guardarDatosPerfil();
         return;
       }
 
-      guardarDatosPerfil.disabled = true;
-      guardarDatosPerfil.textContent = "Guardando...";
+      valoresPerfilOriginales = {
+        nombres: perfilNombres.value,
+        apellidos: perfilApellidos.value
+      };
+
+      perfilNombres.disabled = false;
+      perfilApellidos.disabled = false;
+      perfilNombres.classList.add("is-editing");
+      perfilApellidos.classList.add("is-editing");
+      modificarDatosPerfil.textContent = "Guardar cambios";
+      perfilNombres.focus();
+      return;
+
+    });
+
+    async function guardarDatosPerfil() {
+      const nombres = perfilNombres.value.trim();
+      const apellidos = perfilApellidos.value.trim();
+
+      if(!nombres || !apellidos) {
+        alert("Completa nombres y apellidos.");
+        return;
+      }
+
+      modificarDatosPerfil.disabled = true;
+      modificarDatosPerfil.textContent = "Guardando...";
 
       try {
         const { data, error } = await supabaseClient.auth.updateUser({
@@ -3179,24 +3181,41 @@ header{min-height:64px!important}
         });
 
         if(error) throw error;
+
         mostrarCuenta(data.user);
-        perfilEdicion.style.display = "none";
-        perfilEdicionMensaje.className = "message success";
-        perfilEdicionMensaje.textContent = "Datos actualizados correctamente.";
-        perfilEdicionMensaje.style.display = "block";
+
+        perfilNombres.disabled = true;
+        perfilApellidos.disabled = true;
+        perfilNombres.classList.remove("is-editing");
+        perfilApellidos.classList.remove("is-editing");
+
+        modificarDatosPerfil.textContent = "Modificar datos";
+
+        alert("Datos actualizados correctamente.");
       } catch(error) {
         console.error("ERROR ACTUALIZANDO PERFIL:", error);
-        perfilEdicionMensaje.className = "message error";
-        perfilEdicionMensaje.textContent = "No pudimos actualizar tus datos. Inténtalo nuevamente.";
-        perfilEdicionMensaje.style.display = "block";
+        alert("No pudimos actualizar tus datos. Inténtalo nuevamente.");
+        modificarDatosPerfil.textContent = "Cancelar";
       } finally {
-        guardarDatosPerfil.disabled = false;
-        guardarDatosPerfil.textContent = "Guardar cambios";
+        modificarDatosPerfil.disabled = false;
+      }
+    }
+
+    perfilNombres.addEventListener("keydown", function(event) {
+      if(event.key === "Enter") {
+        event.preventDefault();
+        guardarDatosPerfil();
       }
     });
 
+    perfilApellidos.addEventListener("keydown", function(event) {
+      if(event.key === "Enter") {
+        event.preventDefault();
+        guardarDatosPerfil();
+      }
+    });
 
-    /* =========================================
+        /* =========================================
        CERRAR SESIÓN
        ========================================= */
 
