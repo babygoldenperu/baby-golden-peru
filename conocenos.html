@@ -1,4469 +1,3698 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <meta charset="UTF-8">
+  <title>Conócenos | Baby Golden Perú</title>
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <meta
+    name="description"
+    content="Conoce Baby Golden Perú, nuestra fundadora, nuestro propósito, nuestras áreas y la comunidad que deja huellas."
+  >
 
-    <title>
-        Conócenos | Baby Golden Perú
-    </title>
+  <!-- =====================================================
+       GOOGLE FONTS
+  ====================================================== -->
 
-    <meta
-        name="description"
-        content="Conoce Baby Golden Perú, nuestra fundadora, propósito, áreas de trabajo y comunidad."
-    >
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- GOOGLE FONTS -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+  <style>
 
-    <link
-        rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin
-    >
+    /* =====================================================
+       VARIABLES
+    ====================================================== */
 
-    <link
-        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
-        rel="stylesheet"
-    >
+    :root {
+      --gold: #c99a52;
+      --gold-dark: #a97835;
+      --gold-light: #dfbd83;
 
+      --cream: #fffaf3;
+      --cream-dark: #f5ead9;
+      --cream-deep: #ead9c0;
 
-    <style>
+      --brown: #302219;
+      --brown-soft: #5d4b3e;
 
-        /* =====================================================
-           VARIABLES
-        ====================================================== */
+      --text: #75675d;
 
-        :root {
+      --white: #ffffff;
 
-            --gold: #c99a52;
+      --border: #eadcc9;
 
-            --gold-dark: #a97835;
+      --shadow-sm:
+        0 10px 30px rgba(73, 49, 24, 0.07);
 
-            --cream: #fffaf3;
+      --shadow-md:
+        0 20px 55px rgba(73, 49, 24, 0.12);
 
-            --cream-dark: #f5ead9;
+      --shadow-lg:
+        0 30px 80px rgba(73, 49, 24, 0.18);
 
-            --brown: #302219;
+      --radius-sm: 16px;
+      --radius-md: 24px;
+      --radius-lg: 34px;
 
-            --brown-soft: #5d4b3e;
+      --max-width: 1240px;
+    }
 
-            --text: #75675d;
 
-            --white: #ffffff;
+    /* =====================================================
+       RESET
+    ====================================================== */
 
-            --border: #eadcc9;
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-            --shadow:
-                0 15px 45px rgba(63, 43, 25, .10);
+    html {
+      scroll-behavior: smooth;
+    }
 
-            --shadow-hover:
-                0 22px 55px rgba(63, 43, 25, .16);
+    body {
+      font-family: "DM Sans", sans-serif;
+      color: var(--brown);
+      background: var(--cream);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        }
+    img {
+      width: 100%;
+      display: block;
+    }
 
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
 
-        /* =====================================================
-           RESET
-        ====================================================== */
+    button {
+      font-family: inherit;
+      border: 0;
+      cursor: pointer;
+    }
 
-        * {
+    .container {
+      width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto;
+    }
 
-            margin: 0;
 
-            padding: 0;
+    /* =====================================================
+       HEADER
+    ====================================================== */
 
-            box-sizing: border-box;
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
 
-        }
+      width: 100%;
 
+      z-index: 1000;
 
-        html {
+      padding: 18px 0;
 
-            scroll-behavior: smooth;
+      transition: all 0.35s ease;
+    }
 
-        }
+    .site-header.scrolled {
+      padding: 10px 0;
 
+      background: rgba(255, 250, 243, 0.94);
 
-        body {
+      backdrop-filter: blur(18px);
 
-            font-family:
-                "DM Sans",
-                sans-serif;
+      box-shadow:
+        0 8px 30px rgba(48, 34, 25, 0.08);
+    }
 
-            color:
-                var(--brown);
+    .header-inner {
+      width: min(calc(100% - 32px), 1380px);
 
-            background:
-                var(--cream);
+      min-height: 74px;
 
-            line-height:
-                1.6;
+      margin: 0 auto;
 
-            overflow-x:
-                hidden;
+      padding: 10px 18px 10px 20px;
 
-        }
+      display: flex;
+      align-items: center;
 
+      gap: 25px;
 
-        img {
+      background:
+        rgba(255, 255, 255, 0.92);
 
-            display:
-                block;
+      border:
+        1px solid rgba(234, 220, 201, 0.85);
 
-            width:
-                100%;
+      border-radius: 22px;
 
-        }
+      box-shadow:
+        0 12px 40px rgba(63, 43, 23, 0.08);
 
+      backdrop-filter: blur(16px);
+    }
 
-        a {
+    .logo {
+      display: flex;
+      align-items: center;
 
-            color:
-                inherit;
+      flex-shrink: 0;
+    }
 
-            text-decoration:
-                none;
+    .logo img {
+      width: 154px;
+      max-height: 56px;
 
-        }
+      object-fit: contain;
+    }
 
+    .main-nav {
+      margin-left: auto;
 
-        button {
+      display: flex;
+      align-items: center;
 
-            font-family:
-                inherit;
+      gap: 5px;
+    }
 
-        }
+    .main-nav a {
+      position: relative;
 
+      padding: 11px 13px;
 
-        .container {
+      color: var(--brown-soft);
 
-            width:
-                min(
-                    1180px,
-                    calc(100% - 40px)
-                );
+      font-size: 13px;
+      font-weight: 600;
 
-            margin:
-                0 auto;
+      white-space: nowrap;
 
-        }
+      transition: 0.25s ease;
+    }
 
+    .main-nav a:not(.shop-link)::after {
+      content: "";
 
-        /* =====================================================
-           HEADER
-        ====================================================== */
+      position: absolute;
 
-        .site-header {
+      left: 13px;
+      right: 13px;
 
-            position:
-                sticky;
+      bottom: 5px;
 
-            top:
-                0;
+      height: 2px;
 
-            z-index:
-                1000;
+      background: var(--gold);
 
-            background:
-                rgba(
-                    255,
-                    250,
-                    243,
-                    .96
-                );
+      border-radius: 20px;
 
-            backdrop-filter:
-                blur(14px);
+      transform: scaleX(0);
 
-            border-bottom:
-                1px solid
-                rgba(
-                    234,
-                    220,
-                    201,
-                    .8
-                );
+      transition:
+        transform 0.25s ease;
+    }
 
-        }
+    .main-nav a:hover {
+      color: var(--gold-dark);
+    }
 
+    .main-nav a:not(.shop-link):hover::after {
+      transform: scaleX(1);
+    }
 
-        .header-inner {
+    .shop-link {
+      margin-left: 8px;
 
-            min-height:
-                82px;
+      padding: 12px 20px !important;
 
-            display:
-                flex;
+      color: var(--white) !important;
 
-            align-items:
-                center;
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold),
+          var(--gold-dark)
+        );
 
-            gap:
-                28px;
+      border-radius: 100px;
 
-        }
+      box-shadow:
+        0 8px 18px rgba(169, 120, 53, 0.22);
+    }
 
+    .shop-link:hover {
+      color: var(--white) !important;
 
-        .logo {
+      background: var(--brown);
 
-            width:
-                150px;
+      transform: translateY(-1px);
+    }
 
-            flex-shrink:
-                0;
+    .header-actions {
+      display: flex;
+      align-items: center;
 
-        }
+      gap: 7px;
 
+      margin-left: 8px;
+    }
 
-        .logo img {
+    .header-icon {
+      width: 40px;
+      height: 40px;
 
-            width:
-                100%;
+      display: grid;
+      place-items: center;
 
-            height:
-                auto;
+      border-radius: 50%;
 
-            object-fit:
-                contain;
+      background: transparent;
 
-        }
+      color: var(--brown);
 
+      transition: 0.25s ease;
+    }
 
-        .main-nav {
+    .header-icon:hover {
+      color: var(--gold-dark);
 
-            display:
-                flex;
+      background: var(--cream-dark);
 
-            align-items:
-                center;
+      transform: translateY(-2px);
+    }
 
-            gap:
-                24px;
+    .header-icon svg {
+      width: 19px;
+      height: 19px;
 
-            margin-left:
-                auto;
+      stroke-width: 1.8;
+    }
 
-        }
+    .mobile-menu {
+      display: none;
 
+      width: 42px;
+      height: 42px;
 
-        .main-nav a {
+      margin-left: auto;
 
-            position:
-                relative;
+      place-items: center;
 
-            color:
-                var(--brown-soft);
+      border-radius: 50%;
 
-            font-size:
-                13px;
+      background: var(--cream-dark);
 
-            font-weight:
-                600;
+      color: var(--brown);
+    }
 
-            letter-spacing:
-                .4px;
 
-            transition:
-                .25s ease;
+    /* =====================================================
+       HERO
+    ====================================================== */
 
-        }
+    .hero {
+      position: relative;
 
+      min-height: 760px;
 
-        .main-nav a:not(.nav-shop)::after {
+      display: flex;
+      align-items: center;
 
-            content:
-                "";
+      overflow: hidden;
 
-            position:
-                absolute;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(37, 25, 17, 0.84) 0%,
+          rgba(37, 25, 17, 0.65) 38%,
+          rgba(37, 25, 17, 0.18) 76%,
+          rgba(37, 25, 17, 0.08) 100%
+        ),
+        url("assets/conocenos-hero.jpg")
+        center / cover no-repeat;
+    }
 
-            left:
-                0;
+    .hero::before {
+      content: "";
 
-            bottom:
-                -7px;
+      position: absolute;
 
-            width:
-                0;
+      width: 480px;
+      height: 480px;
 
-            height:
-                2px;
+      left: -260px;
+      bottom: -250px;
 
-            background:
-                var(--gold);
+      border:
+        1px solid rgba(255,255,255,0.16);
 
-            transition:
-                .25s ease;
+      border-radius: 50%;
+    }
 
-        }
+    .hero::after {
+      content: "";
 
+      position: absolute;
 
-        .main-nav a:hover {
+      width: 650px;
+      height: 650px;
 
-            color:
-                var(--gold-dark);
+      left: -360px;
+      bottom: -350px;
 
-        }
+      border:
+        1px solid rgba(255,255,255,0.09);
 
+      border-radius: 50%;
+    }
 
-        .main-nav a:hover::after {
+    .hero-content {
+      position: relative;
 
-            width:
-                100%;
+      z-index: 2;
 
-        }
+      width: min(calc(100% - 48px), var(--max-width));
 
+      margin: 0 auto;
 
-        .nav-shop {
+      padding-top: 95px;
+    }
 
-            padding:
-                11px 19px;
+    .hero-copy {
+      max-width: 690px;
 
-            border-radius:
-                999px;
+      color: var(--white);
+    }
 
-            background:
-                var(--gold);
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
 
-            color:
-                white !important;
+      gap: 11px;
 
-            transition:
-                .25s ease;
+      margin-bottom: 20px;
 
-        }
+      color: #f2d7a9;
 
+      font-size: 12px;
+      font-weight: 700;
 
-        .nav-shop:hover {
+      letter-spacing: 0.2em;
+    }
 
-            background:
-                #17120f;
+    .eyebrow::before {
+      content: "";
 
-            color:
-                white !important;
+      width: 38px;
+      height: 1px;
 
-        }
+      background: #f2d7a9;
+    }
 
+    .hero h1 {
+      margin-bottom: 22px;
 
-        /* =====================================================
-           HEADER ICONS
-        ====================================================== */
+      font-family:
+        "Playfair Display",
+        serif;
 
-        .header-actions {
+      font-size:
+        clamp(64px, 8vw, 108px);
 
-            display:
-                flex;
+      line-height: 0.95;
 
-            align-items:
-                center;
+      font-weight: 600;
 
-            gap:
-                13px;
+      letter-spacing: -0.04em;
+    }
 
-        }
+    .hero-description {
+      max-width: 610px;
 
+      margin-bottom: 30px;
 
-        .header-action {
+      color:
+        rgba(255,255,255,0.88);
 
-            width:
-                37px;
+      font-size: 18px;
 
-            height:
-                37px;
+      line-height: 1.8;
+    }
 
-            display:
-                flex;
+    .hero-motto {
+      display: inline-block;
 
-            align-items:
-                center;
+      padding-left: 18px;
 
-            justify-content:
-                center;
+      border-left:
+        2px solid var(--gold-light);
 
-            border-radius:
-                50%;
+      color: #fff4df;
 
-            color:
-                var(--brown);
+      font-family:
+        "Playfair Display",
+        serif;
 
-            border:
-                1px solid
-                var(--border);
+      font-size: 22px;
 
-            background:
-                white;
+      font-style: italic;
+    }
 
-            font-size:
-                16px;
+    .hero-scroll {
+      position: absolute;
 
-            transition:
-                .25s ease;
+      left: 50%;
+      bottom: 30px;
 
-        }
+      z-index: 2;
 
+      transform:
+        translateX(-50%);
 
-        .header-action:hover {
+      color:
+        rgba(255,255,255,0.78);
 
-            background:
-                var(--gold);
+      font-size: 10px;
+      font-weight: 700;
 
-            color:
-                white;
+      letter-spacing: 0.18em;
 
-            border-color:
-                var(--gold);
+      text-align: center;
+    }
 
-        }
+    .hero-scroll span {
+      display: block;
 
+      width: 1px;
+      height: 45px;
 
-        /* =====================================================
-           HERO
-        ====================================================== */
+      margin:
+        9px auto 0;
 
-        .hero {
+      background:
+        rgba(255,255,255,0.55);
+    }
 
-            position:
-                relative;
 
-            min-height:
-                560px;
+    /* =====================================================
+       GENERAL SECTIONS
+    ====================================================== */
 
-            display:
-                flex;
+    .section {
+      padding: 120px 0;
+    }
 
-            align-items:
-                center;
+    .section-heading {
+      max-width: 700px;
 
-            overflow:
-                hidden;
+      margin-bottom: 55px;
+    }
 
-            background:
+    .section-kicker {
+      display: inline-flex;
+      align-items: center;
 
-                linear-gradient(
-                    90deg,
-                    rgba(
-                        39,
-                        27,
-                        19,
-                        .76
-                    ) 0%,
+      gap: 9px;
 
-                    rgba(
-                        39,
-                        27,
-                        19,
-                        .54
-                    ) 45%,
+      margin-bottom: 13px;
 
-                    rgba(
-                        39,
-                        27,
-                        19,
-                        .12
-                    ) 100%
-                ),
+      color: var(--gold-dark);
 
-                url(
-                    "assets/conocenos-hero.jpg"
-                )
+      font-size: 11px;
+      font-weight: 800;
 
-                center / cover no-repeat;
+      letter-spacing: 0.18em;
 
-        }
+      text-transform: uppercase;
+    }
 
+    .section-kicker::before {
+      content: "";
 
-        .hero-content {
+      width: 28px;
+      height: 1px;
 
-            position:
-                relative;
+      background: var(--gold);
+    }
 
-            z-index:
-                2;
+    .section-title {
+      font-family:
+        "Playfair Display",
+        serif;
 
-            width:
-                min(
-                    720px,
-                    100%
-                );
+      font-size:
+        clamp(42px, 5vw, 64px);
 
-            color:
-                white;
+      line-height: 1.05;
 
-            padding:
-                100px 0;
+      letter-spacing: -0.035em;
 
-        }
+      font-weight: 600;
 
+      color: var(--brown);
+    }
 
-        .eyebrow {
+    .section-intro {
+      max-width: 640px;
 
-            display:
-                inline-flex;
+      margin-top: 17px;
 
-            align-items:
-                center;
+      color: var(--text);
 
-            gap:
-                9px;
+      font-size: 16px;
 
-            margin-bottom:
-                18px;
+      line-height: 1.8;
+    }
 
-            font-size:
-                12px;
 
-            font-weight:
-                700;
+    /* =====================================================
+       QUIÉN ESTÁ DETRÁS
+    ====================================================== */
 
-            letter-spacing:
-                2.5px;
+    .founder-section {
+      position: relative;
 
-            color:
-                #f2d5a0;
+      padding: 130px 0;
 
-        }
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(201,154,82,0.11),
+          transparent 25%
+        ),
+        var(--cream-dark);
 
+      overflow: hidden;
+    }
 
-        .eyebrow::before {
+    .founder-section::before {
+      content: "";
 
-            content:
-                "";
+      position: absolute;
 
-            width:
-                34px;
+      width: 550px;
+      height: 550px;
 
-            height:
-                1px;
+      top: -260px;
+      right: -180px;
 
-            background:
-                #f2d5a0;
+      border:
+        1px solid rgba(169,120,53,0.14);
 
-        }
+      border-radius: 50%;
+    }
 
+    .founder-section::after {
+      content: "";
 
-        .hero h1 {
+      position: absolute;
 
-            max-width:
-                700px;
+      width: 720px;
+      height: 720px;
 
-            margin-bottom:
-                22px;
+      top: -350px;
+      right: -265px;
 
-            font-family:
-                "Playfair Display",
-                serif;
+      border:
+        1px solid rgba(169,120,53,0.08);
 
-            font-size:
-                clamp(
-                    48px,
-                    6vw,
-                    72px
-                );
+      border-radius: 50%;
+    }
 
-            line-height:
-                1.06;
+    .founder-layout {
+      position: relative;
 
-            font-weight:
-                600;
+      z-index: 2;
 
-        }
+      display: grid;
 
+      grid-template-columns:
+        0.9fr 1.1fr;
 
-        .hero-description {
+      gap: 85px;
 
-            max-width:
-                620px;
+      align-items: center;
+    }
 
-            margin-bottom:
-                28px;
+    .founder-image-wrap {
+      position: relative;
+    }
 
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .88
-                );
+    .founder-image {
+      position: relative;
 
-            font-size:
-                18px;
+      z-index: 2;
 
-        }
+      height: 620px;
 
+      object-fit: cover;
 
-        .hero-motto {
+      border-radius:
+        180px 180px 28px 28px;
 
-            font-family:
-                "Playfair Display",
-                serif;
+      box-shadow: var(--shadow-lg);
+    }
 
-            font-size:
-                21px;
+    .founder-image-wrap::before {
+      content: "";
 
-            font-style:
-                italic;
+      position: absolute;
 
-            color:
-                #f4d9a7;
+      z-index: 1;
 
-        }
+      top: 28px;
+      left: -25px;
 
+      width: 100%;
+      height: 100%;
 
-        /* =====================================================
-           GENERAL
-        ====================================================== */
+      border:
+        1px solid var(--gold);
 
-        .section {
+      border-radius:
+        180px 180px 28px 28px;
 
-            padding:
-                100px 0;
+      opacity: 0.55;
+    }
 
-        }
+    .founder-badge {
+      position: absolute;
 
+      z-index: 3;
 
-        .section-header {
+      right: -32px;
+      bottom: 42px;
 
-            max-width:
-                700px;
+      width: 125px;
+      height: 125px;
 
-            margin:
-                0 auto 55px;
+      display: grid;
+      place-items: center;
 
-            text-align:
-                center;
+      padding: 15px;
 
-        }
+      border-radius: 50%;
 
+      background: var(--brown);
 
-        .section-label {
+      color: var(--white);
 
-            display:
-                block;
+      text-align: center;
 
-            margin-bottom:
-                11px;
+      box-shadow: var(--shadow-md);
+    }
 
-            color:
-                var(--gold-dark);
+    .founder-badge span:first-child {
+      display: block;
 
-            font-size:
-                11px;
+      color: var(--gold-light);
 
-            font-weight:
-                700;
+      font-size: 10px;
 
-            letter-spacing:
-                2.5px;
+      font-weight: 800;
 
-        }
+      letter-spacing: 0.12em;
+    }
 
+    .founder-badge span:last-child {
+      display: block;
 
-        .section-title {
+      margin-top: 4px;
 
-            margin-bottom:
-                15px;
+      font-family:
+        "Playfair Display",
+        serif;
 
-            font-family:
-                "Playfair Display",
-                serif;
+      font-size: 19px;
+    }
 
-            font-size:
-                clamp(
-                    35px,
-                    4vw,
-                    52px
-                );
+    .founder-name {
+      margin-bottom: 4px;
 
-            line-height:
-                1.12;
+      font-family:
+        "Playfair Display",
+        serif;
 
-            color:
-                var(--brown);
+      font-size:
+        clamp(48px, 5vw, 68px);
 
-        }
+      line-height: 1;
+    }
 
+    .founder-role {
+      margin-bottom: 28px;
 
-        .section-description {
+      color: var(--gold-dark);
 
-            color:
-                var(--text);
+      font-size: 12px;
 
-            font-size:
-                16px;
+      font-weight: 800;
 
-        }
+      letter-spacing: 0.18em;
+    }
 
+    .founder-copy p {
+      margin-bottom: 23px;
 
-        /* =====================================================
-           INTRO
-        ====================================================== */
+      color: var(--text);
 
-        .intro {
+      font-size: 16px;
 
-            background:
-                white;
+      line-height: 1.9;
+    }
 
-        }
+    .founder-tags {
+      display: flex;
 
+      flex-wrap: wrap;
 
-        .intro-grid {
+      gap: 9px;
 
-            display:
-                grid;
+      margin-top: 30px;
+    }
 
-            grid-template-columns:
-                repeat(
-                    4,
-                    1fr
-                );
+    .founder-tag {
+      padding: 9px 15px;
 
-            gap:
-                18px;
+      border:
+        1px solid rgba(169,120,53,0.3);
 
-        }
+      border-radius: 100px;
 
+      color: var(--brown-soft);
 
-        .intro-card {
+      background:
+        rgba(255,255,255,0.38);
 
-            padding:
-                31px 25px;
+      font-size: 12px;
 
-            border:
-                1px solid
-                var(--border);
+      font-weight: 600;
+    }
 
-            border-radius:
-                22px;
+    .founder-quote {
+      position: relative;
 
-            background:
-                var(--cream);
+      margin-top: 35px;
 
-            transition:
-                .3s ease;
+      padding: 30px 34px;
 
-        }
+      border-left:
+        3px solid var(--gold);
 
+      border-radius:
+        0 25px 25px 0;
 
-        .intro-card:hover {
+      background:
+        rgba(255,255,255,0.55);
 
-            transform:
-                translateY(-5px);
+      box-shadow: var(--shadow-sm);
+    }
 
-            box-shadow:
-                var(--shadow);
+    .founder-quote p {
+      margin: 0;
 
-        }
+      color: var(--brown);
 
+      font-family:
+        "Playfair Display",
+        serif;
 
-        .intro-number {
+      font-size: 22px;
 
-            margin-bottom:
-                22px;
+      line-height: 1.5;
 
-            color:
-                var(--gold);
+      font-style: italic;
+    }
 
-            font-family:
-                "Playfair Display",
-                serif;
 
-            font-size:
-                24px;
+    /* =====================================================
+       PROPÓSITO EN ACCIÓN
+    ====================================================== */
 
-        }
+    .action-section {
+      background: var(--white);
+    }
 
+    .action-layout {
+      display: grid;
 
-        .intro-card h3 {
+      grid-template-columns:
+        0.8fr 1.2fr;
 
-            margin-bottom:
-                10px;
+      gap: 90px;
 
-            font-size:
-                18px;
+      align-items: start;
+    }
 
-        }
+    .action-heading {
+      position: sticky;
 
+      top: 130px;
+    }
 
-        .intro-card p {
+    .action-grid {
+      display: grid;
 
-            color:
-                var(--text);
+      grid-template-columns:
+        repeat(2, 1fr);
 
-            font-size:
-                14px;
+      gap: 20px;
+    }
 
-            line-height:
-                1.7;
+    .action-card {
+      min-height: 230px;
 
-        }
+      padding: 32px;
 
+      background: var(--cream);
 
-        /* =====================================================
-           QUIÉN ESTÁ DETRÁS
-        ====================================================== */
+      border:
+        1px solid var(--border);
 
-        .founder {
+      border-radius:
+        var(--radius-md);
 
-            background:
-                #f4eadb;
+      transition: 0.3s ease;
+    }
 
-        }
+    .action-card:hover {
+      transform: translateY(-6px);
 
+      box-shadow: var(--shadow-sm);
 
-        .founder-grid {
+      border-color:
+        rgba(201,154,82,0.5);
+    }
 
-            display:
-                grid;
+    .action-icon {
+      width: 52px;
+      height: 52px;
 
-            grid-template-columns:
-                .8fr 1.2fr;
+      display: grid;
+      place-items: center;
 
-            gap:
-                75px;
+      margin-bottom: 24px;
 
-            align-items:
-                center;
+      border:
+        1px solid var(--border);
 
-        }
+      border-radius: 50%;
 
+      background: var(--white);
 
-        .founder-image {
+      color: var(--gold-dark);
+    }
 
-            position:
-                relative;
+    .action-icon svg {
+      width: 22px;
+      height: 22px;
+    }
 
-        }
+    .action-card h3 {
+      margin-bottom: 10px;
 
+      font-family:
+        "Playfair Display",
+        serif;
 
-        .founder-image img {
+      font-size: 24px;
+    }
 
-            aspect-ratio:
-                4 / 5;
+    .action-card p {
+      color: var(--text);
 
-            object-fit:
-                cover;
+      font-size: 14px;
 
-            border-radius:
-                28px;
+      line-height: 1.7;
+    }
 
-            box-shadow:
-                var(--shadow);
 
-        }
+    /* =====================================================
+       ÁREAS
+    ====================================================== */
 
+    .areas-section {
+      color: var(--white);
 
-        .founder-badge {
+      background:
+        linear-gradient(
+          rgba(48,34,25,0.97),
+          rgba(48,34,25,0.97)
+        ),
+        url("assets/conocenos-hero.jpg")
+        center / cover;
+    }
 
-            position:
-                absolute;
+    .areas-section .section-kicker {
+      color: var(--gold-light);
+    }
 
-            right:
-                -24px;
+    .areas-section .section-kicker::before {
+      background: var(--gold-light);
+    }
 
-            bottom:
-                28px;
+    .areas-section .section-title {
+      color: var(--white);
+    }
 
-            width:
-                145px;
+    .areas-section .section-intro {
+      color:
+        rgba(255,255,255,0.67);
+    }
 
-            height:
-                145px;
+    .areas-grid {
+      display: grid;
 
-            padding:
-                15px;
+      grid-template-columns:
+        repeat(3, 1fr);
 
-            display:
-                flex;
+      gap: 20px;
+    }
 
-            align-items:
-                center;
+    .area-card {
+      position: relative;
 
-            justify-content:
-                center;
+      min-height: 420px;
 
-            text-align:
-                center;
+      overflow: hidden;
 
-            border-radius:
-                50%;
+      border-radius: 28px;
 
-            background:
-                var(--gold);
+      background: #3a2a20;
 
-            color:
-                white;
+      border:
+        1px solid rgba(255,255,255,0.09);
 
-            font-size:
-                12px;
+      box-shadow:
+        0 20px 50px rgba(0,0,0,0.16);
+    }
 
-            font-weight:
-                700;
+    .area-image {
+      position: absolute;
 
-            letter-spacing:
-                1px;
+      inset: 0;
 
-            box-shadow:
-                var(--shadow);
+      width: 100%;
+      height: 100%;
 
-        }
+      object-fit: cover;
 
+      transition:
+        transform 0.6s ease;
+    }
 
-        .founder-copy h2 {
+    .area-card::after {
+      content: "";
 
-            margin-bottom:
-                7px;
+      position: absolute;
 
-            font-family:
-                "Playfair Display",
-                serif;
+      inset: 0;
 
-            font-size:
-                clamp(
-                    38px,
-                    4vw,
-                    57px
-                );
+      background:
+        linear-gradient(
+          to top,
+          rgba(22,14,9,0.97) 0%,
+          rgba(22,14,9,0.64) 45%,
+          rgba(22,14,9,0.06) 100%
+        );
+    }
 
-            line-height:
-                1.08;
+    .area-card:hover .area-image {
+      transform: scale(1.07);
+    }
 
-        }
+    .area-content {
+      position: absolute;
 
+      z-index: 2;
 
-        .founder-role {
+      left: 0;
+      right: 0;
+      bottom: 0;
 
-            margin-bottom:
-                26px;
+      padding: 30px;
+    }
 
-            color:
-                var(--gold-dark);
+    .area-index {
+      margin-bottom: 10px;
 
-            font-size:
-                12px;
+      color: var(--gold-light);
 
-            font-weight:
-                700;
+      font-size: 10px;
 
-            letter-spacing:
-                2px;
+      font-weight: 800;
 
-        }
+      letter-spacing: 0.18em;
+    }
 
+    .area-content h3 {
+      margin-bottom: 8px;
 
-        .founder-copy p {
+      font-family:
+        "Playfair Display",
+        serif;
 
-            margin-bottom:
-                18px;
+      font-size: 29px;
 
-            color:
-                var(--text);
+      line-height: 1.05;
+    }
 
-            font-size:
-                16px;
+    .area-content p {
+      margin-bottom: 20px;
 
-        }
+      color:
+        rgba(255,255,255,0.74);
 
+      font-size: 13px;
 
-        .founder-tags {
+      line-height: 1.65;
+    }
 
-            display:
-                flex;
+    .area-button {
+      display: inline-flex;
 
-            flex-wrap:
-                wrap;
+      align-items: center;
 
-            gap:
-                10px;
+      gap: 9px;
 
-            margin-top:
-                28px;
+      padding: 10px 0;
 
-        }
+      color: var(--white);
 
+      background: transparent;
 
-        .founder-tag {
+      font-size: 10px;
 
-            padding:
-                9px 14px;
+      font-weight: 800;
 
-            border:
-                1px solid
-                rgba(
-                    169,
-                    120,
-                    53,
-                    .25
-                );
+      letter-spacing: 0.14em;
 
-            border-radius:
-                999px;
+      text-transform: uppercase;
+    }
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .6
-                );
+    .area-button span {
+      color: var(--gold-light);
 
-            color:
-                var(--brown-soft);
+      transition:
+        transform 0.25s ease;
+    }
 
-            font-size:
-                12px;
+    .area-button:hover span {
+      transform:
+        translateX(5px);
+    }
 
-            font-weight:
-                600;
 
-        }
+    /* =====================================================
+       COMUNIDAD
+    ====================================================== */
 
+    .community-section {
+      background: var(--cream);
+    }
 
-        .founder-quote {
+    .community-card {
+      position: relative;
 
-            margin-top:
-                32px;
+      min-height: 450px;
 
-            padding:
-                27px 30px;
+      overflow: hidden;
 
-            background:
-                white;
+      border-radius: 34px;
 
-            border-radius:
-                18px;
+      box-shadow: var(--shadow-lg);
+    }
 
-            border-left:
-                3px solid
-                var(--gold);
+    .community-image {
+      position: absolute;
 
-        }
+      inset: 0;
 
+      width: 100%;
+      height: 100%;
 
-        .founder-quote p {
+      object-fit: cover;
+    }
 
-            margin:
-                0;
+    .community-card::after {
+      content: "";
 
-            font-family:
-                "Playfair Display",
-                serif;
+      position: absolute;
 
-            font-size:
-                21px;
+      inset: 0;
 
-            line-height:
-                1.55;
+      background:
+        linear-gradient(
+          90deg,
+          rgba(31,21,15,0.92),
+          rgba(31,21,15,0.53) 50%,
+          rgba(31,21,15,0.12)
+        );
+    }
 
-            font-style:
-                italic;
+    .community-content {
+      position: relative;
 
-            color:
-                var(--brown);
+      z-index: 2;
 
-        }
+      width: 55%;
 
+      min-height: 450px;
 
-        /* =====================================================
-           PROPÓSITO
-        ====================================================== */
+      padding: 70px 65px;
 
-        .purpose {
+      display: flex;
 
-            background:
-                white;
+      justify-content: center;
 
-        }
+      flex-direction: column;
 
+      color: var(--white);
+    }
 
-        .purpose-grid {
+    .community-content .section-kicker {
+      color: var(--gold-light);
+    }
 
-            display:
-                grid;
+    .community-content .section-kicker::before {
+      background: var(--gold-light);
+    }
 
-            grid-template-columns:
-                repeat(
-                    4,
-                    1fr
-                );
+    .community-content h2 {
+      margin-bottom: 20px;
 
-            gap:
-                20px;
+      font-family:
+        "Playfair Display",
+        serif;
 
-        }
+      font-size:
+        clamp(42px, 5vw, 64px);
 
+      line-height: 1;
+    }
 
-        .purpose-card {
+    .community-content p {
+      max-width: 520px;
 
-            padding:
-                34px 27px;
+      color:
+        rgba(255,255,255,0.78);
 
-            text-align:
-                center;
+      font-size: 16px;
 
-            border:
-                1px solid
-                var(--border);
+      line-height: 1.8;
+    }
 
-            border-radius:
-                24px;
+    .community-counter {
+      display: inline-flex;
 
-            transition:
-                .3s ease;
+      align-items: center;
 
-        }
+      gap: 15px;
 
+      margin-top: 30px;
 
-        .purpose-card:hover {
+      color: var(--white);
 
-            transform:
-                translateY(-6px);
+      font-size: 12px;
 
-            box-shadow:
-                var(--shadow);
+      font-weight: 700;
 
-        }
+      letter-spacing: 0.12em;
 
+      text-transform: uppercase;
+    }
 
-        .purpose-icon {
+    .community-counter::before {
+      content: "♥";
 
-            width:
-                66px;
+      width: 39px;
+      height: 39px;
 
-            height:
-                66px;
+      display: grid;
+      place-items: center;
 
-            margin:
-                0 auto 20px;
+      border:
+        1px solid rgba(255,255,255,0.25);
 
-            display:
-                flex;
+      border-radius: 50%;
 
-            align-items:
-                center;
+      color: var(--gold-light);
+    }
 
-            justify-content:
-                center;
 
-            border-radius:
-                50%;
+    /* =====================================================
+       CTA
+    ====================================================== */
 
-            background:
-                var(--cream-dark);
+    .cta-section {
+      position: relative;
 
-            font-size:
-                28px;
+      padding: 120px 0 130px;
 
-        }
+      background: var(--cream-dark);
 
+      text-align: center;
 
-        .purpose-card h3 {
+      overflow: hidden;
+    }
 
-            margin-bottom:
-                10px;
+    .cta-section::before,
+    .cta-section::after {
+      content: "♥";
 
-            font-family:
-                "Playfair Display",
-                serif;
+      position: absolute;
 
-            font-size:
-                22px;
+      color:
+        rgba(201,154,82,0.1);
 
-        }
+      font-size: 260px;
 
+      font-family: serif;
 
-        .purpose-card p {
+      line-height: 1;
+    }
 
-            color:
-                var(--text);
+    .cta-section::before {
+      left: -60px;
+      top: -70px;
 
-            font-size:
-                14px;
+      transform:
+        rotate(-20deg);
+    }
 
-            line-height:
-                1.7;
+    .cta-section::after {
+      right: -50px;
+      bottom: -100px;
 
-        }
+      transform:
+        rotate(18deg);
+    }
 
+    .cta-content {
+      position: relative;
 
-        /* =====================================================
-           ÁREAS
-        ====================================================== */
+      z-index: 2;
 
-        .areas {
+      max-width: 760px;
 
-            background:
-                var(--cream);
+      margin: 0 auto;
+    }
 
-        }
+    .cta-label {
+      margin-bottom: 15px;
 
+      color: var(--gold-dark);
 
-        .areas-grid {
+      font-size: 11px;
 
-            display:
-                grid;
+      font-weight: 800;
 
-            grid-template-columns:
-                repeat(
-                    3,
-                    1fr
-                );
+      letter-spacing: 0.2em;
+    }
 
-            gap:
-                24px;
+    .cta-title {
+      margin-bottom: 18px;
 
-        }
+      font-family:
+        "Playfair Display",
+        serif;
 
+      font-size:
+        clamp(45px, 6vw, 72px);
 
-        .area-card {
+      line-height: 1;
 
-            overflow:
-                hidden;
+      letter-spacing: -0.04em;
+    }
 
-            border:
-                1px solid
-                var(--border);
+    .cta-text {
+      max-width: 620px;
 
-            border-radius:
-                24px;
+      margin:
+        0 auto 32px;
 
-            background:
-                white;
+      color: var(--text);
 
-            box-shadow:
-                0 8px 25px
-                rgba(
-                    63,
-                    43,
-                    25,
-                    .04
-                );
+      font-size: 16px;
 
-            transition:
-                .3s ease;
+      line-height: 1.8;
+    }
 
-        }
+    .primary-button {
+      display: inline-flex;
 
+      align-items: center;
+      justify-content: center;
 
-        .area-card:hover {
+      gap: 12px;
 
-            transform:
-                translateY(-7px);
+      min-height: 54px;
 
-            box-shadow:
-                var(--shadow-hover);
+      padding: 0 27px;
 
-        }
+      color: var(--white);
 
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold),
+          var(--gold-dark)
+        );
 
-        .area-image {
+      border-radius: 100px;
 
-            position:
-                relative;
+      font-size: 12px;
 
-            overflow:
-                hidden;
+      font-weight: 800;
 
-        }
+      letter-spacing: 0.12em;
 
+      text-transform: uppercase;
 
-        .area-image img {
+      box-shadow:
+        0 14px 30px rgba(169,120,53,0.25);
 
-            aspect-ratio:
-                16 / 10;
+      transition: 0.3s ease;
+    }
 
-            object-fit:
-                cover;
+    .primary-button:hover {
+      background: var(--brown);
 
-            transition:
-                transform .45s ease;
+      transform:
+        translateY(-3px);
 
-        }
+      box-shadow:
+        0 18px 35px rgba(48,34,25,0.2);
+    }
 
 
-        .area-card:hover
-        .area-image img {
+    /* =====================================================
+       FOOTER
+    ====================================================== */
 
-            transform:
-                scale(1.05);
+    footer {
+      padding: 60px 0 25px;
 
-        }
+      background: var(--brown);
 
+      color: var(--white);
+    }
 
-        .area-number {
+    .footer-main {
+      display: flex;
 
-            position:
-                absolute;
+      align-items: center;
 
-            left:
-                16px;
+      justify-content: space-between;
 
-            top:
-                16px;
+      gap: 30px;
 
-            width:
-                40px;
+      padding-bottom: 40px;
+    }
 
-            height:
-                40px;
+    .footer-logo img {
+      width: 170px;
 
-            display:
-                flex;
+      filter:
+        brightness(0)
+        invert(1);
 
-            align-items:
-                center;
+      opacity: 0.96;
+    }
 
-            justify-content:
-                center;
+    .footer-motto {
+      color:
+        rgba(255,255,255,0.65);
 
-            border-radius:
-                50%;
+      font-family:
+        "Playfair Display",
+        serif;
 
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .92
-                );
+      font-size: 18px;
 
-            color:
-                var(--gold-dark);
+      font-style: italic;
+    }
 
-            font-family:
-                "Playfair Display",
-                serif;
+    .footer-bottom {
+      padding-top: 20px;
 
-            font-weight:
-                700;
+      border-top:
+        1px solid rgba(255,255,255,0.1);
 
-        }
+      display: flex;
 
+      justify-content: space-between;
 
-        .area-content {
+      gap: 20px;
 
-            padding:
-                25px;
+      color:
+        rgba(255,255,255,0.43);
 
-        }
+      font-size: 11px;
+    }
 
 
-        .area-content h3 {
+    /* =====================================================
+       MODAL
+    ====================================================== */
 
-            margin-bottom:
-                7px;
+    .modal {
+      position: fixed;
 
-            font-family:
-                "Playfair Display",
-                serif;
+      inset: 0;
 
-            font-size:
-                24px;
+      z-index: 2000;
 
-            line-height:
-                1.15;
+      display: flex;
 
-        }
+      align-items: center;
 
+      justify-content: center;
 
-        .area-leader {
+      padding: 25px;
 
-            margin-bottom:
-                16px;
+      background:
+        rgba(29,19,13,0.67);
 
-            color:
-                var(--gold-dark);
+      backdrop-filter:
+        blur(10px);
 
-            font-size:
-                11px;
+      opacity: 0;
 
-            font-weight:
-                700;
+      visibility: hidden;
 
-            letter-spacing:
-                1.5px;
+      pointer-events: none;
 
-            text-transform:
-                uppercase;
+      transition: 0.3s ease;
+    }
 
-        }
+    .modal.active {
+      opacity: 1;
 
+      visibility: visible;
 
-        .area-button {
+      pointer-events: auto;
+    }
 
-            display:
-                inline-flex;
+    .modal-box {
+      position: relative;
 
-            align-items:
-                center;
+      width: min(100%, 720px);
 
-            gap:
-                8px;
+      max-height: 90vh;
 
-            color:
-                var(--brown);
+      overflow-y: auto;
 
-            font-size:
-                12px;
+      padding: 45px;
 
-            font-weight:
-                700;
+      background: var(--cream);
 
-            letter-spacing:
-                .8px;
+      border-radius: 30px;
 
-            transition:
-                .2s ease;
+      box-shadow: var(--shadow-lg);
 
-        }
+      transform:
+        translateY(25px)
+        scale(0.98);
 
+      transition: 0.35s ease;
+    }
 
-        .area-button:hover {
+    .modal.active .modal-box {
+      transform:
+        translateY(0)
+        scale(1);
+    }
 
-            color:
-                var(--gold-dark);
+    .modal-close {
+      position: absolute;
 
-            gap:
-                12px;
+      top: 18px;
+      right: 18px;
 
-        }
+      width: 42px;
+      height: 42px;
 
+      display: grid;
+      place-items: center;
 
-        /* =====================================================
-           COMUNIDAD
-        ====================================================== */
+      border-radius: 50%;
 
-        .community {
+      background: var(--cream-dark);
 
-            background:
-                white;
+      color: var(--brown);
 
-        }
+      font-size: 22px;
 
+      transition: 0.25s ease;
+    }
 
-        .community-single {
+    .modal-close:hover {
+      background: var(--brown);
 
-            max-width:
-                720px;
+      color: var(--white);
 
-            margin:
-                0 auto;
+      transform:
+        rotate(90deg);
+    }
 
-        }
+    .modal-kicker {
+      margin-bottom: 10px;
 
+      color: var(--gold-dark);
 
-        .community-card {
+      font-size: 10px;
 
-            overflow:
-                hidden;
+      font-weight: 800;
 
-            border-radius:
-                28px;
+      letter-spacing: 0.18em;
 
-            background:
-                var(--cream);
+      text-transform: uppercase;
+    }
 
-            border:
-                1px solid
-                var(--border);
+    .modal-title {
+      margin-bottom: 18px;
 
-            box-shadow:
-                var(--shadow);
+      font-family:
+        "Playfair Display",
+        serif;
 
-            text-align:
-                center;
+      font-size: 42px;
 
-        }
+      line-height: 1.05;
+    }
 
+    .modal-description {
+      color: var(--text);
 
-        .community-card img {
+      font-size: 15px;
 
-            height:
-                330px;
+      line-height: 1.8;
+    }
 
-            object-fit:
-                cover;
+    .modal-list {
+      display: grid;
 
-        }
+      grid-template-columns:
+        repeat(2, 1fr);
 
+      gap: 10px;
 
-        .community-content {
+      margin-top: 28px;
 
-            padding:
-                34px;
+      list-style: none;
+    }
 
-        }
+    .modal-list li {
+      padding: 13px 15px;
 
+      border-radius: 12px;
 
-        .community-content h3 {
+      background: var(--white);
 
-            margin-bottom:
-                12px;
+      border:
+        1px solid var(--border);
 
-            font-family:
-                "Playfair Display",
-                serif;
+      color: var(--brown-soft);
 
-            font-size:
-                29px;
+      font-size: 13px;
 
-        }
+      font-weight: 600;
+    }
 
+    .modal-list li::before {
+      content: "✓";
 
-        .community-content p {
+      margin-right: 8px;
 
-            max-width:
-                550px;
+      color: var(--gold-dark);
 
-            margin:
-                auto;
+      font-weight: 800;
+    }
 
-            color:
-                var(--text);
 
-        }
+    /* =====================================================
+       JOIN MODAL
+    ====================================================== */
 
+    .join-options {
+      display: grid;
 
-        /* =====================================================
-           CTA
-        ====================================================== */
+      grid-template-columns:
+        repeat(2, 1fr);
 
-        .cta {
+      gap: 18px;
 
-            position:
-                relative;
+      margin-top: 28px;
+    }
 
-            padding:
-                110px 0;
+    .join-option {
+      display: flex;
 
-            overflow:
-                hidden;
+      flex-direction: column;
 
-            background:
+      min-height: 235px;
 
-                linear-gradient(
-                    rgba(
-                        52,
-                        36,
-                        25,
-                        .88
-                    ),
-                    rgba(
-                        52,
-                        36,
-                        25,
-                        .88
-                    )
-                ),
+      padding: 27px;
 
-                url(
-                    "assets/conocenos-hero.jpg"
-                )
+      background: var(--white);
 
-                center / cover no-repeat;
+      border:
+        1px solid var(--border);
 
-            color:
-                white;
+      border-radius: 22px;
 
-            text-align:
-                center;
+      transition: 0.3s ease;
+    }
 
-        }
+    .join-option:hover {
+      transform:
+        translateY(-5px);
 
+      box-shadow:
+        var(--shadow-sm);
 
-        .cta-content {
+      border-color:
+        var(--gold-light);
+    }
 
-            max-width:
-                720px;
+    .join-option-icon {
+      width: 48px;
+      height: 48px;
 
-            margin:
-                auto;
+      display: grid;
+      place-items: center;
 
-        }
+      margin-bottom: 22px;
 
+      border-radius: 50%;
 
-        .cta .section-label {
+      background: var(--cream-dark);
 
-            color:
-                #e8c78f;
+      color: var(--gold-dark);
+    }
 
-        }
+    .join-option h3 {
+      margin-bottom: 9px;
 
+      font-family:
+        "Playfair Display",
+        serif;
 
-        .cta h2 {
+      font-size: 23px;
 
-            margin-bottom:
-                18px;
+      line-height: 1.15;
+    }
 
-            font-family:
-                "Playfair Display",
-                serif;
+    .join-option p {
+      margin-bottom: 20px;
 
-            font-size:
-                clamp(
-                    40px,
-                    5vw,
-                    60px
-                );
+      color: var(--text);
 
-            line-height:
-                1.1;
+      font-size: 13px;
 
-        }
+      line-height: 1.65;
+    }
 
+    .join-option a {
+      margin-top: auto;
 
-        .cta p {
+      color: var(--gold-dark);
 
-            margin-bottom:
-                32px;
+      font-size: 11px;
 
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .82
-                );
+      font-weight: 800;
 
-            font-size:
-                17px;
+      letter-spacing: 0.1em;
 
-        }
+      text-transform: uppercase;
+    }
 
 
-        .btn-primary {
+    /* =====================================================
+       ANIMACIONES
+    ====================================================== */
 
-            display:
-                inline-flex;
+    .reveal {
+      opacity: 0;
 
-            align-items:
-                center;
+      transform:
+        translateY(28px);
 
-            justify-content:
-                center;
+      transition:
+        opacity 0.7s ease,
+        transform 0.7s ease;
+    }
 
-            min-height:
-                52px;
+    .reveal.visible {
+      opacity: 1;
 
-            padding:
-                0 27px;
+      transform:
+        translateY(0);
+    }
 
-            border:
-                none;
 
-            border-radius:
-                999px;
+    /* =====================================================
+       RESPONSIVE
+    ====================================================== */
 
-            background:
-                var(--gold);
+    @media (max-width: 1150px) {
 
-            color:
-                white;
+      .main-nav {
+        gap: 0;
+      }
 
-            font-size:
-                12px;
+      .main-nav a {
+        padding-left: 8px;
+        padding-right: 8px;
 
-            font-weight:
-                700;
+        font-size: 12px;
+      }
 
-            letter-spacing:
-                1px;
+      .main-nav a:not(.shop-link)::after {
+        left: 8px;
+        right: 8px;
+      }
 
-            cursor:
-                pointer;
+      .founder-layout {
+        gap: 55px;
+      }
 
-            transition:
-                .25s ease;
+      .areas-grid {
+        grid-template-columns:
+          repeat(2, 1fr);
+      }
 
-        }
+    }
 
 
-        .btn-primary:hover {
+    @media (max-width: 900px) {
 
-            background:
-                white;
+      .header-inner {
+        min-height: 66px;
+      }
 
-            color:
-                var(--brown);
+      .main-nav,
+      .header-actions {
+        display: none;
+      }
 
-            transform:
-                translateY(-2px);
+      .mobile-menu {
+        display: grid;
+      }
 
-        }
+      .header-mobile-open .main-nav {
+        position: absolute;
 
+        top:
+          calc(100% + 10px);
 
-        /* =====================================================
-           FOOTER
-        ====================================================== */
+        left: 0;
+        right: 0;
 
-        footer {
+        display: flex;
 
-            padding:
-                48px 0 25px;
+        flex-direction: column;
 
-            background:
-                #211812;
+        align-items: stretch;
 
-            color:
-                white;
+        padding: 12px;
 
-        }
+        background: var(--white);
 
+        border:
+          1px solid var(--border);
 
-        .footer-inner {
+        border-radius: 20px;
 
-            display:
-                flex;
+        box-shadow:
+          var(--shadow-md);
+      }
 
-            align-items:
-                center;
+      .header-mobile-open .main-nav a {
+        padding: 13px 15px;
+      }
 
-            justify-content:
-                space-between;
+      .header-mobile-open .shop-link {
+        margin-left: 0;
+        margin-top: 5px;
 
-            gap:
-                30px;
+        text-align: center;
+      }
 
-        }
+      .hero {
+        min-height: 700px;
+      }
 
+      .hero-description {
+        font-size: 16px;
+      }
 
-        .footer-logo {
+      .founder-layout,
+      .action-layout {
+        grid-template-columns: 1fr;
+      }
 
-            width:
-                145px;
+      .founder-image {
+        height: 560px;
+      }
 
-            filter:
-                brightness(0)
-                invert(1);
+      .action-heading {
+        position: static;
+      }
 
-            opacity:
-                .95;
+      .community-content {
+        width: 70%;
+      }
 
-        }
+    }
 
 
-        .footer-motto {
+    @media (max-width: 650px) {
 
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .75
-                );
+      .container,
+      .hero-content {
+        width:
+          min(
+            calc(100% - 30px),
+            var(--max-width)
+          );
+      }
 
-            font-family:
-                "Playfair Display",
-                serif;
+      .section {
+        padding: 85px 0;
+      }
 
-            font-size:
-                16px;
+      .header-inner {
+        width:
+          calc(100% - 20px);
 
-            font-style:
-                italic;
+        padding:
+          8px 10px 8px 14px;
 
-        }
+        border-radius: 17px;
+      }
 
+      .logo img {
+        width: 132px;
+      }
 
-        .footer-bottom {
+      .hero {
+        min-height: 650px;
 
-            display:
-                flex;
+        background:
+          linear-gradient(
+            90deg,
+            rgba(37,25,17,0.84),
+            rgba(37,25,17,0.4)
+          ),
+          url("assets/conocenos-hero.jpg")
+          center / cover no-repeat;
+      }
 
-            justify-content:
-                space-between;
+      .hero-content {
+        padding-top: 90px;
+      }
 
-            gap:
-                20px;
+      .hero h1 {
+        font-size: 64px;
+      }
 
-            margin-top:
-                35px;
+      .hero-description {
+        max-width: 100%;
 
-            padding-top:
-                20px;
+        font-size: 15px;
 
-            border-top:
-                1px solid
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .12
-                );
+        line-height: 1.7;
+      }
 
-            color:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .48
-                );
+      .hero-motto {
+        font-size: 18px;
+      }
 
-            font-size:
-                11px;
+      .action-grid,
+      .areas-grid,
+      .join-options {
+        grid-template-columns: 1fr;
+      }
 
-        }
+      .founder-section {
+        padding: 90px 0;
+      }
 
+      .founder-layout {
+        gap: 50px;
+      }
 
-        /* =====================================================
-           MODAL ÁREAS
-        ====================================================== */
+      .founder-image {
+        height: 480px;
 
-        .area-modal {
+        border-radius:
+          140px 140px 22px 22px;
+      }
 
-            display:
-                none;
+      .founder-image-wrap::before {
+        border-radius:
+          140px 140px 22px 22px;
+      }
 
-            position:
-                fixed;
+      .founder-badge {
+        right: 10px;
+        bottom: 25px;
 
-            inset:
-                0;
+        width: 100px;
+        height: 100px;
+      }
 
-            z-index:
-                9998;
+      .founder-name {
+        font-size: 50px;
+      }
 
-        }
+      .founder-quote {
+        padding: 23px;
+      }
 
+      .founder-quote p {
+        font-size: 19px;
+      }
 
-        .area-modal.active {
+      .action-layout {
+        gap: 45px;
+      }
 
-            display:
-                flex;
+      .area-card {
+        min-height: 390px;
+      }
 
-            align-items:
-                center;
+      .community-card,
+      .community-content {
+        min-height: 520px;
+      }
 
-            justify-content:
-                center;
+      .community-content {
+        width: 100%;
 
-        }
+        padding:
+          50px 30px;
 
+        justify-content:
+          flex-end;
+      }
 
-        .modal-overlay {
+      .community-card::after {
+        background:
+          linear-gradient(
+            to top,
+            rgba(31,21,15,0.94),
+            rgba(31,21,15,0.2)
+          );
+      }
 
-            position:
-                absolute;
+      .cta-section {
+        padding: 90px 0;
+      }
 
-            inset:
-                0;
+      .footer-main,
+      .footer-bottom {
+        flex-direction: column;
 
-            background:
-                rgba(
-                    30,
-                    20,
-                    14,
-                    .75
-                );
+        align-items: flex-start;
+      }
 
-            backdrop-filter:
-                blur(6px);
+      .modal {
+        padding: 14px;
+      }
 
-        }
+      .modal-box {
+        padding:
+          35px 23px 25px;
 
+        border-radius: 23px;
+      }
 
-        .area-modal-box {
+      .modal-title {
+        font-size: 35px;
+      }
 
-            position:
-                relative;
+      .modal-list {
+        grid-template-columns: 1fr;
+      }
 
-            z-index:
-                2;
+      .join-options {
+        grid-template-columns: 1fr;
+      }
 
-            width:
-                min(
-                    720px,
-                    calc(100% - 32px)
-                );
+    }
 
-            max-height:
-                90vh;
-
-            overflow-y:
-                auto;
-
-            border-radius:
-                28px;
-
-            background:
-                var(--cream);
-
-            box-shadow:
-                0 30px 90px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    .3
-                );
-
-            animation:
-                modalAppear .3s ease;
-
-        }
-
-
-        .modal-image img {
-
-            height:
-                280px;
-
-            object-fit:
-                cover;
-
-        }
-
-
-        .modal-content {
-
-            padding:
-                35px;
-
-        }
-
-
-        .modal-number {
-
-            margin-bottom:
-                7px;
-
-            color:
-                var(--gold-dark);
-
-            font-size:
-                11px;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                2px;
-
-        }
-
-
-        .modal-content h2 {
-
-            margin-bottom:
-                7px;
-
-            font-family:
-                "Playfair Display",
-                serif;
-
-            font-size:
-                38px;
-
-            line-height:
-                1.1;
-
-        }
-
-
-        .modal-leader {
-
-            margin-bottom:
-                20px;
-
-            color:
-                var(--gold-dark);
-
-            font-size:
-                11px;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                1.5px;
-
-            text-transform:
-                uppercase;
-
-        }
-
-
-        .modal-description {
-
-            margin-bottom:
-                25px;
-
-            color:
-                var(--text);
-
-        }
-
-
-        .modal-content h4 {
-
-            margin-bottom:
-                12px;
-
-            font-size:
-                13px;
-
-            letter-spacing:
-                .7px;
-
-        }
-
-
-        .modal-functions {
-
-            display:
-                grid;
-
-            grid-template-columns:
-                repeat(
-                    2,
-                    1fr
-                );
-
-            gap:
-                8px;
-
-        }
-
-
-        .modal-function {
-
-            padding:
-                10px 13px;
-
-            border-radius:
-                10px;
-
-            background:
-                white;
-
-            color:
-                var(--brown-soft);
-
-            font-size:
-                13px;
-
-        }
-
-
-        .modal-close {
-
-            position:
-                absolute;
-
-            z-index:
-                3;
-
-            top:
-                16px;
-
-            right:
-                18px;
-
-            width:
-                40px;
-
-            height:
-                40px;
-
-            border:
-                none;
-
-            border-radius:
-                50%;
-
-            background:
-                rgba(
-                    255,
-                    255,
-                    255,
-                    .92
-                );
-
-            color:
-                var(--brown);
-
-            font-size:
-                26px;
-
-            line-height:
-                1;
-
-            cursor:
-                pointer;
-
-        }
-
-
-        /* =====================================================
-           MODAL QUIERO SER PARTE
-        ====================================================== */
-
-        .participacion-modal {
-
-            display:
-                none;
-
-            position:
-                fixed;
-
-            inset:
-                0;
-
-            z-index:
-                9999;
-
-        }
-
-
-        .participacion-modal.active {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-        }
-
-
-        .participacion-overlay {
-
-            position:
-                absolute;
-
-            inset:
-                0;
-
-            background:
-                rgba(
-                    35,
-                    25,
-                    18,
-                    .75
-                );
-
-            backdrop-filter:
-                blur(7px);
-
-        }
-
-
-        .participacion-box {
-
-            position:
-                relative;
-
-            z-index:
-                2;
-
-            width:
-                min(
-                    680px,
-                    calc(100% - 32px)
-                );
-
-            padding:
-                48px;
-
-            border-radius:
-                28px;
-
-            background:
-                #fffaf3;
-
-            box-shadow:
-                0 30px 90px
-                rgba(
-                    0,
-                    0,
-                    0,
-                    .3
-                );
-
-            animation:
-                modalAppear .3s ease;
-
-        }
-
-
-        .participacion-close {
-
-            position:
-                absolute;
-
-            top:
-                18px;
-
-            right:
-                22px;
-
-            width:
-                40px;
-
-            height:
-                40px;
-
-            border:
-                none;
-
-            border-radius:
-                50%;
-
-            background:
-                #f2e7d7;
-
-            color:
-                var(--brown);
-
-            font-size:
-                28px;
-
-            line-height:
-                1;
-
-            cursor:
-                pointer;
-
-            transition:
-                .2s;
-
-        }
-
-
-        .participacion-close:hover {
-
-            background:
-                var(--gold);
-
-            color:
-                white;
-
-        }
-
-
-        .participacion-label {
-
-            display:
-                block;
-
-            margin-bottom:
-                10px;
-
-            color:
-                var(--gold-dark);
-
-            font-size:
-                11px;
-
-            font-weight:
-                700;
-
-            letter-spacing:
-                2px;
-
-        }
-
-
-        .participacion-box h2 {
-
-            margin-bottom:
-                12px;
-
-            font-family:
-                "Playfair Display",
-                serif;
-
-            font-size:
-                40px;
-
-            line-height:
-                1.1;
-
-        }
-
-
-        .participacion-intro {
-
-            margin-bottom:
-                30px;
-
-            color:
-                var(--text);
-
-        }
-
-
-        .participacion-options {
-
-            display:
-                flex;
-
-            flex-direction:
-                column;
-
-            gap:
-                14px;
-
-        }
-
-
-        .participacion-card {
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            gap:
-                18px;
-
-            padding:
-                20px;
-
-            border:
-                1px solid
-                var(--border);
-
-            border-radius:
-                18px;
-
-            background:
-                white;
-
-            transition:
-                all .25s ease;
-
-        }
-
-
-        .participacion-card:hover {
-
-            transform:
-                translateY(-3px);
-
-            border-color:
-                var(--gold);
-
-            box-shadow:
-                0 12px 30px
-                rgba(
-                    80,
-                    55,
-                    30,
-                    .10
-                );
-
-        }
-
-
-        .participacion-icon {
-
-            flex:
-                0 0 55px;
-
-            width:
-                55px;
-
-            height:
-                55px;
-
-            display:
-                flex;
-
-            align-items:
-                center;
-
-            justify-content:
-                center;
-
-            border-radius:
-                16px;
-
-            background:
-                #f5ead9;
-
-            font-size:
-                25px;
-
-        }
-
-
-        .participacion-card-content {
-
-            flex:
-                1;
-
-        }
-
-
-        .participacion-card h3 {
-
-            margin-bottom:
-                4px;
-
-            color:
-                var(--brown);
-
-            font-size:
-                15px;
-
-            letter-spacing:
-                .3px;
-
-        }
-
-
-        .participacion-card p {
-
-            color:
-                var(--text);
-
-            font-size:
-                13px;
-
-            line-height:
-                1.5;
-
-        }
-
-
-        .participacion-arrow {
-
-            color:
-                var(--gold-dark);
-
-            font-size:
-                24px;
-
-            transition:
-                .2s;
-
-        }
-
-
-        .participacion-card:hover
-        .participacion-arrow {
-
-            transform:
-                translateX(4px);
-
-        }
-
-
-        /* =====================================================
-           ANIMATION
-        ====================================================== */
-
-        @keyframes modalAppear {
-
-            from {
-
-                opacity:
-                    0;
-
-                transform:
-                    translateY(20px)
-                    scale(.97);
-
-            }
-
-            to {
-
-                opacity:
-                    1;
-
-                transform:
-                    translateY(0)
-                    scale(1);
-
-            }
-
-        }
-
-
-        /* =====================================================
-           RESPONSIVE
-        ====================================================== */
-
-        @media (max-width: 1050px) {
-
-            .main-nav {
-
-                gap:
-                    15px;
-
-            }
-
-
-            .main-nav a {
-
-                font-size:
-                    11px;
-
-            }
-
-
-            .header-actions {
-
-                gap:
-                    7px;
-
-            }
-
-
-            .intro-grid,
-            .purpose-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
-
-            }
-
-
-            .areas-grid {
-
-                grid-template-columns:
-                    repeat(
-                        2,
-                        1fr
-                    );
-
-            }
-
-        }
-
-
-        @media (max-width: 800px) {
-
-            .header-inner {
-
-                min-height:
-                    72px;
-
-            }
-
-
-            .logo {
-
-                width:
-                    130px;
-
-            }
-
-
-            .main-nav {
-
-                display:
-                    none;
-
-            }
-
-
-            .header-actions {
-
-                margin-left:
-                    auto;
-
-            }
-
-
-            .founder-grid {
-
-                grid-template-columns:
-                    1fr;
-
-                gap:
-                    45px;
-
-            }
-
-
-            .founder-image {
-
-                max-width:
-                    520px;
-
-                margin:
-                    auto;
-
-            }
-
-
-            .founder-badge {
-
-                right:
-                    10px;
-
-            }
-
-
-            .hero {
-
-                min-height:
-                    530px;
-
-            }
-
-
-            .hero-content {
-
-                padding:
-                    80px 0;
-
-            }
-
-
-            .section {
-
-                padding:
-                    75px 0;
-
-            }
-
-        }
-
-
-        @media (max-width: 600px) {
-
-            .container {
-
-                width:
-                    min(
-                        100% - 28px,
-                        1180px
-                    );
-
-            }
-
-
-            .header-actions {
-
-                gap:
-                    6px;
-
-            }
-
-
-            .header-action {
-
-                width:
-                    34px;
-
-                height:
-                    34px;
-
-                font-size:
-                    14px;
-
-            }
-
-
-            .hero h1 {
-
-                font-size:
-                    43px;
-
-            }
-
-
-            .hero-description {
-
-                font-size:
-                    16px;
-
-            }
-
-
-            .intro-grid,
-            .purpose-grid,
-            .areas-grid {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .founder-grid {
-
-                gap:
-                    35px;
-
-            }
-
-
-            .founder-badge {
-
-                width:
-                    115px;
-
-                height:
-                    115px;
-
-                right:
-                    5px;
-
-                bottom:
-                    15px;
-
-                font-size:
-                    10px;
-
-            }
-
-
-            .founder-quote {
-
-                padding:
-                    23px;
-
-            }
-
-
-            .founder-quote p {
-
-                font-size:
-                    18px;
-
-            }
-
-
-            .modal-content {
-
-                padding:
-                    27px 22px;
-
-            }
-
-
-            .modal-functions {
-
-                grid-template-columns:
-                    1fr;
-
-            }
-
-
-            .participacion-box {
-
-                padding:
-                    35px 22px;
-
-            }
-
-
-            .participacion-box h2 {
-
-                font-size:
-                    31px;
-
-            }
-
-
-            .participacion-card {
-
-                padding:
-                    16px;
-
-            }
-
-
-            .participacion-icon {
-
-                flex-basis:
-                    48px;
-
-                width:
-                    48px;
-
-                height:
-                    48px;
-
-            }
-
-
-            .footer-inner,
-            .footer-bottom {
-
-                flex-direction:
-                    column;
-
-                text-align:
-                    center;
-
-                align-items:
-                    center;
-
-            }
-
-        }
-
-    </style>
-
+  </style>
 </head>
 
 
 <body>
 
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
-    <header class="site-header">
+  <header class="site-header" id="siteHeader">
 
-        <div class="container header-inner">
+    <div class="header-inner">
 
-
-            <a
-                href="index.html"
-                class="logo"
-            >
-
-                <img
-                    src="assets/logo-baby-golden-peru.png"
-                    alt="Baby Golden Perú"
-                >
-
-            </a>
+      <a
+        href="index.html"
+        class="logo"
+        aria-label="Baby Golden Perú"
+      >
+        <img
+          src="assets/logo-baby-golden-peru.png"
+          alt="Baby Golden Perú"
+        >
+      </a>
 
 
-            <nav class="main-nav">
+      <nav class="main-nav" id="mainNav">
 
-                <a href="index.html">
-                    INICIO
-                </a>
+        <a href="index.html">
+          INICIO
+        </a>
 
-                <a href="conocenos.html">
-                    CONÓCENOS
-                </a>
+        <a href="conocenos.html">
+          CONÓCENOS
+        </a>
 
-                <a href="beneficios.html">
-                    BENEFICIOS
-                </a>
+        <a href="beneficios.html">
+          BENEFICIOS
+        </a>
 
-                <a href="historias.html">
-                    HISTORIAS DE ORO
-                </a>
+        <a href="historias-de-oro.html">
+          HISTORIAS DE ORO
+        </a>
 
-                <a href="contacto.html">
-                    CONTACTO
-                </a>
+        <a href="contacto.html">
+          CONTACTO
+        </a>
 
-                <a
-                    href="tienda.html"
-                    class="nav-shop"
-                >
-                    TIENDA
-                </a>
+        <a
+          href="tienda.html"
+          class="shop-link"
+        >
+          TIENDA
+        </a>
 
-            </nav>
-
-
-            <div class="header-actions">
-
-                <a
-                    href="#"
-                    class="header-action"
-                    aria-label="Buscar"
-                >
-                    ⌕
-                </a>
+      </nav>
 
 
-                <a
-                    href="carrito.html"
-                    class="header-action"
-                    aria-label="Carrito"
-                >
-                    🛒
-                </a>
+      <div class="header-actions">
+
+        <!-- Buscar -->
+
+        <button
+          class="header-icon"
+          aria-label="Buscar"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+
+            <circle
+              cx="11"
+              cy="11"
+              r="7"
+            ></circle>
+
+            <path
+              d="m20 20-4-4"
+            ></path>
+
+          </svg>
+
+        </button>
 
 
-                <a
-                    href="cuenta.html"
-                    class="header-action"
-                    aria-label="Mi cuenta"
-                >
-                    ♡
-                </a>
+        <!-- Carrito -->
 
-            </div>
+        <a
+          href="carrito.html"
+          class="header-icon"
+          aria-label="Carrito"
+        >
 
-        </div>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
 
-    </header>
+            <path
+              d="M6 7h12l1 13H5L6 7Z"
+            ></path>
+
+            <path
+              d="M9 7a3 3 0 0 1 6 0"
+            ></path>
+
+          </svg>
+
+        </a>
 
 
-    <!-- =====================================================
+        <!-- Cuenta -->
+
+        <a
+          href="cuenta.html"
+          class="header-icon"
+          aria-label="Mi cuenta"
+        >
+
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+          >
+
+            <circle
+              cx="12"
+              cy="8"
+              r="3.5"
+            ></circle>
+
+            <path
+              d="M5 20a7 7 0 0 1 14 0"
+            ></path>
+
+          </svg>
+
+        </a>
+
+      </div>
+
+
+      <!-- Mobile -->
+
+      <button
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+        >
+
+          <path d="M4 7h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 17h16"></path>
+
+        </svg>
+
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =====================================================
+       CONTENIDO
+  ====================================================== -->
+
+  <main>
+
+
+    <!-- ===================================================
          HERO
-    ====================================================== -->
+    ==================================================== -->
 
     <section class="hero">
 
-        <div class="container">
+      <div class="hero-content">
 
-            <div class="hero-content">
+        <div class="hero-copy reveal">
 
+          <div class="eyebrow">
+            BABY GOLDEN PERÚ
+          </div>
 
-                <span class="eyebrow">
-                    BABY GOLDEN PERÚ
-                </span>
+          <h1>
+            Conócenos
+          </h1>
 
+          <p class="hero-description">
+            Somos una comunidad creada desde el amor por los perros,
+            la tenencia responsable y el deseo de construir un mundo
+            donde cada huella tenga un propósito.
+          </p>
 
-                <h1>
-                    Conócenos
-                </h1>
-
-
-                <p class="hero-description">
-                    Somos una comunidad creada desde el amor por los
-                    perros, la tenencia responsable y el deseo de
-                    construir juntos un mundo mejor.
-                </p>
-
-
-                <p class="hero-motto">
-                    “Juntos por un mundo mejor, una pata a la vez.”
-                </p>
-
-
-            </div>
+          <div class="hero-motto">
+            Juntos por un mundo mejor, una pata a la vez.
+          </div>
 
         </div>
+
+      </div>
+
+
+      <div class="hero-scroll">
+        DESCUBRE
+        <span></span>
+      </div>
 
     </section>
 
 
-    <!-- =====================================================
-         INTRO
-    ====================================================== -->
-
-    <section class="section intro">
-
-        <div class="container">
-
-
-            <div class="section-header">
-
-
-                <span class="section-label">
-                    BABY GOLDEN PERÚ
-                </span>
-
-
-                <h2 class="section-title">
-                    Una comunidad con propósito
-                </h2>
-
-
-                <p class="section-description">
-                    Conoce quiénes somos, qué nos mueve y cómo trabajamos
-                    para seguir dejando huellas.
-                </p>
-
-
-            </div>
-
-
-            <div class="intro-grid">
-
-
-                <!-- 01 QUIÉN ESTÁ DETRÁS -->
-
-                <article class="intro-card">
-
-                    <div class="intro-number">
-                        01
-                    </div>
-
-
-                    <h3>
-                        Quién está detrás
-                    </h3>
-
-
-                    <p>
-                        Conoce a Sandra, fundadora y directora general
-                        de Baby Golden Perú, y la visión que dio vida
-                        a nuestra comunidad.
-                    </p>
-
-                </article>
-
-
-                <!-- 02 PROPÓSITO -->
-
-                <article class="intro-card">
-
-                    <div class="intro-number">
-                        02
-                    </div>
-
-
-                    <h3>
-                        Nuestro propósito
-                    </h3>
-
-
-                    <p>
-                        Crear una comunidad responsable, solidaria y
-                        comprometida con el bienestar animal.
-                    </p>
-
-                </article>
-
-
-                <!-- 03 VISIÓN -->
-
-                <article class="intro-card">
-
-                    <div class="intro-number">
-                        03
-                    </div>
-
-
-                    <h3>
-                        Nuestra visión
-                    </h3>
-
-
-                    <p>
-                        Ser una comunidad referente que inspire una
-                        convivencia más responsable y amorosa con
-                        nuestros animales.
-                    </p>
-
-                </article>
-
-
-                <!-- 04 VALORES -->
-
-                <article class="intro-card">
-
-                    <div class="intro-number">
-                        04
-                    </div>
-
-
-                    <h3>
-                        Nuestros valores
-                    </h3>
-
-
-                    <p>
-                        Amor, respeto, responsabilidad, solidaridad,
-                        empatía y compromiso con cada huella que dejamos.
-                    </p>
-
-                </article>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
+    <!-- ===================================================
          QUIÉN ESTÁ DETRÁS
-    ====================================================== -->
+    ==================================================== -->
 
     <section
-        class="section founder"
-        id="quien-esta-detras"
+      class="founder-section"
+      id="quien-esta-detras"
     >
 
-        <div class="container founder-grid">
+      <div class="container">
 
+        <div class="founder-layout">
 
-            <div class="founder-image">
 
+          <!-- FOTO -->
 
-                <img
-                    src="assets/fundadora-sandra.jpg"
-                    alt="Sandra - Fundadora de Baby Golden Perú"
-                >
+          <div class="founder-image-wrap reveal">
 
-
-                <div class="founder-badge">
-
-                    FUNDADORA<br>
-                    BABY GOLDEN PERÚ
-
-                </div>
-
-
-            </div>
-
-
-            <div class="founder-copy">
-
-
-                <span class="section-label">
-                    QUIÉN ESTÁ DETRÁS
-                </span>
-
-
-                <h2>
-                    Sandra
-                </h2>
-
-
-                <div class="founder-role">
-                    FUNDADORA 
-                </div>
-
-
-                <p>
-                    Baby Golden Perú nació desde una visión basada en
-                    el amor, la responsabilidad y el deseo de construir
-                    una comunidad donde cada persona pueda aportar.
-                </p>
-
-
-                <p>
-                    Su liderazgo busca unir personas, marcas, instituciones
-                    y comunidades para desarrollar proyectos que generen
-                    experiencias positivas y dejen una huella real.
-                </p>
-
-
-                <div class="founder-tags">
-
-
-                    <span class="founder-tag">
-                        Liderazgo
-                    </span>
-
-
-                    <span class="founder-tag">
-                        Visión
-                    </span>
-
-
-                    <span class="founder-tag">
-                        Comunidad
-                    </span>
-
-
-                    <span class="founder-tag">
-                        Compromiso
-                    </span>
-
-
-                </div>
-
-
-                <div class="founder-quote">
-
-                    <p>
-                        “Los perritos dejan huellas en nuestra vida,
-                        y juntos podemos dejar huellas en el mundo.”
-                    </p>
-
-                </div>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         PROPÓSITO
-    ====================================================== -->
-
-    <section class="section purpose">
-
-        <div class="container">
-
-
-            <div class="section-header">
-
-
-                <span class="section-label">
-                    LO QUE HACEMOS
-                </span>
-
-
-                <h2 class="section-title">
-                    Nuestro propósito en acción
-                </h2>
-
-
-                <p class="section-description">
-                    Cada área trabaja para hacer crecer una comunidad
-                    responsable, activa y solidaria.
-                </p>
-
-
-            </div>
-
-
-            <div class="purpose-grid">
-
-
-                <article class="purpose-card">
-
-                    <div class="purpose-icon">
-                        🐾
-                    </div>
-
-
-                    <h3>
-                        Comunidad
-                    </h3>
-
-
-                    <p>
-                        Creamos espacios para conectar, compartir y
-                        aprender juntos.
-                    </p>
-
-                </article>
-
-
-                <article class="purpose-card">
-
-                    <div class="purpose-icon">
-                        ❤️
-                    </div>
-
-
-                    <h3>
-                        Bienestar
-                    </h3>
-
-
-                    <p>
-                        Promovemos el cuidado y la tenencia responsable
-                        de nuestros animales.
-                    </p>
-
-                </article>
-
-
-                <article class="purpose-card">
-
-                    <div class="purpose-icon">
-                        🤲
-                    </div>
-
-
-                    <h3>
-                        Solidaridad
-                    </h3>
-
-
-                    <p>
-                        Apoyamos causas y casos que necesitan una segunda
-                        oportunidad.
-                    </p>
-
-                </article>
-
-
-                <article class="purpose-card">
-
-                    <div class="purpose-icon">
-                        ✨
-                    </div>
-
-
-                    <h3>
-                        Experiencias
-                    </h3>
-
-
-                    <p>
-                        Organizamos actividades y momentos que crean
-                        recuerdos inolvidables.
-                    </p>
-
-                </article>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         NUESTRAS ÁREAS
-    ====================================================== -->
-
-    <section
-        class="section areas"
-        id="areas"
-    >
-
-        <div class="container">
-
-
-            <div class="section-header">
-
-
-                <span class="section-label">
-                    NUESTRO EQUIPO
-                </span>
-
-
-                <h2 class="section-title">
-                    Nuestras áreas
-                </h2>
-
-
-                <p class="section-description">
-                    Detrás de cada actividad, campaña y experiencia
-                    existe un equipo que trabaja para nuestra comunidad.
-                </p>
-
-
-            </div>
-
-
-            <div class="areas-grid">
-
-
-                <!-- VENTAS -->
-
-                <article class="area-card">
-
-
-                    <div class="area-image">
-
-
-                        <img
-                            src="assets/equipo/lider-ventas.jpg"
-                            alt="Área de Ventas"
-                        >
-
-
-                        <span class="area-number">
-                            01
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="area-content">
-
-
-                        <h3>
-                            Ventas
-                        </h3>
-
-
-                        <div class="area-leader">
-                            Nombre del líder
-                        </div>
-
-
-                        <a
-                            href="#"
-                            class="area-button"
-                            onclick="abrirArea(event, 'ventas')"
-                        >
-                            CONOCER MÁS →
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- LEGAL -->
-
-                <article class="area-card">
-
-
-                    <div class="area-image">
-
-
-                        <img
-                            src="assets/equipo/lider-legal.jpg"
-                            alt="Área Legal"
-                        >
-
-
-                        <span class="area-number">
-                            02
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="area-content">
-
-
-                        <h3>
-                            Legal
-                        </h3>
-
-
-                        <div class="area-leader">
-                            Nombre del líder
-                        </div>
-
-
-                        <a
-                            href="#"
-                            class="area-button"
-                            onclick="abrirArea(event, 'legal')"
-                        >
-                            CONOCER MÁS →
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- ADOPCIONES -->
-
-                <article class="area-card">
-
-
-                    <div class="area-image">
-
-
-                        <img
-                            src="assets/equipo/lider-adopciones.jpg"
-                            alt="Área de Adopciones"
-                        >
-
-
-                        <span class="area-number">
-                            03
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="area-content">
-
-
-                        <h3>
-                            Adopciones
-                        </h3>
-
-
-                        <div class="area-leader">
-                            Nombre del líder
-                        </div>
-
-
-                        <a
-                            href="#"
-                            class="area-button"
-                            onclick="abrirArea(event, 'adopciones')"
-                        >
-                            CONOCER MÁS →
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- EVENTOS -->
-
-                <article class="area-card">
-
-
-                    <div class="area-image">
-
-
-                        <img
-                            src="assets/equipo/lider-eventos.jpg"
-                            alt="Área de Eventos"
-                        >
-
-
-                        <span class="area-number">
-                            04
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="area-content">
-
-
-                        <h3>
-                            Eventos
-                        </h3>
-
-
-                        <div class="area-leader">
-                            Nombre del líder
-                        </div>
-
-
-                        <a
-                            href="#"
-                            class="area-button"
-                            onclick="abrirArea(event, 'eventos')"
-                        >
-                            CONOCER MÁS →
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- REDES -->
-
-                <article class="area-card">
-
-
-                    <div class="area-image">
-
-
-                        <img
-                            src="assets/equipo/lider-redes.jpg"
-                            alt="Área de Redes, Marketing y Audiovisual"
-                        >
-
-
-                        <span class="area-number">
-                            05
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="area-content">
-
-
-                        <h3>
-                            Redes, Marketing & Audiovisual
-                        </h3>
-
-
-                        <div class="area-leader">
-                            Nombre del líder
-                        </div>
-
-
-                        <a
-                            href="#"
-                            class="area-button"
-                            onclick="abrirArea(event, 'redes')"
-                        >
-                            CONOCER MÁS →
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-
-                <!-- ALIANZAS -->
-
-                <article class="area-card">
-
-
-                    <div class="area-image">
-
-
-                        <img
-                            src="assets/equipo/lider-alianzas.jpg"
-                            alt="Área de Alianzas Estratégicas"
-                        >
-
-
-                        <span class="area-number">
-                            06
-                        </span>
-
-
-                    </div>
-
-
-                    <div class="area-content">
-
-
-                        <h3>
-                            Alianzas Estratégicas
-                        </h3>
-
-
-                        <div class="area-leader">
-                            Nombre del líder
-                        </div>
-
-
-                        <a
-                            href="#"
-                            class="area-button"
-                            onclick="abrirArea(event, 'alianzas')"
-                        >
-                            CONOCER MÁS →
-                        </a>
-
-
-                    </div>
-
-
-                </article>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         NUESTRA COMUNIDAD
-    ====================================================== -->
-
-    <section class="section community">
-
-        <div class="container">
-
-
-            <div class="section-header">
-
-
-                <span class="section-label">
-                    NUESTRA COMUNIDAD
-                </span>
-
-
-                <h2 class="section-title">
-                    Personas que dejan huellas.
-                </h2>
-
-
-                <p class="section-description">
-                    Somos una comunidad formada por personas que comparten
-                    el amor y el compromiso por nuestros perros.
-                </p>
-
-
-            </div>
-
-
-            <div class="community-single">
-
-
-                <article class="community-card">
-
-
-                    <img
-                        src="assets/comunidad-miembros.jpg"
-                        alt="Miembros Baby Golden Perú"
-                    >
-
-
-                    <div class="community-content">
-
-
-                        <h3>
-                            MIEMBROS BABY GOLDEN
-                        </h3>
-
-
-                        <p>
-                            Personas y familias que forman parte de nuestra
-                            comunidad y comparten el amor por los perros.
-                        </p>
-
-
-                    </div>
-
-
-                </article>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         CTA
-    ====================================================== -->
-
-    <section class="cta">
-
-        <div class="container">
-
-
-            <div class="cta-content">
-
-
-                <span class="section-label">
-                    SÉ PARTE
-                </span>
-
-
-                <h2>
-                    Juntos hacemos la diferencia.
-                </h2>
-
-
-                <p>
-                    Forma parte de Baby Golden Perú y acompáñanos a seguir
-                    construyendo una comunidad que deja huellas.
-                </p>
-
-
-                <button
-                    class="btn-primary"
-                    onclick="abrirModalParticipacion()"
-                >
-                    QUIERO SER PARTE
-                </button>
-
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer>
-
-        <div class="container">
-
-
-            <div class="footer-inner">
-
-
-                <img
-                    src="assets/logo-baby-golden-peru.png"
-                    alt="Baby Golden Perú"
-                    class="footer-logo"
-                >
-
-
-                <p class="footer-motto">
-                    Juntos por un mundo mejor, una pata a la vez. ♥
-                </p>
-
-
-            </div>
-
-
-            <div class="footer-bottom">
-
-
-                <span>
-                    © 2026 Baby Golden Perú.
-                </span>
-
-
-                <span>
-                    Comunidad que deja huellas.
-                </span>
-
-
-                <span>
-                    Lima, Perú.
-                </span>
-
-
-            </div>
-
-        </div>
-
-    </footer>
-
-
-    <!-- =====================================================
-         MODAL DE ÁREAS
-    ====================================================== -->
-
-    <div
-        class="area-modal"
-        id="areaModal"
-    >
-
-
-        <div
-            class="modal-overlay"
-            onclick="cerrarArea()"
-        ></div>
-
-
-        <div class="area-modal-box">
-
-
-            <button
-                class="modal-close"
-                onclick="cerrarArea()"
-                aria-label="Cerrar"
+            <img
+              class="founder-image"
+              src="assets/fundadora-sandra.jpg"
+              alt="Sandra, fundadora de Baby Golden Perú"
+              onerror="this.src='assets/conocenos-hero.jpg'"
             >
-                ×
-            </button>
 
 
-            <div class="modal-image">
+            <div class="founder-badge">
 
-                <img
-                    id="modalAreaImage"
-                    src=""
-                    alt=""
-                >
+              <div>
 
-            </div>
+                <span>
+                  BABY GOLDEN
+                </span>
 
+                <span>
+                  PERÚ
+                </span>
 
-            <div class="modal-content">
-
-
-                <div
-                    class="modal-number"
-                    id="modalAreaNumber"
-                ></div>
-
-
-                <h2
-                    id="modalAreaTitle"
-                ></h2>
-
-
-                <div
-                    class="modal-leader"
-                    id="modalAreaLeader"
-                ></div>
-
-
-                <p
-                    class="modal-description"
-                    id="modalAreaDescription"
-                ></p>
-
-
-                <h4>
-                    PRINCIPALES FUNCIONES
-                </h4>
-
-
-                <div
-                    class="modal-functions"
-                    id="modalAreaFunctions"
-                ></div>
-
+              </div>
 
             </div>
 
-        </div>
-
-    </div>
+          </div>
 
 
-    <!-- =====================================================
-         MODAL QUIERO SER PARTE
-    ====================================================== -->
+          <!-- INFORMACIÓN -->
 
-    <div
-        class="participacion-modal"
-        id="participacionModal"
-    >
+          <div class="founder-copy reveal">
 
-
-        <div
-            class="participacion-overlay"
-            onclick="cerrarModalParticipacion()"
-        ></div>
+            <div class="section-kicker">
+              QUIÉN ESTÁ DETRÁS
+            </div>
 
 
-        <div class="participacion-box">
-
-
-            <button
-                class="participacion-close"
-                onclick="cerrarModalParticipacion()"
-                aria-label="Cerrar"
-            >
-                ×
-            </button>
-
-
-            <span class="participacion-label">
-                SÚMATE A NUESTRA COMUNIDAD
-            </span>
-
-
-            <h2>
-                ¿Cómo quieres ser parte?
+            <h2 class="founder-name">
+              Sandra
             </h2>
 
 
-            <p class="participacion-intro">
-                Elige cómo quieres sumar tu tiempo, talento o marca
-                a Baby Golden Perú.
+            <div class="founder-role">
+              FUNDADORA &amp; DIRECTORA GENERAL
+            </div>
+
+
+            <p>
+              Baby Golden Perú nació de una visión basada en el amor,
+              la responsabilidad y el deseo de construir una comunidad
+              donde cada persona pueda aportar.
             </p>
 
 
-            <div class="participacion-options">
+            <p>
+              Su liderazgo busca unir personas, marcas, instituciones
+              y comunidades para desarrollar proyectos que generen
+              experiencias positivas y un impacto real.
+            </p>
 
 
-                <!-- VOLUNTARIO -->
+            <div class="founder-tags">
 
-                <a
-                    href="contacto.html#contacto"
-                    class="participacion-card"
-                >
+              <span class="founder-tag">
+                Liderazgo
+              </span>
 
+              <span class="founder-tag">
+                Visión
+              </span>
 
-                    <div class="participacion-icon">
-                        🐾
-                    </div>
+              <span class="founder-tag">
+                Comunidad
+              </span>
 
-
-                    <div class="participacion-card-content">
-
-
-                        <h3>
-                            QUIERO SER VOLUNTARIO/A
-                        </h3>
-
-
-                        <p>
-                            Forma parte de nuestras áreas y ayúdanos
-                            a seguir dejando huellas.
-                        </p>
-
-
-                    </div>
-
-
-                    <span class="participacion-arrow">
-                        →
-                    </span>
-
-
-                </a>
-
-
-                <!-- MARCA -->
-
-                <a
-                    href="https://marcas.babygoldenperu.com/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    class="participacion-card"
-                >
-
-
-                    <div class="participacion-icon">
-                        🤝
-                    </div>
-
-
-                    <div class="participacion-card-content">
-
-
-                        <h3>
-                            QUIERO SER MARCA
-                        </h3>
-
-
-                        <p>
-                            Conecta tu marca con Baby Golden Perú
-                            y construyamos juntos nuevas experiencias.
-                        </p>
-
-
-                    </div>
-
-
-                    <span class="participacion-arrow">
-                        →
-                    </span>
-
-
-                </a>
-
+              <span class="founder-tag">
+                Compromiso
+              </span>
 
             </div>
 
+
+            <div class="founder-quote">
+
+              <p>
+                “Los perritos dejan huellas en nuestra vida,
+                y juntos podemos dejar huellas en el mundo.”
+              </p>
+
+            </div>
+
+          </div>
+
         </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         NUESTRO PROPÓSITO
+    ==================================================== -->
+
+    <section class="section action-section">
+
+      <div class="container">
+
+        <div class="action-layout">
+
+
+          <!-- TEXTO -->
+
+          <div class="action-heading reveal">
+
+            <div class="section-kicker">
+              LO QUE HACEMOS
+            </div>
+
+            <h2 class="section-title">
+              Nuestro propósito<br>
+              en acción.
+            </h2>
+
+            <p class="section-intro">
+              Cada actividad, alianza y proyecto busca convertir
+              el amor por nuestros perros en acciones que generen
+              experiencias y cambios positivos.
+            </p>
+
+          </div>
+
+
+          <!-- CARDS -->
+
+          <div class="action-grid">
+
+
+            <article class="action-card reveal">
+
+              <div class="action-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+
+                  <circle
+                    cx="12"
+                    cy="12"
+                    r="8"
+                  ></circle>
+
+                  <path d="M8 12h8"></path>
+
+                  <path d="M12 8v8"></path>
+
+                </svg>
+
+              </div>
+
+              <h3>
+                Comunidad
+              </h3>
+
+              <p>
+                Creamos espacios para conectar personas,
+                compartir experiencias y fortalecer vínculos.
+              </p>
+
+            </article>
+
+
+            <article class="action-card reveal">
+
+              <div class="action-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+
+                  <path
+                    d="M12 21s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 11c0 5.65-7 10-7 10Z"
+                  ></path>
+
+                </svg>
+
+              </div>
+
+              <h3>
+                Bienestar
+              </h3>
+
+              <p>
+                Promovemos el cuidado, la educación y la tenencia
+                responsable para mejorar la vida de nuestros perros.
+              </p>
+
+            </article>
+
+
+            <article class="action-card reveal">
+
+              <div class="action-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+
+                  <path d="M12 3v18"></path>
+
+                  <path d="M5 8h14"></path>
+
+                  <path
+                    d="M7 8a5 5 0 0 0 10 0"
+                  ></path>
+
+                </svg>
+
+              </div>
+
+              <h3>
+                Solidaridad
+              </h3>
+
+              <p>
+                Nos involucramos en iniciativas y casos que necesitan
+                apoyo, difusión y una comunidad dispuesta a ayudar.
+              </p>
+
+            </article>
+
+
+            <article class="action-card reveal">
+
+              <div class="action-icon">
+
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                >
+
+                  <rect
+                    x="3"
+                    y="5"
+                    width="18"
+                    height="14"
+                    rx="3"
+                  ></rect>
+
+                  <path
+                    d="m8 13 2.5 2.5L16 10"
+                  ></path>
+
+                </svg>
+
+              </div>
+
+              <h3>
+                Experiencias
+              </h3>
+
+              <p>
+                Organizamos encuentros y actividades que convierten
+                la vida junto a nuestros perros en momentos inolvidables.
+              </p>
+
+            </article>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         NUESTRAS ÁREAS
+    ==================================================== -->
+
+    <section class="section areas-section">
+
+      <div class="container">
+
+
+        <div class="section-heading reveal">
+
+          <div class="section-kicker">
+            NUESTRO EQUIPO
+          </div>
+
+          <h2 class="section-title">
+            Nuestras áreas.
+          </h2>
+
+          <p class="section-intro">
+            Detrás de cada actividad existe un equipo que aporta
+            tiempo, talento y compromiso para hacer crecer nuestra comunidad.
+          </p>
+
+        </div>
+
+
+        <div class="areas-grid">
+
+
+          <!-- VENTAS -->
+
+          <article class="area-card reveal">
+
+            <img
+              class="area-image"
+              src="assets/equipo/lider-ventas.jpg"
+              alt="Área de Ventas"
+              onerror="this.src='assets/conocenos-hero.jpg'"
+            >
+
+            <div class="area-content">
+
+              <div class="area-index">
+                01 / ÁREA
+              </div>
+
+              <h3>
+                Ventas
+              </h3>
+
+              <p>
+                Merchandising, productos y coordinación comercial
+                de Baby Golden Perú.
+              </p>
+
+              <button
+                class="area-button"
+                data-area="ventas"
+              >
+                CONOCER MÁS
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- LEGAL -->
+
+          <article class="area-card reveal">
+
+            <img
+              class="area-image"
+              src="assets/equipo/lider-legal.jpg"
+              alt="Área Legal"
+              onerror="this.src='assets/conocenos-hero.jpg'"
+            >
+
+            <div class="area-content">
+
+              <div class="area-index">
+                02 / ÁREA
+              </div>
+
+              <h3>
+                Legal
+              </h3>
+
+              <p>
+                Soporte documental y orientación para nuestras
+                actividades institucionales.
+              </p>
+
+              <button
+                class="area-button"
+                data-area="legal"
+              >
+                CONOCER MÁS
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- ADOPCIONES -->
+
+          <article class="area-card reveal">
+
+            <img
+              class="area-image"
+              src="assets/equipo/lider-adopciones.jpg"
+              alt="Área de Adopciones"
+              onerror="this.src='assets/conocenos-hero.jpg'"
+            >
+
+            <div class="area-content">
+
+              <div class="area-index">
+                03 / ÁREA
+              </div>
+
+              <h3>
+                Adopciones
+              </h3>
+
+              <p>
+                Difusión y acompañamiento de casos que buscan
+                hogares responsables.
+              </p>
+
+              <button
+                class="area-button"
+                data-area="adopciones"
+              >
+                CONOCER MÁS
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- EVENTOS -->
+
+          <article class="area-card reveal">
+
+            <img
+              class="area-image"
+              src="assets/equipo/lider-eventos.jpg"
+              alt="Área de Eventos"
+              onerror="this.src='assets/conocenos-hero.jpg'"
+            >
+
+            <div class="area-content">
+
+              <div class="area-index">
+                04 / ÁREA
+              </div>
+
+              <h3>
+                Eventos
+              </h3>
+
+              <p>
+                Planificación y producción de experiencias
+                para nuestra comunidad.
+              </p>
+
+              <button
+                class="area-button"
+                data-area="eventos"
+              >
+                CONOCER MÁS
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- REDES -->
+
+          <article class="area-card reveal">
+
+            <img
+              class="area-image"
+              src="assets/equipo/lider-redes.jpg"
+              alt="Área de Redes, Marketing y Audiovisual"
+              onerror="this.src='assets/conocenos-hero.jpg'"
+            >
+
+            <div class="area-content">
+
+              <div class="area-index">
+                05 / ÁREA
+              </div>
+
+              <h3>
+                Redes, Marketing &amp; Audiovisual
+              </h3>
+
+              <p>
+                Contenido, comunicación, marketing y producción
+                audiovisual de nuestra comunidad.
+              </p>
+
+              <button
+                class="area-button"
+                data-area="redes"
+              >
+                CONOCER MÁS
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+
+          <!-- ALIANZAS -->
+
+          <article class="area-card reveal">
+
+            <img
+              class="area-image"
+              src="assets/equipo/lider-alianzas.jpg"
+              alt="Área de Alianzas Estratégicas"
+              onerror="this.src='assets/conocenos-hero.jpg'"
+            >
+
+            <div class="area-content">
+
+              <div class="area-index">
+                06 / ÁREA
+              </div>
+
+              <h3>
+                Alianzas Estratégicas
+              </h3>
+
+              <p>
+                Relaciones con marcas, empresas, instituciones
+                y comunidades.
+              </p>
+
+              <button
+                class="area-button"
+                data-area="alianzas"
+              >
+                CONOCER MÁS
+                <span>→</span>
+              </button>
+
+            </div>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         NUESTRA COMUNIDAD
+    ==================================================== -->
+
+    <section class="section community-section">
+
+      <div class="container">
+
+        <div class="community-card reveal">
+
+          <img
+            class="community-image"
+            src="assets/comunidad-miembros.jpg"
+            alt="Miembros Baby Golden"
+            onerror="this.src='assets/conocenos-hero.jpg'"
+          >
+
+          <div class="community-content">
+
+            <div class="section-kicker">
+              NUESTRA COMUNIDAD
+            </div>
+
+            <h2>
+              Miembros<br>
+              Baby Golden
+            </h2>
+
+            <p>
+              Personas y familias que forman parte de nuestra
+              comunidad y comparten el amor por los perros.
+            </p>
+
+            <div class="community-counter">
+              Una comunidad que deja huellas
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CTA
+    ==================================================== -->
+
+    <section class="cta-section">
+
+      <div class="container">
+
+        <div class="cta-content reveal">
+
+          <div class="cta-label">
+            SÉ PARTE
+          </div>
+
+          <h2 class="cta-title">
+            Juntos hacemos<br>
+            la diferencia.
+          </h2>
+
+          <p class="cta-text">
+            Forma parte de Baby Golden Perú y acompáñanos a seguir
+            construyendo una comunidad que deja huellas.
+          </p>
+
+          <button
+            class="primary-button"
+            id="joinButton"
+          >
+            QUIERO SER PARTE
+            <span>→</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+
+  <footer>
+
+    <div class="container">
+
+      <div class="footer-main">
+
+        <a
+          href="index.html"
+          class="footer-logo"
+        >
+
+          <img
+            src="assets/logo-baby-golden-peru.png"
+            alt="Baby Golden Perú"
+          >
+
+        </a>
+
+        <div class="footer-motto">
+          Juntos por un mundo mejor, una pata a la vez. ♥
+        </div>
+
+      </div>
+
+
+      <div class="footer-bottom">
+
+        <span>
+          © 2026 Baby Golden Perú.
+        </span>
+
+        <span>
+          Comunidad que deja huellas.
+        </span>
+
+        <span>
+          Lima, Perú.
+        </span>
+
+      </div>
 
     </div>
 
+  </footer>
 
-    <!-- =====================================================
-         JAVASCRIPT
-    ====================================================== -->
 
-    <script>
+  <!-- =====================================================
+       MODAL ÁREAS
+  ====================================================== -->
 
+  <div
+    class="modal"
+    id="areaModal"
+  >
 
-        /* =====================================================
-           DATOS DE LAS ÁREAS
-        ====================================================== */
+    <div class="modal-box">
 
-        const areas = {
+      <button
+        class="modal-close"
+        data-close="areaModal"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
 
+      <div
+        class="modal-kicker"
+        id="modalKicker"
+      >
+        ÁREA BABY GOLDEN
+      </div>
 
-            ventas: {
+      <h2
+        class="modal-title"
+        id="modalTitle"
+      >
+        Área
+      </h2>
 
-                number:
-                    "ÁREA 01",
+      <p
+        class="modal-description"
+        id="modalDescription"
+      ></p>
 
-                title:
-                    "Ventas",
+      <ul
+        class="modal-list"
+        id="modalList"
+      ></ul>
 
-                leader:
-                    "Nombre del líder",
+    </div>
 
-                image:
-                    "assets/equipo/lider-ventas.jpg",
+  </div>
 
-                description:
-                    "El Área de Ventas se encarga de gestionar el merchandising y los productos de Baby Golden Perú, buscando que nuestra identidad también pueda acompañar a cada miembro de la comunidad.",
 
-                functions: [
+  <!-- =====================================================
+       MODAL QUIERO SER PARTE
+  ====================================================== -->
 
-                    "Gestión de merchandising",
+  <div
+    class="modal"
+    id="joinModal"
+  >
 
-                    "Coordinación de pedidos",
+    <div class="modal-box">
 
-                    "Control de productos",
+      <button
+        class="modal-close"
+        data-close="joinModal"
+        aria-label="Cerrar"
+      >
+        ×
+      </button>
 
-                    "Coordinación comercial",
 
-                    "Apoyo en eventos"
+      <div class="modal-kicker">
+        BABY GOLDEN PERÚ
+      </div>
 
-                ]
 
-            },
+      <h2 class="modal-title">
+        ¿Cómo quieres<br>
+        ser parte?
+      </h2>
 
 
-            legal: {
+      <div class="join-options">
 
-                number:
-                    "ÁREA 02",
 
-                title:
-                    "Legal",
+        <!-- VOLUNTARIO -->
 
-                leader:
-                    "Nombre del líder",
+        <div class="join-option">
 
-                image:
-                    "assets/equipo/lider-legal.jpg",
+          <div class="join-option-icon">
 
-                description:
-                    "El Área Legal brinda soporte documental y orientación para que las actividades de Baby Golden Perú se desarrollen de manera ordenada y responsable.",
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
 
-                functions: [
+              <circle
+                cx="12"
+                cy="8"
+                r="3"
+              ></circle>
 
-                    "Reglamentos internos",
+              <path
+                d="M5 20a7 7 0 0 1 14 0"
+              ></path>
 
-                    "Documentación institucional",
+            </svg>
 
-                    "Revisión de convenios",
+          </div>
 
-                    "Orientación legal",
 
-                    "Apoyo institucional"
+          <h3>
+            Quiero ser voluntario/a
+          </h3>
 
-                ]
 
-            },
+          <p>
+            Forma parte de nuestras áreas y ayúdanos
+            a seguir dejando huellas.
+          </p>
 
 
-            adopciones: {
+          <a href="contacto.html#contacto">
+            QUIERO PARTICIPAR →
+          </a>
 
-                number:
-                    "ÁREA 03",
+        </div>
 
-                title:
-                    "Adopciones",
 
-                leader:
-                    "Nombre del líder",
+        <!-- MARCA -->
 
-                image:
-                    "assets/equipo/lider-adopciones.jpg",
+        <div class="join-option">
 
-                description:
-                    "El Área de Adopciones acompaña la difusión y seguimiento de casos que buscan encontrar hogares responsables y comprometidos.",
+          <div class="join-option-icon">
 
-                functions: [
+            <svg
+              width="21"
+              height="21"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+            >
 
-                    "Recepción de casos",
+              <rect
+                x="3"
+                y="5"
+                width="18"
+                height="14"
+                rx="2"
+              ></rect>
 
-                    "Difusión",
+              <path
+                d="M8 5V3h8v2"
+              ></path>
 
-                    "Evaluación de adoptantes",
+              <path
+                d="M8 12h8"
+              ></path>
 
-                    "Seguimiento",
+            </svg>
 
-                    "Acompañamiento"
+          </div>
 
-                ]
 
-            },
+          <h3>
+            Quiero ser marca
+          </h3>
 
 
-            eventos: {
+          <p>
+            Conecta tu marca con Baby Golden Perú y
+            construyamos juntos nuevas experiencias.
+          </p>
 
-                number:
-                    "ÁREA 04",
 
-                title:
-                    "Eventos",
+          <a
+            href="https://marcas.babygoldenperu.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            CONECTAR MI MARCA →
+          </a>
 
-                leader:
-                    "Nombre del líder",
+        </div>
 
-                image:
-                    "assets/equipo/lider-eventos.jpg",
+      </div>
 
-                description:
-                    "El Área de Eventos convierte las ideas de la comunidad en experiencias, actividades y encuentros que fortalecen nuestros vínculos.",
+    </div>
 
-                functions: [
+  </div>
 
-                    "Planificación",
 
-                    "Producción",
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
 
-                    "Logística",
+  <script>
 
-                    "Coordinación de voluntarios",
 
-                    "Coordinación con aliados"
+    /* =====================================================
+       HEADER AL HACER SCROLL
+    ====================================================== */
 
-                ]
+    const siteHeader =
+      document.getElementById("siteHeader");
 
-            },
 
+    function handleHeader() {
 
-            redes: {
+      if (window.scrollY > 30) {
 
-                number:
-                    "ÁREA 05",
+        siteHeader.classList.add("scrolled");
 
-                title:
-                    "Redes, Marketing & Audiovisual",
+      } else {
 
-                leader:
-                    "Nombre del líder",
+        siteHeader.classList.remove("scrolled");
 
-                image:
-                    "assets/equipo/lider-redes.jpg",
+      }
 
-                description:
-                    "El Área de Redes, Marketing & Audiovisual comunica nuestra identidad, historias, actividades y proyectos mediante contenido creativo y estratégico.",
+    }
 
-                functions: [
 
-                    "Redes sociales",
+    window.addEventListener(
+      "scroll",
+      handleHeader
+    );
 
-                    "Creación de contenido",
 
-                    "Marketing",
+    handleHeader();
 
-                    "Fotografía",
 
-                    "Video y edición",
+    /* =====================================================
+       MENÚ MOBILE
+    ====================================================== */
 
-                    "Diseño gráfico"
+    const mobileMenu =
+      document.getElementById("mobileMenu");
 
-                ]
 
-            },
+    mobileMenu.addEventListener(
+      "click",
+      () => {
 
+        const isOpen =
+          siteHeader.classList.toggle(
+            "header-mobile-open"
+          );
 
-            alianzas: {
 
-                number:
-                    "ÁREA 06",
+        mobileMenu.setAttribute(
+          "aria-expanded",
+          isOpen ? "true" : "false"
+        );
 
-                title:
-                    "Alianzas Estratégicas",
+      }
+    );
 
-                leader:
-                    "Nombre del líder",
 
-                image:
-                    "assets/equipo/lider-alianzas.jpg",
+    document
+      .querySelectorAll(".main-nav a")
+      .forEach(link => {
 
-                description:
-                    "El Área de Alianzas Estratégicas desarrolla relaciones con marcas, empresas, instituciones y comunidades para crear proyectos que generen valor.",
+        link.addEventListener(
+          "click",
+          () => {
 
-                functions: [
+            siteHeader.classList.remove(
+              "header-mobile-open"
+            );
 
-                    "Alianzas con marcas",
+            mobileMenu.setAttribute(
+              "aria-expanded",
+              "false"
+            );
 
-                    "Convenios",
+          }
+        );
 
-                    "Relaciones institucionales",
+      });
 
-                    "Proyectos conjuntos",
 
-                    "Patrocinios",
+    /* =====================================================
+       ANIMACIONES AL HACER SCROLL
+    ====================================================== */
 
-                    "Colaboraciones"
+    const revealElements =
+      document.querySelectorAll(".reveal");
 
-                ]
+
+    const revealObserver =
+      new IntersectionObserver(
+        (entries, observer) => {
+
+          entries.forEach(entry => {
+
+            if (
+              entry.isIntersecting
+            ) {
+
+              entry.target.classList.add(
+                "visible"
+              );
+
+              observer.unobserve(
+                entry.target
+              );
 
             }
 
-        };
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
 
 
-        /* =====================================================
-           ABRIR MODAL DE ÁREA
-        ====================================================== */
+    revealElements.forEach(element => {
 
-        function abrirArea(
-            event,
-            areaKey
-        ) {
+      revealObserver.observe(
+        element
+      );
 
-            event.preventDefault();
+    });
+
+
+    /* =====================================================
+       INFORMACIÓN DE LAS ÁREAS
+    ====================================================== */
+
+    const areas = {
+
+
+      ventas: {
+
+        title: "Ventas",
+
+        description:
+          "El Área de Ventas se encarga de gestionar el merchandising y los productos de Baby Golden Perú, buscando que nuestra identidad también pueda acompañar a cada miembro de la comunidad.",
+
+        functions: [
+
+          "Gestión de merchandising",
+
+          "Coordinación de pedidos",
+
+          "Control de productos",
+
+          "Coordinación comercial",
+
+          "Apoyo en eventos"
+
+        ]
+
+      },
+
+
+      legal: {
+
+        title: "Legal",
+
+        description:
+          "El Área Legal brinda soporte documental y orientación para que las actividades de Baby Golden Perú se desarrollen de manera ordenada y responsable.",
+
+        functions: [
+
+          "Reglamentos internos",
+
+          "Documentación institucional",
+
+          "Revisión de convenios",
+
+          "Orientación legal",
+
+          "Apoyo institucional"
+
+        ]
+
+      },
+
+
+      adopciones: {
+
+        title: "Adopciones",
+
+        description:
+          "El Área de Adopciones acompaña la difusión y seguimiento de casos que buscan encontrar hogares responsables y comprometidos.",
+
+        functions: [
+
+          "Recepción de casos",
+
+          "Difusión",
+
+          "Evaluación de adoptantes",
+
+          "Seguimiento",
+
+          "Acompañamiento"
+
+        ]
+
+      },
+
+
+      eventos: {
+
+        title: "Eventos",
+
+        description:
+          "El Área de Eventos convierte las ideas de la comunidad en experiencias, actividades y encuentros que fortalecen nuestros vínculos.",
+
+        functions: [
+
+          "Planificación",
+
+          "Producción",
+
+          "Logística",
+
+          "Coordinación de voluntarios",
+
+          "Coordinación con aliados"
+
+        ]
+
+      },
+
+
+      redes: {
+
+        title:
+          "Redes, Marketing & Audiovisual",
+
+        description:
+          "El Área de Redes, Marketing & Audiovisual comunica nuestra identidad, historias, actividades y proyectos mediante contenido creativo y estratégico.",
+
+        functions: [
+
+          "Redes sociales",
+
+          "Creación de contenido",
+
+          "Marketing",
+
+          "Fotografía",
+
+          "Video y edición",
+
+          "Diseño gráfico"
+
+        ]
+
+      },
+
+
+      alianzas: {
+
+        title:
+          "Alianzas Estratégicas",
+
+        description:
+          "El Área de Alianzas Estratégicas desarrolla relaciones con marcas, empresas, instituciones y comunidades para crear proyectos que generen valor.",
+
+        functions: [
+
+          "Alianzas con marcas",
+
+          "Convenios",
+
+          "Relaciones institucionales",
+
+          "Proyectos conjuntos",
+
+          "Patrocinios",
+
+          "Colaboraciones"
+
+        ]
+
+      }
+
+    };
+
+
+    /* =====================================================
+       MODAL DE ÁREAS
+    ====================================================== */
+
+    const areaModal =
+      document.getElementById(
+        "areaModal"
+      );
+
+
+    const modalTitle =
+      document.getElementById(
+        "modalTitle"
+      );
+
+
+    const modalDescription =
+      document.getElementById(
+        "modalDescription"
+      );
+
+
+    const modalList =
+      document.getElementById(
+        "modalList"
+      );
+
+
+    document
+      .querySelectorAll("[data-area]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const areaKey =
+              button.dataset.area;
 
 
             const area =
-                areas[areaKey];
+              areas[areaKey];
 
 
             if (!area) {
-
-                return;
-
+              return;
             }
 
 
-            document
-                .getElementById(
-                    "modalAreaNumber"
+            modalTitle.textContent =
+              area.title;
+
+
+            modalDescription.textContent =
+              area.description;
+
+
+            modalList.innerHTML =
+              area.functions
+                .map(
+                  item =>
+                    `<li>${item}</li>`
                 )
-                .textContent =
-                area.number;
+                .join("");
 
 
-            document
-                .getElementById(
-                    "modalAreaTitle"
-                )
-                .textContent =
-                area.title;
-
-
-            document
-                .getElementById(
-                    "modalAreaLeader"
-                )
-                .textContent =
-                area.leader;
-
-
-            document
-                .getElementById(
-                    "modalAreaDescription"
-                )
-                .textContent =
-                area.description;
-
-
-            document
-                .getElementById(
-                    "modalAreaImage"
-                )
-                .src =
-                area.image;
-
-
-            document
-                .getElementById(
-                    "modalAreaImage"
-                )
-                .alt =
-                area.title;
-
-
-            const functionsContainer =
-                document.getElementById(
-                    "modalAreaFunctions"
-                );
-
-
-            functionsContainer.innerHTML =
-                "";
-
-
-            area.functions.forEach(
-                function(funcion) {
-
-
-                    const item =
-                        document.createElement(
-                            "div"
-                        );
-
-
-                    item.className =
-                        "modal-function";
-
-
-                    item.textContent =
-                        "✓ " + funcion;
-
-
-                    functionsContainer
-                        .appendChild(
-                            item
-                        );
-
-
-                }
+            areaModal.classList.add(
+              "active"
             );
 
 
-            document
-                .getElementById(
-                    "areaModal"
-                )
-                .classList
-                .add("active");
-
-
             document.body.style.overflow =
-                "hidden";
+              "hidden";
 
-        }
+          }
+        );
 
-
-        /* =====================================================
-           CERRAR ÁREA
-        ====================================================== */
-
-        function cerrarArea() {
-
-            document
-                .getElementById(
-                    "areaModal"
-                )
-                .classList
-                .remove("active");
+      });
 
 
-            document.body.style.overflow =
-                "";
+    /* =====================================================
+       MODAL QUIERO SER PARTE
+    ====================================================== */
 
-        }
-
-
-        /* =====================================================
-           QUIERO SER PARTE
-        ====================================================== */
-
-        function abrirModalParticipacion() {
-
-            document
-                .getElementById(
-                    "participacionModal"
-                )
-                .classList
-                .add("active");
+    const joinButton =
+      document.getElementById(
+        "joinButton"
+      );
 
 
-            document.body.style.overflow =
-                "hidden";
-
-        }
-
-
-        function cerrarModalParticipacion() {
-
-            document
-                .getElementById(
-                    "participacionModal"
-                )
-                .classList
-                .remove("active");
+    const joinModal =
+      document.getElementById(
+        "joinModal"
+      );
 
 
-            document.body.style.overflow =
-                "";
+    joinButton.addEventListener(
+      "click",
+      () => {
 
-        }
-
-
-        /* =====================================================
-           ESC PARA CERRAR
-        ====================================================== */
-
-        document.addEventListener(
-            "keydown",
-            function(event) {
-
-                if (
-                    event.key ===
-                    "Escape"
-                ) {
-
-                    cerrarArea();
-
-                    cerrarModalParticipacion();
-
-                }
-
-            }
+        joinModal.classList.add(
+          "active"
         );
 
 
-    </script>
+        document.body.style.overflow =
+          "hidden";
 
+      }
+    );
+
+
+    /* =====================================================
+       CERRAR MODALES
+    ====================================================== */
+
+    document
+      .querySelectorAll("[data-close]")
+      .forEach(button => {
+
+        button.addEventListener(
+          "click",
+          () => {
+
+            const modalId =
+              button.dataset.close;
+
+
+            const modal =
+              document.getElementById(
+                modalId
+              );
+
+
+            if (modal) {
+
+              modal.classList.remove(
+                "active"
+              );
+
+            }
+
+
+            document.body.style.overflow =
+              "";
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       CERRAR AL HACER CLICK FUERA
+    ====================================================== */
+
+    document
+      .querySelectorAll(".modal")
+      .forEach(modal => {
+
+        modal.addEventListener(
+          "click",
+          event => {
+
+            if (
+              event.target === modal
+            ) {
+
+              modal.classList.remove(
+                "active"
+              );
+
+              document.body.style.overflow =
+                "";
+
+            }
+
+          }
+        );
+
+      });
+
+
+    /* =====================================================
+       CERRAR CON ESC
+    ====================================================== */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          document
+            .querySelectorAll(
+              ".modal.active"
+            )
+            .forEach(modal => {
+
+              modal.classList.remove(
+                "active"
+              );
+
+            });
+
+
+          document.body.style.overflow =
+            "";
+
+        }
+
+      }
+    );
+
+  </script>
 
 </body>
-
 </html>
