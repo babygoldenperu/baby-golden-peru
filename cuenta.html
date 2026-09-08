@@ -1259,9 +1259,43 @@ header{min-height:64px!important}
 .dog-account-meta{display:flex;flex-wrap:wrap;gap:7px 14px;color:#756b5f;font-size:12px}
 .dog-account-id{display:inline-block;margin-top:9px;color:#a66f1c;font-size:11px;font-weight:700;letter-spacing:1px}
 .dog-account-status{display:inline-flex;align-items:center;justify-content:center;padding:7px 10px;border-radius:999px;background:#f4ead8;color:#8d611f;font-size:10px;font-weight:700;margin-bottom:10px}
-.dog-account-action{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:0 14px;border:1px solid #d9ccb9;border-radius:10px;background:#fff;color:#4a4137;font-size:11px;font-weight:700;text-decoration:none}
+.dog-account-action{display:inline-flex;align-items:center;justify-content:center;cursor:pointer;min-height:38px;padding:0 14px;border:1px solid #d9ccb9;border-radius:10px;background:#fff;color:#4a4137;font-size:11px;font-weight:700;text-decoration:none}
 .dog-account-action:hover{border-color:#b77b20;color:#b77b20}
 @media(max-width:650px){#mis-perritos .section-head{flex-direction:column}.cuenta-btn{width:100%}.dog-account-card{grid-template-columns:68px 1fr}.dog-account-photo{width:68px;height:68px}.dog-account-card>div:last-child{grid-column:2}}
+</style>
+
+
+<style id="mis-perritos-modal-styles">
+.dog-profile-modal{
+  position:fixed;inset:0;z-index:99999;display:none;
+  align-items:center;justify-content:center;padding:20px;
+  background:rgba(40,32,24,.55);
+}
+.dog-profile-modal.is-open{display:flex}
+.dog-profile-box{
+  width:min(620px,100%);max-height:90vh;overflow:auto;
+  background:#fffdf9;border:1px solid #e4d7c5;border-radius:22px;
+  box-shadow:0 25px 70px rgba(35,25,15,.25);padding:28px;
+  position:relative;
+}
+.dog-profile-close{
+  position:absolute;right:16px;top:14px;width:36px;height:36px;
+  border:1px solid #ddcfbd;border-radius:50%;background:#fff;
+  cursor:pointer;font-size:20px;color:#4b4035;
+}
+.dog-profile-top{display:flex;gap:18px;align-items:center;margin-bottom:22px}
+.dog-profile-top img,.dog-profile-top .placeholder{
+  width:110px;height:110px;border-radius:18px;object-fit:cover;
+  background:#f2eadf;border:1px solid #e5dacb;
+}
+.dog-profile-top .placeholder{display:flex;align-items:center;justify-content:center;font-size:45px}
+.dog-profile-box h3{margin:0 0 5px;font-family:'Cormorant Garamond',serif;font-size:34px}
+.dog-profile-box .profile-id{color:#a66f1c;font-size:11px;font-weight:700;letter-spacing:1px}
+.dog-profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.dog-profile-field{padding:13px;border:1px solid #e8ddce;border-radius:12px;background:#fff}
+.dog-profile-field small{display:block;color:#8c8174;font-size:9px;font-weight:700;letter-spacing:1px;margin-bottom:5px}
+.dog-profile-field span{font-size:12px;color:#3e352c}
+@media(max-width:600px){.dog-profile-grid{grid-template-columns:1fr}.dog-profile-top{align-items:flex-start}.dog-profile-top img,.dog-profile-top .placeholder{width:85px;height:85px}}
 </style>
 
 </head>
@@ -2912,30 +2946,74 @@ header{min-height:64px!important}
           vacio.style.display = "block";
           return;
         }
+        const tarjetas = [];
 
-        lista.innerHTML = perritos.map(p => {
-          const foto = obtenerFoto(p.foto_url);
+        for (const p of perritos) {
+
+          let foto = "";
+
+          if (p.foto_url) {
+            const { data: signed, error: signedError } =
+              await supabaseClient.storage
+                .from("fotos-perritos")
+                .createSignedUrl(p.foto_url, 3600);
+
+            if (!signedError) {
+              foto = signed?.signedUrl || "";
+            }
+          }
+
           const imagen = foto
-            ? `<img class="dog-account-photo" src="${escapeHtml(foto)}" alt="${escapeHtml(p.nombre_perrito || "Perrito")}">`
+            ? `<img
+                class="dog-account-photo"
+                src="${escapeHtml(foto)}"
+                alt="${escapeHtml(p.nombre_perrito || "Perrito")}"
+              >`
             : `<div class="dog-account-photo placeholder">🐕</div>`;
 
-          return `
+          tarjetas.push(`
             <article class="dog-account-card">
+
               ${imagen}
+
               <div>
-                <h3 class="dog-account-name">${escapeHtml(p.nombre_perrito || "Sin nombre")}</h3>
+                <h3 class="dog-account-name">
+                  ${escapeHtml(p.nombre_perrito || "Sin nombre")}
+                </h3>
+
                 <div class="dog-account-meta">
                   <span>${escapeHtml(p.raza || "Raza no indicada")}</span>
                   <span>${escapeHtml(p.sexo || "")}</span>
                 </div>
-                <span class="dog-account-id">${escapeHtml(p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0")))}</span>
+
+                <span class="dog-account-id">
+                  ${escapeHtml(p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0")))}
+                </span>
               </div>
+
               <div>
-                <span class="dog-account-status">${escapeHtml(p.estado_solicitud || "PENDIENTE")}</span>
-                <a class="dog-account-action" href="registro.html">Ver / actualizar</a>
+                <span class="dog-account-status">
+                  ${escapeHtml(p.estado_solicitud || "PENDIENTE")}
+                </span>
+
+                <button
+                  type="button"
+                  class="dog-account-action"
+                  data-ver-perrito="${escapeHtml(p.id)}"
+                >
+                  Ver perfil
+                </button>
               </div>
-            </article>`;
-        }).join("");
+
+            </article>
+          `);
+        }
+
+        lista.innerHTML = tarjetas.join("");
+
+        lista.querySelectorAll("[data-ver-perrito]").forEach(btn => {
+          btn.addEventListener("click", () => abrirPerfilPerrito(btn.dataset.verPerrito, perritos));
+        });
 
         lista.style.display = "block";
 
@@ -3543,6 +3621,80 @@ header{min-height:64px!important}
       );
 
   </script>
+
+<div id="dogProfileModal" class="dog-profile-modal" aria-hidden="true">
+  <div class="dog-profile-box" role="dialog" aria-modal="true" aria-labelledby="dogProfileTitle">
+    <button type="button" class="dog-profile-close" id="dogProfileClose" aria-label="Cerrar">×</button>
+    <div id="dogProfileContent"></div>
+  </div>
+</div>
+
+
+<script id="mis-perritos-modal-script">
+async function abrirPerfilPerrito(perritoId, perritos) {
+
+  const p = perritos.find(item => String(item.id) === String(perritoId));
+  if (!p) return;
+
+  const modal = document.getElementById("dogProfileModal");
+  const content = document.getElementById("dogProfileContent");
+
+  if (!modal || !content) return;
+
+  let foto = "";
+
+  if (p.foto_url) {
+    const { data: signed } =
+      await supabaseClient.storage
+        .from("fotos-perritos")
+        .createSignedUrl(p.foto_url, 3600);
+
+    foto = signed?.signedUrl || "";
+  }
+
+  content.innerHTML = `
+    <div class="dog-profile-top">
+      ${foto
+        ? `<img src="${escapeHtml(foto)}" alt="${escapeHtml(p.nombre_perrito || "Perrito")}">`
+        : `<div class="placeholder">🐕</div>`}
+      <div>
+        <h3 id="dogProfileTitle">${escapeHtml(p.nombre_perrito || "Sin nombre")}</h3>
+        <div class="profile-id">${escapeHtml(p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0")))}</div>
+      </div>
+    </div>
+
+    <div class="dog-profile-grid">
+      <div class="dog-profile-field"><small>RAZA</small><span>${escapeHtml(p.raza || "No indicada")}</span></div>
+      <div class="dog-profile-field"><small>SEXO</small><span>${escapeHtml(p.sexo || "No indicado")}</span></div>
+      <div class="dog-profile-field"><small>FECHA DE NACIMIENTO</small><span>${escapeHtml(p.fecha_nacimiento || "No indicada")}</span></div>
+      <div class="dog-profile-field"><small>ESTADO</small><span>${escapeHtml(p.estado_solicitud || "PENDIENTE")}</span></div>
+    </div>
+  `;
+
+  modal.classList.add("is-open");
+  modal.setAttribute("aria-hidden", "false");
+}
+
+(function(){
+  const modal = document.getElementById("dogProfileModal");
+  const close = document.getElementById("dogProfileClose");
+
+  function cerrar(){
+    if(!modal) return;
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden","true");
+  }
+
+  close?.addEventListener("click", cerrar);
+  modal?.addEventListener("click", e => {
+    if(e.target === modal) cerrar();
+  });
+  document.addEventListener("keydown", e => {
+    if(e.key === "Escape") cerrar();
+  });
+})();
+</script>
+
 </body>
 
 </html>
