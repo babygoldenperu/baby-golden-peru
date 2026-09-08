@@ -983,6 +983,37 @@
     }
 
 
+
+    /* =========================================
+       DIRECCIONES
+       ========================================= */
+    .addresses-head{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin-bottom:24px}
+    .addresses-head p{margin:0;color:#765f4c;font-size:12px;line-height:1.7}
+    .address-list{display:grid;gap:14px}
+    .address-card{padding:24px;background:#fffaf4;border:1px solid #decdb8;border-radius:14px}
+    .address-card.is-main{border-color:#c89520;box-shadow:0 8px 25px rgba(183,123,32,.08)}
+    .address-card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:15px}
+    .address-title{margin:0 0 5px;font-family:Georgia,serif;font-size:20px;font-weight:500}
+    .address-badge{display:inline-flex;padding:5px 9px;border-radius:999px;background:#f3e4c9;color:#8a5b12;font-size:9px;font-weight:700;letter-spacing:.5px}
+    .address-body{margin-top:16px;padding-top:15px;border-top:1px solid #eadfce;color:#5f5144;font-size:12px;line-height:1.75}
+    .address-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:17px}
+    .address-action{padding:9px 13px;border:1px solid #d9c9b6;border-radius:999px;background:#fff;color:#4a3324;font-size:10px;font-weight:700;cursor:pointer}
+    .address-action:hover{border-color:#b77b20;color:#b77b20}
+    .address-action.delete{color:#9b493b;border-color:#d8b9b1}
+    .address-form-card{display:none;margin-top:18px;padding:26px;background:#fffaf4;border:1px solid #decdb8;border-radius:14px}
+    .address-form-card.is-open{display:block}
+    .address-form-title{margin:0 0 20px;font-family:Georgia,serif;font-size:25px;font-weight:500}
+    .address-form-grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}
+    .address-form-field.full{grid-column:1/-1}
+    .address-form-field label{display:block;margin-bottom:7px;color:#765f4c;font-size:10px;font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+    .address-form-field input{width:100%;padding:12px;border:1px solid #d9c9b6;border-radius:7px;background:#fff;color:#3b2b20;outline:none}
+    .address-form-field input:focus{border-color:#b77b20}
+    .address-main-check{display:flex;align-items:center;gap:8px;margin-top:15px;color:#5f5144;font-size:11px}
+    .address-main-check input{accent-color:#b77b20}
+    .address-form-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px}
+    .address-status{margin-top:14px}
+    @media(max-width:650px){.addresses-head{flex-direction:column}.address-form-grid{grid-template-columns:1fr}.address-form-field.full{grid-column:auto}}
+
     /* =========================================
        RESPONSIVE
        ========================================= */
@@ -1933,45 +1964,49 @@ header{min-height:64px!important}
 
           <!-- DIRECCIONES -->
 
-          <section
-            id="section-direcciones"
-            class="account-section"
-          >
-
-            <h2 class="section-title">
-              Direcciones
-            </h2>
-
-
-            <div class="info-card">
-
-              <h3>
-                Mis direcciones
-              </h3>
-
-              <p>
-                Aquí podremos guardar las direcciones que utilices
-                para tus pedidos. Esta sección quedará preparada
-                para conectarla con el sistema de órdenes.
-              </p>
-
+          <section id="section-direcciones" class="account-section">
+            <div class="addresses-head">
+              <div>
+                <h2 class="section-title" style="margin-bottom:8px;">Direcciones</h2>
+                <p>Guarda tus datos de entrega para tenerlos disponibles cuando los necesites.</p>
+              </div>
+              <button type="button" class="cuenta-btn" id="nuevaDireccionBtn">+ Nueva dirección</button>
             </div>
 
-
-            <div class="info-card">
-
-              <h3>
-                Próximamente
-              </h3>
-
-              <p>
-                Agregaremos dirección de entrega, distrito,
-                provincia y departamento para facilitar
-                tus futuras compras.
-              </p>
-
+            <div id="direccionesLoading" class="empty-state">Cargando tus direcciones...</div>
+            <div id="direccionesLista" class="address-list" style="display:none;"></div>
+            <div id="direccionesVacio" class="empty-state" style="display:none;">
+              <h3>Aún no tienes direcciones</h3>
+              <p>Agrega una dirección para guardarla en tu cuenta.</p>
+            </div>
+            <div id="direccionesError" class="empty-state" style="display:none;">
+              <h3>No pudimos cargar tus direcciones</h3>
+              <p>Inténtalo nuevamente más tarde.</p>
             </div>
 
+            <div id="direccionFormCard" class="address-form-card">
+              <h3 id="direccionFormTitle" class="address-form-title">Nueva dirección</h3>
+              <form id="direccionForm">
+                <input type="hidden" id="direccionId">
+                <div class="address-form-grid">
+                  <div class="address-form-field"><label for="direccionNombres">Nombres</label><input id="direccionNombres" required autocomplete="given-name"></div>
+                  <div class="address-form-field"><label for="direccionApellidos">Apellidos</label><input id="direccionApellidos" required autocomplete="family-name"></div>
+                  <div class="address-form-field"><label for="direccionDni">DNI</label><input id="direccionDni" inputmode="numeric" maxlength="8"></div>
+                  <div class="address-form-field"><label for="direccionTelefono">Teléfono</label><input id="direccionTelefono" type="tel" autocomplete="tel"></div>
+                  <div class="address-form-field full"><label for="direccionDireccion">Dirección</label><input id="direccionDireccion" required autocomplete="street-address" placeholder="Calle, avenida, número, interior..."></div>
+                  <div class="address-form-field"><label for="direccionDistrito">Distrito</label><input id="direccionDistrito" required autocomplete="address-level3"></div>
+                  <div class="address-form-field"><label for="direccionProvincia">Provincia</label><input id="direccionProvincia" autocomplete="address-level2"></div>
+                  <div class="address-form-field"><label for="direccionDepartamento">Departamento</label><input id="direccionDepartamento" autocomplete="address-level1"></div>
+                  <div class="address-form-field"><label for="direccionReferencia">Referencia</label><input id="direccionReferencia" placeholder="Ej. cerca al parque..."></div>
+                </div>
+                <label class="address-main-check"><input type="checkbox" id="direccionPrincipal"> Usar como dirección principal</label>
+                <div id="direccionFormMessage" class="message address-status"></div>
+                <div class="address-form-actions">
+                  <button type="submit" class="auth-button" style="width:auto;padding:12px 20px;">GUARDAR DIRECCIÓN</button>
+                  <button type="button" class="address-action" id="cancelarDireccionBtn">CANCELAR</button>
+                </div>
+              </form>
+            </div>
           </section>
 
 
@@ -3024,6 +3059,190 @@ header{min-height:64px!important}
       }
     }
 
+
+    /* =========================================
+       DIRECCIONES
+       ========================================= */
+    const direccionIds = [
+      "direccionNombres","direccionApellidos","direccionDni","direccionTelefono",
+      "direccionDireccion","direccionDistrito","direccionProvincia",
+      "direccionDepartamento","direccionReferencia"
+    ];
+
+    function limpiarFormularioDireccion(){
+      document.getElementById("direccionForm").reset();
+      document.getElementById("direccionId").value="";
+      document.getElementById("direccionFormTitle").textContent="Nueva dirección";
+      document.getElementById("direccionFormMessage").style.display="none";
+    }
+
+    function cerrarFormularioDireccion(){
+      document.getElementById("direccionFormCard").classList.remove("is-open");
+      limpiarFormularioDireccion();
+    }
+
+    function mostrarMensajeDireccion(texto,tipo="error"){
+      const box=document.getElementById("direccionFormMessage");
+      box.className="message "+tipo;
+      box.textContent=texto;
+      box.style.display="block";
+    }
+
+    async function cargarDirecciones(){
+      const loading=document.getElementById("direccionesLoading");
+      const lista=document.getElementById("direccionesLista");
+      const vacio=document.getElementById("direccionesVacio");
+      const errorBox=document.getElementById("direccionesError");
+      if(!loading||!lista||!vacio||!errorBox)return;
+
+      loading.style.display="block"; lista.style.display="none";
+      vacio.style.display="none"; errorBox.style.display="none";
+
+      const {data:{session}}=await supabaseClient.auth.getSession();
+      if(!session){
+        loading.style.display="none"; vacio.style.display="block";
+        vacio.innerHTML="<h3>Sesión requerida</h3><p>Debes iniciar sesión para consultar tus direcciones.</p>";
+        return;
+      }
+
+      const {data,error}=await supabaseClient
+        .from("direcciones_usuario")
+        .select("id,nombres,apellidos,dni,telefono,direccion,distrito,provincia,departamento,referencia,es_principal,created_at,updated_at")
+        .eq("user_id",session.user.id)
+        .order("es_principal",{ascending:false})
+        .order("created_at",{ascending:false});
+
+      loading.style.display="none";
+      if(error){
+        console.error("ERROR DIRECCIONES:",error);
+        errorBox.style.display="block";
+        return;
+      }
+
+      if(!data||data.length===0){
+        vacio.style.display="block";
+        return;
+      }
+
+      lista.innerHTML=data.map(a=>{
+        const ubicacion=[a.distrito,a.provincia,a.departamento].filter(Boolean).join(", ");
+        return `
+          <article class="address-card ${a.es_principal?"is-main":""}">
+            <div class="address-card-top">
+              <div>
+                <h3 class="address-title">${escapeHtml(a.nombres+" "+a.apellidos)}</h3>
+                ${a.es_principal?'<span class="address-badge">DIRECCIÓN PRINCIPAL</span>':''}
+              </div>
+            </div>
+            <div class="address-body">
+              <strong>${escapeHtml(a.direccion)}</strong><br>
+              ${escapeHtml(ubicacion || "Ubicación no indicada")}
+              ${a.referencia?`<br><span>Referencia: ${escapeHtml(a.referencia)}</span>`:""}
+              ${a.telefono?`<br><span>Teléfono: ${escapeHtml(a.telefono)}</span>`:""}
+              ${a.dni?`<br><span>DNI: ${escapeHtml(a.dni)}</span>`:""}
+            </div>
+            <div class="address-actions">
+              <button type="button" class="address-action" data-editar-direccion="${escapeHtml(a.id)}">Editar</button>
+              ${!a.es_principal?`<button type="button" class="address-action" data-principal-direccion="${escapeHtml(a.id)}">Hacer principal</button>`:""}
+              <button type="button" class="address-action delete" data-eliminar-direccion="${escapeHtml(a.id)}">Eliminar</button>
+            </div>
+          </article>`;
+      }).join("");
+
+      lista.querySelectorAll("[data-editar-direccion]").forEach(btn=>{
+        btn.addEventListener("click",()=>editarDireccion(btn.dataset.editarDireccion,data));
+      });
+      lista.querySelectorAll("[data-principal-direccion]").forEach(btn=>{
+        btn.addEventListener("click",()=>hacerPrincipalDireccion(btn.dataset.principalDireccion));
+      });
+      lista.querySelectorAll("[data-eliminar-direccion]").forEach(btn=>{
+        btn.addEventListener("click",()=>eliminarDireccion(btn.dataset.eliminarDireccion));
+      });
+      lista.style.display="grid";
+    }
+
+    function editarDireccion(id,data){
+      const a=data.find(x=>String(x.id)===String(id));
+      if(!a)return;
+      document.getElementById("direccionId").value=a.id;
+      const map={
+        direccionNombres:a.nombres,direccionApellidos:a.apellidos,direccionDni:a.dni,
+        direccionTelefono:a.telefono,direccionDireccion:a.direccion,direccionDistrito:a.distrito,
+        direccionProvincia:a.provincia,direccionDepartamento:a.departamento,
+        direccionReferencia:a.referencia
+      };
+      Object.entries(map).forEach(([id,value])=>document.getElementById(id).value=value||"");
+      document.getElementById("direccionPrincipal").checked=!!a.es_principal;
+      document.getElementById("direccionFormTitle").textContent="Editar dirección";
+      document.getElementById("direccionFormCard").classList.add("is-open");
+      document.getElementById("direccionFormCard").scrollIntoView({behavior:"smooth",block:"start"});
+    }
+
+    async function hacerPrincipalDireccion(id){
+      const {data:{session}}=await supabaseClient.auth.getSession();
+      if(!session)return;
+      const {error}=await supabaseClient.from("direcciones_usuario").update({es_principal:true}).eq("id",id).eq("user_id",session.user.id);
+      if(error){console.error("ERROR PRINCIPAL:",error);alert("No pudimos cambiar la dirección principal.");return;}
+      await cargarDirecciones();
+    }
+
+    async function eliminarDireccion(id){
+      if(!confirm("¿Quieres eliminar esta dirección?"))return;
+      const {data:{session}}=await supabaseClient.auth.getSession();
+      if(!session)return;
+      const {error}=await supabaseClient.from("direcciones_usuario").delete().eq("id",id).eq("user_id",session.user.id);
+      if(error){console.error("ERROR ELIMINANDO DIRECCIÓN:",error);alert("No pudimos eliminar la dirección.");return;}
+      await cargarDirecciones();
+    }
+
+    document.getElementById("nuevaDireccionBtn")?.addEventListener("click",()=>{
+      limpiarFormularioDireccion();
+      document.getElementById("direccionFormCard").classList.add("is-open");
+      document.getElementById("direccionFormCard").scrollIntoView({behavior:"smooth",block:"start"});
+    });
+
+    document.getElementById("cancelarDireccionBtn")?.addEventListener("click",cerrarFormularioDireccion);
+
+    document.getElementById("direccionForm")?.addEventListener("submit",async function(event){
+      event.preventDefault();
+      const {data:{session}}=await supabaseClient.auth.getSession();
+      if(!session){mostrarMensajeDireccion("Debes iniciar sesión para guardar una dirección.");return;}
+
+      const payload={
+        nombres:document.getElementById("direccionNombres").value.trim(),
+        apellidos:document.getElementById("direccionApellidos").value.trim(),
+        dni:document.getElementById("direccionDni").value.trim(),
+        telefono:document.getElementById("direccionTelefono").value.trim(),
+        direccion:document.getElementById("direccionDireccion").value.trim(),
+        distrito:document.getElementById("direccionDistrito").value.trim(),
+        provincia:document.getElementById("direccionProvincia").value.trim(),
+        departamento:document.getElementById("direccionDepartamento").value.trim(),
+        referencia:document.getElementById("direccionReferencia").value.trim(),
+        es_principal:document.getElementById("direccionPrincipal").checked
+      };
+
+      const id=document.getElementById("direccionId").value;
+      const button=this.querySelector('button[type="submit"]');
+      button.disabled=true; button.textContent="GUARDANDO...";
+
+      try{
+        let result;
+        if(id){
+          result=await supabaseClient.from("direcciones_usuario").update(payload).eq("id",id).eq("user_id",session.user.id).select().single();
+        }else{
+          result=await supabaseClient.from("direcciones_usuario").insert({...payload,user_id:session.user.id}).select().single();
+        }
+        if(result.error)throw result.error;
+        cerrarFormularioDireccion();
+        await cargarDirecciones();
+      }catch(error){
+        console.error("ERROR GUARDANDO DIRECCIÓN:",error);
+        mostrarMensajeDireccion("No pudimos guardar la dirección. Inténtalo nuevamente.");
+      }finally{
+        button.disabled=false; button.textContent="GUARDAR DIRECCIÓN";
+      }
+    });
+
     /* =========================================
        NAVEGACIÓN DEL PANEL
        ========================================= */
@@ -3101,6 +3320,12 @@ header{min-height:64px!important}
       if(nombre === "mis-perritos") {
 
         cargarMisPerritos();
+
+      }
+
+      if(nombre === "direcciones") {
+
+        cargarDirecciones();
 
       }
 
