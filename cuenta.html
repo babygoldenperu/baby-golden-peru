@@ -1147,7 +1147,34 @@
 
     }
 
-  </style>
+  
+
+    .profile-action-button {
+      border:0;
+      border-radius:10px;
+      padding:11px 18px;
+      cursor:pointer;
+      font-weight:700;
+      background:#d6a84f;
+      color:#111;
+    }
+    .profile-action-button.secondary {
+      background:transparent;
+      border:1px solid rgba(255,255,255,.2);
+      color:inherit;
+    }
+    .profile-edit-input {
+      width:100%;
+      box-sizing:border-box;
+      margin-top:7px;
+      padding:11px 12px;
+      border-radius:9px;
+      border:1px solid rgba(255,255,255,.18);
+      background:rgba(255,255,255,.06);
+      color:inherit;
+      font:inherit;
+    }
+</style>
 
 
 <style id="baby-golden-header-master">
@@ -1802,9 +1829,34 @@ header{min-height:64px!important}
               </div>
 
 
+              <div
+                id="perfilEdicion"
+                style="display:none;margin-top:22px;"
+              >
+                <div class="profile-grid">
+                  <div class="profile-field">
+                    <label class="profile-label" for="editarNombres">Nombres</label>
+                    <input id="editarNombres" type="text" autocomplete="given-name" class="profile-edit-input">
+                  </div>
+                  <div class="profile-field">
+                    <label class="profile-label" for="editarApellidos">Apellidos</label>
+                    <input id="editarApellidos" type="text" autocomplete="family-name" class="profile-edit-input">
+                  </div>
+                </div>
+                <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px;">
+                  <button type="button" id="guardarDatosPerfil" class="profile-action-button">Guardar cambios</button>
+                  <button type="button" id="cancelarEdicionPerfil" class="profile-action-button secondary">Cancelar</button>
+                </div>
+                <div id="perfilEdicionMensaje" class="message" style="display:none;margin-top:12px;"></div>
+              </div>
+
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:18px;">
+                <button type="button" id="modificarDatosPerfil" class="profile-action-button">Modificar datos</button>
+              </div>
+
               <div class="profile-note">
-                Aquí puedes consultar los datos básicos asociados a tu
-                cuenta y el método con el que ingresas a Baby Golden Perú.
+                Aquí puedes consultar y actualizar tus nombres y apellidos.
+                El correo electrónico y el método de acceso se muestran como datos de tu cuenta.
               </div>
 
             </div>
@@ -3073,6 +3125,75 @@ header{min-height:64px!important}
           .join("");
 
     }
+
+
+    /* =========================================
+       MODIFICAR DATOS DEL PERFIL
+       ========================================= */
+
+    const modificarDatosPerfil = document.getElementById("modificarDatosPerfil");
+    const perfilEdicion = document.getElementById("perfilEdicion");
+    const editarNombres = document.getElementById("editarNombres");
+    const editarApellidos = document.getElementById("editarApellidos");
+    const guardarDatosPerfil = document.getElementById("guardarDatosPerfil");
+    const cancelarEdicionPerfil = document.getElementById("cancelarEdicionPerfil");
+    const perfilEdicionMensaje = document.getElementById("perfilEdicionMensaje");
+
+    modificarDatosPerfil.addEventListener("click", function() {
+      const nombresActuales = document.getElementById("perfilNombres").textContent.trim();
+      const apellidosActuales = document.getElementById("perfilApellidos").textContent.trim();
+      editarNombres.value = nombresActuales === "—" ? "" : nombresActuales;
+      editarApellidos.value = apellidosActuales === "—" ? "" : apellidosActuales;
+      perfilEdicionMensaje.style.display = "none";
+      perfilEdicion.style.display = "block";
+      editarNombres.focus();
+    });
+
+    cancelarEdicionPerfil.addEventListener("click", function() {
+      perfilEdicion.style.display = "none";
+      perfilEdicionMensaje.style.display = "none";
+    });
+
+    guardarDatosPerfil.addEventListener("click", async function() {
+      const nombres = editarNombres.value.trim();
+      const apellidos = editarApellidos.value.trim();
+      perfilEdicionMensaje.style.display = "none";
+
+      if(!nombres || !apellidos) {
+        perfilEdicionMensaje.className = "message error";
+        perfilEdicionMensaje.textContent = "Completa nombres y apellidos.";
+        perfilEdicionMensaje.style.display = "block";
+        return;
+      }
+
+      guardarDatosPerfil.disabled = true;
+      guardarDatosPerfil.textContent = "Guardando...";
+
+      try {
+        const { data, error } = await supabaseClient.auth.updateUser({
+          data: {
+            nombre: nombres,
+            apellidos: apellidos,
+            full_name: `${nombres} ${apellidos}`.trim()
+          }
+        });
+
+        if(error) throw error;
+        mostrarCuenta(data.user);
+        perfilEdicion.style.display = "none";
+        perfilEdicionMensaje.className = "message success";
+        perfilEdicionMensaje.textContent = "Datos actualizados correctamente.";
+        perfilEdicionMensaje.style.display = "block";
+      } catch(error) {
+        console.error("ERROR ACTUALIZANDO PERFIL:", error);
+        perfilEdicionMensaje.className = "message error";
+        perfilEdicionMensaje.textContent = "No pudimos actualizar tus datos. Inténtalo nuevamente.";
+        perfilEdicionMensaje.style.display = "block";
+      } finally {
+        guardarDatosPerfil.disabled = false;
+        guardarDatosPerfil.textContent = "Guardar cambios";
+      }
+    });
 
 
     /* =========================================
