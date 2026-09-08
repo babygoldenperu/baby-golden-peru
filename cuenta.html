@@ -1619,6 +1619,21 @@ header{min-height:64px!important}
           class="message"
         ></div>
 
+        <div id="nuevaPasswordPanel" style="display:none;margin-top:22px;">
+          <div class="field">
+            <label for="nuevaPassword">Nueva contraseña</label>
+            <input type="password" id="nuevaPassword" autocomplete="new-password" minlength="6">
+          </div>
+          <div class="field">
+            <label for="nuevaPassword2">Confirmar nueva contraseña</label>
+            <input type="password" id="nuevaPassword2" autocomplete="new-password" minlength="6">
+          </div>
+          <button type="button" class="auth-button" id="guardarNuevaPassword">
+            GUARDAR NUEVA CONTRASEÑA
+          </button>
+          <div id="nuevaPasswordMessage" class="message"></div>
+        </div>
+
 
         <div class="auth-links">
 
@@ -2480,71 +2495,109 @@ header{min-height:64px!important}
        RECUPERAR CONTRASEÑA
        ========================================= */
 
-    document
-      .getElementById("recuperarForm")
-      .addEventListener(
-        "submit",
-        async function(event) {
+    const nuevaPasswordPanel =
+      document.getElementById("nuevaPasswordPanel");
 
-          event.preventDefault();
+    const nuevaPasswordMessage =
+      document.getElementById("nuevaPasswordMessage");
 
+    document.getElementById("recuperarForm").addEventListener(
+      "submit",
+      async function(event) {
+        event.preventDefault();
 
-          const email =
-            document
-              .getElementById(
-                "recuperarEmail"
-              )
-              .value
-              .trim()
-              .toLowerCase();
+        const email = document.getElementById("recuperarEmail")
+          .value.trim().toLowerCase();
 
+        const message = document.getElementById("recuperarMessage");
+        message.className = "message";
+        message.style.display = "none";
 
-          const message =
-            document.getElementById(
-              "recuperarMessage"
-            );
-
-
-          const {
-            error
-          } =
-            await supabaseClient.auth
-              .resetPasswordForEmail(
-                email,
-                {
-
-                  redirectTo:
-                    window.location.origin +
-                    "/cuenta.html"
-
-                }
-              );
-
-
-          if (error) {
-
-            message.className =
-              "message error";
-
-            message.textContent =
-              error.message;
-
-          } else {
-
-            message.className =
-              "message success";
-
-            message.textContent =
-              "Te enviamos un enlace para recuperar tu contraseña.";
-
+        const { error } = await supabaseClient.auth.resetPasswordForEmail(
+          email,
+          {
+            redirectTo:
+              window.location.origin + "/cuenta.html"
           }
+        );
 
-
-          message.style.display =
-            "block";
-
+        if(error) {
+          message.className = "message error";
+          message.textContent =
+            "No pudimos enviar el enlace. Inténtalo nuevamente.";
+          console.error("ERROR RECUPERANDO CONTRASEÑA:", error);
+        } else {
+          message.className = "message success";
+          message.textContent =
+            "Te enviamos un enlace. Revisa tu correo y sigue las instrucciones para crear una nueva contraseña.";
         }
-      );
+
+        message.style.display = "block";
+      }
+    );
+
+    document.getElementById("guardarNuevaPassword").addEventListener(
+      "click",
+      async function() {
+        const password = document.getElementById("nuevaPassword").value;
+        const password2 = document.getElementById("nuevaPassword2").value;
+
+        nuevaPasswordMessage.className = "message";
+        nuevaPasswordMessage.style.display = "none";
+
+        if(password.length < 6) {
+          nuevaPasswordMessage.className = "message error";
+          nuevaPasswordMessage.textContent =
+            "La contraseña debe tener al menos 6 caracteres.";
+          nuevaPasswordMessage.style.display = "block";
+          return;
+        }
+
+        if(password !== password2) {
+          nuevaPasswordMessage.className = "message error";
+          nuevaPasswordMessage.textContent =
+            "Las contraseñas no coinciden.";
+          nuevaPasswordMessage.style.display = "block";
+          return;
+        }
+
+        const button = document.getElementById("guardarNuevaPassword");
+        button.disabled = true;
+        button.textContent = "GUARDANDO...";
+
+        const { error } = await supabaseClient.auth.updateUser({
+          password: password
+        });
+
+        if(error) {
+          console.error("ERROR ACTUALIZANDO CONTRASEÑA:", error);
+          nuevaPasswordMessage.className = "message error";
+          nuevaPasswordMessage.textContent =
+            "No pudimos actualizar tu contraseña. Solicita un nuevo enlace e inténtalo nuevamente.";
+          button.disabled = false;
+          button.textContent = "GUARDAR NUEVA CONTRASEÑA";
+        } else {
+          nuevaPasswordMessage.className = "message success";
+          nuevaPasswordMessage.textContent =
+            "Contraseña actualizada correctamente. Ya puedes iniciar sesión con tu nueva contraseña.";
+          document.getElementById("nuevaPassword").value = "";
+          document.getElementById("nuevaPassword2").value = "";
+          button.disabled = false;
+          button.textContent = "CONTRASEÑA ACTUALIZADA";
+
+          setTimeout(function() {
+            mostrarPanel(loginPanel);
+            nuevaPasswordPanel.style.display = "none";
+            document.getElementById("recuperarForm").style.display = "block";
+            document.getElementById("volverLogin2").style.display = "block";
+            document.getElementById("recuperarMessage").style.display = "none";
+            button.textContent = "GUARDAR NUEVA CONTRASEÑA";
+          }, 1800);
+        }
+
+        nuevaPasswordMessage.style.display = "block";
+      }
+    );
 
 
     /* =========================================
@@ -3302,13 +3355,27 @@ header{min-height:64px!important}
           session
         ) => {
 
-          if(
-            event === "SIGNED_OUT"
-          ) {
+          if(event === "PASSWORD_RECOVERY") {
 
-            mostrarPanel(
-              loginPanel
-            );
+            mostrarPanel(recuperarPanel);
+
+            nuevaPasswordPanel.style.display = "block";
+
+            const recoveryMessage =
+              document.getElementById("recuperarMessage");
+
+            recoveryMessage.className = "message success";
+            recoveryMessage.textContent =
+              "Crea una nueva contraseña para recuperar el acceso a tu cuenta.";
+            recoveryMessage.style.display = "block";
+
+            document.getElementById("recuperarForm").style.display = "none";
+            document.getElementById("volverLogin2").style.display = "none";
+          }
+
+          if(event === "SIGNED_OUT") {
+
+            mostrarPanel(loginPanel);
 
           }
 
