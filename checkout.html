@@ -1125,6 +1125,14 @@ footer p{
     box-shadow:0 1px 5px rgba(0,0,0,.025);
   }
 
+  .payment-logo-fallback{
+    display:none;
+    color:#765f4c;
+    font-size:9px;
+    font-weight:700;
+    letter-spacing:.4px;
+  }
+
   .payment-method img{
     display:block;
     width:78%;
@@ -1275,6 +1283,84 @@ footer p{
       }
     }
 
+
+    .promo-box{
+      margin-top:24px;
+      padding:16px;
+      border:1px solid #decdb8;
+      border-radius:14px;
+      background:#fbf7f0;
+    }
+    .promo-title{
+      margin-bottom:10px;
+      color:#4a3324;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+    }
+    .promo-row{
+      display:flex;
+      gap:8px;
+    }
+    .promo-row input{
+      min-width:0;
+      flex:1;
+      height:42px;
+      padding:0 12px;
+      border:1px solid #d8c7b1;
+      border-radius:9px;
+      background:#fff;
+      color:#3b2b20;
+      font-size:11px;
+      outline:none;
+    }
+    .promo-row input:focus{
+      border-color:#b77b20;
+    }
+    .promo-row button{
+      height:42px;
+      padding:0 15px;
+      border:0;
+      border-radius:9px;
+      background:#4a3324;
+      color:#fff;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:.5px;
+      cursor:pointer;
+    }
+    .promo-row button:hover{
+      background:#b77b20;
+    }
+    .promo-row button:disabled{
+      opacity:.55;
+      cursor:not-allowed;
+    }
+    .promo-message{
+      margin-top:8px;
+      min-height:15px;
+      font-size:10px;
+      line-height:1.5;
+    }
+    .promo-total-row{
+      margin-top:12px;
+      padding-top:12px;
+      border-top:0;
+    }
+    .discount-price{
+      color:#3f7a45;
+      font-size:13px;
+      font-weight:700;
+    }
+    @media(max-width:560px){
+      .promo-row{
+        flex-direction:column;
+      }
+      .promo-row button{
+        width:100%;
+      }
+    }
 </style>
 </head>
 
@@ -1623,7 +1709,29 @@ footer p{
         <div id="summary"></div>
 
 
-        <div
+        
+        <div class="promo-box">
+          <div class="promo-title">¿Tienes un código promocional?</div>
+          <div class="promo-row">
+            <input
+              id="promoCode"
+              type="text"
+              maxlength="40"
+              autocomplete="off"
+              placeholder="Ingresa tu código"
+              aria-label="Código promocional"
+            >
+            <button type="button" id="applyPromo">APLICAR</button>
+          </div>
+          <div id="promoMessage" class="promo-message" aria-live="polite"></div>
+        </div>
+
+        <div id="discountRow" class="total-row promo-total-row" hidden>
+          <span class="total-label">Descuento</span>
+          <span id="discount" class="discount-price">- S/ 0.00</span>
+        </div>
+
+<div
           id="summaryTotal"
           class="total-row"
         >
@@ -1758,6 +1866,7 @@ footer p{
     let products = {};
     let productsLoaded = false;
     let checkoutBusy = false;
+    let appliedPromo = null;
 
     // Las imágenes de la tienda tienen respaldo local porque
     // imagen_url puede estar vacío en Supabase.
@@ -1864,9 +1973,81 @@ footer p{
       return { ok:true, lines };
     }
 
+    function getCartSubtotal(lines){
+      return lines.reduce((sum, line) => {
+        const product = products[line.sku];
+        return sum + (Number(product?.precio || 0) * Number(line.quantity || 0));
+      }, 0);
+    }
+
+    async function validatePromoCode(){
+      const input = document.getElementById("promoCode");
+      const message = document.getElementById("promoMessage");
+      const button = document.getElementById("applyPromo");
+      const cart = validateCartAgainstProducts();
+
+      if(!cart.ok){
+        message.textContent = cart.message;
+        return;
+      }
+
+      const code = String(input.value || "").trim().toUpperCase();
+      if(!code){
+        appliedPromo = null;
+        message.style.color = "#9f3d2c";
+        message.textContent = "Ingresa un código promocional.";
+        renderSummary();
+        return;
+      }
+
+      button.disabled = true;
+      button.textContent = "VALIDANDO...";
+      message.style.color = "#765f4c";
+      message.textContent = "Validando código...";
+
+      try{
+        const subtotal = Number(getCartSubtotal(cart.lines).toFixed(2));
+        const { data, error } = await supabaseClient.rpc(
+          "validar_codigo_promocional",
+          {
+            p_codigo: code,
+            p_subtotal: subtotal
+          }
+        );
+
+        if(error) throw error;
+
+        if(!data?.valido){
+          appliedPromo = null;
+          message.style.color = "#9f3d2c";
+          message.textContent = data?.mensaje || "El código promocional no es válido.";
+        }else{
+          appliedPromo = {
+            codigo: data.codigo,
+            descuento: Number(data.descuento || 0),
+            total: Number(data.total || subtotal)
+          };
+          message.style.color = "#3f7a45";
+          message.textContent = `Código aplicado: ${data.codigo}`;
+        }
+
+        renderSummary();
+      }catch(error){
+        appliedPromo = null;
+        message.style.color = "#9f3d2c";
+        message.textContent = error?.message || "No pudimos validar el código.";
+        renderSummary();
+      }finally{
+        button.disabled = false;
+        button.textContent = "APLICAR";
+      }
+    }
+
     function renderSummary(){
       const summary = document.getElementById("summary");
       const totalElement = document.getElementById("total");
+      const discountRow = document.getElementById("discountRow");
+      const discountElement = document.getElementById("discount");
       const button = document.getElementById("continueButton");
 
       const cart = validateCartAgainstProducts();
@@ -1880,24 +2061,30 @@ footer p{
           </div>
         `;
         totalElement.textContent = "S/ 0.00";
+        discountRow.hidden = true;
         button.disabled = true;
         return;
       }
 
-      let total = 0;
+      const subtotal = Number(getCartSubtotal(cart.lines).toFixed(2));
+
+      if(appliedPromo){
+        const maxDiscount = subtotal;
+        appliedPromo.descuento = Math.min(
+          Number(appliedPromo.descuento || 0),
+          maxDiscount
+        );
+        appliedPromo.total = Number(
+          (subtotal - appliedPromo.descuento).toFixed(2)
+        );
+      }
 
       summary.innerHTML = cart.lines.map(line => {
         const product = products[line.sku];
         const quantity = line.quantity;
         const price = Number(product.precio);
-        const subtotal = price * quantity;
-
-        total += subtotal;
-
-        const image =
-          product.imagen_url ||
-          fallbackProductImages[line.sku] ||
-          "BABY%20GOLDEN.png";
+        const itemSubtotal = price * quantity;
+        const image = product.imagen_url || "BABY%20GOLDEN.png";
 
         return `
           <div class="summary-item">
@@ -1905,14 +2092,9 @@ footer p{
               class="summary-image"
               src="${escapeHtml(image)}"
               alt="${escapeHtml(product.nombre)}"
-              onerror="this.onerror=null;this.src='BABY%20GOLDEN.png';"
             >
-
             <div>
-              <p class="summary-name">
-                ${escapeHtml(product.nombre)}
-              </p>
-
+              <p class="summary-name">${escapeHtml(product.nombre)}</p>
               <p class="summary-meta">
                 Cantidad: ${quantity}
                 <br>
@@ -1920,19 +2102,26 @@ footer p{
                 ${product.maneja_stock ? `<br>Stock disponible: ${Number(product.stock)}` : ""}
               </p>
             </div>
-
-            <div class="summary-price">
-              ${formatMoney(subtotal)}
-            </div>
+            <div class="summary-price">${formatMoney(itemSubtotal)}</div>
           </div>
         `;
       }).join("");
+
+      const descuento = appliedPromo ? Number(appliedPromo.descuento || 0) : 0;
+      const total = Number((subtotal - descuento).toFixed(2));
+
+      if(appliedPromo && descuento > 0){
+        discountRow.hidden = false;
+        discountElement.textContent = "- " + formatMoney(descuento);
+      }else{
+        discountRow.hidden = true;
+      }
 
       totalElement.textContent = formatMoney(total);
       button.disabled = false;
     }
 
-    async function createOrder(customer, lines){
+    async function createOrder(customer, lines, promoCode){
       if(!supabaseClient){
         throw new Error("Supabase no está configurado.");
       }
@@ -1950,7 +2139,8 @@ footer p{
         "crear_pedido_tienda",
         {
           p_customer: customer,
-          p_cart: cartPayload
+          p_cart: cartPayload,
+          p_codigo_promocional: promoCode || null
         }
       );
 
@@ -2001,7 +2191,11 @@ footer p{
           button.disabled = true;
           button.textContent = "VERIFICANDO PEDIDO...";
 
-          const order = await createOrder(customer, validation.lines);
+          const order = await createOrder(
+            customer,
+            validation.lines,
+            appliedPromo?.codigo || null
+          );
 
           localStorage.setItem(
             "babyGoldenCheckout",
