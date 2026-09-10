@@ -181,6 +181,33 @@
       background: #fff8eb;
     }
 
+    /* El tipo de ID lo determina la compra.
+       El usuario no puede cambiarlo durante el registro. */
+    .id-option.id-no-disponible {
+      display: none;
+    }
+
+    .id-option.id-comprado .id-card-option {
+      cursor: default;
+    }
+
+    .id-option.id-comprado .id-card-option:hover {
+      border-color: #b47c24;
+    }
+
+    .id-option.id-comprado .id-card-option::after {
+      content: "✓ ADQUIRIDO";
+      display: inline-block;
+      margin-top: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: #f3eadb;
+      color: #8f611f;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+    }
+
     .id-card-option strong {
       display: block;
       font-family: 'Cormorant Garamond', serif;
@@ -704,7 +731,7 @@
       </span>
 
       <h2 class="section-title">
-        Elige tu ID
+        Tu Baby Golden ID
       </h2>
 
 
@@ -1656,17 +1683,33 @@ comprobarAccesoRegistro();
       contenidoRegistro.style.display = "block";
 
       const tipo = String(acceso.producto || "").toUpperCase();
-      const selector = formulario.querySelector('[name="tipo_id"]');
 
-      if (selector && (tipo === "PREMIUM" || tipo === "BLACK")) {
-        selector.value = tipo;
-        selector.dataset.lockedByPurchase = "true";
+      if (tipo !== "PREMIUM" && tipo !== "BLACK") {
+        throw new Error("El acceso de registro no corresponde a un Baby Golden ID válido.");
       }
+
+      /* El tipo de ID viene de la compra:
+         mostramos únicamente el producto adquirido y lo dejamos fijado. */
+      const opcionesId = formulario.querySelectorAll('[name="tipo_id"]');
+
+      opcionesId.forEach((opcion) => {
+        const esComprado = String(opcion.value || "").toUpperCase() === `${tipo} ID`;
+        const contenedor = opcion.closest(".id-option");
+
+        if (contenedor) {
+          contenedor.classList.toggle("id-comprado", esComprado);
+          contenedor.classList.toggle("id-no-disponible", !esComprado);
+        }
+
+        opcion.checked = esComprado;
+        opcion.disabled = !esComprado;
+        opcion.dataset.lockedByPurchase = "true";
+      });
 
       const aviso = document.getElementById("avisoAccesoCompra");
       if (aviso) {
         aviso.textContent =
-          `Tienes autorizado un registro ${tipo === "BLACK" ? "Black ID" : "Premium ID"}.`;
+          `Tu compra incluye ${tipo === "BLACK" ? "Black ID" : "Premium ID"}. Este tipo ya está seleccionado y no puede modificarse.`;
       }
 
     } catch (error) {
