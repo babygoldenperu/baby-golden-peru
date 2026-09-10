@@ -1236,6 +1236,11 @@ footer p{
       color:#a76f20 !important;
       font-weight:700;
     }
+    .payment-confirmation-register{display:none;margin-top:20px;padding-top:18px;border-top:1px solid #eadfce;}
+    .payment-confirmation-register.is-visible{display:block;}
+    .payment-confirmation-register-copy{margin:0 0 11px !important;color:#765f4c !important;font-size:11px !important;}
+    .payment-confirmation-register-button{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:13px 24px;border:0;border-radius:999px;background:#b77b20;color:#fff;font-size:11px;font-weight:700;letter-spacing:.7px;text-decoration:none;cursor:pointer;transition:.25s ease;}
+    .payment-confirmation-register-button:hover{background:#000;color:#fff;transform:translateY(-1px);}
 
     .payment-confirmation.pending .payment-confirmation-icon{
       background:#f5ecd9;
@@ -1467,6 +1472,11 @@ footer p{
             id="paymentConfirmationOrder"
             class="payment-confirmation-order"
           ></p>
+
+            <div id="paymentConfirmationRegister" class="payment-confirmation-register">
+              <p class="payment-confirmation-register-copy">Tu Baby Golden ID ya está listo. Ahora registra a tu perrito.</p>
+              <a id="paymentConfirmationRegisterButton" class="payment-confirmation-register-button" href="registro.html">REGISTRAR A MI PERRITO</a>
+            </div>
 
         </div>
 
@@ -2234,7 +2244,8 @@ footer p{
               "success",
               "¡Pedido de prueba confirmado!",
               "El código BABY100 cubrió el 100% del pedido. No se realizó ningún cobro ni se abrió Mercado Pago.",
-              freeOrder.numero_pedido || order.numero_pedido
+              freeOrder.numero_pedido || order.numero_pedido,
+              orderContainsBabyGoldenId(order)
             );
 
             return;
@@ -2341,15 +2352,17 @@ footer p{
     }
 
 
-    function showPaymentConfirmation(type, title, text, orderNumber){
+    function showPaymentConfirmation(type, title, text, orderNumber, canRegister){
       const card = document.getElementById("paymentConfirmation");
       const icon = document.getElementById("paymentConfirmationIcon");
       const label = document.getElementById("paymentConfirmationLabel");
       const titleElement = document.getElementById("paymentConfirmationTitle");
       const textElement = document.getElementById("paymentConfirmationText");
       const orderElement = document.getElementById("paymentConfirmationOrder");
+      const registerBox = document.getElementById("paymentConfirmationRegister");
 
       card.className = "payment-confirmation is-visible";
+      registerBox.classList.toggle("is-visible", type === "success" && canRegister === true);
 
       if(type === "pending"){
         card.classList.add("pending");
@@ -2371,6 +2384,14 @@ footer p{
         : "";
     }
 
+
+    function orderContainsBabyGoldenId(orderData){
+      const lines = Array.isArray(orderData?.lineas) ? orderData.lineas : (Array.isArray(orderData?.items) ? orderData.items : []);
+      return lines.some(line => {
+        const sku = String(line?.sku || line?.producto_sku || line?.producto || "").toUpperCase();
+        return sku === "BLACK" || sku === "PREMIUM";
+      });
+    }
 
     async function verifyReturnedOrder(pedidoId, status){
       const formError = document.getElementById("formError");
@@ -2425,11 +2446,13 @@ footer p{
           const estado = String(data?.estado || "").toUpperCase();
 
           if(estado === "PAGADO"){
+            const puedeRegistrar = orderContainsBabyGoldenId(data);
             showPaymentConfirmation(
               "success",
               "¡Pago confirmado!",
               "Tu pago fue recibido correctamente y tu pedido quedó registrado.",
-              data.numero_pedido
+              data.numero_pedido,
+              puedeRegistrar
             );
             formError.style.color = "#3f7a45";
             formError.textContent =
