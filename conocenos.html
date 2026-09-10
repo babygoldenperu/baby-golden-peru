@@ -87,6 +87,27 @@
     }
 
     /* HEADER */
+
+    /* HEADER — tamaño seguro del logo, igual al de index.html */
+    .nav > a.logo{
+      width:165px !important;
+      max-width:165px !important;
+      height:auto !important;
+      flex:0 0 165px !important;
+      display:block !important;
+    }
+
+    .nav > a.logo img{
+      display:block !important;
+      width:165px !important;
+      max-width:165px !important;
+      height:auto !important;
+      max-height:none !important;
+      object-fit:contain !important;
+      margin:0 !important;
+    }
+
+
     header {
       position: sticky !important;
       top: 0;
@@ -267,12 +288,11 @@
       background:
         linear-gradient(
           90deg,
-          rgba(37,25,17,.84) 0%,
-          rgba(37,25,17,.65) 38%,
-          rgba(37,25,17,.18) 76%,
-          rgba(37,25,17,.08) 100%
+          rgba(37,25,17,.92) 0%,
+          rgba(37,25,17,.72) 45%,
+          rgba(37,25,17,.28) 100%
         ),
-        url("assets/conocenos-hero.jpg") center / cover no-repeat;
+        linear-gradient(135deg,#6a5647 0%,#c7b8a6 100%);
     }
 
     .hero::before {
@@ -650,7 +670,7 @@
       color: var(--white);
       background:
         linear-gradient(rgba(48,34,25,.97), rgba(48,34,25,.97)),
-        url("assets/conocenos-hero.jpg") center / cover;
+        linear-gradient(135deg,#4b392e 0%,#806b5b 100%);
     }
 
     .areas-section .section-kicker { color: var(--gold-light); }
@@ -1391,7 +1411,7 @@
         min-height: 650px;
         background:
           linear-gradient(90deg, rgba(37,25,17,.84), rgba(37,25,17,.4)),
-          url("assets/conocenos-hero.jpg") center / cover no-repeat;
+          none;
       }
 
       .hero-content { padding-top: 90px; }
@@ -1518,7 +1538,7 @@
               class="founder-image"
               src="assets/fundadora-sandra.jpg"
               alt="Sandra, fundadora de Baby Golden Perú"
-              onerror="this.onerror=null; this.src='assets/conocenos-hero.jpg';"
+              onerror="this.onerror=null;"
             >
             <div class="founder-badge">
               <div>
