@@ -2209,6 +2209,37 @@ footer p{
             );
           }
 
+          // Código interno de prueba: BABY100 cubre el 100% del pedido.
+          // En este caso confirmamos el pedido directamente y NO abrimos Mercado Pago.
+          if (String(order.codigo_promocional || appliedPromo?.codigo || "").toUpperCase() === "BABY100" && Number(order.total || 0) === 0) {
+            button.textContent = "CONFIRMANDO PEDIDO DE PRUEBA...";
+
+            const { data: freeOrder, error: freeOrderError } =
+              await supabaseClient.rpc(
+                "confirmar_pedido_gratis",
+                { p_pedido_id: order.id }
+              );
+
+            if(freeOrderError) throw freeOrderError;
+
+            if(!freeOrder?.pedido_id || freeOrder.estado !== "PAGADO"){
+              throw new Error("No pudimos confirmar el pedido de prueba.");
+            }
+
+            formError.textContent = "";
+            button.textContent = "PEDIDO CONFIRMADO";
+            button.disabled = true;
+
+            showPaymentConfirmation(
+              "success",
+              "¡Pedido de prueba confirmado!",
+              "El código BABY100 cubrió el 100% del pedido. No se realizó ningún cobro ni se abrió Mercado Pago.",
+              freeOrder.numero_pedido || order.numero_pedido
+            );
+
+            return;
+          }
+
           button.textContent = "CONECTANDO CON MERCADO PAGO...";
 
           /*
