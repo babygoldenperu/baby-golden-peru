@@ -187,6 +187,12 @@
       display: none;
     }
 
+    .id-option.id-comprado {
+      grid-column: 1 / -1;
+      width: min(100%, 365px);
+      justify-self: center;
+    }
+
     .id-option.id-comprado .id-card-option {
       cursor: default;
     }
@@ -348,6 +354,10 @@
 
       .id-options {
         grid-template-columns: 1fr;
+      }
+
+      .id-option.id-comprado {
+        width: 100%;
       }
 
     }
