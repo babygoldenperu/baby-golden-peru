@@ -632,6 +632,64 @@
       font-weight: 700;
     }
 
+    .order-id-action {
+      margin-top: 16px;
+      padding-top: 15px;
+      border-top: 1px solid #eadfce;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
+
+    .order-id-copy {
+      color: #765f4c;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .order-id-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border: 0;
+      border-radius: 999px;
+      background: #b77b20;
+      color: #fff;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .5px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: .2s ease;
+    }
+
+    .order-id-button:hover {
+      background: #000;
+      transform: translateY(-1px);
+    }
+
+    .order-id-button.is-complete {
+      background: #dcefdc;
+      color: #2f6b35;
+      cursor: default;
+    }
+
+    @media(max-width:650px){
+      .order-id-action {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .order-id-button {
+        width: 100%;
+      }
+    }
+
 
     .empty-state {
       padding: 45px 25px;
@@ -3458,6 +3516,43 @@ header{min-height:64px!important}
       }
 
 
+      /*
+        Cada compra de BLACK/PREMIUM tiene su propio acceso de registro.
+        Lo vinculamos por orden_id para que cada botón corresponda
+        exactamente a esa compra.
+      */
+      const ordenIdsBabyGolden = (data || [])
+        .filter(orden => {
+          const producto = String(orden.producto || "").toUpperCase();
+          return producto === "BLACK" || producto === "PREMIUM";
+        })
+        .map(orden => orden.id);
+
+      let accesosPorOrden = {};
+
+      if(ordenIdsBabyGolden.length){
+        const {
+          data: accesos,
+          error: accesosError
+        } = await supabaseClient
+          .from("accesos_registro")
+          .select("id, producto, orden_id, activo, utilizado")
+          .eq("user_id", user.id)
+          .in("orden_id", ordenIdsBabyGolden);
+
+        if(accesosError){
+          console.warn(
+            "No se pudieron consultar los accesos Baby Golden ID:",
+            accesosError
+          );
+        }else{
+          (accesos || []).forEach(acceso => {
+            accesosPorOrden[String(acceso.orden_id)] = acceso;
+          });
+        }
+      }
+
+
       if(
         !data ||
         data.length === 0
@@ -3628,6 +3723,63 @@ header{min-height:64px!important}
                     </div>
 
                   </div>
+
+                  ${
+                    (() => {
+                      const producto = String(orden.producto || "").toUpperCase();
+
+                      if(producto !== "BLACK" && producto !== "PREMIUM"){
+                        return "";
+                      }
+
+                      const acceso = accesosPorOrden[String(orden.id)];
+
+                      const pagoConfirmado =
+                        estadoPago === "PAGADO" ||
+                        estadoPago === "CONFIRMADO";
+
+                      if(!pagoConfirmado){
+                        return `
+                          <div class="order-id-action">
+                            <div class="order-id-copy">
+                              Este Baby Golden ID estará disponible para registro cuando el pago esté confirmado.
+                            </div>
+                          </div>
+                        `;
+                      }
+
+                      if(acceso?.utilizado){
+                        return `
+                          <div class="order-id-action">
+                            <div class="order-id-copy">
+                              ${producto === "BLACK" ? "Black ID" : "Premium ID"} registrado.
+                            </div>
+                            <span class="order-id-button is-complete">
+                              REGISTRO COMPLETADO
+                            </span>
+                          </div>
+                        `;
+                      }
+
+                      if(acceso?.activo){
+                        return `
+                          <div class="order-id-action">
+                            <div class="order-id-copy">
+                              Tu ${producto === "BLACK" ? "Black ID" : "Premium ID"} está listo para registrar a tu perrito.
+                            </div>
+                            <a
+                              class="order-id-button"
+                              href="registro.html?orden_id=${encodeURIComponent(orden.id)}"
+                            >
+                              REGISTRAR ${producto === "BLACK" ? "BLACK" : "PREMIUM"} ID
+                            </a>
+                          </div>
+                        `;
+                      }
+
+                      return "";
+                    })()
+                  }
 
                 </article>
 
