@@ -212,6 +212,12 @@
       border-color:#b77b20;
     }
 
+    input[readonly]{
+      background:#f4eee5;
+      color:#6f5a47;
+      cursor:not-allowed;
+    }
+
     .required{
       color:#a76f20;
     }
@@ -2191,9 +2197,19 @@ footer p{
             departamento: String(formData.get("departamento") || "").trim()
           };
 
+          const { data: { user: usuarioCheckout } } =
+            await supabaseClient.auth.getUser();
+
+          if(usuarioCheckout?.email){
+            customer.email = usuarioCheckout.email;
+          }
+
           checkoutBusy = true;
           button.disabled = true;
           button.textContent = "VERIFICANDO PEDIDO...";
+
+          // Si el usuario está autenticado, sincronizamos sus datos antes de crear el pedido.
+          await guardarDatosCompradorEnCuenta(customer);
 
           const order = await createOrder(
             customer,
@@ -2322,6 +2338,134 @@ footer p{
       });
     }
 
+    /*
+      DATOS DEL COMPRADOR — VINCULADOS A LA CUENTA
+      Si existe una sesión activa, el checkout carga automáticamente
+      los datos guardados en perfiles_usuario y la dirección principal.
+    */
+    async function cargarDatosComprador(){
+      if(!supabaseClient) return;
+
+      try{
+        const { data: { user }, error: userError } =
+          await supabaseClient.auth.getUser();
+
+        if(userError || !user) return;
+
+        const metadata = user.user_metadata || {};
+
+        const { data: perfil, error: perfilError } = await supabaseClient
+          .from("perfiles_usuario")
+          .select("nombres, apellidos, telefono")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        if(perfilError) console.warn("No se pudo cargar el perfil:", perfilError);
+
+        const { data: direccion, error: direccionError } = await supabaseClient
+          .from("direcciones_usuario")
+          .select("nombres, apellidos, telefono, direccion, distrito, provincia, departamento")
+          .eq("user_id", user.id)
+          .eq("es_principal", true)
+          .order("updated_at", { ascending:false })
+          .limit(1)
+          .maybeSingle();
+
+        if(direccionError) console.warn("No se pudo cargar la dirección principal:", direccionError);
+
+        const campos = {
+          nombre: perfil?.nombres || direccion?.nombres || metadata.nombre || metadata.given_name || "",
+          apellidos: perfil?.apellidos || direccion?.apellidos || metadata.apellidos || metadata.family_name || "",
+          email: user.email || "",
+          telefono: perfil?.telefono || direccion?.telefono || metadata.telefono || "",
+          direccion: direccion?.direccion || "",
+          distrito: direccion?.distrito || "",
+          provincia: direccion?.provincia || "",
+          departamento: direccion?.departamento || ""
+        };
+
+        Object.entries(campos).forEach(([id, value]) => {
+          const input = document.getElementById(id);
+          if(input && value) input.value = value;
+        });
+
+        const emailInput = document.getElementById("email");
+        if(emailInput && user.email){
+          emailInput.value = user.email;
+          emailInput.readOnly = true;
+          emailInput.title = "Este correo corresponde a tu cuenta Baby Golden.";
+        }
+      }catch(error){
+        console.warn("No se pudieron precargar los datos de la cuenta:", error);
+      }
+    }
+
+    async function guardarDatosCompradorEnCuenta(customer){
+      if(!supabaseClient) return;
+
+      const { data: { user }, error: userError } =
+        await supabaseClient.auth.getUser();
+
+      if(userError || !user) return;
+
+      try{
+        const { error: perfilError } = await supabaseClient
+          .from("perfiles_usuario")
+          .upsert({
+            id: user.id,
+            nombres: customer.nombre,
+            apellidos: customer.apellidos,
+            telefono: customer.telefono,
+            updated_at: new Date().toISOString()
+          }, { onConflict:"id" });
+
+        if(perfilError) console.warn("No se pudo actualizar el perfil:", perfilError);
+
+        const { data: direccionPrincipal, error: consultaError } = await supabaseClient
+          .from("direcciones_usuario")
+          .select("id")
+          .eq("user_id", user.id)
+          .eq("es_principal", true)
+          .order("updated_at", { ascending:false })
+          .limit(1)
+          .maybeSingle();
+
+        if(consultaError){
+          console.warn("No se pudo consultar la dirección principal:", consultaError);
+          return;
+        }
+
+        const payload = {
+          user_id: user.id,
+          nombres: customer.nombre,
+          apellidos: customer.apellidos,
+          telefono: customer.telefono,
+          direccion: customer.direccion,
+          distrito: customer.distrito,
+          provincia: customer.provincia,
+          departamento: customer.departamento,
+          es_principal: true,
+          updated_at: new Date().toISOString()
+        };
+
+        if(direccionPrincipal?.id){
+          const { error } = await supabaseClient
+            .from("direcciones_usuario")
+            .update(payload)
+            .eq("id", direccionPrincipal.id)
+            .eq("user_id", user.id);
+          if(error) console.warn("No se pudo actualizar la dirección:", error);
+        }else{
+          const { error } = await supabaseClient
+            .from("direcciones_usuario")
+            .insert(payload);
+          if(error) console.warn("No se pudo guardar la dirección:", error);
+        }
+      }catch(error){
+        console.warn("No se pudieron sincronizar los datos del comprador:", error);
+      }
+    }
+
     async function initCheckout(){
       const button = document.getElementById("continueButton");
 
@@ -2334,6 +2478,7 @@ footer p{
 
         await loadProducts();
         renderSummary();
+        await cargarDatosComprador();
 
       }catch(error){
         console.error("Error inicializando checkout:", error);
