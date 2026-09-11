@@ -2373,11 +2373,58 @@ footer p{
 
         if(direccionError) console.warn("No se pudo cargar la dirección principal:", direccionError);
 
+        /*
+          DATOS DE LA CUENTA:
+          - Cuentas creadas con correo: usamos perfiles_usuario y Auth.
+          - Cuentas Google: usamos given_name/family_name y, si no existen,
+            name/full_name que Google entrega en el metadata de Auth.
+        */
+        const nombreCompletoAuth = String(
+          metadata.full_name ||
+          metadata.name ||
+          ""
+        ).trim();
+
+        const partesNombreAuth = nombreCompletoAuth
+          ? nombreCompletoAuth.split(/\s+/)
+          : [];
+
+        const nombreDesdeAuth =
+          metadata.given_name ||
+          metadata.nombre ||
+          partesNombreAuth[0] ||
+          "";
+
+        const apellidosDesdeAuth =
+          metadata.family_name ||
+          metadata.apellidos ||
+          partesNombreAuth.slice(1).join(" ") ||
+          "";
+
         const campos = {
-          nombre: perfil?.nombres || direccion?.nombres || metadata.nombre || metadata.given_name || "",
-          apellidos: perfil?.apellidos || direccion?.apellidos || metadata.apellidos || metadata.family_name || "",
+          nombre: String(
+            perfil?.nombres ||
+            direccion?.nombres ||
+            nombreDesdeAuth ||
+            ""
+          ).trim(),
+
+          apellidos: String(
+            perfil?.apellidos ||
+            direccion?.apellidos ||
+            apellidosDesdeAuth ||
+            ""
+          ).trim(),
+
           email: user.email || "",
-          telefono: perfil?.telefono || direccion?.telefono || metadata.telefono || "",
+
+          telefono: String(
+            perfil?.telefono ||
+            direccion?.telefono ||
+            metadata.telefono ||
+            ""
+          ).trim(),
+
           direccion: direccion?.direccion || "",
           distrito: direccion?.distrito || "",
           provincia: direccion?.provincia || "",
