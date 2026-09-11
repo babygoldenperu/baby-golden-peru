@@ -187,12 +187,6 @@
       display: none;
     }
 
-    .id-option.id-comprado {
-      grid-column: 1 / -1;
-      width: min(100%, 365px);
-      justify-self: center;
-    }
-
     .id-option.id-comprado .id-card-option {
       cursor: default;
     }
@@ -354,10 +348,6 @@
 
       .id-options {
         grid-template-columns: 1fr;
-      }
-
-      .id-option.id-comprado {
-        width: 100%;
       }
 
     }
@@ -1653,14 +1643,27 @@ comprobarAccesoRegistro();
 
     if (!session) return null;
 
-    const { data, error } = await supabaseClient
+    const params = new URLSearchParams(window.location.search);
+    const ordenIdParam = params.get("orden_id");
+
+    let consulta = supabaseClient
       .from("accesos_registro")
       .select("id, producto, orden_id")
       .eq("user_id", session.user.id)
       .eq("activo", true)
-      .eq("utilizado", false)
-      .order("created_at", { ascending: true })
-      .limit(1);
+      .eq("utilizado", false);
+
+    if(ordenIdParam){
+      consulta = consulta
+        .eq("orden_id", ordenIdParam)
+        .limit(1);
+    }else{
+      consulta = consulta
+        .order("created_at", { ascending: true })
+        .limit(1);
+    }
+
+    const { data, error } = await consulta;
 
     if (error) throw error;
 
@@ -1718,8 +1721,11 @@ comprobarAccesoRegistro();
 
       const aviso = document.getElementById("avisoAccesoCompra");
       if (aviso) {
+        const params = new URLSearchParams(window.location.search);
+        const ordenSeleccionada = params.get("orden_id");
+
         aviso.textContent =
-          `Tu compra incluye ${tipo === "BLACK" ? "Black ID" : "Premium ID"}. Este tipo ya está seleccionado y no puede modificarse.`;
+          `Tu compra${ordenSeleccionada ? ` de la Orden #${ordenSeleccionada}` : ""} incluye ${tipo === "BLACK" ? "Black ID" : "Premium ID"}. Este tipo ya está seleccionado y no puede modificarse.`;
       }
 
     } catch (error) {
