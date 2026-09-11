@@ -2261,7 +2261,7 @@ footer p{
               "¡Pedido de prueba confirmado!",
               "El código BABY100 cubrió el 100% del pedido. No se realizó ningún cobro ni se abrió Mercado Pago.",
               freeOrder.numero_pedido || order.numero_pedido,
-              orderContainsBabyGoldenId(order)
+              guardarIndicadorBabyGoldenId(validation.lines)
             );
 
             return;
@@ -2303,6 +2303,11 @@ footer p{
               "Mercado Pago no devolvió el enlace de pago."
             );
           }
+
+          // Guardamos el tipo de compra antes de salir a Mercado Pago.
+          // La respuesta posterior de la Edge Function puede no incluir
+          // las líneas del pedido, por eso no dependemos de ellas al volver.
+          guardarIndicadorBabyGoldenId(validation.lines);
 
           formError.textContent = "";
           button.textContent = "REDIRIGIENDO A MERCADO PAGO...";
@@ -2578,11 +2583,49 @@ footer p{
 
 
     function orderContainsBabyGoldenId(orderData){
-      const lines = Array.isArray(orderData?.lineas) ? orderData.lineas : (Array.isArray(orderData?.items) ? orderData.items : []);
-      return lines.some(line => {
-        const sku = String(line?.sku || line?.producto_sku || line?.producto || "").toUpperCase();
+      const lines = Array.isArray(orderData?.lineas)
+        ? orderData.lineas
+        : (Array.isArray(orderData?.items) ? orderData.items : []);
+
+      if(lines.some(line => {
+        const sku = String(
+          line?.sku ||
+          line?.producto_sku ||
+          line?.producto ||
+          ""
+        ).toUpperCase();
+
+        return sku === "BLACK" || sku === "PREMIUM";
+      })){
+        return true;
+      }
+
+      // Respaldo: el carrito local conserva el producto comprado
+      // cuando Mercado Pago devuelve al checkout.
+      const cart = getCart();
+      return Object.keys(cart).some(sku => {
+        const value = String(sku || "").toUpperCase();
+        return value === "BLACK" || value === "PREMIUM";
+      });
+    }
+
+    function guardarIndicadorBabyGoldenId(lines){
+      const tieneId = Array.isArray(lines) && lines.some(line => {
+        const sku = String(line?.sku || "").toUpperCase();
         return sku === "BLACK" || sku === "PREMIUM";
       });
+
+      localStorage.setItem(
+        "babyGoldenCheckoutHasId",
+        tieneId ? "true" : "false"
+      );
+
+      return tieneId;
+    }
+
+    function checkoutTieneBabyGoldenId(){
+      return localStorage.getItem("babyGoldenCheckoutHasId") === "true"
+        || orderContainsBabyGoldenId(null);
     }
 
     async function verifyReturnedOrder(pedidoId, status){
@@ -2638,7 +2681,10 @@ footer p{
           const estado = String(data?.estado || "").toUpperCase();
 
           if(estado === "PAGADO"){
-            const puedeRegistrar = orderContainsBabyGoldenId(data);
+            const puedeRegistrar =
+              checkoutTieneBabyGoldenId() ||
+              orderContainsBabyGoldenId(data);
+
             showPaymentConfirmation(
               "success",
               "¡Pago confirmado!",
