@@ -2677,6 +2677,668 @@
 
 
 
+
+
+
+<style id="baby-golden-visual-editor-css">
+  .bge-shell{margin-top:28px;border:1px solid #e7ddcf;border-radius:24px;background:#fffdfa;overflow:hidden;box-shadow:0 20px 60px rgba(45,35,25,.08)}
+  .bge-head{padding:24px 26px;border-bottom:1px solid #eee5da;background:linear-gradient(135deg,#fffdfa,#f8f1e7)}
+  .bge-kicker{font:800 10px/1 Arial,sans-serif;letter-spacing:.18em;color:#b18a4a}
+  .bge-title{margin:7px 0 5px;font:600 30px/1.1 Georgia,serif;color:#2d2925}
+  .bge-desc{margin:0;color:#766e65;font:14px/1.6 Arial,sans-serif;max-width:900px}
+  .bge-toolbar{display:flex;gap:9px;align-items:center;flex-wrap:wrap;padding:13px 18px;border-bottom:1px solid #eee5da;background:#fff}
+  .bge-btn{border:1px solid #ddd2c5;background:#fff;color:#4b433b;border-radius:11px;padding:10px 13px;font:700 11px/1 Arial,sans-serif;cursor:pointer}
+  .bge-btn:hover{border-color:#b18a4a;color:#8c682e}
+  .bge-btn.primary{background:#b18a4a;border-color:#b18a4a;color:#fff}
+  .bge-btn.dark{background:#2d2925;border-color:#2d2925;color:#fff}
+  .bge-device{margin-left:auto;display:flex;border:1px solid #ddd2c5;border-radius:11px;overflow:hidden}
+  .bge-device button{border:0;background:#fff;padding:9px 12px;font:700 10px Arial;cursor:pointer}
+  .bge-device button.active{background:#2d2925;color:#fff}
+  .bge-workspace{display:grid;grid-template-columns:minmax(0,1fr) 330px;min-height:760px}
+  .bge-canvas{background:#eee9e1;padding:26px;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
+  .bge-frame{width:100%;height:720px;border:1px solid #d8cdbf;border-radius:14px;background:#fff;box-shadow:0 20px 45px rgba(40,30,20,.14);transition:width .2s;overflow:hidden}
+  .bge-frame.tablet{width:768px;max-width:100%}
+  .bge-frame.mobile{width:390px;max-width:100%}
+  #bgePreview{width:100%;height:100%;border:0;background:#fff}
+  .bge-panel{border-left:1px solid #e5dbcf;background:#fffdfa;padding:18px;overflow:auto}
+  .bge-empty{padding:35px 10px;text-align:center;color:#857c72;font:13px/1.6 Arial}
+  .bge-selected-title{font:700 15px/1.3 Arial;color:#2d2925;margin-bottom:4px}
+  .bge-selected-id{font:10px/1.4 monospace;color:#9a8f84;word-break:break-all;margin-bottom:18px}
+  .bge-field{margin-bottom:14px}
+  .bge-field label{display:block;margin-bottom:6px;font:800 10px/1 Arial;letter-spacing:.08em;color:#71685f;text-transform:uppercase}
+  .bge-field input,.bge-field textarea,.bge-field select{width:100%;border:1px solid #ddd2c5;border-radius:10px;padding:10px 11px;background:#fff;color:#302b27;font:13px/1.45 Arial;outline:none}
+  .bge-field textarea{min-height:92px;resize:vertical}
+  .bge-field input:focus,.bge-field textarea:focus,.bge-field select:focus{border-color:#b18a4a;box-shadow:0 0 0 3px rgba(177,138,74,.10)}
+  .bge-row{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+  .bge-color{display:grid;grid-template-columns:44px 1fr;gap:8px;align-items:center}
+  .bge-color input[type=color]{height:40px;padding:3px;cursor:pointer}
+  .bge-check{display:flex;align-items:center;gap:8px;font:12px Arial;color:#5f574f}
+  .bge-check input{width:16px;height:16px}
+  .bge-media{border:1px dashed #d8cbbd;border-radius:12px;padding:12px;background:#faf7f2}
+  .bge-media-preview{width:100%;max-height:120px;object-fit:cover;border-radius:9px;margin-bottom:9px;background:#eee}
+  .bge-help{font:11px/1.5 Arial;color:#8a8177;margin-top:5px}
+  .bge-divider{height:1px;background:#eee5da;margin:18px 0}
+  .bge-status{display:none;margin-top:12px;border-radius:10px;padding:10px 12px;font:12px/1.4 Arial}
+  .bge-status.show{display:block;background:#edf7ef;color:#28703c}
+  .bge-status.error{background:#faeaea;color:#a33b3b}
+  .bge-list{margin-top:18px}
+  .bge-list-title{font:800 10px Arial;letter-spacing:.12em;color:#8a8178;text-transform:uppercase;margin-bottom:8px}
+  .bge-list-item{display:flex;align-items:center;gap:8px;width:100%;border:1px solid #e6ddd2;background:#fff;border-radius:9px;padding:8px 9px;margin-bottom:6px;text-align:left;cursor:pointer}
+  .bge-list-item:hover{border-color:#c9ad7c}
+  .bge-list-dot{width:8px;height:8px;border-radius:50%;background:#b18a4a;flex:0 0 auto}
+  .bge-list-name{font:700 11px Arial;color:#4a433c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  @media(max-width:1000px){
+    .bge-workspace{grid-template-columns:1fr}
+    .bge-panel{border-left:0;border-top:1px solid #e5dbcf}
+    .bge-frame{height:600px}
+  }
+</style>
+
+
+<div class="bge-shell" id="babyGoldenVisualEditor">
+  <div class="bge-head">
+    <div class="bge-kicker">EDITOR VISUAL</div>
+    <h3 class="bge-title">Edita tu página principal</h3>
+    <p class="bge-desc">
+      Haz clic directamente sobre cualquier elemento de la vista previa para editarlo.
+      Puedes cambiar textos, enlaces, imágenes, videos, GIF, tipografías, tamaños, colores,
+      alineación y estilos. Los cambios se guardan en Supabase y no requieren editar el HTML manualmente.
+    </p>
+  </div>
+
+  <div class="bge-toolbar">
+    <button type="button" class="bge-btn" id="bgeRefresh">↻ ACTUALIZAR VISTA</button>
+    <button type="button" class="bge-btn" id="bgeUndo">↶ DESHACER</button>
+    <button type="button" class="bge-btn" id="bgeReset">RESTABLECER ELEMENTO</button>
+    <button type="button" class="bge-btn dark" id="bgeSave">💾 GUARDAR CAMBIOS</button>
+    <div class="bge-device" aria-label="Vista adaptable">
+      <button type="button" data-device="desktop" class="active">PC</button>
+      <button type="button" data-device="tablet">TABLET</button>
+      <button type="button" data-device="mobile">MÓVIL</button>
+    </div>
+  </div>
+
+  <div class="bge-workspace">
+    <div class="bge-canvas">
+      <div class="bge-frame" id="bgeFrame">
+        <iframe id="bgePreview" title="Vista previa editable de Baby Golden Perú"></iframe>
+      </div>
+    </div>
+
+    <aside class="bge-panel">
+      <div id="bgeInspector">
+        <div class="bge-empty">
+          <strong>Selecciona un elemento</strong><br>
+          Haz clic en un texto, botón, imagen, video o sección de la página para comenzar.
+        </div>
+      </div>
+
+      <div class="bge-list">
+        <div class="bge-list-title">Secciones rápidas</div>
+        <button type="button" class="bge-list-item" data-jump="hero-section"><span class="bge-list-dot"></span><span class="bge-list-name">Portada / Hero</span></button>
+        <button type="button" class="bge-list-item" data-jump="community-section"><span class="bge-list-dot"></span><span class="bge-list-name">Comunidad</span></button>
+        <button type="button" class="bge-list-item" data-jump="stories-section"><span class="bge-list-dot"></span><span class="bge-list-name">Historias de Oro</span></button>
+        <button type="button" class="bge-list-item" data-jump="family-section"><span class="bge-list-dot"></span><span class="bge-list-name">Nuestra esencia</span></button>
+        <button type="button" class="bge-list-item" data-jump="id-section"><span class="bge-list-dot"></span><span class="bge-list-name">Baby Golden ID</span></button>
+        <button type="button" class="bge-list-item" data-jump="benefits-section"><span class="bge-list-dot"></span><span class="bge-list-name">Beneficios</span></button>
+        <button type="button" class="bge-list-item" data-jump="cta-section"><span class="bge-list-dot"></span><span class="bge-list-name">CTA final</span></button>
+        <button type="button" class="bge-list-item" data-jump="footer"><span class="bge-list-dot"></span><span class="bge-list-name">Footer</span></button>
+      </div>
+    </aside>
+  </div>
+</div>
+
+
+<script id="baby-golden-visual-editor-script">
+(function(){
+  const sb = window.supabaseClient;
+  if(!sb) return;
+
+  const editor = document.getElementById("babyGoldenVisualEditor");
+  if(!editor) return;
+
+  const frame = document.getElementById("bgeFrame");
+  const preview = document.getElementById("bgePreview");
+  const inspector = document.getElementById("bgeInspector");
+  const saveBtn = document.getElementById("bgeSave");
+  const refreshBtn = document.getElementById("bgeRefresh");
+  const resetBtn = document.getElementById("bgeReset");
+  const undoBtn = document.getElementById("bgeUndo");
+
+  let visualState = {};
+  let history = [];
+  let selectedId = null;
+  let selectedElement = null;
+
+  const labels = {
+    "header":"Encabezado",
+    "header-logo":"Logo del encabezado",
+    "nav-inicio":"Menú INICIO",
+    "nav-beneficios":"Menú BENEFICIOS",
+    "nav-historias":"Menú HISTORIAS DE ORO",
+    "nav-contacto":"Menú CONTACTO",
+    "nav-tienda":"Botón TIENDA",
+    "hero-section":"Sección Portada",
+    "hero-kicker":"Texto superior de portada",
+    "hero-title-1":"Título portada · línea 1",
+    "hero-title-2":"Título portada · línea 2",
+    "hero-title-3":"Título portada · línea 3",
+    "hero-title-4":"Título portada · línea 4",
+    "hero-subtitle":"Descripción portada",
+    "hero-button-1":"Botón principal de portada",
+    "hero-button-2":"Botón Historias de Oro",
+    "hero-image":"Imagen principal",
+    "community-section":"Sección Comunidad",
+    "community-label":"Etiqueta Comunidad",
+    "community-title":"Título Comunidad",
+    "community-text-1":"Texto Comunidad 1",
+    "community-text-2":"Texto Comunidad 2",
+    "community-text-3":"Texto Comunidad 3",
+    "community-video":"Video Comunidad",
+    "stories-section":"Sección Historias de Oro",
+    "stories-kicker":"Etiqueta Historias",
+    "stories-title":"Título Historias",
+    "stories-description":"Descripción Historias",
+    "family-section":"Sección Nuestra Esencia",
+    "family-kicker":"Etiqueta Nuestra Esencia",
+    "family-title":"Título Nuestra Esencia",
+    "family-text":"Texto Nuestra Esencia",
+    "id-section":"Sección Baby Golden ID",
+    "id-kicker":"Etiqueta Baby Golden ID",
+    "id-title":"Título Baby Golden ID",
+    "id-description":"Descripción Baby Golden ID",
+    "id-intro":"Introducción Baby Golden ID",
+    "product-black":"Tarjeta Black ID",
+    "product-black-image":"Imagen Black ID",
+    "product-black-label":"Etiqueta Black ID",
+    "product-black-title":"Título Black ID",
+    "product-black-description":"Descripción Black ID",
+    "product-black-price":"Precio Black ID",
+    "product-black-link":"Enlace Black ID",
+    "product-premium":"Tarjeta Premium ID",
+    "product-premium-image":"Imagen Premium ID",
+    "product-premium-label":"Etiqueta Premium ID",
+    "product-premium-title":"Título Premium ID",
+    "product-premium-description":"Descripción Premium ID",
+    "product-premium-price":"Precio Premium ID",
+    "product-premium-link":"Enlace Premium ID",
+    "benefits-section":"Sección Beneficios",
+    "benefits-kicker":"Etiqueta Beneficios",
+    "benefits-title":"Título Beneficios",
+    "benefits-description":"Descripción Beneficios",
+    "benefits-button":"Botón Beneficios",
+    "cta-section":"Sección CTA",
+    "cta-heart":"Corazón CTA",
+    "cta-title":"Título CTA",
+    "cta-description":"Descripción CTA",
+    "cta-button":"Botón CTA",
+    "footer":"Pie de página",
+    "footer-logo":"Logo Footer",
+    "footer-brand":"Marca Footer",
+    "footer-text-1":"Texto Footer 1",
+    "footer-text-2":"Texto Footer 2"
+  };
+
+  function clone(obj){
+    return JSON.parse(JSON.stringify(obj || {}));
+  }
+
+  function setStatus(text, error){
+    let box = document.getElementById("bgeStatus");
+    if(!box){
+      box = document.createElement("div");
+      box.id = "bgeStatus";
+      box.className = "bge-status";
+      inspector.appendChild(box);
+    }
+    box.textContent = text;
+    box.className = "bge-status show" + (error ? " error" : "");
+  }
+
+  async function loadState(){
+    const {data,error} = await sb.from("site_content").select("clave,valor").eq("clave","visual_editor").maybeSingle();
+    if(error){
+      console.warn("Editor visual:", error);
+      visualState = {};
+      return;
+    }
+    if(data && data.valor){
+      try{
+        visualState = typeof data.valor === "string" ? JSON.parse(data.valor) : (data.valor || {});
+      }catch(e){
+        visualState = {};
+      }
+    }else{
+      visualState = {};
+    }
+  }
+
+  function previewUrl(){
+    const base = new URL("index.html", window.location.href);
+    base.searchParams.set("bge_preview", Date.now());
+    return base.href;
+  }
+
+  function injectPreview(){
+    preview.src = previewUrl();
+  }
+
+  function iframeReady(){
+    try{
+      const doc = preview.contentDocument;
+      return doc && doc.body;
+    }catch(e){
+      return null;
+    }
+  }
+
+  function clearMarks(){
+    const doc = iframeReady();
+    if(!doc) return;
+    doc.querySelectorAll(".bge-hover,.bge-selected").forEach(el=>{
+      el.classList.remove("bge-hover","bge-selected");
+    });
+  }
+
+  function installFrameEditor(){
+    const doc = iframeReady();
+    if(!doc) return;
+
+    if(!doc.getElementById("bge-frame-style")){
+      const style = doc.createElement("style");
+      style.id = "bge-frame-style";
+      style.textContent = `
+        [data-editor-id]{cursor:pointer!important;outline-offset:3px}
+        [data-editor-id].bge-hover{outline:2px dashed rgba(177,138,74,.55)!important}
+        [data-editor-id].bge-selected{outline:2px solid #b18a4a!important;outline-offset:4px!important}
+        body.bge-editor-active{cursor:crosshair!important}
+      `;
+      doc.head.appendChild(style);
+    }
+
+    doc.body.classList.add("bge-editor-active");
+
+    doc.addEventListener("mouseover", function(ev){
+      const el = ev.target.closest?.("[data-editor-id]");
+      if(!el) return;
+      clearMarks();
+      el.classList.add("bge-hover");
+      if(selectedElement === el) el.classList.add("bge-selected");
+    }, true);
+
+    doc.addEventListener("mouseout", function(ev){
+      const el = ev.target.closest?.("[data-editor-id]");
+      if(el) el.classList.remove("bge-hover");
+    }, true);
+
+    doc.addEventListener("click", function(ev){
+      const el = ev.target.closest?.("[data-editor-id]");
+      if(!el) return;
+      ev.preventDefault();
+      ev.stopPropagation();
+      selectElement(el);
+    }, true);
+
+    applyStateToFrame();
+  }
+
+  function applyStateToFrame(){
+    const doc = iframeReady();
+    if(!doc) return;
+
+    Object.entries(visualState).forEach(([id,config])=>{
+      const el = doc.querySelector(`[data-editor-id="${CSS.escape(id)}"]`);
+      if(!el || !config) return;
+
+      if(Object.prototype.hasOwnProperty.call(config,"text")){
+        el.textContent = config.text;
+      }
+      if(Object.prototype.hasOwnProperty.call(config,"href") && el.tagName === "A"){
+        el.setAttribute("href", config.href || "#");
+      }
+      if(Object.prototype.hasOwnProperty.call(config,"src") && ["IMG","VIDEO"].includes(el.tagName)){
+        el.setAttribute("src", config.src || "");
+      }
+      if(Object.prototype.hasOwnProperty.call(config,"poster") && el.tagName === "VIDEO"){
+        el.setAttribute("poster", config.poster || "");
+      }
+      Object.entries(config.styles || {}).forEach(([p,v])=>{
+        if(v !== null && v !== undefined && v !== "") el.style[p] = v;
+      });
+    });
+
+    const sourceConfig = visualState["community-video-source"];
+    if(sourceConfig?.src){
+      const source = doc.querySelector(".community-video source");
+      if(source){
+        source.src = sourceConfig.src;
+        const video = source.closest("video");
+        if(video) video.load();
+      }
+    }
+  }
+
+  function selectElement(el){
+    clearMarks();
+    selectedElement = el;
+    selectedId = el.getAttribute("data-editor-id");
+    el.classList.add("bge-selected");
+    renderInspector();
+  }
+
+  function getText(el){
+    return el ? el.textContent.trim() : "";
+  }
+
+  function isMedia(el){
+    return el && ["IMG","VIDEO"].includes(el.tagName);
+  }
+
+  function renderInspector(){
+    if(!selectedElement){
+      inspector.innerHTML = `<div class="bge-empty"><strong>Selecciona un elemento</strong><br>Haz clic en un texto, botón, imagen, video o sección de la página para comenzar.</div>`;
+      return;
+    }
+
+    const id = selectedId;
+    const tag = selectedElement.tagName.toLowerCase();
+    const cfg = visualState[id] || {};
+    const styles = cfg.styles || {};
+    const media = isMedia(selectedElement);
+    const editableText = !media && !["SECTION","HEADER","FOOTER","ARTICLE"].includes(selectedElement.tagName);
+    const href = selectedElement.tagName === "A" ? (cfg.href ?? selectedElement.getAttribute("href") ?? "") : "";
+
+    inspector.innerHTML = `
+      <div class="bge-selected-title">${labels[id] || id}</div>
+      <div class="bge-selected-id">${id} · &lt;${tag}&gt;</div>
+
+      ${editableText ? `
+      <div class="bge-field">
+        <label>Contenido</label>
+        <textarea id="bgeText">${escapeHtml(cfg.text ?? getText(selectedElement))}</textarea>
+        <div class="bge-help">Para editar el contenido manteniendo la estructura visual, usa texto plano.</div>
+      </div>` : ""}
+
+      ${selectedElement.tagName === "A" ? `
+      <div class="bge-field">
+        <label>Enlace</label>
+        <input id="bgeHref" type="text" value="${escapeAttr(href)}" placeholder="https://... o tienda.html">
+      </div>` : ""}
+
+      ${media ? `
+      <div class="bge-media">
+        ${selectedElement.tagName === "IMG"
+          ? `<img id="bgeMediaPreview" class="bge-media-preview" src="${escapeAttr(cfg.src ?? selectedElement.getAttribute("src") ?? "")}" alt="">`
+          : `<video id="bgeMediaPreview" class="bge-media-preview" src="${escapeAttr(cfg.src ?? selectedElement.getAttribute("src") ?? "")}" controls></video>`}
+        <input id="bgeMediaFile" type="file" accept="${selectedElement.tagName === "IMG" ? "image/*,.gif" : "video/*"}">
+        <div class="bge-help">Puedes reemplazar este recurso sin cambiar el resto de la página.</div>
+      </div>` : ""}
+
+      ${selectedElement.tagName === "VIDEO" ? `
+      <div class="bge-field">
+        <label>Poster del video</label>
+        <input id="bgePoster" type="text" value="${escapeAttr(cfg.poster ?? selectedElement.getAttribute("poster") ?? "")}" placeholder="URL de imagen">
+      </div>` : ""}
+
+      <div class="bge-divider"></div>
+
+      <div class="bge-row">
+        <div class="bge-field">
+          <label>Tipografía</label>
+          <select id="bgeFont">
+            ${fontOptions(styles.fontFamily || getComputedStyle(selectedElement).fontFamily)}
+          </select>
+        </div>
+        <div class="bge-field">
+          <label>Peso</label>
+          <select id="bgeWeight">
+            ${["400","500","600","700","800"].map(v=>`<option value="${v}" ${String(styles.fontWeight || getComputedStyle(selectedElement).fontWeight)===v?"selected":""}>${v}</option>`).join("")}
+          </select>
+        </div>
+      </div>
+
+      <div class="bge-row">
+        <div class="bge-field">
+          <label>Tamaño</label>
+          <input id="bgeSize" type="text" value="${escapeAttr(styles.fontSize || getComputedStyle(selectedElement).fontSize)}" placeholder="24px">
+        </div>
+        <div class="bge-field">
+          <label>Radio</label>
+          <input id="bgeRadius" type="text" value="${escapeAttr(styles.borderRadius || getComputedStyle(selectedElement).borderRadius)}" placeholder="20px">
+        </div>
+      </div>
+
+      <div class="bge-row">
+        <div class="bge-field">
+          <label>Color texto</label>
+          <div class="bge-color"><input id="bgeColor" type="color" value="${toHex(styles.color || getComputedStyle(selectedElement).color)}"><input id="bgeColorText" type="text" value="${escapeAttr(styles.color || getComputedStyle(selectedElement).color)}"></div>
+        </div>
+        <div class="bge-field">
+          <label>Fondo</label>
+          <div class="bge-color"><input id="bgeBg" type="color" value="${toHex(styles.backgroundColor || getComputedStyle(selectedElement).backgroundColor)}"><input id="bgeBgText" type="text" value="${escapeAttr(styles.backgroundColor || getComputedStyle(selectedElement).backgroundColor)}"></div>
+        </div>
+      </div>
+
+      <div class="bge-row">
+        <div class="bge-field">
+          <label>Alineación</label>
+          <select id="bgeAlign">
+            ${["left","center","right","justify"].map(v=>`<option value="${v}" ${String(styles.textAlign || getComputedStyle(selectedElement).textAlign)===v?"selected":""}>${v}</option>`).join("")}
+          </select>
+        </div>
+        <div class="bge-field">
+          <label>Opacidad</label>
+          <input id="bgeOpacity" type="text" value="${escapeAttr(styles.opacity || getComputedStyle(selectedElement).opacity)}" placeholder="1">
+        </div>
+      </div>
+
+      <label class="bge-check">
+        <input id="bgeHidden" type="checkbox" ${styles.display==="none"?"checked":""}>
+        Ocultar este elemento
+      </label>
+
+      <button type="button" class="bge-btn primary" id="bgeApply" style="width:100%;margin-top:16px">APLICAR AL PREVIEW</button>
+    `;
+
+    bindInspector();
+  }
+
+  function bindInspector(){
+    const textEl = document.getElementById("bgeText");
+    const hrefEl = document.getElementById("bgeHref");
+    const fontEl = document.getElementById("bgeFont");
+    const weightEl = document.getElementById("bgeWeight");
+    const sizeEl = document.getElementById("bgeSize");
+    const radiusEl = document.getElementById("bgeRadius");
+    const colorEl = document.getElementById("bgeColor");
+    const colorText = document.getElementById("bgeColorText");
+    const bgEl = document.getElementById("bgeBg");
+    const bgText = document.getElementById("bgeBgText");
+    const alignEl = document.getElementById("bgeAlign");
+    const opacityEl = document.getElementById("bgeOpacity");
+    const hiddenEl = document.getElementById("bgeHidden");
+    const posterEl = document.getElementById("bgePoster");
+    const mediaFile = document.getElementById("bgeMediaFile");
+
+    if(colorEl && colorText){
+      colorEl.addEventListener("input",()=>{colorText.value=colorEl.value;});
+    }
+    if(bgEl && bgText){
+      bgEl.addEventListener("input",()=>{bgText.value=bgEl.value;});
+    }
+
+    document.getElementById("bgeApply")?.addEventListener("click", async ()=>{
+      if(!selectedElement || !selectedId) return;
+
+      history.push(clone(visualState));
+
+      const cfg = visualState[selectedId] || {};
+      cfg.styles = cfg.styles || {};
+
+      if(textEl) cfg.text = textEl.value;
+      if(hrefEl) cfg.href = hrefEl.value.trim();
+      if(fontEl) cfg.styles.fontFamily = fontEl.value;
+      if(weightEl) cfg.styles.fontWeight = weightEl.value;
+      if(sizeEl) cfg.styles.fontSize = sizeEl.value.trim();
+      if(radiusEl) cfg.styles.borderRadius = radiusEl.value.trim();
+      if(colorText) cfg.styles.color = colorText.value.trim();
+      if(bgText) cfg.styles.backgroundColor = bgText.value.trim();
+      if(alignEl) cfg.styles.textAlign = alignEl.value;
+      if(opacityEl) cfg.styles.opacity = opacityEl.value.trim();
+      cfg.styles.display = hiddenEl?.checked ? "none" : "";
+
+      if(posterEl && selectedElement.tagName === "VIDEO"){
+        cfg.poster = posterEl.value.trim();
+      }
+
+      if(mediaFile?.files?.[0]){
+        try{
+          setStatus("Subiendo recurso...", false);
+          const file = mediaFile.files[0];
+          const safe = file.name.replace(/[^a-zA-Z0-9._-]/g,"-");
+          const path = `visual-editor/${Date.now()}-${safe}`;
+          const {error} = await sb.storage.from("site-media").upload(path,file,{
+            cacheControl:"3600",
+            upsert:false,
+            contentType:file.type || "application/octet-stream"
+          });
+          if(error) throw error;
+          const {data:urlData} = sb.storage.from("site-media").getPublicUrl(path);
+          const url = urlData?.publicUrl;
+          if(!url) throw new Error("No se obtuvo la URL pública del recurso.");
+          cfg.src = url;
+          if(selectedElement.tagName === "IMG"){
+            selectedElement.src = url;
+          }else{
+            selectedElement.src = url;
+            selectedElement.load();
+          }
+          if(document.getElementById("bgeMediaPreview")){
+            document.getElementById("bgeMediaPreview").src = url;
+          }
+        }catch(error){
+          setStatus(error.message || "No se pudo subir el recurso.", true);
+          return;
+        }
+      }
+
+      visualState[selectedId] = cfg;
+      applyConfigToSelected(cfg);
+      setStatus("Cambio aplicado al preview. Pulsa GUARDAR CAMBIOS para publicarlo.", false);
+    });
+  }
+
+  function applyConfigToSelected(cfg){
+    if(!selectedElement) return;
+    if(Object.prototype.hasOwnProperty.call(cfg,"text")) selectedElement.textContent = cfg.text;
+    if(selectedElement.tagName === "A" && Object.prototype.hasOwnProperty.call(cfg,"href")) selectedElement.href = cfg.href || "#";
+    if(selectedElement.tagName === "VIDEO" && Object.prototype.hasOwnProperty.call(cfg,"poster")) selectedElement.poster = cfg.poster || "";
+    if(isMedia(selectedElement) && Object.prototype.hasOwnProperty.call(cfg,"src")) selectedElement.src = cfg.src || "";
+    Object.entries(cfg.styles || {}).forEach(([p,v])=>{
+      selectedElement.style[p] = v || "";
+    });
+  }
+
+  function fontOptions(current){
+    const fonts = [
+      ['Cormorant Garamond','"Cormorant Garamond", Georgia, serif'],
+      ['Montserrat','Montserrat, Arial, sans-serif'],
+      ['Playfair Display','"Playfair Display", Georgia, serif'],
+      ['Georgia','Georgia, serif'],
+      ['Arial','Arial, sans-serif'],
+      ['System','system-ui, sans-serif']
+    ];
+    return fonts.map(([name,val])=>{
+      const selected = current && current.toLowerCase().includes(name.toLowerCase()) ? "selected" : "";
+      return `<option value="${escapeAttr(val)}" ${selected}>${name}</option>`;
+    }).join("");
+  }
+
+  function escapeHtml(value){
+    return String(value ?? "").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]));
+  }
+  function escapeAttr(value){ return escapeHtml(value); }
+
+  function toHex(value){
+    const v = String(value || "").trim();
+    if(/^#[0-9a-f]{6}$/i.test(v)) return v;
+    const m = v.match(/rgba?\((\d+),\s*(\d+),\s*(\d+)/i);
+    if(m) return "#" + [m[1],m[2],m[3]].map(n=>Number(n).toString(16).padStart(2,"0")).join("");
+    return "#b18a4a";
+  }
+
+  async function saveState(){
+    saveBtn.disabled = true;
+    saveBtn.textContent = "GUARDANDO...";
+    try{
+      const {error} = await sb.from("site_content").upsert({
+        clave:"visual_editor",
+        valor:JSON.stringify(visualState)
+      },{onConflict:"clave"});
+      if(error) throw error;
+      setStatus("Cambios guardados correctamente. Ya están disponibles en la página principal.", false);
+    }catch(error){
+      console.error(error);
+      setStatus(error.message || "No se pudieron guardar los cambios.", true);
+    }finally{
+      saveBtn.disabled = false;
+      saveBtn.textContent = "💾 GUARDAR CAMBIOS";
+    }
+  }
+
+  function resetSelected(){
+    if(!selectedId || !selectedElement) return;
+    history.push(clone(visualState));
+    delete visualState[selectedId];
+    injectPreview();
+    setStatus("Elemento restablecido a su contenido y estilo original.", false);
+  }
+
+  undoBtn.addEventListener("click",()=>{
+    if(!history.length) return;
+    visualState = history.pop();
+    injectPreview();
+    setStatus("Se deshizo el último cambio.", false);
+  });
+
+  saveBtn.addEventListener("click",saveState);
+  resetBtn.addEventListener("click",resetSelected);
+  refreshBtn.addEventListener("click",injectPreview);
+
+  document.querySelectorAll("[data-device]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      document.querySelectorAll("[data-device]").forEach(x=>x.classList.remove("active"));
+      btn.classList.add("active");
+      frame.classList.remove("tablet","mobile");
+      if(btn.dataset.device !== "desktop") frame.classList.add(btn.dataset.device);
+    });
+  });
+
+  document.querySelectorAll("[data-jump]").forEach(btn=>{
+    btn.addEventListener("click",()=>{
+      const doc = iframeReady();
+      if(!doc) return;
+      const target = doc.querySelector(`[data-editor-id="${CSS.escape(btn.dataset.jump)}"]`);
+      if(target){
+        target.scrollIntoView({behavior:"smooth",block:"center"});
+        selectElement(target);
+      }
+    });
+  });
+
+  preview.addEventListener("load",()=>{
+    installFrameEditor();
+  });
+
+  (async function init(){
+    await loadState();
+    injectPreview();
+  })();
+
+})();
+</script>
+
+
 </div>
 
 
