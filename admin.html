@@ -2740,7 +2740,8 @@
     <div class="bge-kicker">EDITOR VISUAL</div>
     <h3 class="bge-title">Edita tu página principal</h3>
     <p class="bge-desc">
-      Haz clic directamente sobre cualquier elemento de la vista previa para editarlo.
+      Haz clic directamente sobre cualquier elemento de la vista previa para seleccionarlo.
+      <strong>Doble clic sobre un texto o botón para escribir directamente sobre la página.</strong>
       Puedes cambiar textos, enlaces, imágenes, videos, GIF, tipografías, tamaños, colores,
       alineación y estilos. Los cambios se guardan en Supabase y no requieren editar el HTML manualmente.
     </p>
@@ -2769,7 +2770,7 @@
       <div id="bgeInspector">
         <div class="bge-empty">
           <strong>Selecciona un elemento</strong><br>
-          Haz clic en un texto, botón, imagen, video o sección de la página para comenzar.
+          Haz clic para seleccionar. Haz doble clic sobre un texto o botón para editarlo directamente en la vista previa.
         </div>
       </div>
 
@@ -2955,6 +2956,13 @@
         [data-editor-id]{cursor:pointer!important;outline-offset:3px}
         [data-editor-id].bge-hover{outline:2px dashed rgba(177,138,74,.55)!important}
         [data-editor-id].bge-selected{outline:2px solid #b18a4a!important;outline-offset:4px!important}
+        [data-editor-id].bge-direct-editing{
+          outline:2px solid #b18a4a!important;
+          outline-offset:5px!important;
+          cursor:text!important;
+          caret-color:#b18a4a!important;
+        }
+        [data-editor-id].bge-direct-editing:focus{outline:2px solid #8c682e!important}
         body.bge-editor-active{cursor:crosshair!important}
       `;
       doc.head.appendChild(style);
@@ -2981,6 +2989,74 @@
       ev.preventDefault();
       ev.stopPropagation();
       selectElement(el);
+    }, true);
+
+    // Edición directa de textos en la vista previa.
+    doc.addEventListener("dblclick", function(ev){
+      const el = ev.target.closest?.("[data-editor-id]");
+      if(!el) return;
+      if(["IMG","VIDEO","SECTION","HEADER","FOOTER","ARTICLE"].includes(el.tagName)) return;
+
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      selectElement(el);
+      el.contentEditable = "true";
+      el.spellcheck = false;
+      el.classList.add("bge-direct-editing");
+      el.focus();
+
+      // Seleccionar todo el texto del elemento para escribir inmediatamente.
+      try{
+        const range = doc.createRange();
+        range.selectNodeContents(el);
+        const selection = doc.getSelection();
+        selection.removeAllRanges();
+        selection.addRange(range);
+      }catch(e){}
+
+      const finishDirectEdit = () => {
+        el.contentEditable = "false";
+        el.classList.remove("bge-direct-editing");
+
+        history.push(clone(visualState));
+        const cfg = visualState[selectedId] || {};
+        cfg.text = el.textContent.trim();
+        cfg.styles = cfg.styles || {};
+        visualState[selectedId] = cfg;
+
+        renderInspector();
+        setStatus(
+          "Texto actualizado en la vista previa. Pulsa GUARDAR CAMBIOS para publicarlo.",
+          false
+        );
+
+        el.removeEventListener("blur", finishDirectEdit);
+      };
+
+      el.addEventListener("blur", finishDirectEdit, {once:true});
+
+      el.addEventListener("keydown", function(keyEvent){
+        if(keyEvent.key === "Escape"){
+          keyEvent.preventDefault();
+          el.blur();
+        }
+        if(keyEvent.key === "Enter" && !keyEvent.shiftKey){
+          keyEvent.preventDefault();
+          el.blur();
+        }
+      });
+    }, true);
+
+    // También permite entrar a edición con Enter cuando el elemento ya está seleccionado.
+    doc.addEventListener("keydown", function(ev){
+      if(ev.key !== "Enter") return;
+      const active = doc.activeElement;
+      if(!active || active.contentEditable === "true") return;
+      const el = active.closest?.("[data-editor-id]");
+      if(!el || ["IMG","VIDEO","SECTION","HEADER","FOOTER","ARTICLE"].includes(el.tagName)) return;
+      ev.preventDefault();
+      el.dispatchEvent(new MouseEvent("dblclick",{bubbles:true,cancelable:true}));
     }, true);
 
     applyStateToFrame();
@@ -3040,7 +3116,7 @@
 
   function renderInspector(){
     if(!selectedElement){
-      inspector.innerHTML = `<div class="bge-empty"><strong>Selecciona un elemento</strong><br>Haz clic en un texto, botón, imagen, video o sección de la página para comenzar.</div>`;
+      inspector.innerHTML = `<div class="bge-empty"><strong>Selecciona un elemento</strong><br>Haz clic para seleccionar. Haz doble clic sobre un texto o botón para editarlo directamente en la vista previa.</div>`;
       return;
     }
 
