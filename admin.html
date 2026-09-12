@@ -29,9 +29,9 @@
 
     .container {
       width: 100%;
-      max-width: 1000px;
+      max-width: 1500px;
       margin: auto;
-      padding: 25px 16px 50px;
+      padding: 25px 12px 50px;
     }
 
     .header {
@@ -2681,7 +2681,7 @@
 
 
 <style id="baby-golden-visual-editor-css">
-  .bge-shell{margin-top:28px;border:1px solid #e7ddcf;border-radius:24px;background:#fffdfa;overflow:hidden;box-shadow:0 20px 60px rgba(45,35,25,.08)}
+  .bge-shell{width:100%;margin-top:28px;border:1px solid #e7ddcf;border-radius:24px;background:#fffdfa;overflow:hidden;box-shadow:0 20px 60px rgba(45,35,25,.08)}
   .bge-head{padding:24px 26px;border-bottom:1px solid #eee5da;background:linear-gradient(135deg,#fffdfa,#f8f1e7)}
   .bge-kicker{font:800 10px/1 Arial,sans-serif;letter-spacing:.18em;color:#b18a4a}
   .bge-title{margin:7px 0 5px;font:600 30px/1.1 Georgia,serif;color:#2d2925}
@@ -2694,9 +2694,9 @@
   .bge-device{margin-left:auto;display:flex;border:1px solid #ddd2c5;border-radius:11px;overflow:hidden}
   .bge-device button{border:0;background:#fff;padding:9px 12px;font:700 10px Arial;cursor:pointer}
   .bge-device button.active{background:#2d2925;color:#fff}
-  .bge-workspace{display:grid;grid-template-columns:minmax(0,1fr) 330px;min-height:760px}
-  .bge-canvas{background:#eee9e1;padding:26px;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
-  .bge-frame{width:100%;height:720px;border:1px solid #d8cdbf;border-radius:14px;background:#fff;box-shadow:0 20px 45px rgba(40,30,20,.14);transition:width .2s;overflow:hidden}
+  .bge-workspace{display:grid;grid-template-columns:minmax(0,1fr) 380px;min-height:860px}
+  .bge-canvas{background:#eee9e1;padding:22px;display:flex;justify-content:center;align-items:flex-start;overflow:auto}
+  .bge-frame{width:100%;height:820px;border:1px solid #d8cdbf;border-radius:14px;background:#fff;box-shadow:0 20px 45px rgba(40,30,20,.14);transition:width .2s;overflow:hidden}
   .bge-frame.tablet{width:768px;max-width:100%}
   .bge-frame.mobile{width:390px;max-width:100%}
   #bgePreview{width:100%;height:100%;border:0;background:#fff}
@@ -2727,7 +2727,7 @@
   .bge-list-item:hover{border-color:#c9ad7c}
   .bge-list-dot{width:8px;height:8px;border-radius:50%;background:#b18a4a;flex:0 0 auto}
   .bge-list-name{font:700 11px Arial;color:#4a433c;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  @media(max-width:1000px){
+  @media(max-width:1100px){
     .bge-workspace{grid-template-columns:1fr}
     .bge-panel{border-left:0;border-top:1px solid #e5dbcf}
     .bge-frame{height:600px}
@@ -2791,7 +2791,11 @@
 
 <script id="baby-golden-visual-editor-script">
 (function(){
-  const sb = window.supabaseClient;
+  const SB_URL = "https://cxgcmrpqqaachnfavplh.supabase.co";
+  const SB_KEY = "sb_publishable_6ZXdTZFUqYZUR-4aGU9VSQ_X8rtNtxY";
+  const sb = window.supabase && window.supabase.createClient
+    ? window.supabase.createClient(SB_URL, SB_KEY)
+    : null;
   if(!sb) return;
 
   const editor = document.getElementById("babyGoldenVisualEditor");
