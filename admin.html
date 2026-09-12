@@ -2762,7 +2762,7 @@
   <div class="bge-workspace">
     <div class="bge-canvas">
       <div class="bge-frame" id="bgeFrame">
-        <iframe id="bgePreview" title="Vista previa editable de Baby Golden Perú"></iframe>
+        <iframe id="bgePreview" title="Vista previa editable de Baby Golden Perú" sandbox="allow-scripts allow-same-origin allow-forms allow-modals"></iframe>
       </div>
     </div>
 
@@ -2770,7 +2770,7 @@
       <div id="bgeInspector">
         <div class="bge-empty">
           <strong>Selecciona un elemento</strong><br>
-          Haz clic para seleccionar. Haz doble clic sobre un texto o botón para editarlo directamente en la vista previa.
+          Haz clic para seleccionar. <strong>Doble clic sobre cualquier texto o botón para escribir directamente en la vista previa.</strong> Los enlaces están desactivados dentro de este editor.
         </div>
       </div>
 
@@ -2954,13 +2954,14 @@
       style.id = "bge-frame-style";
       style.textContent = `
         [data-editor-id]{cursor:pointer!important;outline-offset:3px}
-        [data-editor-id].bge-hover{outline:2px dashed rgba(177,138,74,.55)!important}
+        [data-editor-id].bge-hover{outline:2px dashed rgba(177,138,74,.65)!important}
         [data-editor-id].bge-selected{outline:2px solid #b18a4a!important;outline-offset:4px!important}
         [data-editor-id].bge-direct-editing{
           outline:2px solid #b18a4a!important;
           outline-offset:5px!important;
           cursor:text!important;
           caret-color:#b18a4a!important;
+          user-select:text!important;
         }
         [data-editor-id].bge-direct-editing:focus{outline:2px solid #8c682e!important}
         body.bge-editor-active{cursor:crosshair!important}
@@ -2968,45 +2969,93 @@
       doc.head.appendChild(style);
     }
 
+    // Si el index publicado todavía no tiene data-editor-id, crear IDs temporales
+    // usando los elementos de texto/enlace reales. Esto evita que el editor dependa
+    // de que el usuario haya reemplazado el index antes de abrir el Admin.
+    const editableSelector = [
+      "h1","h2","h3","h4","h5","h6","p","small","strong","span",
+      "a","button","li","label"
+    ].join(",");
+
+    let autoId = 0;
+    doc.querySelectorAll(editableSelector).forEach(el=>{
+      if(el.hasAttribute("data-editor-id")) return;
+      if(!el.textContent.trim()) return;
+      if(el.closest("script,style,noscript")) return;
+      if(el.children.length > 3) return;
+
+      // Evitar generar IDs para textos internos de controles complejos si ya
+      // pertenecen a un elemento editable superior.
+      const parentEditable = el.parentElement?.closest?.("[data-editor-id]");
+      if(parentEditable && parentEditable !== el) return;
+
+      autoId += 1;
+      el.setAttribute("data-editor-id", `auto-${autoId}`);
+    });
+
+    // También marcar imágenes y videos sin ID para permitir reemplazarlos.
+    doc.querySelectorAll("img,video").forEach(el=>{
+      if(!el.hasAttribute("data-editor-id")){
+        autoId += 1;
+        el.setAttribute("data-editor-id", `auto-media-${autoId}`);
+      }
+    });
+
     doc.body.classList.add("bge-editor-active");
 
-    doc.addEventListener("mouseover", function(ev){
-      const el = ev.target.closest?.("[data-editor-id]");
-      if(!el) return;
-      clearMarks();
-      el.classList.add("bge-hover");
-      if(selectedElement === el) el.classList.add("bge-selected");
-    }, true);
-
-    doc.addEventListener("mouseout", function(ev){
-      const el = ev.target.closest?.("[data-editor-id]");
-      if(el) el.classList.remove("bge-hover");
-    }, true);
-
+    // MUY IMPORTANTE: ningún clic dentro de la vista previa debe llevar
+    // al usuario a otra página. La vista previa es solo de edición.
     doc.addEventListener("click", function(ev){
+      const link = ev.target.closest?.("a,button");
+      if(link){
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+
       const el = ev.target.closest?.("[data-editor-id]");
       if(!el) return;
+
       ev.preventDefault();
       ev.stopPropagation();
       selectElement(el);
     }, true);
 
-    // Edición directa de textos en la vista previa.
+    doc.addEventListener("mousedown", function(ev){
+      const link = ev.target.closest?.("a,button");
+      if(link){
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
+
+    doc.addEventListener("auxclick", function(ev){
+      const link = ev.target.closest?.("a,button");
+      if(link){
+        ev.preventDefault();
+        ev.stopPropagation();
+      }
+    }, true);
+
+    // DOBLE CLIC = editar directamente en la página.
     doc.addEventListener("dblclick", function(ev){
       const el = ev.target.closest?.("[data-editor-id]");
       if(!el) return;
-      if(["IMG","VIDEO","SECTION","HEADER","FOOTER","ARTICLE"].includes(el.tagName)) return;
+
+      if(["IMG","VIDEO","SECTION","HEADER","FOOTER","ARTICLE"].includes(el.tagName)){
+        selectElement(el);
+        return;
+      }
 
       ev.preventDefault();
       ev.stopPropagation();
 
       selectElement(el);
+
       el.contentEditable = "true";
       el.spellcheck = false;
       el.classList.add("bge-direct-editing");
       el.focus();
 
-      // Seleccionar todo el texto del elemento para escribir inmediatamente.
       try{
         const range = doc.createRange();
         range.selectNodeContents(el);
@@ -3015,23 +3064,29 @@
         selection.addRange(range);
       }catch(e){}
 
+      let finished = false;
       const finishDirectEdit = () => {
+        if(finished) return;
+        finished = true;
+
         el.contentEditable = "false";
         el.classList.remove("bge-direct-editing");
 
         history.push(clone(visualState));
-        const cfg = visualState[selectedId] || {};
+        const id = el.getAttribute("data-editor-id");
+        const cfg = visualState[id] || {};
         cfg.text = el.textContent.trim();
         cfg.styles = cfg.styles || {};
-        visualState[selectedId] = cfg;
+        visualState[id] = cfg;
 
+        selectedElement = el;
+        selectedId = id;
         renderInspector();
+
         setStatus(
-          "Texto actualizado en la vista previa. Pulsa GUARDAR CAMBIOS para publicarlo.",
+          "Texto cambiado directamente en la vista previa. Pulsa GUARDAR CAMBIOS para publicarlo.",
           false
         );
-
-        el.removeEventListener("blur", finishDirectEdit);
       };
 
       el.addEventListener("blur", finishDirectEdit, {once:true});
@@ -3040,23 +3095,24 @@
         if(keyEvent.key === "Escape"){
           keyEvent.preventDefault();
           el.blur();
-        }
-        if(keyEvent.key === "Enter" && !keyEvent.shiftKey){
+        }else if(keyEvent.key === "Enter" && !keyEvent.shiftKey){
           keyEvent.preventDefault();
           el.blur();
         }
       });
     }, true);
 
-    // También permite entrar a edición con Enter cuando el elemento ya está seleccionado.
-    doc.addEventListener("keydown", function(ev){
-      if(ev.key !== "Enter") return;
-      const active = doc.activeElement;
-      if(!active || active.contentEditable === "true") return;
-      const el = active.closest?.("[data-editor-id]");
-      if(!el || ["IMG","VIDEO","SECTION","HEADER","FOOTER","ARTICLE"].includes(el.tagName)) return;
-      ev.preventDefault();
-      el.dispatchEvent(new MouseEvent("dblclick",{bubbles:true,cancelable:true}));
+    doc.addEventListener("mouseover", function(ev){
+      const el = ev.target.closest?.("[data-editor-id]");
+      if(!el) return;
+      doc.querySelectorAll(".bge-hover").forEach(x=>x.classList.remove("bge-hover"));
+      el.classList.add("bge-hover");
+      if(selectedElement === el) el.classList.add("bge-selected");
+    }, true);
+
+    doc.addEventListener("mouseout", function(ev){
+      const el = ev.target.closest?.("[data-editor-id]");
+      if(el) el.classList.remove("bge-hover");
     }, true);
 
     applyStateToFrame();
@@ -3116,7 +3172,7 @@
 
   function renderInspector(){
     if(!selectedElement){
-      inspector.innerHTML = `<div class="bge-empty"><strong>Selecciona un elemento</strong><br>Haz clic para seleccionar. Haz doble clic sobre un texto o botón para editarlo directamente en la vista previa.</div>`;
+      inspector.innerHTML = `<div class="bge-empty"><strong>Selecciona un elemento</strong><br>Haz clic para seleccionar. <strong>Doble clic sobre cualquier texto o botón para escribir directamente en la vista previa.</strong> Los enlaces están desactivados dentro de este editor.</div>`;
       return;
     }
 
