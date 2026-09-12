@@ -2762,7 +2762,7 @@
   <div class="bge-workspace">
     <div class="bge-canvas">
       <div class="bge-frame" id="bgeFrame">
-        <iframe id="bgePreview" title="Vista previa editable de Baby Golden Perú" sandbox="allow-scripts allow-same-origin allow-forms allow-modals"></iframe>
+        <iframe id="bgePreview" title="Vista previa editable de Baby Golden Perú"></iframe>
       </div>
     </div>
 
@@ -2947,6 +2947,7 @@
 
   function installFrameEditor(){
     const doc = iframeReady();
+    if(!doc) return;
     if(!doc) return;
 
     if(!doc.getElementById("bge-frame-style")){
@@ -3464,7 +3465,15 @@
 
   preview.addEventListener("load",()=>{
     installFrameEditor();
+    setTimeout(installFrameEditor, 100);
+    setTimeout(installFrameEditor, 500);
   });
+
+  // Si el navegador ya tiene el documento listo al terminar la inicialización,
+  // volver a instalar los eventos de edición.
+  setTimeout(()=>{
+    installFrameEditor();
+  }, 1200);
 
   (async function init(){
     await loadState();
