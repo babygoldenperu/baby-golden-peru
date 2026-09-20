@@ -1907,11 +1907,12 @@
       calculadas a partir de la fotografía real.
     */
     .story-slide{
-      flex:0 0 auto;
-      width:auto;
-      height:auto;
-      min-width:0;
-      max-width:none;
+      flex:0 0 300px;
+      width:300px;
+      height:390px;
+      min-width:300px;
+      max-width:300px;
+      position:relative;
       position:relative;
       overflow:hidden;
       border-radius:24px;
@@ -1937,8 +1938,10 @@
       display:block;
       width:100% !important;
       height:100% !important;
-      max-width:none;
-      max-height:none;
+      max-width:100% !important;
+      max-height:100% !important;
+      object-fit:cover !important;
+      object-position:center !important;
       min-width:0;
       object-fit:fill !important;
       object-position:center;
@@ -2229,8 +2232,11 @@
   }
 
   .story-slide{
-    min-width:0;
-    max-width:none;
+    flex:0 0 230px;
+    width:230px;
+    height:300px;
+    min-width:230px;
+    max-width:230px;
   }
 
   .story-arrow{
