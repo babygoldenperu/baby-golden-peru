@@ -258,7 +258,7 @@ async function loadIndex(){
     if(r.ok) data=await r.text();
   }catch(e){}
   currentIndexHTML=data||"";
-  renderIndex(currentIndexHTML||null);
+  await renderIndex(currentIndexHTML||null);
 }
 
 function buildPreview(raw){
@@ -304,7 +304,7 @@ function autoMark(root){
   });
 }
 
-function renderIndex(raw){
+async function renderIndex(raw){
   const preview=$("pagePreview");
   preview.innerHTML="";
   const root=buildPreview(raw||"");
@@ -312,8 +312,75 @@ function renderIndex(raw){
   autoMark(preview);
   bindPreview();
   initEditorStories();
+
+  // IMPORTANTE:
+  // index.html obtiene las Historias de Oro desde site_gallery.
+  // Como el editor elimina los <script> del index para que no se
+  // ejecuten dentro del preview, cargamos aquí esas imágenes
+  // directamente desde Supabase.
+  await loadStoriesFromSupabase();
+
+  // Los cambios guardados en el editor tienen prioridad sobre
+  // los valores originales de site_gallery.
   applyAllState();
   renderSectionList();
+}
+
+async function loadStoriesFromSupabase(){
+  const preview = $("pagePreview");
+  const STORY_SLOTS = Array.from(
+    {length:12},
+    (_,i)=>`historia_${i+1}`
+  );
+
+  try{
+    const {data,error} = await sb
+      .from("site_gallery")
+      .select("slot,imagen_url,title,caption,published")
+      .in("slot",STORY_SLOTS)
+      .order("slot",{ascending:true});
+
+    if(error) throw error;
+
+    (data || []).forEach(item=>{
+      const number = Number(
+        String(item.slot || "").replace("historia_","")
+      );
+
+      if(number < 1 || number > 12) return;
+
+      const image = preview.querySelector("#storyPhoto" + number);
+      const slide = image?.closest(".story-slide");
+
+      if(image && item.imagen_url){
+        image.src = item.imagen_url;
+        image.alt = item.title || "Historia de Oro · Baby Golden Perú";
+      }
+
+      if(slide){
+        const label = slide.querySelector(".story-slide-label");
+        if(label && item.title){
+          label.textContent = item.title;
+        }
+
+        slide.dataset.title = item.title || "";
+        slide.dataset.description = item.caption || "";
+        slide.dataset.loaded = "true";
+        slide.dataset.published = item.published ? "true" : "false";
+
+        if(item.published === false){
+          slide.style.display = "none";
+        }else{
+          slide.style.display = "";
+        }
+      }
+    });
+  }catch(error){
+    console.warn(
+      "Editor: no se pudieron cargar las Historias de Oro desde Supabase.",
+      error
+    );
+  }
 }
 
 function initEditorStories(){
