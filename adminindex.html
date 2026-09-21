@@ -255,6 +255,47 @@ function buildPreview(raw){
     wrapper.appendChild(document.importNode(s,true));
   });
 
+  // ESTILOS EXCLUSIVOS DEL EDITOR VISUAL
+  // El index real calcula el tamaño de las tarjetas de Historias de Oro
+  // mediante su JavaScript. El editor elimina los <script> del preview,
+  // por lo que esas tarjetas quedan con width/height:auto y las fotos
+  // pueden mostrarse a su tamaño natural. Esta regla solo existe dentro
+  // de #bge-index-root y no modifica index.html ni la página publicada.
+  const editorFix=document.createElement("style");
+  editorFix.textContent=`
+    #bge-index-root .stories-carousel .stories-track .story-slide{
+      flex:0 0 208px !important;
+      width:208px !important;
+      height:268px !important;
+      min-width:208px !important;
+      max-width:208px !important;
+    }
+
+    #bge-index-root .stories-carousel .stories-track .story-slide .story-image-button{
+      width:100% !important;
+      height:100% !important;
+    }
+
+    #bge-index-root .stories-carousel .stories-track .story-slide .story-image-button img{
+      width:100% !important;
+      height:100% !important;
+      max-width:none !important;
+      max-height:none !important;
+      object-fit:cover !important;
+    }
+
+    @media(max-width:620px){
+      #bge-index-root .stories-carousel .stories-track .story-slide{
+        flex-basis:170px !important;
+        width:170px !important;
+        height:220px !important;
+        min-width:170px !important;
+        max-width:170px !important;
+      }
+    }
+  `;
+  wrapper.appendChild(editorFix);
+
   const body=document.createElement("div");
   body.innerHTML=parsed.body?.innerHTML||"";
   while(body.firstChild) wrapper.appendChild(body.firstChild);
