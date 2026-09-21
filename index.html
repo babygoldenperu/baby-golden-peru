@@ -1907,12 +1907,11 @@
       calculadas a partir de la fotografía real.
     */
     .story-slide{
-      flex:0 0 300px;
-      width:300px;
-      height:390px;
-      min-width:300px;
-      max-width:300px;
-      position:relative;
+      flex:0 0 auto;
+      width:auto;
+      height:auto;
+      min-width:0;
+      max-width:none;
       position:relative;
       overflow:hidden;
       border-radius:24px;
@@ -1936,14 +1935,11 @@
 
     .story-slide img{
       display:block;
-      width:100% !important;
-      height:100% !important;
-      max-width:100% !important;
-      max-height:100% !important;
-      object-fit:cover !important;
-      object-position:center !important;
-      min-width:0;
-      object-fit:fill !important;
+      width:100%;
+      height:100%;
+      max-width:none;
+      max-height:none;
+      object-fit:contain;
       object-position:center;
       background:#f5eee4;
       transition:transform .7s ease;
@@ -2232,11 +2228,11 @@
   }
 
   .story-slide{
-    flex:0 0 230px;
-    width:230px;
-    height:300px;
-    min-width:230px;
-    max-width:230px;
+    flex:0 0 auto;
+    width:auto;
+    height:auto;
+    min-width:0;
+    max-width:none;
   }
 
   .story-arrow{
@@ -2282,7 +2278,8 @@
   display:block;
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:contain;
+  object-position:center;
 }
 
 .story-image-button:focus-visible{
@@ -4028,28 +4025,19 @@
 
         }
 
-        slide.style.width =
-          Math.round(width) + "px";
+        const finalWidth = Math.round(width);
+        const finalHeight = Math.round(height);
 
-        slide.style.height =
-          Math.round(height) + "px";
+        slide.style.width = finalWidth + "px";
+        slide.style.minWidth = finalWidth + "px";
+        slide.style.maxWidth = finalWidth + "px";
+        slide.style.height = finalHeight + "px";
+        slide.style.aspectRatio = "auto";
 
-        slide.style.aspectRatio =
-          "auto";
-
-        img.style.width =
-          "100%";
-
-        img.style.height =
-          "100%";
-
-        /*
-          El marco y la imagen tienen EXACTAMENTE
-          la misma proporción, por lo que fill no
-          deforma ni recorta.
-        */
-        img.style.objectFit =
-          "fill";
+        img.style.width = "100%";
+        img.style.height = "100%";
+        img.style.objectFit = "contain";
+        img.style.objectPosition = "center";
 
       });
 
