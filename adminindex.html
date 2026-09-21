@@ -296,6 +296,35 @@ function buildPreview(raw){
   `;
   wrapper.appendChild(editorFix);
 
+  // El preview se ejecuta desde adminindex.html, pero los medios pertenecen
+  // a index.html. Convertimos SOLO en el preview las rutas relativas de
+  // imágenes/videos a rutas absolutas basadas en index.html. Esto evita que
+  // una foto deje de cargar por el cambio de documento base del editor.
+  const indexBase=new URL("index.html",window.location.href);
+  parsed.querySelectorAll("img[src],video[src],source[src]").forEach(media=>{
+    const src=media.getAttribute("src");
+    if(!src || /^(data:|blob:|https?:|\/\/)/i.test(src)) return;
+    try{ media.setAttribute("src",new URL(src,indexBase).href); }catch(e){}
+  });
+  parsed.querySelectorAll("img[srcset]").forEach(img=>{
+    const srcset=img.getAttribute("srcset");
+    if(!srcset) return;
+    try{
+      img.setAttribute("srcset",srcset.split(",").map(part=>{
+        const bits=part.trim().split(/\s+/);
+        if(bits[0] && !/^(data:|blob:|https?:|\/\/)/i.test(bits[0])){
+          bits[0]=new URL(bits[0],indexBase).href;
+        }
+        return bits.join(" ");
+      }).join(", "));
+    }catch(e){}
+  });
+  parsed.querySelectorAll("video[poster]").forEach(video=>{
+    const poster=video.getAttribute("poster");
+    if(!poster || /^(data:|blob:|https?:|\/\/)/i.test(poster)) return;
+    try{ video.setAttribute("poster",new URL(poster,indexBase).href); }catch(e){}
+  });
+
   const body=document.createElement("div");
   body.innerHTML=parsed.body?.innerHTML||"";
   while(body.firstChild) wrapper.appendChild(body.firstChild);
