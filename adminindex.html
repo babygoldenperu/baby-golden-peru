@@ -57,23 +57,6 @@ textarea{min-height:110px;resize:vertical}
 #pagePreview .bge-editor-selected{outline:2px solid var(--gold)!important;outline-offset:3px}
 #pagePreview .bge-editor-editing{outline:2px solid #8c682e!important;outline-offset:4px;cursor:text!important;caret-color:var(--gold)}
 #pagePreview [data-editor-temp]{cursor:pointer!important}
-#pagePreview .bge-story-dot{
-  min-width:24px;
-  height:24px;
-  padding:0 7px;
-  margin:0 3px;
-  border:1px solid rgba(183,123,32,.28);
-  border-radius:999px;
-  background:rgba(255,255,255,.88);
-  color:#8b642d;
-  font-size:9px;
-  font-weight:700;
-  cursor:pointer;
-}
-#pagePreview .bge-story-dot:hover{
-  background:#b77b20;
-  color:#fff;
-}
 
 .inspector{background:#fff;border-left:1px solid var(--line);padding:18px;overflow:auto}
 .inspector-title{font-size:15px;font-weight:800}
@@ -101,6 +84,51 @@ textarea{min-height:110px;resize:vertical}
 }
 </style>
 </head>
+<style>
+/* =========================================================
+   ADMIN VISUAL EDITOR — PREVIEW ONLY
+   Controla el tamaño de Historias de Oro únicamente dentro
+   del editor. NO modifica index.html ni los datos guardados.
+========================================================= */
+#pagePreview #bge-index-root .stories-carousel .story-slide{
+  flex:0 0 300px !important;
+  width:300px !important;
+  min-width:300px !important;
+  max-width:300px !important;
+  height:390px !important;
+  min-height:390px !important;
+  max-height:390px !important;
+  overflow:hidden !important;
+}
+
+#pagePreview #bge-index-root .stories-carousel .story-image-button{
+  width:100% !important;
+  height:100% !important;
+  overflow:hidden !important;
+}
+
+#pagePreview #bge-index-root .stories-carousel .story-slide img{
+  display:block !important;
+  width:100% !important;
+  height:100% !important;
+  max-width:100% !important;
+  max-height:100% !important;
+  object-fit:cover !important;
+  object-position:center !important;
+}
+
+/* En móvil/tablet dentro del editor mantenemos una vista manejable. */
+#pagePreview .page-frame.mobile .stories-carousel .story-slide,
+#pagePreview .page-frame.tablet .stories-carousel .story-slide{
+  flex-basis:230px !important;
+  width:230px !important;
+  min-width:230px !important;
+  max-width:230px !important;
+  height:300px !important;
+  min-height:300px !important;
+  max-height:300px !important;
+}
+</style>
 <body>
 
 <section id="loginView">
@@ -258,7 +286,7 @@ async function loadIndex(){
     if(r.ok) data=await r.text();
   }catch(e){}
   currentIndexHTML=data||"";
-  await renderIndex(currentIndexHTML||null);
+  renderIndex(currentIndexHTML||null);
 }
 
 function buildPreview(raw){
@@ -304,161 +332,20 @@ function autoMark(root){
   });
 }
 
-async function renderIndex(raw){
+function renderIndex(raw){
   const preview=$("pagePreview");
   preview.innerHTML="";
   const root=buildPreview(raw||"");
   preview.appendChild(root);
   autoMark(preview);
   bindPreview();
-  initEditorStories();
-
-  // IMPORTANTE:
-  // index.html obtiene las Historias de Oro desde site_gallery.
-  // Como el editor elimina los <script> del index para que no se
-  // ejecuten dentro del preview, cargamos aquí esas imágenes
-  // directamente desde Supabase.
-  await loadStoriesFromSupabase();
-
-  // Los cambios guardados en el editor tienen prioridad sobre
-  // los valores originales de site_gallery.
   applyAllState();
   renderSectionList();
-}
-
-async function loadStoriesFromSupabase(){
-  const preview = $("pagePreview");
-  const STORY_SLOTS = Array.from(
-    {length:12},
-    (_,i)=>`historia_${i+1}`
-  );
-
-  try{
-    const {data,error} = await sb
-      .from("site_gallery")
-      .select("slot,imagen_url,title,caption,published")
-      .in("slot",STORY_SLOTS)
-      .order("slot",{ascending:true});
-
-    if(error) throw error;
-
-    (data || []).forEach(item=>{
-      const number = Number(
-        String(item.slot || "").replace("historia_","")
-      );
-
-      if(number < 1 || number > 12) return;
-
-      const image = preview.querySelector("#storyPhoto" + number);
-      const slide = image?.closest(".story-slide");
-
-      if(image && item.imagen_url){
-        image.src = item.imagen_url;
-        image.alt = item.title || "Historia de Oro · Baby Golden Perú";
-      }
-
-      if(slide){
-        const label = slide.querySelector(".story-slide-label");
-        if(label && item.title){
-          label.textContent = item.title;
-        }
-
-        slide.dataset.title = item.title || "";
-        slide.dataset.description = item.caption || "";
-        slide.dataset.loaded = "true";
-        slide.dataset.published = item.published ? "true" : "false";
-
-        if(item.published === false){
-          slide.style.display = "none";
-        }else{
-          slide.style.display = "";
-        }
-      }
-    });
-  }catch(error){
-    console.warn(
-      "Editor: no se pudieron cargar las Historias de Oro desde Supabase.",
-      error
-    );
-  }
-}
-
-function initEditorStories(){
-  const preview = $("pagePreview");
-  const track = preview.querySelector("#storiesTrack");
-  if(!track) return;
-
-  const carousel = track.closest(".stories-carousel");
-  if(!carousel) return;
-
-  const prev = carousel.querySelector(".story-arrow.prev");
-  const next = carousel.querySelector(".story-arrow.next");
-  const dots = carousel.querySelector("#storyDots");
-  const slides = Array.from(track.querySelectorAll(".story-slide"));
-
-  if(!slides.length) return;
-
-  const getStep = () => {
-    const slide = slides.find(el => getComputedStyle(el).display !== "none") || slides[0];
-    const rect = slide.getBoundingClientRect();
-    const styles = getComputedStyle(track);
-    const gap = parseFloat(styles.columnGap || styles.gap || "18") || 18;
-    return Math.max(180, rect.width + gap);
-  };
-
-  const move = direction => {
-    track.scrollBy({
-      left: direction * getStep(),
-      behavior: "smooth"
-    });
-  };
-
-  if(prev){
-    prev.addEventListener("click", ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      move(-1);
-    });
-  }
-
-  if(next){
-    next.addEventListener("click", ev => {
-      ev.preventDefault();
-      ev.stopPropagation();
-      move(1);
-    });
-  }
-
-  if(dots){
-    dots.innerHTML = "";
-    slides.forEach((slide, index) => {
-      const dot = document.createElement("button");
-      dot.type = "button";
-      dot.className = "bge-story-dot";
-      dot.setAttribute("aria-label", "Ir a Historia de Oro " + (index + 1));
-      dot.textContent = String(index + 1);
-      dot.addEventListener("click", ev => {
-        ev.preventDefault();
-        ev.stopPropagation();
-        slide.scrollIntoView({
-          behavior: "smooth",
-          block: "nearest",
-          inline: "start"
-        });
-      });
-      dots.appendChild(dot);
-    });
-  }
 }
 
 function bindPreview(){
   const preview=$("pagePreview");
   preview.querySelectorAll("[data-editor-id]").forEach(el=>{
-    const isCarouselControl = el.matches(
-      ".story-arrow, .story-dots button, .story-lightbox button"
-    );
-    if(isCarouselControl) return;
-
     el.addEventListener("mouseenter",()=>el.classList.add("bge-editor-outline"));
     el.addEventListener("mouseleave",()=>el.classList.remove("bge-editor-outline"));
     el.addEventListener("click",ev=>{
@@ -479,11 +366,6 @@ function bindPreview(){
     });
   });
   preview.addEventListener("click",ev=>{
-    const storyControl = ev.target.closest(
-      ".story-arrow, .story-dots button, .story-lightbox button"
-    );
-    if(storyControl) return;
-
     const link=ev.target.closest("a,button");
     if(link){ev.preventDefault();ev.stopPropagation();}
   },true);
