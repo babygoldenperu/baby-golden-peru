@@ -266,43 +266,58 @@ function buildPreview(raw){
   ====================================================== */
   const editorProtection=document.createElement("style");
   editorProtection.textContent=`
+    /* Historias de Oro: mismas dimensiones que index.html en escritorio. */
     #bge-index-root .stories-carousel{
       overflow:hidden !important;
     }
     #bge-index-root .stories-track{
       display:flex !important;
+      align-items:flex-start !important;
       gap:18px !important;
+      width:max-content !important;
       transform:none !important;
     }
     #bge-index-root .story-slide{
-      flex:0 0 calc((100% - 36px)/3) !important;
-      width:auto !important;
-      min-width:0 !important;
-      max-width:none !important;
-      height:auto !important;
-      aspect-ratio:1.08/1 !important;
+      flex:0 0 300px !important;
+      width:300px !important;
+      min-width:300px !important;
+      max-width:300px !important;
+      height:390px !important;
+      min-height:390px !important;
+      max-height:390px !important;
+      position:relative !important;
+      overflow:hidden !important;
+      box-sizing:border-box !important;
+    }
+    #bge-index-root .story-image-button{
+      display:block !important;
+      width:100% !important;
+      height:100% !important;
+      padding:0 !important;
+      margin:0 !important;
+      border:0 !important;
       overflow:hidden !important;
     }
-    #bge-index-root .story-slide img,
-    #bge-index-root .story-image-button,
-    #bge-index-root .story-image-button img{
+    #bge-index-root .story-slide img{
+      display:block !important;
       width:100% !important;
-      max-width:100% !important;
       height:100% !important;
-      max-height:100% !important;
+      max-width:none !important;
+      max-height:none !important;
       object-fit:cover !important;
+      object-position:center !important;
+    }
+    /* El editor no ejecuta el JS del carrusel público. */
+    #bge-index-root .stories-track{
+      transition:none !important;
+      will-change:auto !important;
     }
     @media(max-width:1000px){
       #bge-index-root .story-slide{
-        flex-basis:calc((100% - 18px)/2) !important;
-      }
-    }
-    @media(max-width:650px){
-      #bge-index-root .stories-carousel{padding:0 30px 24px !important;}
-      #bge-index-root .stories-track{gap:12px !important;}
-      #bge-index-root .story-slide{
-        flex:0 0 100% !important;
-        aspect-ratio:1.05/1 !important;
+        flex:0 0 300px !important;
+        width:300px !important;
+        min-width:300px !important;
+        max-width:300px !important;
       }
     }
   `;
@@ -340,10 +355,41 @@ function autoMark(root){
   });
 }
 
-function renderIndex(raw){
+async function hydrateStoriesFromSupabase(root){
+  try{
+    const {data,error}=await sb
+      .from("site_gallery")
+      .select("slot,imagen_url,title,orden,activo,published")
+      .like("slot","historia_%")
+      .eq("activo",true)
+      .eq("published",true)
+      .order("orden",{ascending:true});
+    if(error) throw error;
+
+    const rows=(data||[]).filter(x=>x?.slot).sort((a,b)=>(a.orden||0)-(b.orden||0));
+    rows.forEach(row=>{
+      const m=String(row.slot).match(/^historia_(\d+)$/);
+      if(!m)return;
+      const n=m[1];
+      const img=root.querySelector(`#storyPhoto${CSS.escape(n)}`);
+      if(img && row.imagen_url){
+        img.src=row.imagen_url;
+      }
+      const label=root.querySelector(`.story-slide[data-story-number="${CSS.escape(n)}"] .story-slide-label`);
+      if(label && row.title){
+        label.textContent=row.title;
+      }
+    });
+  }catch(e){
+    console.warn("No se pudieron cargar las Historias de Oro desde Supabase:",e);
+  }
+}
+
+async function renderIndex(raw){
   const preview=$("pagePreview");
   preview.innerHTML="";
   const root=buildPreview(raw||"");
+  await hydrateStoriesFromSupabase(root);
   preview.appendChild(root);
   autoMark(preview);
   bindPreview();
@@ -572,11 +618,15 @@ function applyConfig(el,cfg){
      hacer que una foto ajena apareciera en Historias de Oro o
      que la imagen terminara ocupando toda la pantalla.
   */
+  const storyArea=el.closest(".stories-carousel");
   const isStoryMedia=
     el.tagName==="IMG" &&
     !!el.closest(".story-slide");
+  const isBenefitCard=el.classList.contains("benefit");
 
-  if(Object.prototype.hasOwnProperty.call(cfg,"text"))el.textContent=cfg.text;
+  /* Nunca volver a aplanar una tarjeta de beneficios con textContent.
+     La tarjeta contiene símbolo + título + descripción en elementos separados. */
+  if(!isBenefitCard && Object.prototype.hasOwnProperty.call(cfg,"text"))el.textContent=cfg.text;
   if(el.tagName==="A"&&Object.prototype.hasOwnProperty.call(cfg,"href"))el.setAttribute("href",cfg.href||"#");
 
   if(["IMG","VIDEO"].includes(el.tagName)&&Object.prototype.hasOwnProperty.call(cfg,"src")&&!isStoryMedia){
@@ -586,6 +636,9 @@ function applyConfig(el,cfg){
   if(el.tagName==="VIDEO"&&Object.prototype.hasOwnProperty.call(cfg,"poster"))el.setAttribute("poster",cfg.poster||"");
 
   Object.entries(cfg.styles||{}).forEach(([p,val])=>{
+    /* Historias de Oro tiene su propio módulo. No permitimos que
+       configuraciones antiguas del editor deformen su carrusel. */
+    if(storyArea) return;
     if(isStoryMedia && ["width","height","maxWidth","maxHeight","minWidth","minHeight","aspectRatio","objectFit","objectPosition","display","position","transform"].includes(p)){
       return;
     }
@@ -596,7 +649,11 @@ function applyConfig(el,cfg){
 function applyAllState(){
   Object.entries(visualState).forEach(([id,cfg])=>{
     const el=$("pagePreview").querySelector(`[data-editor-id="${CSS.escape(id)}"]`);
-    if(el)applyConfig(el,cfg);
+    if(!el)return;
+    /* No aplicar estados antiguos a Historias de Oro. Sus fotos y layout
+       vienen de site_gallery y deben verse igual que en index.html. */
+    if(el.closest(".stories-carousel"))return;
+    applyConfig(el,cfg);
   });
 }
 
