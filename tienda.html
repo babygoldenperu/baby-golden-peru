@@ -2319,7 +2319,7 @@
         .eq("activo",true).order("created_at",{ascending:true});
       if(error){
         console.error("Error cargando productos:",error);
-        document.getElementById("productsGrid").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
+        document.getElementById("productsGridId").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
         return;
       }
       products={};
@@ -2363,7 +2363,7 @@
               <p class="product-description">
                 ${escapeHtml(product.descripcion || "")}
               </p>
-              <div class="product-price">${formatMoney(product.precio)}</div>
+              <div class="product-price">S/ ${Number(product.precio || 0).toFixed(2)}</div>
 
               <div class="product-actions">
                 ${isId ? `
