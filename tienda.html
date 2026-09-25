@@ -2551,6 +2551,33 @@
 
 
     /* =========================================
+       DATOS DEL PRODUCTO PARA EL CARRITO
+       =========================================
+       La tabla de Supabase usa nombres en español:
+       precio, nombre e imagen_url.
+       Algunas versiones antiguas del carrito usaban
+       price, name e image. Estos helpers aceptan ambos
+       formatos para no romper carritos existentes.
+    */
+
+    function cartProductName(product) {
+      return String(product?.nombre ?? product?.name ?? "Producto");
+    }
+
+    function cartProductPrice(product) {
+      return Number(product?.precio ?? product?.price ?? 0);
+    }
+
+    function cartProductImage(product) {
+      return String(
+        product?.imagen_url ??
+        product?.image ??
+        imageForProduct(product)
+      );
+    }
+
+
+    /* =========================================
        ELEMENTOS
        ========================================= */
 
@@ -2616,7 +2643,7 @@
         ids.reduce(
           (sum, id) =>
             sum +
-            products[id].price *
+            cartProductPrice(products[id]) *
             Number(cart[id]),
           0
         );
@@ -2651,20 +2678,20 @@
 
                 <img
                   class="cart-item-image"
-                  src="${product.image}"
-                  alt="${product.name}"
+                  src="${escapeHtml(cartProductImage(product))}"
+                  alt="${escapeHtml(cartProductName(product))}"
                 >
 
                 <div>
 
                   <h3>
-                    ${product.name}
+                    ${escapeHtml(cartProductName(product))}
                   </h3>
 
                   <p>
-                    S/ ${product.price.toFixed(2)}
+                    S/ ${cartProductPrice(product).toFixed(2)}
                     · Subtotal:
-                    S/ ${(product.price * quantity).toFixed(2)}
+                    S/ ${(cartProductPrice(product) * quantity).toFixed(2)}
                   </p>
 
                   <div
