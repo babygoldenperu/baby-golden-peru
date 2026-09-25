@@ -2314,20 +2314,45 @@
     }
 
     async function loadProducts(){
-      const {data,error}=await supabaseClient.from("productos")
-        .select("id,sku,nombre,slug,descripcion,categoria,precio,stock,imagen_url,activo,maneja_stock,orden")
+      let query = supabaseClient.from("productos")
+        .select("id,sku,nombre,slug,descripcion,categoria,precio,stock,imagen_url,activo,maneja_stock,orden,created_at")
         .eq("activo",true)
-        .order("categoria",{ascending:true})
-        .order("orden",{ascending:true})
         .order("created_at",{ascending:true});
+
+      let {data,error}=await query;
+
       if(error){
-        console.error("Error cargando productos:",error);
+        console.error("Error cargando productos (consulta principal):",error);
+
+        // Fallback: permite que la tienda siga mostrando los productos
+        // aunque alguna instalación todavía no tenga el campo de orden.
+        const fallback = await supabaseClient.from("productos")
+          .select("id,sku,nombre,slug,descripcion,categoria,precio,stock,imagen_url,activo,maneja_stock")
+          .eq("activo",true)
+          .order("created_at",{ascending:true});
+
+        data = fallback.data;
+        error = fallback.error;
+      }
+
+      if(error){
+        console.error("Error cargando productos (fallback):",error);
         document.getElementById("productsGridId").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
+        document.getElementById("productsGridMerch").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
         return;
       }
       products={};
       (data||[]).forEach(p=>products[p.sku]=p);
       renderProducts();
+    }
+
+    function normalizeCategory(value){
+      return String(value || "")
+        .trim()
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g,"")
+        .replace(/\s+/g," ");
     }
 
     function renderProducts(){
@@ -2336,7 +2361,7 @@
 
       const idProducts = Object.values(products)
         .filter(product =>
-          String(product.categoria || "").trim().toLowerCase() === "baby golden id"
+          normalizeCategory(product.categoria) === "baby golden id"
         )
         .sort((a,b)=>
           (Number(a.orden)||999999)-(Number(b.orden)||999999) ||
@@ -2345,8 +2370,8 @@
 
       const merchProducts = Object.values(products)
         .filter(product => {
-          const category = String(product.categoria || "").trim().toLowerCase();
-          return category === "merchandising baby golden perú" ||
+          const category = normalizeCategory(product.categoria);
+          return category === "merchandising baby golden peru" ||
                  category === "merchandising";
         })
         .sort((a,b)=>
@@ -2376,7 +2401,7 @@
               <p class="product-description">
                 ${escapeHtml(product.descripcion || "")}
               </p>
-              <div class="product-price">${formatMoney(product.precio)}</div>
+              <div class="product-price">S/ ${Number(product.precio || 0).toFixed(2)}</div>
 
               <div class="product-actions">
                 ${isId ? `
