@@ -1443,6 +1443,50 @@
       gap:22px;
     }
 
+    /* =========================================
+       CATEGORÍAS DE LA TIENDA
+       ========================================= */
+    .shop-category{margin:0 0 76px}
+    .shop-category + .shop-category{
+      margin-top:92px;
+      padding-top:78px;
+      border-top:1px solid #dfd1bd;
+    }
+    .category-heading{
+      max-width:740px;
+      margin:0 auto 42px;
+      text-align:center;
+    }
+    .category-heading small{
+      display:block;
+      margin-bottom:13px;
+      color:#a9711c;
+      font-size:10px;
+      font-weight:700;
+      letter-spacing:4px;
+    }
+    .category-heading h2{
+      margin:0 0 14px;
+      font-family:'Cormorant Garamond',serif;
+      font-size:clamp(44px,4.5vw,66px);
+      line-height:.92;
+      font-weight:500;
+    }
+    .category-heading p{
+      max-width:620px;
+      margin:0 auto;
+      color:var(--brown-2);
+      font-size:12px;
+      line-height:1.75;
+    }
+    @media(max-width:760px){
+      .products{grid-template-columns:1fr}
+      .shop-category + .shop-category{
+        margin-top:65px;
+        padding-top:55px;
+      }
+    }
+
     .product{
       overflow:hidden;
       background:var(--cream-2);
@@ -2152,20 +2196,36 @@
   <main class="shop">
 
 
-    <div class="section-heading">
-
-      <small>
-        BABY GOLDEN ID
-      </small>
-
-      <h2>
-        Nuestra colección
-      </h2>
-
-    </div>
+    
 
 
-    <section class="products" id="productsGrid"></section>
+    <section class="shop-category" id="categoryBabyGoldenId">
+      <div class="category-heading">
+        <small>BABY GOLDEN ID</small>
+        <h2>Identidad y pertenencia.</h2>
+        <p>
+          Nuestros Baby Golden ID para identificar a tu compañero
+          y formar parte del ecosistema de Baby Golden Perú.
+        </p>
+      </div>
+      <div class="products" id="productsGridId">
+        <!-- Baby Golden ID se carga desde Supabase -->
+      </div>
+    </section>
+
+    <section class="shop-category" id="categoryMerchandising">
+      <div class="category-heading">
+        <small>MERCHANDISING BABY GOLDEN PERÚ</small>
+        <h2>La comunidad también se lleva puesta.</h2>
+        <p>
+          Productos oficiales de nuestra comunidad para acompañarte
+          en encuentros, paseos y experiencias Baby Golden.
+        </p>
+      </div>
+      <div class="products" id="productsGridMerch">
+        <!-- Merchandising se carga desde Supabase -->
+      </div>
+    </section>
 
 
     <!-- PRÓXIMAMENTE -->
@@ -2255,54 +2315,111 @@
 
     async function loadProducts(){
       const {data,error}=await supabaseClient.from("productos")
-        .select("id,sku,nombre,slug,descripcion,categoria,precio,stock,imagen_url,activo,maneja_stock")
-        .eq("activo",true).order("created_at",{ascending:true});
+        .select("id,sku,nombre,slug,descripcion,categoria,precio,stock,imagen_url,activo,maneja_stock,orden")
+        .eq("activo",true)
+        .order("categoria",{ascending:true})
+        .order("orden",{ascending:true})
+        .order("created_at",{ascending:true});
       if(error){
         console.error("Error cargando productos:",error);
-        document.getElementById("productsGrid").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
+        document.getElementById("productsGridId").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
         return;
       }
       products={};
-      (data||[]).forEach(p=>{
-        const sku=String(p.sku||"").trim().toUpperCase();
-        if(!sku) return;
-        products[sku]={
-          ...p,
-          sku,
-          name:p.nombre||sku,
-          price:Number(p.precio)||0,
-          image:imageForProduct(p)
-        };
-      });
+      (data||[]).forEach(p=>products[p.sku]=p);
       renderProducts();
-      renderCart();
     }
 
     function renderProducts(){
-      const grid=document.getElementById("productsGrid");
-      const list=Object.values(products);
-      grid.innerHTML=list.map(p=>{
-        const isId=["BLACK","PREMIUM"].includes(String(p.sku||"").toUpperCase());
-        return `<article class="product">
-          <img class="product-image" src="${escapeHtml(imageForProduct(p))}" alt="${escapeHtml(p.nombre)}" loading="lazy" onerror="this.onerror=null;this.src='BABY%20GOLDEN.png'">
-          <div class="product-body">
-            <span class="product-category">${escapeHtml(p.categoria||"BABY GOLDEN PERÚ")}</span>
-            <h2>${escapeHtml(p.nombre)}</h2>
-            <p class="product-description">${escapeHtml(p.descripcion||"")}</p>
-            <div class="product-price">S/ ${Number(p.precio||0).toFixed(2)}</div>
-            <div class="product-actions">
-              ${isId?`<a href="id.html" class="product-link">CONOCER ${escapeHtml(p.sku)}</a>`:""}
-              <button type="button" class="product-link product-buy" data-add-to-cart="${escapeHtml(p.sku)}">AGREGAR AL CARRITO</button>
-            </div>
-          </div>
-        </article>`;
-      }).join("");
-      grid.querySelectorAll("[data-add-to-cart]").forEach(button=>button.addEventListener("click",function(){
-        const cart=getCart(), id=this.dataset.addToCart;
-        cart[id]=(Number(cart[id])||0)+1; saveCart(cart); renderCart(); openCart();
-      }));
-    }
+      const idGrid = document.getElementById("productsGridId");
+      const merchGrid = document.getElementById("productsGridMerch");
 
+      const idProducts = Object.values(products)
+        .filter(product =>
+          String(product.categoria || "").trim().toLowerCase() === "baby golden id"
+        )
+        .sort((a,b)=>
+          (Number(a.orden)||999999)-(Number(b.orden)||999999) ||
+          String(a.nombre||"").localeCompare(String(b.nombre||""))
+        );
+
+      const merchProducts = Object.values(products)
+        .filter(product => {
+          const category = String(product.categoria || "").trim().toLowerCase();
+          return category === "merchandising baby golden perú" ||
+                 category === "merchandising";
+        })
+        .sort((a,b)=>
+          (Number(a.orden)||999999)-(Number(b.orden)||999999) ||
+          String(a.nombre||"").localeCompare(String(b.nombre||""))
+        );
+
+      function card(product){
+        const image = imageForProduct(product);
+        const isId = ["BLACK","PREMIUM"].includes(
+          String(product.sku || "").toUpperCase()
+        );
+
+        return `
+          <article class="product">
+            <img class="product-image"
+              src="${escapeHtml(image)}"
+              alt="${escapeHtml(product.nombre)}"
+              loading="lazy"
+              onerror="this.onerror=null;this.src='BABY%20GOLDEN.png';">
+
+            <div class="product-body">
+              <span class="product-category">
+                ${escapeHtml(product.categoria || "BABY GOLDEN PERÚ")}
+              </span>
+              <h2>${escapeHtml(product.nombre)}</h2>
+              <p class="product-description">
+                ${escapeHtml(product.descripcion || "")}
+              </p>
+              <div class="product-price">${formatMoney(product.precio)}</div>
+
+              <div class="product-actions">
+                ${isId ? `
+                  <a href="id.html" class="product-link">
+                    CONOCER ${escapeHtml(String(product.sku).replace(/_/g," "))}
+                  </a>
+                ` : ""}
+
+                <button type="button"
+                  class="product-link product-buy"
+                  data-add-to-cart="${escapeHtml(product.sku)}">
+                  AGREGAR AL CARRITO
+                </button>
+              </div>
+            </div>
+          </article>
+        `;
+      }
+
+      function renderGrid(grid, list){
+        if(!list.length){
+          grid.innerHTML =
+            '<p style="grid-column:1/-1;text-align:center;color:#765f4c;">Próximamente tendremos productos en esta categoría.</p>';
+          return;
+        }
+
+        grid.innerHTML = list.map(card).join("");
+
+        grid.querySelectorAll("[data-add-to-cart]").forEach(button => {
+          button.addEventListener("click",function(){
+            const id = this.dataset.addToCart;
+            const cart = getCart();
+            cart[id] = (Number(cart[id]) || 0) + 1;
+            saveCart(cart);
+            renderCart();
+            openCart();
+          });
+        });
+      }
+
+      renderGrid(idGrid, idProducts);
+      renderGrid(merchGrid, merchProducts);
+    }
 
     /* =========================================
        CARRITO
