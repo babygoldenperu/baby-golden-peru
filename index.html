@@ -3581,8 +3581,26 @@
             const el = document.querySelector(`[data-editor-id="${CSS.escape(editorId)}"]`);
             if (!el || !config) return;
 
+            /*
+              El editor visual puede tener registros antiguos guardados
+              sobre contenedores completos (por ejemplo, benefit-2).
+              Nunca debemos reemplazar textContent de un contenedor que
+              contiene HTML interno, porque eso elimina su estructura
+              (símbolo + título + descripción) y vuelve a aparecer el
+              problema de "% DESCUENTOS ...".
+
+              El texto editable solo se aplica a elementos hoja, es decir,
+              elementos que no contienen otros elementos HTML.
+            */
             if (Object.prototype.hasOwnProperty.call(config, "text")) {
-              el.textContent = config.text;
+              if (el.children.length === 0) {
+                el.textContent = config.text;
+              } else {
+                console.warn(
+                  "Editor visual: se ignoró text en un contenedor para preservar su estructura:",
+                  editorId
+                );
+              }
             }
 
             if (Object.prototype.hasOwnProperty.call(config, "href") && el.tagName === "A") {
