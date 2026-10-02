@@ -255,74 +255,6 @@ function buildPreview(raw){
     wrapper.appendChild(document.importNode(s,true));
   });
 
-  /* =====================================================
-     PROTECCIÓN DEL EDITOR VISUAL
-     Historias de Oro tiene su propio administrador y su
-     carrusel se inicializa con JavaScript en index.html.
-     El editor visual elimina los scripts para poder editar
-     la página, por lo que aquí fijamos únicamente su layout
-     visual y evitamos que estilos guardados del editor
-     puedan deformar las fotografías.
-  ====================================================== */
-  const editorProtection=document.createElement("style");
-  editorProtection.textContent=`
-    /* Historias de Oro: mismas dimensiones que index.html en escritorio. */
-    #bge-index-root .stories-carousel{
-      overflow:hidden !important;
-    }
-    #bge-index-root .stories-track{
-      display:flex !important;
-      align-items:flex-start !important;
-      gap:18px !important;
-      width:max-content !important;
-      transform:none !important;
-    }
-    #bge-index-root .story-slide{
-      flex:0 0 300px !important;
-      width:300px !important;
-      min-width:300px !important;
-      max-width:300px !important;
-      height:390px !important;
-      min-height:390px !important;
-      max-height:390px !important;
-      position:relative !important;
-      overflow:hidden !important;
-      box-sizing:border-box !important;
-    }
-    #bge-index-root .story-image-button{
-      display:block !important;
-      width:100% !important;
-      height:100% !important;
-      padding:0 !important;
-      margin:0 !important;
-      border:0 !important;
-      overflow:hidden !important;
-    }
-    #bge-index-root .story-slide img{
-      display:block !important;
-      width:100% !important;
-      height:100% !important;
-      max-width:none !important;
-      max-height:none !important;
-      object-fit:cover !important;
-      object-position:center !important;
-    }
-    /* El editor no ejecuta el JS del carrusel público. */
-    #bge-index-root .stories-track{
-      transition:none !important;
-      will-change:auto !important;
-    }
-    @media(max-width:1000px){
-      #bge-index-root .story-slide{
-        flex:0 0 300px !important;
-        width:300px !important;
-        min-width:300px !important;
-        max-width:300px !important;
-      }
-    }
-  `;
-  wrapper.appendChild(editorProtection);
-
   const body=document.createElement("div");
   body.innerHTML=parsed.body?.innerHTML||"";
   while(body.firstChild) wrapper.appendChild(body.firstChild);
@@ -332,6 +264,10 @@ function buildPreview(raw){
 
 function autoMark(root){
   let count=0;
+
+  // IMPORTANTE: los elementos que ya tienen data-editor-id usan un ID estable.
+  // Esto evita que una modificación estructural de index.html cambie el destino
+  // de los estilos/textos guardados en visual_editor_v2.
   const textSelector="h1,h2,h3,h4,h5,h6,p,small,strong,span,a,button,li,label";
   root.querySelectorAll(textSelector).forEach(el=>{
     if(el.dataset.editorId) return;
@@ -355,43 +291,28 @@ function autoMark(root){
   });
 }
 
-async function hydrateStoriesFromSupabase(root){
-  try{
-    const {data,error}=await sb
-      .from("site_gallery")
-      .select("slot,imagen_url,title,orden,activo,published")
-      .like("slot","historia_%")
-      .eq("activo",true)
-      .eq("published",true)
-      .order("orden",{ascending:true});
-    if(error) throw error;
-
-    const rows=(data||[]).filter(x=>x?.slot).sort((a,b)=>(a.orden||0)-(b.orden||0));
-    rows.forEach(row=>{
-      const m=String(row.slot).match(/^historia_(\d+)$/);
-      if(!m)return;
-      const n=m[1];
-      const img=root.querySelector(`#storyPhoto${CSS.escape(n)}`);
-      if(img && row.imagen_url){
-        img.src=row.imagen_url;
-      }
-      const label=root.querySelector(`.story-slide[data-story-number="${CSS.escape(n)}"] .story-slide-label`);
-      if(label && row.title){
-        label.textContent=row.title;
-      }
-    });
-  }catch(e){
-    console.warn("No se pudieron cargar las Historias de Oro desde Supabase:",e);
-  }
-}
-
-async function renderIndex(raw){
+function renderIndex(raw){
   const preview=$("pagePreview");
   preview.innerHTML="";
   const root=buildPreview(raw||"");
-  await hydrateStoriesFromSupabase(root);
   preview.appendChild(root);
   autoMark(preview);
+
+  // Protección contra el problema histórico de los auto-IDs: si la sección
+  // Beneficios trae IDs estables, nunca permitimos que una configuración
+  // antigua auto-* vuelva a sobrescribir sus textos/estilos.
+  const benefits=preview.querySelector('[data-editor-id="benefits-section"]');
+  if(benefits){
+    Object.keys(visualState).forEach(id=>{
+      if(/^auto-/.test(id)){
+        const target=preview.querySelector(`[data-editor-id="${CSS.escape(id)}"]`);
+        if(target && target.closest('[data-editor-id="benefits-section"]')){
+          delete visualState[id];
+        }
+      }
+    });
+  }
+
   bindPreview();
   applyAllState();
   renderSectionList();
@@ -608,52 +529,17 @@ function applyInspector(){
 
 function applyConfig(el,cfg){
   if(!el||!cfg)return;
-
-  /*
-     Las Historias de Oro se administran en su módulo propio.
-     En el editor visual de index NO aplicamos src ni estilos
-     guardados por identificadores automáticos a esas imágenes,
-     porque esos identificadores pueden cambiar cuando se agrega
-     o elimina otro elemento de la página. Eso era lo que podía
-     hacer que una foto ajena apareciera en Historias de Oro o
-     que la imagen terminara ocupando toda la pantalla.
-  */
-  const storyArea=el.closest(".stories-carousel");
-  const isStoryMedia=
-    el.tagName==="IMG" &&
-    !!el.closest(".story-slide");
-  const isBenefitCard=el.classList.contains("benefit");
-
-  /* Nunca volver a aplanar una tarjeta de beneficios con textContent.
-     La tarjeta contiene símbolo + título + descripción en elementos separados. */
-  if(!isBenefitCard && Object.prototype.hasOwnProperty.call(cfg,"text"))el.textContent=cfg.text;
+  if(Object.prototype.hasOwnProperty.call(cfg,"text"))el.textContent=cfg.text;
   if(el.tagName==="A"&&Object.prototype.hasOwnProperty.call(cfg,"href"))el.setAttribute("href",cfg.href||"#");
-
-  if(["IMG","VIDEO"].includes(el.tagName)&&Object.prototype.hasOwnProperty.call(cfg,"src")&&!isStoryMedia){
-    el.setAttribute("src",cfg.src||"");
-  }
-
+  if(["IMG","VIDEO"].includes(el.tagName)&&Object.prototype.hasOwnProperty.call(cfg,"src"))el.setAttribute("src",cfg.src||"");
   if(el.tagName==="VIDEO"&&Object.prototype.hasOwnProperty.call(cfg,"poster"))el.setAttribute("poster",cfg.poster||"");
-
-  Object.entries(cfg.styles||{}).forEach(([p,val])=>{
-    /* Historias de Oro tiene su propio módulo. No permitimos que
-       configuraciones antiguas del editor deformen su carrusel. */
-    if(storyArea) return;
-    if(isStoryMedia && ["width","height","maxWidth","maxHeight","minWidth","minHeight","aspectRatio","objectFit","objectPosition","display","position","transform"].includes(p)){
-      return;
-    }
-    el.style[p]=val||"";
-  });
+  Object.entries(cfg.styles||{}).forEach(([p,val])=>el.style[p]=val||"");
 }
 
 function applyAllState(){
   Object.entries(visualState).forEach(([id,cfg])=>{
     const el=$("pagePreview").querySelector(`[data-editor-id="${CSS.escape(id)}"]`);
-    if(!el)return;
-    /* No aplicar estados antiguos a Historias de Oro. Sus fotos y layout
-       vienen de site_gallery y deben verse igual que en index.html. */
-    if(el.closest(".stories-carousel"))return;
-    applyConfig(el,cfg);
+    if(el)applyConfig(el,cfg);
   });
 }
 
