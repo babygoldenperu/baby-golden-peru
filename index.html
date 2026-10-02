@@ -713,73 +713,6 @@
       }
     }
 
-    /* ================= ID CARD ================= */
-
-    .id-card{
-      position:absolute;
-      right:2%;
-      bottom:2%;
-      z-index:8;
-      width:345px;
-      min-height:235px;
-      padding:25px;
-      background:rgba(255,250,243,.96);
-      border:1px solid rgba(183,123,32,.28);
-      border-radius:25px;
-      box-shadow:0 30px 70px rgba(50,35,20,.20);
-      backdrop-filter:blur(12px);
-    }
-
-    .id-card-top{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      color:var(--gold);
-      font-size:9px;
-      font-weight:700;
-      letter-spacing:1.4px;
-    }
-
-    .id-card-logo{width:92px}
-
-    .id-card-name{
-      margin-top:27px;
-      font-family:'Cormorant Garamond',serif;
-      font-size:43px;
-      line-height:1;
-    }
-
-    .id-card-breed{
-      margin-top:5px;
-      color:#786f64;
-      font-size:9px;
-      letter-spacing:1.7px;
-    }
-
-    .id-number{
-      display:inline-block;
-      margin-top:17px;
-      padding:8px 13px;
-      border-radius:999px;
-      background:var(--gold);
-      color:#fff;
-      font-size:9px;
-      font-weight:700;
-    }
-
-    .id-technologies{
-      display:flex;
-      justify-content:space-between;
-      margin-top:22px;
-      padding-top:14px;
-      border-top:1px solid #e4d7c4;
-      color:#93661f;
-      font-size:9px;
-      font-weight:700;
-      letter-spacing:1px;
-    }
-
     /* ================= COMMUNITY + VIDEO ================= */
 
     .community{
@@ -968,189 +901,6 @@
       color:#756d63;
       font-size:15px;
       line-height:1.85;
-    }
-
-    /* ================= ID HIGHLIGHT ================= */
-
-    .id-highlight{
-      background:var(--cream-2);
-      border:1px solid #e4d6c0;
-      border-radius:30px;
-      padding:58px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:55px;
-      align-items:center;
-      box-shadow:var(--shadow);
-    }
-
-    .id-highlight-label{
-      color:var(--gold);
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:3px;
-    }
-
-    .id-highlight h3{
-      margin:15px 0 20px;
-      font-family:'Cormorant Garamond',serif;
-      font-size:55px;
-      line-height:.92;
-      font-weight:500;
-    }
-
-    .id-highlight h3 span{color:var(--gold)}
-
-    .id-highlight p{
-      color:#6f675d;
-      font-size:14px;
-      line-height:1.85;
-    }
-
-    .id-features{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:12px;
-    }
-
-    .id-feature{
-      padding:25px;
-      background:#fff;
-      border:1px solid #e8ddcd;
-      border-radius:18px;
-      transition:.25s ease;
-    }
-
-    .id-feature:hover{
-      transform:translateY(-4px);
-      box-shadow:0 18px 45px rgba(50,35,20,.07);
-    }
-
-    .id-feature-number{
-      color:var(--gold);
-      font-family:'Cormorant Garamond',serif;
-      font-size:28px;
-    }
-
-    .id-feature h4{
-      margin:8px 0;
-      font-size:11px;
-      letter-spacing:1px;
-    }
-
-    .id-feature p{
-      margin:0;
-      font-size:12px;
-      line-height:1.65;
-    }
-
-    /* ================= STEPS ================= */
-
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:20px;
-    }
-
-    .step{
-      padding:42px 28px;
-      text-align:center;
-      background:rgba(255,255,255,.55);
-      border:1px solid #e7dccb;
-      border-radius:22px;
-      transition:.25s ease;
-    }
-
-    .step:hover{
-      transform:translateY(-6px);
-      box-shadow:0 22px 50px rgba(65,45,20,.08);
-    }
-
-    .step-number{
-      width:68px;
-      height:68px;
-      margin:auto;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      border-radius:50%;
-      background:#f1e4cf;
-      border:1px solid #d5b77c;
-      color:#ad7822;
-      font-family:'Cormorant Garamond',serif;
-      font-size:27px;
-    }
-
-    .step h3{
-      margin:20px 0 8px;
-      font-family:'Cormorant Garamond',serif;
-      font-size:30px;
-      font-weight:600;
-    }
-
-    .step p{
-      margin:0;
-      color:#746d64;
-      font-size:13px;
-      line-height:1.75;
-    }
-
-    /* ================= VISUAL BANNER ================= */
-
-    .visual-banner{
-      max-width:1250px;
-      margin:20px auto 115px;
-      min-height:440px;
-      position:relative;
-      overflow:hidden;
-      border-radius:30px;
-      box-shadow:var(--shadow);
-    }
-
-    .visual-banner img{
-      width:100%;
-      height:440px;
-      object-fit:cover;
-      object-position:center 48%;
-    }
-
-    .visual-banner::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(90deg,rgba(20,16,12,.70),rgba(20,16,12,.05) 70%);
-    }
-
-    .visual-banner-content{
-      position:absolute;
-      left:60px;
-      top:50%;
-      transform:translateY(-50%);
-      z-index:2;
-      max-width:520px;
-      color:#fff;
-    }
-
-    .visual-banner-content small{
-      color:#e1b45b;
-      font-size:10px;
-      font-weight:700;
-      letter-spacing:3px;
-    }
-
-    .visual-banner-content h2{
-      margin:14px 0 12px;
-      font-family:'Cormorant Garamond',serif;
-      font-size:58px;
-      line-height:.9;
-      font-weight:500;
-    }
-
-    .visual-banner-content p{
-      margin:0;
-      color:rgba(255,255,255,.88);
-      font-size:14px;
-      line-height:1.75;
     }
 
     /* ================= BENEFITS ================= */
@@ -1343,10 +1093,6 @@
         grid-template-columns:1fr;
         gap:45px;
         text-align:center;
-      }
-
-      .id-highlight{
-        grid-template-columns:1fr;
       }
 
       .benefit-grid{
@@ -2625,27 +2371,38 @@
 
     <div class="menu" id="mainMenu">
 
-  <a data-editor-id="nav-inicio" href="#inicio">INICIO</a>
+        <a data-editor-id="nav-inicio" href="#inicio">INICIO</a>
 
-  <a data-editor-id="nav-beneficios" href="beneficios.html">BENEFICIOS</a>
+        <a data-editor-id="nav-beneficios" href="beneficios.html">BENEFICIOS</a>
 
-  <a data-editor-id="nav-historias" href="#historias">HISTORIAS DE ORO</a>
+        <a data-editor-id="nav-historias" href="#historias">HISTORIAS DE ORO</a>
 
-  <a data-editor-id="nav-contacto" href="https://babygoldenperu.github.io/baby-golden-peru/contacto.html">CONTACTO</a>
+        <a data-editor-id="nav-contacto" href="contacto.html">CONTACTO</a>
 
-  <!-- TIENDA -->
-  <a data-editor-id="nav-tienda" href="tienda.html" class="header-button">TIENDA</a>
+        <a data-editor-id="nav-tienda" href="tienda.html" class="header-button">TIENDA</a>
 
-  <div class="nav-actions" aria-label="Accesos rápidos">
+        <div class="nav-actions" aria-label="Accesos rápidos">
           <button class="icon-button" id="openSearch" type="button" aria-label="Buscar en Baby Golden Perú">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5"></circle><path d="m16 16 4 4"></path></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="11" cy="11" r="6.5"></circle>
+              <path d="m16 16 4 4"></path>
+            </svg>
           </button>
+
           <button class="icon-button cart-button" id="openCart" type="button" aria-label="Abrir carrito de compras">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path><circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle></svg>
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
+              <circle cx="10" cy="20" r="1"></circle>
+              <circle cx="17" cy="20" r="1"></circle>
+            </svg>
             <span class="cart-count" id="cartCount" hidden>0</span>
           </button>
-          <a class="icon-button" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" aria-label="Ir a Mi cuenta">
-            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.5"></circle><path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path></svg>
+
+          <a class="icon-button" href="cuenta.html" aria-label="Ir a Mi cuenta">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5"></circle>
+              <path d="M5.5 20c.7-3.5 3.1-5.3 6.5-5.3s5.8 1.8 6.5 5.3"></path>
+            </svg>
           </a>
         </div>
 
@@ -2678,7 +2435,7 @@
     <div class="cart-items" id="cartItems"></div>
     <div class="cart-summary">
       <div><span>Total</span><strong id="cartTotal">S/ 0.00</strong></div>
-      <a class="button primary cart-checkout" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" id="cartCheckout">CONTINUAR A MI CUENTA</a>
+      <a class="button primary cart-checkout" href="cuenta.html" id="cartCheckout">CONTINUAR A MI CUENTA</a>
       <p>Desde Mi cuenta podrás crear tu orden e iniciar sesión de forma segura.</p>
     </div>
   </aside>
@@ -2707,7 +2464,7 @@
       </p>
 
       <div class="premium-actions">
-        <a data-editor-id="hero-button-1" href="https://babygoldenperu.github.io/baby-golden-peru/cuenta.html" class="premium-btn primary">
+        <a data-editor-id="hero-button-1" href="cuenta.html" class="premium-btn primary">
           ÚNETE A LA FAMILIA
         </a>
         <a data-editor-id="hero-button-2" href="#historias" class="premium-btn ghost">
@@ -2960,7 +2717,7 @@
 
       <article data-editor-id="product-black" class="id-product black">
         <div class="id-product-image">
-          <img data-editor-id="product-black-image" src="img/productos/black.jpeg" alt="Baby Golden Perú Black ID">
+          <img data-editor-id="product-black-image" src="" alt="Baby Golden Perú Black ID" loading="lazy">
         </div>
         <div class="id-product-body">
           <small data-editor-id="product-black-label">EXCLUSIVA · ELEGANTE · ESENCIAL</small>
@@ -2969,7 +2726,7 @@
             La identidad digital para los Goldens que quieren
             llevar a Baby Golden Perú con ellos.
           </p>
-          <div data-editor-id="product-black-price" class="product-price">S/ 36.90</div>
+          <div data-editor-id="product-black-price" class="product-price" aria-live="polite">Cargando…</div>
           <div class="product-actions">
             <a data-editor-id="product-black-link" href="tienda.html" class="id-product-link">CONOCER BLACK ID</a>
             <button type="button" class="id-product-link product-buy" data-add-to-cart="BLACK">AGREGAR AL CARRITO</button>
@@ -2979,7 +2736,7 @@
 
       <article data-editor-id="product-premium" class="id-product premium">
         <div class="id-product-image">
-          <img data-editor-id="product-premium-image" src="img/productos/premium.jpeg" alt="Baby Golden Perú Premium ID">
+          <img data-editor-id="product-premium-image" src="" alt="Baby Golden Perú Premium ID" loading="lazy">
         </div>
         <div class="id-product-body">
           <small data-editor-id="product-premium-label">ELEGANCIA · PROTECCIÓN · PREMIUM</small>
@@ -2988,7 +2745,7 @@
             Una experiencia más completa para tu compañero de vida,
             con la identidad digital Baby Golden.
           </p>
-          <div data-editor-id="product-premium-price" class="product-price">S/ 30.00</div>
+          <div data-editor-id="product-premium-price" class="product-price" aria-live="polite">Cargando…</div>
           <div class="product-actions">
             <a data-editor-id="product-premium-link" href="tienda.html" class="id-product-link">CONOCER PREMIUM ID</a>
             <button type="button" class="id-product-link product-buy" data-add-to-cart="PREMIUM">AGREGAR AL CARRITO</button>
@@ -3004,15 +2761,15 @@
 
 
   <!-- BENEFICIOS -->
-  <section class="benefits" id="beneficios">
+  <section data-editor-id="benefits-section" class="benefits" id="beneficios">
 
     <div class="benefits-heading">
 
-      <small>GOLDEN BENEFITS CLUB</small>
+      <small data-editor-id="benefits-kicker">GOLDEN BENEFITS CLUB</small>
 
-      <h2>Beneficios para nuestra comunidad</h2>
+      <h2 data-editor-id="benefits-title">Beneficios para nuestra comunidad</h2>
 
-      <p>
+      <p data-editor-id="benefits-description">
         Las marcas afiliadas de Baby Golden Perú pueden ofrecer
         beneficios exclusivos para nuestros miembros.
       </p>
@@ -3022,26 +2779,26 @@
 
     <div class="benefit-grid">
 
-      <div class="benefit">
-        <div class="benefit-symbol">♡</div>
+      <div data-editor-id="benefit-1" class="benefit">
+        <div data-editor-id="benefit-1-symbol" class="benefit-symbol">♡</div>
         <h3>BENEFICIOS EXCLUSIVOS</h3>
         <p>Promociones y experiencias pensadas para la comunidad.</p>
       </div>
 
-      <div class="benefit">
-        <div class="benefit-symbol">%</div>
+      <div data-editor-id="benefit-2" class="benefit">
+        <div data-editor-id="benefit-2-symbol" class="benefit-symbol">%</div>
         <h3>DESCUENTOS</h3>
         <p>Accede a beneficios especiales de nuestras marcas afiliadas.</p>
       </div>
 
-      <div class="benefit">
-        <div class="benefit-symbol">NFC</div>
+      <div data-editor-id="benefit-3" class="benefit">
+        <div data-editor-id="benefit-3-symbol" class="benefit-symbol">NFC</div>
         <h3>BABY GOLDEN ID</h3>
         <p>Identificación que permite acceder a determinados beneficios.</p>
       </div>
 
-      <div class="benefit">
-        <div class="benefit-symbol">♥</div>
+      <div data-editor-id="benefit-4" class="benefit">
+        <div data-editor-id="benefit-4-symbol" class="benefit-symbol">♥</div>
         <h3>COMUNIDAD</h3>
         <p>Una comunidad que crece junto a nuestros perritos.</p>
       </div>
@@ -3051,7 +2808,7 @@
 
     <div class="benefits-link">
 
-      <a href="beneficios.html" class="button primary">
+      <a data-editor-id="benefits-button" href="beneficios.html" class="button primary">
         VER TODOS LOS BENEFICIOS
       </a>
 
@@ -3821,13 +3578,6 @@
             : visualRaw;
 
           Object.entries(visual || {}).forEach(([editorId, config]) => {
-            /*
-              BENEFICIOS es contenido estructural controlado por site_content.
-              No permitimos que configuraciones antiguas del editor visual
-              puedan reemplazar su HTML ni sus estilos.
-            */
-            if (editorId === "benefits-section" || editorId.startsWith("benefit-")) return;
-
             const el = document.querySelector(`[data-editor-id="${CSS.escape(editorId)}"]`);
             if (!el || !config) return;
 
@@ -4889,18 +4639,22 @@
        PRODUCTOS
        ========================================= */
 
+    /*
+      BLACK y PREMIUM se cargan exclusivamente desde public.productos
+      en Supabase. No se mantienen precios ni imágenes duplicados en este HTML.
+    */
     const products = {
 
       BLACK: {
         name: "Black ID",
-        price: 36.90,
-        image: "img/productos/black.jpeg"
+        price: 0,
+        image: ""
       },
 
       PREMIUM: {
         name: "Premium ID",
-        price: 30.00,
-        image: "img/productos/premium.jpeg"
+        price: 0,
+        image: ""
       },
 
       BANDANA: {
@@ -4945,6 +4699,50 @@
         SUPABASE_URL,
         SUPABASE_KEY
       );
+
+
+    /* =========================================
+       BLACK / PREMIUM DESDE SUPABASE
+       ========================================= */
+
+    async function loadIdProductsFromSupabase() {
+      const { data, error } = await supabaseClient
+        .from("productos")
+        .select("sku,precio,imagen_url,activo")
+        .in("sku", ["BLACK", "PREMIUM"])
+        .eq("activo", true);
+
+      if (error) {
+        console.error("Error cargando BLACK/PREMIUM desde Supabase:", error);
+        throw error;
+      }
+
+      const bySku = Object.fromEntries(
+        (data || []).map(product => [product.sku, product])
+      );
+
+      for (const sku of ["BLACK", "PREMIUM"]) {
+        const product = bySku[sku];
+
+        if (!product || product.precio == null || !product.imagen_url) {
+          throw new Error(`El producto ${sku} no tiene precio o imagen configurados en Supabase.`);
+        }
+
+        products[sku].price = Number(product.precio);
+        products[sku].image = product.imagen_url;
+      }
+
+      const blackImage = document.querySelector('[data-editor-id="product-black-image"]');
+      const blackPrice = document.querySelector('[data-editor-id="product-black-price"]');
+      const premiumImage = document.querySelector('[data-editor-id="product-premium-image"]');
+      const premiumPrice = document.querySelector('[data-editor-id="product-premium-price"]');
+
+      blackImage.src = products.BLACK.image;
+      blackPrice.textContent = `S/ ${products.BLACK.price.toFixed(2)}`;
+
+      premiumImage.src = products.PREMIUM.image;
+      premiumPrice.textContent = `S/ ${products.PREMIUM.price.toFixed(2)}`;
+    }
 
 
     function getCart() {
@@ -5524,7 +5322,39 @@ const searchPanel=document.getElementById('searchPanel');
     searchInput.addEventListener('input',()=>{const query=searchInput.value.toLowerCase().trim();const result=destinations.find(item=>item.terms.some(term=>query.includes(term)));if(!query){searchHelp.textContent='Puedes buscar Premium ID, Black ID, beneficios, comunidad o registro.';return}if(result){searchHelp.innerHTML=`Resultado: <strong>${result.label}</strong>. Presiona Enter para ir.`;searchInput.dataset.target=result.target}else{searchHelp.textContent='Aún no encontramos esa sección. Prueba con Premium, Black, beneficios, comunidad o registro.';searchInput.dataset.target=''}});
     searchInput.addEventListener('keydown',event=>{if(event.key==='Enter'&&searchInput.dataset.target){location.hash=searchInput.dataset.target;searchPanel.hidden=true}});
     document.addEventListener('keydown',event=>{if(event.key==='Escape'){searchPanel.hidden=true;closeCart()}});
-    renderCart();
+
+    /*
+      Inicialización única: primero se obtiene BLACK/PREMIUM desde Supabase
+      y recién después se renderiza el carrito y sus precios.
+    */
+    loadIdProductsFromSupabase()
+      .then(() => {
+        renderCart();
+      })
+      .catch(error => {
+        console.error("No fue posible cargar BLACK/PREMIUM desde Supabase.", error);
+
+        document.querySelectorAll(
+          '[data-editor-id="product-black-price"], [data-editor-id="product-premium-price"]'
+        ).forEach(element => {
+          element.textContent = "No disponible";
+        });
+
+        document.querySelectorAll(
+          '[data-editor-id="product-black-image"], [data-editor-id="product-premium-image"]'
+        ).forEach(image => {
+          image.removeAttribute("src");
+        });
+
+        document.querySelectorAll('[data-add-to-cart="BLACK"], [data-add-to-cart="PREMIUM"]')
+          .forEach(button => {
+            button.disabled = true;
+            button.setAttribute("aria-disabled", "true");
+            button.title = "Producto temporalmente no disponible";
+          });
+
+        renderCart();
+      });
 })();
 </script>
 <script>
