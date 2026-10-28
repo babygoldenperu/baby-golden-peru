@@ -729,13 +729,14 @@
       z-index: 1;
       inset: 0;
       pointer-events: none;
-      background:
-        linear-gradient(
-          to top,
-          rgba(22,14,9,.98) 0%,
-          rgba(22,14,9,.68) 43%,
-          rgba(22,14,9,.08) 100%
-        );
+      /* Oscurece solo lo necesario para que el texto blanco se lea sin apagar la foto. */
+      background: linear-gradient(
+        to top,
+        rgba(20, 13, 8, .97) 0%,
+        rgba(20, 13, 8, .84) 28%,
+        rgba(20, 13, 8, .42) 58%,
+        rgba(20, 13, 8, .04) 100%
+      );
     }
 
     .carousel-arrow {
@@ -819,14 +820,28 @@
       right: 0;
       bottom: 0;
       padding: 30px;
+      color: #fff;
+      text-shadow: 0 2px 12px rgba(0, 0, 0, .55);
+      pointer-events: none;
+    }
+
+    .area-content .area-button {
+      pointer-events: auto;
+      text-shadow: none;
+    }
+
+    .area-content h3 {
+      color: #fff;
+      text-shadow: 0 2px 14px rgba(0, 0, 0, .65);
     }
 
     .area-index {
       margin-bottom: 10px;
-      color: var(--gold-light);
+      color: #f2d7a9;
       font-size: 10px;
       font-weight: 800;
       letter-spacing: .18em;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .75);
     }
 
     .area-content h3 {
@@ -837,23 +852,38 @@
     }
 
     .area-content p {
-      margin-bottom: 20px;
-      color: rgba(255,255,255,.74);
+      margin-bottom: 16px;
+      color: rgba(255, 255, 255, .96);
       font-size: 13px;
       line-height: 1.65;
+      font-weight: 500;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, .75);
+      max-width: 38ch;
     }
 
     .area-button {
       display: inline-flex;
       align-items: center;
       gap: 9px;
-      padding: 10px 0;
-      color: var(--white);
-      background: transparent;
+      padding: 10px 15px;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(24, 17, 12, .52);
+      backdrop-filter: blur(6px);
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: .14em;
+      letter-spacing: .12em;
       text-transform: uppercase;
+      transition: background .25s ease, border-color .25s ease, transform .25s ease;
+    }
+
+    .area-button:hover,
+    .area-button:focus-visible {
+      background: #b77b20;
+      border-color: #d7ad63;
+      outline: 2px solid rgba(255,255,255,.7);
+      outline-offset: 2px;
     }
 
     .area-button span {
@@ -1323,6 +1353,13 @@
       transform: translateY(0);
     }
 
+    @media (prefers-reduced-motion: reduce) {
+      .reveal, .reveal.visible, .carousel-track, .community-track {
+        transition: none !important;
+        transform: none;
+      }
+    }
+
     /* MEDIA QUERIES */
     @media (max-width: 1150px) {
       .founder-layout { gap: 55px; }
@@ -1711,7 +1748,9 @@
             <div class="area-carousel">
               <div class="carousel-track">
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/ventas/ventas-1.jpeg" alt="Representante del Área de Ventas" data-bge-safe-image></div>
-               aria-label="Representante anterior">‹</button>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" aria-label="Representante anterior">‹</button>
             <button class="carousel-arrow carousel-next" aria-label="Siguiente representante">›</button>
             <div class="carousel-dots"></div>
             <div class="area-content">
@@ -1727,7 +1766,9 @@
             <div class="area-carousel">
               <div class="carousel-track">
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/legal/legal-1.jpeg" alt="Representante del Área de Legal" data-bge-safe-image></div>
-               aria-label="Representante anterior">‹</button>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" aria-label="Representante anterior">‹</button>
             <button class="carousel-arrow carousel-next" aria-label="Siguiente representante">›</button>
             <div class="carousel-dots"></div>
             <div class="area-content">
@@ -1745,7 +1786,9 @@
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/adopciones/adopciones-1.png" alt="Representante del Área de Adopciones" data-bge-safe-image></div>
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/adopciones/adopciones-2.jpeg" alt="Representante del Área de Adopciones" data-bge-safe-image></div>
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/adopciones/adopciones-3.jpeg" alt="Representante del Área de Adopciones" data-bge-safe-image></div>
-               aria-label="Representante anterior">‹</button>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" aria-label="Representante anterior">‹</button>
             <button class="carousel-arrow carousel-next" aria-label="Siguiente representante">›</button>
             <div class="carousel-dots"></div>
             <div class="area-content">
@@ -1765,7 +1808,9 @@
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/eventos/eventos-3.jpeg" alt="Representante del Área de Eventos" data-bge-safe-image></div>
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/eventos/eventos-4.jpeg" alt="Representante del Área de Eventos" data-bge-safe-image></div>
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/eventos/eventos-5.jpeg" alt="Representante del Área de Eventos" data-bge-safe-image></div>
-               aria-label="Representante anterior">‹</button>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" aria-label="Representante anterior">‹</button>
             <button class="carousel-arrow carousel-next" aria-label="Siguiente representante">›</button>
             <div class="carousel-dots"></div>
             <div class="area-content">
@@ -1783,7 +1828,9 @@
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/redes/redes-1.webp" alt="Representante del Área de Redes" data-bge-safe-image></div>
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/redes/redes-2.jpeg" alt="Representante del Área de Redes" data-bge-safe-image></div>
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/redes/redes-3.jpeg" alt="Representante del Área de Redes" data-bge-safe-image></div>
-               aria-label="Representante anterior">‹</button>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" aria-label="Representante anterior">‹</button>
             <button class="carousel-arrow carousel-next" aria-label="Siguiente representante">›</button>
             <div class="carousel-dots"></div>
             <div class="area-content">
@@ -1800,7 +1847,9 @@
               <div class="carousel-track">
                 <div class="carousel-slide"><img loading="lazy" decoding="async" src="img/equipo/alianzas/alianzas-1.webp" alt="Representante del Area de Alianzas Estrategicas" data-bge-safe-image></div>
                 <!-- No hay imágenes de esta área en el repositorio actualmente. -->
-               aria-label="Representante anterior">‹</button>
+              </div>
+            </div>
+            <button class="carousel-arrow carousel-prev" aria-label="Representante anterior">‹</button>
             <button class="carousel-arrow carousel-next" aria-label="Siguiente representante">›</button>
             <div class="carousel-dots"></div>
             <div class="area-content">
@@ -1924,16 +1973,19 @@
   <script>
     // Reveal Observer
     const revealElements = document.querySelectorAll(".reveal");
-    const revealObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: .12 });
-
-    revealElements.forEach(element => revealObserver.observe(element));
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .08 });
+      revealElements.forEach(element => revealObserver.observe(element));
+    } else {
+      revealElements.forEach(element => element.classList.add("visible"));
+    }
 
     // Protección de imágenes:
     // NO se consulta la API de GitHub. Las imágenes se sirven directamente
@@ -1947,17 +1999,19 @@
           return;
         }
 
+        // Identificar el carrusel antes de retirar la diapositiva del DOM.
+        const areaCard = slide.closest("[data-carousel]");
+        const communityCard = slide.closest(".community-card");
+
         // Si la foto no existe en GitHub Pages, se elimina del DOM.
         slide.remove();
 
-        const areaCard = slide.closest("[data-carousel]");
         if (areaCard) {
           areaCard.dispatchEvent(new CustomEvent("bge:slide-removed"));
           return;
         }
 
         // Para el carrusel de comunidad, sincronizamos sus fotos y puntos.
-        const communityCard = slide.closest(".community-card");
         if (communityCard) {
           communityCard.dispatchEvent(new CustomEvent("bge:community-slide-removed"));
         }
