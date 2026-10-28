@@ -3189,18 +3189,7 @@
             content.black_description;
         }
 
-        const price =
-          black.querySelector(
-            ".product-price"
-          );
-
-        if (
-          price &&
-          content.black_price
-        ) {
-          price.textContent =
-            money(content.black_price);
-        }
+        /* El precio de BLACK ID se establece exclusivamente desde public.productos en Supabase. */
 
         const image =
           black.querySelector(
@@ -3243,10 +3232,7 @@
             ".id-product-body p"
           );
 
-        const price =
-          premium.querySelector(
-            ".product-price"
-          );
+        /* El precio de PREMIUM ID se establece exclusivamente desde public.productos en Supabase. */
 
         const image =
           premium.querySelector(
@@ -3277,13 +3263,7 @@
             content.premium_description;
         }
 
-        if (
-          price &&
-          content.premium_price
-        ) {
-          price.textContent =
-            money(content.premium_price);
-        }
+        /* No sobrescribir el precio: lo carga loadIdProductsFromSupabase(). */
 
         if (
           image &&
