@@ -2235,10 +2235,16 @@ footer p{
             );
           }
 
-          // Código interno de prueba: BABY100 cubre el 100% del pedido.
-          // En este caso confirmamos el pedido directamente y NO abrimos Mercado Pago.
-          if (String(order.codigo_promocional || appliedPromo?.codigo || "").toUpperCase() === "BABY100" && Number(order.total || 0) === 0) {
-            button.textContent = "CONFIRMANDO PEDIDO DE PRUEBA...";
+          // Cualquier código promocional válido que deje el pedido en S/ 0.00
+          // debe confirmarse por Supabase, sin intentar cobrar S/ 0.00 en Mercado Pago.
+          // La función del servidor vuelve a validar el código, su vigencia y sus usos.
+          const appliedCode = String(
+            order.codigo_promocional || appliedPromo?.codigo || ""
+          ).trim().toUpperCase();
+          const orderTotal = Number(order.total);
+
+          if (appliedCode && Number.isFinite(orderTotal) && orderTotal <= 0.005) {
+            button.textContent = "CONFIRMANDO PEDIDO...";
 
             const { data: freeOrder, error: freeOrderError } =
               await supabaseClient.rpc(
@@ -2246,10 +2252,18 @@ footer p{
                 { p_pedido_id: order.id }
               );
 
-            if(freeOrderError) throw freeOrderError;
+            if(freeOrderError) {
+              throw new Error(
+                freeOrderError.message ||
+                "No pudimos confirmar el pedido con descuento del 100%. Verifica la configuración de la confirmación gratuita en Supabase."
+              );
+            }
 
             if(!freeOrder?.pedido_id || freeOrder.estado !== "PAGADO"){
-              throw new Error("No pudimos confirmar el pedido de prueba.");
+              throw new Error(
+                freeOrder?.mensaje ||
+                "El pedido quedó creado, pero Supabase no confirmó su pago promocional. No se realizó ningún cobro."
+              );
             }
 
             formError.textContent = "";
@@ -2258,8 +2272,8 @@ footer p{
 
             showPaymentConfirmation(
               "success",
-              "¡Pedido de prueba confirmado!",
-              "El código BABY100 cubrió el 100% del pedido. No se realizó ningún cobro ni se abrió Mercado Pago.",
+              "¡Pedido confirmado!",
+              `El código ${appliedCode} cubrió el 100% del pedido. No se realizó ningún cobro ni se abrió Mercado Pago.`,
               freeOrder.numero_pedido || order.numero_pedido,
               guardarIndicadorBabyGoldenId(validation.lines)
             );
@@ -2824,3 +2838,4 @@ footer p{
 </body>
 
 </html>
+
