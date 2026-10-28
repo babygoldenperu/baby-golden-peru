@@ -1987,37 +1987,57 @@
       revealElements.forEach(element => element.classList.add("visible"));
     }
 
-    // Protección de imágenes:
-    // NO se consulta la API de GitHub. Las imágenes se sirven directamente
-    // desde el repositorio/GitHub Pages, evitando rate limits y bloqueos.
+    // Protección de imágenes con rutas alternativas para GitHub Pages.
+    // Si la carpeta de imágenes cambió, se prueban ubicaciones habituales
+    // antes de retirar la diapositiva del carrusel.
     document.querySelectorAll("img[data-bge-safe-image]").forEach(img => {
-      img.addEventListener("error", () => {
-        const slide = img.closest(".carousel-slide, .community-slide");
+      const originalSrc = img.getAttribute("src") || "";
+      const filenameMatch = originalSrc.match(/miembros-(\d+)\.(jpg|jpeg|png|webp)$/i);
+      const candidates = [originalSrc];
 
+      if (filenameMatch) {
+        const number = filenameMatch[1];
+        ["jpg", "jpeg", "png", "webp"].forEach(ext => {
+          [
+            `img/comunidad/miembros-${number}.${ext}`,
+            `assets/comunidad/miembros-${number}.${ext}`,
+            `assets/img/comunidad/miembros-${number}.${ext}`
+          ].forEach(path => {
+            if (!candidates.includes(path)) candidates.push(path);
+          });
+        });
+      }
+
+      let candidateIndex = 0;
+      const onImageError = () => {
+        candidateIndex += 1;
+        if (candidateIndex < candidates.length) {
+          img.src = candidates[candidateIndex];
+          return;
+        }
+
+        img.removeEventListener("error", onImageError);
+        const slide = img.closest(".carousel-slide, .community-slide");
         if (!slide) {
           img.remove();
           return;
         }
 
-        // Identificar el carrusel antes de retirar la diapositiva del DOM.
+        // Capturar los padres antes de retirar la diapositiva.
         const areaCard = slide.closest("[data-carousel]");
         const communityCard = slide.closest(".community-card");
-
-        // Si la foto no existe en GitHub Pages, se elimina del DOM.
         slide.remove();
 
         if (areaCard) {
           areaCard.dispatchEvent(new CustomEvent("bge:slide-removed"));
-          return;
-        }
-
-        // Para el carrusel de comunidad, sincronizamos sus fotos y puntos.
-        if (communityCard) {
+        } else if (communityCard) {
           communityCard.dispatchEvent(new CustomEvent("bge:community-slide-removed"));
         }
-      }, { once: true });
+      };
 
+      img.addEventListener("error", onImageError);
       img.addEventListener("load", () => {
+        img.removeEventListener("error", onImageError);
         img.removeAttribute("data-bge-safe-image");
       }, { once: true });
     });
