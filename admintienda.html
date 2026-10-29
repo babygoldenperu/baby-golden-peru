@@ -193,19 +193,22 @@ function salesDate(v){if(!v)return "—";const d=new Date(v);return Number.isNaN
 async function loadSales(){
   $("salesRows").innerHTML='<tr><td colspan="7">Cargando pedidos…</td></tr>';
   try{
-    const r=await sb.from("pedidos").select("id,numero_pedido,estado,subtotal,descuento,total,codigo_promocional,created_at").order("created_at",{ascending:false}).limit(200);
+    // Los totales se calculan en Supabase con una RPC protegida para administradores,
+    // no a partir de una lista limitada por las políticas RLS del navegador.
+    const r=await sb.rpc("admin_resumen_ventas_tienda");
     if(r.error)throw r.error;
-    const orders=Array.isArray(r.data)?r.data:[];
-    const valid=orders.filter(o=>String(o.estado||"").toUpperCase()==="PAGADO"&&Number(o.total)>0);
-    const cancelled=orders.filter(o=>String(o.estado||"").toUpperCase()==="CANCELADO").length;
-    const zero=orders.filter(o=>Number(o.total)===0).length;
-    $("salesCount").textContent=String(valid.length);
-    $("salesRevenue").textContent=money(valid.reduce((sum,o)=>sum+Number(o.total||0),0));
-    $("salesCancelled").textContent=String(cancelled);
-    $("salesZero").textContent=String(zero);
+    let summary=r.data;
+    if(typeof summary==="string")summary=JSON.parse(summary||"{}");
+    if(!summary||typeof summary!=="object")throw new Error("Supabase devolvió un resumen vacío o inválido.");
+    const orders=Array.isArray(summary.pedidos)?summary.pedidos:[];
+    $("salesCount").textContent=String(Number(summary.ventas_validas||0));
+    $("salesRevenue").textContent=money(summary.ingresos_registrados||0);
+    $("salesCancelled").textContent=String(Number(summary.pedidos_cancelados||0));
+    $("salesZero").textContent=String(Number(summary.pedidos_cero||0));
     $("salesRows").innerHTML=orders.length?orders.map(o=>`<tr><td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td><td>${esc(String(o.estado||"SIN ESTADO"))}</td><td>${esc(money(o.subtotal))}</td><td>${esc(money(o.descuento))}</td><td>${esc(money(o.total))}</td><td>${esc(o.codigo_promocional||"—")}</td></tr>`).join(""):'<tr><td colspan="7">No se encontraron pedidos.</td></tr>';
-    salesStatus(`Actualizado correctamente. Se revisaron ${orders.length} pedidos (máximo 200 más recientes). Los pedidos cancelados no se cuentan como ventas.`);
-  }catch(e){console.error(e);$("salesCount").textContent="—";$("salesRevenue").textContent="—";$("salesCancelled").textContent="—";$("salesZero").textContent="—";$("salesRows").innerHTML='<tr><td colspan="7">No se pudieron cargar los pedidos. Comprueba los permisos de lectura de la tabla pedidos en Supabase.</td></tr>';salesStatus(e.message||"No se pudo cargar el resumen.",true)}
+    const total=Number(summary.total_pedidos||0);
+    salesStatus(`Actualizado correctamente. Totales calculados sobre los ${total} pedidos completos; se muestran los ${orders.length} más recientes. Los pedidos cancelados y los de S/ 0.00 no se cuentan como ventas.`);
+  }catch(e){console.error(e);$("salesCount").textContent="—";$("salesRevenue").textContent="—";$("salesCancelled").textContent="—";$("salesZero").textContent="—";$("salesRows").innerHTML='<tr><td colspan="7">No se pudo cargar el resumen. Ejecuta primero el SQL de configuración de la función admin_resumen_ventas_tienda.</td></tr>';salesStatus(e.message||"No se pudo cargar el resumen.",true)}
 }
 function showMainView(view){
   $("productsView").classList.toggle("hidden",view!=="products");
