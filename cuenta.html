@@ -1364,11 +1364,41 @@ header{min-height:64px!important}
 }
 .dog-profile-modal.is-open{display:flex}
 .dog-profile-box{
-  width:min(620px,100%);max-height:90vh;overflow:auto;
-  background:#fffdf9;border:1px solid #e4d7c5;border-radius:22px;
-  box-shadow:0 25px 70px rgba(35,25,15,.25);padding:28px;
-  position:relative;
+  width:min(700px,100%);max-height:90vh;overflow:auto;
+  background:#fffdf9;border:1px solid #e4d7c5;border-radius:24px;
+  box-shadow:0 25px 70px rgba(35,25,15,.25);padding:30px;
+  position:relative;transition:background .2s,border-color .2s;
 }
+/* Identidad visual BLACK ID */
+.dog-profile-box.is-black{
+  color:#f7f1e7;background:linear-gradient(155deg,#171717 0%,#24211d 58%,#30271d 100%);
+  border:1px solid #b38a4b;box-shadow:0 28px 80px rgba(0,0,0,.48);
+}
+.dog-profile-box.is-black .dog-profile-close{background:#282522;color:#f4dfb5;border-color:#80643b}
+.dog-profile-box.is-black .dog-profile-top img,.dog-profile-box.is-black .dog-profile-top .placeholder{border-color:#9b7845;background:#302b24}
+.dog-profile-box.is-black h3{color:#fff8eb}
+.dog-profile-box.is-black .profile-id{color:#e0bd7d}
+.dog-profile-box.is-black .dog-profile-field{background:rgba(255,255,255,.07);border-color:rgba(218,183,119,.3)}
+.dog-profile-box.is-black .dog-profile-field small{color:#d5b77f}
+.dog-profile-box.is-black .dog-profile-field span{color:#fff9ef}
+.dog-profile-box.is-black h4{color:#e8c98e!important;border-bottom-color:#80643b!important}
+/* Identidad visual PREMIUM ID */
+.dog-profile-box.is-premium{
+  color:#493a2c;background:linear-gradient(145deg,#fffdf7 0%,#f8f0df 52%,#fffaf0 100%);
+  border:2px solid #d7b66e;box-shadow:0 25px 75px rgba(133,99,42,.25);
+}
+.dog-profile-box.is-premium .dog-profile-close{background:#fffaf0;color:#80602d;border-color:#dfc98f}
+.dog-profile-box.is-premium .dog-profile-top img,.dog-profile-box.is-premium .dog-profile-top .placeholder{border:2px solid #d7b66e;background:#f4ead2}
+.dog-profile-box.is-premium h3{color:#6c4d20}
+.dog-profile-box.is-premium .profile-id{color:#9a702c}
+.dog-profile-box.is-premium .dog-profile-field{background:rgba(255,255,255,.82);border-color:#e7d6ae;box-shadow:0 3px 12px rgba(139,105,48,.06)}
+.dog-profile-box.is-premium .dog-profile-field small{color:#9b783e}
+.dog-profile-box.is-premium .dog-profile-field span{color:#493a2c}
+.dog-profile-box.is-premium h4{color:#8b6429!important;border-bottom-color:#dfc98f!important}
+.dog-profile-brand{display:inline-flex;align-items:center;gap:8px;margin:0 0 18px;padding:7px 13px;border-radius:30px;font-size:10px;font-weight:800;letter-spacing:1.8px}
+.is-black .dog-profile-brand{color:#f0d49d;border:1px solid #96713d;background:rgba(191,150,82,.12)}
+.is-premium .dog-profile-brand{color:#8a6428;border:1px solid #ddc58f;background:#f5ebd4}
+.dog-profile-section-title{padding-bottom:8px;border-bottom:1px solid #e5d9c8}
 .dog-profile-close{
   position:absolute;right:16px;top:14px;width:36px;height:36px;
   border:1px solid #ddcfbd;border-radius:50%;background:#fff;
@@ -3043,7 +3073,7 @@ header{min-height:64px!important}
 
         const {data:perritos,error} = await supabaseClient
           .from("perritos")
-          .select("id,baby_golden_id,nombre_perrito,fecha_nacimiento,sexo,raza,caracteristicas,tiene_microchip,foto_url,estado_solicitud,numero_microchip,red_social")
+          .select("id,baby_golden_id,tipo_id,nombre_perrito,fecha_nacimiento,sexo,raza,caracteristicas,tiene_microchip,foto_url,estado_solicitud,numero_microchip,red_social")
           .eq("registrado_por",session.user.id)
           .order("created_at",{ascending:false});
 
@@ -4045,7 +4075,14 @@ async function abrirPerfilPerrito(perritoId, perritos) {
   if (!modal || !content) return;
 
   const idVisible = p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0"));
+  const tipoId = String(p.tipo_id || "").trim().toUpperCase();
+  const claseId = tipoId === "BLACK" ? "is-black" : tipoId === "PREMIUM" ? "is-premium" : "";
+  const nombreId = tipoId === "BLACK" ? "BLACK ID" : tipoId === "PREMIUM" ? "PREMIUM ID" : "BABY GOLDEN ID";
+  const cajaPerfil = modal.querySelector(".dog-profile-box");
+  if (cajaPerfil) cajaPerfil.classList.remove("is-black", "is-premium");
+  if (cajaPerfil && claseId) cajaPerfil.classList.add(claseId);
   content.innerHTML = `
+    <div class="dog-profile-brand">${nombreId}</div>
     <div class="dog-profile-top">
       <div class="placeholder">🐕</div>
       <div>
@@ -4089,6 +4126,7 @@ async function abrirPerfilPerrito(perritoId, perritos) {
       : `<div class="placeholder">🐕</div>`;
 
     content.innerHTML = `
+      <div class="dog-profile-brand">${nombreId}</div>
       <div class="dog-profile-top">
         ${imagen}
         <div>
@@ -4108,7 +4146,7 @@ async function abrirPerfilPerrito(perritoId, perritos) {
         <div class="dog-profile-field"><small>CARACTERÍSTICAS</small><span>${detalle(p.caracteristicas)}</span></div>
       </div>
 
-      <h4 style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Tutor</h4>
+      <h4 class="dog-profile-section-title" style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Tutor</h4>
       <div class="dog-profile-grid">
         <div class="dog-profile-field"><small>TUTOR 1</small><span>${detalle(tutor.nombre_tutor_1)}</span></div>
         <div class="dog-profile-field"><small>DNI TUTOR 1</small><span>${detalle(tutor.dni_tutor_1)}</span></div>
@@ -4121,7 +4159,7 @@ async function abrirPerfilPerrito(perritoId, perritos) {
         <div class="dog-profile-field"><small>CELULAR DE EMERGENCIA</small><span>${detalle(tutor.emergencia_celular)}</span></div>
       </div>
 
-      <h4 style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Información de salud</h4>
+      <h4 class="dog-profile-section-title" style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Información de salud</h4>
       <div class="dog-profile-grid">
         <div class="dog-profile-field"><small>ALERGIAS</small><span>${siNo(info.alergias)}</span></div>
         <div class="dog-profile-field"><small>DETALLE DE ALERGIAS</small><span>${detalle(info.detalle_alergias)}</span></div>
