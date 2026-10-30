@@ -1591,13 +1591,13 @@ header{
         href="micuenta.html"
         id="cartCheckout"
       >
-        CONTINUAR A MI CUENTA
+        IR AL CHECKOUT
       </a>
 
 
       <p>
-        Desde Mi cuenta podrás crear tu orden
-        e iniciar el proceso de compra.
+        Los productos se agregan desde nuestra tienda.
+        Aquí puedes revisar tu selección antes de continuar.
       </p>
 
 
@@ -1930,355 +1930,150 @@ header{
 
 
   <!-- =========================================
-       CARRITO — JAVASCRIPT
+       CARRITO — SOLO LECTURA
+       Los productos se agregan exclusivamente en tienda.html.
        ========================================= -->
 
   <script>
-
-    /* =========================================
-       PRODUCTOS
-       ========================================= */
-
     const products = {
-
       BLACK: {
         name: "Black ID",
         price: 36.90
       },
-
       PREMIUM: {
         name: "Premium ID",
         price: 30.00
+      },
+      BANDANA: {
+        name: "Bandana Baby Golden Perú",
+        price: 34.90
+      },
+      POLO: {
+        name: "Polo Baby Golden Perú",
+        price: 39.90
+      },
+      GORRO: {
+        name: "Gorro Baby Golden Perú",
+        price: 79.90
       }
-
     };
 
-
-    /* =========================================
-       CARRITO
-       ========================================= */
-
-    const cartKey =
-      "babyGoldenCart";
-
+    const cartKey = "babyGoldenCart";
 
     function getCart() {
-
       try {
+        const saved = JSON.parse(localStorage.getItem(cartKey));
 
-        return JSON.parse(
-          localStorage.getItem(
-            cartKey
-          )
-        ) || [];
+        // Formato actual compartido con tienda.html y checkout.html.
+        if (saved && typeof saved === "object" && !Array.isArray(saved)) {
+          return saved;
+        }
 
+        // Compatibilidad de lectura con carritos antiguos en formato array.
+        if (Array.isArray(saved)) {
+          return saved.reduce((items, id) => {
+            if (products[id]) {
+              items[id] = (Number(items[id]) || 0) + 1;
+            }
+            return items;
+          }, {});
+        }
+
+        return {};
       } catch {
-
-        return [];
-
+        return {};
       }
-
     }
 
-
-    function saveCart(
-      cart
-    ) {
-
-      localStorage.setItem(
-        cartKey,
-        JSON.stringify(
-          cart
-        )
-      );
-
-    }
-
-
-    /* =========================================
-       ELEMENTOS
-       ========================================= */
-
-    const cartCount =
-      document.getElementById(
-        "cartCount"
-      );
-
-
-    const cartItems =
-      document.getElementById(
-        "cartItems"
-      );
-
-
-    const cartTotal =
-      document.getElementById(
-        "cartTotal"
-      );
-
-
-    const cartDrawer =
-      document.getElementById(
-        "cartDrawer"
-      );
-
-
-    const cartBackdrop =
-      document.getElementById(
-        "cartBackdrop"
-      );
-
-
-    /* =========================================
-       MOSTRAR CARRITO
-       ========================================= */
+    const cartCount = document.getElementById("cartCount");
+    const cartItems = document.getElementById("cartItems");
+    const cartTotal = document.getElementById("cartTotal");
+    const cartDrawer = document.getElementById("cartDrawer");
+    const cartBackdrop = document.getElementById("cartBackdrop");
+    const checkout = document.getElementById("cartCheckout");
 
     function renderCart() {
+      const cart = getCart();
 
-      const cart =
-        getCart();
+      const ids = Object.keys(cart).filter(id =>
+        products[id] && Number(cart[id]) > 0
+      );
 
+      const totalItems = ids.reduce(
+        (total, id) => total + Number(cart[id]),
+        0
+      );
 
-      cartCount.hidden =
-        cart.length === 0;
+      const total = ids.reduce(
+        (sum, id) => sum + products[id].price * Number(cart[id]),
+        0
+      );
 
+      cartCount.hidden = totalItems === 0;
+      cartCount.textContent = totalItems;
+      cartTotal.textContent = "S/ " + total.toFixed(2);
 
-      cartCount.textContent =
-        cart.length;
-
-
-      const total =
-        cart.reduce(
-          (
-            sum,
-            id
-          ) => {
-
-            return sum +
-              (
-                products[id]?.price ||
-                0
-              );
-
-          },
-          0
-        );
-
-
-      cartTotal.textContent =
-        "S/ " +
-        total.toFixed(2);
-
-
-      if (
-        cart.length === 0
-      ) {
-
+      if (totalItems === 0) {
         cartItems.innerHTML = `
           <p class="cart-empty">
-            Tu carrito está vacío.
-            Agrega una Baby Golden ID
-            para continuar.
+            Tu carrito está vacío. Visita nuestra tienda para elegir tus productos.
           </p>
         `;
-
       } else {
+        cartItems.innerHTML = ids.map(id => {
+          const product = products[id];
+          const quantity = Number(cart[id]);
+          const subtotal = product.price * quantity;
 
-        cartItems.innerHTML =
-          cart
-            .map(
-              (
-                id,
-                index
-              ) => {
-
-                const product =
-                  products[id];
-
-
-                return `
-
-                  <div class="cart-item">
-
-                    <div>
-
-                      <h3>
-                        ${product.name}
-                      </h3>
-
-                      <p>
-                        Baby Golden Perú ·
-                        S/ ${product.price.toFixed(2)}
-                      </p>
-
-                    </div>
-
-                    <button
-                      class="remove-item"
-                      type="button"
-                      data-remove-item="${index}"
-                    >
-                      QUITAR
-                    </button>
-
-                  </div>
-
-                `;
-
-              }
-            )
-            .join("");
-
+          return `
+            <div class="cart-item">
+              <div>
+                <h3>${product.name}</h3>
+                <p>
+                  Cantidad: ${quantity}<br>
+                  S/ ${product.price.toFixed(2)} c/u ·
+                  Subtotal: S/ ${subtotal.toFixed(2)}
+                </p>
+              </div>
+            </div>
+          `;
+        }).join("");
       }
 
-
-      document
-        .querySelectorAll(
-          "[data-remove-item]"
-        )
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              function() {
-
-                const cart =
-                  getCart();
-
-
-                cart.splice(
-                  Number(
-                    this.dataset.removeItem
-                  ),
-                  1
-                );
-
-
-                saveCart(
-                  cart
-                );
-
-
-                renderCart();
-
-              }
-            );
-
-          }
-        );
-
-
-      const checkout =
-        document.getElementById(
-          "cartCheckout"
-        );
-
-
-      checkout.classList.toggle(
-        "is-disabled",
-        cart.length === 0
-      );
-
-
-      checkout.href =
-        cart.length
-
-          ? "micuenta.html?carrito=" +
-            encodeURIComponent(
-              cart.join(",")
-            )
-
-          : "micuenta.html";
-
+      checkout.classList.toggle("is-disabled", totalItems === 0);
+      checkout.setAttribute("aria-disabled", totalItems === 0 ? "true" : "false");
+      checkout.href = totalItems > 0 ? "checkout.html" : "#";
     }
-
-
-    /* =========================================
-       ABRIR CARRITO
-       ========================================= */
 
     function openCart() {
-
-      cartDrawer.classList.add(
-        "is-open"
-      );
-
-
-      cartDrawer.setAttribute(
-        "aria-hidden",
-        "false"
-      );
-
-
-      cartBackdrop.hidden =
-        false;
-
-
+      cartDrawer.classList.add("is-open");
+      cartDrawer.setAttribute("aria-hidden", "false");
+      cartBackdrop.hidden = false;
       renderCart();
-
     }
-
-
-    /* =========================================
-       CERRAR CARRITO
-       ========================================= */
 
     function closeCart() {
-
-      cartDrawer.classList.remove(
-        "is-open"
-      );
-
-
-      cartDrawer.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-
-      cartBackdrop.hidden =
-        true;
-
+      cartDrawer.classList.remove("is-open");
+      cartDrawer.setAttribute("aria-hidden", "true");
+      cartBackdrop.hidden = true;
     }
 
+    document.getElementById("openCart").addEventListener("click", openCart);
+    document.getElementById("closeCart").addEventListener("click", closeCart);
+    cartBackdrop.addEventListener("click", closeCart);
 
-    /* =========================================
-       BOTONES
-       ========================================= */
+    checkout.addEventListener("click", event => {
+      if (checkout.getAttribute("aria-disabled") === "true") {
+        event.preventDefault();
+      }
+    });
 
-    document
-      .getElementById(
-        "openCart"
-      )
-      .addEventListener(
-        "click",
-        openCart
-      );
-
-
-    document
-      .getElementById(
-        "closeCart"
-      )
-      .addEventListener(
-        "click",
-        closeCart
-      );
-
-
-    cartBackdrop.addEventListener(
-      "click",
-      closeCart
-    );
-
-
-    /* =========================================
-       INICIAR
-       ========================================= */
+    // Actualiza la vista si el carrito cambia en otra pestaña.
+    window.addEventListener("storage", event => {
+      if (event.key === cartKey) renderCart();
+    });
 
     renderCart();
-
   </script>
 
 
