@@ -4031,6 +4031,13 @@ header{min-height:64px!important}
 <script id="mis-perritos-modal-script">
 async function abrirPerfilPerrito(perritoId, perritos) {
 
+  function escapeHtml(value){
+    return String(value ?? "")
+      .replace(/&/g,"&amp;").replace(/</g,"&lt;")
+      .replace(/>/g,"&gt;").replace(/"/g,"&quot;")
+      .replace(/'/g,"&#039;");
+  }
+
   const p = perritos.find(item => String(item.id) === String(perritoId));
   if (!p) return;
 
