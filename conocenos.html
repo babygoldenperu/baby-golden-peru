@@ -1399,65 +1399,29 @@
     .cart-backdrop { position: fixed; z-index: 1250; inset: 0; background: rgba(24,22,19,.42); }
     body.cart-open { overflow: hidden; }
 
-    /* HERO VISUAL — composición inspirada en el inicio */
+    /* HERO: fotografía cargada desde el repositorio de GitHub */
     .hero-layout {
       position: relative; z-index: 2; width: min(calc(100% - 48px), var(--max-width));
       margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr;
-      align-items: center; gap: 35px; padding: 95px 0 80px;
+      align-items: center; gap: 45px; padding: 95px 0 80px;
     }
     .hero-content { width: 100%; margin: 0; padding: 0; }
-    .hero-visual {
-      position: relative; min-height: 570px; display: flex;
-      justify-content: center; align-items: center;
+    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    .hero-photo {
+      display: block; width: 100%; max-width: 540px; height: 430px;
+      object-fit: cover; object-position: center 38%;
+      border-radius: 28px; border: 1px solid rgba(255,255,255,.35);
+      box-shadow: 0 30px 65px rgba(0,0,0,.24);
     }
-    .hero-golden-glow {
-      position: absolute; width: min(39vw, 490px); aspect-ratio: 1;
-      border-radius: 50%; background: #d9ad61; opacity: .25;
-      box-shadow: 0 0 0 35px rgba(215,173,99,.07), 0 0 0 70px rgba(215,173,99,.04);
-    }
-    .hero-golden-frame {
-      position: relative; z-index: 1; width: min(78%, 390px); height: 470px;
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; border-radius: 210px 210px 28px 28px;
-      background: linear-gradient(145deg,#f0d39b,#b77b20);
-      box-shadow: 0 35px 70px rgba(0,0,0,.25);
-      border: 1px solid rgba(255,255,255,.35);
-    }
-    .hero-golden-dog {
-      font-size: clamp(150px, 18vw, 220px);
-      filter: drop-shadow(0 18px 16px rgba(50,30,12,.18));
-      transform: translateY(8px);
-    }
-    .hero-id-card {
-      position: absolute; z-index: 3; right: -2px; bottom: 18px;
-      width: min(84%, 330px); padding: 22px 24px;
-      border: 1px solid rgba(185,139,59,.4); border-radius: 20px;
-      background: rgba(255,250,241,.97); color: #302a23;
-      box-shadow: 0 25px 55px rgba(0,0,0,.25);
-    }
-    .hero-id-top { display:flex; justify-content:space-between; align-items:center; color:#a56f20; font-size:10px; font-weight:800; letter-spacing:1px; }
-    .hero-id-mark { width:28px; height:28px; display:grid; place-items:center; border-radius:50%; background:#f1e5d1; font-size:17px; }
-    .hero-id-name { margin-top:20px; font:600 34px/1 "Cormorant Garamond",serif; color:#302a23; }
-    .hero-id-breed { margin-top:5px; color:#746b60; font-size:9px; letter-spacing:1.4px; }
-    .hero-id-number { display:inline-block; margin-top:14px; padding:7px 12px; border-radius:30px; background:#bd8730; color:#fff; font-size:9px; font-weight:800; letter-spacing:1px; }
-    .hero-id-tech { display:flex; justify-content:space-between; margin-top:17px; padding-top:12px; border-top:1px solid #e5dac7; color:#93651e; font-size:9px; font-weight:800; letter-spacing:1px; }
-
     @media (max-width: 900px) {
-      .hero-layout { grid-template-columns: 1fr; gap: 10px; padding: 90px 0 75px; }
+      .hero-layout { grid-template-columns: 1fr; gap: 35px; padding: 90px 0 75px; }
       .hero-copy { max-width: 690px; }
-      .hero-visual { min-height: 490px; }
-      .hero-golden-glow { width: min(70vw, 420px); }
-      .hero-golden-frame { height: 410px; width: min(75%, 340px); }
-      .hero-id-card { right: 4%; }
+      .hero-photo { max-width: 620px; height: 390px; }
     }
     @media (max-width: 650px) {
       .cart-drawer { padding: 23px 20px; }
       .hero-layout { width: min(calc(100% - 30px), var(--max-width)); padding: 80px 0 70px; }
-      .hero-visual { min-height: 420px; }
-      .hero-golden-frame { height: 350px; width: 75%; }
-      .hero-golden-dog { font-size: 155px; }
-      .hero-id-card { width: 82%; right: 0; bottom: 0; padding: 17px 19px; }
-      .hero-id-name { font-size: 29px; }
+      .hero-photo { height: 290px; border-radius: 20px; object-position: center 35%; }
     }
 
     /* MEDIA QUERIES */
@@ -1726,21 +1690,14 @@
             </div>
           </div>
         </div>
-        <div class="hero-visual reveal" aria-label="Ilustración de un Golden Retriever y su Baby Golden ID">
-          <div class="hero-golden-glow"></div>
-          <div class="hero-golden-frame">
-            <div class="hero-golden-dog" aria-hidden="true">🐕</div>
-          </div>
-          <div class="hero-id-card">
-            <div class="hero-id-top">
-              <span>BABY GOLDEN PERÚ</span>
-              <span class="hero-id-mark">♥</span>
-            </div>
-            <div class="hero-id-name">KALMA</div>
-            <div class="hero-id-breed">GOLDEN RETRIEVER</div>
-            <div class="hero-id-number">BGP · IDENTIDAD DIGITAL</div>
-            <div class="hero-id-tech"><span>NFC</span><span>QR CODE</span><span>COMUNIDAD</span></div>
-          </div>
+        <div class="hero-visual reveal">
+          <img
+            class="hero-photo"
+            src="img/conocenos-golden.webp"
+            alt="Golden Retriever mirando a cámara"
+            loading="eager"
+            fetchpriority="high"
+          >
         </div>
       </div>
       <div class="hero-scroll">
