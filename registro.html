@@ -1803,6 +1803,7 @@ comprobarAccesoRegistro();
       const { data, error } = await supabaseClient.rpc(
         "crear_baby_golden_id",
         {
+          p_acceso_id: acceso.id,
           p_tipo_id: tipoCompra,
           p_nombre_perrito: datos.get("nombre_perrito"),
           p_fecha_nacimiento: datos.get("fecha_nacimiento") || null,
