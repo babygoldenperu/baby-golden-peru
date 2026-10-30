@@ -39,7 +39,12 @@
     <div id="salesStatus" class="status hidden"></div>
     <div class="sales-actions"><button id="salesRefresh" class="btn primary" type="button">ACTUALIZAR RESUMEN</button></div>
   </div>
-  <div class="sales-panel"><h2>Pedidos recientes</h2><div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>ESTADO</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th></tr></thead><tbody id="salesRows"><tr><td colspan="9">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
+  <div class="sales-panel"><h2>Gestión de pedidos</h2>
+  <div class="sales-actions" style="gap:10px;flex-wrap:wrap">
+    <input id="salesSearch" type="search" placeholder="Buscar pedido, cliente, correo o teléfono" style="flex:1;min-width:220px;padding:11px;border:1px solid #ddd;border-radius:8px">
+    <select id="salesStateFilter" style="padding:11px;border:1px solid #ddd;border-radius:8px"><option value="">Todos los estados</option><option value="PAGADO">Pagado</option><option value="CANCELADO">Cancelado</option><option value="PENDIENTE">Pendiente</option><option value="RECHAZADO">Rechazado</option></select>
+  </div>
+  <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>CLIENTE</th><th>ESTADO</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th><th>DETALLE</th></tr></thead><tbody id="salesRows"><tr><td colspan="11">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
   <div class="sales-panel"><div class="sales-note">Este panel es de solo lectura. La identificación de pagos de prueba consulta únicamente la marca es_prueba de la tabla de pagos. Los pagos de prueba se excluyen del cálculo de ventas e ingresos en Supabase. Esta pantalla no modifica pagos, estados, credenciales, preferencias, webhooks ni ningún flujo de Mercado Pago. Si no se puede consultar la marca de prueba, el pedido aparecerá como “NO VERIFICADO”, nunca como pago real confirmado.</div></div>
 </section>
 <section id="promoView" class="promo-wrap hidden">
@@ -192,65 +197,71 @@ $("promoForm").onsubmit=async e=>{e.preventDefault();const b=$("promoSave");b.di
 function salesStatus(text,error=false){$("salesStatus").textContent=text;$("salesStatus").classList.remove("hidden");$("salesStatus").classList.toggle("error",error)}
 function money(v){return "S/ "+Number(v||0).toLocaleString("es-PE",{minimumFractionDigits:2,maximumFractionDigits:2})}
 function salesDate(v){if(!v)return "—";const d=new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("es-PE",{dateStyle:"short",timeStyle:"short"})}
+let salesOrdersCache=[], salesPaymentCache=new Map(), salesPaymentRead=true;
+function renderSalesOrders(){
+  const term=($("salesSearch")?.value||"").trim().toLowerCase();
+  const state=($("salesStateFilter")?.value||"").toUpperCase();
+  const filtered=salesOrdersCache.filter(o=>{
+    const hay=[o.numero_pedido,o.nombre,o.apellidos,o.email,o.telefono,o.direccion,o.distrito].join(" ").toLowerCase();
+    return (!term||hay.includes(term))&&(!state||String(o.estado||"").toUpperCase()===state);
+  });
+  $("salesRows").innerHTML=filtered.length?filtered.map(o=>{
+    const payment=salesPaymentCache.get(o.id);
+    const type=!salesPaymentRead?"NO VERIFICADO":
+      payment?.isTest?"PAGO DE PRUEBA":
+      payment?"PAGO NO IDENTIFICADO COMO PRUEBA":"SIN REGISTRO DE PAGO";
+    const method=salesPaymentRead?(payment?.methods.join(", ")||"—"):"No disponible";
+    const typeStyle=payment?.isTest?' style="font-weight:800;color:#8e3328"':'';
+    const customer=[o.nombre,o.apellidos].filter(Boolean).join(" ")||"—";
+    const detail=`<details><summary style="cursor:pointer">Ver</summary><div style="min-width:220px;white-space:normal;line-height:1.6"><b>${esc(customer)}</b><br>Correo: ${esc(o.email||"—")}<br>Teléfono: ${esc(o.telefono||"—")}<br>Dirección: ${esc(o.direccion||"—")}<br>Distrito: ${esc(o.distrito||"—")}<br>Provincia: ${esc(o.provincia||"—")}<br>Departamento: ${esc(o.departamento||"—")}<br>Envío: ${esc(money(o.envio))}</div></details>`;
+    return `<tr>
+      <td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td>
+      <td>${esc(customer)}</td><td>${esc(String(o.estado||"SIN ESTADO"))}</td>
+      <td>${esc(money(o.subtotal))}</td><td>${esc(money(o.descuento))}</td>
+      <td>${esc(money(o.total))}</td><td>${esc(o.codigo_promocional||"—")}</td>
+      <td${typeStyle}>${esc(type)}</td><td>${esc(method)}</td><td>${detail}</td>
+    </tr>`;
+  }).join(""):'<tr><td colspan="11">No hay pedidos que coincidan con la búsqueda.</td></tr>';
+}
+$("salesSearch").addEventListener("input",renderSalesOrders);
+$("salesStateFilter").addEventListener("change",renderSalesOrders);
+
 async function loadSales(){
-  $("salesRows").innerHTML='<tr><td colspan="9">Cargando pedidos…</td></tr>';
+  $("salesRows").innerHTML='<tr><td colspan="11">Cargando pedidos…</td></tr>';
   try{
     const r=await sb.rpc("admin_resumen_ventas_tienda");
     if(r.error)throw r.error;
     let summary=r.data;
     if(typeof summary==="string")summary=JSON.parse(summary||"{}");
     if(!summary||typeof summary!=="object")throw new Error("Supabase devolvió un resumen vacío o inválido.");
-
-    const orders=Array.isArray(summary.pedidos)?summary.pedidos:[];
+    salesOrdersCache=Array.isArray(summary.pedidos)?summary.pedidos:[];
     $("salesCount").textContent=String(Number(summary.ventas_validas||0));
     $("salesRevenue").textContent=money(summary.ingresos_registrados||0);
     $("salesCancelled").textContent=String(Number(summary.pedidos_cancelados||0));
     $("salesZero").textContent=String(Number(summary.pedidos_cero||0));
     $("salesTotal").textContent=String(Number(summary.total_pedidos||0));
 
-    // Lectura únicamente de la clasificación; no modifica pagos ni invoca Mercado Pago.
-    let paymentMap=new Map(), paymentReadAvailable=true, testOrderIds=new Set();
-    const orderIds=orders.map(o=>o.id).filter(Boolean);
-    if(orderIds.length){
-      const pr=await sb.from("pagos").select("pedido_id,es_prueba,payment_method").in("pedido_id",orderIds);
-      if(pr.error){
-        console.warn("No se pudo consultar la clasificación de pagos:",pr.error);
-        paymentReadAvailable=false;
-      }else{
-        (pr.data||[]).forEach(pg=>{
-          const current=paymentMap.get(pg.pedido_id)||{isTest:false,methods:[]};
-          if(pg.es_prueba===true){current.isTest=true;testOrderIds.add(pg.pedido_id);}
-          if(pg.payment_method&&!current.methods.includes(pg.payment_method))current.methods.push(pg.payment_method);
-          paymentMap.set(pg.pedido_id,current);
-        });
-      }
+    // Consulta de solo lectura; no altera pagos ni interactúa con Mercado Pago.
+    salesPaymentCache=new Map();salesPaymentRead=true;
+    const ids=salesOrdersCache.map(o=>o.id).filter(Boolean);
+    if(ids.length){
+      const pr=await sb.from("pagos").select("pedido_id,es_prueba,payment_method").in("pedido_id",ids);
+      if(pr.error){console.warn("No se pudo consultar clasificación:",pr.error);salesPaymentRead=false;}
+      else (pr.data||[]).forEach(pg=>{
+        const x=salesPaymentCache.get(pg.pedido_id)||{isTest:false,methods:[]};
+        if(pg.es_prueba===true)x.isTest=true;
+        if(pg.payment_method&&!x.methods.includes(pg.payment_method))x.methods.push(pg.payment_method);
+        salesPaymentCache.set(pg.pedido_id,x);
+      });
     }
-    $("salesTest").textContent=paymentReadAvailable?String(testOrderIds.size):"—";
-
-    $("salesRows").innerHTML=orders.length?orders.map(o=>{
-      const payment=paymentMap.get(o.id);
-      const type=!paymentReadAvailable?"NO VERIFICADO":
-        payment?.isTest?"PAGO DE PRUEBA":
-        payment?"PAGO NO IDENTIFICADO COMO PRUEBA":"SIN REGISTRO DE PAGO";
-      const method=paymentReadAvailable?(payment?.methods.join(", ")||"—"):"No disponible";
-      const typeStyle=payment?.isTest?' style="font-weight:800;color:#8e3328"':'';
-      return `<tr>
-        <td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td>
-        <td>${esc(String(o.estado||"SIN ESTADO"))}</td><td>${esc(money(o.subtotal))}</td>
-        <td>${esc(money(o.descuento))}</td><td>${esc(money(o.total))}</td>
-        <td>${esc(o.codigo_promocional||"—")}</td><td${typeStyle}>${esc(type)}</td><td>${esc(method)}</td>
-      </tr>`;
-    }).join(""):'<tr><td colspan="9">No se encontraron pedidos.</td></tr>';
-
-    const total=Number(summary.total_pedidos||0);
-    const verification=paymentReadAvailable
-      ?` Se identificaron ${testOrderIds.size} pedido(s) con pago(s) marcado(s) como prueba entre los pedidos recientes.`
-      :" No fue posible consultar la marca de prueba de los pagos; se muestran como no verificados.";
-    salesStatus(`Actualizado correctamente. Totales calculados sobre los ${total} pedidos completos; se muestran los ${orders.length} más recientes. Los ingresos excluyen pagos marcados como prueba.${verification}`);
+    $("salesTest").textContent=salesPaymentRead?String(salesOrdersCache.filter(o=>salesPaymentCache.get(o.id)?.isTest).length):"—";
+    renderSalesOrders();
+    const n=Number(summary.total_pedidos||0);
+    salesStatus(`Actualizado. ${n} pedidos registrados; se muestran hasta los 200 más recientes. Búsqueda y filtros aplicados localmente. Solo lectura; los pagos de prueba se excluyen de los ingresos.`);
   }catch(e){
     console.error(e);
     ["salesCount","salesRevenue","salesCancelled","salesZero","salesTest","salesTotal"].forEach(id=>$(id).textContent="—");
-    $("salesRows").innerHTML='<tr><td colspan="9">No se pudo cargar el resumen. Revisa la función admin_resumen_ventas_tienda.</td></tr>';
+    $("salesRows").innerHTML='<tr><td colspan="11">No se pudo cargar el resumen. Revisa la función admin_resumen_ventas_tienda.</td></tr>';
     salesStatus(e.message||"No se pudo cargar el resumen.",true);
   }
 }
@@ -270,4 +281,3 @@ $("loginForm").onsubmit=async e=>{e.preventDefault();try{const r=await sb.auth.s
 $("logout").onclick=async()=>{await sb.auth.signOut();location.reload()};
 (async()=>{const r=await sb.auth.getSession();if(r.data?.session)try{await admin();$("login").classList.add("hidden");$("app").classList.remove("hidden");await load()}catch{await sb.auth.signOut()}})();
 </script></body></html>
-
