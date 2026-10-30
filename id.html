@@ -965,14 +965,20 @@ async function cargarPerfil() {
 
   const dataPerfil = perfil;
 
-  const esBlack =
-    dataPerfil.tipo_id === "Black ID";
+  // Normalizar el tipo de ID para reconocer valores como:
+  // "BLACK", "Black ID", "black_id" o "PREMIUM ID".
+  const tipoIdNormalizado = String(dataPerfil.tipo_id || "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]/g, "");
 
+  const esBlack = tipoIdNormalizado.includes("black");
+  const esPremium = tipoIdNormalizado.includes("premium");
 
-  const claseTarjeta =
-    esBlack
-      ? "black"
-      : "premium";
+  // Mantener PREMIUM como presentación predeterminada para los
+  // valores que no indiquen BLACK, sin alterar el dato original.
+  const claseTarjeta = esBlack ? "black" : "premium";
 
 
   const app =
