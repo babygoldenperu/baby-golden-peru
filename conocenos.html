@@ -1399,29 +1399,77 @@
     .cart-backdrop { position: fixed; z-index: 1250; inset: 0; background: rgba(24,22,19,.42); }
     body.cart-open { overflow: hidden; }
 
-    /* HERO: fotografía cargada desde el repositorio de GitHub */
-    .hero-layout {
-      position: relative; z-index: 2; width: min(calc(100% - 48px), var(--max-width));
-      margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr;
-      align-items: center; gap: 45px; padding: 95px 0 80px;
+    /* HERO — estilo editorial: texto a la izquierda y fotografía integrada a la derecha */
+    .hero {
+      min-height: 760px;
+      background: #302319;
+      isolation: isolate;
     }
-    .hero-content { width: 100%; margin: 0; padding: 0; }
-    .hero-visual { display: flex; justify-content: center; align-items: center; }
+    .hero::before, .hero::after { display: none; }
+    .hero-layout {
+      position: relative;
+      z-index: 2;
+      width: min(calc(100% - 48px), var(--max-width));
+      min-height: 760px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 24px;
+      padding: 80px 0;
+    }
+    .hero-content { position: relative; z-index: 3; width: 100%; margin: 0; padding: 0; }
+    .hero-copy { max-width: 650px; }
+    .hero h1 { max-width: 650px; font-size: clamp(64px, 7.2vw, 104px); }
+    .hero-visual {
+      position: absolute;
+      z-index: 1;
+      top: 0;
+      right: calc((min(100vw, 1320px) - 100vw) / 2);
+      width: min(59vw, 850px);
+      height: 100%;
+      min-height: 760px;
+      overflow: hidden;
+    }
     .hero-photo {
-      display: block; width: 100%; max-width: 540px; height: 430px;
-      object-fit: cover; object-position: center 38%;
-      border-radius: 28px; border: 1px solid rgba(255,255,255,.35);
-      box-shadow: 0 30px 65px rgba(0,0,0,.24);
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 38%;
+    }
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background: linear-gradient(90deg, #302319 0%, rgba(48,35,25,.78) 8%, rgba(48,35,25,.18) 38%, rgba(48,35,25,0) 68%);
+      pointer-events: none;
+    }
+    .hero-visual::after {
+      content: "";
+      position: absolute;
+      z-index: 1;
+      inset: 0;
+      background: linear-gradient(0deg, rgba(35,24,17,.16), transparent 35%);
+      pointer-events: none;
     }
     @media (max-width: 900px) {
-      .hero-layout { grid-template-columns: 1fr; gap: 35px; padding: 90px 0 75px; }
-      .hero-copy { max-width: 690px; }
-      .hero-photo { max-width: 620px; height: 390px; }
+      .hero, .hero-layout { min-height: 700px; }
+      .hero-layout { grid-template-columns: 1fr; padding: 85px 0; }
+      .hero-visual { right: -24px; width: 66vw; min-height: 700px; opacity: .78; }
+      .hero-copy { max-width: 620px; }
+      .hero-visual::before { background: linear-gradient(90deg, #302319 0%, rgba(48,35,25,.86) 18%, rgba(48,35,25,.24) 72%, rgba(48,35,25,.08)); }
     }
     @media (max-width: 650px) {
       .cart-drawer { padding: 23px 20px; }
-      .hero-layout { width: min(calc(100% - 30px), var(--max-width)); padding: 80px 0 70px; }
-      .hero-photo { height: 290px; border-radius: 20px; object-position: center 35%; }
+      .hero, .hero-layout { min-height: 650px; }
+      .hero-layout { width: min(calc(100% - 30px), var(--max-width)); padding: 78px 0 70px; }
+      .hero-visual { right: -15px; width: 100%; min-height: 650px; opacity: .52; }
+      .hero-visual::before { background: linear-gradient(90deg, rgba(48,35,25,.96), rgba(48,35,25,.62) 55%, rgba(48,35,25,.35)); }
+      .hero h1 { font-size: 60px; }
+      .hero-description { max-width: 100%; font-size: 15px; line-height: 1.7; }
+      .hero-motto { font-size: 18px; }
     }
 
     /* MEDIA QUERIES */
@@ -1690,14 +1738,8 @@
             </div>
           </div>
         </div>
-        <div class="hero-visual reveal">
-          <img
-            class="hero-photo"
-            src="img/conocenos-golden.webp"
-            alt="Golden Retriever mirando a cámara"
-            loading="eager"
-            fetchpriority="high"
-          >
+        <div class="hero-visual" aria-label="Golden Retriever">
+          <img class="hero-photo" src="img/conocenos-golden.webp" alt="Golden Retriever mirando a cámara" fetchpriority="high">
         </div>
       </div>
       <div class="hero-scroll">
