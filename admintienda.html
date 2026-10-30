@@ -231,7 +231,7 @@ async function loadSales(){
       const payment=paymentMap.get(o.id);
       const type=!paymentReadAvailable?"NO VERIFICADO":
         payment?.isTest?"PAGO DE PRUEBA":
-        payment?"SIN MARCA DE PRUEBA":"SIN REGISTRO DE PAGO";
+        payment?"PAGO NO IDENTIFICADO COMO PRUEBA":"SIN REGISTRO DE PAGO";
       const method=paymentReadAvailable?(payment?.methods.join(", ")||"—"):"No disponible";
       const typeStyle=payment?.isTest?' style="font-weight:800;color:#8e3328"':'';
       return `<tr>
@@ -270,3 +270,4 @@ $("loginForm").onsubmit=async e=>{e.preventDefault();try{const r=await sb.auth.s
 $("logout").onclick=async()=>{await sb.auth.signOut();location.reload()};
 (async()=>{const r=await sb.auth.getSession();if(r.data?.session)try{await admin();$("login").classList.add("hidden");$("app").classList.remove("hidden");await load()}catch{await sb.auth.signOut()}})();
 </script></body></html>
+
