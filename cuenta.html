@@ -2305,6 +2305,21 @@ header{min-height:64px!important}
     }
 
 
+    // Solo se permite regresar al checkout después de autenticar.
+    function destinoDespuesDeAutenticar(){
+      const params = new URLSearchParams(window.location.search);
+      return params.get("next") === "checkout.html" ? "checkout.html" : null;
+    }
+
+    function continuarDespuesDeAutenticar(user){
+      if(destinoDespuesDeAutenticar() && user){
+        window.location.replace("checkout.html");
+        return true;
+      }
+      mostrarCuenta(user);
+      return false;
+    }
+
     /* =========================================
        REGISTRO
        ========================================= */
@@ -2467,7 +2482,7 @@ header{min-height:64px!important}
 
                   emailRedirectTo:
                     window.location.origin +
-                    "/cuenta.html",
+                    (destinoDespuesDeAutenticar() ? "/cuenta.html?next=checkout.html" : "/cuenta.html"),
 
                   data: {
                     nombre: nombre,
@@ -2606,7 +2621,7 @@ header{min-height:64px!important}
           }
 
 
-          mostrarCuenta(
+          continuarDespuesDeAutenticar(
             data.user
           );
 
@@ -2648,7 +2663,7 @@ header{min-height:64px!important}
 
                   redirectTo:
                     window.location.origin +
-                    "/cuenta.html"
+                    (destinoDespuesDeAutenticar() ? "/cuenta.html?next=checkout.html" : "/cuenta.html")
 
                 }
 
@@ -3947,6 +3962,11 @@ header{min-height:64px!important}
 
       }
 
+
+      if(destinoDespuesDeAutenticar()){
+        window.location.replace("checkout.html");
+        return;
+      }
 
       mostrarCuenta(
         data.session.user
