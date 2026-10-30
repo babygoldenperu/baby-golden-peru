@@ -3043,7 +3043,7 @@ header{min-height:64px!important}
 
         const {data:perritos,error} = await supabaseClient
           .from("perritos")
-          .select("id,baby_golden_id,nombre_perrito,fecha_nacimiento,sexo,raza,foto_url,estado_solicitud,numero_microchip,red_social")
+          .select("id,baby_golden_id,nombre_perrito,fecha_nacimiento,sexo,raza,caracteristicas,tiene_microchip,foto_url,estado_solicitud,numero_microchip,red_social")
           .eq("registrado_por",session.user.id)
           .order("created_at",{ascending:false});
 
@@ -4030,7 +4030,6 @@ header{min-height:64px!important}
 
 <script id="mis-perritos-modal-script">
 async function abrirPerfilPerrito(perritoId, perritos) {
-
   function escapeHtml(value){
     return String(value ?? "")
       .replace(/&/g,"&amp;").replace(/</g,"&lt;")
@@ -4045,101 +4044,113 @@ async function abrirPerfilPerrito(perritoId, perritos) {
   const content = document.getElementById("dogProfileContent");
   if (!modal || !content) return;
 
+  const idVisible = p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0"));
   content.innerHTML = `
     <div class="dog-profile-top">
       <div class="placeholder">🐕</div>
       <div>
         <h3 id="dogProfileTitle">${escapeHtml(p.nombre_perrito || "Sin nombre")}</h3>
-        <div class="profile-id">${escapeHtml(p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0")))}</div>
+        <div class="profile-id">${escapeHtml(idVisible)}</div>
       </div>
-    </div>
-    <div class="dog-profile-grid">
-      <div class="dog-profile-field"><small>RAZA</small><span>${escapeHtml(p.raza || "No indicada")}</span></div>
-      <div class="dog-profile-field"><small>SEXO</small><span>${escapeHtml(p.sexo || "No indicado")}</span></div>
-      <div class="dog-profile-field"><small>FECHA DE NACIMIENTO</small><span>${escapeHtml(p.fecha_nacimiento || "No indicada")}</span></div>
-      <div class="dog-profile-field"><small>ESTADO</small><span>${escapeHtml(p.estado_solicitud || "PENDIENTE")}</span></div>
     </div>
     <div style="text-align:center;padding:18px 0;color:#8c8174;font-size:12px;">Cargando información...</div>
   `;
-
   modal.classList.add("is-open");
   modal.setAttribute("aria-hidden", "false");
 
-  let foto = "";
-  if (p.foto_url) {
-    const { data } = await supabaseClient.storage
-      .from("fotos-perritos").createSignedUrl(p.foto_url, 3600);
-    foto = data?.signedUrl || "";
-  }
+  try {
+    let foto = "";
+    if (p.foto_url) {
+      const { data, error } = await supabaseClient.storage
+        .from("fotos-perritos").createSignedUrl(p.foto_url, 3600);
+      if (!error) foto = data?.signedUrl || "";
+    }
 
-  const [tutorRes, infoRes] = await Promise.all([
-    supabaseClient.from("tutores")
-      .select("nombre_tutor_1,nombre_tutor_2,celular,correo,distrito")
-      .eq("perrito_id", p.id).maybeSingle(),
-    supabaseClient.from("informacion_perrito")
-      .select("alergias,detalle_alergias,condicion_medica,detalle_condicion,medicamento,detalle_medicamento,vacunas_al_dia")
-      .eq("perrito_id", p.id).maybeSingle()
-  ]);
+    // Consultar siempre usando el ID exacto del perrito seleccionado.
+    const [tutorRes, infoRes] = await Promise.all([
+      supabaseClient.from("tutores")
+        .select("nombre_tutor_1,dni_tutor_1,nombre_tutor_2,dni_tutor_2,celular,correo,distrito,emergencia_nombre,emergencia_celular")
+        .eq("perrito_id", p.id).maybeSingle(),
+      supabaseClient.from("informacion_perrito")
+        .select("alergias,detalle_alergias,condicion_medica,detalle_condicion,medicamento,detalle_medicamento,vacunas_al_dia,mostrar_celular,habilitar_whatsapp")
+        .eq("perrito_id", p.id).maybeSingle()
+    ]);
 
-  const tutor = tutorRes.data || {};
-  const info = infoRes.data || {};
+    if (tutorRes.error) throw tutorRes.error;
+    if (infoRes.error) throw infoRes.error;
 
-  const imagen = foto
-    ? `<img src="${escapeHtml(foto)}" alt="${escapeHtml(p.nombre_perrito || "Perrito")}">`
-    : `<div class="placeholder">🐕</div>`;
+    const tutor = tutorRes.data || {};
+    const info = infoRes.data || {};
+    const detalle = (v, fallback="No indicada") =>
+      escapeHtml(v === null || v === undefined || v === "" ? fallback : v);
+    const siNo = v => v === true ? "Sí" : v === false ? "No" : detalle(v);
+    const imagen = foto
+      ? `<img src="${escapeHtml(foto)}" alt="${escapeHtml(p.nombre_perrito || "Perrito")}">`
+      : `<div class="placeholder">🐕</div>`;
 
-  const detalle = (v, fallback="No indicada") =>
-    escapeHtml(v === null || v === undefined || v === "" ? fallback : v);
-
-  content.innerHTML = `
-    <div class="dog-profile-top">
-      ${imagen}
-      <div>
-        <h3 id="dogProfileTitle">${escapeHtml(p.nombre_perrito || "Sin nombre")}</h3>
-        <div class="profile-id">${escapeHtml(p.baby_golden_id || ("BGP-" + String(p.id).padStart(5,"0")))}</div>
+    content.innerHTML = `
+      <div class="dog-profile-top">
+        ${imagen}
+        <div>
+          <h3 id="dogProfileTitle">${escapeHtml(p.nombre_perrito || "Sin nombre")}</h3>
+          <div class="profile-id">${escapeHtml(idVisible)}</div>
+        </div>
       </div>
-    </div>
 
-    <div class="dog-profile-grid">
-      <div class="dog-profile-field"><small>RAZA</small><span>${detalle(p.raza)}</span></div>
-      <div class="dog-profile-field"><small>SEXO</small><span>${detalle(p.sexo)}</span></div>
-      <div class="dog-profile-field"><small>FECHA DE NACIMIENTO</small><span>${detalle(p.fecha_nacimiento)}</span></div>
-      <div class="dog-profile-field"><small>ESTADO</small><span>${detalle(p.estado_solicitud,"PENDIENTE")}</span></div>
-      <div class="dog-profile-field"><small>MICROCHIP</small><span>${detalle(p.numero_microchip,"No registrado")}</span></div>
-      <div class="dog-profile-field"><small>RED SOCIAL</small><span>${detalle(p.red_social,"No indicada")}</span></div>
-    </div>
+      <div class="dog-profile-grid">
+        <div class="dog-profile-field"><small>RAZA</small><span>${detalle(p.raza)}</span></div>
+        <div class="dog-profile-field"><small>SEXO</small><span>${detalle(p.sexo)}</span></div>
+        <div class="dog-profile-field"><small>FECHA DE NACIMIENTO</small><span>${detalle(p.fecha_nacimiento)}</span></div>
+        <div class="dog-profile-field"><small>ESTADO</small><span>${detalle(p.estado_solicitud,"PENDIENTE")}</span></div>
+        <div class="dog-profile-field"><small>¿TIENE MICROCHIP?</small><span>${siNo(p.tiene_microchip)}</span></div>
+        <div class="dog-profile-field"><small>NÚMERO DE MICROCHIP</small><span>${detalle(p.numero_microchip,"No registrado")}</span></div>
+        <div class="dog-profile-field"><small>RED SOCIAL</small><span>${detalle(p.red_social)}</span></div>
+        <div class="dog-profile-field"><small>CARACTERÍSTICAS</small><span>${detalle(p.caracteristicas)}</span></div>
+      </div>
 
-    <h4 style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Tutor</h4>
-    <div class="dog-profile-grid">
-      <div class="dog-profile-field"><small>TUTOR 1</small><span>${detalle(tutor.nombre_tutor_1)}</span></div>
-      <div class="dog-profile-field"><small>TUTOR 2</small><span>${detalle(tutor.nombre_tutor_2)}</span></div>
-      <div class="dog-profile-field"><small>CELULAR</small><span>${detalle(tutor.celular)}</span></div>
-      <div class="dog-profile-field"><small>CORREO</small><span>${detalle(tutor.correo)}</span></div>
-      <div class="dog-profile-field"><small>DISTRITO</small><span>${detalle(tutor.distrito)}</span></div>
-    </div>
+      <h4 style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Tutor</h4>
+      <div class="dog-profile-grid">
+        <div class="dog-profile-field"><small>TUTOR 1</small><span>${detalle(tutor.nombre_tutor_1)}</span></div>
+        <div class="dog-profile-field"><small>DNI TUTOR 1</small><span>${detalle(tutor.dni_tutor_1)}</span></div>
+        <div class="dog-profile-field"><small>TUTOR 2</small><span>${detalle(tutor.nombre_tutor_2)}</span></div>
+        <div class="dog-profile-field"><small>DNI TUTOR 2</small><span>${detalle(tutor.dni_tutor_2)}</span></div>
+        <div class="dog-profile-field"><small>CELULAR</small><span>${detalle(tutor.celular)}</span></div>
+        <div class="dog-profile-field"><small>CORREO</small><span>${detalle(tutor.correo)}</span></div>
+        <div class="dog-profile-field"><small>DISTRITO</small><span>${detalle(tutor.distrito)}</span></div>
+        <div class="dog-profile-field"><small>CONTACTO DE EMERGENCIA</small><span>${detalle(tutor.emergencia_nombre)}</span></div>
+        <div class="dog-profile-field"><small>CELULAR DE EMERGENCIA</small><span>${detalle(tutor.emergencia_celular)}</span></div>
+      </div>
 
-    <h4 style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Información de salud</h4>
-    <div class="dog-profile-grid">
-      <div class="dog-profile-field"><small>ALERGIAS</small><span>${detalle(info.alergias)}</span></div>
-      <div class="dog-profile-field"><small>DETALLE DE ALERGIAS</small><span>${detalle(info.detalle_alergias)}</span></div>
-      <div class="dog-profile-field"><small>CONDICIÓN MÉDICA</small><span>${detalle(info.condicion_medica)}</span></div>
-      <div class="dog-profile-field"><small>DETALLE DE CONDICIÓN</small><span>${detalle(info.detalle_condicion)}</span></div>
-      <div class="dog-profile-field"><small>MEDICAMENTO</small><span>${detalle(info.medicamento)}</span></div>
-      <div class="dog-profile-field"><small>VACUNAS AL DÍA</small><span>${detalle(info.vacunas_al_dia)}</span></div>
-    </div>
-  `;
+      <h4 style="margin:25px 0 10px;font-family:'Cormorant Garamond',serif;font-size:23px;">Información de salud</h4>
+      <div class="dog-profile-grid">
+        <div class="dog-profile-field"><small>ALERGIAS</small><span>${siNo(info.alergias)}</span></div>
+        <div class="dog-profile-field"><small>DETALLE DE ALERGIAS</small><span>${detalle(info.detalle_alergias)}</span></div>
+        <div class="dog-profile-field"><small>CONDICIÓN MÉDICA</small><span>${siNo(info.condicion_medica)}</span></div>
+        <div class="dog-profile-field"><small>DETALLE DE CONDICIÓN</small><span>${detalle(info.detalle_condicion)}</span></div>
+        <div class="dog-profile-field"><small>¿TOMA MEDICAMENTO?</small><span>${siNo(info.medicamento)}</span></div>
+        <div class="dog-profile-field"><small>DETALLE DE MEDICAMENTO</small><span>${detalle(info.detalle_medicamento)}</span></div>
+        <div class="dog-profile-field"><small>VACUNAS AL DÍA</small><span>${siNo(info.vacunas_al_dia)}</span></div>
+        <div class="dog-profile-field"><small>MOSTRAR CELULAR</small><span>${siNo(info.mostrar_celular)}</span></div>
+        <div class="dog-profile-field"><small>HABILITAR WHATSAPP</small><span>${siNo(info.habilitar_whatsapp)}</span></div>
+      </div>
+    `;
+  } catch (error) {
+    console.error("ERROR AL CARGAR PERFIL DEL PERRITO:", error);
+    content.innerHTML = `
+      <h3 id="dogProfileTitle">No se pudo cargar el perfil</h3>
+      <p style="color:#756b5f;font-size:13px;">Ocurrió un problema al consultar los datos de este perrito. Inténtalo nuevamente.</p>
+    `;
+  }
 }
 
 (function(){
   const modal=document.getElementById("dogProfileModal");
   const close=document.getElementById("dogProfileClose");
-
   function cerrar(){
     if(!modal)return;
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden","true");
   }
-
   close?.addEventListener("click",cerrar);
   modal?.addEventListener("click",e=>{if(e.target===modal)cerrar();});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrar();});
