@@ -2568,12 +2568,12 @@ footer p{
           localStorage mientras la persona inicia sesión o se registra.
           La cuenta debe devolverla a checkout.html después del acceso.
         */
-        const { data: { user }, error: authError } =
-          await supabaseClient.auth.getUser();
+        const { data: { session }, error: sessionError } =
+          await supabaseClient.auth.getSession();
 
-        if(authError) throw authError;
+        if(sessionError) throw sessionError;
 
-        if(!user){
+        if(!session || !session.user){
           localStorage.setItem("babyGoldenCheckoutReturn", "checkout.html");
           window.location.replace("cuenta.html?return=checkout.html");
           return;
