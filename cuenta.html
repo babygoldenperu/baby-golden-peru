@@ -1331,6 +1331,9 @@ header{min-height:64px!important}
 .nav-actions{width:100%!important;flex:0 0 auto!important;display:flex!important;flex-direction:row!important;flex-wrap:nowrap!important;align-items:center!important;justify-content:flex-start!important;gap:10px!important;padding:12px 8px 2px!important;margin:0!important;border-top:1px solid rgba(183,123,32,.12)!important}
 .nav-actions .icon-button{flex:0 0 38px!important}
 }
+
+.nav-actions .account-cart-link{position:relative!important}
+.account-cart-count{position:absolute;top:0;right:0;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:#b77b20;color:#fff;font:700 9px/16px Arial,sans-serif;text-align:center;box-sizing:border-box;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 </style>
 
 
@@ -1420,11 +1423,12 @@ header{min-height:64px!important}
             <circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4 4"></path>
           </svg>
         </a>
-        <a class="icon-button" href="tienda.html?abrirCarrito=1" aria-label="Carrito" title="Carrito">
+        <a class="icon-button account-cart-link" href="checkout.html" aria-label="Ir al checkout" title="Ir al checkout">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
             <circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle>
           </svg>
+          <span class="account-cart-count" id="accountCartCount" hidden>0</span>
         </a>
         <a class="icon-button" href="cuenta.html" aria-label="Mi cuenta" title="Mi cuenta">
           <svg viewBox="0 0 24 24" aria-hidden="true">
@@ -4135,6 +4139,33 @@ async function abrirPerfilPerrito(perritoId, perritos) {
   close?.addEventListener("click",cerrar);
   modal?.addEventListener("click",e=>{if(e.target===modal)cerrar();});
   document.addEventListener("keydown",e=>{if(e.key==="Escape")cerrar();});
+})();
+</script>
+
+
+<script>
+(function(){
+  const badge = document.getElementById("accountCartCount");
+  if (!badge) return;
+  function updateAccountCartCount(){
+    let count = 0;
+    try {
+      const saved = JSON.parse(localStorage.getItem("babyGoldenCart") || "null");
+      if (Array.isArray(saved)) {
+        count = saved.length;
+      } else if (saved && typeof saved === "object") {
+        count = Object.values(saved).reduce((sum, quantity) => {
+          const value = Math.floor(Number(quantity));
+          return sum + (Number.isFinite(value) && value > 0 ? value : 0);
+        }, 0);
+      }
+    } catch (_) { count = 0; }
+    badge.textContent = count > 99 ? "99+" : String(count);
+    badge.hidden = count <= 0;
+  }
+  updateAccountCartCount();
+  window.addEventListener("storage", updateAccountCartCount);
+  window.addEventListener("pageshow", updateAccountCartCount);
 })();
 </script>
 
