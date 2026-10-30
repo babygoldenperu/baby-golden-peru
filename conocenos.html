@@ -1361,6 +1361,105 @@
       }
     }
 
+
+    /* CARRITO LATERAL — sincronizado con tienda y checkout */
+    .cart-drawer {
+      position: fixed; z-index: 1300; top: 0; right: 0;
+      width: min(430px, 100%); height: 100dvh; padding: 28px;
+      display: flex; flex-direction: column; background: #fffaf4;
+      box-shadow: -18px 0 60px rgba(0,0,0,.22);
+      transform: translateX(105%); transition: transform .28s ease;
+    }
+    .cart-drawer.is-open { transform: translateX(0); }
+    .cart-drawer-header {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      gap: 20px; padding-bottom: 20px; border-bottom: 1px solid #e4d7c5;
+    }
+    .cart-drawer-header h2 { margin: 7px 0 0; font-size: 34px; line-height: .95; }
+    .panel-kicker { margin: 0; color: #b77b20; font-size: 9px; font-weight: 700; letter-spacing: 2.5px; }
+    .panel-close {
+      width: 38px; height: 38px; border: 1px solid #dfd1bd; border-radius: 50%;
+      background: transparent; color: #4a3324; font-size: 26px; line-height: 1; cursor: pointer;
+    }
+    .cart-items { flex: 1; overflow: auto; padding: 20px 0; }
+    .cart-empty { margin: 20px 0; color: #765f4c; font-size: 13px; line-height: 1.7; }
+    .cart-item { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 15px 0; border-bottom: 1px solid #eadfce; }
+    .cart-item h3 { margin: 0 0 7px; font-size: 24px; line-height: .95; }
+    .cart-item p { margin: 0; color: #765f4c; font-size: 11px; line-height: 1.7; }
+    .cart-summary { padding-top: 20px; border-top: 1px solid #e4d7c5; }
+    .cart-summary > div { display: flex; justify-content: space-between; align-items: center; font-size: 13px; }
+    .cart-summary strong { color: #b77b20; font-family: "Cormorant Garamond",serif; font-size: 29px; }
+    .cart-checkout {
+      width: 100%; display: flex; align-items: center; justify-content: center;
+      margin-top: 18px; padding: 15px; border-radius: 999px;
+      background: #4a3324; color: #fff; font-size: 10px; font-weight: 700; letter-spacing: .8px;
+    }
+    .cart-checkout.is-disabled { pointer-events: none; opacity: .52; }
+    .cart-summary p { margin: 14px 0 0; color: #765f4c; font-size: 10px; line-height: 1.6; text-align: center; }
+    .cart-backdrop { position: fixed; z-index: 1250; inset: 0; background: rgba(24,22,19,.42); }
+    body.cart-open { overflow: hidden; }
+
+    /* HERO VISUAL — composición inspirada en el inicio */
+    .hero-layout {
+      position: relative; z-index: 2; width: min(calc(100% - 48px), var(--max-width));
+      margin: 0 auto; display: grid; grid-template-columns: 1.05fr .95fr;
+      align-items: center; gap: 35px; padding: 95px 0 80px;
+    }
+    .hero-content { width: 100%; margin: 0; padding: 0; }
+    .hero-visual {
+      position: relative; min-height: 570px; display: flex;
+      justify-content: center; align-items: center;
+    }
+    .hero-golden-glow {
+      position: absolute; width: min(39vw, 490px); aspect-ratio: 1;
+      border-radius: 50%; background: #d9ad61; opacity: .25;
+      box-shadow: 0 0 0 35px rgba(215,173,99,.07), 0 0 0 70px rgba(215,173,99,.04);
+    }
+    .hero-golden-frame {
+      position: relative; z-index: 1; width: min(78%, 390px); height: 470px;
+      display: flex; align-items: center; justify-content: center;
+      overflow: hidden; border-radius: 210px 210px 28px 28px;
+      background: linear-gradient(145deg,#f0d39b,#b77b20);
+      box-shadow: 0 35px 70px rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.35);
+    }
+    .hero-golden-dog {
+      font-size: clamp(150px, 18vw, 220px);
+      filter: drop-shadow(0 18px 16px rgba(50,30,12,.18));
+      transform: translateY(8px);
+    }
+    .hero-id-card {
+      position: absolute; z-index: 3; right: -2px; bottom: 18px;
+      width: min(84%, 330px); padding: 22px 24px;
+      border: 1px solid rgba(185,139,59,.4); border-radius: 20px;
+      background: rgba(255,250,241,.97); color: #302a23;
+      box-shadow: 0 25px 55px rgba(0,0,0,.25);
+    }
+    .hero-id-top { display:flex; justify-content:space-between; align-items:center; color:#a56f20; font-size:10px; font-weight:800; letter-spacing:1px; }
+    .hero-id-mark { width:28px; height:28px; display:grid; place-items:center; border-radius:50%; background:#f1e5d1; font-size:17px; }
+    .hero-id-name { margin-top:20px; font:600 34px/1 "Cormorant Garamond",serif; color:#302a23; }
+    .hero-id-breed { margin-top:5px; color:#746b60; font-size:9px; letter-spacing:1.4px; }
+    .hero-id-number { display:inline-block; margin-top:14px; padding:7px 12px; border-radius:30px; background:#bd8730; color:#fff; font-size:9px; font-weight:800; letter-spacing:1px; }
+    .hero-id-tech { display:flex; justify-content:space-between; margin-top:17px; padding-top:12px; border-top:1px solid #e5dac7; color:#93651e; font-size:9px; font-weight:800; letter-spacing:1px; }
+
+    @media (max-width: 900px) {
+      .hero-layout { grid-template-columns: 1fr; gap: 10px; padding: 90px 0 75px; }
+      .hero-copy { max-width: 690px; }
+      .hero-visual { min-height: 490px; }
+      .hero-golden-glow { width: min(70vw, 420px); }
+      .hero-golden-frame { height: 410px; width: min(75%, 340px); }
+      .hero-id-card { right: 4%; }
+    }
+    @media (max-width: 650px) {
+      .cart-drawer { padding: 23px 20px; }
+      .hero-layout { width: min(calc(100% - 30px), var(--max-width)); padding: 80px 0 70px; }
+      .hero-visual { min-height: 420px; }
+      .hero-golden-frame { height: 350px; width: 75%; }
+      .hero-golden-dog { font-size: 155px; }
+      .hero-id-card { width: 82%; right: 0; bottom: 0; padding: 17px 19px; }
+      .hero-id-name { font-size: 29px; }
+    }
+
     /* MEDIA QUERIES */
     @media (max-width: 1150px) {
       .founder-layout { gap: 55px; }
@@ -1590,21 +1689,57 @@
     </nav>
   </header>
 
+  <!-- CARRITO LATERAL — SOLO LECTURA -->
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras" aria-hidden="true">
+    <div class="cart-drawer-header">
+      <div>
+        <p class="panel-kicker">TU SELECCIÓN</p>
+        <h2>Carrito</h2>
+      </div>
+      <button class="panel-close" type="button" id="closeCart" aria-label="Cerrar carrito">×</button>
+    </div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="cart-summary">
+      <div><span>Total</span><strong id="cartTotal">S/ 0.00</strong></div>
+      <a class="cart-checkout" href="#" id="cartCheckout" aria-disabled="true">IR AL CHECKOUT</a>
+      <p>Los productos se agregan desde nuestra tienda. Aquí puedes revisar tu selección antes de continuar.</p>
+    </div>
+  </aside>
+  <div class="cart-backdrop" id="cartBackdrop" hidden></div>
+
   <!-- MAIN -->
   <main>
     <!-- HERO -->
     <section class="hero">
-      <div class="hero-content">
-        <div class="hero-copy reveal">
-          <div class="eyebrow">BABY GOLDEN PERÚ</div>
-          <h1>Conócenos</h1>
-          <p class="hero-description">
-            Somos una comunidad creada desde el amor por los perros,
-            la tenencia responsable y el deseo de construir un mundo
-            donde cada huella tenga un propósito.
-          </p>
-          <div class="hero-motto">
-            Juntos por un mundo mejor, una pata a la vez.
+      <div class="hero-layout">
+        <div class="hero-content">
+          <div class="hero-copy reveal">
+            <div class="eyebrow">BABY GOLDEN PERÚ</div>
+            <h1>Conócenos</h1>
+            <p class="hero-description">
+              Somos una comunidad creada desde el amor por los perros,
+              la tenencia responsable y el deseo de construir un mundo
+              donde cada huella tenga un propósito.
+            </p>
+            <div class="hero-motto">
+              Juntos por un mundo mejor, una pata a la vez.
+            </div>
+          </div>
+        </div>
+        <div class="hero-visual reveal" aria-label="Ilustración de un Golden Retriever y su Baby Golden ID">
+          <div class="hero-golden-glow"></div>
+          <div class="hero-golden-frame">
+            <div class="hero-golden-dog" aria-hidden="true">🐕</div>
+          </div>
+          <div class="hero-id-card">
+            <div class="hero-id-top">
+              <span>BABY GOLDEN PERÚ</span>
+              <span class="hero-id-mark">♥</span>
+            </div>
+            <div class="hero-id-name">KALMA</div>
+            <div class="hero-id-breed">GOLDEN RETRIEVER</div>
+            <div class="hero-id-number">BGP · IDENTIDAD DIGITAL</div>
+            <div class="hero-id-tech"><span>NFC</span><span>QR CODE</span><span>COMUNIDAD</span></div>
           </div>
         </div>
       </div>
@@ -1972,6 +2107,90 @@
 
   <!-- JAVASCRIPT -->
   <script>
+    // Carrito compartido con tienda.html y checkout.html — SOLO LECTURA.
+    const cartProducts = {
+      BLACK: { name: "Black ID", price: 36.90 },
+      PREMIUM: { name: "Premium ID", price: 30.00 },
+      BANDANA: { name: "Bandana Baby Golden Perú", price: 34.90 },
+      POLO: { name: "Polo Baby Golden Perú", price: 39.90 },
+      GORRO: { name: "Gorro Baby Golden Perú", price: 79.90 }
+    };
+    const cartStorageKey = "babyGoldenCart";
+
+    function readSharedCart() {
+      try {
+        const saved = JSON.parse(localStorage.getItem(cartStorageKey));
+        if (saved && typeof saved === "object" && !Array.isArray(saved)) return saved;
+        if (Array.isArray(saved)) {
+          return saved.reduce((items, id) => {
+            if (cartProducts[id]) items[id] = (Number(items[id]) || 0) + 1;
+            return items;
+          }, {});
+        }
+        return {};
+      } catch {
+        return {};
+      }
+    }
+
+    const cartCountBadge = document.getElementById("cartCount");
+    const cartItemsContainer = document.getElementById("cartItems");
+    const cartTotalLabel = document.getElementById("cartTotal");
+    const cartDrawerPanel = document.getElementById("cartDrawer");
+    const cartBackdropLayer = document.getElementById("cartBackdrop");
+    const cartCheckoutLink = document.getElementById("cartCheckout");
+
+    function renderSharedCart() {
+      const cart = readSharedCart();
+      const ids = Object.keys(cart).filter(id => cartProducts[id] && Number(cart[id]) > 0);
+      const itemCount = ids.reduce((sum, id) => sum + Number(cart[id]), 0);
+      const total = ids.reduce((sum, id) => sum + cartProducts[id].price * Number(cart[id]), 0);
+
+      cartCountBadge.hidden = itemCount === 0;
+      cartCountBadge.textContent = itemCount;
+      cartTotalLabel.textContent = "S/ " + total.toFixed(2);
+
+      if (!itemCount) {
+        cartItemsContainer.innerHTML = '<p class="cart-empty">Tu carrito está vacío. Visita nuestra tienda para elegir tus productos.</p>';
+      } else {
+        cartItemsContainer.innerHTML = ids.map(id => {
+          const product = cartProducts[id];
+          const quantity = Number(cart[id]);
+          return `<div class="cart-item"><div><h3>${product.name}</h3><p>Cantidad: ${quantity}<br>S/ ${product.price.toFixed(2)} c/u · Subtotal: S/ ${(product.price * quantity).toFixed(2)}</p></div></div>`;
+        }).join("");
+      }
+
+      cartCheckoutLink.classList.toggle("is-disabled", itemCount === 0);
+      cartCheckoutLink.setAttribute("aria-disabled", itemCount === 0 ? "true" : "false");
+      cartCheckoutLink.href = itemCount > 0 ? "checkout.html" : "#";
+    }
+
+    function openSharedCart() {
+      renderSharedCart();
+      cartDrawerPanel.classList.add("is-open");
+      cartDrawerPanel.setAttribute("aria-hidden", "false");
+      cartBackdropLayer.hidden = false;
+      document.body.classList.add("cart-open");
+    }
+
+    function closeSharedCart() {
+      cartDrawerPanel.classList.remove("is-open");
+      cartDrawerPanel.setAttribute("aria-hidden", "true");
+      cartBackdropLayer.hidden = true;
+      document.body.classList.remove("cart-open");
+    }
+
+    document.getElementById("openCart").addEventListener("click", openSharedCart);
+    document.getElementById("closeCart").addEventListener("click", closeSharedCart);
+    cartBackdropLayer.addEventListener("click", closeSharedCart);
+    cartCheckoutLink.addEventListener("click", event => {
+      if (cartCheckoutLink.getAttribute("aria-disabled") === "true") event.preventDefault();
+    });
+    window.addEventListener("storage", event => {
+      if (event.key === cartStorageKey || event.key === null) renderSharedCart();
+    });
+    renderSharedCart();
+
     // Reveal Observer
     const revealElements = document.querySelectorAll(".reveal");
     if ("IntersectionObserver" in window) {
