@@ -33,12 +33,14 @@
       <div class="sales-card"><small>INGRESOS REGISTRADOS</small><strong id="salesRevenue">—</strong></div>
       <div class="sales-card"><small>PEDIDOS CANCELADOS</small><strong id="salesCancelled">—</strong></div>
       <div class="sales-card"><small>PEDIDOS EN S/ 0.00</small><strong id="salesZero">—</strong></div>
+      <div class="sales-card"><small>PEDIDOS DE PRUEBA</small><strong id="salesTest">—</strong></div>
+      <div class="sales-card"><small>TOTAL DE PEDIDOS</small><strong id="salesTotal">—</strong></div>
     </div>
     <div id="salesStatus" class="status hidden"></div>
     <div class="sales-actions"><button id="salesRefresh" class="btn primary" type="button">ACTUALIZAR RESUMEN</button></div>
   </div>
-  <div class="sales-panel"><h2>Pedidos recientes</h2><div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>ESTADO</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th></tr></thead><tbody id="salesRows"><tr><td colspan="7">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
-  <div class="sales-panel"><div class="sales-note">Este panel es de solo lectura. No modifica pedidos, pagos, códigos promocionales ni accesos BGP. Los ingresos se cuentan únicamente cuando el pedido está marcado como PAGADO y tiene un total mayor que cero. Para evitar sumar pagos de prueba o cancelados, el estado del pedido también debe ser válido.</div></div>
+  <div class="sales-panel"><h2>Pedidos recientes</h2><div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>ESTADO</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th></tr></thead><tbody id="salesRows"><tr><td colspan="9">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
+  <div class="sales-panel"><div class="sales-note">Este panel es de solo lectura. La identificación de pagos de prueba consulta únicamente la marca es_prueba de la tabla de pagos. Los pagos de prueba se excluyen del cálculo de ventas e ingresos en Supabase. Esta pantalla no modifica pagos, estados, credenciales, preferencias, webhooks ni ningún flujo de Mercado Pago. Si no se puede consultar la marca de prueba, el pedido aparecerá como “NO VERIFICADO”, nunca como pago real confirmado.</div></div>
 </section>
 <section id="promoView" class="promo-wrap hidden">
   <div class="promo-panel">
@@ -191,24 +193,66 @@ function salesStatus(text,error=false){$("salesStatus").textContent=text;$("sale
 function money(v){return "S/ "+Number(v||0).toLocaleString("es-PE",{minimumFractionDigits:2,maximumFractionDigits:2})}
 function salesDate(v){if(!v)return "—";const d=new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("es-PE",{dateStyle:"short",timeStyle:"short"})}
 async function loadSales(){
-  $("salesRows").innerHTML='<tr><td colspan="7">Cargando pedidos…</td></tr>';
+  $("salesRows").innerHTML='<tr><td colspan="9">Cargando pedidos…</td></tr>';
   try{
-    // Los totales se calculan en Supabase con una RPC protegida para administradores,
-    // no a partir de una lista limitada por las políticas RLS del navegador.
     const r=await sb.rpc("admin_resumen_ventas_tienda");
     if(r.error)throw r.error;
     let summary=r.data;
     if(typeof summary==="string")summary=JSON.parse(summary||"{}");
     if(!summary||typeof summary!=="object")throw new Error("Supabase devolvió un resumen vacío o inválido.");
+
     const orders=Array.isArray(summary.pedidos)?summary.pedidos:[];
     $("salesCount").textContent=String(Number(summary.ventas_validas||0));
     $("salesRevenue").textContent=money(summary.ingresos_registrados||0);
     $("salesCancelled").textContent=String(Number(summary.pedidos_cancelados||0));
     $("salesZero").textContent=String(Number(summary.pedidos_cero||0));
-    $("salesRows").innerHTML=orders.length?orders.map(o=>`<tr><td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td><td>${esc(String(o.estado||"SIN ESTADO"))}</td><td>${esc(money(o.subtotal))}</td><td>${esc(money(o.descuento))}</td><td>${esc(money(o.total))}</td><td>${esc(o.codigo_promocional||"—")}</td></tr>`).join(""):'<tr><td colspan="7">No se encontraron pedidos.</td></tr>';
+    $("salesTotal").textContent=String(Number(summary.total_pedidos||0));
+
+    // Lectura únicamente de la clasificación; no modifica pagos ni invoca Mercado Pago.
+    let paymentMap=new Map(), paymentReadAvailable=true, testOrderIds=new Set();
+    const orderIds=orders.map(o=>o.id).filter(Boolean);
+    if(orderIds.length){
+      const pr=await sb.from("pagos").select("pedido_id,es_prueba,payment_method").in("pedido_id",orderIds);
+      if(pr.error){
+        console.warn("No se pudo consultar la clasificación de pagos:",pr.error);
+        paymentReadAvailable=false;
+      }else{
+        (pr.data||[]).forEach(pg=>{
+          const current=paymentMap.get(pg.pedido_id)||{isTest:false,methods:[]};
+          if(pg.es_prueba===true){current.isTest=true;testOrderIds.add(pg.pedido_id);}
+          if(pg.payment_method&&!current.methods.includes(pg.payment_method))current.methods.push(pg.payment_method);
+          paymentMap.set(pg.pedido_id,current);
+        });
+      }
+    }
+    $("salesTest").textContent=paymentReadAvailable?String(testOrderIds.size):"—";
+
+    $("salesRows").innerHTML=orders.length?orders.map(o=>{
+      const payment=paymentMap.get(o.id);
+      const type=!paymentReadAvailable?"NO VERIFICADO":
+        payment?.isTest?"PAGO DE PRUEBA":
+        payment?"SIN MARCA DE PRUEBA":"SIN REGISTRO DE PAGO";
+      const method=paymentReadAvailable?(payment?.methods.join(", ")||"—"):"No disponible";
+      const typeStyle=payment?.isTest?' style="font-weight:800;color:#8e3328"':'';
+      return `<tr>
+        <td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td>
+        <td>${esc(String(o.estado||"SIN ESTADO"))}</td><td>${esc(money(o.subtotal))}</td>
+        <td>${esc(money(o.descuento))}</td><td>${esc(money(o.total))}</td>
+        <td>${esc(o.codigo_promocional||"—")}</td><td${typeStyle}>${esc(type)}</td><td>${esc(method)}</td>
+      </tr>`;
+    }).join(""):'<tr><td colspan="9">No se encontraron pedidos.</td></tr>';
+
     const total=Number(summary.total_pedidos||0);
-    salesStatus(`Actualizado correctamente. Totales calculados sobre los ${total} pedidos completos; se muestran los ${orders.length} más recientes. Los pedidos cancelados y los de S/ 0.00 no se cuentan como ventas.`);
-  }catch(e){console.error(e);$("salesCount").textContent="—";$("salesRevenue").textContent="—";$("salesCancelled").textContent="—";$("salesZero").textContent="—";$("salesRows").innerHTML='<tr><td colspan="7">No se pudo cargar el resumen. Ejecuta primero el SQL de configuración de la función admin_resumen_ventas_tienda.</td></tr>';salesStatus(e.message||"No se pudo cargar el resumen.",true)}
+    const verification=paymentReadAvailable
+      ?` Se identificaron ${testOrderIds.size} pedido(s) con pago(s) marcado(s) como prueba entre los pedidos recientes.`
+      :" No fue posible consultar la marca de prueba de los pagos; se muestran como no verificados.";
+    salesStatus(`Actualizado correctamente. Totales calculados sobre los ${total} pedidos completos; se muestran los ${orders.length} más recientes. Los ingresos excluyen pagos marcados como prueba.${verification}`);
+  }catch(e){
+    console.error(e);
+    ["salesCount","salesRevenue","salesCancelled","salesZero","salesTest","salesTotal"].forEach(id=>$(id).textContent="—");
+    $("salesRows").innerHTML='<tr><td colspan="9">No se pudo cargar el resumen. Revisa la función admin_resumen_ventas_tienda.</td></tr>';
+    salesStatus(e.message||"No se pudo cargar el resumen.",true);
+  }
 }
 function showMainView(view){
   $("productsView").classList.toggle("hidden",view!=="products");
