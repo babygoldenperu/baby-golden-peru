@@ -2132,13 +2132,12 @@
         href="checkout.html"
         id="cartCheckout"
       >
-        CONTINUAR A MI CUENTA
+        CONTINUAR AL CHECKOUT
       </a>
 
 
       <p>
-        Desde Mi cuenta podrás crear tu orden
-        e iniciar el proceso de compra.
+        Continúa al checkout para completar tu compra.
       </p>
 
 
@@ -2339,11 +2338,15 @@
         console.error("Error cargando productos (fallback):",error);
         document.getElementById("productsGridId").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
         document.getElementById("productsGridMerch").innerHTML='<p style="grid-column:1/-1;text-align:center;color:#765f4c">No se pudieron cargar los productos.</p>';
+        renderCart();
         return;
       }
-      products={};
-      (data||[]).forEach(p=>products[p.sku]=p);
+      products = {};
+      (data || []).forEach(p => {
+        if (p && p.sku) products[String(p.sku)] = p;
+      });
       renderProducts();
+      renderCart(); // Recalcula precios y detalles cuando Supabase termina.
     }
 
     function normalizeCategory(value){
@@ -2470,69 +2473,34 @@
 
 
     function getCart() {
-
       try {
+        const saved = JSON.parse(localStorage.getItem(cartKey) || "null");
 
-        const saved =
-          JSON.parse(
-            localStorage.getItem(
-              cartKey
-            )
-          );
-
-
-        /*
-          Si existe un carrito antiguo
-          guardado como array, lo convertimos
-          al nuevo formato de cantidades.
-        */
-
-        if(Array.isArray(saved)){
-
+        // Compatibilidad con carritos antiguos guardados como array.
+        // No dependemos de que Supabase haya terminado de cargar productos.
+        if (Array.isArray(saved)) {
           const converted = {};
-
-
-          saved.forEach(id => {
-
-            if(products[id]){
-
-              converted[id] =
-                (
-                  Number(
-                    converted[id]
-                  ) || 0
-                ) + 1;
-
-            }
-
+          saved.forEach(value => {
+            const id = String(value || "").trim();
+            if (id) converted[id] = (Number(converted[id]) || 0) + 1;
           });
-
-
           saveCart(converted);
-
           return converted;
-
         }
 
+        if (!saved || typeof saved !== "object") return {};
 
-        if(
-          saved &&
-          typeof saved === "object"
-        ){
-
-          return saved;
-
-        }
-
-
+        const normalized = {};
+        Object.entries(saved).forEach(([id, quantity]) => {
+          const key = String(id || "").trim();
+          const qty = Math.floor(Number(quantity));
+          if (key && Number.isFinite(qty) && qty > 0) normalized[key] = qty;
+        });
+        return normalized;
+      } catch (error) {
+        console.error("No se pudo leer el carrito guardado:", error);
         return {};
-
-      } catch {
-
-        return {};
-
       }
-
     }
 
 
@@ -2619,19 +2587,14 @@
 
       const cart = getCart();
 
-      const ids =
-        Object.keys(cart).filter(
-          id =>
-            products[id] &&
-            Number(cart[id]) > 0
-        );
+      // El contador se calcula desde localStorage, sin depender de la
+      // carga de productos de Supabase. Así nunca muestra cero por demora.
+      const ids = Object.keys(cart).filter(id => Number(cart[id]) > 0);
 
-      const totalItems =
-        ids.reduce(
-          (total, id) =>
-            total + Number(cart[id]),
-          0
-        );
+      const totalItems = ids.reduce(
+        (total, id) => total + Number(cart[id]),
+        0
+      );
 
       cartCount.hidden =
         totalItems === 0;
@@ -2666,11 +2629,14 @@
         cartItems.innerHTML =
           ids.map(id => {
 
-            const product =
-              products[id];
+            const product = products[id] || {
+              sku: id,
+              nombre: "Producto pendiente de cargar",
+              precio: 0,
+              imagen_url: "BABY%20GOLDEN.png"
+            };
 
-            const quantity =
-              Number(cart[id]);
+            const quantity = Number(cart[id]);
 
             return `
 
@@ -2838,53 +2804,10 @@
         totalItems === 0
       );
 
-      /*
-        Si el usuario ya inició sesión:
-        → checkout.html
-
-        Si no inició sesión:
-        → cuenta.html
-      */
-
-      checkout.href =
-        "cuenta.html";
-
-
-      checkout.dataset.loggedIn =
-        "false";
-
-
-      supabaseClient.auth
-        .getSession()
-        .then(
-          ({
-            data
-          }) => {
-
-            const session =
-              data?.session;
-
-
-            if(session){
-
-              checkout.href =
-                "checkout.html";
-
-              checkout.dataset.loggedIn =
-                "true";
-
-            } else {
-
-              checkout.href =
-                "cuenta.html";
-
-              checkout.dataset.loggedIn =
-                "false";
-
-            }
-
-          }
-        );
+      // El carrito siempre conduce al checkout. El checkout se encarga
+      // de solicitar autenticación y regresar al proceso de compra.
+      checkout.href = "checkout.html";
+      checkout.dataset.loggedIn = "not-checked-here";
 
     }
 
@@ -3029,39 +2952,14 @@
        INICIAR
        ========================================= */
 
-    document
-      .getElementById("cartCheckout")
-      .addEventListener(
-        "click",
-        async function(event){
-
-          const {
-            data
-          } =
-            await supabaseClient.auth.getSession();
-
-
-          const session =
-            data?.session;
-
-
-          event.preventDefault();
-
-
-          if(session){
-
-            window.location.href =
-              "checkout.html";
-
-          } else {
-
-            window.location.href =
-              "cuenta.html";
-
-          }
-
-        }
-      );
+    document.getElementById("cartCheckout").addEventListener("click", function(event){
+      if (this.classList.contains("is-disabled")) {
+        event.preventDefault();
+        return;
+      }
+      // No redirigir a Mi cuenta desde la tienda: checkout.html gestiona
+      // el inicio de sesión y conserva el carrito.
+    });
 
 
     renderCart();
