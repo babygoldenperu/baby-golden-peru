@@ -1420,7 +1420,7 @@ header{min-height:64px!important}
             <circle cx="11" cy="11" r="6.5"></circle><path d="M16 16l4 4"></path>
           </svg>
         </a>
-        <a class="icon-button" href="tienda.html" aria-label="Carrito" title="Carrito">
+        <a class="icon-button" href="tienda.html?abrirCarrito=1" aria-label="Carrito" title="Carrito">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M3 4h2l2.1 10.1a2 2 0 0 0 2 1.6h7.8a2 2 0 0 0 1.9-1.4L20 8H7"></path>
             <circle cx="10" cy="20" r="1"></circle><circle cx="17" cy="20" r="1"></circle>
@@ -2308,7 +2308,8 @@ header{min-height:64px!important}
     // Solo se permite regresar al checkout después de autenticar.
     function destinoDespuesDeAutenticar(){
       const params = new URLSearchParams(window.location.search);
-      return params.get("next") === "checkout.html" ? "checkout.html" : null;
+      const destino = params.get("return") || params.get("next");
+      return destino === "checkout.html" ? "checkout.html" : null;
     }
 
     function continuarDespuesDeAutenticar(user){
