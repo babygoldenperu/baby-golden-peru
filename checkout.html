@@ -2136,6 +2136,10 @@ footer p{
         throw new Error("Supabase no está configurado.");
       }
 
+      const { data: { user }, error: authError } = await supabaseClient.auth.getUser();
+      if(authError) throw authError;
+      if(!user) throw new Error("Debes iniciar sesión o crear una cuenta antes de comprar.");
+
       const cartPayload = {};
       lines.forEach(line => {
         cartPayload[line.sku] = line.quantity;
@@ -2197,12 +2201,23 @@ footer p{
             departamento: String(formData.get("departamento") || "").trim()
           };
 
-          const { data: { user: usuarioCheckout } } =
+          const { data: { user: usuarioCheckout }, error: authError } =
             await supabaseClient.auth.getUser();
 
-          if(usuarioCheckout?.email){
-            customer.email = usuarioCheckout.email;
+          if(authError) throw authError;
+
+          if(!usuarioCheckout){
+            // Conserva el carrito y los datos ingresados mientras el cliente
+            // inicia sesión o crea su cuenta. La página de cuenta lo devolverá.
+            localStorage.setItem("babyGoldenCheckout", JSON.stringify(customer));
+            localStorage.setItem("babyGoldenCheckoutReturn", "checkout.html");
+            formError.innerHTML = 'Para realizar tu compra primero debes <a href="cuenta.html?next=checkout.html" style="color:#8a5a35;font-weight:700;text-decoration:underline">iniciar sesión o crear una cuenta</a>. Tu carrito se conservará.';
+            button.disabled = false;
+            button.textContent = "CONTINUAR AL PAGO";
+            return;
           }
+
+          customer.email = usuarioCheckout.email || customer.email;
 
           checkoutBusy = true;
           button.disabled = true;
