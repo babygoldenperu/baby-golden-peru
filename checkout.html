@@ -2551,10 +2551,32 @@ footer p{
       const button = document.getElementById("continueButton");
 
       try{
+        if(!supabaseClient){
+          throw new Error("No se pudo iniciar Supabase. Revisa la conexión.");
+        }
+
         if(SUPABASE_ANON_KEY === "PEGA_AQUI_TU_SUPABASE_ANON_KEY"){
           throw new Error(
             "Falta configurar la clave pública (anon key) de Supabase en checkout.html."
           );
+        }
+
+        /*
+          ACCESO OBLIGATORIO CON CUENTA:
+          Antes de cargar el formulario o permitir continuar, verificamos
+          que exista una sesión autenticada. El carrito permanece en
+          localStorage mientras la persona inicia sesión o se registra.
+          La cuenta debe devolverla a checkout.html después del acceso.
+        */
+        const { data: { user }, error: authError } =
+          await supabaseClient.auth.getUser();
+
+        if(authError) throw authError;
+
+        if(!user){
+          localStorage.setItem("babyGoldenCheckoutReturn", "checkout.html");
+          window.location.replace("cuenta.html?return=checkout.html");
+          return;
         }
 
         await loadProducts();
