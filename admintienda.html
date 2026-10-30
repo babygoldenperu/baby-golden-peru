@@ -20,7 +20,7 @@
 @media(max-width:560px){.promo-wrap{padding:14px}.promo-panel{padding:16px}.promo-form{grid-template-columns:1fr}.promo-form .wide{grid-column:auto}}
 @media(max-width:1050px){.layout{grid-template-columns:210px 1fr}.inspect{grid-column:1/-1;border-left:0;border-top:1px solid #ded1bf}}@media(max-width:700px){.layout{grid-template-columns:1fr}.side{border-right:0;border-bottom:1px solid #ded1bf}.grid{grid-template-columns:1fr}.top{padding:0 12px}.brand span{display:none}}
 
-.sales-wrap{padding:26px;max-width:1500px;margin:auto}.sales-panel{background:#fff;border:1px solid #ded1bf;border-radius:18px;padding:24px;margin-bottom:20px}.sales-panel h2{font:600 32px "Cormorant Garamond",serif;margin:0 0 8px}.sales-panel p{font-size:11px;line-height:1.6;color:#765f4c}.sales-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}.sales-card{background:#fffaf4;border:1px solid #e4d6c4;border-radius:14px;padding:18px}.sales-card small{display:block;font-size:9px;font-weight:800;letter-spacing:1px;color:#8c7159}.sales-card strong{display:block;font:700 30px "Cormorant Garamond",serif;color:#b77b20;margin-top:8px}.sales-table-wrap{overflow:auto}.sales-table{width:100%;border-collapse:collapse;font-size:11px;min-width:680px}.sales-table th,.sales-table td{text-align:left;padding:12px 10px;border-bottom:1px solid #eee1d2}.sales-table th{font-size:9px;letter-spacing:1px;color:#8c7159}.sales-note{padding:12px;border-radius:10px;background:#f2eadf;color:#654d38;font-size:10px;line-height:1.6}.sales-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}@media(max-width:850px){.sales-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.sales-wrap{padding:14px}.sales-panel{padding:16px}.sales-cards{grid-template-columns:1fr}}
+.sales-wrap{padding:26px;max-width:1500px;margin:auto}.sales-panel{background:#fff;border:1px solid #ded1bf;border-radius:18px;padding:24px;margin-bottom:20px}.sales-panel h2{font:600 32px "Cormorant Garamond",serif;margin:0 0 8px}.sales-panel p{font-size:11px;line-height:1.6;color:#765f4c}.sales-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:18px 0}.sales-card{background:#fffaf4;border:1px solid #e4d6c4;border-radius:14px;padding:18px}.sales-card small{display:block;font-size:9px;font-weight:800;letter-spacing:1px;color:#8c7159}.sales-card strong{display:block;font:700 30px "Cormorant Garamond",serif;color:#b77b20;margin-top:8px}.sales-table-wrap{overflow:auto}.sales-table{width:100%;border-collapse:collapse;font-size:11px;min-width:680px}.sales-table th,.sales-table td{text-align:left;padding:12px 10px;border-bottom:1px solid #eee1d2}.sales-table th{font-size:9px;letter-spacing:1px;color:#8c7159}.order-state-select{max-width:155px;padding:7px;border:1px solid #d9c9b6;border-radius:8px;background:#fffaf4;color:#342a22;font-size:10px}.order-state-select:disabled{opacity:.65;cursor:not-allowed}.sales-note{padding:12px;border-radius:10px;background:#f2eadf;color:#654d38;font-size:10px;line-height:1.6}.sales-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}@media(max-width:850px){.sales-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.sales-wrap{padding:14px}.sales-panel{padding:16px}.sales-cards{grid-template-columns:1fr}}
 </style></head><body>
 <div id="login" class="login"><form id="loginForm" class="loginbox"><h1>Editor de tienda.</h1><p>Usa la misma cuenta de administrador de Baby Golden Perú.</p><label>Correo</label><input id="email" type="email" required><label>Contraseña</label><input id="password" type="password" required><button class="btn primary" type="submit">INGRESAR</button><div id="loginMsg" class="status error hidden"></div></form></div>
 <div id="app" class="hidden"><header class="top"><div class="brand">BABY GOLDEN PERÚ <span>EDITOR DE TIENDA</span></div><div class="actions"><button id="showSales" class="btn light" type="button">RESUMEN DE VENTAS</button><button id="showPromos" class="btn light" type="button">CÓDIGOS PROMOCIONALES</button><button id="showProducts" class="btn light hidden" type="button">VOLVER A PRODUCTOS</button><button id="new" class="btn light">+ NUEVO PRODUCTO</button><button id="logout" class="btn dark">SALIR</button></div></header>
@@ -44,8 +44,8 @@
     <input id="salesSearch" type="search" placeholder="Buscar pedido, cliente, correo o teléfono" style="flex:1;min-width:220px;padding:11px;border:1px solid #ddd;border-radius:8px">
     <select id="salesStateFilter" style="padding:11px;border:1px solid #ddd;border-radius:8px"><option value="">Todos los estados</option><option value="PAGADO">Pagado</option><option value="CANCELADO">Cancelado</option><option value="PENDIENTE">Pendiente</option><option value="RECHAZADO">Rechazado</option></select>
   </div>
-  <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>CLIENTE</th><th>ESTADO</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th><th>DETALLE</th></tr></thead><tbody id="salesRows"><tr><td colspan="11">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
-  <div class="sales-panel"><div class="sales-note">Este panel es de solo lectura. La identificación de pagos de prueba consulta únicamente la marca es_prueba de la tabla de pagos. Los pagos de prueba se excluyen del cálculo de ventas e ingresos en Supabase. Esta pantalla no modifica pagos, estados, credenciales, preferencias, webhooks ni ningún flujo de Mercado Pago. Si no se puede consultar la marca de prueba, el pedido aparecerá como “NO VERIFICADO”, nunca como pago real confirmado.</div></div>
+  <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>CLIENTE</th><th>ESTADO / GESTIÓN</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th><th>DETALLE</th></tr></thead><tbody id="salesRows"><tr><td colspan="11">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
+  <div class="sales-panel"><div class="sales-note">La identificación de pagos de prueba consulta únicamente la marca es_prueba de la tabla de pagos. Los pagos de prueba se excluyen del cálculo de ventas e ingresos en Supabase. La gestión solo permite actualizar el estado operativo de pedidos pagados; no modifica pagos, credenciales, preferencias, webhooks ni ningún flujo de Mercado Pago. Si no se puede consultar la marca de prueba, el pedido aparecerá como “NO VERIFICADO”, nunca como pago real confirmado.</div></div>
 </section>
 <section id="promoView" class="promo-wrap hidden">
   <div class="promo-panel">
@@ -216,7 +216,7 @@ function renderSalesOrders(){
     const detail=`<details><summary style="cursor:pointer">Ver</summary><div style="min-width:220px;white-space:normal;line-height:1.6"><b>${esc(customer)}</b><br>Correo: ${esc(o.email||"—")}<br>Teléfono: ${esc(o.telefono||"—")}<br>Dirección: ${esc(o.direccion||"—")}<br>Distrito: ${esc(o.distrito||"—")}<br>Provincia: ${esc(o.provincia||"—")}<br>Departamento: ${esc(o.departamento||"—")}<br>Envío: ${esc(money(o.envio))}</div></details>`;
     return `<tr>
       <td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td>
-      <td>${esc(customer)}</td><td>${esc(String(o.estado||"SIN ESTADO"))}</td>
+      <td>${esc(customer)}</td><td>${(()=>{const st=String(o.estado||"").toUpperCase();const canManage=["PAGADO","EN_PREPARACION","ENVIADO"].includes(st);return `<select class="order-state-select" data-order-id="${esc(o.id)}" ${canManage?"":"disabled"} aria-label="Estado del pedido ${esc(o.numero_pedido)}"><option value="" selected>${esc(st||"SIN ESTADO")}</option>${canManage?`<option value="EN_PREPARACION" ${st==="EN_PREPARACION"?"disabled":""}>En preparación</option><option value="ENVIADO" ${st==="ENVIADO"?"disabled":""}>Enviado</option><option value="ENTREGADO">Entregado</option>`:""}</select>`})()}</td>
       <td>${esc(money(o.subtotal))}</td><td>${esc(money(o.descuento))}</td>
       <td>${esc(money(o.total))}</td><td>${esc(o.codigo_promocional||"—")}</td>
       <td${typeStyle}>${esc(type)}</td><td>${esc(method)}</td><td>${detail}</td>
@@ -225,6 +225,22 @@ function renderSalesOrders(){
 }
 $("salesSearch").addEventListener("input",renderSalesOrders);
 $("salesStateFilter").addEventListener("change",renderSalesOrders);
+$("salesRows").addEventListener("change",async e=>{
+  const select=e.target.closest(".order-state-select");
+  if(!select||!select.value)return;
+  const nextState=select.value, orderId=select.dataset.orderId;
+  if(!confirm(`¿Cambiar el pedido a ${nextState.replaceAll("_"," ")}? Esta acción solo actualiza el estado operativo del pedido; no modifica pagos ni Mercado Pago.`)){select.value="";return;}
+  select.disabled=true;
+  try{
+    const {data,error}=await sb.rpc("admin_actualizar_estado_pedido",{p_pedido_id:orderId,p_estado:nextState});
+    if(error)throw error;
+    salesStatus(`Pedido #${data?.numero_pedido??""} actualizado a ${nextState.replaceAll("_"," ")}. No se modificó ningún pago.`);
+    await loadSales();
+  }catch(err){
+    salesStatus(err.message||"No se pudo actualizar el estado del pedido.",true);
+    await loadSales();
+  }
+});
 
 async function loadSales(){
   $("salesRows").innerHTML='<tr><td colspan="11">Cargando pedidos…</td></tr>';
@@ -257,7 +273,7 @@ async function loadSales(){
     $("salesTest").textContent=salesPaymentRead?String(salesOrdersCache.filter(o=>salesPaymentCache.get(o.id)?.isTest).length):"—";
     renderSalesOrders();
     const n=Number(summary.total_pedidos||0);
-    salesStatus(`Actualizado. ${n} pedidos registrados; se muestran hasta los 200 más recientes. Búsqueda y filtros aplicados localmente. Solo lectura; los pagos de prueba se excluyen de los ingresos.`);
+    salesStatus(`Actualizado. ${n} pedidos registrados; se muestran hasta los 200 más recientes. Búsqueda y filtros locales. Los cambios de estado solo están habilitados para pedidos pagados; no modifican pagos ni Mercado Pago. Los pagos de prueba se excluyen de los ingresos.`);
   }catch(e){
     console.error(e);
     ["salesCount","salesRevenue","salesCancelled","salesZero","salesTest","salesTotal"].forEach(id=>$(id).textContent="—");
