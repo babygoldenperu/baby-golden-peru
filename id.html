@@ -976,6 +976,13 @@ async function cargarPerfil() {
   const esBlack = tipoIdNormalizado.includes("black");
   const esPremium = tipoIdNormalizado.includes("premium");
 
+  // Unificar el nombre visible sin modificar el valor guardado en Supabase.
+  const etiquetaTipoId = esBlack
+    ? "BLACK ID"
+    : esPremium
+      ? "PREMIUM ID"
+      : String(dataPerfil.tipo_id || "Baby Golden ID").trim();
+
   // Mantener PREMIUM como presentación predeterminada para los
   // valores que no indiquen BLACK, sin alterar el dato original.
   const claseTarjeta = esBlack ? "black" : "premium";
@@ -1472,9 +1479,7 @@ const beneficiosID = `
 
       <div class="id-type">
 
-        ${escaparHTML(
-          dataPerfil.tipo_id
-        )}
+        ${escaparHTML(etiquetaTipoId)}
 
       </div>
 
@@ -1559,9 +1564,7 @@ const beneficiosID = `
 
           <span class="value">
 
-            ${escaparHTML(
-              dataPerfil.tipo_id
-            )}
+            ${escaparHTML(etiquetaTipoId)}
 
           </span>
 
