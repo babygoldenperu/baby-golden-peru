@@ -1686,11 +1686,10 @@
       height:100% !important;
       max-width:100% !important;
       max-height:100% !important;
-      object-fit:cover !important;
-      object-position:center !important;
+      /* Mantiene la proporción original completa de cada fotografía. */
+      object-fit:contain !important;
+      object-position:center center !important;
       min-width:0;
-      object-fit:fill !important;
-      object-position:center;
       background:#f5eee4;
       transition:transform .7s ease;
     }
