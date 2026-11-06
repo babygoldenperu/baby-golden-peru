@@ -1365,6 +1365,23 @@ footer p{
       }
     }
 </style>
+<style id="checkout-summary-first-responsive">
+/* En móviles y tablets: mostrar primero el resumen y después los datos. */
+@media (max-width:1024px){
+  .checkout-grid{
+    grid-template-columns:1fr !important;
+  }
+
+  .checkout-grid > aside.box{
+    order:1;
+  }
+
+  .checkout-grid > section.box{
+    order:2;
+  }
+}
+</style>
+
 </head>
 
 
