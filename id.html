@@ -151,15 +151,21 @@
 
     .photo-container {
       padding: 0 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 220px;
     }
 
 
     .photo {
-      width: 100%;
+      /* Conserva la proporción original: no recorta ni estira la foto. */
+      width: auto;
+      height: auto;
+      max-width: 100%;
+      max-height: 420px;
 
-      aspect-ratio: 1 / 1;
-
-      object-fit: cover;
+      object-fit: contain;
 
       display: block;
 
@@ -741,6 +747,14 @@
 
       .card {
         border-radius: 22px;
+      }
+
+      .photo-container {
+        min-height: 180px;
+      }
+
+      .photo {
+        max-height: 360px;
       }
 
       .name {
