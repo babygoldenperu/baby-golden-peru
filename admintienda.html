@@ -44,7 +44,7 @@
     <input id="salesSearch" type="search" placeholder="Buscar pedido, cliente, correo o teléfono" style="flex:1;min-width:220px;padding:11px;border:1px solid #ddd;border-radius:8px">
     <select id="salesStateFilter" style="padding:11px;border:1px solid #ddd;border-radius:8px"><option value="">Todos los estados</option><option value="PAGADO">Pagado</option><option value="CANCELADO">Cancelado</option><option value="PENDIENTE">Pendiente</option><option value="RECHAZADO">Rechazado</option></select>
   </div>
-  <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>CLIENTE</th><th>ESTADO / GESTIÓN</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th><th>DETALLE</th></tr></thead><tbody id="salesRows"><tr><td colspan="11">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
+  <div class="sales-table-wrap"><table class="sales-table"><thead><tr><th>N.º PEDIDO</th><th>FECHA</th><th>CLIENTE</th><th>ESTADO / GESTIÓN</th><th>SUBTOTAL</th><th>DESCUENTO</th><th>TOTAL</th><th>CÓDIGO</th><th>TIPO</th><th>MÉTODO DE PAGO</th><th>PRODUCTOS</th><th>DETALLE</th></tr></thead><tbody id="salesRows"><tr><td colspan="12">Inicia sesión para cargar los pedidos.</td></tr></tbody></table></div></div>
   <div class="sales-panel"><div class="sales-note">La identificación de pagos de prueba consulta únicamente la marca es_prueba de la tabla de pagos. Los pagos de prueba se excluyen del cálculo de ventas e ingresos en Supabase. La gestión solo permite actualizar el estado operativo de pedidos pagados; no modifica pagos, credenciales, preferencias, webhooks ni ningún flujo de Mercado Pago. Si no se puede consultar la marca de prueba, el pedido aparecerá como “NO VERIFICADO”, nunca como pago real confirmado.</div></div>
 </section>
 <section id="promoView" class="promo-wrap hidden">
@@ -197,7 +197,7 @@ $("promoForm").onsubmit=async e=>{e.preventDefault();const b=$("promoSave");b.di
 function salesStatus(text,error=false){$("salesStatus").textContent=text;$("salesStatus").classList.remove("hidden");$("salesStatus").classList.toggle("error",error)}
 function money(v){return "S/ "+Number(v||0).toLocaleString("es-PE",{minimumFractionDigits:2,maximumFractionDigits:2})}
 function salesDate(v){if(!v)return "—";const d=new Date(v);return Number.isNaN(d.getTime())?"—":d.toLocaleString("es-PE",{dateStyle:"short",timeStyle:"short"})}
-let salesOrdersCache=[], salesPaymentCache=new Map(), salesPaymentRead=true;
+let salesOrdersCache=[], salesPaymentCache=new Map(), salesItemsCache=new Map(), salesPaymentRead=true;
 function renderSalesOrders(){
   const term=($("salesSearch")?.value||"").trim().toLowerCase();
   const state=($("salesStateFilter")?.value||"").toUpperCase();
@@ -213,15 +213,18 @@ function renderSalesOrders(){
     const method=salesPaymentRead?(payment?.methods.join(", ")||"—"):"No disponible";
     const typeStyle=payment?.isTest?' style="font-weight:800;color:#8e3328"':'';
     const customer=[o.nombre,o.apellidos].filter(Boolean).join(" ")||"—";
+    const items=salesItemsCache.get(o.id)||[];
+    const products=items.length?items.map(it=>`<div style="padding:5px 0;border-bottom:1px solid #eee1d2"><b>${esc(it.nombre||it.producto_id||"Producto")}</b><br><small>${Number(it.cantidad||1)} × ${esc(money(it.precio))} = ${esc(money(it.subtotal??(Number(it.precio||0)*Number(it.cantidad||1))))}</small></div>`).join(""):'<span style="color:#8e3328">No se encontraron productos asociados.</span>';
+    const productDetail=`<details><summary style="cursor:pointer">Ver productos (${items.length})</summary><div style="min-width:180px;white-space:normal;line-height:1.5;padding:5px 0">${products}</div></details>`;
     const detail=`<details><summary style="cursor:pointer">Ver</summary><div style="min-width:220px;white-space:normal;line-height:1.6"><b>${esc(customer)}</b><br>Correo: ${esc(o.email||"—")}<br>Teléfono: ${esc(o.telefono||"—")}<br>Dirección: ${esc(o.direccion||"—")}<br>Distrito: ${esc(o.distrito||"—")}<br>Provincia: ${esc(o.provincia||"—")}<br>Departamento: ${esc(o.departamento||"—")}<br>Envío: ${esc(money(o.envio))}</div></details>`;
     return `<tr>
       <td>${esc(o.numero_pedido??o.id)}</td><td>${esc(salesDate(o.created_at))}</td>
       <td>${esc(customer)}</td><td>${(()=>{const st=String(o.estado||"").toUpperCase();const canManage=["PAGADO","EN_PREPARACION","ENVIADO"].includes(st);return `<select class="order-state-select" data-order-id="${esc(o.id)}" ${canManage?"":"disabled"} aria-label="Estado del pedido ${esc(o.numero_pedido)}"><option value="" selected>${esc(st||"SIN ESTADO")}</option>${canManage?`<option value="EN_PREPARACION" ${st==="EN_PREPARACION"?"disabled":""}>En preparación</option><option value="ENVIADO" ${st==="ENVIADO"?"disabled":""}>Enviado</option><option value="ENTREGADO">Entregado</option>`:""}</select>`})()}</td>
       <td>${esc(money(o.subtotal))}</td><td>${esc(money(o.descuento))}</td>
       <td>${esc(money(o.total))}</td><td>${esc(o.codigo_promocional||"—")}</td>
-      <td${typeStyle}>${esc(type)}</td><td>${esc(method)}</td><td>${detail}</td>
+      <td${typeStyle}>${esc(type)}</td><td>${esc(method)}</td><td>${productDetail}</td><td>${detail}</td>
     </tr>`;
-  }).join(""):'<tr><td colspan="11">No hay pedidos que coincidan con la búsqueda.</td></tr>';
+  }).join(""):'<tr><td colspan="12">No hay pedidos que coincidan con la búsqueda.</td></tr>';
 }
 $("salesSearch").addEventListener("input",renderSalesOrders);
 $("salesStateFilter").addEventListener("change",renderSalesOrders);
@@ -243,7 +246,7 @@ $("salesRows").addEventListener("change",async e=>{
 });
 
 async function loadSales(){
-  $("salesRows").innerHTML='<tr><td colspan="11">Cargando pedidos…</td></tr>';
+  $("salesRows").innerHTML='<tr><td colspan="12">Cargando pedidos…</td></tr>';
   try{
     const r=await sb.rpc("admin_resumen_ventas_tienda");
     if(r.error)throw r.error;
@@ -251,6 +254,16 @@ async function loadSales(){
     if(typeof summary==="string")summary=JSON.parse(summary||"{}");
     if(!summary||typeof summary!=="object")throw new Error("Supabase devolvió un resumen vacío o inválido.");
     salesOrdersCache=Array.isArray(summary.pedidos)?summary.pedidos:[];
+    salesItemsCache=new Map();
+    const orderIds=salesOrdersCache.map(o=>o.id).filter(Boolean);
+    if(orderIds.length){
+      const ir=await sb.from("pedido_items").select("pedido_id,producto_id,nombre,precio,cantidad,subtotal").in("pedido_id",orderIds);
+      if(ir.error)throw ir.error;
+      (ir.data||[]).forEach(item=>{
+        const arr=salesItemsCache.get(item.pedido_id)||[];
+        arr.push(item);salesItemsCache.set(item.pedido_id,arr);
+      });
+    }
     $("salesCount").textContent=String(Number(summary.ventas_validas||0));
     $("salesRevenue").textContent=money(summary.ingresos_registrados||0);
     $("salesCancelled").textContent=String(Number(summary.pedidos_cancelados||0));
@@ -277,7 +290,7 @@ async function loadSales(){
   }catch(e){
     console.error(e);
     ["salesCount","salesRevenue","salesCancelled","salesZero","salesTest","salesTotal"].forEach(id=>$(id).textContent="—");
-    $("salesRows").innerHTML='<tr><td colspan="11">No se pudo cargar el resumen. Revisa la función admin_resumen_ventas_tienda.</td></tr>';
+    $("salesRows").innerHTML='<tr><td colspan="12">No se pudo cargar el resumen. Revisa la función admin_resumen_ventas_tienda.</td></tr>';
     salesStatus(e.message||"No se pudo cargar el resumen.",true);
   }
 }
